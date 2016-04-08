@@ -1,7 +1,9 @@
 # GitBook
 Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit Hugo Probleme bei der Erstellung einer Menüstruktur hatte, habe ich mich dann doch mal mit GitBook beschäftigt. So könnte ich zumindest mal mit dem Markdown-Style in Fahrt kommen und mir dann aber mittelfristig eine andere Lösung überlegen (oder vielleicht gefällt es mir ja so gut, daß ich dabei bleibe).
 
-## Installation
+---
+
+# Installation
 
 * http://toolchain.gitbook.com/setup.html
 
@@ -12,9 +14,13 @@ C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
 ...
 ```
 
-## Site erstellen, deployen, veröffentlichen
 
-### Erstellung
+---
+
+
+# Site erstellen, deployen, veröffentlichen
+
+## Erstellung
 
     $ gitbook init ./pierreinside
     Installing GitBook 2.6.7
@@ -23,7 +29,7 @@ C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
 
 Dadurch wird ein Verzeichnis `./pierreinside`, in dem bereits zwei Markdown-Seiten liegen.
 
-### Deployment - lokal
+## Deployment - lokal
 
 Per
 
@@ -39,7 +45,7 @@ http://localhost:4000
 
 darauf zugreifen kann.
 
-### Statische Seiten generieren
+## Statische Seiten generieren
 
 Per
 ```
@@ -47,11 +53,11 @@ gitbook build ./pierreinside
 ```
 wird ein Verzeichnis `./pierreinside/_book` angelegt, das alle statisch
 
-### Publishing@GitBook
+## Publishing@GitBook
 
 Für die Veröffentlichung auf GitHub bzw. GitBook muß man sich initial mal bei GitBook anmelden ... keine Sorge man kann sich mit dem GitHub-Account anmelden (oder Facebook, ...)
 
-### Publishing@Self-Hosted-Webserver
+## Publishing@Self-Hosted-Webserver
 
 Bei
 
@@ -61,12 +67,18 @@ gitbook build ./pierreinside
 
 wird ein Verzeichnis `./pierreinside/_book` erstellt, das die statischen Dateien enthält, die man auf JEDEN Webserver deployen kann. Deshalb ist man nicht gezwungen die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
 
+
+---
+
 # Integration in das GitHub-Tooling
 ACHTUNG: GitBook kann genutzt werden, ohne die serverseitige GitHub/GitBook-Infrastruktur zu nutzen!!! Allerdings kann die angebotene Toolkette die Arbeit komfortabler machen ...
 
 ## GitHub
 
 GitHub kann verwendet werden, um den Raw-Content (Markdown, AsciiDoc) zu speichern (inkl. Versionsverwaltung). Das kann in einem öffentlichen (man kann allerdings bestimmen, wer committen darf) oder privaten Repository erfolgen. Allerdings ist bei GitHub derzeit nur ein einziges private Repository kostenlos ...
+
+
+---
 
 # Content
 
@@ -127,6 +139,9 @@ Das passte aber irgendwie zu meiner Beobachtung, daß bei neu angelegten Bücher
 Zudem muß erst ein Sync auf das Remote-Repository erfolgen ... komisch ...
 
 Diese Arbeitsweise bin ich so nicht gewohnt bei der Arbeit mit Git ... da ich aber ja nicht mit meinem Tooling arbeite, sondern mit dem Tooling von GitHub mag das der eingeschlagene Weg sein.
+
+
+---
 
 # Fazit
 Ich bin wirklich richtig begeistert von der Toolchain. Außerdem ist das Editieren von Markdown (insbes. mit dem *GitBook Editor*) eine wahre Freude. Zukünftig werde ich deutlich schneller meine Artikel verfassen können und zudem mit noch mehr Freude.
