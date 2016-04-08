@@ -1,6 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [GitBook](it/gitbook.md)
 * IT
+** [GitBook](it/gitbook.md)
 
