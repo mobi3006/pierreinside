@@ -114,7 +114,7 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
 > ACHTUNG:
 > Die Änderungen im Editor sind außerhalb des Editor (Filesystem, ``gitbook serve`` zunächst nicht sichtbar. Erst nach dem Sync (grüne Umrandung) auf das Remote-Repository werden die Änderungen auch außerhalb sichtbar ([Details siehe](#256143)).
 
-![Gitbook Editor commit und sync](gitbookEditorCommitSync.jpg)
+![Gitbook Editor commit und sync](images/gitbookEditorCommitSync.jpg)
 
 #### <a name="256143"></a>Was bedeutet "Import"? Wo liegen die Dateien?
  
