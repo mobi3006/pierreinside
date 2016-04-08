@@ -6,11 +6,16 @@ Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit H
 
 * http://toolchain.gitbook.com/setup.html
 
+```
 $ npm install gitbook-cli -g
-C:\Users\MY_USER\AppData\Roaming\npm\gitbook -> C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
+C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
+   C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
 ...
-Site erstellen, deployen, veröffentlichen
-Erstellung:
+```
+
+## Site erstellen, deployen, veröffentlichen
+
+### Erstellung
 
     $ gitbook init ./gitbook
     Installing GitBook 2.6.7
@@ -19,15 +24,19 @@ Erstellung:
 
 Danach habe ich ein Verzeichnis ./gitbook, in dem bereits zwei Markdown-Seiten liegen.
 
-Deployment - lokal:
+### Deployment - lokal
 
 Per
 
-    gitbook server ./gitbook
-
+```
+gitbook server ./gitbook
+```
+    
 kann ich das "Buch" lokal deployen, so daß ich per
 
-    http://localhost:4000
+```
+http://localhost:4000
+```
 
 darauf zugreifen kann.
 
