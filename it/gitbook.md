@@ -22,7 +22,7 @@ C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
     gitbook@2.6.7 ..\..\Programme\cygwin\tmp\tmp-8108lvZ454IipE6j\node_modules\gitbook
     ...
 
-Danach habe ich ein Verzeichnis ./gitbook, in dem bereits zwei Markdown-Seiten liegen.
+Dadurch wird ein Verzeichnis `./gitbook`, in dem bereits zwei Markdown-Seiten liegen.
 
 ### Deployment - lokal
 
@@ -40,61 +40,61 @@ http://localhost:4000
 
 darauf zugreifen kann.
 
-Statische Seiten generieren:
+### Statische Seiten generieren
 
 Per
+```
+gitbook build ./gitbook
+```
+wird ein Verzeichnis `./gitbook/_book` angelegt, das alle statisch
 
-    gitbook build ./gitbook
-
-wird ein Verzeichnis ./gitbook/_book angelegt, das alle statisch
-
-Publishing@GitBook:
+### Publishing@GitBook
 
 Für die Veröffentlichung auf GitHub bzw. GitBook muß man sich initial mal bei GitBook anmelden ... keine Sorge man kann sich mit dem GitHub-Account anmelden (oder Facebook, ...)
 
-Publishing@Self-Hosted-Webserver:
+### Publishing@Self-Hosted-Webserver
 
 Bei
 
-    gitbook build ./mybook
+```
+gitbook build ./gitbook
+```
 
-wird ein Verzeichnis ./mybook/_book erstellt, das die statischen Dateien enthält, die man auf JEDEN Webserver deployen kann. Deshalb ist man nicht gezwungen die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
-Integration in das GitHub-Tooling
+wird ein Verzeichnis `./mybook/_book` erstellt, das die statischen Dateien enthält, die man auf JEDEN Webserver deployen kann. Deshalb ist man nicht gezwungen die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
+
+# Integration in das GitHub-Tooling
 ACHTUNG: GitBook kann genutzt werden, ohne die serverseitige GitHub/GitBook-Infrastruktur zu nutzen!!! Allerdings kann die angebotene Toolkette die Arbeit komfortabler machen ...
 
-GitHub:
+## GitHub
 
 GitHub kann verwendet werden, um den Raw-Content (Markdown, AsciiDoc) zu speichern (inkl. Versionsverwaltung). Das kann in einem öffentlichen (man kann allerdings bestimmen, wer committen darf) oder privaten Repository erfolgen. Allerdings ist bei GitHub derzeit nur ein einziges private Repository kostenlos ...
-Content
 
-    http://toolchain.gitbook.com/pages.html
+# Content
 
-Filesystem-Organisation:
+* http://toolchain.gitbook.com/pages.html
 
-Unterhalb von $SITE_HOME (auf dem lokalen Rechner) liegt die Datei
+## Filesystem-Organisation
 
-    SUMMARY.MD
+Unterhalb von $SITE_HOME (auf dem lokalen Rechner) liegt die Datei `SUMMARY.MD`, die das Inhaltsverzeichnis abbildet (später im linken Navigationsbereich dargestellt). Darin kann beliebig in die Filesystem-Ordnerstruktur referenziert werden. Yippppiiieeeh ... genau so habe ich mir das vorgestellt :-)
 
-aus der das Inhaltsverzeichnis (später im linker Navigationsbereich dargestellt), aus dem man dann beliebig in auf die Filesystem-Ordnerstruktur verweisen kann. Yippppiiieeeh ... genau so habe ich mir das vorgestellt :-)
-
-Unterstützte Input-Formate:
+### Unterstützte Input-Formate
 
 GitBook unterstützt folgende Input Formate
 
-    Markdown (GitHub-Flavor)
-    AsciiDoc
+* Markdown (GitHub-Flavor)
+* AsciiDoc
 
-Unterstützte Output-Formate:
+### Unterstützte Output-Formate
 
 GitBook unterstützt folgende Output Formate
 
-    HTML
-    eBook
-        epub
-        mobi (Amazon-Kindle)
-    PDF
+* HTML
+* eBook
+** epub
+** mobi (Amazon-Kindle)
+* PDF
 
-Content schreiben:
+## Content erstellen
 
-Der Content kann mit jedem beliebigen Editor geschrieben werden. Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitBook bietet hier einen Editor kostenlos an (https://www.gitbook.com/editor).
+Der Content kann mit jedem beliebigen Editor geschrieben werden. Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie trotzdem einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitBook bietet hier einen Editor kostenlos an (https://www.gitbook.com/editor).
 
