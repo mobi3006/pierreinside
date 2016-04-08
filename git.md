@@ -1,5 +1,5 @@
 # GIT
-Sehr gute Quellen:
+Sehr gute Quellen: pierre
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/
 * http://book.git-scm.com/
@@ -396,6 +396,3 @@ in ihre ``~/.gitconfig`` aufnehmen. Das verhindert, daß ein CRLF im Repository 
     or MSysGitPath setting error ... der Nutzung
 
 **Antwort 6:** Angeblich braucht man MSysGit, wenn man an Git hacken will ... für die normale Nutzung scheinbar nicht. Hä? Ah, eine Weile später fällts mir auf ... ich habe nur TortoiseGit installiert, Git selbst hatte ich nicht installiert - das brauche ich aber auch.
-
-
-[github]: http://github.com
