@@ -228,7 +228,7 @@ aufnehmen, damit LineEndings immer als LF (Linux-like) im Repository landen und 
 Für die Arbeit mit Git benötigt man einen Git Client.
 
 ## GitHub Desktop
-Der [GitHub Desktop](https://desktop.github.com/) hat mir wirklich Spaß gemacht als ich mit [GitBook](gitbook) begonnen habe.
+Der [GitHub Desktop](https://desktop.github.com/) hat mir wirklich Spaß gemacht als ich mit [GitBook](gitbook.md) begonnen habe.
 
 ---
 

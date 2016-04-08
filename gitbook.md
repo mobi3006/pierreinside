@@ -112,11 +112,11 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
 * Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
 
 > ACHTUNG:
-> Die Änderungen im Editor sind außerhalb des Editor (Filesystem, ``gitbook serve`` zunächst nicht sichtbar. Erst nach dem Sync (grüne Umrandung) auf das Remote-Repository werden die Änderungen auch außerhalb sichtbar ([Details siehe](#was-bedeutet-import-wo-liegen-die-dateien)).
+> Die Änderungen im Editor sind außerhalb des Editor (Filesystem, ``gitbook serve`` zunächst nicht sichtbar. Erst nach dem Sync (grüne Umrandung) auf das Remote-Repository werden die Änderungen auch außerhalb sichtbar ([Details siehe](#256143)).
 
 ![Gitbook Editor commit und sync](gitbookEditorCommitSync.jpg)
 
-#### Was bedeutet "Import"? Wo liegen die Dateien?
+#### <a name="256143"></a>Was bedeutet "Import"? Wo liegen die Dateien?
  
 Bei meinem ersten Buch hatte ich meine Sourcen in ``C:\Dev\pierreinside`` liegen und hatte das in GitBook Editor importiert.
 
