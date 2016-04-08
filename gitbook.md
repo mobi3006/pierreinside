@@ -16,19 +16,19 @@ C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
 
 ### Erstellung
 
-    $ gitbook init ./gitbook
+    $ gitbook init ./pierreinside
     Installing GitBook 2.6.7
     gitbook@2.6.7 ..\..\Programme\cygwin\tmp\tmp-8108lvZ454IipE6j\node_modules\gitbook
     ...
 
-Dadurch wird ein Verzeichnis `./gitbook`, in dem bereits zwei Markdown-Seiten liegen.
+Dadurch wird ein Verzeichnis `./pierreinside`, in dem bereits zwei Markdown-Seiten liegen.
 
 ### Deployment - lokal
 
 Per
 
 ```
-gitbook server ./gitbook
+gitbook serve ./pierreinside
 ```
     
 kann ich das "Buch" lokal deployen, so daß ich per
@@ -43,9 +43,9 @@ darauf zugreifen kann.
 
 Per
 ```
-gitbook build ./gitbook
+gitbook build ./pierreinside
 ```
-wird ein Verzeichnis `./gitbook/_book` angelegt, das alle statisch
+wird ein Verzeichnis `./pierreinside/_book` angelegt, das alle statisch
 
 ### Publishing@GitBook
 
@@ -56,10 +56,10 @@ Für die Veröffentlichung auf GitHub bzw. GitBook muß man sich initial mal bei
 Bei
 
 ```
-gitbook build ./gitbook
+gitbook build ./pierreinside
 ```
 
-wird ein Verzeichnis `./mybook/_book` erstellt, das die statischen Dateien enthält, die man auf JEDEN Webserver deployen kann. Deshalb ist man nicht gezwungen die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
+wird ein Verzeichnis `./pierreinside/_book` erstellt, das die statischen Dateien enthält, die man auf JEDEN Webserver deployen kann. Deshalb ist man nicht gezwungen die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
 
 # Integration in das GitHub-Tooling
 ACHTUNG: GitBook kann genutzt werden, ohne die serverseitige GitHub/GitBook-Infrastruktur zu nutzen!!! Allerdings kann die angebotene Toolkette die Arbeit komfortabler machen ...
