@@ -109,5 +109,6 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
 * Sync to RemoteRepo
 * Live-Preview
 * WYSIWYG-Editor 
+  * besonders gut gefallen haben mir die Shortcuts (Strg-B für Fettdruck, ...)
 * Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
 
