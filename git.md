@@ -8,7 +8,7 @@ Sehr gute Quellen:
 
 # Idee
 
-    http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml
+* http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml
 
 Bei Git handelt es sich um ein Versionssystem, das ohne zentralen Server auskommt. Das Repository (mit allen Versionen der verwalteten Ressourcen) liegt im gleichen Verzeichnis wie die Ressourcen selbst. Somit kommt das System ohne Netzwerk aus, ist aber auch zunächst mal nur lokal. Nicht gerade das, was man bei der Softwareentwicklung im Team braucht, wäre da nicht ein weiteres Git-Feature: ein verteiltes Modell, das eine Synchonisierung der verteilten (= geclonten) Repositories in ein zentrales Repository ermöglicht.
 
@@ -397,3 +397,5 @@ in ihre ``~/.gitconfig`` aufnehmen. Das verhindert, daß ein CRLF im Repository 
 
 **Antwort 6:** Angeblich braucht man MSysGit, wenn man an Git hacken will ... für die normale Nutzung scheinbar nicht. Hä? Ah, eine Weile später fällts mir auf ... ich habe nur TortoiseGit installiert, Git selbst hatte ich nicht installiert - das brauche ich aber auch.
 
+
+[github]: http://github.com
