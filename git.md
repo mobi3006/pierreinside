@@ -1,5 +1,5 @@
 # GIT
-Sehr gute Quellen: pierre
+Sehr gute Quellen:
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/
 * http://book.git-scm.com/
