@@ -120,6 +120,8 @@ Nach einiger Zeit habe ich mir allerdings die Frage gestellt wo denn der Editor 
 
 Das passte aber irgendwie zu meiner Beobachtung, daß bei neu angelegten Büchern gar nicht nach dem Speicherort gefragt wurde ... gefunden habe ich diese Bücher aber unter ``C:\Users\MY_USER\GitBook\Library\Import\`` - scheinbar ist das das einzige Verzeichnis, mit dem GitBook Editor arbeiten kann.
 
+Zudem muß erst ein Sync auf das Remote-Repository erfolgen ... komisch ...
+
 # Fazit
 Ich bin wirklich richtig begeistert von der Toolchain. Außerdem ist das Editieren von Markdown (insbes. mit dem *GitBook Editor*) eine wahre Freude. Zukünftig werde ich deutlich schneller meine Artikel verfassen können und zudem mit noch mehr Freude.
 
