@@ -112,6 +112,9 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
   * besonders gut gefallen haben mir die Shortcuts (Strg-B für Fettdruck, ...)
 * Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
 
+Nach einiger Zeit habe ich mir allerdings die Frage gestellt wo denn der Editor die Dateien lokal speichert. Ich habe neu erstellte Dateien weder in meinem angegebenen Library Verzeichnis gefunden noch in ``C:\Users\MY_USER\GitBook\Library\Import\pierreinside`` gefunden. Selbst eine Suche auf der gesamten lokalen Festplatte war erfolglos. Irgendwo mußten sie aber persistiert sein, denn ich habe den Rechner sogar mal runtergefahren und die Dateien waren weiterhin über den GitBook Editor sichtbar ... nur eben nie über den File-Explorer. Ich konnte auch ein Commit über den GitBook Editor machen ... gefunden habe ich die Dateien nicht. Erst nachdem ich ein Sync aufs Remot-repository gemacht habe
+Erst nachdem ich die Dateien Ich war nahe an der Verzweiflung
+
 # Fazit
 Ich bin wirklich richtig begeistert von der Toolchain. Außerdem ist das Editieren von Markdown (insbes. mit dem *GitBook Editor*) eine wahre Freude. Zukünftig werde ich deutlich schneller meine Artikel verfassen können und zudem mit noch mehr Freude.
 
