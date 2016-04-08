@@ -1,9 +1,10 @@
-
 # GIT
 Sehr gute Quellen:
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/
 * http://book.git-scm.com/
+
+---
 
 # Idee
 
@@ -37,6 +38,8 @@ Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, is
 
 Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Repository als Internetdienstleistung anbieten (z. B. [GitHub](http://github.com/))
 
+---
+
 # Basis-Konzepte
 **Repository:**
 * bildet die Basis der Versionsverwaltung - alle Tools (commit, checkout, branch, merge, ...) nutzen das Repository als Datenbasis. Hier sind alle Änderungen getrackt.
@@ -67,6 +70,8 @@ Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Reposito
 * es gibt immer mindestens einen Head, den sog. MASTER (der Head vom Hauptzweig)
 * der aktuell selektierte Head wird mit HEAD bezeichnet, wenn es der Hauptzweig ist gilt HEAD == MASTER
 * neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
+
+---
 
 # Befehle
 Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bin ich beruflich ein Subversion-Nutzer).
@@ -190,6 +195,7 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
     * Änderungen aus dem lokalen Repository ins Remote-Repository zurückspielen
     * im entfernten Repository müssen die Heads per git checkout weitergesetzt werden (das geschieht nicht automatisch)
 
+---
 # Konfiguration
 ## Repository-spezifische Konfiguration
 
@@ -215,6 +221,16 @@ Hier sollte man http://help.github.com/line-endings/
         autocrlf = true
 
 aufnehmen, damit LineEndings immer als LF (Linux-like) im Repository landen und nicht Windows-like als CRLF (näheres siehe http://help.github.com/line-endings/). Dies sollten ALLE Git-Nutzer tun, denn auch Linux/Unix-User könnten von anderen Quellen (z. B. ein Source File kommt per Mail von einem Windows-User) eingeschleust werden.
+
+---
+
+# Tooling
+Für die Arbeit mit Git benötigt man einen Git Client.
+
+## GitHub Desktop
+Der [GitHub Desktop](https://desktop.github.com/) hat mir wirklich Spaß gemacht als ich mit [it/GitBook] begonnen habe.
+
+---
 
 # Typische Use-Cases
 ## Neues lokales Repository aufsetzen
@@ -285,6 +301,7 @@ Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
     * auf dem Branch ein Pull-Request anlegen
     * per Pull-Request die Änderungen am Branch in den master-Branch mergen
 
+---
 # Performance
 Für die Performance wird GIT ja immer angepriesen und das war auch eine der Zielvorgaben des "Erfinders" Linus Torvalds.
 
@@ -329,10 +346,14 @@ Unter Berücksichtigung dieser Erkenntnisse stabilisierte sich die Performance. 
 
 Die SharedFolder (oder evtl. sogar das gesamte VirtualBox-Filesystem) ist sehr langsam und braucht viel Leistung (die CPU-Usage war beim git status innerhalb einer VM sehr hoch - mein Laptop-Lüfter drehte richtig hoch). Innerhalb der VM sollte man einige ressourcenintensive Tools nicht nutzen.
 
+---
+
 # Tips
 
 * vorm mergen sollte man alle lokalen Änderungen commiten oder rollbacken
 * vorm checkout eines Heads sollte man alle lokalen Änderungen commiten oder rollbacken
+
+---
 
 # Fragen und Probleme
 **Frage 1:** Das clonen übers Netzwerk dauert sehr lange. Woran liegt das?
