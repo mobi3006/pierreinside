@@ -90,11 +90,24 @@ GitBook unterstützt folgende Output Formate
 
 * HTML
 * eBook
-** epub
-** mobi (Amazon-Kindle)
+  * epub
+  * mobi (Amazon-Kindle)
 * PDF
 
 ## Content erstellen
 
-Der Content kann mit jedem beliebigen Editor geschrieben werden. Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie trotzdem einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitBook bietet hier einen Editor kostenlos an (https://www.gitbook.com/editor).
+Der Content kann mit jedem beliebigen Editor geschrieben werden. Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie trotzdem einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitHub bietet mit dem GitBook Editor ein sehr gutes Tool (siehe unten).
+
+### GitBook Editor
+
+* https://www.gitbook.com/editor
+
+Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. Als ich dann aber mit GitBook anfing wollte ich dem diesem Editor mal eine Chance geben ... und tatsächlich adressiert er schon sehr viele Aspekte, die man ansonsten vermutlich über mehrere Tools (Editor mit Live-Vorschau, Git-Client) abbilden müßte ... hier ist alles integriert und somit für Newbies auf jeden Fall ein guter Startpunkt:
+
+* Commit to LocalRepo
+  * Anzeige noch nicht commiteter Änderungen
+* Sync to RemoteRepo
+* Live-Preview
+* WYSIWYG-Editor 
+* Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
 
