@@ -112,8 +112,13 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
   * besonders gut gefallen haben mir die Shortcuts (Strg-B für Fettdruck, ...)
 * Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
 
-Nach einiger Zeit habe ich mir allerdings die Frage gestellt wo denn der Editor die Dateien lokal speichert. Ich habe neu erstellte Dateien weder in meinem angegebenen Library Verzeichnis gefunden noch in ``C:\Users\MY_USER\GitBook\Library\Import\pierreinside`` gefunden. Selbst eine Suche auf der gesamten lokalen Festplatte war erfolglos. Irgendwo mußten sie aber persistiert sein, denn ich habe den Rechner sogar mal runtergefahren und die Dateien waren weiterhin über den GitBook Editor sichtbar ... nur eben nie über den File-Explorer. Ich konnte auch ein Commit über den GitBook Editor machen ... gefunden habe ich die Dateien nicht. Erst nachdem ich ein Sync aufs Remot-repository gemacht habe
-Erst nachdem ich die Dateien Ich war nahe an der Verzweiflung
+#### Was bedeutet "Import"? Wo liegen die Dateien?
+
+Bei meinem ersten Buch hatte ich meine Sourcen in ``C:\Dev\pierreinside`` liegen und hatte das in GitBook Editor importiert.
+
+Nach einiger Zeit habe ich mir allerdings die Frage gestellt wo denn der Editor die Dateien lokal speichert. Ich hatte eigentlich erwartet, daß die Speicherung in ``C:\Dev\pierreinside`` erfolgt. Dort habe ich neu erstellte Dateien aber nicht gefunden ... in ``C:\Users\MY_USER\GitBook\Library\Import\pierreinside`` aber auch nicht. Selbst eine Suche auf der gesamten lokalen Festplatte war erfolglos. Irgendwo mußten sie aber persistiert sein. Ich habe den Rechner sogar mal runtergefahren und die Dateien waren weiterhin über den GitBook Editor sichtbar ... nur eben nie über den File-Explorer. Selbst nach einem Commit über den GitBook Editor waren die Dateien noch nicht über den File-Explorer sichtbar. Erst nachdem ich ein Sync aufs Remote-repository gemacht habe wurden die Dateien in ``C:\Users\MY_USER\GitBook\Library\Import\pierreinside`` angezeigt ... 
+
+Das passte aber irgendwie zu meiner Beobachtung, daß bei neu angelegten Büchern gar nicht nach dem Speicherort gefragt wurde ... gefunden habe ich diese Bücher aber unter ``C:\Users\MY_USER\GitBook\Library\Import\`` - scheinbar ist das das einzige Verzeichnis, mit dem GitBook Editor arbeiten kann.
 
 # Fazit
 Ich bin wirklich richtig begeistert von der Toolchain. Außerdem ist das Editieren von Markdown (insbes. mit dem *GitBook Editor*) eine wahre Freude. Zukünftig werde ich deutlich schneller meine Artikel verfassen können und zudem mit noch mehr Freude.
