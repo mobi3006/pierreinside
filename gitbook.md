@@ -1,5 +1,4 @@
 # GitBook
-huhu
 Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit Hugo Probleme bei der Erstellung einer Menüstruktur hatte, habe ich mich dann doch mal mit GitBook beschäftigt. So könnte ich zumindest mal mit dem Markdown-Style in Fahrt kommen und mir dann aber mittelfristig eine andere Lösung überlegen (oder vielleicht gefällt es mir ja so gut, daß ich dabei bleibe).
 
 ## Installation
@@ -112,10 +111,13 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
   * besonders gut gefallen haben mir die Shortcuts (Strg-B für Fettdruck, ...)
 * Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
 
-![Gitbook Editor commit und sync](/images/gitbookEditorCommitSync.jpg)
+> ACHTUNG:
+> Die Änderungen im Editor sind außerhalb des Editor (Filesystem, ``gitbook serve`` zunächst nicht sichtbar. Erst nach dem Sync (grüne Umrandung) auf das Remote-Repository werden die Änderungen auch außerhalb sichtbar ([Details siehe](#Was bedeutet "Import"? Wo liegen die Dateien?])).
+
+![Gitbook Editor commit und sync](gitbookEditorCommitSync.jpg)
 
 #### Was bedeutet "Import"? Wo liegen die Dateien?
-
+ 
 Bei meinem ersten Buch hatte ich meine Sourcen in ``C:\Dev\pierreinside`` liegen und hatte das in GitBook Editor importiert.
 
 Nach einiger Zeit habe ich mir allerdings die Frage gestellt wo denn der Editor die Dateien lokal speichert. Ich hatte eigentlich erwartet, daß die Speicherung in ``C:\Dev\pierreinside`` erfolgt. Dort habe ich neu erstellte Dateien aber nicht gefunden ... in ``C:\Users\MY_USER\GitBook\Library\Import\pierreinside`` aber auch nicht. Selbst eine Suche auf der gesamten lokalen Festplatte war erfolglos. Irgendwo mußten sie aber persistiert sein. Ich habe den Rechner sogar mal runtergefahren und die Dateien waren weiterhin über den GitBook Editor sichtbar ... nur eben nie über den File-Explorer. Selbst nach einem Commit über den GitBook Editor waren die Dateien noch nicht über den File-Explorer sichtbar. Erst nachdem ich ein Sync aufs Remote-repository gemacht habe wurden die Dateien in ``C:\Users\MY_USER\GitBook\Library\Import\pierreinside`` angezeigt ... 
