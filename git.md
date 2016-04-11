@@ -23,7 +23,7 @@ Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflo
 
 * **Peer-to-Peer-Ansatz:** 
   * bei diesem Ansatz tauscht jeder Entwickler mit jedem Entwickler per Git-Pull oder Git-Push die Sourcen aus. Dieser Ansatz skaliert nicht besonders gut.
-* **Shared-Repository-Modell:**
+* **Shared-Repository-Ansatz:**
   * bei diesem Ansatz synchronisieren sich die beteiligten Entwickler über ein zentrales Repository, auf das sie Lese- und Schreibrechte haben (Peer-to-Peer-Autausch ist aber weiterhin jederzeit möglich - beispielsweise, wenn zwei Entwickler ein Subteam bilden)
   * man clont das zentrale GIT-Repository (über das lokale Filesystem oder Remote über ssh). Im neuen Repository entstehen Remote-Heads. Vom relevanten Remote-Head erzeugt man einen lokalen Branch/Head und arbeitet darauf lokal vollkommen losgelöst vom Kollegen weiter. Die zukünftigen Änderungen vom Kollegen bekommt man über ein git fetch wobei einfach die Remote-Heads geändert werden - die Remote-Branches werden einfach erweitert. Über ein git pull zieht/mergt man die Änderungen des Kollegen in den eigenen Entwicklungsstrang rein.
   * sehr ähnlich zur Arbeitsweise mit Subversion
@@ -33,7 +33,7 @@ Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflo
 
 ### Peer-to-Peer-Ansatz
 
-### Zentrales Repository
+### Shared-Repository-Ansatz
 
 Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe (ab 3-4 Leute) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher ein zentrales Repository zu errichten, so daß sich jeder Entwickler nur noch mit dem zentralen Repository (also mit einer Gegenstelle) als Synchronisationspunkt austauschen muss. Das klingt ein bisschen wie Subversion mit einem zentralen Repository ...
 

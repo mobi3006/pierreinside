@@ -5,4 +5,8 @@
 * [Git](git.md)
 * [Reactive Programming](reactiveProgramming.md)
 * [Markdown](markdown.md)
+* [Static Site Generators](staticSiteGenerators.md)
+   * [Hugo](hugo.md)
+   * Jeckyll
+* [Auto](auto.md)
 
