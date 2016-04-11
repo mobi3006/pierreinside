@@ -14,8 +14,9 @@ Bei Git handelt es sich um ein Versionssystem, das ohne zentralen Server auskomm
 
 ## Verteiltes Modell
 
-Git kennt das Konzept eines zentralen GIT-Repositories nicht. ABER: man kann Git so nutzen und das wird auch getan (z. B. [GitHub](http://github.com))
+Git erfordert - im Gegensatz zu Subversion - kein zentrales Repository. ABER: man kann Git so nutzen (Shared-repository-Modell) und das wird auch getan (z. B. [GitHub](http://github.com)).
 
+![Git Workflow](gitWorkflow.png)
 ## Workflows
 
 Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflows (man kann sich ausser den folgenden sicher noch andere überlegen):
@@ -29,7 +30,6 @@ Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflo
 * **Integration Manager Modell:**
   * dieses Modell wird häufig von OpenSource-Projekten verwendet
   * es gibt einen ausgezeichneten Integration Manager, der die Änderungen der anderen Entwickler integriert. Der Integration Manager führt das sog. Blessed Repository (nur er hat dort Schreibrechte - kann dort git push machen). Jeder Entwickler erstellt einen Fork des Blessed Repository und gibt dem Integration Manager Leserechte auf diesem Fork-Repository. Der Integration Manager holt sich die Änderungen der Entwickler in sein Arbeitsrepository und integriert sie. Dann pusht er das Integrationsergebnis per git push ins Blessed Repository.
-![Git Workflow](gitWorkflow.png)
 
 ### Peer-to-Peer-Ansatz
 
