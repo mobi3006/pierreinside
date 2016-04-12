@@ -1,7 +1,13 @@
 # Reactive Programming
+test
+
 Bei den nicht-funktionalen Anforderungen an Software hat sich in den letzten 10 Jahren sehr viel bewegt. Mittlerweile sind automatische Skalierbarkeit, Resilience, Responsiveness viel stärker in den Fokus gerückt. Diese gedankliche Weiterentwicklung mündet im ![Reactive Manifest][1].
 
 Mittlerweile sind wir bei den Standard-Architekturen wie JSF, Spring, ... gar nicht mehr gewohnt mit Threads zu arbeiten. Einige PaaS-Ansätze verbieten das sogar explizit und werfen eine Exception. Klar, Multithreading erhöht in jedem Fall die Komplexität für den Entwickler, doch läßt sich damit die Hardware besser auslasten und am Ende gewinnt der Nutzer, weil die Software mehr Responsiveness aufweist. 
+
+Insofern handelt es sich um ein zweischneidiges Schwert - auch der [Technology Radar](https://www.thoughtworks.com/de/radar/techniques) meint dazu:
+
+> "We recommend assessing the performance and scalability needs of your system before committing to this architectural style."
 
 # Links
 * http://www.reactivemanifesto.org

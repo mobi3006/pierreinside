@@ -72,6 +72,15 @@ Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Reposito
 * der aktuell selektierte Head wird mit HEAD bezeichnet, wenn es der Hauptzweig ist gilt HEAD == MASTER
 * neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
 
+**Clone:**
+* ein ``git clone`` ist vergleichbar einem ``svn checkout`` - es erstellt eine Kopie des aktuellen Repositories
+* über ``git push`` oder Pull-Requests kann eine Integration in das Origin-Repository erfolgen
+
+**Clone vs. Fork:**
+* Clone und Fork sind schon recht ähnlich und man kann mit beiden sehr ähnlich arbeiten
+* ABER: ein Fork sorgt dafür, daß Origin und Fork unterschiedliche Eigentümer hat. Je nach Konfiguration kann nur der Eigentümer Pull-Requests committen. Man kann aber problemlos einen Fork erstellen und dann einen Pull-Request erstellen, der zum Transport der Änderungen/Erweiterungen in das Origin-Repository verwendet wird.
+* Clone ist eher eine lokale Kopie des Remote-Repositories, Fork ist eine serverseitige Kopie des Remote-Repositories mit geändertem Eigentümer ... aber was ist schon Client/Server/lokal/remote, wenn die Grenzen fließend sind?
+
 ---
 
 # Befehle
