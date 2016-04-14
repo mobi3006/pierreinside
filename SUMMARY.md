@@ -9,4 +9,5 @@
    * [Hugo](hugo.md)
    * Jeckyll
 * [Auto](auto.md)
+* [NoSQL](nosql.md)
 
