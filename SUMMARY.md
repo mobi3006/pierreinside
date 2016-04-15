@@ -6,9 +6,10 @@
 * [Reactive Programming](reactiveProgramming.md)
 * [Spring Data](springdata.md)
 * [Markdown](markdown.md)
+* [Auto](auto.md)
 * [Static Site Generators](staticSiteGenerators.md)
    * [Hugo](hugo.md)
    * Jeckyll
-* [Auto](auto.md)
 * [NoSQL](nosql.md)
+* [Hystrix](hystrix.md)
 

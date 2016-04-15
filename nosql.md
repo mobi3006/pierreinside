@@ -54,7 +54,34 @@ Innerhalb von NoSQL-datenbanken unterscheidet man folgende Typen:
 
 Wie man sieht gibt es also eine ganze Reihe unterschiedlicher NoSQL-Datenbank-Kategorien (die Grenzen sind schwimmend) und zu jeder Kategorie unzählige Produkte.
 
-# Beliebte Produkte
+# Produkte im Detail
+## Document Store - Elasticsearch 
+* no ACID transaction support
+* no good support for relations ... Graph databases are addressing it
+
+## Graph Database - OrientDB
+
+* [Homepage](http://orientdb.com)
+* [Training](http://orientdb.com/training)
+
+This seems to be the *EierlegendeWollmilchsau* - a mixture of the best of different storage approaches:
+
+* [OrientDB Feature in comparison to RDBMS, DocumentStore, other GraphDBs](http://orientdb.com/why-orientdb/)
+
+What makes OrientDB outstanding
+
+> Distributed Reliability
+Most NoSQL solutions are used as “cache” to speed up certain use cases, while the master database remains a relational DBMS. For this reason, the average NoSQL product is built more for performance and scalability, while sacrificing reliability.
+
+OrientDB, however, isn’t the average NoSQL DBMS. What happens when a server node crashes? Thanks to WAL (Write Ahead Logging), OrientDB is able to restore the database content after a crash. Any pending transactions are automatically rolled back. Immediately, the server cluster redistributes the load across the available nodes and all the clients connected to the node in failure are automatically switched to an available server node with no fail-over to the application level.
+It is
+* lightning fast
+  * relations are modeled by persistent pointers and not runtime joins ... optimized for read access
+  * distributed => scalable
+* has [Spring Data](SpringData) support (https://github.com/noskovd/spring-data-orient) - not official
+
+
+
 
 
 
