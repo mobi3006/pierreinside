@@ -4,6 +4,8 @@
 * http://www.reactivemanifesto.org
 * http://reactivex.io/
 * [Venkat Subramaniam - Reactive Programming](https://www.youtube.com/watch?v=3bAQXTVsEiQ)
+* [A Playful Introduction to Rx by Eik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
+* [Reactive Programming at Netflix ](http://techblog.netflix.com/2013/01/reactive-programming-at-netflix.html)
 
 # Motivation
 
@@ -116,7 +118,11 @@ läßt sich reaktives Programmieren umsetzen, doch die die Erfahrung (nicht mein
 RxJava ist nur eine von einigen Java-Bibliotheken, die das reaktive Programmiermodell in unsere Java-Applikationen bringen kann. Für andere Programmiersprachen gibt es entsprechende Bibliotheken, die aber glücklicherweise alle miteinander interagieren können (was inbes. bei eine Microservice-Architektur sehr wichtig ist).
 
 ### Links
+
 * [JavaOne: Functional Reactive Programming in RxJava](https://www.youtube.com/watch?v=Dk8cR1Kxj0Y)
+* [Größeres Programmierbeispiel (umfassend erklärt)](http://blog.xebia.in/2015/09/01/day1-building-an-application-from-scratch-using-rxjava-and-java8/)
+* [Reactive Programming in Java 8 With RxJava](http://app.pluralsight.com/courses/reactive-programming-java-8-rxjava)
+
 ### Idee
 > "An API for asynchronous programming with observable streams [...] 
 > 
@@ -182,6 +188,9 @@ Das Holen der Daten aus den Quellen kann parallel erfolgen, doch muß man beim Z
 Die Dokumentation von Rx-Funktionen ist in Prosa oftmals kaum verständlich. Deshalb hat man ein neues Dokumentationsschema erfunden: Marbles
 
 ## Reactive Programming in UI
+
+### MVC und reactive Programming
+* http://aaronstacy.com/writings/reactive-programming-and-mvc/
 
 In UI you usually have to deal with Model-View-Controller Pattern. If the Model is reacting on server events because state has changed by somebody else you can implement a distributed real-time-UI.
 
