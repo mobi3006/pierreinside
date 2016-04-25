@@ -9,9 +9,13 @@
 
 # Motivation
 
-Bei den nicht-funktionalen Anforderungen an Software hat sich in den letzten 10 Jahren sehr viel bewegt. Mittlerweile sind automatische Skalierbarkeit, Resilience, Responsiveness viel stärker in den Fokus gerückt. Diese gedankliche Weiterentwicklung mündet im ![Reactive Manifest][1].
+In den letzten 10 Jahren hat sich der Charakter der Softwareapplikationen stark verändert. SOA ist lebendig - es gibt fast keine professionelle Software mehr, die ohne ein API auskommt. Damit kann man Mashups bilden und so mit wenig Aufwand erstaunliche Ergebnisse erzielen. Das ermöglicht sogar kleinen Unternehmen/Startups Allerdings erfordert dies auch eine andere Art, um mit Fehlersituationen und Laufzeitverhalten umzugehen. Resilience ist hier ein Stichwort. Macht man mehrere Service-Calls, so muß man diese evtl. parallelisieren und kann evtl. erst Teilergebnisse anzeigen, die man auf den Client pusht ... weitere Ergebnisse werden dann gepusht sobald sie vorhanden sind. In keinem Fall will man den Client blockieren und dem Nutzer mehrere Sekunden eine weiße Seite anzeigen ... vielleicht sind die Ergebnisse, die man schon hat, vollkommen ausreichend für den Benutzer. 
 
-Mittlerweile sind wir bei den Standard-Architekturen wie JSF, Spring, ... gar nicht mehr gewohnt mit Threads zu arbeiten. Einige PaaS-Ansätze verbieten das sogar explizit und werfen eine Exception. Klar, Multithreading erhöht in jedem Fall die Komplexität für den Entwickler, doch läßt sich damit die Hardware besser auslasten und am Ende gewinnt der Nutzer, weil die Software mehr Responsiveness aufweist.
+Aber nicht nur bei den funktionalen Aspekten hat sich viel getan. Mittlerweile sind automatische Skalierbarkeit, Resilience, Responsiveness, Distribution viel stärker in den Fokus gerückt. Ein langsamer oder nicht verfügbarer externer Service soll nicht alle Threads meiner eigenen Anwendung blockieren und so den Anschein erwecken als habe meine Anwendung ein Problem.
+
+Diese Entwicklungen münden im ![Reactive Manifest][1].
+
+Es ist mal wieder Zeit für einen Paradigmenwechsel ... und die neue Denkweise muß sich erst mal in unseren Köpfen festsetzen. Denn mittlerweile sind wir bei den Standard-Architekturen wie JSF, Spring, ... gar nicht mehr gewohnt über Parallelisierung (oder gar Threads) nachzudenken. Klar, Multithreading erhöht in jedem Fall die Komplexität für den Entwickler, doch läßt sich damit die Hardware (insbes. heutige Multicore Maschinen) besser auslasten und am Ende gewinnt der Nutzer, weil die Software mehr Responsiveness aufweist.
 
 Insofern handelt es sich um ein zweischneidiges Schwert - auch der [Technology Radar](https://www.thoughtworks.com/de/radar/techniques) meint dazu:
 
@@ -23,7 +27,9 @@ Die Ideen hinter Reactive Programming sind schon so alt wie die IT selbst:
 * Publish-Subscribe
 * Asynchronität
 
-Und natürlich ist eine effinziente Nutzung von Ressourcen schon IMMER ein Thema ... früher vielleicht sogar mehr als heute. Deshalb ist die Frage berechtigt warum man das nicht schon immer so gemacht hat? Ich habe darauf keine Antwort - ich vermute, daß es liet daran, daß über das Internet SOA erst mal möglich war und auch viele kleine Unternehmen Interesse an professionellen Services bekommen haben. Zudem haben sich einige Unternehmen dem Open-Source Gedanken verschrieben und ihr professionellen Lösungen anderen bereitgestellt. Microservices, Funtional Programming, Websockets, ... helfen dabei, daß sich Anwendungen basierend auf dem Observer-Pattern durchsetzen können.
+Und natürlich ist eine effinziente Nutzung von Ressourcen schon IMMER ein Thema ... früher vielleicht sogar mehr als heute. Deshalb ist es vielleicht eher ein Back-to-the-Roots ... als eine ganz neue Idee.
+
+Deshalb ist die Frage berechtigt warum man das nicht schon immer so gemacht hat? Ich habe darauf keine Antwort - ich vermute, daß es liet daran, daß über das Internet SOA erst mal möglich war und auch viele kleine Unternehmen Interesse an professionellen Services bekommen haben. Zudem haben sich einige Unternehmen dem Open-Source Gedanken verschrieben und ihr professionellen Lösungen anderen bereitgestellt. Microservices, Funtional Programming, Websockets, ... helfen dabei, daß sich Anwendungen basierend auf dem Observer-Pattern durchsetzen können.
 Auf diese Weise ist ein Ökosystem entstanden, das den Nährboden für die Umsetzung längst akzeptierter Ideen bildet.
 
 Kurz: früher hatte man nicht das Tooling, um die Konzepte massentauglich umzusetzen
@@ -35,6 +41,26 @@ Ich denke wir sind nun soweit, um tatsächlich reaktive verteilte Systeme auf Hi
 Besser kann man es nicht motivieren: [Venkat Subramaniam - Reactive Programming](https://www.youtube.com/watch?v=3bAQXTVsEiQ)
 
 WOW :-)
+
+## Haben Microservices damit etwas zu tun?
+Früher hatte man es eher mit monolithischen Systemen zu tun. **EIN** System hatte **ALLE** Daten: 
+
+```
+DifferenceReport report =
+   shopService.calculateDifferenceReportOfOrders()
+```
+
+Die Verbreitung von Microservices hat zu stark verteilten Systemen gefürt, die 
+
+* einen OrderService
+* einen PriceService
+* einen RatingService
+
+auf unterschiedlichen Servern bereitstellen.
+
+Beim monolithischen System hat der Backend-Service im besten Fall die Parallelisierung gemacht. Evtl. war das nicht notwendig, weil die Daten über entsprechende SQL-Joins mit einem Request aus der (**EINZIGEN**) Datenbank geholt wurde.
+
+Beim verteilten Modell muß sich der Client um die performante Abfrage der beteiligen Microservices kümmern.
 
 ## Anschauliches Beispiel
 
@@ -78,26 +104,6 @@ Wie man sieht ist das Push-Prinzip allgegenwärtig und könnte - richtig angewen
 
 Wenn ein Client an Daten nicht mehr interessiert ist, dann kann er das dem Server über ein unsubcribe mitteilen. Auf diese Weise können die Server-Resourcen für Clients genutzt werden, die tatsächlich noch an Informationen interessiert sind.
 
-## Was haben Microservices damit zu tun?
-Früher hatte man es eher mit monolithischen Systemen zu tun. **EIN** System hatte **ALLE** Daten: 
-
-```
-DifferenceReport report =
-   shopService.calculateDifferenceReportOfOrders()
-```
-
-Die Verbreitung von Microservices hat zu stark verteilten Systemen gefürt, die 
-
-* einen OrderService
-* einen PriceService
-* einen RatingService
-
-auf unterschiedlichen Servern bereitstellen.
-
-Beim monolithischen System hat der Backend-Service im besten Fall die Parallelisierung gemacht. Evtl. war das nicht notwendig, weil die Daten über entsprechende SQL-Joins mit einem Request aus der (**EINZIGEN**) Datenbank geholt wurde.
-
-Beim verteilten Modell muß sich der Client um die performante Abfrage der beteiligen Microservices kümmern.
-
 # Reaktives Programmiermodell
 Vorreiter waren hier Microsoft und Netflix - Netflix portierte die Microsoft *Reactive Extensions (Rx)* nach Java. Netflix machte einige Bibliotheken Open-Source (z. B. RxJava), so daß der Ansatz von anderen Projekten leichter genutzt werden kann.
 
@@ -106,14 +112,18 @@ Das Programmiermodell ist auf dem Observer-Pattern mit publish-subscribe Ansätz
 * Producer kann signalisieren, daß keine Daten mehr zu erwarten sind.
 * Producer kann den Observer über Fehler informieren
 
-## Reaktive Programming mit Core-Java
+## Reactive Programming mit Core-Java
 Über 
 
 * Threads
+  * low-level
 * Futures
+  * abstrahieren von Threads
 * Callbacks (Callback-Hell)
 
 läßt sich reaktives Programmieren umsetzen, doch die die Erfahrung (nicht meine) hat gezeigt, daß das im Details schon recht schnell unübersichtlich wird. Der Umgang mit bedingter Ausführung und verschachtelten asynchronen Aufrufen führt schnell zu komplett unverständlichem Code. Und wenn man den Code schon kaum versteht, ist die Gefahr groß, daß sich Fehler einschleichen (Locking, Thread-Synchronisierung). Und Fehlersuche in stark multi-threaded Programmen ist nun wirklich kein Spaß.
+
+Bendenke, daß ein ``Future.get()`` den Client-Thread blockiert ... es wird eben ein Pull-Mechanismus umgesetzt. So einfach ist das also nicht ... man benötigt hier schon ein CompletableFuture.
 ## RxJava
 RxJava ist nur eine von einigen Java-Bibliotheken, die das reaktive Programmiermodell in unsere Java-Applikationen bringen kann. Für andere Programmiersprachen gibt es entsprechende Bibliotheken, die aber glücklicherweise alle miteinander interagieren können (was inbes. bei eine Microservice-Architektur sehr wichtig ist).
 
