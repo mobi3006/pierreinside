@@ -159,6 +159,8 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
   * ``git remote add origin https://myserver/de.cachaca.learn.anything.git``
 * Origin (Remote-Repository) umkonfigurieren
   * ``git remote set-url origin https://otherserver/de.cachaca.learn.anything.git``
+* Origin (Remote-Repository) entfernen
+  * ``git remote remove origin``
 * Änderungen in ein Remote Repository pushen
   * ``git push -u origin master``
 * Änderungen rückgängig machen
