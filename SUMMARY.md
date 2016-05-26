@@ -13,4 +13,6 @@
 * [NoSQL](nosql.md)
 * [Hystrix](hystrix.md)
 * [Englisch](englisch.md)
+* [Bitbucket](bitbucket.md)
+* [Kubernetes](kubernetes.md)
 

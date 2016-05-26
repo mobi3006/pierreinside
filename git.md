@@ -53,7 +53,7 @@ Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Reposito
 * PreCommit-CommitObject: ganz ähnlich zu einem CommitObject, aber ohne Vorgänger und eben nicht commitet. Der Index bildet die Quelle für das Commit, denn alle Ressourcen im Index kommen auch ins CommitObject
   * ``git add bla.txt``
     * fügt bla.txt zum Index hinzu. Wenn bla.txt noch nicht versioniert ist, wird es beim nachfolgenden git commit versioniert
-  * git commit -a
+  * ``git commit -a``
     * der aktuelle Index wird automatisch um alle geänderten Ressourcen ergänzt (sofern noch nicht enthalten) und dieser wird commitet
 * Container von Referenzen auf Ressourcen
 
@@ -105,13 +105,7 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 * Ressourcen hinzufügen:
   * ``git add myfile.txt``
     * Dateien zu einem Index hinzufügen (ACHTUNG: Im Gegensatz zu Subversion, sind alle unveränderten Dateien automatisch Bestandteil eines Commits - man muss also nur die neuen oder geänderten Dateien explizit hinzufügen)
-* Änderungen commiten, indem das aktuelle CommitObject committed wird:
-  * ``git commit``
-    * alle Änderungen commiten, die zum CommitObject hinzugefügt wurden oder implizit drin sind
-  * ``git commit -a``
-    * alle geänderten Dateien zu einem Commit hinzufügen (neue nicht!!!)
-  * ``git commit -m "mein Kommentar"``
-* **Änderungen prüfen**
+* auf lokale Änderungen prüfen
   * ``git status``
     * welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
       * Änderungen, die bereits an einem CommitObject hängen (changes to be committed), weil man beispielweise ein git add gemacht hat
@@ -152,9 +146,17 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
     * Änderungen zwischen den beiden Heads anzeigen
   * ``git diff head1 ... head2`` (3 Punkte !!!)
     * Änderungen zwischen Head2 und dem gemeinsamen Vorfahren von Head1 und Head2 
-* **Änderungen rückgängig machen**
+* Änderungen lokal commiten, indem das aktuelle CommitObject committed wird:
+  * ``git commit``
+    * alle Änderungen commiten, die zum CommitObject hinzugefügt wurden oder implizit drin sind
+  * ``git commit -a``
+    * alle geänderten Dateien zu einem Commit hinzufügen (neue nicht!!!)
+  * ``git commit -m "mein Kommentar"``
+* Änderungen in ein Remote Repository pushen
+  * ``git push -u origin master``
+* Änderungen rückgängig machen
   * ``git checkout -- datei.txt``
-* **Ressourcen löschen**
+* Ressourcen löschen
   * ``git rm myfile.txt``
 * **Branches** http://www.eecs.harvard.edu/~cduan/technical/git/git-2.shtml
   * ``git branch``
@@ -223,9 +225,11 @@ Nach der Erstinstallation von git sollte man beispielsweise
     git config --global user.name "Your Name"
     git config --global user.email you@example.com
 
-durchführen. Dadurch wird die Datei ``~/.gitconfig`` um die Properties erweitert.
+durchführen. Alternativ dazu kann man auch 
 
-Hier sollte man http://help.github.com/line-endings/
+    git config --global --edit
+
+Dadurch wird die Datei ``~/.gitconfig`` um die Properties erweitert. Hier sollte man http://help.github.com/line-endings/
 
     [core]
         autocrlf = true
