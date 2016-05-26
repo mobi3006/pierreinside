@@ -3,6 +3,8 @@ VirtualBox und Vagrant begeistern mich schon einige Zeit. Durch einen Jobwechsel
 
 Auf diese Weise könnte ich auch anderen Entwicklern den Einstieg in eine Linux-Entwicklungsumgebung (OS, Docker, Java-IDE, Svn, Git, ...) erleichtern.
 
+Ich frage ich allerdings bereits am Anfang dieser Idee, ob ich denn dauerhaft die Muße haben werde alle Anpassungen an meiner Workbench auch zu scripten und - VOR ALLEM - auch zu testen, denn das ist häufig sehr aufwendig ...
+
 ## Ubuntu Desktop 16.04 LTS
 Ich habe mich für das Ubuntu Desktop Image ``boxcutter/ubuntu1604-desktop`` (siehe  https://atlas.hashicorp.com/boxcutter/boxes/ubuntu1604-desktop) entschieden. Hierbei handelt es sich um die LongTimeSupport-Variante von Ubuntu, mit der ich bereits zuvor gute Erfahrungen gemacht habe.
 

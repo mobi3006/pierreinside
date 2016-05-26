@@ -152,6 +152,13 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
   * ``git commit -a``
     * alle geänderten Dateien zu einem Commit hinzufügen (neue nicht!!!)
   * ``git commit -m "mein Kommentar"``
+* Ressourcen ignorieren: das kann man zentral machen oder lokal (für ein Repository)
+  * lokal: eine Datei mit dem Namen ``.gitignore`` anlegen und dort die Dateien aufführen (reguläre Ausdrücke sind meines Wissens erlaubt)
+  * zentral: ...
+* Remote-Repository als Origin konfigurieren, so daß man dorthin ein push machen kann
+  * ``git remote add origin https://myserver/de.cachaca.learn.anything.git``
+* Origin (Remote-Repository) umkonfigurieren
+  * ``git remote set-url origin https://otherserver/de.cachaca.learn.anything.git``
 * Änderungen in ein Remote Repository pushen
   * ``git push -u origin master``
 * Änderungen rückgängig machen
