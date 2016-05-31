@@ -2,7 +2,9 @@
 
 Vagrant erlaubt das Skripten von virtualisierten Images (Linux und Windows). Es werden verschiedene Virtualisierungstools unterstützt, u. a. VirtualBox, VmWare.
 
-## Getting Started
+---
+
+# Getting Started
 
 * https://docs.vagrantup.com/v2/getting-started/index.html
 
@@ -37,15 +39,15 @@ wird das Image gestartet und in den alten Zustand gebracht.
 
 ---
 
-## Nice2Know
+# Nice2Know
 
-### Misc
+## Misc
 
 * die Datei VAGRANT_PROJECT_DIR/Vagrantfile beinhaltet die Konfiguration des Images - hieraus kann man jederzeit ein frisches Image erstellen (zumindest wenn man es ordentlich gescriptet hat)
 * das erzeugte VirtualBox-Image wird im Standard Verzeichnis von VirtualBox für Images abgelegt ... unter Windows ist das: $HOME\VirtualBox VMs
 * über die VirtualBox Oberfläche ist das Image auch sichtbar (dort sind viele Zahlen drin: z. B. Mu2CertificationTools_default_1433340495394_70941) ... aber ACHTUNG: besser man startet/stoppt das Image über das Vagrant-CLI, sonst kann das zu Seiteneffekten führen. Beim Starten des Images über das CLI wird kein Fenster für das Image gestartet (im Gegensatz zu einem Start - NICHT EMPFOHLEN - über das VirtualBox-GUI).
 
-### Filesystem
+## Filesystem
 
 So siehts auf dem Filesystem aus:
 
@@ -73,7 +75,7 @@ Bei der Verwendung von Virtualbox als Provider wird man noch folgende Struktur f
 
 ---
 
-## CLI Kommandos
+# CLI Kommandos
 
 siehe https://docs.vagrantup.com/v2/cli/index.html
 
@@ -140,11 +142,11 @@ Im Detail
 
 ---
 
-## Vagrantfile
+# Vagrantfile
 
 Hier steckt die Konfiguration des Images drin. Es ist vergleichbar dem Dockerfile bei Docker. Es ist dazu gedacht, per eMail ausgetauscht zu werden, um ein Image from-scratch aufzubauen. Das ist in jedem Fall schneller übertragen als ein 20 GB grosses Image (das zudem die meisten Mailboxen sprengen würde). Ausserdem lässt es sich versionieren und - da Textfile - leicht mergen.
 
-### Konfiguration der VM mit VirtualBox als Provider
+## Konfiguration der VM mit VirtualBox als Provider
 
 Hier kann man viele Parameter setzen - diese Parameter sind providerabhängig (z. B. Virtualbox, VmWare).
 
@@ -163,7 +165,7 @@ Die prinzipielles Strunktur ist folgendermassen:
 
 Als Parameter kann man diese verwenden: http://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm
 
-### Parametrisierung des Provisionings
+## Parametrisierung des Provisionings
 
 Es können Parameter an Provisioning-Shell-Skripte übergeben werden:
 
@@ -187,7 +189,7 @@ Im Shellskript wird auf diese Parameter wie üblich zugegriffen (${1}, ${2}, ${3
 
 ---
 
-## Synced Folders
+# Synced Folders
 
 Per Default wird das ``VAGRANT_PROJECT_DIR`` im Linux-Image unter ``/vagrant`` als Synced-Folder eingebunden (read/write) - Achtung: der Zugriff kann je nach Vagrant-Virtualisierungsprovider (daraus leitet sich das Verfahren ab) recht langsam sein. Das vereinfacht der Datenaustausch, der vor allem dann wichtig ist, wenn das Image from-scratch aufgebaut und dann per custom-scripts angepaßt werden soll. Mit VirtualBox als Provider sind Synced-Folders über Shared-Folders abgebildet (ACHTUNG: langsam), so daß Änderungen automatisch sofort sichtbar sind (das ist bei anderen Virtualisierungsprovidern wie VMWare evtl. nicht so ... vielleicht wird dort rsync o. ä. verwendet).
 
@@ -211,7 +213,7 @@ Synced-Folder unterstützt sehr viele Konfigurationsmöglichkeiten ... hier ein 
 
 ---
 
-## Base Images
+# Base Images
 
 Per
 
@@ -225,13 +227,13 @@ Man kann eigene Base Images veröffentlichen (public oder private).
 
 ---
 
-## Netzwerk
+# Netzwerk
 
 * https://docs.vagrantup.com/v2/networking/
 
 In Vagrant kann man im Vagrantfile ein oder mehrere Netzwerkinterfaces definieren.
 
-### Private Netzwerke
+## Private Netzwerke
 
 Solche Netzwerke sind von ausserhalb des Gastbetriebssysstem nicht oder zumindest nicht direkt (sondern nur per Port-Forwarding erreichbar über das Hostbetriebssystem). Die VirtualBox fungiert als Router zwischen dem privaten Netzwerk und dem Netzwerk des Host-Betriebssystems. auf diese Weise erhält das Gastbetriebssystem Zugriff aufs Internet (über NAT). Die VirtualBox fungiert als Switch zu anderen virtuallen Images des gleichen privaten Netzwerks. 
 
@@ -283,7 +285,7 @@ Konfiguriert man nur ein einziges private_network (``config.vm.network "private_
       link-local      0.0.0.0         255.255.0.0     U     1003   0        0 enp0s8
       192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 enp0s8
 
-### Public Netzwerke
+## Public Netzwerke
 
 Solche Netzwerke erhalten eine statische oder dynamische IP-Adresse und verstecken sich nicht hinter dem VirtualBox-Software-Router, sondern sind direkt - ohne Portforwarding - erreichbar. Da Vagrant unsichere SSH-Keys verwendet kann man sich relativ leicht Zugriff auf eine Vagrant-Box mit Public-Network verschaffen ... aus diesem Grund sollte man sich das gut überlegen.
 
@@ -301,13 +303,13 @@ Hier ein paar Beispiele:
 
 ---
 
-## Provisioning
+# Provisioning
 
 * https://docs.vagrantup.com/v2/provisioning/index.html
 
 Hiermit lassen sich die Base-Images an die eigenen Bedürfnisse anpassen. Defaultmäßig läuft das Provisioning nur, wenn ein neues Image erstellt wird ... nicht wenn ein vorhandenes neu gestartet oder resumed wird. Man kann das Provisioning aber auch explizit triggern (``vagrant up --provision, vagrant provision``).
 
-### Tools
+## Tools
 
 * CFEngine
 * Chef
@@ -316,7 +318,7 @@ Hiermit lassen sich die Base-Images an die eigenen Bedürfnisse anpassen. Defaul
 * Shell-Scripting
 * ... stetig wachsend
 
-### Shell-Scripting
+## Shell-Scripting
 
 Beispielsweise so:
 
@@ -332,7 +334,7 @@ Hier sollte man folgendes:
 
 ---
 
-## Multi-Machine-Projects
+# Multi-Machine-Projects
 
 * https://docs.vagrantup.com/v2/multi-machine/index.html
 
@@ -357,7 +359,7 @@ Bei einem
 
 auf einem Multi-Machine (also ohne Angabe eines Maschinennamens) werden alle Images gestartet.
 
-### Parallelisierung
+## Parallelisierung
 
 Bei komplexen Systemen kann man Zeit einsparen, wenn man die Maschinen - sofern das möglich ist aufgrund von Abhängigkeiten untereinander - parallel hochzieht. Bei heutigen Multicore-Prozessoren ist das prinzipiell möglich und bringt eine Menge (ich konnte dadurch in einem Projekt die Deployzeit von 50 Minuten auf 20 Minuten reduzieren).
 
@@ -387,7 +389,7 @@ Um einen anderen Provider als VirtualBox zu verwenden, muß man das Vagrant Plug
 
 ---
 
-## Plugins
+# Plugins
 
 Für Vagrant gibt es eine Reihe nützlicher Plugins: http://vagrant-lists.github.io/plugins.html
 
@@ -407,7 +409,7 @@ Ein paar Ansätze:
     
 ---
 
-## Box-Datei
+# Box-Datei
 
 Das Provisioning kann bei einem komplexen Image schon mal ein paar Minuten/Stunden dauern. Deshalb macht es manchmal Sinn den aktuellen Zustand nach einem Provisioning in einem Base-Image festzuhalten, damit man das Provisioning nicht immer wieder durchführen muss. Mit
 
@@ -419,18 +421,18 @@ kann ich den aktuellen Stand des Vagrant-Project-Deplyoments wegsichern, um ihn 
 
 schnell mal wieder lokal zu deployen (eine andere Frage ist hier natürlich, ob jeder selbst tun sollte oder ob man diese Deployments nicht zentral bereitstellen sollte). Das Deployment dauert dann nicht 30 Minuten, sondern nur noch 1 Minute.
 
-### Anwendungsmöglichkeit 1
+## Anwendungsmöglichkeit 1
 
 Ich als Softwareentwickler beispielsweise möchte bei umfangreichen Refactorings gerne den Stand vom letzten Sprintende-Tag (vor meinen Refactorings) anschauen, um zu prüfen, ob ein Problem durch mein Refactoring neu entstanden ist oder vorher schon vorhanden war.
 
-### Anwendungsmöglichkeit 2
+## Anwendungsmöglichkeit 2
 
 Bei schwierigen Problemen hilft es häufig, wenn man den Zeitraum des erstmaligen Auftretens eingrenzen kann. Könnte man schnell den Stand der letzten 3 Sprints wiederherstellen, so würde das schon mal eine gute Eingrenzung ermöglichen.
 Push
 
 ---
 
-## Push
+# Push
 
 Hierbei geht es nicht darum fertige Base-Images in ein Repository zu pushen, sondern darum den Code des Vagrant-Projects auf einen anderen Server zu transferieren, um das Projekt dort zu deployen (z. B. für die QA). Das push muss im Vagrantfile konfiguriert werden - hier gibt man das Ziel oder eben verschiedene Ziele (z. B. staging, production). Mit einem
 
@@ -442,7 +444,7 @@ oder
 
 wird das Projekt auf einen anderen Server (oder gar einem anderen Provider - z. B. Heroku) kopiert.
 
-### Push-Provider
+## Push-Provider
 
 * Atlas
   * im Vagrantfile wird hierzu das Ziel spezifiziert:
@@ -458,7 +460,7 @@ wird das Projekt auf einen anderen Server (oder gar einem anderen Provider - z. 
 
 ---
 
-## Bewertung
+# Bewertung
 
 Die Idee, ein ganzes System mit ein paar Zeilen Konfiguration (im Prinzip ists ja ein Einzeler) from-scratch aufzubauen ist wirklich bestechend. Auf diese Weise braucht man keine Angst zu haben, ein System durch falsch-Konfiguration zu zerstören, dann mit dem Vagrantfile (under version control) lässt es sich immer wíeder in den gewünschten validen Zustand zurückbringen. Allerdings muss man dann auch die Disziplin haben, alles zu scripten.
 
@@ -468,7 +470,7 @@ Meine Erfahrungen waren sehr positiv. Wir konnten damit ein sehr komplexes Deplo
 
 ---
 
-## Fragen
+# Fragen
 
 **Frage 1:** Ich habe ``vagrant suspend`` gemacht, doch bei ``vagrant resume`` wird ein from-scratch-Image erzeugt. Was ist da denn los?
 
