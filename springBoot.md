@@ -31,7 +31,7 @@ Im pom.xml wird man u. a. folgendes finden:
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-die wiederum die spring-boot-dependencies als Parent hat (siehe hier). In dieser spring-boot-dependencies sind Versionen von einer Vielzahl von Frameworks definiert, die zueinander passen. Will man eine andere Version benutzen, so muß man im eigenen pom.xml nur ein Property definieren (z. B. <commons-collections.version>3.2.2</commons-collections.version>).
+die wiederum die spring-boot-dependencies als Parent hat (siehe hier). In dieser spring-boot-dependencies sind Versionen von einer Vielzahl von Frameworks definiert, die zueinander passen. Will man eine andere Version benutzen, so muß man im eigenen pom.xml nur ein Property definieren (z. B. ``<commons-collections.version>3.2.2</commons-collections.version>``).
 
 Hat man sich für eine Web-Applikation entschieden, so wird sich in der pom.xml noch folgende Abhängigkeit finden:
 
