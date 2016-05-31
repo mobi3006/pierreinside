@@ -548,3 +548,10 @@ Die Frage ist also warum die Maschine nicht unter MachineRegistry registriert wi
 * ``~/VirtualBox VMs/vagrant_foo`` löschen (ACHTUNG: keine Images löschen, die noch gebraucht werden)
 * alle Vagrant-Prozesse killen, die relevant sein könnten
 
+**Frage 9:** Seit ich auf VirtualBox 5.0.20 umgestiegen bin habe ich gelegentliche Abbrüche beim Shutdown des Images ("Memory Allocation..."). Wenn ich das Image dann neu starte, dann bleibt er im Consolen-Modus mit einer Fehlermeldung hängen. Ein Restart bringt auch nichts ... immer wieder Consolen-Modus.
+
+**Antwort 9a:** Folgendermaßen kommt man aus der Konsolen-Modus-Schleife raus:
+* mit Strg-Alt-1 die virtuelle Console 1 öffnen
+* per ``vagrant/vagrant`` anmelden
+* zum root werden per ``sudo bash``
+* ``shutdown -r 0``

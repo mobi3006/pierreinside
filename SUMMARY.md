@@ -18,4 +18,5 @@
 * [Workbench](workbench.md)
 * [Spring Boot](springBoot.md)
 * [Vagrant](vagrant.md)
+* [zsh](zsh.md)
 
