@@ -20,4 +20,5 @@
 * [Vagrant](vagrant.md)
 * [zsh](zsh.md)
 * [Ansible](ansible.md)
+* [Saltstack](saltstack.md)
 

@@ -14,9 +14,7 @@ C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
 ...
 ```
 
-
 ---
-
 
 # Site erstellen, deployen, veröffentlichen
 
@@ -76,7 +74,6 @@ ACHTUNG: GitBook kann genutzt werden, ohne die serverseitige GitHub/GitBook-Infr
 ## GitHub
 
 GitHub kann verwendet werden, um den Raw-Content (Markdown, AsciiDoc) zu speichern (inkl. Versionsverwaltung). Das kann in einem öffentlichen (man kann allerdings bestimmen, wer committen darf) oder privaten Repository erfolgen. Allerdings ist bei GitHub derzeit nur ein einziges private Repository kostenlos ...
-
 
 ---
 

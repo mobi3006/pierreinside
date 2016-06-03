@@ -1,11 +1,15 @@
 # Reactive Programming
 
+---
+
 # Links
 * http://www.reactivemanifesto.org
 * http://reactivex.io/
 * [Venkat Subramaniam - Reactive Programming](https://www.youtube.com/watch?v=3bAQXTVsEiQ)
 * [A Playful Introduction to Rx by Eik Meijer](https://www.youtube.com/watch?v=WKore-AkisY)
 * [Reactive Programming at Netflix ](http://techblog.netflix.com/2013/01/reactive-programming-at-netflix.html)
+
+---
 
 # Motivation
 
@@ -103,6 +107,8 @@ Wie man sieht ist das Push-Prinzip allgegenwärtig und könnte - richtig angewen
 ### Unsubscribe
 
 Wenn ein Client an Daten nicht mehr interessiert ist, dann kann er das dem Server über ein unsubcribe mitteilen. Auf diese Weise können die Server-Resourcen für Clients genutzt werden, die tatsächlich noch an Informationen interessiert sind.
+
+---
 
 # Reaktives Programmiermodell
 Vorreiter waren hier Microsoft und Netflix - Netflix portierte die Microsoft *Reactive Extensions (Rx)* nach Java. Netflix machte einige Bibliotheken Open-Source (z. B. RxJava), so daß der Ansatz von anderen Projekten leichter genutzt werden kann.
