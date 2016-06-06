@@ -1,5 +1,7 @@
 # Spring Boot
 
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+
 ... vereinfacht die Entwicklung von Java-Server-Applikationen. Man muss solche Server dann nicht in einem Application-Server als war-file deployen, sondern die Server-Applikationen werden als jar gepackt und enthalten einen Spring-Boot-unterstützten Application-Server (z. B. Tomcat, Jetty). Eine Spring-Boot-Applikation kann dann ganz einfach per
 
     java -jar my-application.jar
