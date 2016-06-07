@@ -27,6 +27,21 @@ gestartet werden.
     * Webapplikation: ``org.springframework.boot/spring-boot-starter-web-parent``
       * hieraus ergibt sich eine Abhängigkeit zu einem Embedded-Servlet-Container wie Tomcat/Jetty ... die Abhängigkeit ist aber in dem Parent definiert
 * Main-Class-Gerüst, so daß man mit der Business-Logik der Anwendung sofort loslegen kann
+
+      @SpringBootApplication
+      public class MyApplication 
+        extends SpringBootServletInitializer {
+
+        public static void main(String[] args) {
+          MyApplication.run(MyApplication.class, args);
+        }
+
+        protected SpringApplicationBuilder configure(
+          SpringApplicationBuilder application) {
+          return application.sources(MyApplication.class);
+        }
+      }
+
 * Beispiel-Konfiguration
 
 Zudem werden noch ein paar Java-Klassen generiert.
