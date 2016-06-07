@@ -44,8 +44,6 @@ gestartet werden.
 
 * Beispiel-Konfiguration
 
-Zudem werden noch ein paar Java-Klassen generiert.
-
 ## Build your application
 Das Kommando
     
@@ -59,7 +57,7 @@ Der Start der Applikation erfolgt über
 
     mvn spring-boot:run
     
-oder 
+oder (was hat welche Vorteile???)
 
     java -jar my-application.jar
 
@@ -139,7 +137,7 @@ Verwendet man das Spring-Dependency-Management (via ``spring-boot-dependencies``
 
 # Applicationscode
 
-Spring-Boot verwendet - Spring-typisch - Java-Annotation en-masse ... sie werden verwendet, um die Eigenschaften der Anwendung festzulegen. Beispiele:
+Spring-Boot verwendet - Spring-typisch - Java-Annotation en-masse, um den ApplicationContext aufzubauen. Sie werden verwendet, um die Eigenschaften der Anwendung festzulegen. Beispiele:
 
 * ``@SpringBootApplication``
 * ``@EnableAutoConfiguration``
@@ -228,6 +226,7 @@ Eine IDE könnte hier sogar Autovervollständigung im Properties-Editor anbieten
 ## Konfiguration über ``application.properties``/``application.yml``
 
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
 
 In diesem Link sind die Konfigurationseinstellungen zu ganz vielen Komponenten dargestellt. Wenn man besipielsweise Velocity (Template-Engine) verwedet, dann wird man dort sicher fündig werden, wenn man die Konfiguration anpassen will.
 
