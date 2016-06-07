@@ -2,13 +2,11 @@
 
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
 
-... vereinfacht die Entwicklung von Java-Server-Applikationen. Man muss solche Server dann nicht in einem Application-Server als war-file deployen, sondern die Server-Applikationen werden als jar gepackt und enthalten einen Spring-Boot-unterstützten Application-Server (z. B. Tomcat, Jetty). Eine Spring-Boot-Applikation kann dann ganz einfach per
+... vereinfacht die Entwicklung von Java-Server-Applikationen indem ein ausführbares jar-File erstellt wird, das sich selbst in der jeweiligen Umgebung deployed. Das jar enthält in diesem Fall ALLE notwendigen Third-Party-Bibliotheken und zudem noch die notwendige Laufzeitumgebung. Handelt es sich um eine Web-Applikation, so ist ein Servlet-Container (Tomcat, Jetty) eingebettet, in dem die Web-Applikation deployed wird. Eine Spring-Boot-Applikation kann dann ganz einfach per
 
     java -jar my-application.jar
 
 gestartet werden.
-
-Zudem unterstützt Spring Boot HotDeployment wie man es bisher beispielsweise über JRebel erkaufen mußte.
 
 ---
 
@@ -16,7 +14,7 @@ Zudem unterstützt Spring Boot HotDeployment wie man es bisher beispielsweise ü
 
 Über Spring Initializr kann man sich sehr schnell ein Maven/Gradle Projekt mit verschiedenen Spring (Boot, Cloud, ...) und nicht-Spring Technologien (ElasticSearch, JavaMail, ...)  zusammenstellen lassen (letztlich geht es beispielsweise im die pom.xml und ein paar weitere Getting Started Ressourcen). Es werden auch verschiedene Sprachen unterstützt (2015: sind es Java und Groovy).
 
-## Create maven pom.xml: Spring Initializr
+## Spring Initializr => erstellt Maven pom.xml
 
 * https://start.spring.io/
 
@@ -52,50 +50,23 @@ oder
 
 Voila ... sehr schlank. Wir sind nun innerhalb weniger Minuten zu einer komfortabel deploybaren Server-Applikation gekommen. Jetzt kanns losgehen mit der Implementierung der Business-Logik.
 
-## Jar-to-war
-
-* https://spring.io/guides/gs/convert-jar-to-war/
-
-Will man eine Spring-Boot Anwendung dennoch in einem externen Application-Server deployen, so benötigt man ein War-Artefakt. Für diesen Anwendungsfall hat Spring maven/gradle-Plugins entwickelt.
-
-Hat man nun ein War-Artefakt erzeugt, so kann man aber dennoch den komfortablen Deployment-Ansatz im embedded-Application-Server per
-
-    java -jar mySpringBootApp.war
-    
-nutzen.
-
 ---
 
 # Build Tool Support
 Spring Boot unterstützt die beiden Build-Tools
 
 * maven
-* gradle
+* gradle ... habe ich selbst noch nicht genutzt - deshalb beschränke ich mich im folgenden auf maven
 
 durch Dependency-Management, Code-Generierung (z. B. pom.xml).
 
 Andere Build-Tools (z. B. ant) können auch verwendet werden, doch wird es nicht von Spring unterstützt, d. h. der Einsatz ist weniger komfortabel.
 
----
+## Maven: Starter POMs
 
-# Annotation-Based
-Spring-Boot verwendet - Spring-typisch - Java-Annotation en-masse ... sie werden verwendet, um die Eigenschaften der Anwendung festzulegen. Beispiele:
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter-poms 
 
-* ``@SpringBootApplication``
-* ``@EnableAutoConfiguration``
-* ``@Configuration``
-* ``@ComponentScan``
-
-Auf diese Weise weiß der Spring-Boot-Loader (und somit auch der Leser dieser Klasse) beispielsweise wie die Anwendung zu initialisieren ist.
-
-## EnableAutoConfiguration
-Ist diese Eigenschaft gesetzt, so versucht Spring sich die Konfiguration der Anwendung selbst zu erschließen.
-
----
-
-# Spring Dependency Management
-
-Im pom.xml wird man u. a. folgendes finden:
+Im Initializr generierten ``pom.xml`` wird man u. a. folgendes finden:
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -104,4 +75,242 @@ Im pom.xml wird man u. a. folgendes finden:
         <relativePath/>
     </parent>
 
-die wiederum die ``spring-boot-dependencies`` (http://search.maven.org/#artifactdetails|org.springframework.boot|spring-boot-dependencies|1.3.5.RELEASE|pom) als Parent hat. In dieser sind Versionen von einer Vielzahl von Frameworks definiert, die zueinander passen. Will man eine andere Version benutzen, so muß man im eigenen ``pom.xml`` nur ein Property definieren, z. B. ``<commons-collections.version>3.2.2</commons-collections.version>``.
+Das sorgt für zwei Dinge:
+
+* das ``spring-boot-maven-plugin`` ist integriert, so daß ein ausführbares jar-File erstellt wird
+* die ``spring-boot-dependencies`` (http://search.maven.org/#artifactdetails|org.springframework.boot|spring-boot-dependencies|1.3.5.RELEASE|pom) werden verwendet. In dieser sind Versionen von einer Vielzahl von Frameworks definiert, die zueinander passen (Spring übernimmt also das Dependency-Management (wenn man will).
+
+Auf diese Weise kommt man schon mal sehr schnell sehr weit.
+
+## Maven: Artefakt Typen jar vs. self-executable jar
+
+Per Default (d. h. wenn das Default Parent-Pom verwendet wird) werden zwei Typen von jar-Artefakten erstellt:
+
+* ausführbares JAR [mit folgendem Inhalt](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#executable-jar-jar-file-structure):
+  * alle notwendigen Libs (als jars)
+  * Laufzeitumgebung (z. B. Servlet-Container)
+* normales JAR des Moduls, um in anderen Assemblies verwendet zu werden
+
+## Maven: Artefakt-Typ: jar vs. war
+
+* https://spring.io/guides/gs/convert-jar-to-war/
+
+Will man eine Spring-Boot Anwendung dennoch in einem externen Application-Server deployen, so benötigt man ein War-Artefakt. Für diesen Anwendungsfall verwendet man 
+
+    <packaging>war</packaging>
+    
+im ``pom.xml``.
+
+Hat man nun ein War-Artefakt erzeugt, so kann man aber dennoch den Executable-Deployment-Ansatz nutzen:
+
+    java -jar mySpringBootApp.war
+
+
+## Maven: Dependency Version ändern
+
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-customize-dependency-versions
+
+Verwendet man das Spring-Dependency-Management (via ``spring-boot-dependencies``), so kann man folgendermaßen im ``pom.xml`` die Version einer Dependency ändern ... ohne Gewähr, daß dann noch alles funktioniert:
+
+    <commons-collections.version>3.2.2</commons-collections.version>
+
+## Maven: Interessante Properties
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+
+
+---
+
+# Applicationscode
+
+Spring-Boot verwendet - Spring-typisch - Java-Annotation en-masse ... sie werden verwendet, um die Eigenschaften der Anwendung festzulegen. Beispiele:
+
+* ``@SpringBootApplication``
+* ``@EnableAutoConfiguration``
+* ``@Configuration``
+* ``@ComponentScan``
+* ...
+
+Auf diese Weise weiß der Spring-Boot-Loader (und somit auch der Leser dieser Klasse) beispielsweise wie die Anwendung zu initialisieren ist.
+
+Die zentralen Annotationen macht man am besten an die Main-Class, denn das ist die erste Klasse, die geladen wird.
+
+> Gelegentlich gibt es Alternativen zur Annotation (z. B. Konfiguration über eine xml-Datei statt über ``@Configuration`` aber die Spring-Macher empfehlen die Verwendung von Annotationen).
+
+## Strukturierung
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-locating-the-main-class
+
+## @SpringBootApplication
+Convenience Annotation ... subsumiert die empfohlenen Annotationen 
+
+* ``@EnableAutoConfiguration``
+* ``@Configuration``
+* ``@ComponentScan``
+
+## @EnableAutoConfiguration
+Ist diese Eigenschaft gesetzt, so versucht Spring sich die Konfiguration der Anwendung selbst zu erschließen. Hierin steckt schon eine Menge Magie ...
+
+> Wenn eine JPA Dependency definiert ist und EnableAutoConfiguration gesetzt ist, dann sucht der Spring Boot (der Loader) nach entsprechenden ``@Entity`` Anntotaionen im Code
+
+... solange das zuverlässig und intuitiv funktioniert ist alles gut ;-)
+
+### Auto-Configuration gezielt abschalten
+
+Über Excludes lassen sich einzelne Ressourcen von der Auto-Configuration ausschließen:
+
+    @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+
+### Auto Configuration Report
+Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --debug``) wird ein sog. Auto-Configuration Report ausgegeben:
+
+
+    =========================
+    AUTO-CONFIGURATION REPORT
+    =========================
+    
+
+    Positive matches:
+    -----------------
+
+     AuditAutoConfiguration.AuditEventRepositoryConfiguration matched
+        - @ConditionalOnMissingBean (types:
+              org.springframework.boot.actuate.audit.AuditEventRepository;
+              SearchStrategy: all) found no beans (OnBeanCondition)
+    ... blablabla ...
+
+
+## @Configuration
+
+## @ConfigurationProperties
+Diese Annotation kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten der Anwendung abbildet.
+
+Beispiel:
+
+    @Component
+    @ConfigurationProperties(prefix = "de.cachaca.myapp")
+    public class CloudIntegrationConfiguration {
+
+        private String cloudProviderName = "AWS";
+        
+        public void setCloudProviderName(String name) {
+          cloudProviderName = name;
+        }
+        
+        public String getCloudProviderName() {
+          return cloudProviderName;
+        }
+    }
+
+Eine Anpassung des ``cloudProviderName`` wäre dann über die ``application.properties`` möglich:
+
+  de.cachaca.myapp.cloudProviderName = Microsoft Azure
+  
+Beim Maven-Build wird daraus eine Datei ``spring-configuration-metadata.json`` generiert, die Metadaten für Spring-Boot bereitstellt.
+
+Eine IDE könnte hier sogar Autovervollständigung im Properties-Editor anbieten. Willkommen im 21. Jahrhundert der Softwareentwicklung.
+
+## Konfiguration über ``application.properties``/``application.yml``
+
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
+
+In diesem Link sind die Konfigurationseinstellungen zu ganz vielen Komponenten dargestellt. Wenn man besipielsweise Velocity (Template-Engine) verwedet, dann wird man dort sicher fündig werden, wenn man die Konfiguration anpassen will.
+
+Da der Application-Server in einem Executable-Jar auch Komponente der Anwendung ist, findet man dort also auch Konfigurationsmöglichkeiten.
+
+
+## @ComponentScan
+
+Ist diese Eigenschaft gesetzt, dann sucht der Spring-Loader selbst nach Spring-Beans, d. h. nach Anwendungskomponenten wie 
+
+* ``@Component``
+* ``@Service``
+* ``@Repository``
+* ``@Controller``
+
+Zusammen mit ``@Autowire`` ergibt sich dadurch kaum noch expliziter Konfigurationsaufwand.
+
+---
+
+# HotSwapping
+* Developer Tools: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-hotswapping
+
+## Developer Tools (aka ``devtools``)
+Über die Dependency
+
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+      </dependency>
+    </dependencies>
+    
+erfolgt die Integration der Developer Tools. 
+
+### Cold-Start vs. Warm-Restart vs. Reload 
+
+* Cold-Start:
+  * gesamte Anwendung wird neu gestartet
+  * diesen Ansatz verfolgen Application-Server i. d. R. out-of-the-box
+  * dauert lang (je nach Anwendung mehrere Minuten)
+* Warm-Restart: in Sping-Boot integrierter Ansatz (Developer Tools)
+  * funktioniert mit zwei Classloadern. Einer ist für die unveränderbaren Third-Party-Ressourcen zuständig, einer für die veränderlichen eigenen Ressourcen.
+  * funktioniert auch mit Remote-Deployments (http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-remote)
+  * geht deutlich schneller
+* Reload: 
+  * hierbei wird die Anwendung nicht neu gestartet, sondern die Änderungen werden nachgeladen
+  * geht am schnellsten (i. d. R. sofort bis wenige Sekunden) und funktioniert (aus eigener Erfahrung) ganz wunderbar!!!
+  * Java-Bytecode HotSwapping: Moderne IDEs unterstützen alle Hot-Swapping von Byte-Code sofern die Klassen/Methoden-Signatur nicht geändert wird, d. h. bei Änderungen im Methoden-Body. Das funktioniert bei Spring-Boot somit 
+  * [JRebel Ansatz](http://zeroturnaround.com/software/jrebel/)
+  * [Spring-Loaded Ansatz](https://github.com/spring-projects/spring-loaded)
+
+### Feature: Automatic Warm Restart
+
+Die Developer Tools aktivieren per Default das Automatic Restart Feature. Sobald sich eine Ressource auf dem Filesystem ändert (z. B. durch eine Änderung in der IDE und der daraus folgenden Class-Generierung) erfolgt ein Warm-Restart (Erklärung siehe oben).
+
+**ACHTUNG:** es muß sichergestellt werden, daß das von der IDE erzeugte Class-File auch tatsächlich im Classpath der gestarteten Anwendung landet. Ist die Anwendung in der IDE gestartet, dann geschieht das automatisch. Läuft die Anwendung allerdings über maven, dann kommt es darauf an wohin die IDE die class-Datei compiliert.
+
+### Feature: Reload Templates
+
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-reload-thymeleaf-template-content
+
+In einer Produktionsumgebung ist das Caching von Templates eine sehr sinnvolle Vorgehensweise, weil sich die Templates nicht ändern. In Developer-Umgebungen will man hingegen die Änderungen am sofort sehen und nicht erst die Anwendung durchstarten müssen.
+
+Über die ``application.properties`` kann das Caching ausgeschaltet werden:
+
+    spring.velocity.cache = false
+    
+### Konfiguration
+Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application.properties``. Da es sich aber schon um spezielle Entwickler-abhängige Einstellungen handelt, kann der Entwickler die Einstellungen per ``~/.spring-boot-devtools.properties`` dauerhaft übersteuern (siehe http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-globalsettings).
+
+---
+
+# Production-Ready Features
+
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
+
+Die production-ready Features werden über die Dependency
+
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+      </dependency>
+    </dependencies>
+
+aktiviert. Dadurch werden einige REST-Endpunkte aktiviert (siehe http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints).
+
+Einen Überblick erhält man über
+
+    http://IP_ADDRESS:PORT/docs
+
+## Custom application info
+
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-application-info
+
+Features:
+
+* Monitoring/Health-Checks
