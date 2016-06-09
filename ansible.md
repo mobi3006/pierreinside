@@ -5,6 +5,103 @@ Bricht das Shellscript nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeut
 
 ---
 
+# Getting Started - Linux-User
+
+* http://docs.ansible.com/ansible/index.html
+
+Ansible kennt das Controller-System und die Zielsysteme. Auf dem Controller-System muß  Ansible installiert werden ... auf den zu verwaltenden Systemen genügt ein SSH-Server und Python.
+
+## Installation auf dem Controller-System
+* http://docs.ansible.com/ansible/intro_installation.html
+
+## Konfiguration des Controller-Systems
+
+Die Kommandos aus dem Ansible-Playbook werden später über ssh auf die Zielsysteme übertragen und dort ausgeführt. Um eine scriptgesteuerte Ausführung zu ermöglichen, darf kein Passwort abgefragt werden. Das wird über die Verwendung von Public/Private Keys erreicht. Der Private-Key unterliegt strengster Geheimhaltung 
+
+### SSH-Key erzeugen
+* https://wiki.ubuntuusers.de/SSH/
+
+Folgender Befehl erzeugt einen Public-Key und einen Private-Key:
+
+    ssh-keygen -t rsa -b 4096 -C "info@cachaca.de"
+    
+Dabei wird eine Passphrase abgefragt, die man später bei Verwendung des Private-Key eingeben muß. 
+
+### SSH-Agent starten und konfigurieren
+Der Private-Key ist durch eine Passphrase geschützt. Da Ansible-Playbooks aber i. d. R. vollautomatisiert im Hintergrund laufen und somit nicht ständig um die Eingabe dieser Passphrase betteln wollen, starten wir einen ssh-agent ...
+
+    eval $(ssh-agent -s)
+    
+und geben ihm die Passphrase (wird im Speicher gehalten und nicht persistiert)
+
+    ssh-add ~/.ssh/id_rsa
+   
+### Zielrechner definieren
+
+Die Zielrechner können gruppiert werden - das ist sehr praktisch, wenn man mit einem Befehl gleich mehrere Rechner adressieren möchte.
+
+**Option 1: sytemweit**
+
+Unter ``/etc/ansible/hosts`` müssen die zu verwaltenden Rechner eingetragen werden. Im einfachsten Fall trägt man dort ``localhost`` ein
+
+**Option 2: userspezifisch**
+
+    $ echo "127.0.0.1" > ~/.ansible_hosts
+    $ export ANSIBLE_INVENTORY=~/.ansible_hosts
+
+### authorized_keys auf Zielrechnern anpassen
+
+... damit die passwordfreie Authentifizierung auch funktioniert müssen die Public-Keys des Users,
+
+## Das erste Kommando ...
+Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
+
+    ansible all -a "/bin/echo hello"
+
+---
+
+# Getting Started - Windows-User
+
+Ansible wird für Windows nicht unterstützt, d. h. eine Windows-Maschine kann nicht als Ansible-Controller agieren. Evtl. ist die Vagrant-Ansible-Integration vielleicht eine Alternative. 
+
+---
+
+# Vagrant-Ansible-Integration
+
+## Variante 1: Remote Ansible
+
+Der typische Ansible-Ansatz ermöglicht die Ausführung von Kommandos via ssh. Insofern paßt es perfekt in ein Vagrant-Host/Guest-Szenario - der Host sendet via ssh (wird von Vagrant eh schon konfiguriert) die entsprechenden Shell-Kommandos zum Guest. 
+
+Einzige Voraussetzung ist die Installation von Ansible auf dem Host-System. Leider wird diese Einschränkung für Windows-Host-Systeme zum Ausschlußkriterium, denn Ansible wird für Windows nicht unterstützt.
+
+## Variante 2: Local Ansible
+
+In diesem Fall muß Ansible auf dem Guest-System installiert werden. Das erfolgt 
+
+* entweder automatisch durch die Option ``install``:
+
+
+    config.vm.provision "ansible_local" do |ansible|
+       ansible.playbook = "playbook.yml"
+       install = true
+    end
+
+* oder per Shellscript-Provisioning im Vagrantfile:
+
+
+    config.vm.provision "shell", inline: <<-SHELL
+        sudo apt-get install -y ansible
+    SHELL
+
+
+Die Local Ansible Variante hat den Vorteil, daß Ansible auf dem Host-System nicht erst installiert werden muß. Das hat folgende Vorteile:
+
+* das Host-System wird nicht verändert
+* die Installation kann komplett vagrant-scriptbasiert erfolgen
+* **Windows-Host-Systeme können Ansible-Provisioning verwenden**
+
+---
+
 # Vorteile Shellscripting
 Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 
@@ -53,8 +150,3 @@ Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 
 ---
 
-# Getting Started
-
----
-
-# Vagrants Ansible Integration
