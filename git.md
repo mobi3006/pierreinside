@@ -1,4 +1,4 @@
-# GIT igitt
+# GIT
 Sehr gute Quellen:
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/
