@@ -16,7 +16,7 @@ Bei Git handelt es sich um ein Versionssystem, das ohne zentralen Server auskomm
 
 Git erfordert - im Gegensatz zu Subversion - kein zentrales Repository. ABER: man kann Git so nutzen (Shared-repository-Modell) und das wird auch getan (z. B. [GitHub](http://github.com)).
 
-![Git Workflow](gitWorkflow.png)
+![Git Workflow](images/GitWorkflow.png)
 ## Workflows
 
 Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflows (man kann sich ausser den folgenden sicher noch andere überlegen):
