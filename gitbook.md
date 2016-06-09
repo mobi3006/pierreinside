@@ -17,10 +17,11 @@ Die Toolchain bestehend aus
 * GitBook
   * produziert automatisch (wenn man in GitBook das GitHub Repository konfiguriert und GitBook entsprechende Rechte eingeräumt hat) eine neue Version des Buches sobald in GitHub Änderungen committet wurden 
   * Bücher werden in verschiedenen Formaten erstellt (ePub, PDF, mobi)
+  * unterstützt Webhooks, so daß nach der Erstellung eines Buchs weitere Aktionen getriggert werden können
 
 ---
 
-# Installation
+# Installation GitBookEditor
 
 * http://toolchain.gitbook.com/setup.html
 
@@ -33,7 +34,7 @@ C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
 
 ---
 
-# Site erstellen, deployen, veröffentlichen
+# Book erstellen, deployen, veröffentlichen
 
 ## Erstellung
 
