@@ -129,13 +129,13 @@ Der Content kann mit jedem beliebigen Editor geschrieben werden. Auch wenn Markd
 
 Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. Als ich dann aber mit GitBook anfing wollte ich dem diesem Editor mal eine Chance geben ... und tatsächlich adressiert er schon sehr viele Aspekte, die man ansonsten vermutlich über mehrere Tools (Editor mit Live-Vorschau, Git-Client) abbilden müßte ... hier ist alles integriert und somit für Newbies auf jeden Fall ein guter Startpunkt:
 
-* Commit to LocalRepo
-  * Anzeige noch nicht commiteter Änderungen
-* Sync to RemoteRepo
+* Commit to Filesystem  - rote Umrandung in Abbildung unten
+* Sync to RemoteRepo (auf GitHub) - grüne Umrandung in Abbildung unten
 * Live-Preview
 * WYSIWYG-Editor 
   * besonders gut gefallen haben mir die Shortcuts (Strg-B für Fettdruck, ...)
 * Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
+* farbige Anzeige noch nicht gespeicherter Seiten
 
 > ACHTUNG:
 > Die Änderungen im Editor sind außerhalb des Editor (Filesystem, ``gitbook serve`` zunächst nicht sichtbar. Erst nach dem Sync (grüne Umrandung) auf das Remote-Repository werden die Änderungen auch außerhalb sichtbar ([Details siehe](#256143)).
