@@ -10,6 +10,8 @@ REST ist kein Standard, sondern ein Architekturstil basierend auf Standards wie 
 ---
 
 # REST vs. SOAP
+* http://www.xfront.com/REST.ppt
+
 ## REST lebt HTTP
 REST verwendet das HTTP-Protokoll mit seinen Methoden GET, POST, PUT, DELETE ... die verwendete Methode hat in REST eine Bedeutung. Der Payload (beim PUT, POST) wird in den HTTP-Body gepackt ... in einem beliebigen Format (XML, JSON, YAML, Freitext, ...).
 
@@ -57,3 +59,4 @@ Bei REST besteht die Idee, daß ein Client sich ohne weiteres Wissen von einer R
 
 Bei SOAP wäre das nicht möglich, weil immer ein HTTP-POST mit SOAP-Envelope erforderlich ist. Das lässt sich nicht in einem einfachen Link unterbringen.
 
+# REST API Empfehlungen
