@@ -142,7 +142,8 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
 
 ![Gitbook Editor commit und sync](images/gitbookEditorCommitSync.jpg)
 
-#### <a name="256143"></a>Was bedeutet "Import"? Wo liegen die Dateien?
+
+#### Was bedeutet "Import"? Wo liegen die Dateien?
  
 Bei meinem ersten Buch hatte ich meine Sourcen in ``C:\Dev\pierreinside`` liegen und hatte das in GitBook Editor importiert.
 
