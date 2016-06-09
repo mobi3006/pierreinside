@@ -1,5 +1,22 @@
 # GitBook
+* https://www.gitbook.com/
+* https://help.gitbook.com/
+
 Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit Hugo Probleme bei der Erstellung einer Menüstruktur hatte, habe ich mich dann doch mal mit GitBook beschäftigt. So könnte ich zumindest mal mit dem Markdown-Style in Fahrt kommen und mir dann aber mittelfristig eine andere Lösung überlegen (oder vielleicht gefällt es mir ja so gut, daß ich dabei bleibe).
+
+Die Toolchain bestehend aus
+
+* GitBookEditor: 
+  * wird zum Schreiben des Contents (in Markdown) auf dem lokalen Rechner genutzt
+  * verwendet Git zur lokalen Speicherung
+  * verwendet GitHub zur remote Speicherung
+  * ermöglicht die lokale Erstellung von HTML-Seiten, die man auf jeden beliebigen Webserver schieben kann 
+* GitHub (https://github.com)
+  * hier kann der per GitBookEditor erstellte Content zentral abgelegt werden 
+  * die Markdown-Seiten werden hier auch schon in HTML gerendert
+* GitBook
+  * produziert automatisch (wenn man in GitBook das GitHub Repository konfiguriert und GitBook entsprechende Rechte eingeräumt hat) eine neue Version des Buches sobald in GitHub Änderungen committet wurden 
+  * Bücher werden in verschiedenen Formaten erstellt (ePub, PDF, mobi)
 
 ---
 
