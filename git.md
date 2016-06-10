@@ -3,6 +3,8 @@ Sehr gute Quellen:
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/
 * http://book.git-scm.com/
+* Ultra-Kurzeinführung: http://rogerdudler.github.io/git-guide/
+* https://www.youtube.com/watch?v=0fKg7e37bQE
 
 ---
 
@@ -14,30 +16,35 @@ Bei Git handelt es sich um ein Versionssystem, das ohne zentralen Server auskomm
 
 ## Verteiltes Modell
 
-Git erfordert - im Gegensatz zu Subversion - kein zentrales Repository. ABER: man kann Git so nutzen (Shared-repository-Modell) und das wird auch getan (z. B. [GitHub](http://github.com)).
+Git erfordert - im Gegensatz zu Subversion - kein zentrales Repository. ABER: man kann Git so nutzen (Shared-Repository-Modell) und das wird auch getan (z. B. [GitHub](http://github.com)).
+
+Während man bei Subversion allerdings zentral am Server Branches/Tags erzeugt hat, tut das bei Git jeder Nutzer.
 
 ![Git Workflow](images/GitWorkflow.png)
 ## Workflows
 
 Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflows (man kann sich ausser den folgenden sicher noch andere überlegen):
 
-* **Peer-to-Peer-Ansatz:** 
-  * bei diesem Ansatz tauscht jeder Entwickler mit jedem Entwickler per Git-Pull oder Git-Push die Sourcen aus. Dieser Ansatz skaliert nicht besonders gut.
-* **Shared-Repository-Ansatz:**
-  * bei diesem Ansatz synchronisieren sich die beteiligten Entwickler über ein zentrales Repository, auf das sie Lese- und Schreibrechte haben (Peer-to-Peer-Autausch ist aber weiterhin jederzeit möglich - beispielsweise, wenn zwei Entwickler ein Subteam bilden)
-  * man clont das zentrale GIT-Repository (über das lokale Filesystem oder Remote über ssh). Im neuen Repository entstehen Remote-Heads. Vom relevanten Remote-Head erzeugt man einen lokalen Branch/Head und arbeitet darauf lokal vollkommen losgelöst vom Kollegen weiter. Die zukünftigen Änderungen vom Kollegen bekommt man über ein git fetch wobei einfach die Remote-Heads geändert werden - die Remote-Branches werden einfach erweitert. Über ein git pull zieht/mergt man die Änderungen des Kollegen in den eigenen Entwicklungsstrang rein.
-  * sehr ähnlich zur Arbeitsweise mit Subversion
-* **Integration Manager Modell:**
-  * dieses Modell wird häufig von OpenSource-Projekten verwendet
-  * es gibt einen ausgezeichneten Integration Manager, der die Änderungen der anderen Entwickler integriert. Der Integration Manager führt das sog. Blessed Repository (nur er hat dort Schreibrechte - kann dort git push machen). Jeder Entwickler erstellt einen Fork des Blessed Repository und gibt dem Integration Manager Leserechte auf diesem Fork-Repository. Der Integration Manager holt sich die Änderungen der Entwickler in sein Arbeitsrepository und integriert sie. Dann pusht er das Integrationsergebnis per git push ins Blessed Repository.
+* Peer-to-Peer-Ansatz
+* Shared-Repository-Ansatz
+* Integration Manager Modell
 
 ### Peer-to-Peer-Ansatz
+Bei diesem Ansatz tauscht jeder Entwickler mit jedem Entwickler per Git-Pull oder Git-Push die Sourcen aus. Dieser Ansatz skaliert nicht besonders gut.
+
+Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe (ab 3-4 Leute) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher einen Shared-Repository-Ansatz zu fahren.
 
 ### Shared-Repository-Ansatz
 
-Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe (ab 3-4 Leute) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher ein zentrales Repository zu errichten, so daß sich jeder Entwickler nur noch mit dem zentralen Repository (also mit einer Gegenstelle) als Synchronisationspunkt austauschen muss. Das klingt ein bisschen wie Subversion mit einem zentralen Repository ...
+Bei diesem Ansatz synchronisieren sich die beteiligten Entwickler über ein zentrales Repository, auf das sie Lese- und Schreibrechte haben. Peer-to-Peer-Autausch ist aber weiterhin jederzeit möglich.
 
-Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Repository als Internetdienstleistung anbieten (z. B. [GitHub](http://github.com/))
+Jeder Entwickler clont das zentrale GIT-Repository ... im neuen lokalen Repository entsteht ein Branch mit dem Namen *master*, der Remote-Heads besitzt. Auf diesem lokalen Repository arbeitet er allein solange er keine Änderungen vom zentralen Repository per ``git fetch``/``git merge`` reinzieht. Die anderen Entwickler sehen seine Änderungen allerdings auch nicht solange kein Push ins zentrale Repository oder Pull Requests erfolgen
+
+Lokal kann der Entwickler Branches und Tags erstellen und bei Bedarf sogar weitere Clones von seinem eigenen lokalen Repository machen.
+
+### Integration Manager Modell
+
+Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei einen ausgezeichneten Integration Manager, der die Änderungen der anderen Entwickler integriert. Der Integration Manager führt das sog. *Blessed Repository* (nur er hat dort Schreibrechte - kann darauf ``git push`` machen). Jeder Entwickler erstellt einen Fork des Blessed Repository und gibt dem Integration Manager Leserechte auf diesem Fork-Repository. Der Integration Manager integriert die Änderungen der Entwickler in sein Arbeitsrepository und pusht sie ins Blessed Repository.
 
 ---
 
@@ -52,18 +59,17 @@ Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Reposito
 **Index:**
 * PreCommit-CommitObject: ganz ähnlich zu einem CommitObject, aber ohne Vorgänger und eben nicht commitet. Der Index bildet die Quelle für das Commit, denn alle Ressourcen im Index kommen auch ins CommitObject
   * ``git add bla.txt``
-    * fügt bla.txt zum Index hinzu. Wenn bla.txt noch nicht versioniert ist, wird es beim nachfolgenden git commit versioniert
+    * fügt *bla.txt* zum Index hinzu ... man spricht vom *staging von bla.txt*. Wenn *bla.txt* noch nicht versioniert ist, wird es beim nachfolgenden ``git commit`` versioniert
   * ``git commit -a``
     * der aktuelle Index wird automatisch um alle geänderten Ressourcen ergänzt (sofern noch nicht enthalten) und dieser wird commitet
-* Container von Referenzen auf Ressourcen
 
 **CommitObject:**
-* ein CommitObject besteht aus Pointern auf Ressourcen (Dateien) und deren Änderungen zur Vorversion
-* durch ein git add bla.txt fügt man die geänderte Ressource bla.txt zum Index
+* ein CommitObject besteht aus Pointern auf Ressourcen (Dateien) und deren Änderungen zur Vorversion. Da ein Git-Repository in sich alle Änderungen aller Branches trägt sind Vergleiche zwischen Revisionen einer Ressource komplett lokal möglich - dazu werden die CommitObjects benötigt
+* durch ein ``git add bla.txt`` fügt man eine geänderte Ressource *bla.txt* zum Index hinzu
 * nur das erste CommitObject hat keinen Vorfahren - alle anderen haben i. d. R. einen Vorfahren, bei gemergten Branches zwei Vorfahren
 
 **Zustand eines Branches:**
-* ergibt sich aus den CommitObjects des aktuellen Head zurück zur Wurzel
+* ergibt sich aus den CommitObjects (repräsentieren die Diffs) von der Wurzel bis zum aktuellen Head
 
 **Head:**
 * benanntes CommitObject (Teilmenge aller CommitObjects) - durch Branching wird ein neuer Head erzeugt, der dann eine eigene Historie entwickeln kann und irgendwann evtl. mal wieder mit dem anderen Zweig zusammengeführt wird
@@ -73,7 +79,7 @@ Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Reposito
 * neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
 
 **Clone:**
-* ein ``git clone`` ist vergleichbar einem ``svn checkout`` - es erstellt eine Kopie des aktuellen Repositories
+* ein ``git clone`` ist vergleichbar einem ``svn checkout`` - es erstellt eine Kopie des Repositories. Dabei werden ALLE CommitObjects aller Branches ins neue Repository übernommen, d. h. die gesamte Historie ist im geclonten Repository vorhanden.
 * über ``git push`` oder Pull-Requests kann eine Integration in das Origin-Repository erfolgen
 
 **Clone vs. Fork:**
@@ -81,36 +87,36 @@ Es gibt auch entsprechende Dienstleister, die ein solches zentrales Git-Reposito
 * ABER: ein Fork sorgt dafür, daß Origin und Fork unterschiedliche Eigentümer hat. Je nach Konfiguration kann nur der Eigentümer Pull-Requests committen. Man kann aber problemlos einen Fork erstellen und dann einen Pull-Request erstellen, der zum Transport der Änderungen/Erweiterungen in das Origin-Repository verwendet wird.
 * Clone ist eher eine lokale Kopie des Remote-Repositories, Fork ist eine serverseitige Kopie des Remote-Repositories mit geändertem Eigentümer ... aber was ist schon Client/Server/lokal/remote, wenn die Grenzen fließend sind?
 
+**Branch:**
+
+Ein Branch repräsentiert alle CommitObjects eines Commit-Threads. Man kann zwischen Branches beliebig hin- und herwechseln und bekommt den im jeweiligen Branch gültigen Stand auf dem Filesystem wiederhergestellt. Das erscheint auf den ersten Blick magisch, weil sich u. U. das gesamte Filesystem ändert.
+Hat man eine nicht commitete Änderung an einer Ressource, die bereits unter Version-Control steht, in dem zu verlassenden Branch, dann wird das unterbunden. Man muß erst entscheiden, ob man die Änderung committet oder rückgängig macht.
+Hat man eine nicht commitete Änderung an einer Ressource, die nocht nicht unter Version-Control steht, in  
+
 ---
 
 # Befehle
 Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bin ich beruflich ein Subversion-Nutzer).
 
-* Repository: http://www.eecs.harvard.edu/~cduan/technical/git/git-1.shtml
-  * ``git init``
-    * Erzeugung eines Repositories aus einem vorhandenen Verzeichnis ... dadurch wird ein Verzeichnis ``.git`` angelegt
-  * ``git clone ../gitTest``
-    * lokales Repository lokalen clonen
-  * ``git clone ssh://user@server/absolutePath/to/repository myDir``
-    * ACHTUNG: es ist KEIN Doppelpunkt zwischen Servername und dem Pfad zum Git-Repository
-    * entferntes Repository lokal clonen - myDir kann optional weggelassen werden
-    * dadurch entstehen Remote Heads auf das Original-Repository, die den Namen ``origin/[HEAD_NAME]``
-* Versionsstand herstellen - ACHTUNG: auf noch nicht committe Änderungen achten, wenn man den Branch dabei wechselt!!!
-  * ``git checkout``
-    * aktuell konfigurierten branch aktualisieren
-  * ``git checkout <HEADNAME>``
-  * ``git checkout HEAD``
-  * ``git checkout mybranch``
-  * ``git checkout 0df81ba8e4281f9f0edbd6c586e26d8f42073522``
-* Ressourcen hinzufügen:
-  * ``git add myfile.txt``
-    * Dateien zu einem Index hinzufügen (ACHTUNG: Im Gegensatz zu Subversion, sind alle unveränderten Dateien automatisch Bestandteil eines Commits - man muss also nur die neuen oder geänderten Dateien explizit hinzufügen)
-* auf lokale Änderungen prüfen
-  * ``git status``
-    * welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
-      * Änderungen, die bereits an einem CommitObject hängen (changes to be committed), weil man beispielweise ein git add gemacht hat
-      * Änderungen, die noch nicht an einem CommitObejct hängen (changed but not updated)
-      * neue Ressourcen (untracked files)
+## Arbeiten am Repository
+* http://www.eecs.harvard.edu/~cduan/technical/git/git-1.shtml
+
+* ``git init``
+  * Erzeugung eines GIT-Repositories für das aktuelle Verzeichnis ... es entsteht ein Verzeichnis ``.git`` angelegt (= die Repository-"Datenbank")
+* ``git clone ../gitTest``
+  * Repository, das im Verzeichnis ``../gitTest`` liegt, clonen
+* ``git clone ssh://user@server/absolutePath/to/repository myDir``
+  * ACHTUNG: es ist KEIN Doppelpunkt zwischen Servername und dem Pfad zum Git-Repository
+  * Remote-Repository lokal clonen - ``myDir`` kann optional weggelassen werden
+  * dadurch entstehen Remote-Head-CommitObjects auf das Original-Repository, die den Namen ``origin/[HEAD_NAME]`` haben
+
+## Arbeiten am Index
+
+* ``git status``
+  * welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
+    * Änderungen, die bereits im Index liegen und dementsprechend bei einem ``git commit`` committed würden (Folge eines ``git add``)
+    * Änderungen, die noch nicht im Index liegen
+    * neue Ressourcen (untracked files)
 
           ```
           ~/src/gitTest> git status
@@ -132,42 +138,52 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
           #       trash.txt
           ```
 
-      * eine solche Ausgabe bedeutet, dass man auf dem geclonten Repository ein Commit gemacht hat, das noch nicht wieder zurückgepush wurde:
+    * folgende Ausgabe bedeutet, dass man auf dem geclonten Repository ein Commit gemacht hat, das noch nicht wieder zurückgepush wurde:
         ```
         $ git status
         # On branch master
         # Your branch is ahead of 'origin/master' by 1 commit.
         ```
-  * ``git diff``
-    * Änderungen an Resourcen seit letztem commit anzeigen
-  * ``git diff myfile.txt``
-    * Änderung an der Datei ``myfile.txt`` seit letztem commit anzeigen
-  * ``git diff head1 .. head2``
-    * Änderungen zwischen den beiden Heads anzeigen
-  * ``git diff head1 ... head2`` (3 Punkte !!!)
-    * Änderungen zwischen Head2 und dem gemeinsamen Vorfahren von Head1 und Head2 
-* Änderungen lokal commiten, indem das aktuelle CommitObject committed wird:
-  * ``git commit``
-    * alle Änderungen commiten, die zum CommitObject hinzugefügt wurden oder implizit drin sind
-  * ``git commit -a``
-    * alle geänderten Dateien zu einem Commit hinzufügen (neue nicht!!!)
-  * ``git commit -m "mein Kommentar"``
+* Ressourcen zum Index hinzufügen (in Vorbereitung eines Commits):
+  * ``git add myfile.txt``
+    * Dateien zu einem Index hinzufügen (ACHTUNG: Im Gegensatz zu Subversion, sind alle unveränderten Dateien automatisch Bestandteil eines Commits - man muss also nur die neuen oder geänderten Dateien explizit hinzufügen)
+* Ressourcen aus dem Index rausnehmen (in Vorbereiotung eines Commits):
+  * ``git reset HEAD myfile.txt``
+
+## Lokale Änderungen
+
 * Ressourcen ignorieren: das kann man zentral machen oder lokal (für ein Repository)
   * lokal: eine Datei mit dem Namen ``.gitignore`` anlegen und dort die Dateien aufführen (reguläre Ausdrücke sind meines Wissens erlaubt)
   * zentral: ...
-* Remote-Repository als Origin konfigurieren, so daß man dorthin ein push machen kann
-  * ``git remote add origin https://myserver/de.cachaca.learn.anything.git``
-* Origin (Remote-Repository) umkonfigurieren
-  * ``git remote set-url origin https://otherserver/de.cachaca.learn.anything.git``
-* Origin (Remote-Repository) entfernen
-  * ``git remote remove origin``
-* Änderungen in ein Remote Repository pushen
-  * ``git push -u origin master``
-* Änderungen rückgängig machen
+* ``git diff``
+  * Änderungen an Resourcen seit letztem commit anzeigen
+* ``git diff myfile.txt``
+  * Änderung an der Datei ``myfile.txt`` seit letztem commit anzeigen
+* ``git diff head1 .. head2``
+  * Änderungen zwischen den beiden Heads anzeigen
+* ``git diff head1 ... head2`` (3 Punkte !!!)
+  * Änderungen zwischen Head2 und dem gemeinsamen Vorfahren von Head1 und Head2 
+* Änderungen lokal commiten, indem das aktuelle CommitObject committed wird:
+* ``git commit``
+  * alle Änderungen committen, die im aktuellen Index sind ... nach erfolgreichem Commit wurde im Repository ein neues HEAD-CommitObject mit dem Inhalt des Index angelegt.
+* ``git commit -a``
+  * alle geänderten Dateien zum Index hinzufügen und diesen committen
+* ``git commit -m "mein Kommentar"``
+* Änderungen, die noch nicht im Index gestaged wurden, rückgängig machen
   * ``git checkout -- datei.txt``
 * Ressourcen löschen
   * ``git rm myfile.txt``
-* **Branches** http://www.eecs.harvard.edu/~cduan/technical/git/git-2.shtml
+## Arbeiten mit Branches
+* http://www.eecs.harvard.edu/~cduan/technical/git/git-2.shtml
+
+* Versionsstand herstellen - ACHTUNG: auf noch nicht committe Änderungen achten, wenn man den Branch dabei wechselt!!!
+  * ``git checkout``
+    * aktuell konfigurierten branch aktualisieren
+  * ``git checkout <HEADNAME>``
+  * ``git checkout HEAD``
+  * ``git checkout mybranch``
+  * ``git checkout 0df81ba8e4281f9f0edbd6c586e26d8f42073522``
+
   * ``git branch``
     * zeigt die existierenden heads an - der HEAD wird mit einem Sternchen gekennzeichnet
   * ``git branch mybranchname``
@@ -182,39 +198,56 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
     * zum Branch mybranchname wechseln - dadurch wird HEAD auf das letzte CommitObject im mybranchname-Branch gesetzt
   * ``git checkout master``
     * zum master Branch wechseln - dadurch wird HEAD auf das letzte CommitObject im Master-Branch gesetzt
-* **Mergen** http://www.eecs.harvard.edu/~cduan/technical/git/git-3.shtml
+
+## Mergen
+* http://www.eecs.harvard.edu/~cduan/technical/git/git-3.shtml
+
   * ``git merge mybranch``
-    * mergen der mybranch in den HEAD (der HEAD sollte natürlich nicht mybranch sein)
-    * sollte im HEAD keine Änderung seit dem Branchinbg erfolgt sein, handelt es sich um einen Fast-Forward-Merge - dann werden HEAD und der Ziel-Branch (z. B. master) einfach auf des CommitObject von mybranch gesetzt, es entsteht kein neues CommitObject
-* **Taggen**
-  * ``git tag -a 1.0.0 -m "tag for version 1.0.0"``
-    * aktuell konfigurierten Branch mit der Bezeichnung 1.0.0 taggen
-* **Historie**
-  * ``git log``
-    * zeige alle CommitObject-Vorfahren zum HEAD an
-  * ``git log head``
-    * identisch zu ``git log``
-  * ``git log master``
-    * identisch zu ``git log``
-  * ``git log 1c8a778cd20b2991094914b573bdcda27678c51b``
-    * zeige alle CommitObject-Vorfahren zum CommitObject 1c8a778cd20b2991094914b573bdcda27678c51 an
-  * ``git log head1 .. head2``
-    * zeige alle CommitObjects
-* **Collaboration**
-  * ``git clone ssh://user@server/absolutePath/to/repository``
-    * entferntes Repository clonen - dann kann man lokal darauf arbeiten und die Änderungen irgendwann per ``git push`` zurückspielen
-  * ``git fetch``
-    * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen
-    * wird nur in Ausnahmefällen gebraucht
-  * ``git remote add SYMBOLIC_NAME_OTHER_REPO URL_TO_OTHER_REPO``
-    * dann kann man per ``git pull SYMBOLIC_NAME_OTHER_REPO BRANCH_NAME`` die Sourcen ins lokale Repository ziehen ... die liegen dort erst mal unverbunden rum und man muss sie per git merge einbinden
-    * dieser Befehl passiert automatisch, wenn man das eigene Repository als Clone eines anderen Repositories angelegt hat.
-  * ``git pull``
-    * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen und die Änderungen in den eigenen Entwicklungsstrang mergen
-    * hierdurch kommen evtl. weitere Heads des geclonten Repositories hinzu (tragen das Prefix origin/)
-  * ``git push``
-    * Änderungen aus dem lokalen Repository ins Remote-Repository zurückspielen
-    * im entfernten Repository müssen die Heads per git checkout weitergesetzt werden (das geschieht nicht automatisch)
+    * merge des *mybranch* in den HEAD (der HEAD sollte natürlich nicht *mybranch* sein)
+    * sollte im HEAD keine Änderung seit dem Branching erfolgt sein, handelt es sich um einen Fast-Forward-Merge - dann werden HEAD und der Ziel-Branch (z. B. master) einfach auf des CommitObject von mybranch gesetzt, es entsteht kein neues CommitObject
+
+## Taggen
+* ``git tag -a 1.0.0 -m "tag for version 1.0.0"``
+  * aktuell konfigurierten Branch mit der Bezeichnung 1.0.0 taggen
+
+## Historie
+
+* ``git log``
+  * zeige alle CommitObject-Vorfahren zum HEAD an
+* ``git log head``
+  * identisch zu ``git log``
+* ``git log master``
+  * identisch zu ``git log``
+* ``git log 1c8a778cd20b2991094914b573bdcda27678c51b``
+  * zeige alle CommitObject-Vorfahren zum CommitObject 1c8a778cd20b2991094914b573bdcda27678c51 an
+* ``git log head1 .. head2``
+  * zeige alle CommitObjects
+
+## Arbeiten mit Remot-Repository
+
+* ``git clone ssh://user@server/absolutePath/to/repository``
+  * Remote-Repository lokal clonen
+  * das Remote-Repository wird automatisch als *Origin* eingetragen
+* Remote-Repository als Origin konfigurieren, so daß man dorthin ein push machen kann
+  * ``git remote add origin https://myserver/de.cachaca.learn.anything.git``
+* Origin (Remote-Repository) umkonfigurieren
+  * ``git remote set-url origin https://otherserver/de.cachaca.learn.anything.git``
+* Origin (Remote-Repository) entfernen
+  * ``git remote remove origin``
+* Änderungen in ein Remote Repository pushen
+  * ``git push -u origin master``
+* ``git fetch``
+  * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen
+* ``git remote add SYMBOLIC_NAME_OTHER_REPO URL_TO_OTHER_REPO``
+  * dann kann man per ``git pull SYMBOLIC_NAME_OTHER_REPO BRANCH_NAME`` die Sourcen ins lokale Repository ziehen ... die liegen dort erst mal unverbunden rum und man muss sie per git merge einbinden
+  * dieser Befehl passiert automatisch, wenn man das eigene Repository als Clone eines anderen Repositories angelegt hat.
+* ``git pull``
+  * macht ein ``git fetch`` und ``git merge`` in einem Kommando - manche Entwickler raten davon ab, weil es schlecht nachvollziehbar und voller Magic ist (siehe http://longair.net/blog/2009/04/16/git-fetch-and-merge/)
+  * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen und die Änderungen in den eigenen Entwicklungsstrang mergen
+  * hierdurch kommen evtl. weitere Heads des geclonten Repositories hinzu (tragen das Prefix origin/)
+* ``git push``
+  * Änderungen aus dem lokalen Repository ins Remote-Repository zurückspielen
+  * im entfernten Repository müssen die Heads per git checkout weitergesetzt werden (das geschieht nicht automatisch)
 
 ---
 # Konfiguration
