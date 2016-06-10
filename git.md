@@ -18,7 +18,9 @@ Sehr gute Quellen:
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml
 
-Bei Git handelt es sich um ein Versionssystem, das ohne zentralen Server auskommt. Das Repository (mit allen Versionen der verwalteten Ressourcen) liegt im gleichen Verzeichnis wie die Ressourcen selbst - dadurch ist das Version-Control-Feature auch offline nutzbar. Somit kommt das System ohne Netzwerk aus, ist aber auch zunächst mal nur lokal. Nicht gerade das, was man bei der Softwareentwicklung im Team braucht, wäre da nicht ein weiteres Git-Feature: ein verteiltes Modell, das eine Synchonisierung der verteilten (= geclonten) Repositories in ein zentrales Repository ermöglicht.
+Bei Git handelt es sich um ein Versionssystem, das ohne dedizierten zentralen Server auskommt. Stattdessen gibt es viele mehr oder weniger gleichberechtigte vollwertige Repositories (mit allen Versionen der verwalteten Ressourcen), die bei Bedarf synchronisiert werden.
+
+Jeder Entwickler wird für "sein" Repository zum Administrator, auf dem er Branches und Tags erstellt. 
 
 ## Verteiltes Modell
 
@@ -99,16 +101,18 @@ Hat man eine nicht commitete Änderung an einer Ressource, die nocht nicht unter
 Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bin ich beruflich ein Subversion-Nutzer).
 
 ## Arbeiten am Repository
+
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-1.shtml
 
-* ``git init``
-  * Erzeugung eines GIT-Repositories für das aktuelle Verzeichnis ... es entsteht ein Verzeichnis ``.git`` angelegt (= die Repository-"Datenbank")
-* ``git clone ../gitTest``
-  * Repository, das im Verzeichnis ``../gitTest`` liegt, clonen
-* ``git clone ssh://user@server/absolutePath/to/repository myDir``
-  * ACHTUNG: es ist KEIN Doppelpunkt zwischen Servername und dem Pfad zum Git-Repository
-  * Remote-Repository lokal clonen - ``myDir`` kann optional weggelassen werden
-  * dadurch entstehen Remote-Head-CommitObjects auf das Original-Repository, die den Namen ``origin/[HEAD_NAME]`` haben
+* Erstellung eines lokalen Repositories
+  * Option 1: ``git init``
+    * die Ressourcen im aktuellen Verzeichnis bilden das Repository, das im Verzeichnis ``.git`` abgelegt ist
+  * Option 2: ``git clone ../gitTest``
+    * Repository, das im Verzeichnis ``../gitTest`` liegt, clonen
+  * Option 3: ``git clone ssh://user@server/absolutePath/to/repository myDir``
+    * ACHTUNG: es ist KEIN Doppelpunkt zwischen Servername und dem Pfad zum Git-Repository
+    * Remote-Repository lokal clonen - ``myDir`` kann optional weggelassen werden
+    * dadurch entstehen Remote-Head-CommitObjects auf das Original-Repository, die den Namen ``origin/[HEAD_NAME]`` haben
 
 ## Arbeiten am Index
 
@@ -199,18 +203,18 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 * ``git checkout master``
   * zum master Branch wechseln - dadurch wird HEAD auf das letzte CommitObject im Master-Branch gesetzt
 
-## Mergen
+## Mergen von Branches
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-3.shtml
 
-  * ``git merge mybranch``
-    * merge des *mybranch* in den HEAD (der HEAD sollte natürlich nicht *mybranch* sein)
-    * sollte im HEAD keine Änderung seit dem Branching erfolgt sein, handelt es sich um einen Fast-Forward-Merge - dann werden HEAD und der Ziel-Branch (z. B. master) einfach auf des CommitObject von mybranch gesetzt, es entsteht kein neues CommitObject
+* ``git merge mybranch``
+  * merge des *mybranch* in den HEAD (der HEAD sollte natürlich nicht *mybranch* sein)
+  * sollte im HEAD keine Änderung seit dem Branching erfolgt sein, handelt es sich um einen Fast-Forward-Merge - dann werden HEAD und der Ziel-Branch (z. B. master) einfach auf des CommitObject von mybranch gesetzt, es entsteht kein neues CommitObject
 
-## Taggen
+## Taggen von Branches
 * ``git tag -a 1.0.0 -m "tag for version 1.0.0"``
   * aktuell konfigurierten Branch mit der Bezeichnung 1.0.0 taggen
 
-## Historie
+## Commit-Historie
 
 * ``git log``
   * zeige alle CommitObject-Vorfahren zum HEAD an
@@ -223,7 +227,7 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 * ``git log head1 .. head2``
   * zeige alle CommitObjects
 
-## Arbeiten mit Remot-Repository
+## Arbeiten mit Remote-Repository
 
 * ``git clone ssh://user@server/absolutePath/to/repository``
   * Remote-Repository lokal clonen
@@ -242,9 +246,10 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
   * dann kann man per ``git pull SYMBOLIC_NAME_OTHER_REPO BRANCH_NAME`` die Sourcen ins lokale Repository ziehen ... die liegen dort erst mal unverbunden rum und man muss sie per git merge einbinden
   * dieser Befehl passiert automatisch, wenn man das eigene Repository als Clone eines anderen Repositories angelegt hat.
 * ``git pull``
-  * macht ein ``git fetch`` und ``git merge`` in einem Kommando - manche Entwickler raten davon ab, weil es schlecht nachvollziehbar und voller Magic ist (siehe http://longair.net/blog/2009/04/16/git-fetch-and-merge/)
+  * macht ein ``git fetch`` und ``git merge`` in einem Kommando
   * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen und die Änderungen in den eigenen Entwicklungsstrang mergen
   * hierdurch kommen evtl. weitere Heads des geclonten Repositories hinzu (tragen das Prefix origin/)
+  * **ACHTUNG:** manche Entwickler raten von ``pull``  ab, weil es schlecht nachvollziehbar und voller Magic ist (siehe http://longair.net/blog/2009/04/16/git-fetch-and-merge/)
 * ``git push``
   * Änderungen aus dem lokalen Repository ins Remote-Repository zurückspielen
   * im entfernten Repository müssen die Heads per git checkout weitergesetzt werden (das geschieht nicht automatisch)
@@ -300,29 +305,41 @@ Im folgenden gehe ich davon aus, dass der Benutzer bereits Dateien angelegt hat 
 
 ## Zentrales Repository aufsetzen
 
-Ich gehe davon aus, daß ein Entwickler mal mit dem Projekt begonnen hat und die Sourcen zunächst lokal liegen hat. Diese Sourcen will er dann in ein zentales Repository stellen, um sie mit anderen zu teilen. Es wird empfohlen, das zentrale Repository nur als sog. bare repository anzulegen, d. h. der zentale Srever hat keine eigene Working-Copy, sondern hält nur die Repository-Information (mehr wäre vermutlich auch Platzverschwendung). Das vereinfacht die Sache, denn ansonsten würde die Working-Copy nicht automatisch upgedated und das würde nur zu Verwirrung führen (kann ich aus eigener Erfahrung bestätigen).
+Ich gehe davon aus, daß ein Entwickler mal mit dem Projekt begonnen hat und die Sourcen zunächst lokal liegen hat. Diese Sourcen will er dann in ein zentales Repository stellen, um sie mit anderen zu teilen. Es wird empfohlen, das zentrale Repository nur als sog. *Bare Repository* anzulegen, d. h. der zentrale Server hat keine eigene Working-Copy, sondern hält nur die Repository-Information (mehr wäre vermutlich auch Platzverschwendung). Das vereinfacht die Sache, denn ansonsten würde die Working-Copy nicht automatisch upgedated und das würde nur zu Verwirrung führen (kann ich aus eigener Erfahrung bestätigen).
 
 * http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#setting-up-a-public-repository
-* ``git clone --bare ~/existingGitRepsoitoy ~/centralRepo; touch ~/centralRepo/git-daemon-export-ok``
-* ``scp -r ~/centralRepo USER@HOST:/home/bla/...``
-* Variante 1
-  * lokale Sourcen archivieren und zentrales Repository neu clonen ``git clone ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY``
-* Variante 2:
-  * ``cd ~/existingGitRepsoitoy; git remote add origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY``
-  * ACHTUNG: das erste push erfordert noch git push origin master (danach sollte es automatisch funktionieren) oder man fügt folgenden Eintrag in .git/config hinzu:
 
-      ```
-      [branch "master"]
-      remote = origin
-      merge = refs/heads/master
-      ```
+  ```
+  git clone --bare ~/existingGitRepsoitoy ~/centralRepo
+  touch ~/centralRepo/git-daemon-export-ok
+  scp -r ~/centralRepo USER@HOST:/home/bla/...
+  ```
+    
+### Variante 1
 
-* Variante 3: EMPFOHLEN
-* ``cd ~/existingGitRepsoitoy; git remote add --track master origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY``
+Lokale Sourcen archivieren und zentrales Repository neu clonen 
+
+    git clone ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY
+
+### Variante 2
+    cd ~/existingGitRepsoitoy
+    git remote add origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY
+
+**ACHTUNG:** das erste push erfordert noch ``git push origin master`` (danach sollte es automatisch funktionieren) oder man fügt folgenden Eintrag in ``.git/config`` hinzu:
+
+    ```
+    [branch "master"]
+    remote = origin
+    merge = refs/heads/master
+    ```
+
+### Variante 3 - EMPFOHLEN
+    cd ~/existingGitRepsoitoy
+    git remote add --track master origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY``
 
 ## Zentraler-Repository-Ansatz mit GitHub
 
-Die Arbeit mit GitHub könnte folgendermaßen aussehen (in der Kombination von GitHub Desktop Tool und GitHub Webapplikation wird dieser Workflow sehr gut durch Tooling unterstützt ... aber man kann auch Standard-Tools verwenden):
+Die Arbeit mit GitHub könnte folgendermaßen aussehen (in der Kombination von GitHub Desktop Tool und GitHub Webapplikation wird dieser Workflow sehr gut durch Tooling unterstützt ... aber man kann auch Standard-Tools verwenden).
 
 ### Schritte 1a - GitHub Repository aus lokalen Ressourcen initial erstellen
 
@@ -337,7 +354,7 @@ Die Arbeit mit GitHub könnte folgendermaßen aussehen (in der Kombination von G
 
 ### Schritt 1b - GitHub Remote-Repository clonen
 
-### Schritt 2 - Änderungen lokal committen und ins Remote-Repository syncen
+### Schritt 2 - Änderungen lokal committen und ins Remote-Repository pushen/syncen
 
 Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
 
@@ -361,13 +378,13 @@ Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
 # Performance
 Für die Performance wird GIT ja immer angepriesen und das war auch eine der Zielvorgaben des "Erfinders" Linus Torvalds.
 
-Ich machte allerdings zunächst mal ganz andere Erfahrungen. Mein 3 GB großes neu aufgesetztes Repository (ca. 3000 Dateien - kaum Versionen) war bei der Statusüberprüfung per git status sehr langsam. Zugegebenermassen habe ich viele binäre Dateien drin und es hätte gut sein können, daß GIT darauf nicht optimiert ist und dementsprechend keine gute Wahl für meinen Use-Case ist. Deshalb ging ich dem Problem auf den Grund.
+Ich machte allerdings zunächst mal ganz andere Erfahrungen. Mein 3 GB großes neu aufgesetztes Repository (ca. 3000 Dateien - kaum Versionen) war bei der Statusüberprüfung per ``git status`` sehr langsam. Zugegebenermaßen habe ich viele binäre Dateien drin und es hätte gut sein können, daß GIT darauf nicht optimiert ist und dementsprechend keine gute Wahl für meinen Use-Case ist. Deshalb ging ich dem Problem auf den Grund.
 
 ## PROBLEM 1
 Performance war stark schwanken: mal 1 Sekunde und dann wieder 3 Minuten (im gleichen Setup)
 
 ## LÖSUNG 1
-Ich verwendete zwei unterschiedliche Systeme, um auf das gleiche Repository zuzugreifen (von Windows per cygwin und von Suse-Linux über einen Shared Folder meiner VM). Des Rätsels Lösung war der ständige Neuaufbau des Caches (.git/index) - erkennbar nur am neuen Zeitstempel der Datei, denn inhaltlich waren die Dateien identisch (ich habe die Ergebnisse von ``git ls-files --stage > index.txt`` miteinander verglichen). Ich vermute aufgrund unterschiedlicher Git-Clients werden die Verwaltungsinformationen neu aufgebaut. Ich habe Clients der Versionen 1.6.0.2 bzw. 1.7.3.3 verwendet, vielleicht lag es auch an den verschiedenen Plattformen (cygwin vs. Suse). Der Wert core.repositoryformatversion in ``.git/config`` war bei beiden Clients allerdings 0.Der Aufbau der Metadaten dauert eben seine Zeit, allerdings ist das normalerweise nur sehr selten erforderlich.
+Ich verwendete zwei unterschiedliche Systeme, um auf das gleiche Repository zuzugreifen (von Windows per cygwin und von Suse-Linux über einen Shared Folder meiner VM). Des Rätsels Lösung war der ständige Neuaufbau des Caches (``.git/index``) - erkennbar nur am neuen Zeitstempel der Datei, denn inhaltlich waren die Dateien identisch (ich habe die Ergebnisse von ``git ls-files --stage > index.txt`` miteinander verglichen). Ich vermute aufgrund unterschiedlicher Git-Clients werden die Verwaltungsinformationen neu aufgebaut. Ich habe Clients der Versionen 1.6.0.2 bzw. 1.7.3.3 verwendet, vielleicht lag es auch an den verschiedenen Plattformen (cygwin vs. Suse). Der Wert ``core.repositoryformatversion`` in ``.git/config`` war bei beiden Clients allerdings 0.Der Aufbau der Metadaten dauert eben seine Zeit, allerdings ist das normalerweise nur sehr selten erforderlich.
    
 Der folgende Befehl zeigt den Inhalt der binären Datei ``.git/index`` in leserlicher Form an
 
@@ -376,7 +393,7 @@ Der folgende Befehl zeigt den Inhalt der binären Datei ``.git/index`` in leserl
 Es zeigt sich, daß hier alle Dateien mit Zugriffsrechten und Fingerprint aufgelistet sind.
 
 ## PROBLEM 2
-Manchmal wurde die Datei ``.git/index`` erneuert, obwohl immer wieder mit dem gleichen Client ein git status ausgeführt wurde
+Manchmal wurde die Datei ``.git/index`` erneuert, obwohl immer wieder mit dem gleichen Client ein ``git status`` ausgeführt wurde
 
 ## Lösung 2
 Noch keine Lösung gefunden - ist aber nur unter meiner Suse-VirtualBox-VM passiert.
@@ -406,19 +423,22 @@ Die SharedFolder (oder evtl. sogar das gesamte VirtualBox-Filesystem) ist sehr l
 
 # Tips
 
-* vorm mergen sollte man alle lokalen Änderungen commiten oder rollbacken
-* vorm checkout eines Heads sollte man alle lokalen Änderungen commiten oder rollbacken
+* vorm Mergen sollte man alle lokalen Änderungen commiten oder rollbacken
+* vorm Checkout eines Heads sollte man alle lokalen Änderungen commiten oder rollbacken
 
 ---
 
 # Fragen und Probleme
 **Frage 1:** Das clonen übers Netzwerk dauert sehr lange. Woran liegt das?
+
 **Antwort 1:** Die Ressourcen werden scheinbar gepackt und erst dann per ssh übertragen. Das verursacht auf dem Server entsprechend Last (unter Linux wird man die Prozesse git-pack-object, git-upload-pack und sshd sehen, die entsprechende CPU- und I/O-Last erzeugen). Bei einem unperformanten Server bzw. Client kann das u. U. eine ganze Weile dauern.
 
 **Frage 2:** Nach einem Clone dauert das erste git status extrem lang (die nachfolgenden git status Aufrufe sind wieder schnell) - ist das üblich?
+
 **Antwort 2:** Ich vermute, daß das Repository hier nochmals aktualisiert wird.
 
 **Frage 3:** Nach einem Clone (von einem Linux-System) auf ein Windows-System sind alle Dateien als geändert gekennzeichnet. Die Diffs zeigen eine nicht-sichtbare Änderung am Ende der Datei. Hä?
+
 **Antwort 3:** Die Zeilenendekennzeichnungen sind unter Windows (CRLF - CarriageReturnLineFeed) und Linux/Unix (LF - LineFeed) sind unterschiedlich. Daher kommen die Unterschiede. Jeder Git-User (sowohl Windows- als auch Linux-User) sollten IMMER
 
     [core]
