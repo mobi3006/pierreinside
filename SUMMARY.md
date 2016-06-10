@@ -13,7 +13,6 @@
 * [Hystrix](hystrix.md)
 * [Englisch](englisch.md)
 * [Bitbucket](bitbucket.md)
-   * REST
 * [Kubernetes](kubernetes.md)
 * [Workbench](workbench.md)
 * [REST](rest.md)
