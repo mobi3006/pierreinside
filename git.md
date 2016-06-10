@@ -8,11 +8,15 @@ Sehr gute Quellen:
 
 ---
 
+# Motivation - Linus Torvalds
+
+* https://www.youtube.com/watch?v=idLyobOhtO4
+
 # Idee
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml
 
-Bei Git handelt es sich um ein Versionssystem, das ohne zentralen Server auskommt. Das Repository (mit allen Versionen der verwalteten Ressourcen) liegt im gleichen Verzeichnis wie die Ressourcen selbst. Somit kommt das System ohne Netzwerk aus, ist aber auch zunächst mal nur lokal. Nicht gerade das, was man bei der Softwareentwicklung im Team braucht, wäre da nicht ein weiteres Git-Feature: ein verteiltes Modell, das eine Synchonisierung der verteilten (= geclonten) Repositories in ein zentrales Repository ermöglicht.
+Bei Git handelt es sich um ein Versionssystem, das ohne zentralen Server auskommt. Das Repository (mit allen Versionen der verwalteten Ressourcen) liegt im gleichen Verzeichnis wie die Ressourcen selbst - dadurch ist das Version-Control-Feature auch offline nutzbar. Somit kommt das System ohne Netzwerk aus, ist aber auch zunächst mal nur lokal. Nicht gerade das, was man bei der Softwareentwicklung im Team braucht, wäre da nicht ein weiteres Git-Feature: ein verteiltes Modell, das eine Synchonisierung der verteilten (= geclonten) Repositories in ein zentrales Repository ermöglicht.
 
 ## Verteiltes Modell
 
@@ -173,31 +177,31 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
   * ``git checkout -- datei.txt``
 * Ressourcen löschen
   * ``git rm myfile.txt``
+
 ## Arbeiten mit Branches
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-2.shtml
 
 * Versionsstand herstellen - ACHTUNG: auf noch nicht committe Änderungen achten, wenn man den Branch dabei wechselt!!!
   * ``git checkout``
-    * aktuell konfigurierten branch aktualisieren
+    * aktuell konfigurierten Branch aktualisieren
   * ``git checkout <HEADNAME>``
   * ``git checkout HEAD``
   * ``git checkout mybranch``
   * ``git checkout 0df81ba8e4281f9f0edbd6c586e26d8f42073522``
-
-  * ``git branch``
-    * zeigt die existierenden heads an - der HEAD wird mit einem Sternchen gekennzeichnet
-  * ``git branch mybranchname``
-    * basierend auf HEAD einen neuen Head (= eine neue Version) mit dem Namen mybranchname erzeugen
-  * ``git branch mybranchname HEAD^``
-    * basierend auf dem Vorgänger von HEAD einen neuen Head (= eine neue Version) mit dem Namen mybranchname erzeugen
-  * ``git branch mybranchname 0df81ba8e4281f9f0edbd6c586e26d8f42073522``
-    * basierend auf dem CommitObject mit dem Namen 0df81ba8e4281f9f0edbd6c586e26d8f42073522 (SHA1-Name) einen neuen Head (= eine neue Version) mit dem Namen mybranchname erzeugen
-  * ``git branch -d mybranchname``
-    * Head eines Branches löschen, damit er nicht mehr in der Liste der Heads auftaucht (git branch). Man verliert nicht die CommitObjects, die in diesem Branch committed wurden
-  * ``git checkout mybranchname``
-    * zum Branch mybranchname wechseln - dadurch wird HEAD auf das letzte CommitObject im mybranchname-Branch gesetzt
-  * ``git checkout master``
-    * zum master Branch wechseln - dadurch wird HEAD auf das letzte CommitObject im Master-Branch gesetzt
+* ``git branch``
+  * zeigt die existierenden Branches an - der aktuell selektierte Branch wird mit einem Sternchen gekennzeichnet (hätte man eine [oh-my-zsh Shell](https://github.com/robbyrussell/oh-my-zsh) laufen, dann würde man das sofort sehen)
+* ``git branch mybranchname``
+  * basierend auf HEAD CommitObject einen neuen Branch mit dem Namen *mybranchname* erzeugen
+* ``git branch mybranchname HEAD^``
+  * basierend auf dem Vorgänger des HEAD-CommitObjects einen neuen Branch mit dem Namen *mybranchname* erzeugen
+* ``git branch mybranchname 0df81ba8e4281f9f0edbd6c586e26d8f42073522``
+  * basierend auf dem CommitObject mit dem Namen 0df81ba8e4281f9f0edbd6c586e26d8f42073522 (SHA1-Name) einen neuen Head (= eine neue Version) mit dem Namen mybranchname erzeugen
+* ``git branch -d mybranchname``
+  * Head eines Branches löschen, damit er nicht mehr in der Liste der Heads auftaucht (git branch). Man verliert nicht die CommitObjects, die in diesem Branch committed wurden
+* ``git checkout mybranchname``
+  * zum Branch mybranchname wechseln - dadurch wird HEAD auf das letzte CommitObject im mybranchname-Branch gesetzt
+* ``git checkout master``
+  * zum master Branch wechseln - dadurch wird HEAD auf das letzte CommitObject im Master-Branch gesetzt
 
 ## Mergen
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-3.shtml
