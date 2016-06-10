@@ -12,6 +12,8 @@ Sehr gute Quellen:
 
 * https://www.youtube.com/watch?v=idLyobOhtO4
 
+---
+
 # Idee
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml
@@ -58,22 +60,17 @@ Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei ein
 * rein Filesystem basiert (es ist kein Server oder Prozess erforderlich) - somit auch leicht zu sichern
 
 **Remote Repository:**
-* entferntes Repository, das in Verbindung mit dem lokalen Repository steht (z. B. weil es das Vater-Repository ist, in das das lokale Repository immer wieder bei Bedarf gemergt wird)
+Entferntes Repository, das über den Origin-Parameter in Verbindung mit dem lokalen Repository steht (z. B. weil es das geclonte Repository ist, aus dem das lokale Repository entstanden ist)
 
-**Index:**
-* PreCommit-CommitObject: ganz ähnlich zu einem CommitObject, aber ohne Vorgänger und eben nicht commitet. Der Index bildet die Quelle für das Commit, denn alle Ressourcen im Index kommen auch ins CommitObject
-  * ``git add bla.txt``
-    * fügt *bla.txt* zum Index hinzu ... man spricht vom *staging von bla.txt*. Wenn *bla.txt* noch nicht versioniert ist, wird es beim nachfolgenden ``git commit`` versioniert
-  * ``git commit -a``
-    * der aktuelle Index wird automatisch um alle geänderten Ressourcen ergänzt (sofern noch nicht enthalten) und dieser wird commitet
+**Index/Stage:**
+Container, den der Entwickler bewusst explizit mit geänderten/gelöschten/hinzugefügten Ressourcen befüllt (z. B. ``git add bla.txt``). Dieser Container wird später committed ... die geänderten Ressourcen bilden zusammen mit den Änderungen das CommitObject
 
 **CommitObject:**
 * ein CommitObject besteht aus Pointern auf Ressourcen (Dateien) und deren Änderungen zur Vorversion. Da ein Git-Repository in sich alle Änderungen aller Branches trägt sind Vergleiche zwischen Revisionen einer Ressource komplett lokal möglich - dazu werden die CommitObjects benötigt
-* durch ein ``git add bla.txt`` fügt man eine geänderte Ressource *bla.txt* zum Index hinzu
 * nur das erste CommitObject hat keinen Vorfahren - alle anderen haben i. d. R. einen Vorfahren, bei gemergten Branches zwei Vorfahren
 
-**Zustand eines Branches:**
-* ergibt sich aus den CommitObjects (repräsentieren die Diffs) von der Wurzel bis zum aktuellen Head
+**Aktueller Zustand eines Branches:**
+Der aktuelle Zustand eines Branches ergibt sich aus den CommitObjects (repräsentieren die Diffs) von der Wurzel bis zum aktuellen Head-CommitObject
 
 **Head:**
 * benanntes CommitObject (Teilmenge aller CommitObjects) - durch Branching wird ein neuer Head erzeugt, der dann eine eigene Historie entwickeln kann und irgendwann evtl. mal wieder mit dem anderen Zweig zusammengeführt wird
@@ -83,8 +80,7 @@ Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei ein
 * neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
 
 **Clone:**
-* ein ``git clone`` ist vergleichbar einem ``svn checkout`` - es erstellt eine Kopie des Repositories. Dabei werden ALLE CommitObjects aller Branches ins neue Repository übernommen, d. h. die gesamte Historie ist im geclonten Repository vorhanden.
-* über ``git push`` oder Pull-Requests kann eine Integration in das Origin-Repository erfolgen
+Ein ``git clone`` erzeugt eine 1:1 Kopie eines Repositories. Dabei werden ALLE CommitObjects aller Branches ins neue Repository übernommen, d. h. die gesamte Historie ist im geclonten Repository vorhanden. Über das Origin-Attribut ist die Verbindung zur Quelle weiterhin vorhanden und per ``git push`` oder Pull-Requests kann eine Integration in das Origin-Repository erfolgen.
 
 **Clone vs. Fork:**
 * Clone und Fork sind schon recht ähnlich und man kann mit beiden sehr ähnlich arbeiten
