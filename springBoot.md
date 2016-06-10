@@ -224,6 +224,11 @@ Beim Maven-Build wird daraus eine Datei ``spring-configuration-metadata.json`` g
 
 Eine IDE könnte hier sogar Autovervollständigung im Properties-Editor anbieten. Willkommen im 21. Jahrhundert der Softwareentwicklung.
 
+## @ImportResource
+Diese Annotation wird benötigt, um nicht-annotationsbasierten Spring-Code (der auf xml-Konfiguration basiert) zu integrieren.
+
+    @ImportResource("classpath:my-context.xml")
+
 ## Konfiguration über ``application.properties``/``application.yml``
 
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
