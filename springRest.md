@@ -31,7 +31,10 @@ modelliert werden. In letzterem Fall hat man größeren Einfluß auf den HTTP-St
 
 Die Schnittstelle zur Erzeugung sieht so aus:
 
-    public ResponseEntity(T body, MultiValueMap<String, String> headers, HttpStatus statusCode)
+    public ResponseEntity(
+      T body, 
+      MultiValueMap<String, String> headers, 
+      HttpStatus statusCode)
     
 Die Benutzung ist straight-forward.
 

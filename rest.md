@@ -129,4 +129,4 @@ In der Java-Welt gibt es u. a. folgende Ansätze, um RESTful Webservices zu impl
 * JAX-RS-Spezifikation basiert: [JAX-RS](https://jcp.org/en/jsr/detail?id=339) ist eine Spezifikation des Java-Community-Process (JSR-339) 
   * Implementierung CXF
   * Implementierung [Jersey](https://jersey.java.net/)
-* [Spring REST](springRest)
+* [Spring REST](springRest.md)
