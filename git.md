@@ -374,7 +374,35 @@ Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
     * auf dem Branch ein Pull-Request anlegen
     * per Pull-Request die Änderungen am Branch in den master-Branch mergen
 
+## Zentraler-Repository-Ansatz mit Synology-Git
+
+* http://blog.osdev.org/git/2014/02/13/using-git-on-a-synology-nas.html
+
+Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern (evtl. legt man auch einen User ``gituser`` an) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist und läuft.
+
+Anschließend wechselt man root-User (mein root User heißt *admin*)
+
+    ssh admin@diskstation
+    
+auf die Diskstation, um ein sog. *Bare-Repository* anzulegen:
+
+    cd /volume1/homes/myuser/
+    mkdir git-repos
+    cd git-repos
+    mkdir myrepo.git
+    cd myrepo.git
+    git --bare init
+    git update-server-info
+    cd ..
+    chown -R myuser:users myrepo.git     # hat bei mir nicht funktioniert (Operation not permitted)
+    
+Anschließend wird das ssh-Terminal geschlossen und das Repository wird lokal geclont
+
+    git clone ssh://myuser@diskstation/volume1/homes/myuser/git-repos/myrepo.git
+
+
 ---
+
 # Performance
 Für die Performance wird GIT ja immer angepriesen und das war auch eine der Zielvorgaben des "Erfinders" Linus Torvalds.
 
