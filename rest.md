@@ -51,6 +51,63 @@ Ist nicht möglich ... sofern man im Proxy nicht irgendwelche applikationsspezif
 ## Fazit
 In geschlossenen Umgebungen, über die man gemeinsam bestimmen kann, funktioniert SOAP. In offenen Umgebungen ohne zentrale Entscheider hat sich REST bewährt, weil es das einfachere standardisiertere Protokoll ist und somit Interoperabilität besser unterstützt.
 
+--- 
+
+# Wichtige HTTP-Header
+* https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+
+## Request-Fields
+* https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Request_fields
+
+### Authorization
+Anmeldung am Server
+
+    Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+### Accept
+Kennzeichnet in welchem Style die Antwort akzeptiert wird
+
+    Accept: text/plain
+    Accept: application/xml
+    Accept: application/json
+    ...
+
+### Accept-Language
+In welcher Sprache soll der Request verarbeitet werden
+
+### Content-Type
+Kennzeichnet in welchem Style der POST-Body versendet wird
+
+    application/xml
+    application/json
+    ...
+    
+### Cache-Control
+
+* https://en.wikipedia.org/wiki/Web_cache#Cache_control
+
+
+    Cache-Control: no-cache
+    
+### ETags
+
+* https://en.wikipedia.org/wiki/HTTP_ETag
+* https://tools.ietf.org/html/rfc7232#section-2.3
+
+
+### User-Agent
+
+Kennzeichnet den Client 
+
+    User-Agent: Mozilla/5.0 
+    (X11; Linux x86_64; rv:12.0) 
+    Gecko/20100101 Firefox/21.0
+
+## Response-Fields
+* https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields
+
+
+
 ---
 
 # Idee Traversierbarkeit

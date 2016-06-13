@@ -19,6 +19,7 @@
 * [Spring Data](springdata.md)
 * [Spring Boot](springBoot.md)
 * [Spring REST](springRest.md)
+   * [Http](http.md)
 * [Vagrant](vagrant.md)
 * [zsh](zsh.md)
 * [Ansible](ansible.md)
