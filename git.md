@@ -180,6 +180,7 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 
 ## Arbeiten mit Branches
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-2.shtml
+* https://git-scm.com/book/de/v1/Git-Grundlagen-Mit-externen-Repositorys-arbeiten
 
 * Versionsstand herstellen - ACHTUNG: auf noch nicht committe Änderungen achten, wenn man den Branch dabei wechselt!!!
   * ``git checkout``
@@ -232,6 +233,7 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 * ``git clone ssh://user@server/absolutePath/to/repository``
   * Remote-Repository lokal clonen
   * das Remote-Repository wird automatisch als *Origin* eingetragen
+* ``git remote -v``: welche Remote-Repositories sind konfiguriert?
 * Remote-Repository als Origin konfigurieren, so daß man dorthin ein push machen kann
   * ``git remote add origin https://myserver/de.cachaca.learn.anything.git``
 * Origin (Remote-Repository) umkonfigurieren
@@ -241,7 +243,7 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 * Änderungen in ein Remote Repository pushen
   * ``git push -u origin master``
 * ``git fetch``
-  * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen
+  * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen, d. h. alle CommitObjects aller Branches werden ins lokale Repository übernommen. ACHTUNG: das ändert nicht den aktuellen Zustand des aktuellen Branches ... das erfolgt erst bei ``git merge``
 * ``git remote add SYMBOLIC_NAME_OTHER_REPO URL_TO_OTHER_REPO``
   * dann kann man per ``git pull SYMBOLIC_NAME_OTHER_REPO BRANCH_NAME`` die Sourcen ins lokale Repository ziehen ... die liegen dort erst mal unverbunden rum und man muss sie per git merge einbinden
   * dieser Befehl passiert automatisch, wenn man das eigene Repository als Clone eines anderen Repositories angelegt hat.
@@ -380,26 +382,29 @@ Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
 
 Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern (evtl. legt man auch einen User ``gituser`` an) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist und läuft.
 
-Anschließend wechselt man root-User (mein root User heißt *admin*)
+Anschließend wechselt man root-User (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet)
 
-    ssh admin@diskstation
+    ssh root@diskstation
     
 auf die Diskstation, um ein sog. *Bare-Repository* anzulegen:
 
-    cd /volume1/homes/myuser/
+    cd /volume1/myuser/    # (A)
     mkdir git-repos
     cd git-repos
     mkdir myrepo.git
     cd myrepo.git
     git --bare init
     git update-server-info
-    cd ..
-    chown -R myuser:users myrepo.git     # hat bei mir nicht funktioniert (Operation not permitted)
+    cd ../..
+    chown -R myuser:users myrepo.git   # (B)
     
+**ACHTUNG:** natürlich muß man die Location (A) und den Ownder bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend/schreibend zugreifen kann.
+
 Anschließend wird das ssh-Terminal geschlossen und das Repository wird lokal geclont
 
     git clone ssh://myuser@diskstation/volume1/homes/myuser/git-repos/myrepo.git
 
+**ACHTUNG:** es handelt sich hier um eine ssh-Url und nicht um https!!! Will man die https-Url verwenden, so muß noch WebDAV auf der Synology-Diskstation installiert und konfiguriert sein.
 
 ---
 
