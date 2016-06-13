@@ -31,4 +31,18 @@ Statt den ``Authorization``-Header manuell in den HTTP-Request zu packen, kann m
 ## Form-Based Authentication
 * https://en.wikipedia.org/wiki/Form-based_authentication
 
+In diesem Fall packt man die Credentials in ein HTML-Form:
+
+    <form method="post" action="/login">
+      <input type="text" name="username" required>
+      <input type="password" name="password" required>
+      <input type="submit" value="Login">
+    </form>
+
+---
+
+# Tooling
+## UI
+### Postman
+* https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
 
