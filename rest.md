@@ -116,4 +116,17 @@ Bei REST besteht die Idee, daß ein Client sich ohne weiteres Wissen von einer R
 
 Bei SOAP wäre das nicht möglich, weil immer ein HTTP-POST mit SOAP-Envelope erforderlich ist. Das lässt sich nicht in einem einfachen Link unterbringen.
 
+---
+
 # REST API Empfehlungen
+
+---
+
+# Java-REST Frameworks
+
+In der Java-Welt gibt es u. a. folgende Ansätze, um RESTful Webservices zu implementieren:
+
+* JAX-RS-Spezifikation basiert: [JAX-RS](https://jcp.org/en/jsr/detail?id=339) ist eine Spezifikation des Java-Community-Process (JSR-339) 
+  * Implementierung CXF
+  * Implementierung [Jersey](https://jersey.java.net/)
+* [Spring REST](springRest)

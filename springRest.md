@@ -1,5 +1,5 @@
 # Spring REST
-Spring bietet auch eine Lösung für REST-basierte Webservices (das Paket nennt sich ``spring-web``). Es tritt damit in Konkurrenz zu vielen in der Java-Welt existierenden REST-Implementierungen (u. a. JAX-RS). 
+Spring bietet auch eine Lösung für REST-basierte Webservices (das Paket nennt sich ``spring-web``). Es tritt damit in Konkurrenz zu vielen in der Java-Welt existierenden REST-Implementierungen (u. a. [JAX-RS JSR-339](https://jcp.org/en/jsr/detail?id=339)). 
 
 Wie bei Spring üblich wird viel mit Java-Annotationen gearbeitet:
 
@@ -35,6 +35,11 @@ Die Schnittstelle zur Erzeugung sieht so aus:
     
 Die Benutzung ist straight-forward.
 
+---
 
+# Vergleich zu Jax-RS
+JAX-RS ist eine Java-Community Specifikation ([JSR-339](https://jcp.org/en/jsr/detail?id=339)), zu der es unterschiedliche Implementierungen gibt. [Apache CXF](http://cxf.apache.org/docs/jax-rs.html) liefert eine solche Implementierung. Spring REST implementiert NICHT den JAX-RS-Standard ... insofern handelt es sich um einen proprietären Ansatz.
 
+## Annotationslevel
 
+Bei JAX-RS werden Webservices auf Interface-Level spezifiziert, bei Spring REST hingegen auch Class-Level.
