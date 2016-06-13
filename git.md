@@ -116,11 +116,10 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 
 ## Arbeiten am Index
 
-* ``git status``
-  * welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
-    * Änderungen, die bereits im Index liegen und dementsprechend bei einem ``git commit`` committed würden (Folge eines ``git add``)
-    * Änderungen, die noch nicht im Index liegen
-    * neue Ressourcen (untracked files)
+* ``git status``: welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
+  * Änderungen, die bereits im Index liegen und dementsprechend bei einem ``git commit`` committed würden (Folge eines ``git add``)
+  * Änderungen, die noch nicht im Index liegen
+  * neue Ressourcen (untracked files)
 
           ```
           ~/src/gitTest> git status
@@ -142,7 +141,8 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
           #       trash.txt
           ```
 
-    * folgende Ausgabe bedeutet, dass man auf dem geclonten Repository ein Commit gemacht hat, das noch nicht wieder zurückgepush wurde:
+  * folgende Ausgabe bedeutet, dass man auf dem geclonten Repository ein Commit gemacht hat, das noch nicht wieder zurückgepush wurde:
+
         ```
         $ git status
         # On branch master
