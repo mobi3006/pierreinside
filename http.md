@@ -1,9 +1,7 @@
 # Http
 
----
-
 # Authentication
-Es gibt verschiedenen Formen der Authentifizierung innerhalb des HTTp-Protokolls:
+Es gibt verschiedenen Formen der Authentifizierung innerhalb des HTTP-Protokolls:
 
 * [Basic Access Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 * [Digest Access Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication)

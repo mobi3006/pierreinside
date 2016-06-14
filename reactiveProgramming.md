@@ -1,7 +1,5 @@
 # Reactive Programming
 
----
-
 # Links
 * http://www.reactivemanifesto.org
 * http://reactivex.io/
