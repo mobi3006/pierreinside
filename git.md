@@ -1,6 +1,7 @@
 # GIT
 Sehr gute Quellen:
 
+* SUPER: https://git-scm.com/book/de/v1
 * http://www.eecs.harvard.edu/~cduan/technical/git/
 * http://book.git-scm.com/
 * Ultra-Kurzeinführung: http://rogerdudler.github.io/git-guide/
@@ -232,14 +233,15 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 
 * ``git clone ssh://user@server/absolutePath/to/repository``
   * Remote-Repository lokal clonen
-  * das Remote-Repository wird automatisch als *Origin* eingetragen
+  * das Remote-Repository wird automatisch mit dem Kurznamen *origin* benanntngetragen
 * ``git remote -v``: welche Remote-Repositories sind konfiguriert?
-* Remote-Repository als Origin konfigurieren, so daß man dorthin ein push machen kann
-  * ``git remote add origin https://myserver/de.cachaca.learn.anything.git``
-* Origin (Remote-Repository) umkonfigurieren
+* Remote-Repository unter dem Kurznamen *team1* konfigurieren, so daß man dorthin ein push machen kann
+  * ``git remote add team1 https://myserver/de.cachaca.learn.anything.git``
+    * ``origin`` ist dabei der Name Kurzname des Repositories, der bei einem ``git push -u origin master`` angegeben wird
+* Remote-Repository mit dem Kurznamen *team1* umkonfigurieren
   * ``git remote set-url origin https://otherserver/de.cachaca.learn.anything.git``
-* Origin (Remote-Repository) entfernen
-  * ``git remote remove origin``
+* Remote-Repository mit dem Kurznamen *team1* entfernen
+  * ``git remote remove team1``
 * Änderungen in ein Remote Repository pushen
   * ``git push -u origin master``
 * ``git fetch``
