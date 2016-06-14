@@ -13,8 +13,12 @@ Die zsh Shell installieren
     
 dann die oh-my-zsh Erweiterungen hinzufügen
 
-    bash -c 
-      "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    bash -c
+      "$(curl 
+         -fsSL
+         https://raw.githubusercontent.com
+            /robbyrussell/oh-my-zsh/
+            master/tools/install.sh)"
 
 und zu guter letzt noch zsh als Default Shell festlegen:
 
