@@ -21,7 +21,7 @@ Die Toolchain besteht aus:
   * Bücher werden in verschiedenen Formaten erstellt (ePub, PDF, mobi)
   * unterstützt Webhooks, so daß nach der Erstellung eines Buchs weitere Aktionen getriggert werden können
 
-![GitBook-Ansatz](GitBook.png)
+![GitBook-Ansatz](images/GitBook.png)
 
 Mit dieser Toolchain ist der Einstieg in Markdown-Content sehr einfach und man muß sich noch nicht damit beschäftigen welchen [Markdown-StaticSiteGenerator](staticSiteGenerators.md) man mal verwenden will.
 
