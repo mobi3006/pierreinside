@@ -7,7 +7,7 @@ Doch dann kam Apple mit dem iPad Pro 9.7 ... das 12.9 war mir vor einem halben J
 
 * Stiftbedienung - ich verwende mein Galaxy Note 8 als Papier-Ersatz (in Meetings)
 * leicht und somit portabel (ich werde es auch bei Fußball-Spieltagen meiner Kinder dabei haben, um Videos zu drehen und [Berichte zu schreiben](http://asvdjk.wordpress.com))
-* Größe ideal
+* Größe ideal - noch portabel
   * nicht so riesig wie das iPad Pro 12.9
   * groß genug, um darauf gut schreiben und lesen zu können
 * stylisch
@@ -76,3 +76,31 @@ Synology hat hier vielleicht eine Lösung: http://appcrawlr.com/ios/ds-cloud
 
 # Wichtige Apps
 Das ist das Salz in der Suppe ...
+
+---
+
+# Fazit
+# Nach 4 Wochen
+Ich bereue den Kauf keineswegs 
+
+**Was mich begeistert:**
+
+* Fingerabdrucksensor ... wie konnte ich ohne den leben?
+* Display
+* Stift ... liegt klasse in der Hand
+
+**Was könnte besser sein:**
+
+* auch hier ist die Bedienung für mich nicht immer intuitiv ... wenn man mal unter die Apps schauen will (aufs Filesystem), dann hat man hier keinen so direkten Einstieg. Vielleicht komme ich dazu auch zu sehr aus der Techie-Ecke ... ein typischer Apple-User hat vielleicht einen anderen Blick auf die Apps. Bei der Fehlersuche bzw. Nutzung in nicht direkt vorgesehenen Use-Cases könnte das aber vielleicht helfen
+  * Beispiel: ich wollte meine [DrawExpress-Zeichnungen](http://drawexpress.com/) importieren. Die Import-Funktionalität in der App habe ich nicht gefunden. Deshalb wollte ich die Zeichnungsdateien einfach ins Filesystem ablegen. Doch dort finde ich nur die Verzeichnisse *Downloads* und *User Manual*
+* Akkus des Pencils hält nicht besonders lang
+* Akku des Tablets könnte länger halten
+* Laden des Akkus funktioniert nicht über Standard USB-Kabel ... stattdessen Lightning-Anschluß
+
+**Was mich stört:**
+
+* kein WhatsApp ... geht nur über http://web.whatsapp.com, aber das ist nicht so schön integriert (Fotos teilen aus dem Bildbetrachter)
+
+**Was könnte mich mal stören?**
+
+* Lightning-Anschluß, da dieser proprietär ist und man dann Adapter benötigt (z. B. HDMI-Output)
