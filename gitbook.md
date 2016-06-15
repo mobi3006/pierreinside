@@ -45,16 +45,23 @@ Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes C
 
 * http://toolchain.gitbook.com/setup.html
 
+## Anmeldung bei GitHub und GitBook
+
+Das ist schnell gemacht.
+
+## Vorbereitung
+
+* Anmeldung bei GitHub und GitBook
+* Repository bei GitHub anlegen
+* Buch bei GitBook anlegen und mit dem GitHub-Repository verbinden (so daß später mal das Buch automatisch gebaut wird, wenn ein Commit ins GitHub-Repository erfolgen kann) 
+* 
 ## Installation
 
-    $ npm install gitbook-cli -g
-    C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
-       C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
-    ...
+Das Binary wird vom Download-Server geladen und installiert.
 
 ## Buch erstellen
 
-* GitBook editor starten
+* GitBook-Editor starten
 * Neues Buch anlegen ... das Buch (bzw. das Git-Repository) wird unter Windows an diese Position angelegt: ``C:\Users\myUser\GitBook\Library\Import\mybook``
 * das neue Buch hat gleich schon drei Dateien:
   * ``README.md`` ... wird in Inhaltsverzeichnis als *Introduction* angezeigt
@@ -73,7 +80,20 @@ Mit dem GitBook-CLI kann das Buch lokal in verschiedenen Formaten deployed werde
 
 ---
 
-# Option 2: Getting started via GitBook-CommandLineInterface
+# Option 2: Getting started via GitBook-Command-Line-Interface
+
+## Vorbereitung
+
+* Anmeldung bei GitHub und GitBook
+* Repository bei GitHub anlegen
+* Buch bei GitBook anlegen und mit dem GitHub-Repository verbinden (so daß später mal das Buch automatisch gebaut wird, wenn ein Commit ins GitHub-Repository erfolgen kann) 
+
+## Installation
+
+    $ npm install gitbook-cli -g
+    C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
+       C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
+    ...
 
 ## Buch erstellen
 
@@ -90,7 +110,7 @@ Dadurch wird ein Verzeichnis `./pierreinside` angelegt, in dem ein Git-Repositor
 
 Danach werden Dateien mit beliebigen Tools geändert, hinzugefügt und gelöscht. Anschließend erfolgt der lokale commit mittels ``git add`` und ``git commit``. 
 
-## Deployment - lokal
+## Buch lokal deployen
 
 Per
 
@@ -102,25 +122,24 @@ kann ich das "Buch" lokal deployen, so daß ich per
 
 darauf zugreifen kann.
 
+## Buch online deployen
+
+* über ``git push`` wird das lokale Repository ins GitHub-Repository gepusht
+* nach einer Weile wird das Buch automatisch neu gebaut (HTML, PDF, eBook-Formate) und deployed ... z. B. hier: https://mobi3006.gitbooks.io/pierreinside/content/
+
+---
+
+# Option 3: Deployment auf Self-Hosted-Webserver
+
 ## Statische Seiten generieren
 
-Per
+Per GitBook-CLI
 
     gitbook build ./pierreinside
 
-wird ein Verzeichnis `./pierreinside/_book` angelegt, das alle statisch
+werden die statischen HTML-Seiten erzeugt. Dabei wird ein Verzeichnis `./pierreinside/_book` angelegt. Diese Dateien kann man auf JEDEN Webserver kopieren ... DAS WARS
 
-## Publishing@GitBook
-
-Für die Veröffentlichung auf GitHub bzw. GitBook muß man sich initial mal bei GitBook anmelden ... keine Sorge man kann sich mit dem GitHub-Account anmelden (oder Facebook, ...)
-
-## Publishing@Self-Hosted-Webserver
-
-Bei
-
-    gitbook build ./pierreinside
-
-wird ein Verzeichnis `./pierreinside/_book` erstellt, das die statischen Dateien enthält, die man auf JEDEN Webserver deployen kann. Deshalb ist man nicht gezwungen die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
+**ACHTUNG:** Man sieht hieran, daß man trotz GitHub-Tooling nicht gezwungen ist, die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
 
 ---
 
