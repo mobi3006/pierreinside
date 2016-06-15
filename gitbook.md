@@ -21,6 +21,8 @@ Die Toolchain besteht aus:
   * Bücher werden in verschiedenen Formaten erstellt (ePub, PDF, mobi)
   * unterstützt Webhooks, so daß nach der Erstellung eines Buchs weitere Aktionen getriggert werden können
 
+![GitBook-Ansatz](GitBook.png)
+
 Mit dieser Toolchain ist der Einstieg in Markdown-Content sehr einfach und man muß sich noch nicht damit beschäftigen welchen [Markdown-StaticSiteGenerator](staticSiteGenerators.md) man mal verwenden will.
 
 Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes Content-Management-System) auch mit GitBook erstellt ist ... ein Zeichen dafür, daß es ein exzellentes Tool für Dokumentation ist. Zudem scheint der [Static-Site-Generator-Ansatz](staticSiteGenerators.md) genau richtig zu sein für Dokumentation ... ansonsten würden die Drupal-Entwickler sicher auch Drupal verwenden (in diesem Fall sind sie wahrscheinlich auch an der leichten Integration der Leser interessiert ... "Leser werden zu Autoren"). GitBook ist sehr beliebt als Static Site Generator: http://www.staticgen.com/
@@ -39,7 +41,7 @@ Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes C
 
 ---
 
-# GitBookEditor
+# Option 1: Getting started via GitBookEditor
 
 * http://toolchain.gitbook.com/setup.html
 
@@ -50,28 +52,43 @@ Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes C
        C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
     ...
 
-## Erstes Buch erstellen
+## Buch erstellen
 
 * GitBook editor starten
-* Neues Buch anlegen ... das Buch wird unter Windows an diese Position angelegt: ``C:\Users\myUser\GitBook\Library\Import\mybook``
+* Neues Buch anlegen ... das Buch (bzw. das Git-Repository) wird unter Windows an diese Position angelegt: ``C:\Users\myUser\GitBook\Library\Import\mybook``
 * das neue Buch hat gleich schon drei Dateien:
   * ``README.md`` ... wird in Inhaltsverzeichnis als *Introduction* angezeigt
   * ``SUMMARY.md`` ... ist das Inhaltsverzeichnis
   * ``chapter1.md`` ... ein Beispiel
-  * 
+* lokal committen
+
+## Buch lokal deployen
+
+Mit dem GitBook-CLI kann das Buch lokal in verschiedenen Formaten deployed werden. Das Command-Line-Interface wird weiter unten vorgestellt.
+
+## Buch online deployen
+
+* über den GitBookEditor erfolgt ein sync (= push) mit GitHub
+* nach einer Weile wird das Buch automatisch neu gebaut (HTML, PDF, eBook-Formate) und deployed ... z. B. hier: https://mobi3006.gitbooks.io/pierreinside/content/
 
 ---
 
-# HTML erstellen, deployen, veröffentlichen
+# Option 2: Getting started via GitBook-CommandLineInterface
 
-## Erstellung
+## Buch erstellen
 
     $ gitbook init ./pierreinside
     Installing GitBook 2.6.7
     gitbook@2.6.7 ..\..\Programme\cygwin\tmp\tmp-8108lvZ454IipE6j\node_modules\gitbook
     ...
 
-Dadurch wird ein Verzeichnis `./pierreinside`, in dem bereits zwei Markdown-Seiten liegen.
+Dadurch wird ein Verzeichnis `./pierreinside` angelegt, in dem ein Git-Repository angelegt ist (``.git``) und in dem bereits folgende Seiten befinden:
+
+* ``README.md`` ... wird in Inhaltsverzeichnis als *Introduction* angezeigt
+* ``SUMMARY.md`` ... ist das Inhaltsverzeichnis
+* ``chapter1.md`` ... ein Beispiel
+
+Danach werden Dateien mit beliebigen Tools geändert, hinzugefügt und gelöscht. Anschließend erfolgt der lokale commit mittels ``git add`` und ``git commit``. 
 
 ## Deployment - lokal
 
