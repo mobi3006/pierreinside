@@ -190,6 +190,10 @@ GitBook unterstützt folgende Output Formate
 
 Der Content kann mit jedem beliebigen Editor geschrieben werden. Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie trotzdem einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitHub bietet mit dem GitBook Editor ein sehr gutes Tool (siehe unten).
 
+### SUMMARY.md
+
+Diese Datei ist das Inhaltsverzeichnis, das später auf in der linken Seite angezeigt wird.
+
 ### GitBook Editor
 
 * https://www.gitbook.com/editor
@@ -232,10 +236,17 @@ Diese Arbeitsweise bin ich so nicht gewohnt bei der Arbeit mit Git ... da ich ab
 Es ist extrem schwierig das Layout einer GitBook-Seite an eigene Bedürfnisse anzupassen ...
 
 
-
 ---
 
 # Fazit
 Ich bin wirklich richtig begeistert von der Toolchain. Außerdem ist das Editieren von Markdown (insbes. mit dem *GitBook Editor*) eine wahre Freude. Zukünftig werde ich deutlich schneller meine Artikel verfassen können und zudem mit noch mehr Freude.
 
 Mal sehen ob ich dauerhaft bei GitBook bleibe ...
+
+---
+
+# FAQ
+
+**Frage 1:** Ich versuche, die Seiten durch Verschieben im GitBook-Editor in den Chaptern zu verschieben ... das klappt aber gar nicht ...
+
+Antwort 1: Vielleicht ein Bug in GitBook-Editor ... ich tue das über die Datei ``SUMMARY.md``.
