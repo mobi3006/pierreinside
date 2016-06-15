@@ -1,0 +1,78 @@
+# iPad Pro 9,7''
+Man glaubt es kaum, aber dieses Gerät ist mein erstes Apple-Gerät. Die Apple-Hardware fand ich schon immer große klasse, da ich aber beruflich Linux und Windows nutze und seit Jahren Android Mobilgeräte verwende, wollte ich nicht noch ein Bedienkonzept erlernen müssen ... vor allem graute mir vor den damit verbundenen unendlichen Stunden der Fehlersuche in einem mir unbekannten Ökosystem.
+
+Deshalb hatte ich immer wieder nach einem Samsung Note Nachfolger für mein mittlerweile betagtes Note 8 (... rational ist eine Ablösung aber noch unbegründet ;-)
+
+Doch dann kam Apple mit dem iPad Pro 9.7 ... das 12.9 war mir vor einem halben Jahr zu groß. Es war einfach das perfekte Gerät:
+
+* Stiftbedienung - ich verwende mein Galaxy Note 8 als Papier-Ersatz (in Meetings)
+* leicht und somit portabel (ich werde es auch bei Fußball-Spieltagen meiner Kinder dabei haben, um Videos zu drehen und [Berichte zu schreiben](http://asvdjk.wordpress.com))
+* Größe ideal
+  * nicht so riesig wie das iPad Pro 12.9
+  * groß genug, um darauf gut schreiben und lesen zu können
+* stylisch
+* sehr gute Kamera
+* 4K Videos
+* AppStore mit den besten Apps für mobile Endgeräte - meiner Erfahrung nach scheidet Windows hiermit aus und auch die Android-Apps sind bei den Entwicklern eher an Platz 2. Die qualitativ besten Apps gibt es einfach hier
+* noch bezahlbar (1000 Euro mit 128 GB Speicher, Stift, Hülle)... obwohl schon verdammt teuer
+
+Meine Bedenken waren allerdings:
+
+* muß ich mich in die Internas begeben, um Fehler analysieren zu können und Workarounds zu schaffen ... oder ist das so einfach, daß es kaum Zeit kostet ... oder gibt es das bei Apple einfach nicht?
+  * eins vorweg: nach 4 Wochen Benutzung mußte hatte ich noch keine Fehleranalyse-Sessions ... [aber der Software-Update 9.3.2 hätte beinahe aus meinem Tablet ein Schneidebrett gemacht](http://www.golem.de/news/error-56-ios-9-3-2-macht-ipad-pro-9-7-zoll-unbrauchbar-1605-120926.html) ... glücklicherweise habe ich nicht auf den Upgrade-Button gedrückt
+* wird es sich in meinen Alltag integrieren lassen ... hinsichtlich Integration in Nicht-Apple-Umgebungen ist es vielleicht nicht so gut bestellt
+  * eins vorweg: es klappt erstaunlich gut ... 
+* wird die Stiftbedienung von genügend für MICH brauchbaren Apps unterstützt
+  * Hoffnung macht mir hier, daß derzeit die Stifbedienung im Aufwind ist ... mein bisheriger Favorit Samsung setzt aber voll und ganz auf Windows 10 Tablets im Stiftbereich
+* ist das Arbeiten ohne Cloud möglich ... ich will keinem Cloud-Anbieter meine teilweise geschäftlichen Informationen (auch wenn diese nicht Top-Secret sind) anvertrauen. 
+* nicht alle von mir in 5 Jahren Android liebgewonnenen Apps sind auch unter iOS verfügbar. Werde ich passenden Ersatz finden? Wie sehr wird es mich stören, daß ich dann mindestens zwei Anwendung für die gleiche Aufgabe nutzen muß?
+
+Keine Rolle spielte bei meiner Entscheidung, daß die Apps unter iOS zumeist Geld kosten und auch teurer sind. Ich bin selbst Softwareentwickler und weiß wieviel Zeit/Geld die Erstellung einer hochwertigen Anwendung kostet. Gute Software möchte ich auch belohnen ... deshalb habe ich es mir auch zur Angewohnheit unter Android gemacht die Vollversionen zu kaufen (auch wenn die Lite-Versionen oft schon ausreichten für meine Bedürfnisse). Außerdem glaube ich, daß 5-10 Euro für richtig brauchbare Apps den Bock nicht fett machen (das Gerät an sich kostet 1000 Euro) ... die 100 Euro kann ich dann auch noch drauflegen (auch wenn es schon ein bissl ärgerlich ist, daß man dann eine Android-App UND eine iOS-App bezahlt hat).
+
+--- 
+
+# Alternativen
+## Android
+Hier gibt es seltsamerweise keine braucbaren Neuentwicklungen mit Stiftbedienung. Alle ehemaligen "Android-Hersteller" scheinen auf Windows 10 für Tablets mit Stiftbedienung zu setzen.
+
+## Windows 10
+In diesem Bereich gibt es viele Tablets bzw. Convertibles, die eine Stifteingabe unterstützen (z. B. Surface 4, Surface Book) und teilweise einen sehr guten Eindruck machen (das Surface Book fand ich klasse). Die Preise liegen dann aber auch schon deutlich über 1000 Euro.
+
+Letztlich habe ich mir die Frage gestellt, ob ich einen Laptop mit Tablet-Features haben will (Windows 10 Convertible) oder eher ein Tablet, das auf den Nicht-Tastatur-Ansatz und Stiftbedienung optimiert ist (hoffentlich Apple iPad Pro).
+
+Diese Frage habe ich für mich mit Apple iPad Pro beantwortet. Wenn es was am iPad Pro zu bemängeln gibt, dann vielleicht, daß es nicht die OS X Anwendungen laufen lassen kann ... man ist auf die iOS Apps beschränkt. Wenn ich allerdings meine Entscheidung gegen ein Windows 10 Convertible konsequent weiterdenke ("optimiert für Nicht-Tastatur-Ansatz und Stiftbedienung"), dann ist das kein Argument für mich. Vielleicht wäre es sogar schlecht ...
+
+ABER: Windows scheidet aufgrund des schlechten App-Stores (wenig Auswahl) aus
+
+---
+
+# Integration in Nicht-Apple-Umgebung
+Ich verwende das iPad hauptsächlich für "geschäftliche" Aktivitäten wie
+
+* Selbstorganisation (TODO-Listen, Planungen)
+* Meetings
+* Knowhow-Aufbau
+  * Lesen
+  * Videos schauen
+  * schreiben
+  * Architektur-Schaubilder anfertigen
+
+Ich spiele damit nicht, schaue kein Fernsehen, entwickle keine Software, höre keine Musik, ... das kommt gelegentlich vor, es würde mich aber nicht extrem stören, wenn es dort nicht so optimal passen würde (wobei diese Bereiche wohl schon eher passen würden ... aber vielleicht nicht in meiner Umgebung).
+
+## Zugriff auf NAS
+Ich habe ein Synology-NAS ... der Zugriff ist problemlos möglich
+
+## Streaming auf Google Chromecast
+Das ist zwar kein Kern-Use-Case (vielleicht irgendwann mal für Präsentationen mit Screen-Mirroring) ... funktioniert aber dennoch.
+
+## Backup
+Ich versuche weitestgehend ohne Cloud-Speicherung auszukommen. Hauptsächlich, weil dort auch mal geschäftliche Informationen enthalten sind, die ich KEINEMM Cloud-Anbieter anvertrauen will.
+
+Für meine Android-Geräte habe ich immer die App [FolderSync](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.full&hl=de) verwendet, um meine Bilder, Notizen, Zeichnungen automatisch periodisch auf das Synology-NAS zu sichern. Unter iOS gibt es das leider nicht (wäre mir am liebsten, denn ich will keinen Anwendungszoo für die gleiche Aufgaben aufbauen) ...
+
+Synology hat hier vielleicht eine Lösung: http://appcrawlr.com/ios/ds-cloud
+
+---
+
+# Wichtige Apps
+Das ist das Salz in der Suppe ...
