@@ -6,7 +6,7 @@
 
 Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit Hugo Probleme bei der Erstellung einer Menüstruktur hatte, habe ich mich dann doch mal mit GitBook beschäftigt. So könnte ich zumindest mal mit dem Markdown-Style in Fahrt kommen und mir dann aber mittelfristig eine andere Lösung überlegen (oder vielleicht gefällt es mir ja so gut, daß ich dabei bleibe).
 
-Die Toolchain bestehend aus
+Die Toolchain besteht aus:
 
 * GitBookEditor: 
   * wird zum Schreiben des Contents (in Markdown) auf dem lokalen Rechner genutzt
@@ -24,6 +24,18 @@ Die Toolchain bestehend aus
 Mit dieser Toolchain ist der Einstieg in Markdown-Content sehr einfach und man muß sich noch nicht damit beschäftigen welchen [Markdown-StaticSiteGenerator](staticSiteGenerators.md) man mal verwenden will.
 
 Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes Content-Management-System) auch mit GitBook erstellt ist ... ein Zeichen dafür, daß es ein exzellentes Tool für Dokumentation ist. Zudem scheint der [Static-Site-Generator-Ansatz](staticSiteGenerators.md) genau richtig zu sein für Dokumentation ... ansonsten würden die Drupal-Entwickler sicher auch Drupal verwenden (in diesem Fall sind sie wahrscheinlich auch an der leichten Integration der Leser interessiert ... "Leser werden zu Autoren"). GitBook ist sehr beliebt als Static Site Generator: http://www.staticgen.com/
+
+--- 
+
+# Was macht GitBook attraktiv?
+
+* gute Toolchain, um schnell mit dem Publishing zu beginnen ... dafür aber eingeschränkt in der Anpassbarkeit. Später kann man sich vielleicht für einen anderen Ansatz entscheiden ... den Markdown-Content wird man dann zumindest man nicht mehr anpassen müssen
+* GIT-based - Versionskontrolle inherent
+* gute Integration von Lesern (Leser werden leicht zu Autoren)
+* Output-Formate:
+  * HTML
+  * PDF
+  * verschiedene eBook-Formate
 
 ---
 
@@ -163,6 +175,15 @@ Das passte aber irgendwie zu meiner Beobachtung, daß bei neu angelegten Bücher
 Zudem muß erst ein Sync auf das Remote-Repository erfolgen ... komisch ...
 
 Diese Arbeitsweise bin ich so nicht gewohnt bei der Arbeit mit Git ... da ich aber ja nicht mit meinem Tooling arbeite, sondern mit dem Tooling von GitHub mag das der eingeschlagene Weg sein.
+
+---
+
+# GitBooks Schwächen
+
+## Anpassung des Themes
+
+Es ist extrem schwierig das Layout einer GitBook-Seite an eigene Bedürfnisse anzupassen ...
+
 
 
 ---
