@@ -1,4 +1,5 @@
 # iPad Pro 9,7''
+
 Man glaubt es kaum, aber dieses Gerät ist mein erstes Apple-Gerät. Die Apple-Hardware fand ich schon immer große klasse, da ich aber beruflich Linux und Windows nutze und seit Jahren Android Mobilgeräte verwende, wollte ich nicht noch ein Bedienkonzept erlernen müssen ... vor allem graute mir vor den damit verbundenen unendlichen Stunden der Fehlersuche in einem mir unbekannten Ökosystem.
 
 Deshalb hatte ich immer wieder nach einem Samsung Note Nachfolger für mein mittlerweile betagtes Note 8 (... rational ist eine Ablösung aber noch unbegründet ;-)
@@ -6,17 +7,18 @@ Deshalb hatte ich immer wieder nach einem Samsung Note Nachfolger für mein mitt
 Doch dann kam Apple mit dem iPad Pro 9.7 ... das 12.9 war mir vor einem halben Jahr zu groß. Es war einfach das perfekte Gerät:
 
 * Stiftbedienung - ich verwende mein Galaxy Note 8 als Papier-Ersatz (in Meetings)
-* leicht und somit portabel (ich werde es auch bei Fußball-Spieltagen meiner Kinder dabei haben, um Videos zu drehen und [Berichte zu schreiben](http://asvdjk.wordpress.com))
-* Größe ideal - noch portabel
-  * nicht so riesig wie das iPad Pro 12.9
-  * groß genug, um darauf gut schreiben und lesen zu können
+* portable (ich werde es auch bei Fußball-Spieltagen meiner Kinder dabei haben, um Videos zu drehen und [Berichte zu schreiben](http://asvdjk.wordpress.com))
+  * leicht 
+  * Größe ideal
+    * nicht so riesig wie das iPad Pro 12.9
+    * groß genug, um darauf gut schreiben und lesen zu können
 * stylisch
 * sehr gute Kamera
 * 4K Videos
 * AppStore mit den besten Apps für mobile Endgeräte - meiner Erfahrung nach scheidet Windows hiermit aus und auch die Android-Apps sind bei den Entwicklern eher an Platz 2. Die qualitativ besten Apps gibt es einfach hier
 * noch bezahlbar (1000 Euro mit 128 GB Speicher, Stift, Hülle)... obwohl schon verdammt teuer
 
-Meine Bedenken waren allerdings:
+**Meine Bedenken waren allerdings:**
 
 * muß ich mich in die Internas begeben, um Fehler analysieren zu können und Workarounds zu schaffen ... oder ist das so einfach, daß es kaum Zeit kostet ... oder gibt es das bei Apple einfach nicht?
   * eins vorweg: nach 4 Wochen Benutzung mußte hatte ich noch keine Fehleranalyse-Sessions ... [aber der Software-Update 9.3.2 hätte beinahe aus meinem Tablet ein Schneidebrett gemacht](http://www.golem.de/news/error-56-ios-9-3-2-macht-ipad-pro-9-7-zoll-unbrauchbar-1605-120926.html) ... glücklicherweise habe ich nicht auf den Upgrade-Button gedrückt
@@ -72,11 +74,13 @@ Für meine Android-Geräte habe ich immer die App [FolderSync](https://play.goog
 
 Synology hat hier vielleicht eine Lösung: http://appcrawlr.com/ios/ds-cloud
 
-## Tethering mit Andorid-Handy
+## Tethering mit Android-Handy
 
 Ich halte Tablets mit GSM-Modul für Quatsch ... normalerweise hat man keine Zweitkarte und muß dann evtl. einen weiteren Mobilfunkvertrag abschließen (das ist teuer). Zumeist unterstützen die Tablets das Telefonieren nicht mal ... abgesehen davon siehts komisch aus, wenn man nicht gerade ein Headset verwendet. Bei meinem Note 8 konnte ich telefonieren, habe es aber nur anfangs gelegentlich gemacht.
 
 Mein Handy habe ich IMMER dabei ... dort brauche ich die Internetverbindung und die Telefonverbidung.
+
+Dem erhöhten Stromverbrauch fürs Handy werde ich gerecht mit einem externen Akku-Ladegerät. Da ich für das Tablet eh immer eine Tasche dabei habe (z. B. http://www.crumpler.eu), Anker 
 
 Tethering funktioniert problemlos :-)
 
