@@ -1,10 +1,10 @@
 # Summary
 
 * [Introduction](README.md)
+* [GitBook](gitbook.md)
 * [Static Site Generators](staticSiteGenerators.md)
    * [Hugo](hugo.md)
    * Jeckyll
-* [GitBook](gitbook.md)
 * [Git](git.md)
 * [Reactive Programming](reactiveProgramming.md)
 * [Markdown](markdown.md)
@@ -25,7 +25,7 @@
 * [Ansible](ansible.md)
 * [Saltstack](saltstack.md)
    * test
-* [TestChapter](testchapter.md)
 * Mobile Devices
    * [iPad Pro](ipadPro.md)
+* [TestChapter](testchapter.md)
 
