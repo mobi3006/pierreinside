@@ -39,15 +39,26 @@ Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes C
 
 ---
 
-# Installation GitBookEditor
+# GitBookEditor
 
 * http://toolchain.gitbook.com/setup.html
 
+## Installation
 
     $ npm install gitbook-cli -g
     C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
        C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
     ...
+
+## Erstes Buch erstellen
+
+* GitBook editor starten
+* Neues Buch anlegen ... das Buch wird unter Windows an diese Position angelegt: ``C:\Users\myUser\GitBook\Library\Import\mybook``
+* das neue Buch hat gleich schon drei Dateien:
+  * ``README.md`` ... wird in Inhaltsverzeichnis als *Introduction* angezeigt
+  * ``SUMMARY.md`` ... ist das Inhaltsverzeichnis
+  * ``chapter1.md`` ... ein Beispiel
+  * 
 
 ---
 
