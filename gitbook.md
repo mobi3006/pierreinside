@@ -1,4 +1,5 @@
 # GitBook
+
 * https://www.gitbook.com/
 * https://help.gitbook.com/
 
@@ -19,22 +20,25 @@ Die Toolchain bestehend aus
   * Bücher werden in verschiedenen Formaten erstellt (ePub, PDF, mobi)
   * unterstützt Webhooks, so daß nach der Erstellung eines Buchs weitere Aktionen getriggert werden können
 
+Mit dieser Toolchain ist der Einstieg in Markdown-Content sehr einfach und man muß sich noch nicht damit beschäftigen welchen [Markdown-StaticSiteGenerator](staticSiteGenerators.md) man mal verwenden will.
+
+Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes Content-Management-System) auch mit GitBook erstellt ist ... ein Zeichen dafür, daß es ein exzellentes Tool für Dokumentation ist. Zudem scheint der [Static-Site-Generator-Ansatz](staticSiteGenerators.md) genau richtig zu sein für Dokumentation. GitBook ist sehr beliebt als Static Site Generator: http://www.staticgen.com/
+
 ---
 
 # Installation GitBookEditor
 
 * http://toolchain.gitbook.com/setup.html
 
-```
-$ npm install gitbook-cli -g
-C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
-   C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
-...
-```
+
+    $ npm install gitbook-cli -g
+    C:\Users\MY_USER\AppData\Roaming\npm\gitbook ->
+       C:\Users\MY_USER\AppData\Roaming\npm\node_modules\gitbook-cli\bin\gitbook.js
+    ...
 
 ---
 
-# Book erstellen, deployen, veröffentlichen
+# HTML erstellen, deployen, veröffentlichen
 
 ## Erstellung
 
@@ -49,24 +53,20 @@ Dadurch wird ein Verzeichnis `./pierreinside`, in dem bereits zwei Markdown-Seit
 
 Per
 
-```
-gitbook serve ./pierreinside
-```
+    gitbook serve ./pierreinside
     
 kann ich das "Buch" lokal deployen, so daß ich per
 
-```
-http://localhost:4000
-```
+    http://localhost:4000
 
 darauf zugreifen kann.
 
 ## Statische Seiten generieren
 
 Per
-```
-gitbook build ./pierreinside
-```
+
+    gitbook build ./pierreinside
+
 wird ein Verzeichnis `./pierreinside/_book` angelegt, das alle statisch
 
 ## Publishing@GitBook
@@ -77,21 +77,27 @@ Für die Veröffentlichung auf GitHub bzw. GitBook muß man sich initial mal bei
 
 Bei
 
-```
-gitbook build ./pierreinside
-```
+    gitbook build ./pierreinside
 
 wird ein Verzeichnis `./pierreinside/_book` erstellt, das die statischen Dateien enthält, die man auf JEDEN Webserver deployen kann. Deshalb ist man nicht gezwungen die Bücher bei GitHub zu hosten und bei GitBook zu deployen!!!
-
 
 ---
 
 # Integration in das GitHub-Tooling
-ACHTUNG: GitBook kann genutzt werden, ohne die serverseitige GitHub/GitBook-Infrastruktur zu nutzen!!! Allerdings kann die angebotene Toolkette die Arbeit komfortabler machen ...
+
+**ACHTUNG:** GitBook kann auch genutzt werden, ohne die serverseitige GitHub/GitBook-Infrastruktur zu nutzen!!! Allerdings kann die angebotene Toolkette die Arbeit vereinfachen (vor allem reduziert es die Einstiegshürde) ...
 
 ## GitHub
 
 GitHub kann verwendet werden, um den Raw-Content (Markdown, AsciiDoc) zu speichern (inkl. Versionsverwaltung). Das kann in einem öffentlichen (man kann allerdings bestimmen, wer committen darf) oder privaten Repository erfolgen. Allerdings ist bei GitHub derzeit nur ein einziges private Repository kostenlos ...
+
+### Leser werden zu Autoren
+
+**Annahme:** der Leser ist auch ein GitHub-User
+
+Ein Vorteil dieser Integration ist, daß es sehr einfach ist, Input von Lesern zu bekommen und so seine Dokumentation ständig zu verbessern. Ein Leser kann auf dem GitBook einfach den Link *Edit this Page*  drücken und die Seite wird in GitHub geöffnet. Dort kann der Leser zum Autor werden und einen Fork des Repositories erstellen. Darin nimmt er die gewünschten/vorgschlagenen Verbesserungen vor und erstellt dann einen Pull-Request an den Repository-Owner. Der kann seinerseits entscheiden, ob er die Änderungen übernehmen will oder nicht.
+
+Sollte der Leser kein GitHub-User sein, dann kann er auf ähnliche Weise zur Verbesserung beisteuern, aber eben nicht gar so komfortabel. Wer aber möchte, daß sich andere beteiligen, sollte darauf achten, daß es möglichst einfach ist ... niemand will stundenlang Tools installieren müssen, nur um dann eine Zeile Dokumentation zu verbessern, die dann evtl. vom Owner nicht mal übernommen wird.
 
 ---
 
