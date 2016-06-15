@@ -72,22 +72,61 @@ Für meine Android-Geräte habe ich immer die App [FolderSync](https://play.goog
 
 Synology hat hier vielleicht eine Lösung: http://appcrawlr.com/ios/ds-cloud
 
+## Tethering mit Andorid-Handy
+
+Ich halte Tablets mit GSM-Modul für Quatsch ... normalerweise hat man keine Zweitkarte und muß dann evtl. einen weiteren Mobilfunkvertrag abschließen (das ist teuer). Zumeist unterstützen die Tablets das Telefonieren nicht mal ... abgesehen davon siehts komisch aus, wenn man nicht gerade ein Headset verwendet. Bei meinem Note 8 konnte ich telefonieren, habe es aber nur anfangs gelegentlich gemacht.
+
+Mein Handy habe ich IMMER dabei ... dort brauche ich die Internetverbindung und die Telefonverbidung.
+
+Tethering funktioniert problemlos :-)
+
+## Bluetooth-Headset-Integration
+
+Hiermit hatte ich mein erstes wirkliches Problem, dann das Pairing hat nicht funktioniert. Erst nachdem ich meine existierenden Pairings am Headset gelöscht hatte (siehe http://tb43.com/2013/10/28/wie-kann-man-das-headset-jabra-wave-zuruecksetzen/) klappte es.
+
+Allerdings klappt es seitdem nicht mehr mit meinen Android-Geräten ;-)
+
 ---
 
 # Wichtige Apps
 Das ist das Salz in der Suppe ...
 
+* GoodNews als Papierersatz
+* DrawExpress zum Zeichnen von Architekturen, Diagrammen
+
+---
+
+# Hülle
+
+Apple hat leider nicht selber darüber nachgedacht wie Stiftnutzer diesen transportieren und vermeiden, ihn zu verlieren. Das hätte ich so nicht erwartet ... und selbst wenn der "Fehler" beim ersten Apple mit Stift (12.9) passiert, dann hätte ich zumindest beim Nachfolger bzw. einer Weiterentwicklung im gleichen Segment (9.7) erwartet, daß der Fehler korrigiert wird.
+
+Glücklicherweise gibt es einen Zubehörmarkt, der hier kreativ tätig wurde und ganz brauchbare Lösungen geschaffen hat:
+
+* [UnderArmorGear-Hülle](https://urbanarmorgear.com/collections/ipad-pro-9-7-cases) ... sehr schöne Hülle (für meinen Geschmack), die .
+  * das Gerät wird scheinbar gut schützt (die 800 Euro fallen schnell mal aus der Hand)
+  * Funktionalität nicht eingeschränkt
+  * kann auch zusammen mit der Apple-Tastatur genutzt werden
+  * relativ leicht
+  * Deckel läßt sich leicht entfernen ... spart nochmals Gewicht
+  * mit 50 Euro recht günstig
+  * leider nur drei Farben
+* [StilGut Pencil Halter](http://www.stilgut.de/produkte/apple/pencil/) ist auch ganz brauchbar.
+
 ---
 
 # Fazit
-# Nach 4 Wochen
-Ich bereue den Kauf keineswegs ... die meiste Kritik bekommt der Stift, allerdings hauptsächlich bzgl. der hardwartechnischen Integration.
+## Nach 4 Wochen
+Das Teil ist SUPER :-) 
+
+... die meiste Kritik bekommt der Stift, allerdings hauptsächlich bzgl. der hardwartechnischen Integration.
 
 **Was mich begeistert:**
 
 * Fingerabdrucksensor ... wie konnte ich ohne den leben?
 * Display
 * Stift ... liegt klasse in der Hand und Schreiben ist eine wahre Wonne
+* tolle Apps
+* 
 
 **Was könnte besser sein:**
 
