@@ -81,13 +81,13 @@ Das ist das Salz in der Suppe ...
 
 # Fazit
 # Nach 4 Wochen
-Ich bereue den Kauf keineswegs 
+Ich bereue den Kauf keineswegs ... die meiste Kritik bekommt der Stift, allerdings hauptsächlich bzgl. der hardwartechnischen Integration.
 
 **Was mich begeistert:**
 
 * Fingerabdrucksensor ... wie konnte ich ohne den leben?
 * Display
-* Stift ... liegt klasse in der Hand
+* Stift ... liegt klasse in der Hand und Schreiben ist eine wahre Wonne
 
 **Was könnte besser sein:**
 
@@ -96,11 +96,15 @@ Ich bereue den Kauf keineswegs
 * Akkus des Pencils hält nicht besonders lang
 * Akku des Tablets könnte länger halten
 * Laden des Akkus funktioniert nicht über Standard USB-Kabel ... stattdessen Lightning-Anschluß
+* der Stift wirkt wie das fünfte Rad am Wagen ... Apple stellt keine Möglichkeit bereit, den Stift ans/ins Gerät zu stecken. Ich habe mit der [UnderArmorGear-Hülle](https://urbanarmorgear.com/collections/ipad-pro-9-7-cases) eine gute Lösung gefunden ... aber der [StilGut Pencil Halter](http://www.stilgut.de/produkte/apple/pencil/) ist auch ganz brauchbar.
+* wenn ich den Pencil zum Laden in den iPad-Lightning-Anschluß stecken muß, bekomme ich Gänsehaut ... das sieht so fragil aus
 
 **Was mich stört:**
 
 * kein WhatsApp ... geht nur über http://web.whatsapp.com, aber das ist nicht so schön integriert (Fotos teilen aus dem Bildbetrachter)
+* Ladeadapter für den Stift ... wo soll man den aufbewahren? Aufgrund des Lightning-Schnellade-Vorgangs wird er nicht unbedingt beöntigt, aber das ist nicht Apple-like :-(
+* die Kappe am Stiftende wirkt auf mich als würde ich sie bald mal verlieren, obwohl sie zudem noch magnetisch ist
 
 **Was könnte mich mal stören?**
 
-* Lightning-Anschluß, da dieser proprietär ist und man dann Adapter benötigt (z. B. HDMI-Output)
+* Lightning-Anschluß zur Integration (z. B. HDMI-Output) ... proprietär => man benötigt (teure) Adapter
