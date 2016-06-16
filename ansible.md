@@ -23,8 +23,9 @@ Die Kommandos aus dem Ansible-Playbook werden später über ssh auf die Zielsyst
 
 Folgender Befehl erzeugt einen Public-Key und einen Private-Key:
 
+```shell
     ssh-keygen -t rsa -b 4096 -C "info@cachaca.de"
-    
+```    
 Dabei wird eine Passphrase abgefragt, die man später bei Verwendung des Private-Key eingeben muß. 
 
 ### SSH-Agent starten und konfigurieren

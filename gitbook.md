@@ -23,7 +23,8 @@ Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit H
     * verschiedene eBook-Formate
   * Erstellung der Bücher automatisiert ... der Autor committet nur nach GitHub und dann läuft alles automatisch
   * Diskussionen möglich
-  * im deployten Buch ist eine Suche möglich (bei Static-Site-Generator-Ansätzen ist das nicht out-of-the-box)
+  * im deployten Buch ist auf der Seite selbst eine Suche möglich (bei Static-Site-Generator-Ansätzen ist das nicht out-of-the-box)
+  * über https://www.gitbook.com/search/advanced kann man noch komfortabler suchen
 * Erweiterbarkeit über [Webhooks](https://developer.gitbook.com/webhooks/) ... man kann weitere Webhooks konfigurieren bzw. selbst welche schreiben
 * sehr gute Anlaufquelle für Dokumentation von Technologien aus Anwendersicht (sehr brauchbar für Entwickler)
 
@@ -43,6 +44,8 @@ Die Toolchain besteht aus:
   * produziert automatisch (wenn man in GitBook das GitHub Repository konfiguriert und GitBook entsprechende Rechte eingeräumt hat) eine neue Version des Buches sobald in GitHub Änderungen committet wurden 
   * Bücher werden in verschiedenen Formaten erstellt (ePub, PDF, mobi)
   * unterstützt Webhooks, so daß nach der Erstellung eines Buchs weitere Aktionen getriggert werden können
+  * ermöglich eine komfortable Suche: https://www.gitbook.com/search/advanced
+    * http://jinlaixu.net/books/gitbook-documentation/platform/search.html
 
 ![GitBook-Ansatz](images/GitBook.png)
 
@@ -171,7 +174,6 @@ werden die statischen HTML-Seiten erzeugt. Dabei wird ein Verzeichnis `./pierrei
 
 GitHub kann verwendet werden, um den Raw-Content (Markdown, AsciiDoc) zu speichern (inkl. Versionsverwaltung). Das kann in einem öffentlichen (man kann allerdings bestimmen, wer committen darf) oder privaten Repository erfolgen. Allerdings ist bei GitHub derzeit nur ein einziges private Repository kostenlos ...
 
-
 ---
 
 # Content
@@ -194,6 +196,7 @@ GitBook unterstützt folgende Input Formate
 Der Content kann mit jedem beliebigen Editor geschrieben werden (u. a. mit dem GitBook-Editor, der zudem noch einen grafischen Git-Client integriert). Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie trotzdem einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitHub bietet mit dem GitBook Editor ein sehr gutes Tool (siehe unten).
 
 ### SUMMARY.md
+* http://jinlaixu.net/books/gitbook-documentation/book/chapters.html
 
 Diese Datei ist das Inhaltsverzeichnis, das später auf in der linken Seite angezeigt wird.
 
@@ -202,6 +205,12 @@ Diese Datei ist das Inhaltsverzeichnis, das später auf in der linken Seite ange
 Diese Datei wird in GitBook als Intro für das Buch dargestellt: 
 * https://www.gitbook.com/book/mobi3006/pierreinside/details
 * https://www.gitbook.com/book/0xax/linux-insides/details
+
+### Youtube Videos 
+
+* https://plugins.gitbook.com/plugin/youtube
+
+In Markdown können Videos beispielsweise über HTML eingebettet werden ... mal
 
 ---
 
@@ -239,6 +248,50 @@ Zudem muß erst ein Sync auf das Remote-Repository erfolgen ... komisch ...
 Diese Arbeitsweise bin ich so nicht gewohnt bei der Arbeit mit Git ... da ich aber ja nicht mit meinem Tooling arbeite, sondern mit dem Tooling von GitHub mag das der eingeschlagene Weg sein.
 
 ---
+
+# Theming
+
+* https://help.gitbook.com/content/how-can-i-change-theme.html
+
+Seit Version 3 ist Theming möglich ... es gibt auch schon fertige Themes
+
+## Fertige Themes
+
+* https://github.com/GitbookIO/theme-faq
+
+---
+
+# Kollaboration
+
+## Diskussionen
+
+Unter *GitBook Admin UI - MyBook - Settings - Features - Discussions* muß das Feature aktiviert werden. 
+## Kommentare
+
+Unter *GitBook Admin UI - MyBook - Settings - Features - Inline Comments* muß das Feature aktiviert werden.
+
+---
+
+# Administrative Informationen
+
+## Private vs Public Bücher
+
+**Public:**
+
+* alle Internetuser können das Buch lesen - es wird auch über Suchmaschinen gefunden
+* nur die explizit eingetragenen Kollaborateure können das Buch bearbeiten (Clones sind natürlich jederzeit möglich, weil es sich um ein GitHub-repository handelt)
+* können verkauft werden
+* die GitBook-Plattform ist für Public-Bücher kostenlos
+
+**Private:**
+
+* sind nur für die explizit eingetragenen Kollaborateure sichtbar
+* können NICHT verkauft werden
+* der Autor muß für die Plattform bezahlen
+
+## Lizenz
+
+Für jedes Buch kann eine Lizenz unter *GitBook Admin UI - MyBook - Settings - Features - Discussions* eingestellt werden ...
 
 # GitBooks Schwächen
 
