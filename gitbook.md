@@ -24,6 +24,7 @@ Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit H
   * Erstellung der Bücher automatisiert ... der Autor committet nur nach GitHub und dann läuft alles automatisch
   * Diskussionen möglich
   * im deployten Buch ist eine Suche möglich (bei Static-Site-Generator-Ansätzen ist das nicht out-of-the-box)
+* Erweiterbarkeit über [Webhooks](https://developer.gitbook.com/webhooks/) ... man kann weitere Webhooks konfigurieren bzw. selbst welche schreiben
 
 ## Toolchain
 
@@ -86,6 +87,7 @@ Mit dem GitBook-CLI kann das Buch lokal in verschiedenen Formaten deployed werde
 
 * über den GitBookEditor erfolgt ein sync (= push) mit GitHub
 * nach einer Weile wird das Buch automatisch neu gebaut (HTML, PDF, eBook-Formate) und deployed ... z. B. hier: https://mobi3006.gitbooks.io/pierreinside/content/
+  * sollte das nicht automatisch funktionieren, so muß man im GitBook-Admin-Weboberfläche evtl. die Verbindung zum GitHub-Repository herstellen und einen Webhook konfigurieren (der Webhook stößt dann den Build an)
 
 ---
 
