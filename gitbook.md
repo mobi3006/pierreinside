@@ -25,7 +25,9 @@ Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit H
   * Diskussionen möglich
   * im deployten Buch ist auf der Seite selbst eine Suche möglich (bei Static-Site-Generator-Ansätzen ist das nicht out-of-the-box)
   * über https://www.gitbook.com/search/advanced kann man noch komfortabler suchen
-* Erweiterbarkeit über [Webhooks](https://developer.gitbook.com/webhooks/) ... man kann weitere Webhooks konfigurieren bzw. selbst welche schreiben
+* Erweiterbarkeit über 
+  * [Webhooks](https://developer.gitbook.com/webhooks/) ... man kann weitere Webhooks konfigurieren bzw. selbst welche schreiben
+  * Plugins ... z. B. [YouTube-Plugin](https://plugins.gitbook.com/plugin/youtube)
 * sehr gute Anlaufquelle für Dokumentation von Technologien aus Anwendersicht (sehr brauchbar für Entwickler)
 
 ## Toolchain
@@ -182,7 +184,14 @@ GitHub kann verwendet werden, um den Raw-Content (Markdown, AsciiDoc) zu speiche
 
 ## Filesystem-Organisation
 
+* http://toolchain.gitbook.com/structure.html
+
 Unterhalb von ``$SITE_HOME`` (auf dem lokalen Rechner) liegt die Datei `SUMMARY.MD`, die das Inhaltsverzeichnis abbildet (später im linken Navigationsbereich dargestellt). Darin kann beliebig in die Filesystem-Ordnerstruktur referenziert werden. Yippppiiieeeh ... genau so habe ich mir das vorgestellt :-)
+
+## Konfiguration
+* http://toolchain.gitbook.com/config.html
+
+... erfolgt in der ``book.json``.
 
 ## Unterstützte Input-Formate
 
@@ -194,6 +203,10 @@ GitBook unterstützt folgende Input Formate
 ## Contenterstellung
 
 Der Content kann mit jedem beliebigen Editor geschrieben werden (u. a. mit dem GitBook-Editor, der zudem noch einen grafischen Git-Client integriert). Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie trotzdem einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitHub bietet mit dem GitBook Editor ein sehr gutes Tool (siehe unten).
+
+### Markdown Input Format
+
+* http://toolchain.gitbook.com/syntax/markdown.html
 
 ### SUMMARY.md
 * http://jinlaixu.net/books/gitbook-documentation/book/chapters.html
