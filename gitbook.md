@@ -6,6 +6,27 @@
 
 Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit Hugo Probleme bei der Erstellung einer Menüstruktur hatte, habe ich mich dann doch mal mit GitBook beschäftigt. So könnte ich zumindest mal mit dem Markdown-Style in Fahrt kommen und mir dann aber mittelfristig eine andere Lösung überlegen (oder vielleicht gefällt es mir ja so gut, daß ich dabei bleibe).
 
+--- 
+
+# Was macht GitBook attraktiv?
+
+* gute Toolchain ... darauf gehe ich noch detaillierter ein
+* kein/geringer Tool-Lock-in-Effekt ... später kann man sich vielleicht für einen anderen Deployment-Ansatz entscheiden ... den Markdown-Content wird man dann zumindest man nicht mehr anpassen müssen.
+* Git-Features: 
+  * verteiltes offline Arbeiten möglich 
+  * Versionskontrolle für Dokumentation ... diffs möglich
+* GitHub-Features: [siehe hier](github.md)
+* GitBook-Features:
+  * Output-Formate:
+    * HTML
+    * PDF
+    * verschiedene eBook-Formate
+  * Erstellung der Bücher automatisiert ... der Autor committet nur nach GitHub und dann läuft alles automatisch
+  * Diskussionen möglich
+  * im deployten Buch ist eine Suche möglich (bei Static-Site-Generator-Ansätzen ist das nicht out-of-the-box)
+
+## Toolchain
+
 Die Toolchain besteht aus:
 
 * GitBookEditor: 
@@ -26,18 +47,6 @@ Die Toolchain besteht aus:
 Mit dieser Toolchain ist der Einstieg in Markdown-Content sehr einfach und man muß sich noch nicht damit beschäftigen welchen [Markdown-StaticSiteGenerator](staticSiteGenerators.md) man mal verwenden will.
 
 Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes Content-Management-System) auch mit GitBook erstellt ist ... ein Zeichen dafür, daß es ein exzellentes Tool für Dokumentation ist. Zudem scheint der [Static-Site-Generator-Ansatz](staticSiteGenerators.md) genau richtig zu sein für Dokumentation ... ansonsten würden die Drupal-Entwickler sicher auch Drupal verwenden (in diesem Fall sind sie wahrscheinlich auch an der leichten Integration der Leser interessiert ... "Leser werden zu Autoren"). GitBook ist sehr beliebt als Static Site Generator: http://www.staticgen.com/
-
---- 
-
-# Was macht GitBook attraktiv?
-
-* gute Toolchain, um schnell mit dem Publishing zu beginnen ... dafür aber eingeschränkt in der Anpassbarkeit. Später kann man sich vielleicht für einen anderen Ansatz entscheiden ... den Markdown-Content wird man dann zumindest man nicht mehr anpassen müssen
-* GIT-based - Versionskontrolle inherent
-* gute Integration von Lesern (Leser werden leicht zu Autoren)
-* Output-Formate:
-  * HTML
-  * PDF
-  * verschiedene eBook-Formate
 
 ---
 
@@ -239,7 +248,9 @@ Es ist extrem schwierig das Layout einer GitBook-Seite an eigene Bedürfnisse an
 ---
 
 # Fazit
-Ich bin wirklich richtig begeistert von der Toolchain. Außerdem ist das Editieren von Markdown (insbes. mit dem *GitBook Editor*) eine wahre Freude. Zukünftig werde ich deutlich schneller meine Artikel verfassen können und zudem mit noch mehr Freude.
+Ich bin wirklich richtig begeistert von der Toolchain. Dokumentation wie Code zu behandeln (Versionskontrolle) halte ich grundsätzlich für einen gute Idee. Das Editieren von Markdown (insbes. mit dem *GitBook Editor* mit Preview-Ansicht) ist eine wahre Freude. Der automatisierte Build/Deployment von Büchern ist sehr angenehm.
+
+Zukünftig werde ich deutlich schneller meine Artikel verfassen können und zudem mit noch mehr Freude.
 
 Mal sehen ob ich dauerhaft bei GitBook bleibe ...
 
