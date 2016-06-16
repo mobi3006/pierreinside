@@ -25,6 +25,7 @@ Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit H
   * Diskussionen möglich
   * im deployten Buch ist eine Suche möglich (bei Static-Site-Generator-Ansätzen ist das nicht out-of-the-box)
 * Erweiterbarkeit über [Webhooks](https://developer.gitbook.com/webhooks/) ... man kann weitere Webhooks konfigurieren bzw. selbst welche schreiben
+* sehr gute Anlaufquelle für Dokumentation von Technologien aus Anwendersicht (sehr brauchbar für Entwickler)
 
 ## Toolchain
 

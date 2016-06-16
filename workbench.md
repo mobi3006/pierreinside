@@ -23,7 +23,7 @@ Diese Image bringt noch kein Docker out-of-the-box mit, doch das ist schnell ein
 
 # Vagrant-Ansible-Setup - ERFOLGLOS
 
-Meine ursprüngliche Idee war, ein Vagrant-Ansible-Setup unter einem Windows-Host zu fahren. Für Windows gibt es keinen Ansible-Support. Deshalb blieb mir nur das Ansible-Remote-Provisioning, bei dem Ansible auf dem Guest-System (Linux) installiert wird und dann der übliche ssh-execute-command verwendet wird ([Details siehe hier](ansible.md)). Leider hat das auch nicht funktioniert ... nach einigen Versuchen war ich frustriert und habe aufgegeben.
+Meine ursprüngliche Idee war, ein Vagrant-Ansible-Setup unter einem Windows-Host zu fahren. Für Windows gibt es keinen Ansible-Support. Deshalb schied das typische *Ansible-Remote-Provisioning* (über ssh in das Guest-System hinein) aus. Mir blieb nur das *Ansible-Local-Provisioning*, bei dem Ansible auf dem Guest-System (Linux) installiert wird und dann der übliche ssh-execute-command verwendet wird ([Details siehe hier](ansible.md)). Leider hat das auch nicht funktioniert ... nach einigen Versuchen war ich frustriert und habe aufgegeben.
 
 ---
 
