@@ -49,6 +49,14 @@ Mit dieser Toolchain ist der Einstieg in Markdown-Content sehr einfach und man m
 
 Interessant ist, daß Teile der Drupal-Dokumentation (Drupal ist ein bekanntes Content-Management-System) auch mit GitBook erstellt ist ... ein Zeichen dafür, daß es ein exzellentes Tool für Dokumentation ist. Zudem scheint der [Static-Site-Generator-Ansatz](staticSiteGenerators.md) genau richtig zu sein für Dokumentation ... ansonsten würden die Drupal-Entwickler sicher auch Drupal verwenden (in diesem Fall sind sie wahrscheinlich auch an der leichten Integration der Leser interessiert ... "Leser werden zu Autoren"). GitBook ist sehr beliebt als Static Site Generator: http://www.staticgen.com/
 
+## Leser werden zu Autoren
+
+**Annahme:** der Leser ist auch ein GitHub-User
+
+Ein Vorteil dieser Integration ist, daß es sehr einfach ist, Input von Lesern zu bekommen und so seine Dokumentation ständig zu verbessern. Ein Leser kann auf dem GitBook einfach den Link *Edit this Page*  drücken und die Seite wird in GitHub geöffnet. Dort kann der Leser zum Autor werden und einen Fork des Repositories erstellen. Darin nimmt er die gewünschten/vorgschlagenen Verbesserungen vor und erstellt dann einen Pull-Request an den Repository-Owner. Der kann seinerseits entscheiden, ob er die Änderungen übernehmen will oder nicht.
+
+Sollte der Leser kein GitHub-User sein, dann kann er auf ähnliche Weise zur Verbesserung beisteuern, aber eben nicht gar so komfortabel. Wer aber möchte, daß sich andere beteiligen, sollte darauf achten, daß es möglichst einfach ist ... niemand will stundenlang Tools installieren müssen, nur um dann eine Zeile Dokumentation zu verbessern, die dann evtl. vom Owner nicht mal übernommen wird.
+
 ---
 
 # Option 1: Getting started via GitBookEditor
@@ -162,13 +170,6 @@ werden die statischen HTML-Seiten erzeugt. Dabei wird ein Verzeichnis `./pierrei
 
 GitHub kann verwendet werden, um den Raw-Content (Markdown, AsciiDoc) zu speichern (inkl. Versionsverwaltung). Das kann in einem öffentlichen (man kann allerdings bestimmen, wer committen darf) oder privaten Repository erfolgen. Allerdings ist bei GitHub derzeit nur ein einziges private Repository kostenlos ...
 
-### Leser werden zu Autoren
-
-**Annahme:** der Leser ist auch ein GitHub-User
-
-Ein Vorteil dieser Integration ist, daß es sehr einfach ist, Input von Lesern zu bekommen und so seine Dokumentation ständig zu verbessern. Ein Leser kann auf dem GitBook einfach den Link *Edit this Page*  drücken und die Seite wird in GitHub geöffnet. Dort kann der Leser zum Autor werden und einen Fork des Repositories erstellen. Darin nimmt er die gewünschten/vorgschlagenen Verbesserungen vor und erstellt dann einen Pull-Request an den Repository-Owner. Der kann seinerseits entscheiden, ob er die Änderungen übernehmen will oder nicht.
-
-Sollte der Leser kein GitHub-User sein, dann kann er auf ähnliche Weise zur Verbesserung beisteuern, aber eben nicht gar so komfortabel. Wer aber möchte, daß sich andere beteiligen, sollte darauf achten, daß es möglichst einfach ist ... niemand will stundenlang Tools installieren müssen, nur um dann eine Zeile Dokumentation zu verbessern, die dann evtl. vom Owner nicht mal übernommen wird.
 
 ---
 
@@ -178,32 +179,28 @@ Sollte der Leser kein GitHub-User sein, dann kann er auf ähnliche Weise zur Ver
 
 ## Filesystem-Organisation
 
-Unterhalb von $SITE_HOME (auf dem lokalen Rechner) liegt die Datei `SUMMARY.MD`, die das Inhaltsverzeichnis abbildet (später im linken Navigationsbereich dargestellt). Darin kann beliebig in die Filesystem-Ordnerstruktur referenziert werden. Yippppiiieeeh ... genau so habe ich mir das vorgestellt :-)
+Unterhalb von ``$SITE_HOME`` (auf dem lokalen Rechner) liegt die Datei `SUMMARY.MD`, die das Inhaltsverzeichnis abbildet (später im linken Navigationsbereich dargestellt). Darin kann beliebig in die Filesystem-Ordnerstruktur referenziert werden. Yippppiiieeeh ... genau so habe ich mir das vorgestellt :-)
 
-### Unterstützte Input-Formate
+## Unterstützte Input-Formate
 
 GitBook unterstützt folgende Input Formate
 
 * Markdown (GitHub-Flavor)
 * AsciiDoc
 
-### Unterstützte Output-Formate
-
-GitBook unterstützt folgende Output Formate
-
-* HTML
-* eBook
-  * epub
-  * mobi (Amazon-Kindle)
-* PDF
-
-## Content erstellen
+## Contenterstellung
 
 Der Content kann mit jedem beliebigen Editor geschrieben werden (u. a. mit dem GitBook-Editor, der zudem noch einen grafischen Git-Client integriert). Auch wenn Markdown eine relativ eingeschränkte Syntax hat, muß man sie trotzdem einhalten. Deshalb bieten sich Editoren an, die die Seite dann auch gleich darstellen, um so Fehler frühzeitig aufzudecken. GitHub bietet mit dem GitBook Editor ein sehr gutes Tool (siehe unten).
 
 ### SUMMARY.md
 
 Diese Datei ist das Inhaltsverzeichnis, das später auf in der linken Seite angezeigt wird.
+
+### README.md
+
+Diese Datei wird in GitBook als Intro für das Buch dargestellt: 
+* https://www.gitbook.com/book/mobi3006/pierreinside/details
+* https://www.gitbook.com/book/0xax/linux-insides/details
 
 ---
 
