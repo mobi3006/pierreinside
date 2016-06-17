@@ -235,7 +235,8 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
 
 * Speichern ... aber wohin ??? - türkise Umrandung in Abbildung unten
 * Commit zum lokalen Repository (vorher wird die Datei auf dem Filesystem gespeichert)  - rote Umrandung in Abbildung unten
-* Sync ins RemoteRepo (auf GitHub) - grüne Umrandung in Abbildung unten
+* Sync (push, pull) mit dem RemoteRepo (auf GitHub) - grüne Umrandung in Abbildung unten
+  * aufgrund des integrierten ``pull`` beim Sync kann man auch problemlos direkt auf dem Server-Repository (über die Webapplikation) editieren ... PERFEKT :-)
 * Live-Preview
 * WYSIWYG-Editor 
   * besonders gut gefallen haben mir die Shortcuts (Strg-B für Fettdruck, ...)

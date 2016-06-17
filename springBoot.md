@@ -152,7 +152,9 @@ Die zentralen Annotationen macht man am besten an die Main-Class, denn das ist d
 
 > Gelegentlich gibt es Alternativen zur Annotation (z. B. Konfiguration über eine xml-Datei statt über ``@Configuration`` aber die Spring-Macher empfehlen die Verwendung von Annotationen).
 
+
 ## Strukturierung
+
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-locating-the-main-class
 
 ## @SpringBootApplication
@@ -163,6 +165,7 @@ Convenience Annotation ... subsumiert die empfohlenen Annotationen
 * ``@ComponentScan``
 
 ## @EnableAutoConfiguration
+
 Ist diese Eigenschaft gesetzt, so versucht Spring sich die Konfiguration der Anwendung selbst zu erschließen. Hierin steckt schon eine Menge Magie ...
 
 > Wenn eine JPA Dependency definiert ist und EnableAutoConfiguration gesetzt ist, dann sucht der Spring Boot (der Loader) nach entsprechenden ``@Entity`` Anntotaionen im Code
@@ -176,6 +179,7 @@ Ist diese Eigenschaft gesetzt, so versucht Spring sich die Konfiguration der Anw
     @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 
 ### Auto Configuration Report
+
 Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --debug``) wird ein sog. Auto-Configuration Report ausgegeben:
 
 
@@ -252,6 +256,37 @@ Zusammen mit ``@Autowire`` ergibt sich dadurch kaum noch expliziter Konfiguratio
 
 ---
 
+# Integrationtest
+
+* http://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html
+* https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/
+
+Eine typische Testklasse für eine Webapplikation sieht so aus:
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(
+        classes = MyApplication.class,
+        locations = { "classpath:META-INF/test-context.xml" })
+@WebAppConfiguration
+@IntegrationTest("server.port:0")
+public class MyApplicationTest {
+
+    @Autowired
+    private MyService service; 
+    
+    @Test
+    public void testServiceCall() {
+        service.method();
+    }
+    
+}
+```
+
+## @IntegrationTest
+
+---
+
 # HotSwapping
 * Developer Tools: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-hotswapping
@@ -259,6 +294,7 @@ Zusammen mit ``@Autowire`` ergibt sich dadurch kaum noch expliziter Konfiguratio
 ## Developer Tools (aka ``devtools``)
 Über die Dependency
 
+```xml
     <dependencies>
       <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -266,7 +302,8 @@ Zusammen mit ``@Autowire`` ergibt sich dadurch kaum noch expliziter Konfiguratio
         <optional>true</optional>
       </dependency>
     </dependencies>
-    
+```
+
 erfolgt die Integration der Developer Tools. 
 
 ### Cold-Start vs. Warm-Restart vs. Reload 
