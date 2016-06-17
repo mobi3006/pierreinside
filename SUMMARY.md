@@ -21,16 +21,16 @@
 * Spring Ecosystem
    * [Spring Data](springdata.md)
    * [Spring Boot](springBoot.md)
-* DevOps
+* Build und Deployment
+   * [Maven](maven.md)
    * [Vagrant](vagrant.md)
    * [Ansible](ansible.md)
    * [Saltstack](saltstack.md)
    * [Kubernetes](kubernetes.md)
-* Mobile Devices
-   * [iPad Pro](ipadPro.md)
 * [Workbench](workbench.md)
    * [zsh](zsh.md)
+* Devices
+   * [iPad Pro](ipadPro.md)
+   * [Auto](auto.md)
 * [Englisch](englisch.md)
-* [Auto](auto.md)
-* [Maven](maven.md)
 
