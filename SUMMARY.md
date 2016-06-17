@@ -32,4 +32,5 @@
    * [zsh](zsh.md)
 * [Englisch](englisch.md)
 * [Auto](auto.md)
+* [Maven](maven.md)
 

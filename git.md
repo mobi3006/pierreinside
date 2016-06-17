@@ -5,13 +5,32 @@ Sehr gute Quellen:
 * http://www.eecs.harvard.edu/~cduan/technical/git/
 * http://book.git-scm.com/
 * Ultra-Kurzeinführung: http://rogerdudler.github.io/git-guide/
-* https://www.youtube.com/watch?v=0fKg7e37bQE
+* [1]: https://www.youtube.com/watch?v=0fKg7e37bQE
 
 ---
 
 # Motivation - Linus Torvalds
 
 * https://www.youtube.com/watch?v=idLyobOhtO4
+
+Linus Torvalds hat Git für seine Arbeit am Linux-Kernel entwickelt, weil es kein Tool gab, das seinen Anforderungen gerecht wurde. Dementsprechend hat das Tool folgende Merkmale:
+
+* mergen vieler Dateien (im Sinne eines *Integration-Managers* - siehe unten) ... die einzelne Datei spielt keine große Rolle.
+* extrem performant (u. a. durch den lokalen Ansatz) hinsichtlich Diffs, ...
+* jeder Kernel-Entwickler kann Arbeiten, ohne andere zu beeinflussen ... erst wenn die Arbeit DONE ist, kann entschieden werden, ob die Änderungen übernommen werden.
+* möglichst hohe Freiheitsgrade in der Arbeitsorganisation für jeden einzelnen Entwickler
+
+## Git in typischen Softwareprojekten ...
+
+Diese *Integration Manager*-Modell  Arbeitsweise paßt zu den wenigstens Standard-Entwicklern. Dennoch können auch Standard-Entwickler von diesem Ansatz profitieren.
+
+Einer der größten Vorteile dieses Modells ist, daß es den Entwicklern große Freiheitsgrade (Branching, Tagging, Push, Pull, Verteilung, Zentralisierung) bei der Arbeitsorganisation läßt. Je nach Aufgabe kann man sich jedes mal neu entscheiden wie man sich organisiert ... man wählt den besten Ansatz für die jeweilige Problemstellung.
+
+Diese Freiheitsgrade erfordern aber auch Vertrauen und gute Entwickler. Und genau das könnte vielen  Verantwortlichen in den Projekten/Unternehmen Angst machen ...
+
+> Aus meiner Sicht ist diese Angst vollkommen unbegründet, denn ein Unternehmen MUSS Vertrauen in seine Mitarbeiter haben, um überhaupt Software entwickeln zu können. Warum sollte es darauf vertrauen, daß qualitativ hochwertige Software entsteht, wenn es seinen Entwicklern nicht einmal zutraut ein Versionsverwaltungssystem sinnvoll zu nutzen? Solche Firmen sind zum Scheitern verurteilt.
+
+Ich habe jehrelang mit Subversion und maven gearbeitet. Dabei bin ich nach einiger Zeit dazu übergegangen, ein paar Stunden (selten Tage) offline zu arbeiten, um nicht von anderen Commits gestört zu werden. Bei maven habe ich die Variante No-Remote-Snapshot-Updates gewählt (siehe [Remote-SNAPSHOT-Abhängigkeiten ... DONT DO THIS](maven.md)).
 
 ---
 
@@ -58,24 +77,37 @@ Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei ein
 ---
 
 # Basis-Konzepte
+
+Linux Torvalds sagte in einer [Präsentation](2) mal, daß Git Content-based ist und Subversion File-based. Ich habe es noch nicht so ganz verstanden, aber als Beispiel führte er folgendes an:
+
+> Eine Datei A beherbergt zum Zeitpunkt t1 eine Methode ``calculatePrice()``. Diese Methode wird zum Zeitpunkt t2 in die Datei B verschoben. Wenn der Entwickler nun die Historie zu ``calculatePrice()`` ansehen möchte, dann ist es bei Git kein Problem, den gesamten Lebenszyklus zu berücksichtigt, d. h. das Verschieben von A nach B ist transparent. Bei Subversion ist das schwierig, weil es File-based ist.
+
+Eventuell ist das auch der Grund warum Merging mit Git so gut (automatisiert und zuverlässig) funktioniert. Bei SVN ist das aufwendiger und viele versuchen, es zu vermeiden. Diese Schwäche sorgt dafür, daß Subversion-User in der Wahl ihrer Arbeistweisen eingeschränkt sind.
+
 **Repository:**
+
 * bildet die Basis der Versionsverwaltung - alle Tools (commit, checkout, branch, merge, ...) nutzen das Repository als Datenbasis. Hier sind alle Änderungen getrackt.
 * rein Filesystem basiert (es ist kein Server oder Prozess erforderlich) - somit auch leicht zu sichern
 
 **Remote Repository:**
+
 Entferntes Repository, das über den Origin-Parameter in Verbindung mit dem lokalen Repository steht (z. B. weil es das geclonte Repository ist, aus dem das lokale Repository entstanden ist)
 
 **Index/Stage:**
+
 Container, den der Entwickler bewusst explizit mit geänderten/gelöschten/hinzugefügten Ressourcen befüllt (z. B. ``git add bla.txt``). Dieser Container wird später committed ... die geänderten Ressourcen bilden zusammen mit den Änderungen das CommitObject
 
 **CommitObject:**
+
 * ein CommitObject besteht aus Pointern auf Ressourcen (Dateien) und deren Änderungen zur Vorversion. Da ein Git-Repository in sich alle Änderungen aller Branches trägt sind Vergleiche zwischen Revisionen einer Ressource komplett lokal möglich - dazu werden die CommitObjects benötigt
 * nur das erste CommitObject hat keinen Vorfahren - alle anderen haben i. d. R. einen Vorfahren, bei gemergten Branches zwei Vorfahren
 
 **Aktueller Zustand eines Branches:**
+
 Der aktuelle Zustand eines Branches ergibt sich aus den CommitObjects (repräsentieren die Diffs) von der Wurzel bis zum aktuellen Head-CommitObject
 
 **Head:**
+
 * benanntes CommitObject (Teilmenge aller CommitObjects) - durch Branching wird ein neuer Head erzeugt, der dann eine eigene Historie entwickeln kann und irgendwann evtl. mal wieder mit dem anderen Zweig zusammengeführt wird
 * jeder separate Branch hat einen eigenen Head
 * es gibt immer mindestens einen Head, den sog. MASTER (der Head vom Hauptzweig)
@@ -83,9 +115,11 @@ Der aktuelle Zustand eines Branches ergibt sich aus den CommitObjects (repräsen
 * neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
 
 **Clone:**
+
 Ein ``git clone`` erzeugt eine 1:1 Kopie eines Repositories. Dabei werden ALLE CommitObjects aller Branches ins neue Repository übernommen, d. h. die gesamte Historie ist im geclonten Repository vorhanden. Über das Origin-Attribut ist die Verbindung zur Quelle weiterhin vorhanden und per ``git push`` oder Pull-Requests kann eine Integration in das Origin-Repository erfolgen.
 
 **Clone vs. Fork:**
+
 * Clone und Fork sind schon recht ähnlich und man kann mit beiden sehr ähnlich arbeiten
 * ABER: ein Fork sorgt dafür, daß Origin und Fork unterschiedliche Eigentümer hat. Je nach Konfiguration kann nur der Eigentümer Pull-Requests committen. Man kann aber problemlos einen Fork erstellen und dann einen Pull-Request erstellen, der zum Transport der Änderungen/Erweiterungen in das Origin-Repository verwendet wird.
 * Clone ist eher eine lokale Kopie des Remote-Repositories, Fork ist eine serverseitige Kopie des Remote-Repositories mit geändertem Eigentümer ... aber was ist schon Client/Server/lokal/remote, wenn die Grenzen fließend sind?
@@ -507,3 +541,5 @@ in ihre ``~/.gitconfig`` aufnehmen. Das verhindert, daß ein CRLF im Repository 
     or MSysGitPath setting error ... der Nutzung
 
 **Antwort 6:** Angeblich braucht man MSysGit, wenn man an Git hacken will ... für die normale Nutzung scheinbar nicht. Hä? Ah, eine Weile später fällts mir auf ... ich habe nur TortoiseGit installiert, Git selbst hatte ich nicht installiert - das brauche ich aber auch.
+
+[2]: https://www.youtube.com/watch?v=0fKg7e37bQE
