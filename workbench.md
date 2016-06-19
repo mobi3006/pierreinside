@@ -1,4 +1,5 @@
 # Workbench4Devs
+
 VirtualBox und Vagrant begeistern mich schon einige Zeit. Durch einen Jobwechsel wollte ich eine neue Workbench (OS, IDE) mit Docker-Support installieren. Ich kam auf die Idee, dies zu scripten, um so auch Dokumentation zu haben und unter Umständen das System auch neu aufzusetzen. 
 
 Auf diese Weise könnte ich auch anderen Entwicklern den Einstieg in eine Linux-Entwicklungsumgebung (OS, Docker, Java-IDE, Svn, Git, ...) erleichtern.

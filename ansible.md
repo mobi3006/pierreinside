@@ -1,4 +1,5 @@
 # Ansible
+
 In einem Multimachine-Vagrant-Projekt, das aus 5 verschiedenen Images bestand und dessen Provisioning eine knappe Stunde dauerte, haben wir Shellscripting zum Provisioning eingesetzt. Das hatte einige Vorteile, **aber auch einen ganz entscheidenden Nachteil**: Fehlende Idempotenz.
 
 Bricht das Shellscript nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeutet das nach Beheben des Fehlers oftmals (wenn man nicht mehrere Minuten in das manuelle Anpassen der Scripte investieren will), daß das Image komplett platt gemacht und neu aufgebaut wird ... also wieder 20 Minuten warten bis man überhaupt wieder so weit ist wie man schon mal war.
@@ -63,13 +64,31 @@ Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
 
 # Getting Started - Windows-User
 
-Ansible wird für Windows nicht unterstützt, d. h. eine Windows-Maschine kann nicht als Ansible-Controller agieren. Evtl. ist die Vagrant-Ansible-Integration vielleicht eine Alternative. 
+**YOU LOST** ... Ansible wird für Windows nicht unterstützt, d. h. eine Windows-Maschine kann nicht als Ansible-Controller agieren. Evtl. ist die Vagrant-Ansible-Integration vielleicht eine Alternative. 
+
+---
+
+# Aufsetzen meiner Workbench
+
+* alle Module: http://docs.ansible.com/ansible/list_of_all_modules.html
+
+Meine Workbench (Entwicklungsumgebung) besteht aus einem VirtualBox-Image auf Ubuntu-Basis (16.04 LTS). 
+
+## Installation ansible
+
+    apt-get install ansible
+    
+## Installation midnight-commander
+
+
 
 ---
 
 # Vagrant-Ansible-Integration
 
 ## Variante 1: Remote Ansible
+
+* http://docs.ansible.com/ansible/guide_vagrant.html
 
 Der typische Ansible-Ansatz ermöglicht die Ausführung von Kommandos via ssh. Insofern paßt es perfekt in ein Vagrant-Host/Guest-Szenario - der Host sendet via ssh (wird von Vagrant eh schon konfiguriert) die entsprechenden Shell-Kommandos zum Guest. 
 
@@ -103,14 +122,6 @@ Die Local Ansible Variante hat den Vorteil, daß Ansible auf dem Host-System nic
 
 ---
 
-# Vorteile Shellscripting
-Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
-
-* ganz dicht am manuellen Aufsetzen - klar Scripting bedeutet dann oftmals auch, daß eine gewisse Art von Konfigurierbarkeit in die Scripte eingebaut wird, um sie an bestimmte Umgebungen anzupassen. Verzichtet man aber auf die Konfigurierbarkeit, dann genügt es, die für eine manuelle Installation/Konfiguration eines System erforderlichen Befehle, in eine Shelldatei zu packen. Viola :-)
-* kein weiteres Layer zwischen den Befehlen und dem System ... ich bin mir aber nicht sicher, ob das wirklich ein Vorteil ist, denn Fehlersuche in Shellscripten ist wirklich alles andere als eine Freude ... insbes. aufgrund der fehlenden Idempotenz
-
----
-
 # Was macht Ansible so angenehm?
 
 * **IDEMPOTENZ**
@@ -128,6 +139,22 @@ Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 * Ansible basiert auf Python ... für mich als nicht Ruby (Puppet) Entwickler könnte das Vorteile haben
 * Templating basiert auf dem Jinja2-Templating (Subset von Django), mit dem viele Entwickler vertrauter sind
 
+## Vergleich von Alternativen
+
+* https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-overview/
+* https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-hands-on-with-ansible/
+* ein sehr ausführlicher Vergleich zwischen Ansible und Saltstack: http://ryandlane.com/blog/2014/08/04/moving-away-from-puppet-saltstack-or-ansible/
+
+
+> "After three years of using Puppet at VMware and Virtual Instruments, the thought of not continuing to use the market leader in configuration management tools seemed like a radical idea when it was first suggested to me. After spending several weeks researching Ansible and using it hands-on, I came to the conclusion that Ansible is a perfectly viable alternative to Puppet. I tend to agree with Lyft’s conclusion that if you have a centralized Ops team in change of deployments then they can own a Puppet codebase. On the other hand if you want more wide-spread ownership of your configuration management scripts, a tool with a shallower learning curve like Ansible is a better choice." (*Dan Tehranian's Blog*, https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-hands-on-with-ansible/)
+
+## Vorteile des Shellscriptings
+
+Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
+
+* ganz dicht am manuellen Aufsetzen - klar Scripting bedeutet dann oftmals auch, daß eine gewisse Art von Konfigurierbarkeit in die Scripte eingebaut wird, um sie an bestimmte Umgebungen anzupassen. Verzichtet man aber auf die Konfigurierbarkeit, dann genügt es, die für eine manuelle Installation/Konfiguration eines System erforderlichen Befehle, in eine Shelldatei zu packen. Viola :-)
+* kein weiteres Layer zwischen den Befehlen und dem System ... ich bin mir aber nicht sicher, ob das wirklich ein Vorteil ist, denn Fehlersuche in Shellscripten ist wirklich alles andere als eine Freude ... insbes. aufgrund der fehlenden Idempotenz
+
 ---
 
 # Was kann man von Ansible nicht erwarten?
@@ -137,17 +164,6 @@ Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 
 
 * Dry-Run-Mode zum Testen von Scripten ... mittlerweile gibt es das aber wohl: http://docs.ansible.com/ansible/playbooks_checkmode.html
-
----
-
-# Vergleich von Alternativen
-
-* https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-overview/
-* https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-hands-on-with-ansible/
-* ein sehr ausführlicher Vergleich zwischen Ansible und Saltstack: http://ryandlane.com/blog/2014/08/04/moving-away-from-puppet-saltstack-or-ansible/
-
-
-> "After three years of using Puppet at VMware and Virtual Instruments, the thought of not continuing to use the market leader in configuration management tools seemed like a radical idea when it was first suggested to me. After spending several weeks researching Ansible and using it hands-on, I came to the conclusion that Ansible is a perfectly viable alternative to Puppet. I tend to agree with Lyft’s conclusion that if you have a centralized Ops team in change of deployments then they can own a Puppet codebase. On the other hand if you want more wide-spread ownership of your configuration management scripts, a tool with a shallower learning curve like Ansible is a better choice." (*Dan Tehranian's Blog*, https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-hands-on-with-ansible/)
 
 ---
 
