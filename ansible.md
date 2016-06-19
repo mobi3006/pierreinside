@@ -68,8 +68,9 @@ Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
 
 ---
 
-# Wichtige Module
+# Beispiele
 
+* Beispiele: https://github.com/ansible/ansible-examples
 * alle Module: http://docs.ansible.com/ansible/list_of_all_modules.html
 
 ---
