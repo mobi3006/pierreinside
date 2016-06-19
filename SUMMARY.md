@@ -28,9 +28,9 @@
    * [Saltstack](saltstack.md)
    * [Kubernetes](kubernetes.md)
 * [Workbench](workbench.md)
-   * [zsh](zsh.md)
    * [Ubuntu 14.10 LTS](workbench/ubuntu_1410_lts.md)
-       * [Ubuntu 16.04 LTS](workbench/ubuntu_1604_lts.md)
+   * [Ubuntu 16.04 LTS](workbench/ubuntu_1604_lts.md)
+   * [zsh](zsh.md)
 * Devices
    * [iPad Pro](ipadPro.md)
    * [Auto](auto.md)
