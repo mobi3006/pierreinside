@@ -68,19 +68,9 @@ Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
 
 ---
 
-# Aufsetzen meiner Workbench
+# Wichtige Module
 
 * alle Module: http://docs.ansible.com/ansible/list_of_all_modules.html
-
-Meine Workbench (Entwicklungsumgebung) besteht aus einem VirtualBox-Image auf Ubuntu-Basis (16.04 LTS). 
-
-## Installation ansible
-
-    apt-get install ansible
-    
-## Installation midnight-commander
-
-
 
 ---
 

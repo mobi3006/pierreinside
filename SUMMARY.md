@@ -29,7 +29,7 @@
    * [Kubernetes](kubernetes.md)
 * [Workbench](workbench.md)
    * [zsh](zsh.md)
-   * [Ubuntu 14.10 LTS](workbench/ubuntu1404_lts.md)
+   * [Ubuntu 14.10 LTS](workbench/ubuntu_1410_lts.md)
        * [Ubuntu 16.04 LTS](workbench/ubuntu_1604_lts.md)
 * Devices
    * [iPad Pro](ipadPro.md)
