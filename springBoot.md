@@ -285,6 +285,19 @@ public class MyApplicationTest {
 
 ## @IntegrationTest
 
+## Remote Debugging ermöglichen
+
+Um ein Remote-Debugging (z. B. über eine IDE) der Spring-Boot-Applikation zu ermöglichen, muß die Applikation folgendermaßen gestartet werden:
+
+    java 
+      -Xdebug 
+      -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n
+      - jar myapp.jar
+
+Soll die Applikation aus der IDE gestartet werden, so müssen die ``-X``-Argumente im Launcher als VM-Argumente eingetragen werden.
+
+Ist die Applikation gestartet, wird in der IDE ein Remote-Debug-Prozess gestartet, der sich an den Remote-Debug-Port der Anwendung verbindet (wie üblich, wenn Java-Applikationen remote gedebugged werden).
+
 ---
 
 # HotSwapping
