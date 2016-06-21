@@ -94,6 +94,8 @@ Ich werde die Installation und Konfiguration dieses Images zumindest teilweise s
 
     apt-get install ansible
     
+Danach muß ansible noch konfiguriert werden (ssh-keys, ssh-agent, ``~/.ssh/authorized_keys``) ... siehe [Ansible](ansible.md#).
+    
 ## Installation midnight-commander
 
 ## awesome Fenstermanager
