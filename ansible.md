@@ -29,15 +29,6 @@ Folgender Befehl erzeugt einen Public-Key und einen Private-Key:
 ```    
 Dabei wird eine Passphrase abgefragt, die man später bei Verwendung des Private-Key eingeben muß. 
 
-### SSH-Agent starten und konfigurieren
-Der Private-Key ist durch eine Passphrase geschützt. Da Ansible-Playbooks aber i. d. R. vollautomatisiert im Hintergrund laufen und somit nicht ständig um die Eingabe dieser Passphrase betteln wollen, starten wir einen ssh-agent ...
-
-    eval $(ssh-agent -s)
-    
-und geben ihm die Passphrase (wird im Speicher gehalten und nicht persistiert)
-
-    ssh-add ~/.ssh/id_rsa
-   
 ### Zielrechner definieren
 
 Die Zielrechner können gruppiert werden - das ist sehr praktisch, wenn man mit einem Befehl gleich mehrere Rechner adressieren möchte.
@@ -68,6 +59,33 @@ Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
 
     ansible all -a "/bin/echo hello"
 
+Damit kann getestet werden, ob Ansible und die System-Konfiguration (ssh-keys, ssh-agent) funktionieren.
+
+### SSH-Agent starten und konfigurieren
+Der Private-Key ist durch eine Passphrase geschützt. Da Ansible-Playbooks aber i. d. R. vollautomatisiert im Hintergrund laufen und somit nicht ständig um die Eingabe dieser Passphrase betteln wollen, starten wir einen ssh-agent ...
+
+    eval $(ssh-agent -s)
+    
+und geben ihm die Passphrase (wird im Speicher gehalten und nicht persistiert)
+
+    ssh-add ~/.ssh/id_rsa
+   
+
+## Das erste Playbook (= Skript) ...
+Die Skipte heißen bei Ansible Playbook. Das folgende Ansible-Playbook (``myplaybook.yml``)
+
+```
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+  - name: install midnight commander
+    package: name=mc state=latest
+    remote_user: root
+```
+
+wird per ``ansible-playbook myplaybook.yml`` ausgeführt und installiert das Paket *Midnight Commander*.
+
 ---
 
 # Getting Started - Windows-User
@@ -80,6 +98,8 @@ Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
 
 * Beispiele: https://github.com/ansible/ansible-examples
 * alle Module: http://docs.ansible.com/ansible/list_of_all_modules.html
+
+Hier habe ich ein paar Beispiele 
 
 ---
 

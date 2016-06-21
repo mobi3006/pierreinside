@@ -40,7 +40,10 @@ Ein Ordner vom Windows-Host (z. B. ``C:\transfer``) wird zum Austausch von Datei
 
 Danach muß sich der User ab- und wieder anmelden.
 
-## Vorbereitungen für Ansible
+## SSH-Server installieren und konfigurieren
+
+u. a. Ansible wird diese Vorarbeit später benötigen.
+
 ### ssh-Server installieren
 Ein ssh-Server ist Voraussetzung für Ansible ... auch wenn der Target-Host der Ansible-Kommandos ``localhost`` ist.
 
@@ -96,9 +99,29 @@ Ich werde die Installation und Konfiguration dieses Images zumindest teilweise s
     
 Danach muß ansible noch konfiguriert werden (ssh-keys, ssh-agent, ``~/.ssh/authorized_keys``) ... siehe [Ansible](ansible.md#).
     
-## Installation midnight-commander
+## Ansible: midnight-commander
+``playbook.yml``:
 
-## awesome Fenstermanager
+    ---
+    - hosts: localhost
+      remote_user: root
+      tasks:
+      - name: install midnight commander
+        package: name=mc state=latest
+
+## Ansible: awesome Fenstermanager
+
+``playbook.yml``:
+
+    ---
+    - hosts: localhost
+      remote_user: root
+      tasks:
+      - name: install awesome window manager - CORE
+        package: name=awesome state=latest
+        remote_user: root
+      - name: install awesome window manager - EXTRA
+        package: name=awesome-extra state=latest
 
 Einfach per
 
