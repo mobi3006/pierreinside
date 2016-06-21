@@ -61,15 +61,7 @@ Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
 
 Damit kann getestet werden, ob Ansible und die System-Konfiguration (ssh-keys, ssh-agent) funktionieren.
 
-### SSH-Agent starten und konfigurieren
-Der Private-Key ist durch eine Passphrase geschützt. Da Ansible-Playbooks aber i. d. R. vollautomatisiert im Hintergrund laufen und somit nicht ständig um die Eingabe dieser Passphrase betteln wollen, starten wir einen ssh-agent ...
-
-    eval $(ssh-agent -s)
-    
-und geben ihm die Passphrase (wird im Speicher gehalten und nicht persistiert)
-
-    ssh-add ~/.ssh/id_rsa
-   
+**ACHTUNG:** sollte der ssh-agent nicht laufen und der Private-SSH-Key mit einer Passphrase geschützt sein, so wird interaktiv nach der Passphrase gefragt. Das widerspricht eigentlich der Ansible-Idee einer Vollautomatisierung ... der SSH-Agent löst dieses Problem.  
 
 ## Das erste Playbook (= Skript) ...
 Die Skipte heißen bei Ansible Playbook. Das folgende Ansible-Playbook (``myplaybook.yml``)
@@ -85,6 +77,15 @@ Die Skipte heißen bei Ansible Playbook. Das folgende Ansible-Playbook (``myplay
 ```
 
 wird per ``ansible-playbook myplaybook.yml`` ausgeführt und installiert das Paket *Midnight Commander*.
+
+## SSH-Agent starten und konfigurieren
+Der Private-Key ist durch eine Passphrase geschützt. Da Ansible-Playbooks aber i. d. R. vollautomatisiert im Hintergrund laufen und somit nicht ständig um die Eingabe dieser Passphrase betteln wollen, starten wir einen ssh-agent ...
+
+    eval $(ssh-agent -s)
+    
+und geben ihm die Passphrase (wird im Speicher gehalten und nicht persistiert)
+
+    ssh-add ~/.ssh/id_rsa
 
 ---
 

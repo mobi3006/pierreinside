@@ -77,7 +77,7 @@ Nun muß man den ``/home/userA/.ssh/id_rsa.pub`` in die ``ddd`` reinbekommen:
     su - root    # oder sudo bash
     cat /home/userA/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 
-### ssh-agent: Passphrase umgehen
+### ssh-agent: interaktive Passphraseabfrage umgehen
 Das Ansible-Skript soll ohne Interaktion auskommen. Da man i. a. aber eine Passphrase über den Private-Key legt, müßte dem Ansible-Controller die Passphrase bekannt sein. Das  will man aber eigentlich nicht ... deshalb beauftragt man den SSH-Agent damit.
 
 Starten des SSH-Agent:
@@ -123,11 +123,7 @@ Danach muß ansible noch konfiguriert werden (ssh-keys, ssh-agent, ``~/.ssh/auth
       - name: install awesome window manager - EXTRA
         package: name=awesome-extra state=latest
 
-Einfach per
-
-    apt-get install awesome awesome-extra
-
-installiert, ausgeloggt vom Gnome Desktop, awesome als Fenstermanager beim Einloggen auswählen und Freude am schlanken awesome haben :-)
+Danach ausloggen und beim Login-Screen awesome als Fenstermanager auswählen. Viel  Freude am schlanken awesome :-)
 
 ## zsh und oh-my-zsh
 
