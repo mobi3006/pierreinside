@@ -53,7 +53,15 @@ Unter ``/etc/ansible/hosts`` müssen die zu verwaltenden Rechner eingetragen wer
 
 ### authorized_keys auf Zielrechnern anpassen
 
-... damit die passwordfreie Authentifizierung auch funktioniert müssen die Public-Keys des Users,
+... damit die passwortfreie Authentifizierung funktioniert muß der Public-Keys des Users auf dem Controller-Rechner in die ``~/.ssh/authorized_keys`` auf dem Zielrechner für den Zielnutzer aufgenommen werden. Ansonsten bekommt wird ein Fehler dieser Art ausgegeben:
+
+    localhost | UNREACHABLE! => {
+        "changed": false, 
+        "msg": "ERROR! SSH encountered an unknown error during the connection. 
+          We recommend you re-run the command using -vvvv, which will enable 
+          SSH debugging output to help diagnose the issue", 
+    "unreachable": true
+    }
 
 ## Das erste Kommando ...
 Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
