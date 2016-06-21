@@ -1,5 +1,10 @@
 # Http
 
+# Inputdaten
+* https://stackoverflow.com/questions/14551194/how-are-parameters-sent-in-an-http-post-request
+
+---
+
 # Authentication
 Es gibt verschiedenen Formen der Authentifizierung innerhalb des HTTP-Protokolls:
 
@@ -42,5 +47,7 @@ In diesem Fall packt man die Credentials in ein HTML-Form:
 # Tooling
 ## UI
 ### Postman
-* https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop
+
+* https://github.com/postmanlabs/postman-app-support/wiki
+* [Chrome-Plugin](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
 

@@ -19,8 +19,9 @@
    * [REST](rest.md)
    * [Spring REST](springRest.md)
 * Spring Ecosystem
-   * [Spring Data](springdata.md)
    * [Spring Boot](springBoot.md)
+   * [Spring Cloud](springCloud.md)
+   * [Spring Data](springdata.md)
 * Build und Deployment
    * [Maven](maven.md)
    * [Vagrant](vagrant.md)

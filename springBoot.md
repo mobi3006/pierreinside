@@ -224,9 +224,15 @@ Eine Anpassung des ``cloudProviderName`` wäre dann über die ``application.prop
 
   de.cachaca.myapp.cloudProviderName = Microsoft Azure
   
-Beim Maven-Build wird daraus eine Datei ``spring-configuration-metadata.json`` generiert, die Metadaten für Spring-Boot bereitstellt.
+Im Anwendungscode wird das beispielsweise folgendermaßen verwendet:
 
-Eine IDE könnte hier sogar Autovervollständigung im Properties-Editor anbieten. Willkommen im 21. Jahrhundert der Softwareentwicklung.
+    @.springframework.beans.factory.annotation.Value(
+        "${de.cachaca.myapp.cloudProviderName}")
+    private String systemName;
+
+Beim Maven-Build wird eine Datei ``spring-configuration-metadata.json`` generiert, die Metadaten für Spring-Boot bereitstellt.
+
+IntelliJ bietet hier sogar die Möglichkeit zur Autovervollständigung. Willkommen im 21. Jahrhundert der Softwareentwicklung.
 
 ## @ImportResource
 Diese Annotation wird benötigt, um nicht-annotationsbasierten Spring-Code (der auf xml-Konfiguration basiert) zu integrieren.
@@ -304,6 +310,8 @@ Ist die Applikation gestartet, wird in der IDE ein Remote-Debug-Prozess gestarte
 * Developer Tools: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-hotswapping
 
+Spring Boot bringt eine Warm-Restart-Funktionalität (siehe unten) mit. Hierzu müssen die Develeoper Tools aktiviert werden. Startet man die Anwendung aus der IDE, so führen Änderungen in der IDE automatisch zu einem Warm-Restart der Anwendung ... ein JRebel-Light (dafür aber kostenlos).
+
 ## Developer Tools (aka ``devtools``)
 Über die Dependency
 
@@ -340,7 +348,7 @@ erfolgt die Integration der Developer Tools.
 
 Die Developer Tools aktivieren per Default das Automatic Restart Feature. Sobald sich eine Ressource auf dem Filesystem ändert (z. B. durch eine Änderung in der IDE und der daraus folgenden Class-Generierung) erfolgt ein Warm-Restart (Erklärung siehe oben).
 
-**ACHTUNG:** es muß sichergestellt werden, daß das von der IDE erzeugte Class-File auch tatsächlich im Classpath der gestarteten Anwendung landet. Ist die Anwendung in der IDE gestartet, dann geschieht das automatisch. Läuft die Anwendung allerdings über maven, dann kommt es darauf an wohin die IDE die class-Datei compiliert.
+**ACHTUNG:** es muß sichergestellt werden, daß das von der IDE erzeugte Class-File auch tatsächlich im Classpath der gestarteten Anwendung landet. Ist die Anwendung in der IDE gestartet, dann geschieht das automatisch. Läuft die Anwendung über maven (``mvn spring-boot:run``), dann kommt es darauf an wohin die IDE die class-Datei compiliert. Läuft die Anwendung über das Executable-Jar (``java -jar myapp.jar``), dann kann es nicht funktionieren, weil die Klassen aus dem Jar-Artefakt gezogen werden.
 
 ### Feature: Reload Templates
 
@@ -353,6 +361,7 @@ In einer Produktionsumgebung ist das Caching von Templates eine sehr sinnvolle V
     spring.velocity.cache = false
     
 ### Konfiguration
+
 Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application.properties``. Da es sich aber schon um spezielle Entwickler-abhängige Einstellungen handelt, kann der Entwickler die Einstellungen per ``~/.spring-boot-devtools.properties`` dauerhaft übersteuern (siehe http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-globalsettings).
 
 ---
@@ -384,3 +393,11 @@ Einen Überblick erhält man über
 Features:
 
 * Monitoring/Health-Checks
+
+## Startup-Banner
+
+* http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-spring-application.html
+
+Beim Start der Applikation wird standardmäßig ein Banner angezeigt ... das ist konfigurierbar. Einfach eine ``banner.txt`` in den Classpath legen.
+
+Solche Banner macht niemand selber ... http://patorjk.com
