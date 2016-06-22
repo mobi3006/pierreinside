@@ -1,6 +1,8 @@
 # Maven
 
-REWORK NEEDED ...
+* Refcardz maven 2: https://dzone.com/refcardz/apache-maven-2
+
+**TODO ... REWORK NEEDED ...**
 
 * http://www.sonatype.com/books/maven-book/reference/
 

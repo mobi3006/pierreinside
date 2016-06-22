@@ -2,6 +2,7 @@
 Sehr gute Quellen:
 
 * SUPER: https://git-scm.com/book/de/v1
+* Refcardz: https://dzone.com/refcardz/getting-started-git
 * http://www.eecs.harvard.edu/~cduan/technical/git/
 * http://book.git-scm.com/
 * Ultra-Kurzeinführung: http://rogerdudler.github.io/git-guide/
