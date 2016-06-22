@@ -1,5 +1,8 @@
 # Spring Data
+* Refcardz: https://dzone.com/refcardz/core-spring-data
+
 Spring Data ermöglicht die Persistenz von POJOs in Repositories untschiedlicher Couleur:
+
 * relationale Datenbank: [Spring Data JPA](http://projects.spring.io/spring-data-jpa)
 * NoSQL Datzenbanken
   * [Elasticsearch](http://projects.spring.io/spring-data-elasticsearch)

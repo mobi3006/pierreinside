@@ -1,4 +1,5 @@
 # REST
+* Refcardz: https://dzone.com/refcardz/rest-foundations-restful
 * http://www.restapitutorial.com/resources.html
 * http://blog.philipphauer.de/restful-api-design-best-practices/
 * [HTTP 1.1 Protokoll - RFC-2068](https://tools.ietf.org/html/rfc2068)

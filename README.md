@@ -2,5 +2,9 @@
 Diese Seite pflege ich für mich selber ... ich habe viele Interessen und leider sehr wenig Zeit. Manchmal habe ich ein paar Tage und kann mich in ein neues Thema einarbeiten, aber dann mache ich wieder wochelang nichts. Um zu verhindern, daß ich dann immer wieder von vorne anfangen muß habe ich verschiedene Strategien entwickelt:
 
 * Dokumentation: diese Seite, die im Stile einer [Refcardz](https://dzone.com/refcardz) entworfen ist
-* Scripting: Scripting ist aus meiner Sicht lauffähige Dokumentation ... deshalb habe ich mich auch entschlossen, meine [Entwicklungsumgebung (= Workbench) mit Ansible zu scripten}(ubuntu).
+* Scripting: Scripting ist aus meiner Sicht lauffähige Dokumentation ... deshalb habe ich mich auch entschlossen, meine [Entwicklungsumgebung (= Workbench) mit Ansible zu scripten](ubuntu_1604_lts.md) und [Vagrant](vagrant) einzusetzen.
+
+Mittlerweile versuche ich auch, meine Artefakte in der Cloud bereitzustellen. Ich möchte meine Infrastruktur zuhause nicht freigeben, möchte aber dennoch von überall Zugriff auf meine Projekte haben. Außerdem lerne ich dadurch das Tooling der Cloud kennen ... als Softwareentwickler vielleicht nicht die schlechteste Idee. Natürlich gibt es auch ein paar nicht-öffentliche Artefakte, die ich zuhause auf meinem Synology hoste (z. B. Git-Repository).
+
+![Me, myself and I](images/pierre.jpg)
 

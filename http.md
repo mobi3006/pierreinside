@@ -1,4 +1,5 @@
 # Http
+* Refcardz: https://dzone.com/refcardz/http-hypertext-transfer-0
 
 # Inputdaten
 * https://stackoverflow.com/questions/14551194/how-are-parameters-sent-in-an-http-post-request
