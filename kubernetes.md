@@ -1,5 +1,7 @@
 # Kubernetes
 
+* Refcardz: https://dzone.com/refcardz/kubernetes-essentials
+
 Kubernetes ist ein Google-Projekt, mit dem sich Deployments auf Basis von Docker-Containern automatisieren, administrieren, skalieren läßt.
 
 # Google Cloud Engine
