@@ -202,7 +202,7 @@ Ich verwende eine Bridged-Netzwerkverbindung. Die Netzwerkverbindung muss stehen
 
 Über die Gnome-Oberfläche kann man das komfortabel über den Network-Manager durchführen. Sollte man einen spartanischeren Fenstermanager verwenden, der keine Mausbedienung ermöglicht, so geht das durch Starten des Tools ``nm-applet`` (oder auch ``nm-connection-editor``):
 
-![nm-applet](networkConnectionManager.jpg)
+![nm-applet](images/networkConnectionManager.jpg)
 
 Dieses Tool kann man aus anderen Fenstermanagern auch per Console starten. Mit der rechten Maustaste gelangt man in den Konfigurationsassistenten, mit der linken Maustaste baut man anschließend die VPN-Verbindung auf.
 
