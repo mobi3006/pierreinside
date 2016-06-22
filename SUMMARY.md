@@ -1,6 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
+   * [Spring Cloud Config](springCloudConfig.md)
 * [Workbench](workbench.md)
    * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
    * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)

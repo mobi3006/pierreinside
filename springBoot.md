@@ -45,14 +45,14 @@ gestartet werden.
 
 * Beispiel-Konfiguration
 
-## Build your application
+## Build der Applikation
 Das Kommando
     
     mvn package
 
 erzeugt ein **Fat-Jar** (compilierte Klassen des Projekts + abhängige Libs), das ohne weiteres startbar ist.
 
-## Start your application
+## Start der Applikation
 
 Der Start der Applikation erfolgt über 
 
@@ -63,6 +63,17 @@ oder (was hat welche Vorteile???)
     java -jar my-application.jar
 
 Voila ... sehr schlank. Wir sind nun innerhalb weniger Minuten zu einer komfortabel deploybaren Server-Applikation gekommen. Jetzt kanns losgehen mit der Implementierung der Business-Logik.
+
+## Eclipse-Integration der Applikation
+Über
+
+    mvn eclipse:eclipse
+
+werden die Eclipse Artefakte ``.project`` und ``.classpath`` erzeugt. Danach kann das Projekt in Eclipse importiert werden. 
+
+**ACHTUNG:** standardmäßig waren die Dateien ``application.properties`` und ``application.yml`` vom Build ausgeschlossen. Das sollte man ändern!!! Ansonsten  wandern diese Dateien (auch nach Änderungen) nie in den Runtime-Classpath der Applikation und somit funktioniert die Anwendung nicht richtig.
+
+> Wenn man zufällig ein Build über Maven angestoßen hatte, dann wurden im ``target/classes`` Verzeichnis diese Dateien abgelegt ... Eclipse hätte aber niemals ein Update darauf gemacht. Hmmmm, schon strange ... will mich da jemand zu IntelliJ treiben?
 
 ---
 
@@ -199,6 +210,14 @@ Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --de
 
 
 ## @Configuration
+Ganz ohne weiteres zutun unterstützt Spring bereits das Injecten von Property-Values in Beans per
+
+    @Value("${de.cachaca.cloud.})
+    private String cloudProvider;
+    
+Spring sucht in den Property-Dateien im Classpath nach entsprechenden Properties.
+
+Über ``@ConfigurationProperties`` lässt sich dieser Prozess noch ein bisschen komfortabler gestalten.
 
 ## @ConfigurationProperties
 Diese Annotation kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten der Anwendung abbildet.
@@ -368,10 +387,12 @@ Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application
 
 # Production-Ready Features
 
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints
+## Actuator
 
-Die production-ready Features werden über die Dependency
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready
+* [Endpunkte](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html)
+
+Die sog. Production-Ready Features werden über die Dependency
 
     <dependencies>
       <dependency>
@@ -380,11 +401,16 @@ Die production-ready Features werden über die Dependency
       </dependency>
     </dependencies>
 
-aktiviert. Dadurch werden einige REST-Endpunkte aktiviert (siehe http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints).
+aktiviert. Dadurch werden einige nützliche Webservice-[Endpunkte](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) exponiert.
 
-Einen Überblick erhält man über
+Optional kann der ``/docs`` Endpunkt (http://IP_ADDRESS:PORT/docs) aktiviet werden:
 
-    http://IP_ADDRESS:PORT/docs
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-actuator-docs</artifactId>
+      </dependency>
+    </dependencies>
 
 ## Custom application info
 
