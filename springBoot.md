@@ -1,6 +1,6 @@
 # Spring Boot
 
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/
+* [Offizielle Dokumentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
 
 ... vereinfacht die Entwicklung von Java-Server-Applikationen indem ein ausführbares jar-File erstellt wird, das sich selbst in der jeweiligen Umgebung deployed. Das jar enthält in diesem Fall ALLE notwendigen Third-Party-Bibliotheken und zudem noch die notwendige Laufzeitumgebung. Handelt es sich um eine Web-Applikation, so ist ein Servlet-Container (Tomcat, Jetty) eingebettet, in dem die Web-Applikation deployed wird. Eine Spring-Boot-Applikation kann dann ganz einfach per
 
@@ -11,13 +11,13 @@ gestartet werden.
 ---
 
 # Getting Started
-* https://www.youtube.com/watch?v=p8AdyMlpmPk
+* [YouTube Video](https://www.youtube.com/watch?v=p8AdyMlpmPk)
 
 Über Spring Initializr kann man sich sehr schnell ein Maven/Gradle Projekt mit verschiedenen Spring (Boot, Cloud, ...) und nicht-Spring Technologien (ElasticSearch, JavaMail, ...)  zusammenstellen lassen (letztlich geht es beispielsweise im die pom.xml und ein paar weitere Getting Started Ressourcen). Es werden auch verschiedene Sprachen unterstützt (2015: sind es Java und Groovy).
 
 ## Spring Initializr => erstellt Maven pom.xml
 
-* https://start.spring.io/
+* [Initializr Webapplikation](https://start.spring.io/)
 
 Über die Weboberfläche des Initializr wählt man sich Eckpunkte (Sprache, Buildsystem, Frameworks, Technologien) aus, auf denen die Applikation basieren soll. Am Ende bekommt man ein Zip zum Download, das folgendes enthält:
 
@@ -89,7 +89,7 @@ Andere Build-Tools (z. B. ant) können auch verwendet werden, doch wird es nicht
 
 ## Maven: Starter POMs
 
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter-poms 
+* [Offizielle Dokumentation ... Using Starter-POMs](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter-poms)
 
 Im Initializr generierten ``pom.xml`` wird man u. a. folgendes finden:
 
@@ -118,7 +118,7 @@ Per Default (d. h. wenn das Default Parent-Pom verwendet wird) werden zwei Typen
 
 ## Maven: Artefakt-Typ: jar vs. war
 
-* https://spring.io/guides/gs/convert-jar-to-war/
+* [How-To](https://spring.io/guides/gs/convert-jar-to-war/)
 
 Will man eine Spring-Boot Anwendung dennoch in einem externen Application-Server deployen, so benötigt man ein War-Artefakt. Für diesen Anwendungsfall verwendet man 
 
@@ -133,7 +133,7 @@ Hat man nun ein War-Artefakt erzeugt, so kann man aber dennoch den Executable-De
 
 ## Maven: Dependency Version ändern
 
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-customize-dependency-versions
+* [How-To customize Dependency Versions](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-customize-dependency-versions)
 
 Verwendet man das Spring-Dependency-Management (via ``spring-boot-dependencies``), so kann man folgendermaßen im ``pom.xml`` die Version einer Dependency ändern ... ohne Gewähr, daß dann noch alles funktioniert:
 
@@ -141,9 +141,8 @@ Verwendet man das Spring-Dependency-Management (via ``spring-boot-dependencies``
 
 ## Maven: Interessante Properties
 
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
 
 ---
 
@@ -426,4 +425,18 @@ Features:
 
 Beim Start der Applikation wird standardmäßig ein Banner angezeigt ... das ist konfigurierbar. Einfach eine ``banner.txt`` in den Classpath legen.
 
-Solche Banner macht niemand selber ... http://patorjk.com
+Solche Banner macht niemand selber ... http://patorjk.com/software/taag (die Fonts *Ogre*, *Doom*, *Standard*, *ANSI Shadow*, *CalvinS* sind meine Favoriten):
+
+            _                    
+      _ __ (_) ___ _ __ _ __ ___ 
+     | '_ \| |/ _ \ '__| '__/ _ \
+     | |_) | |  __/ |  | | |  __/
+     | .__/|_|\___|_|  |_|  \___|
+     |_|                         
+
+---
+
+# Fazit
+Spring zeigt mit seinen neuen Projekten (Boot, Config, ...), daß es sich innovativ weiterentwickelt und echte Mehrwerte für die Nutzer schafft. Der Einstieg in die Java-Welt wird generell (und insbesondere mit Blick auf Microservices) extrem vereinfacht.
+
+Spring trifft den Nerv der Zeit ... Hut ab :-)
