@@ -437,6 +437,8 @@ Solche Banner macht niemand selber ... http://patorjk.com/software/taag (die Fon
 ---
 
 # Fazit
-Spring zeigt mit seinen neuen Projekten (Boot, Config, ...), daß es sich innovativ weiterentwickelt und echte Mehrwerte für die Nutzer schafft. Der Einstieg in die Java-Welt wird generell (und insbesondere mit Blick auf Microservices) extrem vereinfacht.
+Spring zeigt mit seinen neuen Projekten (Boot, Config, ...), daß es sich innovativ weiterentwickelt und echte Mehrwerte für die Nutzer schafft. Der Einstieg in die Java-Welt wird generell (und insbesondere mit Blick auf Microservices) extrem vereinfacht. Verteilte Systeme - wie ich sie bisher aus meinem Studium kannte - sind nun auch für Startups in greifbare Nähe gerückt. Und dazu muß man nicht 3 Monate auf Schulung gehen ...
+
+Seit 2010 hat sich in den Bereichen Microservices, Cloud-Deployment, DevOps, Continous Delivery so viel getan, daß die Softwareentwicklung auf einem neuen Level angekommen ist. 
 
 Spring trifft den Nerv der Zeit ... Hut ab :-)

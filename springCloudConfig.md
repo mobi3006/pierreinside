@@ -3,7 +3,9 @@
 
 Spring Boot bietet bereits eine komfortable Möglichzeit, die Konfiguration der Anwendung über Property-Files (oder Yaml-Files) zu steuern - [siehe ``@Value`` und ``@ConfigurationProperties``](springBoot.md). Allerdings ist diese Konfiguration nach dem Start der Anwendnung nicht mehr änderbar (ohne die Anwendnung zu restarten). In einer Zeit, in der Anwendungen automatische skalieren und Failover mitbringen, ist das zu kurz gegriffen. 
 
-Spring Cloud Config setzt auf Spring Boot auf (vermutlich geht es auch in Nicht-Spring-Boot-Applikationen).
+Spring Cloud Config soll diese Lücke schließen.
+
+> Spring Cloud Config auf Spring Boot auf (vermutlich geht es auch in Nicht-Spring-Boot-Applikationen).
 
 ---
 
