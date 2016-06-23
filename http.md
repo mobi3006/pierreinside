@@ -77,12 +77,19 @@ Caching spielt in diesem Zusammenhang eine wichtige Rolle.
 
 ---
 
+# Latenz
+Die Latenz spielt zwar für einen einzigen Request keine besonders große Rolle ... wenn aber für eine einzige HTML-Seite hunderte von Requests gefahren werden, kann es zum Problem werden ... 
+
+Die Signallaufzeit wird u. a. durch die Entfernung von Client und Server bestimmt - auch wenn die Signale in Lichtgeschwindigkeit (Glasfaserkabel) über die Leitung rauschen kann das es schon ein paar Millisekunden ausmachen ob der Server in Eppelheim oder in Neuseeland steht.
+
 ## Caching
 * Google Developers: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=de
 
 Viele der Ressourcen einer HTML-Seite sind relativ statisch, d. h. sie ändern sich nicht so häufig und könnten gecached werden (Browser, Proxy-Server, ...). Aus diesem Grund gibt es in HTTP-Response-Headern eine Vielzahl von Informationen, die das Caching ermöglichen sollen. Natürlich ist es am besten, wenn der Server (als Bereitsteller dieser Ressourcen) entscheidet wie lange eine Ressource gechaed werden kann. Das macht Sinn, weil er - in jedem Fall besser weiß als der Client - wie häufig sich die Ressource ändern wird.
 
-Hier ein paar wichtige HTTP-Response-Header:
+Die Anforderungen in Richtung Caching hat sich durch die Verwendung mobiler Endgeräte, gestiegenen Anforderungen hinsichtlich Skalierbarkeit, Offline-Fähigkeit, ... deutlich erhöht. 
+
+Ein paar wichtige HTTP-Response-Header:
 
 * Cache-Control
   * ``max-age``: wie lange darf die Ressource gecached werden?
@@ -91,10 +98,13 @@ Hier ein paar wichtige HTTP-Response-Header:
 * ETag - Fingerprint der Ressource (aka Validierungstoken) ... dadurch kann zumindest das Senden der Ressource durch den Server unterbunden werden - wenn sich die Ressource nicht geändert hat, macht es ja keinen Sinn. Der Server würde in diesem Fall mit dem Status Code ``304 Not Modified`` antworten.
   * ACHTUNG: der ETag optimiert nur die Größe der Antwort - Caching hingegen verhindert, daß überhaupt ein Request zum Server geschickt wird (und dort evtl. hohe Last erzeugt)
 
-## Cache-Annulierung
+### Cache-Annulierung
 Was tun wir, wenn der Server eine neue Version einer Ressource (z. B. CSS-Datei) hat, die ``max-age`` aber noch nicht bei allen Clients abgelaufen ist. Der Server hat keinen Zugriff auf den Cache der Client ... die Clients könnte evtl. nicht mal erreichbar sein (Rechner runtergefahren, Firewall, ...).
 
 Hierzu bedient man sich des Ansatze *Früher-an-später-denken* ... es werden immer Versionsnummern oder Fingerprints (z. B. ETag) in den Ressourcennamen integriert (z. B. ``style.5213tzf.css``). Auf diese Weise kann ein Reload der neuen Ressource bei Bedarf erzwungen werden. Bei einer Änderung bekommt die Ressource einen neuen Namen und muß dann vom Client runtergeladen werden. Man muß hier "nur" sicherstellen, daß die referenzierende Ressource (z. B. die HTML-Seite) nicht unkontrollierbar gecached wird (``no-cache`` oder ETag) ... bei dynamischen Ressourcen (z. B. JSF-generierte HTML-Seiten) ist das aber natürlich das Standardvorgehen.
+
+## CDN - Content Delivery Network
+Hierdurch soll die Signallaufzeit durch Erhöhung der  Geografische Nähe reduziert werden. 
 
 ---
 
@@ -108,7 +118,7 @@ Hierzu bedient man sich des Ansatze *Früher-an-später-denken* ... es werden im
 ---
 
 # HTTP/2
-Webapplikationen sind im Jahre 2015 die Standardtechnologie für Software. Der alte HTTP 1.1 Standard wurde den Anforderungen insbes. hinsichtlich Performance nicht mehr gerecht. Die [Latenz](https://en.wikipedia.org/wiki/Latency_(engineering) ist hier ein wichtiger Faktor, der die Responsiveness einer Seite deutlich einschränken kann. Die Latenz spielt zwar für einen einzigen Request keine besonders große Rolle ... wenn aber für eine einzige HTML-Seite hunderte von Requests gefahren werden, kann es zum Problem werden ...  
+Webapplikationen sind im Jahre 2015 die Standardtechnologie für Software. Der alte HTTP 1.1 Standard wurde den Anforderungen insbes. hinsichtlich Performance nicht mehr gerecht. Die [Latenz](https://en.wikipedia.org/wiki/Latency_(engineering) ist hier ein wichtiger Faktor, der die Responsiveness einer Seite deutlich einschränken kann.  
 
 Google war mit seinem SPDY (aka Speedy) Protokoll Vorreiter in der Implementierung von HTTP/2-Ideen.
 
@@ -126,3 +136,11 @@ Aufgrund der Vielzahl unterschiedlicher Informationstypen (CSS, JavaScript, Bild
 
 ## Server-Push für Ressourcen
 Ein Server kennt die Anwendung, die bereitgestellt wird, und kennt somit auch die Menge der Ressourcen, die der Client benötigen wird. Aus diesem Grund kann die Latenz (wie lange dauert es bis der Benutzer die Seite nutzen kann) reduziert werden, indem der der Server die notwendigen Ressourcen pusht.
+
+---
+
+# Server-Push-Technologien
+Das typische Request-Response-Verfahren (Pull-Verfahren) bei HTTP wird den hetigen Anforderungen an Responsiveness nicht mehr gerecht. Statdessen benötigen wir ein Push-Verfahren wie es auch im Mode-View-Controller-Pattern vorgeschlagen wird. Der Server weiß wann sich neue Informationen für einen/mehrere Clients ergeben haben und liefert die Informationen gezielt weiter. Das erhöht sicherlich den serverseitigen Aufwand (auch den Entwicklungsaufwand), aber der Server wird auch andererseits in manchen Use-Cases (z. B. Chat-Webapplikation) entlastet, weil er keine nutzlosen Pull-Anfragen beantworten muß.
+
+## WebSockets
+... bieten die Möglichkeit zur Umsetzung von Server-Push
