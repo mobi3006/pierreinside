@@ -104,7 +104,12 @@ Was tun wir, wenn der Server eine neue Version einer Ressource (z. B. CSS-Datei)
 Hierzu bedient man sich des Ansatze *Früher-an-später-denken* ... es werden immer Versionsnummern oder Fingerprints (z. B. ETag) in den Ressourcennamen integriert (z. B. ``style.5213tzf.css``). Auf diese Weise kann ein Reload der neuen Ressource bei Bedarf erzwungen werden. Bei einer Änderung bekommt die Ressource einen neuen Namen und muß dann vom Client runtergeladen werden. Man muß hier "nur" sicherstellen, daß die referenzierende Ressource (z. B. die HTML-Seite) nicht unkontrollierbar gecached wird (``no-cache`` oder ETag) ... bei dynamischen Ressourcen (z. B. JSF-generierte HTML-Seiten) ist das aber natürlich das Standardvorgehen.
 
 ## CDN - Content Delivery Network
-Hierdurch soll die Signallaufzeit durch Erhöhung der  Geografische Nähe reduziert werden. 
+Hierdurch soll die Signallaufzeit durch Erhöhung der  Geografische Nähe reduziert werden.
+
+> "Die Auslieferung von statischen Assets via CDN ist der klassische Anwendnungsfall. Der initiale Request wird vom Origin beantwortet, die restlichen Requests für JavaScript, Bilder und CSS kommen vom CDN." ([javamagazin 5/2016](https://jaxenter.de/ausgaben/java-magazin-5-16), "Teil 10: Latenz - Loading ...")
+
+### Option 1: URL-Rewriting
+Der Origin entscheidet aufgrund der geografischen Informationen (z. B. über IP-Adresse) im Request, welcher CDN-Knoten der beste ist und paßt die URLs der verlinkten Ressourcen entsprechend an, so daß diese vom nächstgelegenen Knoten nachgeladen werden.
 
 ---
 
