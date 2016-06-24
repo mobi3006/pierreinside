@@ -264,6 +264,23 @@ A JRebel application needs some more heap space ... otherwise you will have some
 ## JRebel - only for web-applications?
 JRebel is not restricted to web-applications. You can configure the JRebel-Java-Agent within any Java application.
 
+## Very Low Level
+
+Statement 1:
+> "JRebel is a JVM plugin (-javaagent) that integrates with the JVM and rewrites each class to be updateable. JRebel versions each class individually, instead of an entire application or module at a time – and it does not use classloaders. With JRebel, changes to classes are always visible with the Reflection API." (http://files.zeroturnaround.com/pdf/JRebelWhitePaper2014.pdf)
+
+Statement 2:
+> "JRebel integrates directly with application servers and frameworks to propagate configuration changes from the changed classes and resources, and annotation changes are also visible via Reflection API. JRebel comes with special integrations for over 80 of the most popular frameworks and technologies (Spring, Hibernate, Seam, Wicket and Struts just to name a few)." (http://files.zeroturnaround.com/pdf/JRebelWhitePaper2014.pdf)
+
+Statement 3:
+> "And for developers who run their application server on a virtual machine or other remote system, JRebel has a special feature called JRebel Remoting that eliminates the need to transfer the application manually. JRebel Remoting simply transfers the changed files only and then performs the reloading on remote server as expected." (http://files.zeroturnaround.com/pdf/JRebelWhitePaper2014.pdf)
+
+You can see that in your rebellized deployed application there are some JRebel-Threads:
+![JRebel Threads](images/jrebel_threadsAtRuntime.jpg)
+
+When you debug you can see that JRebel is there ... the Java-Classes are instrumented:
+
+
 ---
 
 # Supported Frameworks 
@@ -275,6 +292,10 @@ JRebel not only supports hot-swapping for Java classes but also refactorings/ext
 ---
 
 # JRebel-Remote
+* http://manuals.zeroturnaround.com/jrebel/remoting/index.html
+* [Eclipse-Plugin](http://manuals.zeroturnaround.com/jrebel/remoteserver/eclipse.html)
+* [IntelliJ-Plugin](http://manuals.zeroturnaround.com/jrebel/remoteserver/intellij.html)
+
 JRebel not only supports IDE and application server running on the same machine. The IDE-JRebel-Plugin also supports remote deployments.
 
 In this scenario the IDE-Plugin is responsible to transfer the changed artifacts to your deplyoment-machine. The application server on that deployment-machine is configured to have a back-reference to the transfer folder to reload updated resources.
@@ -294,11 +315,10 @@ Sorry, but I have never used it personally ...
 # Conclusion
 JRebel is really worth the money if a warm-restart approach ([like Spring-Boot supports](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-restart)) is not good enough.
 
-It takes only some minutes to make it running. It works without any requirements to your IDE ... therefore it works with EVERY IDE (you do not need the provided plugins).
-
-Even if you are a test-driven developer it makes sense to use JRebel
-
-* to identify the broken code - you often have an idea where the code is broken and use JRebel to check your assumption
-* to do rapid prototyping
-
+* it takes only some minutes to make it running
+* it works without any requirements to your IDE ... therefore it works with EVERY IDE (you do not need the provided plugins).
+* even if you are a test-driven developer it makes sense to use JRebel
+  * to identify the broken code - you often have an idea where the code is broken and use JRebel to check your assumption
+  * to do rapid prototyping
+* Support is excellent (in 2014)
 
