@@ -279,7 +279,7 @@ You can see that in your rebellized deployed application there are some JRebel-T
 ![JRebel Threads](images/jrebel_threadsAtRuntime.jpg)
 
 When you debug you can see that JRebel is there ... the Java-Classes are instrumented:
-
+![JRebel Threads](images/jrebel_debugging.jpg)
 
 ---
 
