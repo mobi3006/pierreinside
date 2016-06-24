@@ -103,34 +103,38 @@ THEREFORE: I recommend to only include the Eclipse target build folder (bin/clas
 
 ... by adding ``jrebel-maven-plugin`` to ``mymodule/pom.xml``:
 
-    <plugin>
-      <groupId>org.zeroturnaround</groupId>
-      <artifactId>jrebel-maven-plugin</artifactId>
-      <version>1.1.5</version>
-      <executions>
-        <execution>
-          <id>generate-rebel-xml</id>
-          <phase>process-resources</phase>
-          <goals>
-            <goal>generate</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>        
+```xml
+<plugin>
+  <groupId>org.zeroturnaround</groupId>
+  <artifactId>jrebel-maven-plugin</artifactId>
+  <version>1.1.5</version>
+  <executions>
+    <execution>
+      <id>generate-rebel-xml</id>
+      <phase>process-resources</phase>
+      <goals>
+        <goal>generate</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>        
+```
 
 Afterwards you have to run ``mvn clean install`` to generate the ``target/classes/rebel.xml``. It will look like this:
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <application
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://www.zeroturnaround.com"
-        xsi:schemaLocation=
-          "http://www.zeroturnaround.com 
-          http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
-            <classpath>
-                    <dir name="/home/pfh/src/myapp/modules/mymodule/bin/classes"/>
-            </classpath>
-    </application>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<application
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.zeroturnaround.com"
+    xsi:schemaLocation=
+      "http://www.zeroturnaround.com 
+      http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
+        <classpath>
+                <dir name="/home/pfh/src/myapp/modules/mymodule/bin/classes"/>
+        </classpath>
+</application>
+```
 
 The ``rebel.xml`` will also be part of the module artifact ``mymodule.jar``.
 
@@ -157,12 +161,24 @@ Here you can
   * usually I rebellize ALL modules and use ``rebel.packages`` to select only some
 * configure license (``rebel.license``)
 * configure logging (``rebel.log``)
+* exclude/inlcude classes/packages
+
+> If you had such classes:
+* first.Alpha
+* first.foo.Bravo
+* second.Charlie
+* third.Delta
+> 
+> and you added -Drebel.packages=first.foo,second -Drebel.packages_exclude=first
+ then JRebel would not reload Alpha and Bravo, because they're included
+in the exclude, and Delta, because it's not included in any of the
+rebel.packages. However it'd reload Charlie.
 
 ## Tanuki Wrapper
 If you use this one you have to configure the JRebel-Java-Agent within your ``wrapper.conf``:
 
-wrapper.java.additional.13=-javaagent:/home/pfh/programs/jrebel/jrebel.jar
-wrapper.java.additional.14=-Drebel.log=true
+    wrapper.java.additional.13=-javaagent:/home/pfh/programs/jrebel/jrebel.jar
+    wrapper.java.additional.14=-Drebel.log=true
 
 ## rebel.xml
 Every Artifact (jar, war, ear) under Rebel-Control needs a ``rebel.xml`` that contains the back-reference to the code (which is under User-IDE-Control).
@@ -173,7 +189,74 @@ Usually your developers have different filesystem structures (maybe even differe
       -javaagent:"C:\jrebel\jrebel.jar" 
       -DsourceFolder=c:/src/myapp"
       
-Within the user-unspecific ``rebel.xml`` you configure 
+Within the user-unspecific and usually generated ``rebel.xml`` you use the System-Property ``sourceFolder`` in a way like this (see element ``rootPath``):
+
+```xml
+<build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+              <groupId>org.zeroturnaround</groupId>
+              <artifactId>jrebel-maven-plugin</artifactId>
+              <version>1.1.5</version>
+              <configuration>
+                    <packaging>jar</packaging>
+                    <relativePath>../../</relativePath>
+                    <rootPath>$${sourceFolder}</rootPath>
+                    <generateDefaultElements>false</generateDefaultElements>
+                    <classpath>
+                            <fallback>default</fallback>
+                            <resources>
+                                <resource>
+                                    <directory>bin/classes</directory>
+                                    <excludes>
+                                        <exclude>**/*.properties</exclude>
+                                        <exclude>**/*.xml</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                    </classpath>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>generate-rebel-xml</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                    <goal>generate</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>       
+        </plugins>
+    </pluginManagement>
+    <plugins>
+        <plugin>
+            <groupId>org.zeroturnaround</groupId>
+            <artifactId>jrebel-maven-plugin</artifactId>
+        </plugin>       
+    </plugins>
+</build>
+```
+
+The ``relativePath`` should reference to the folder reletive to this module ... this is hard to understand. Above configuration would fit for this filesystem structure
+
+    c:/src/myapp/             <--- value of system property "sourceFolder"
+      modules/
+        mymodule/
+          pom.xml             <--- content see above
+          target/
+            classes/
+              rebel.xml       <--- content see below
+              
+This will result in a generated ``rebel.xml`` like this:
+
+```xml
+<application>
+	<classpath fallback="default">
+		<dir name="${sourceFolder}/modules/mymodule/bin/classes"/>
+	</classpath>
+</application>
+```
 
 ## JRebel Heap Space
 A JRebel application needs some more heap space ... otherwise you will have some performance issues because of garbage collector running continuously
@@ -188,4 +271,34 @@ JRebel is not restricted to web-applications. You can configure the JRebel-Java-
 JRebel not only supports hot-swapping for Java classes but also refactorings/extensions on framework-specific artifacts (spring application contexts, Hibernate mappings, Cxf, ...):
 
 * http://manuals.zeroturnaround.com/jrebel/misc/integrations.html
+
+---
+
+# JRebel-Remote
+JRebel not only supports IDE and application server running on the same machine. The IDE-JRebel-Plugin also supports remote deployments.
+
+In this scenario the IDE-Plugin is responsible to transfer the changed artifacts to your deplyoment-machine. The application server on that deployment-machine is configured to have a back-reference to the transfer folder to reload updated resources.
+
+Sorry, but I have never used it personally ...
+
+---
+
+# Performance
+* the application is slightly slower than without JRebel ... but in developer environments this does not really matter.
+* application startup increases by 10-30% (but you will have to restart less often)
+* JSF-xhtml reload is in realtime
+* Java-Code changes are visible within 2-15 seconds
+
+---
+
+# Conclusion
+JRebel is really worth the money if a warm-restart approach ([like Spring-Boot supports](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-restart)) is not good enough.
+
+It takes only some minutes to make it running. It works without any requirements to your IDE ... therefore it works with EVERY IDE (you do not need the provided plugins).
+
+Even if you are a test-driven developer it makes sense to use JRebel
+
+* to identify the broken code - you often have an idea where the code is broken and use JRebel to check your assumption
+* to do rapid prototyping
+
 
