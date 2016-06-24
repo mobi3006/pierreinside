@@ -19,7 +19,9 @@ JRebel supports real Hot-Swapping of a wide range of refactorings
 
 It supports also a wide range of frameworks ... a lot of framework-specific refactorings (e. g. changing the spring context) are possible without restarting the application.
 
-Have a look at the [white paper](http://files.zeroturnaround.com/pdf/JRebelWhitePaper2014.pdf) and the following video (https://vimeo.com/112443042):
+Have a look at the [white paper](http://files.zeroturnaround.com/pdf/JRebelWhitePaper2014.pdf), video 1 and video 2
+
+Video 1: (https://vimeo.com/112443042)
 
   <a href="https://vimeo.com/112443042" target="_blank">
     <img 
@@ -28,8 +30,16 @@ Have a look at the [white paper](http://files.zeroturnaround.com/pdf/JRebelWhite
       width="240" height="130" border="73" />
   </a>
 
-This is my own experience:
+Video 2: (https://www.youtube.com/watch?v=4JGGFCzspaY)
 
+  <a href="https://www.youtube.com/watch?v=4JGGFCzspaY" target="_blank">
+    <img 
+      src="https://i.ytimg.com/vi/4JGGFCzspaY/hqdefault.jpg?custom=true&w=196&h=110&stc=true&jpg444=true&jpgq=90&sp=68&sigh=hsQwzXWFra8SFJQHizIvWoa_V-A"
+      alt="JRebel in 120 seconds" 
+      width="240" height="130" border="73" />
+  </a>
+
+This is my own experience:
 ![JRebel Benefit](images/jrebel_benefit.png)
 
 ---
@@ -326,3 +336,4 @@ JRebel is really worth the money if a warm-restart approach ([like Spring-Boot s
   * to do rapid prototyping
 * Support is excellent (in 2014)
 
+Well done, Zeroturnaround :-)
