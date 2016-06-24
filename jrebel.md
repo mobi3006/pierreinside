@@ -28,6 +28,10 @@ Have a look at the [white paper](http://files.zeroturnaround.com/pdf/JRebelWhite
       width="240" height="130" border="73" />
   </a>
 
+This is my own experience:
+
+![JRebel Benefit](images/jrebel_benefit.png)
+
 ---
 
 # Conservative Approaches
