@@ -1,11 +1,7 @@
 # JRebel
-Deploying code changes (Java-Classes, JSF-Resources, Spring-Context-Changes, ...) to the server is done by:
+Deploying code changes (Java-Classes, JSF-Resources, Spring-Context-Changes, ...) to the server is usually done this way:
 
-    change resource in Eclipse
-    mvn clean install
-    copy artifacts to tomcat
-    tomcat stops (automatically)
-    tomcat starts (automatically)
+![JRebel Benefit](images/jrebel_benefit.png)
 
 This process takes - depending on the size of your application - some minutes ... several times a day.
 
@@ -38,9 +34,6 @@ Video 2: (https://www.youtube.com/watch?v=4JGGFCzspaY)
       alt="JRebel in 120 seconds" 
       width="240" height="130" border="73" />
   </a>
-
-This is my own experience:
-![JRebel Benefit](images/jrebel_benefit.png)
 
 ---
 
