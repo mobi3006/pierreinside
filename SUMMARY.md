@@ -1,11 +1,11 @@
 # Summary
 
 * [Introduction](README.md)
-   * [Spring Cloud Config](springCloudConfig.md)
 * [Workbench](workbench.md)
    * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
    * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
    * [zsh](zsh.md)
+   * [JRebel](jrebel.md)
 * [Architektur](architecture.md)
    * [Microservices](microservices.md)
    * [NoSQL](nosql.md)
@@ -21,6 +21,7 @@
 * Spring Ecosystem
    * [Spring Boot](springBoot.md)
    * [Spring Cloud](springCloud.md)
+   * [Spring Cloud Config](springCloudConfig.md)
    * [Spring Data](springData.md)
 * Testen
    * [Easymock](easymock.md)
@@ -48,5 +49,3 @@
    * [iPad Pro](ipadPro.md)
    * [Auto](auto.md)
 * [Englisch](englisch.md)
-* [JRebel](jrebel.md)
-
