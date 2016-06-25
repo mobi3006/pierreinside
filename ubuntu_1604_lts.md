@@ -106,11 +106,10 @@ Danach muß ansible noch konfiguriert werden (ssh-keys, ssh-agent, ``~/.ssh/auth
 * zsh und oh-my-zsh
   * mit der ``~/.zshrc`` von GRML
 * Oracle-Java-Installation
-  * https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get
-
-
-
-
+  * http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
+  * es gibt kein offizielles Ubuntu-Paket des Oracle-Java. Stattdessen habe ich mich entschieden ein **P**ersonal**P**ackage**A**rchive zu verwenden, weil das - gegenüber der Installation eines Tar-Balls - den Vorteil vom Idempotenz bei Verwendung von Ansible und automatischer Updates hat. Der PPA-Anbieter ist Launchpad hinter dem die Firma Canonical steht. Außerdem komme ich so um die leidige Alternatives Konfiguration rum. 
+  * das PPA ``ppa:webupd8team/java`` umfaßt nur einen interaktiven Installer, der das Original Oracle JDK als tar.gz vom Oracle-Server runterlädt und installiert. Es es somit auch möglich, das tar.gz selbst vom Oracle-Server zu laden und lokal unter ``/var/cache/oracle-jdk8-installer`` abzulegen ... dann wird es nicht mehr innerhalb des Installers vom Server runtergeladen. Es ist aus lizenzrechtlichen Gründen nicht erlaubt, ein Paket anzubieten, das das JDK bereits enthält!!! 
+  * dieser Installer kann auch Java 7 installieren ... nach der Installation läßt sich per ``sudo update-java-alternatives -s java-8-oracle`` bzw. ``sudo update-java-alternatives -s java-7-oracle`` zwischen den beiden Versionen umschalten.
 
 ## Eclipse IDE Spring Source Tool Suite (STS)
 
