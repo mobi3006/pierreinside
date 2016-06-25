@@ -49,3 +49,5 @@
    * [iPad Pro](ipadPro.md)
    * [Auto](auto.md)
 * [Englisch](englisch.md)
+* [Linux-Paketverwaltung](linuxPaketverwaltung.md)
+

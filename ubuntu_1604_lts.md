@@ -98,66 +98,19 @@ Ich werde die Installation und Konfiguration dieses Images zumindest teilweise s
     apt-get install ansible
     
 Danach muß ansible noch konfiguriert werden (ssh-keys, ssh-agent, ``~/.ssh/authorized_keys``) ... siehe [Ansible](ansible.md#).
+
+## Weitere Installationen über Ansible
     
-## Ansible: midnight-commander
-``playbook.yml``:
-
-    ---
-    - hosts: localhost
-      remote_user: root
-      tasks:
-      - name: install midnight commander
-        package: name=mc state=latest
-
-## Ansible: awesome Fenstermanager
-
-``playbook.yml``:
-
-    ---
-    - hosts: localhost
-      remote_user: root
-      tasks:
-      - name: install awesome window manager - CORE
-        package: name=awesome state=latest
-        remote_user: root
-      - name: install awesome window manager - EXTRA
-        package: name=awesome-extra state=latest
-
-Danach ausloggen und beim Login-Screen awesome als Fenstermanager auswählen. Viel  Freude am schlanken awesome :-)
-
-## zsh und oh-my-zsh
+* midnight-commander
+* awesome Fenstermanager
+* zsh und oh-my-zsh
+  * mit der ``~/.zshrc`` von GRML
+* Oracle-Java-Installation
+  * https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get
 
 
-## Oracle-Java-Installation
 
-* http://www.linux-community.de/Archiv/Tipp-der-Woche/Oracle-Java-unter-Ubuntu-Debian-und-LinuxMint-installieren
 
-Für die Software, die wir erstellen verwenden wir ein Oracle JDK 1.7 - ich kann also nicht das vorhandene OpenJDK von Ubuntu verwenden.
-
-Unter Suse hab ich mehrere Java-Versionen per Hand (symbolische Links auf die executables wie java, javac, jvisualvm, ...) folgendermassen abgebildet: mich immer um die Verwendung des Alternatives-Feature gedrückt und stattdessen angelegt. Das sah dann so aus:
-
-    /usr/local/bin/java -> /opt/jdk/bin/java
-    /usr/local/bin/javac -> /opt/jdk/bin/javac
-    /usr/local/bin/jvisualvm -> /opt/jdk/bin/jvisualvm
-       
-    /opt/jdk -> jdk1.7.0_55
-    /opt/jdk1.7.0_55/ ...
-    /opt/jdk1.8/ ...
-
-durch Umbiegen eines einzigen symbolischen Links (``/opt/jdk``) alle Tools umstellen und musste dann nur noch die JAVA_HOME-Variable anpassen.
-
-Dennoch fühlte sich das irgendwie konzeptuell falsch an ... zumal das Standard-JDK irgendwie mit einer Alternatives-Konfiguration (http://wiki.ubuntuusers.de/Alternativen-System) daherkam. Wenn ich jetzt das System eh mal neu aufbaue habe ich mir das Alternatives-Feature mal angeschaut.
-
-Hier ist das recht gut erklärt: http://www.linux-community.de/Archiv/Tipp-der-Woche/Oracle-Java-unter-Ubuntu-Debian-und-LinuxMint-installieren
-
-Letztlich macht das was ganz ähnliches wie ich per Hand ... es werden Links in ``/etc/alternatives/`` angelegt. Wenn ich nun alle JDK-Tools auf ``/opt/jdk`` zeigen lasse
-
-    update-alternatives --install "/usr/bin/java" "java" "/opt/jdk/bin/java" 1
-    update-alternatives --set "java" "/opt/jdk/bin/java"
-
-dann habe ich genau das erreicht, was auch meine manuellen Lösung hatte ... ich kann mit Umbiegen des Links ``/opt/jdk`` alle Tools auf einmal umbiegen. Irgendwie kein Gewinn und kein Verlust - eben nur ein bissl anders. Vielleicht ein bisschen standardkonformer (und damit besser integriert???).
-
-Ich machs so wie bisher ... vielleicht erkenne ich irgendwann die Vorteile.
 
 ## Eclipse IDE Spring Source Tool Suite (STS)
 

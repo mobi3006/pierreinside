@@ -91,7 +91,7 @@ THEREFORE: I recommend to only include the Eclipse target build folder (bin/clas
 
 ... with one module - in 15 minutes ..
 
-**Step 0: prepare JRebel**
+## Step 0: prepare JRebel
 
 * download and unzip software package (e. g. to ``~/programs/jrebel`` - aka JREBEL_HOME): https://zeroturnaround.com/software/jrebel/download/
 * download license file (e. g. put it into ~/.jrebel/ directory)
@@ -99,14 +99,14 @@ THEREFORE: I recommend to only include the Eclipse target build folder (bin/clas
   * ``$JREBEL_HOME/bin/activate.sh $PATH_TO_LICENSE_FILE`` e. g. ``~/programs/jrebel/bin/activate.sh ~/.jrebel/jrebel.lic``
     * KEEP IN MIND: there is also an Actiivation-UI (if you do not like CLI)
 
-**Step 1: prepare Tomcat**
+## Step 1: prepare Tomcat
 * JRebel provides an interactive script that adapts the tomcat startup scripts:
   * ``$JREBEL_HOME/bin/setup.sh -r $TOMCAT_HOME``  
     * e. g.: ``$JREBEL_HOME//bin/setup.sh -r ~/programs/apache-tomcat-7.0.42``
     * ATTENTION: I had to adapt the created startup script startup-jrebel.sh slightly because the existing startup.sh needs to be called within (instead of catalina.sh)
     * background information: the script is nothing more than adding the JRebel-Java-Agent (``-javaagent:/path/to/jrebel.jar``) to the Tomcat (see http://manuals.zeroturnaround.com/jrebel/standalone/launch-quick-start.html)
 
-**Step 2: prepare module ``mymodule``**
+## Step 2: prepare module ``mymodule``
 
 ... by adding ``jrebel-maven-plugin`` to ``mymodule/pom.xml``:
 
@@ -145,12 +145,12 @@ Afterwards you have to run ``mvn clean install`` to generate the ``target/classe
 
 The ``rebel.xml`` will also be part of the module artifact ``mymodule.jar``.
 
-**Step 3:** deploy ``mymodule.jar``
+## Step 3: deploy ``mymodule.jar``
 * copy mymodule.jar to your Tomcat-deployment
 * start the Tomcat with ``startup-jrebel.sh``
   * within the startup log you should see some JRebel Success messages
 
-**Step 4:** test it
+## Step 4: test it
 * change ``MyClass.java`` if the module ``mymodule`` within your IDE
 * build the corresponding ``MyClass.class`` by your IDE (in Eclipse usually done automatically - output folder is ``bin/classes``)
 * test your change in the running application

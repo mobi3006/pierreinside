@@ -5,7 +5,7 @@ Derzeit habe ich noch nicht die Notwendigkeit für diese unglaubliche Performanc
 
 DESHALB: nutze das, was Deine Problem JETZT auch löst ... und denke nicht darüber nach, welche Probleme du vielleicht irgendwann mal lösen willst.
 
-**MEINE ENTSCHEIDUNG: Ansible**
+**MEINE ENTSCHEIDUNG:** [Ansible](ansible.md)
 
 
 

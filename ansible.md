@@ -1,15 +1,23 @@
 # Ansible
 
+Ansible wird zum automatisierten Provisioning von Systemen eingesetzt.
+
 In einem Multimachine-Vagrant-Projekt, das aus 5 verschiedenen Images bestand und dessen Provisioning eine knappe Stunde dauerte, haben wir Shellscripting zum Provisioning eingesetzt. Das hatte einige Vorteile, **aber auch einen ganz entscheidenden Nachteil**: Fehlende Idempotenz.
 
 Bricht das Shellscript nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeutet das nach Beheben des Fehlers oftmals (wenn man nicht mehrere Minuten in das manuelle Anpassen der Scripte investieren will), daß das Image komplett platt gemacht und neu aufgebaut wird ... also wieder 20 Minuten warten bis man überhaupt wieder so weit ist wie man schon mal war.
 
 ---
 
-# Getting Started - Linux-User
+# Getting Started ...
 
 * http://docs.ansible.com/ansible/index.html
 
+## Nur Linux - kein Windows
+Windows-User müssen leider draußen bleiben. Es ist weder möglich ein Windows-System mit Ansible aufzusetzen noch einen Windows-Rechner als Controller zu verwenden.
+
+**Ansible wird für Windows nicht unterstützt.**
+
+## Controller-Konzept
 Ansible kennt das Controller-System und die Zielsysteme. Auf dem Controller-System muß  Ansible installiert werden ... auf den zu verwaltenden Systemen genügt ein SSH-Server und Python.
 
 ## Installation auf dem Controller-System
@@ -76,7 +84,7 @@ Die Skipte heißen bei Ansible Playbook. Das folgende Ansible-Playbook (``myplay
     remote_user: root
 ```
 
-wird per ``ansible-playbook myplaybook.yml`` ausgeführt und installiert das Paket *Midnight Commander*.
+wird per ``ansible-playbook myplaybook.yml`` ausgeführt und installiert das Paket *Midnight Commander*. Wenn es nicht funktionieren sollte, die Option ``-vvv`` bzw. ``-vvvv`` macht Ansible ein wenig geschwätziger.
 
 ## SSH-Agent starten und konfigurieren
 Der Private-Key ist durch eine Passphrase geschützt. Da Ansible-Playbooks aber i. d. R. vollautomatisiert im Hintergrund laufen und somit nicht ständig um die Eingabe dieser Passphrase betteln wollen, starten wir einen ssh-agent ...
@@ -89,22 +97,55 @@ und geben ihm die Passphrase (wird im Speicher gehalten und nicht persistiert)
 
 ---
 
-# Getting Started - Windows-User
 
-**YOU LOST** ... Ansible wird für Windows nicht unterstützt, d. h. eine Windows-Maschine kann nicht als Ansible-Controller agieren. Evtl. ist die Vagrant-Ansible-Integration vielleicht eine Alternative. 
+# Ansible Runtime Engine
+
+## LogLevel
+Über ``-v`` wird das LogLevel definiert ... je mehr v's desto geschwätziger:
+
+    ansible-playbook myplaybook.yml -vvvv
 
 ---
 
-# Beispiele
+# Ansible Playbook DSL
 
 * Beispiele: https://github.com/ansible/ansible-examples
 * alle Module: http://docs.ansible.com/ansible/list_of_all_modules.html
+* https://liquidat.wordpress.com/2016/01/26/howto-introduction-to-ansible-variables/
 
-Hier habe ich ein paar Beispiele 
+## Module
+Ansible DSL baut auf Modulen auf: http://docs.ansible.com/ansible/modules_by_category.html
+
+## Idempotenz
+Um die gewünschte Idempotenz zu erreichen, muß man sich als Linux-Scripting-Veteran vom Modul ``shell`` lösen (auch wenn es scher fällt) und geeignete Ansible-Module verwenden. 
+
+Lösung 1: **NICHT** idempotent
+
+    shell: echo "ZSH_THEME=robbyrussell" >> ~/.zshrc
+
+    
+Lösung 2: idempotent
+
+    lineinfile: dest=~/.zshrc state=present line='ZSH_THEME=robbyrussell'
+
+## Umgebungsinformationen
+Ansible sammelt zu den Hosts Informationen (z. B. CPU, OS), die als Variablen zur Verfügung stehen. Diese Variablen können per 
+
+    ansible -m setup localhost
+    
+Statt ``localhost`` kann jeder registrierte Host eingetragen werden (siehe ``/etc/ansible/hosts``).
+
+Umgebungsvariablen werden per
+
+    vars:
+       executingUser: "{{ lookup('env','USER') }}"
+
+abgefragt (hier: der ausführende User).
 
 ---
 
 # Vagrant-Ansible-Integration
+Für eine komplette Automatisierung meiner [Workbench (VirtualBox-Linux-Image)](workbench.md) hatte ich die Idee, mittels Vagrant und Ansible ein komplett automatisiertes Setup zu scripten.
 
 ## Variante 1: Remote Ansible
 
@@ -112,7 +153,7 @@ Hier habe ich ein paar Beispiele
 
 Der typische Ansible-Ansatz ermöglicht die Ausführung von Kommandos via ssh. Insofern paßt es perfekt in ein Vagrant-Host/Guest-Szenario - der Host sendet via ssh (wird von Vagrant eh schon konfiguriert) die entsprechenden Shell-Kommandos zum Guest. 
 
-Einzige Voraussetzung ist die Installation von Ansible auf dem Host-System. Leider wird diese Einschränkung für Windows-Host-Systeme zum Ausschlußkriterium, denn Ansible wird für Windows nicht unterstützt.
+Einzige Voraussetzung ist die Installation von Ansible auf dem Host-System. Leider wird diese Einschränkung für Windows-Host-Systeme zum Ausschlußkriterium, denn Ansible wird für Windows nicht unterstützt. Für mein Workbench-Szenario kam diese Lösung demnach nicht in Frage.
 
 ## Variante 2: Local Ansible
 
@@ -132,7 +173,6 @@ In diesem Fall muß Ansible auf dem Guest-System installiert werden. Das erfolgt
     config.vm.provision "shell", inline: <<-SHELL
         sudo apt-get install -y ansible
     SHELL
-
 
 Die Local Ansible Variante hat den Vorteil, daß Ansible auf dem Host-System nicht erst installiert werden muß. Das hat folgende Vorteile:
 
@@ -168,7 +208,7 @@ Die Local Ansible Variante hat den Vorteil, daß Ansible auf dem Host-System nic
 
 > "After three years of using Puppet at VMware and Virtual Instruments, the thought of not continuing to use the market leader in configuration management tools seemed like a radical idea when it was first suggested to me. After spending several weeks researching Ansible and using it hands-on, I came to the conclusion that Ansible is a perfectly viable alternative to Puppet. I tend to agree with Lyft’s conclusion that if you have a centralized Ops team in change of deployments then they can own a Puppet codebase. On the other hand if you want more wide-spread ownership of your configuration management scripts, a tool with a shallower learning curve like Ansible is a better choice." (*Dan Tehranian's Blog*, https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-hands-on-with-ansible/)
 
-## Vorteile des Shellscriptings
+## Alternative Shellscripting?
 
 Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 
@@ -177,13 +217,6 @@ Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 
 ---
 
-# Was kann man von Ansible nicht erwarten?
-* Abstraktion vom Package-Manager ... es gibt beispielsweise die Ansible-Module ``apt`` und ``yum`` (Puppet beispielsweise abstrahiert hier) ... keine Ahnung ob das von Vorteil oder Nachteil ist ...
-
-> Configuration management abstractions generally lead to complicated, convoluted and difficult to understand code. (http://ryandlane.com/blog/2014/08/04/moving-away-from-puppet-saltstack-or-ansible/)
-
-
-* Dry-Run-Mode zum Testen von Scripten ... mittlerweile gibt es das aber wohl: http://docs.ansible.com/ansible/playbooks_checkmode.html
-
----
+# Performance
+Tatsächlich scheint mir die Performance nicht so berauschend. Für meinen Anwendungsfall (wenige Tasks auf wenigen Knoten) ist es aber ok.
 
