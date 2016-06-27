@@ -32,6 +32,8 @@ In einem Projekt wollten wir von einer proprietären Konfigurationskomponente zu
 
 Wir haben uns für folgendes Design entschieden:
 
+![Spring @Primary im Einsatz](images/springPrimary.png)
+
 Das Modul ``mail-sender`` bietet ein ``MailConfiguration`` Interface. Zudem eine Implementierung dieses Interface auf Spring-Basis (mit ``@ConfigurationProperties``). Will ein Client diese Konfigurationsveriante nutzen, dann muß er nichts weiter konfigurieren.
 
 Clients - wie unser proprietäres Legacy Module - können ihre eigene Implementierung des ``MailConfiguration`` Interface beisteuern (ist mit ``@Primary`` annotiert) und die Default-Implementierung dadurch übersteuern.
