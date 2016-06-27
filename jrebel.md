@@ -103,8 +103,13 @@ THEREFORE: I recommend to only include the Eclipse target build folder (bin/clas
 * JRebel provides an interactive script that adapts the tomcat startup scripts:
   * ``$JREBEL_HOME/bin/setup.sh -r $TOMCAT_HOME``  
     * e. g.: ``$JREBEL_HOME//bin/setup.sh -r ~/programs/apache-tomcat-7.0.42``
-    * ATTENTION: I had to adapt the created startup script startup-jrebel.sh slightly because the existing startup.sh needs to be called within (instead of catalina.sh)
-    * background information: the script is nothing more than adding the JRebel-Java-Agent (``-javaagent:/path/to/jrebel.jar``) to the Tomcat (see http://manuals.zeroturnaround.com/jrebel/standalone/launch-quick-start.html)
+  * ATTENTION: I had to adapt the created startup script ``startup-jrebel.sh`` slightly because the existing startup.sh needs to be called within (instead of catalina.sh)
+  * background information: the script is nothing more than adding the JRebel-Java-Agent (``-javaagent:/path/to/jrebel.jar``) to the Tomcat (see http://manuals.zeroturnaround.com/jrebel/standalone/launch-quick-start.html)
+* seit Version 6 kann/sollte (???) noch eine Location für den sog. *rebelbootCache* angegeben werden:
+
+```
+-Xbootclasspath/p:/home/myuser/.jrebel/bootCache/rebelbootCache.jar
+```
 
 ## Step 2: prepare module ``mymodule``
 

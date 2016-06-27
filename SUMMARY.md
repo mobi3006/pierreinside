@@ -19,6 +19,7 @@
    * [REST](rest.md)
    * [Spring REST](springRest.md)
 * Spring Ecosystem
+   * [Spring Core](springCore.md)
    * [Spring Boot](springBoot.md)
    * [Spring Cloud](springCloud.md)
    * [Spring Cloud Config](springCloudConfig.md)
@@ -39,6 +40,7 @@
 * Git Ecosystem
    * [Git](git.md)
    * [GitHub](github.md)
+   * [GitBook](gitbook.md)
    * [Bitbucket](bitbucket.md)
 * [Static Site Generators](staticSiteGenerators.md)
    * [Markdown](markdown.md)
