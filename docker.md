@@ -17,7 +17,7 @@ Hierzu verwende ich i. a. VirtualBox (früher auch mal VMWare) und mittlerweile 
 
 **Ergo:** Virtualisierung über Images funktioniert gut, hat aber auch Nachteile - es ist eben schwergewichtig.
 
-Eine leichtgewichtige Lösung sind *Linux Containers*
+Eine leichtgewichtige Lösung sind *Linux Containers* ... Docker ist eine Implementierung dieses Konzepts. 
 
 ---
 
