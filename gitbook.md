@@ -3,6 +3,7 @@
 * https://www.gitbook.com/
 * https://help.gitbook.com/
 * https://www.youtube.com/watch?v=KFF5bBLX7ME
+* [Sehr guter Überblick](http://www.linux-magazine.com/Issues/2014/166/Workspace-GitBook)
 
 Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit Hugo Probleme bei der Erstellung einer Menüstruktur hatte, habe ich mich dann doch mal mit GitBook beschäftigt. So könnte ich zumindest mal mit dem Markdown-Style in Fahrt kommen und mir dann aber mittelfristig eine andere Lösung überlegen (oder vielleicht gefällt es mir ja so gut, daß ich dabei bleibe).
 
@@ -231,7 +232,7 @@ In Markdown können Videos beispielsweise über HTML eingebettet werden ... mal
 
 * https://www.gitbook.com/editor
 
-Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. Als ich dann aber mit GitBook anfing wollte ich dem diesem Editor mal eine Chance geben ... und tatsächlich adressiert er schon sehr viele Aspekte, die man ansonsten vermutlich über mehrere Tools (Editor mit Live-Vorschau, Git-Client) abbilden müßte ... hier ist alles integriert und somit für Newbies auf jeden Fall ein guter Startpunkt:
+Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. Als ich dann aber mit GitBook anfing wollte ich dem diesem Editor mal eine Chance geben ... und tatsächlich adressiert er schon sehr viele Aspekte, die man ansonsten vermutlich über mehrere Tools (Editor mit Live-Vorschau, Git-Client) abbilden müßte ... hier ist alles integriert (es handelt sich eher um eine Desktop Publishing Solution als um einen einfachen Editor) und somit für Newbies auf jeden Fall ein guter Startpunkt:
 
 * Speichern ... aber wohin ??? - türkise Umrandung in Abbildung unten
 * Commit zum lokalen Repository (vorher wird die Datei auf dem Filesystem gespeichert)  - rote Umrandung in Abbildung unten

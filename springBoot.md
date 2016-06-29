@@ -103,7 +103,7 @@ Im Initializr generierten ``pom.xml`` wird man u. a. folgendes finden:
 Das sorgt für zwei Dinge:
 
 * das ``spring-boot-maven-plugin`` ist integriert, so daß ein ausführbares jar-File erstellt wird
-* die ``spring-boot-dependencies`` (http://search.maven.org/#artifactdetails|org.springframework.boot|spring-boot-dependencies|1.3.5.RELEASE|pom) werden verwendet. In dieser sind Versionen von einer Vielzahl von Frameworks definiert, die zueinander passen (Spring übernimmt also das Dependency-Management (wenn man will).
+* die ``spring-boot-dependencies`` (siehe [Maven Central Repository](http://search.maven.org/#artifactdetails|org.springframework.boot|spring-boot-dependencies|1.3.5.RELEASE|pom)) werden verwendet. In dieser sind Versionen von einer Vielzahl von Frameworks definiert, die zueinander passen (Spring übernimmt also das Dependency-Management (wenn man will).
 
 Auf diese Weise kommt man schon mal sehr schnell sehr weit.
 

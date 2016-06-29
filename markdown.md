@@ -12,6 +12,7 @@ Auf Plattformen wie GitHub gehört sie zum Standard.
 
 # Syntax
 * http://jinlaixu.net/books/gitbook-documentation/book/markdown.html
+* https://help.github.com/articles/basic-writing-and-formatting-syntax/
 * https://daringfireball.net/projects/markdown/syntax
 * GitHub/GitBook:  http://toolchain.gitbook.com/syntax/markdown.html
 
@@ -41,6 +42,15 @@ sieht dann so aus:
 
 I like :-)
 
+## Emojis
+* Emoji-Liste: http://www.emoji-cheat-sheet.com/
+
+Folgendes funktioniert nicht:
+
+:punch:
+
+... hilft das vielleicht (brauche ich noch ein Plugin?): https://github.com/GitbookIO/gitbook/issues/1151
+
 ---
 
 # Nicht-Standardisierte Erweiterungen
@@ -67,3 +77,8 @@ Folgende Sprachen werden unterstützt:
 
 * https://highlightjs.org/static/demo/
 
+---
+
+# Präsentationen
+* RemarkJS: http://remarkjs.com/#1
+* Slidify: http://slidify.org/

@@ -419,7 +419,7 @@ Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
 
 Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern (evtl. legt man auch einen User ``gituser`` an) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist und läuft.
 
-Anschließend wechselt man root-User (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet)
+Anschließend wechselt man als root-User (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet)
 
     ssh root@diskstation
     
@@ -435,9 +435,9 @@ auf die Diskstation, um ein sog. *Bare-Repository* anzulegen:
     cd ../..
     chown -R myuser:users myrepo.git   # (B)
     
-**ACHTUNG:** natürlich muß man die Location (A) und den Ownder bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend/schreibend zugreifen kann.
+**ACHTUNG:** natürlich muß man die Location (A) und den Owner bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend/schreibend zugreifen kann.
 
-Anschließend wird das ssh-Terminal geschlossen und das Repository wird lokal geclont
+Anschließend wird das ssh-Terminal geschlossen und das Repository wird lokal geclont (Achtung: es ist eine ssh-URL, d. h. 
 
     git clone ssh://myuser@diskstation/volume1/homes/myuser/git-repos/myrepo.git
 

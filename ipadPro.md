@@ -6,8 +6,8 @@ Deshalb hatte ich immer wieder nach einem Samsung Note Nachfolger für mein mitt
 
 Doch dann kam Apple mit dem iPad Pro 9.7 ... das 12.9 war mir vor einem halben Jahr zu groß. Es war einfach das perfekte Gerät:
 
-* Stiftbedienung - ich verwende mein Galaxy Note 8 als Papier-Ersatz (in Meetings)
-* portable (ich werde es auch bei Fußball-Spieltagen meiner Kinder dabei haben, um Videos zu drehen und [Berichte zu schreiben](http://asvdjk.wordpress.com))
+* Stiftbedienung - ich verwende mein Galaxy Note 8 als Papier-Ersatz (in Meetings ... zusammen mit der App *Good Notes*)
+* portabel (ich werde es auch bei Fußball-Spieltagen meiner Kinder dabei haben, um Videos zu drehen und [Berichte zu schreiben](http://asvdjk.wordpress.com))
   * leicht 
   * Größe ideal
     * nicht so riesig wie das iPad Pro 12.9
@@ -15,7 +15,7 @@ Doch dann kam Apple mit dem iPad Pro 9.7 ... das 12.9 war mir vor einem halben J
 * stylisch
 * sehr gute Kamera
 * 4K Videos
-* AppStore mit den besten Apps für mobile Endgeräte - meiner Erfahrung nach scheidet Windows hiermit aus und auch die Android-Apps sind bei den Entwicklern eher an Platz 2. Die qualitativ besten Apps gibt es einfach hier
+* AppStore mit den besten Apps für mobile Endgeräte (meine Best-of siehe unten) - meiner Erfahrung nach scheidet Windows hiermit aus und auch die Android-Apps sind bei den Entwicklern eher an Platz 2. Die qualitativ besten Apps gibt es einfach hier
 * noch bezahlbar (1000 Euro mit 128 GB Speicher, Stift, Hülle)... obwohl schon verdammt teuer
 
 **Meine Bedenken waren allerdings:**
@@ -70,7 +70,7 @@ Das ist zwar kein Kern-Use-Case (vielleicht irgendwann mal für Präsentationen 
 ## Backup
 Ich versuche weitestgehend ohne Cloud-Speicherung auszukommen. Hauptsächlich, weil dort auch mal geschäftliche Informationen enthalten sind, die ich KEINEMM Cloud-Anbieter anvertrauen will.
 
-Für meine Android-Geräte habe ich immer die App [FolderSync](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.full&hl=de) verwendet, um meine Bilder, Notizen, Zeichnungen automatisch periodisch auf das Synology-NAS zu sichern. Unter iOS gibt es das leider nicht (wäre mir am liebsten, denn ich will keinen Anwendungszoo für die gleiche Aufgaben aufbauen) ...
+Für meine Android-Geräte verwende ich die App [FolderSync](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.full&hl=de), um meine Bilder, Notizen, Zeichnungen automatisch periodisch auf das Synology-NAS zu sichern. Unter iOS gibt es das leider nicht (wäre mir am liebsten, denn ich will keinen Anwendungszoo für die gleiche Aufgaben aufbauen) ...
 
 Synology hat hier vielleicht eine Lösung: http://appcrawlr.com/ios/ds-cloud
 
@@ -92,7 +92,7 @@ Allerdings klappt es seitdem nicht mehr mit meinen Android-Geräten ;-)
 
 ---
 
-# Wichtige Apps
+# Best-of-Apps
 Das ist das Salz in der Suppe ...
 
 * Good Notes als Papierersatz
@@ -103,7 +103,8 @@ Super app - die 8 Euro sind gut investiert ... jetzt ist das iPad tatsächlich e
 
 > Das ist die perfekte Kombination: nicht mit der unhandlichen Tastatur hantieren müssen und trotzdem nicht alles abtippen müssen 
 
-
+## Drawexpress
+Ich liebe es, mit dieser App unter iOS und Android, Komponenten- und Sequenzdiagramme anzufertigen.
 
 ---
 
