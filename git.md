@@ -295,16 +295,22 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
 
 ---
 # Konfiguration
-## Repository-spezifische Konfiguration
+Man unterscheidet die Konfiguration auf verschiedenen Ebenen
+
+* ``--system``: systemspezifisch/userübergreifend
+* ``--global``: userspezifisch ... für alle Repositories (liegt in ``~/.gitconfig``)
+* ``--local``: Repository-spezifisch (liegt in ``$REPOSITORY_HOME/.git/config``)
+ 
+## Repositoryspezifische Konfiguration
 
 Jedes Git-Repository hat ein Verzeichnis .git (im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
 
 * config
-  * statt Einstellungen für jedes Repository durchzuführen kann man das in der ``~/.gitconfig`` zentralisieren.
+  * statt Einstellungen für jedes Repository durchzuführen kann das in der ``~/.gitconfig`` zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen (GitHub, BitBucket, lokales Synology, ...)
 
-## Globale Konfiguration
+## Benutzerspezifische Konfiguration
 
-Einstellungen, die für alle Repositories gelten sollen, kann man in der Datei ``~/.gitconfig`` machen.
+Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei ``~/.gitconfig`` machen.
 
 Nach der Erstinstallation von git sollte man beispielsweise
 
@@ -315,7 +321,7 @@ durchführen. Alternativ dazu kann man auch
 
     git config --global --edit
 
-Dadurch wird die Datei ``~/.gitconfig`` um die Properties erweitert. Hier sollte man http://help.github.com/line-endings/
+Dadurch wird die Datei ``~/.gitconfig`` um die Properties erweitert. Hier sollte man (http://help.github.com/line-endings/)
 
     [core]
         autocrlf = true
