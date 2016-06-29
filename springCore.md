@@ -5,6 +5,16 @@ Spring Core ist ein Factory-Ansatz, d. h. Spring kümmert sich um die Instanziie
 
 ---
 
+# ApplicationContext
+## @ImportResource
+Importiert eine Spring-Konfiguration in Form von xml-Files.
+
+```java
+@ImportResource("classpath:application-context.xml")
+```
+
+---
+
 # Wiring
 ## Implizites vs. explizites Wiring
 Explizites Wiring (damit hat die Spring-Geschichte begonnen) erfolgt über XML-Dateien. Der Apring-ApplicationContext-Loader liest diese Dateien und erzeugt daraus zur Laufzeit den sog. ApplicationContext. 

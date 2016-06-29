@@ -141,8 +141,47 @@ Verwendet man das Spring-Dependency-Management (via ``spring-boot-dependencies``
 
 ## Maven: Interessante Properties
 
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
+```xml
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<java.version>1.8</java.version>
+``` 
+
+## Debug-Port einschalten
+
+Über 
+
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <configuration>
+        <jvmArguments>
+            -Xdebug
+            -Xrunjdwp:transport
+              =dt_socket,server=y,suspend=n
+              ,address=9000
+        </jvmArguments>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
+wird das Remote-Debugging der Applikation ermöglich, wenn sie über maven gestartet wird (``mvn spring-boot:run``).
+
+Startet man hingegen das executable jar-Artefakt (erstellt durch ``mvn install``), dann kann dort das Debugging wie üblich per Java-Parameter beim Programmstart
+
+```bash
+java 
+  -jar myapp.jar 
+  -Xdebug 
+  -Xrunjdwp:transport=dt_socket
+    ,address=8000,server=y,suspend=n`` 
+```
+
+konfiguriert werden.
 
 ---
 
@@ -176,7 +215,7 @@ Convenience Annotation ... subsumiert die empfohlenen Annotationen
 
 ## @EnableAutoConfiguration
 
-Ist diese Eigenschaft gesetzt, so versucht Spring sich die Konfiguration der Anwendung selbst zu erschließen. Hierin steckt schon eine Menge Magie ...
+Ist diese Eigenschaft gesetzt, so versucht Spring sich die Spring-Konfiguration der Anwendung selbst zu erschließen. Hierin steckt schon eine Menge Magie ...
 
 > Wenn eine JPA Dependency definiert ist und EnableAutoConfiguration gesetzt ist, dann sucht der Spring Boot (der Loader) nach entsprechenden ``@Entity`` Anntotaionen im Code
 
@@ -186,7 +225,8 @@ Ist diese Eigenschaft gesetzt, so versucht Spring sich die Konfiguration der Anw
 
 Über Excludes lassen sich einzelne Ressourcen von der Auto-Configuration ausschließen:
 
-    @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+    @EnableAutoConfiguration(
+      exclude={DataSourceAutoConfiguration.class})
 
 ### Auto Configuration Report
 
@@ -206,12 +246,37 @@ Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --de
               org.springframework.boot.actuate.audit.AuditEventRepository;
               SearchStrategy: all) found no beans (OnBeanCondition)
     ... blablabla ...
+    
+Dieser Report kann sehr hilfreich sein, wenn man der Spring-Magie auf die SChliche kommen will.
 
+### @Configuration
+Mit dieser Annotation werden Klassen gekennzeichnet, die Beans beispielsweise über Methoden (``@Bean public MyBean getMyBean``) bereitstellen.
 
-## @Configuration
+Eine mit ``@Component public class MyConfiguration`` oder ``@Service public class MyService`` gekennzeichnete Klasse exponiert Instanzen dieser Klasse automatisch als Beans, so daß ein ``@Autowired`` darauf möglich ist.
+
+## Konfiguration von Applicationseigenschaften
+* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/1.4.0.M3/reference/htmlsingle/#boot-features-external-config
+
+### spring.config.location
+Über das Property ``spring.config.location`` können Dateien definiert werden, in der die Property-Werte gesetzt werden (es kann eine Übersteuerung erfolgen). Das ist sehr praktisch, wenn man die Anwendnung in einem anderen Environment laufen lassen möchte (statt in der Developer-Umgebung in der Staging-Umgebung):
+
+```bash
+java 
+  -jar myapp.jar 
+  --spring.config.location=
+      classpath:/default.properties,
+      classpath:/override.properties
+```
+    
+Hierzu muß die Spring-Boot-Applikation allerdings Command-Line-Parameter unterstützen (``SpringApplication.setAddCommandLineProperties(true)``), was aber per Default der Fall ist.
+
+### Laufzeitänderungen
+Ist der ``spring-boot-starter-actuator`` aktiviert (als Dependency vorhanden), dann wird ein Rest-Service bereitgestellt, über den die Konfiguration zur Laufzeit geändert werden kann.
+
+## Property Injection
 Ganz ohne weiteres zutun unterstützt Spring bereits das Injecten von Property-Values in Beans per
 
-    @Value("${de.cachaca.cloud.})
+    @Value("${de.cachaca.cloudProvider})
     private String cloudProvider;
     
 Spring sucht in den Property-Dateien im Classpath nach entsprechenden Properties.
@@ -219,41 +284,59 @@ Spring sucht in den Property-Dateien im Classpath nach entsprechenden Properties
 Über ``@ConfigurationProperties`` lässt sich dieser Prozess noch ein bisschen komfortabler gestalten.
 
 ## @ConfigurationProperties
-Diese Annotation kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten der Anwendung abbildet.
+* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/1.4.0.M3/reference/htmlsingle/#boot-features-external-config-typesafe-configuration-properties
+
+Auf diese Weise werden typensichere Konfigurationen ermöglicht. ``@ConfigurationProperties`` kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten einer Komponente abbildet.
+
+Voraussetzung ist diese Dependency:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-configuration-processor</artifactId>
+    <optional>true</optional>
+</dependency>
+```
 
 Beispiel:
 
-    @Component
-    @ConfigurationProperties(prefix = "de.cachaca.myapp")
-    public class CloudIntegrationConfiguration {
+```java
+@Component
+@ConfigurationProperties(prefix = "de.cachaca.myapp")
+public class CloudIntegrationConfiguration {
 
-        private String cloudProviderName = "AWS";
-        
-        public void setCloudProviderName(String name) {
-          cloudProviderName = name;
-        }
-        
-        public String getCloudProviderName() {
-          return cloudProviderName;
-        }
+    private String cloudProviderName = "AWS";
+
+    public void setCloudProviderName(String name) {
+      cloudProviderName = name;
     }
+
+    public String getCloudProviderName() {
+      return cloudProviderName;
+    }
+}
+```
 
 Eine Anpassung des ``cloudProviderName`` wäre dann über die ``application.properties`` möglich:
 
-  de.cachaca.myapp.cloudProviderName = Microsoft Azure
+    de.cachaca.myapp.cloudProviderName = Microsoft Azure
   
-Im Anwendungscode wird das beispielsweise folgendermaßen verwendet:
+Möchte man die Konfiguration in einer anderen Datei als ``application.properties`` vornehmen, dann geht das über ``@ConfigurationProperties(prefix="test", locations = "classpath:MyConfiguration.properties")``. Aus meiner Sicht besteht dafür i. a. kein Grund ... ich bevorzuge hier den Standardweg und mag es lieber eine einzige Datei zu haben.
 
-    @.springframework.beans.factory.annotation.Value(
-        "${de.cachaca.myapp.cloudProviderName}")
-    private String systemName;
+Im Anwendungscode kann dieses Property auch folgendermaßen verwendet werden:
+
+```java
+@.springframework.beans.factory.annotation.Value(
+    "${de.cachaca.myapp.cloudProviderName}")
+private String systemName;
+```
 
 Beim Maven-Build wird eine Datei ``spring-configuration-metadata.json`` generiert, die Metadaten für Spring-Boot bereitstellt.
 
 IntelliJ bietet hier sogar die Möglichkeit zur Autovervollständigung. Willkommen im 21. Jahrhundert der Softwareentwicklung.
 
 ## @ImportResource
-Diese Annotation wird benötigt, um nicht-annotationsbasierten Spring-Code (der auf xml-Konfiguration basiert) zu integrieren.
+Diese Annotation wird benötigt, um die Spring-Xml-Kontextbeschreibungen nicht-annotationsbasierter Komponenten zu integrieren.
 
     @ImportResource("classpath:my-context.xml")
 
@@ -305,6 +388,22 @@ public class MyApplicationTest {
     }
     
 }
+```
+
+## @RunWith(SpringJUnit4ClassRunner.class)
+Dieser JUnit-Testrunner sollte grundsätzlich bei Spring-basierten Komponenten verwendet werden. Er stellt die Grundvoraussetzung dar - sonst darf man sich nicht wundern, wenn spring-spezifische Aspekte (z. B. der Aufbau des ApplicationContext aus xml-Dateien ``@ContextConfiguration(locations = { "classpath:mymodule-context.xml" })``) nicht funktionieren.
+
+## @SpringApplicationConfiguration
+Diese Annotation wird häufig in Spring-Boot-Tests eingesetzt, um den ApplicationContext aufzubauen. Es ist eine Erweiterung des Spring-Core Annotation 
+
+    @ContextConfiguration(locations = { "classpath:mymodule-context.xml" })
+
+Hier werden i. a.  zentrale Klassen ausgeführt (z. B. die Spring-Boot-Application-Klasse), die dann weitere Spring-Komponenten anziehen. Ausserdem lassen sich darüber XML-basierte ApplicationContext-Eweiterungen anziehen:
+
+```java
+@SpringApplicationConfiguration(
+        classes = MySpringBootApplication.class,
+        locations = { "classpath:test-context.xml" })
 ```
 
 ## @IntegrationTest
@@ -439,6 +538,17 @@ Solche Banner macht niemand selber ... http://patorjk.com/software/taag (die Fon
 # Fazit
 Spring zeigt mit seinen neuen Projekten (Boot, Config, ...), daß es sich innovativ weiterentwickelt und echte Mehrwerte für die Nutzer schafft. Der Einstieg in die Java-Welt wird generell (und insbesondere mit Blick auf Microservices) extrem vereinfacht. Verteilte Systeme - wie ich sie bisher aus meinem Studium kannte - sind nun auch für Startups in greifbare Nähe gerückt. Und dazu muß man nicht 3 Monate auf Schulung gehen ...
 
-Seit 2010 hat sich in den Bereichen Microservices, Cloud-Deployment, DevOps, Continous Delivery so viel getan, daß die Softwareentwicklung auf einem neuen Level angekommen ist. 
+Seit 2010 hat sich in den Bereichen Microservices, Cloud-Deployment, DevOps, Continous Delivery so viel getan, daß die Softwareentwicklung auf einem neuen Level angekommen ist.
 
 Spring trifft den Nerv der Zeit ... Hut ab :-)
+
+## Kritikpunkte
+Auch wenn der Einstieg sehr leicht fällt ... ums Lesen von Dokumentation kommt man nicht rum ;-)
+### Magie
+Spring hat schon recht viel magic eingebaut. Beispielsweise kann Code compilierbar sein, aber durch eine fehlende Abhängigkeit verhält er sich zur Laufzeit einfach nicht wie erwartet, weil eben die zur Laufzeit ausgewertete Abhängigkeit fehlt. 
+
+Es hat etwas von Pluggable-Extensions, wenn ich zur Applikation die Bibliothek ``spring-boot-starter-actuator-1.3.5.RELEASE.jar`` hinzufüge und dadurch weitere REST-Endpunkte vorhanden sind. Sehr komfortabel ... aber erst mal gewöhnungsbedürftig.
+
+### Überblick über Unterprojekte
+Zudem kann ist die Zuordnung einer Funktionalität zu einem Spring-Projekt nicht immer einfach. Dementsprechend fällt die Auswahl der richtigen Dependencies recht schwer. 
+

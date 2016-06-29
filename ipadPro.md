@@ -123,6 +123,7 @@ Glücklicherweise gibt es einen Zubehörmarkt, der hier kreativ tätig wurde und
   * mit 50 Euro recht günstig
   * leider nur drei Farben
 * [StilGut Pencil Halter](http://www.stilgut.de/produkte/apple/pencil/) ist auch ganz brauchbar.
+* [PencilCozy](https://www.amazon.de/Cozy-Industries-5149452-PencilCozy-Apple/dp/B01BRUU43O/ref=lp_5419570031_1_3?srs=5419570031&ie=UTF8&qid=1467184966&sr=8-3) soll verhindern, daß ich den Stiftkopf und den Stift-Stromadapter verliere ... 10 Euro für ein bissl Silikon ist ja schon hart, aber der Stift kostet ja auch immerhin über 100 Euro.
 
 ---
 

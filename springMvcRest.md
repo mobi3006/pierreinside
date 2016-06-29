@@ -1,4 +1,4 @@
-# Spring REST
+# Spring MVC REST
 Spring bietet auch eine Lösung für REST-basierte Webservices (das Paket nennt sich ``spring-web``) - gehört zum Spring MVC Paket. Es tritt damit in Konkurrenz zu vielen in der Java-Welt existierenden REST-Implementierungen (u. a. [JAX-RS JSR-339](https://jcp.org/en/jsr/detail?id=339)). 
 
 Wie bei Spring üblich wird viel mit Java-Annotationen gearbeitet:

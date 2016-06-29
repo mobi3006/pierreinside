@@ -17,7 +17,7 @@
 * Webservices
    * [Http](http.md)
    * [REST](rest.md)
-   * [Spring REST](springRest.md)
+   * [Spring MVC REST](springMvcRest.md)
 * Spring Ecosystem
    * [Spring Core](springCore.md)
    * [Spring Boot](springBoot.md)
