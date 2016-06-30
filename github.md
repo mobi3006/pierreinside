@@ -28,8 +28,11 @@ Die Authentifizierung kann über (ODER)
 erfolgen.
 
 ## Erstellung ssh-key
-Für die Verbindung mit GitHub wird ein ssh-Key benötigt Über 
+[siehe ssh](ssh.md) 
 
 ### Connection prüfen
 
-ssh -T git@github.com
+Bei GitHub darf man sich NICHT mit dem Usernamen (= Email-Adresse) anmelden, sondern IMMER über den User ``git``:
+
+    ssh -T git@github.com
+    
