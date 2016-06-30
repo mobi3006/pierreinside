@@ -42,51 +42,22 @@ Danach muß sich der User ab- und wieder anmelden.
 
 ## SSH-Server installieren und konfigurieren
 
+* [siehe Kapitel "ssh"](ssh.md)
+
 u. a. Ansible wird diese Vorarbeit später benötigen.
 
-### ssh-Server installieren
-Ein ssh-Server ist Voraussetzung für Ansible ... auch wenn der Target-Host der Ansible-Kommandos ``localhost`` ist.
-
-    sudo apt-get install openssh-server
-
-Ich teste den Zugriff per
-
-    ssh localhost
-    
-Dabei kann ich gleich auch den Fingerprint des Host akzeptieren, damit dieser in die Liste der ``~/.ssh/known_hosts`` aufgenommen wird. Beim nächsten ssh-connect mit dem gleichen Client-User wird nicht mehr nachgefragt, ob ich diesem ssh-Server vertraue (Ansible wird das tun, wenn mein Playbook ausgeführt wird).
-
 ### Public-Private-Key-Generierung
-Will man ohne Password auf einen anderen Rechner zugreifen, dann tut man das in Linux-Umgebungen i. d. R. über Public-Private-Keys. Der Ansible-Controller wird später Kommandos via ssh an die Workbench schicken. Da wir das vom lokalen Rechner zum lokalen Rechner tun (klingt strange ... nicht wahr), braucht der zugreifende User einen Public-Private-Key, der folgendermaßen erzeugt wird:
-
-    ssh-keygen -t rsa -b 4096 -C "anyEmailOfMyUser@example.com"
-
-Dabei wird eine Passphrase (ein Kennwort) abgefragt, mit dem der Private-Key geschützt ist. der erzeugte Public-Private-Key wird unter ``~/.ssh`` abgelegt.
+* [siehe Kapitel "ssh"](ssh.md)
 
 ### ssh-Server: passwortlosen ssh-Zugriff erlauben
-Der im vorigen Abschnitt erzeugte Public-Key jedes zugreifenden Users muß im zugegriffenen User des Servers unter ``~/.ssh/authorized_keys`` abgelegt werden. Hier veranschaulicht, wenn User *userA* sich per ssh als *userB* am gleichen Rechner verbindet:
+* [siehe Kapitel "ssh"](ssh.md)
 
-    /home/userA/.ssh/
-      id_rsa
-      id_rsa.pub
-      known_hosts
-    /home/userB/.ssh/
-      authorized_keys
-      
-Nun muß man den ``/home/userA/.ssh/id_rsa.pub`` in die ``ddd`` reinbekommen:
-
-    su - root    # oder sudo bash
-    cat /home/userA/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+Der im vorigen Abschnitt erzeugte Public-Key jedes zugreifenden Users muß im zugegriffenen User des Servers unter ``~/.ssh/authorized_keys`` abgelegt werden.
 
 ### ssh-agent: interaktive Passphraseabfrage umgehen
-Das Ansible-Skript soll ohne Interaktion auskommen. Da man i. a. aber eine Passphrase über den Private-Key legt, müßte dem Ansible-Controller die Passphrase bekannt sein. Das  will man aber eigentlich nicht ... deshalb beauftragt man den SSH-Agent damit.
+* [siehe Kapitel "ssh"](ssh.md)
 
-Starten des SSH-Agent:
-
-    eval $(ssh-agent -s)
-    
-Passphrase einlagern:
-
-    ssh-add ~/.ssh/id_rsa
+Das Ansible-Skript soll ohne Interaktion auskommen. Da man i. a. aber eine Passphrase über den Private-Key legt, müßte dem Ansible-Controller die Passphrase bekannt sein. Das will man aber eigentlich nicht ... deshalb kann man den SSH-Agent damit beauftragen. 
 
 ---
 

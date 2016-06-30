@@ -30,7 +30,9 @@
 * Performance & Scalability
    * [Java Performance](javaPerformance.md)
    * [Java Concurrency](javaConcurrency.md)
-* Build und Deployment
+* DevOps
+   * [Linux-Paketverwaltung](linuxPaketverwaltung.md)
+   * [ssh](ssh.md)
    * [Maven](maven.md)
    * [Vagrant](vagrant.md)
    * [Ansible](ansible.md)
@@ -44,12 +46,10 @@
    * [Bitbucket](bitbucket.md)
 * [Static Site Generators](staticSiteGenerators.md)
    * [Markdown](markdown.md)
-   * [GitBook](gitbook.md)
    * [Hugo](hugo.md)
    * Jeckyll
 * Devices
    * [iPad Pro](ipadPro.md)
    * [Auto](auto.md)
 * [Englisch](englisch.md)
-* [Linux-Paketverwaltung](linuxPaketverwaltung.md)
 
