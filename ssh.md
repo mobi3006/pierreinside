@@ -12,7 +12,18 @@ Public-Private-Key erzeugen:
 
     ssh-keygen -t rsa -b 4096 -C "anyEmailOfMyUser@example.com"
 
-Dabei wird eine Passphrase (ein Kennwort) abgefragt, mit dem der Private-Key geschützt ist. der erzeugte Public-Private-Key wird unter ``~/.ssh/id_rsa`` bzw. ``~/.ssh/id_rsa.pub`` abgelegt. Auf dieses Verzeichnis DARF nur der jeweilige Benutzer Zugriff haben (Permussions 700)!!!
+Dabei wird eine Passphrase (ein Kennwort) abgefragt, mit dem der Private-Key geschützt ist. der erzeugte Public-Private-Key wird unter ``~/.ssh/id_rsa`` bzw. ``~/.ssh/id_rsa.pub`` abgelegt. Entscheidend sind nun auch die Permissions (ansonsten funktioniert die Nutzung im worst-case nicht):
+
+* Verzeichnis ``~/.ssh`` sollte die Permissions 700 haben
+* die Key-Dateien sollten die Permissions 600 haben
+
+## Fingerprints von Keys
+Die Vergleichbarkeit von Keys ist für menschliche Benutzer kaum zu bewerkstelligen. In manchen Situationen (GitHub: *Ist der Public-Key als autorisierter User eingetragen?*) muß der User aber die Keys miteinander vergleichen können. Hierzu gibt es die sog. Fingerprints, die eine Kurzform des Keys darstellen (aber auch eindeutig sind):
+
+* MD5-Fingerprint erzeugen: ``ssh-keygen -l -E md5 -f ~/.ssh/id_rsa.pub``
+  * liefert sowas in der Art: ``4096 MD5:32:fd:81:0c:6c:63:7b:36:8f:a1:12:f3:d2:5f:88:23 myuser@mydomain.com (RSA)``
+* SHA-256-Fingerprint erzeugen: ``ssh-keygen -l -E sha256 -f ~/.ssh/id_rsa.pub``
+  * liefert sowas in der Art: ``4096 SHA256:juG69ZMq226OfvWN4Pezg2Q8l+5vv1234pDemtJLDz0 myuser@mydomain.com (RSA)``
 
 ## Verwendung mehrerer SSH-Keys
 Für einen User können mehrere SSH-Keys hinterlegt werden (z. B. wenn ein User in verschiedenen Rollen arbeitet). Natürlich können dann nicht alle Key-Dateien den gleichen namen ``id_rsa`` haben. In folgender Situation mit zwei Public-Private-Key-Paaren

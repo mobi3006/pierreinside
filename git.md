@@ -271,8 +271,8 @@ Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bi
   * das Remote-Repository wird automatisch mit dem Kurznamen *origin* benanntngetragen
 * ``git remote -v``: welche Remote-Repositories sind konfiguriert?
 * Remote-Repository unter dem Kurznamen *team1* konfigurieren, so daß man dorthin ein push machen kann
-  * ``git remote add team1 https://myserver/de.cachaca.learn.anything.git``
-    * ``origin`` ist dabei der Name Kurzname des Repositories, der bei einem ``git push -u origin master`` angegeben wird
+  * ``git remote add origin https://myserver/de.cachaca.learn.anything.git``
+    * ``origin`` ist dabei der Name Kurzname des Repositories, der auch beim Push (``git push -u origin master``) angegeben wird
 * Remote-Repository mit dem Kurznamen *team1* umkonfigurieren
   * ``git remote set-url origin https://otherserver/de.cachaca.learn.anything.git``
 * Remote-Repository mit dem Kurznamen *team1* entfernen

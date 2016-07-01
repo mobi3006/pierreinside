@@ -199,7 +199,7 @@ Auf diese Weise weiß der Spring-Boot-Loader (und somit auch der Leser dieser Kl
 
 Die zentralen Annotationen macht man am besten an die Main-Class, denn das ist die erste Klasse, die geladen wird.
 
-> Gelegentlich gibt es Alternativen zur Annotation (z. B. Konfiguration über eine xml-Datei statt über ``@Configuration`` aber die Spring-Macher empfehlen die Verwendung von Annotationen).
+> i. a. gibt es xml-basierte Alternativen zur Annotation aber die Spring-Macher empfehlen die Verwendung von Annotationen).
 
 
 ## Strukturierung
@@ -254,8 +254,15 @@ Mit dieser Annotation werden Klassen gekennzeichnet, die Beans beispielsweise ü
 
 Eine mit ``@Component public class MyConfiguration`` oder ``@Service public class MyService`` gekennzeichnete Klasse exponiert Instanzen dieser Klasse automatisch als Beans, so daß ein ``@Autowired`` darauf möglich ist.
 
-## Konfiguration von Applicationseigenschaften
-* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/1.4.0.M3/reference/htmlsingle/#boot-features-external-config
+## Konfiguration von Applikationseigenschaften
+* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
+* https://blog.codecentric.de/2016/04/binding-configuration-javabeans-spring-boot/
+
+Hier unterstützt Spring diese Ansätze
+
+* Property Injection mit Spring-EL
+* Type-safe @ConfigurationProperties
+* Spring-Cloud-Config
 
 ### spring.config.location
 Über das Property ``spring.config.location`` können Dateien definiert werden, in der die Property-Werte gesetzt werden (es kann eine Übersteuerung erfolgen). Das ist sehr praktisch, wenn man die Anwendnung in einem anderen Environment laufen lassen möchte (statt in der Developer-Umgebung in der Staging-Umgebung):
@@ -273,7 +280,7 @@ Hierzu muß die Spring-Boot-Applikation allerdings Command-Line-Parameter unters
 ### Laufzeitänderungen
 Ist der ``spring-boot-starter-actuator`` aktiviert (als Dependency vorhanden), dann wird ein Rest-Service bereitgestellt, über den die Konfiguration zur Laufzeit geändert werden kann.
 
-## Property Injection
+### Property Injection mit Spring-EL
 Ganz ohne weiteres zutun unterstützt Spring bereits das Injecten von Property-Values in Beans per
 
     @Value("${de.cachaca.cloudProvider})
@@ -283,8 +290,8 @@ Spring sucht in den Property-Dateien im Classpath nach entsprechenden Properties
 
 Über ``@ConfigurationProperties`` lässt sich dieser Prozess noch ein bisschen komfortabler gestalten.
 
-## @ConfigurationProperties
-* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/1.4.0.M3/reference/htmlsingle/#boot-features-external-config-typesafe-configuration-properties
+### Type-safe @ConfigurationProperties
+* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-typesafe-configuration-properties
 
 Auf diese Weise werden typensichere Konfigurationen ermöglicht. ``@ConfigurationProperties`` kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten einer Komponente abbildet.
 
@@ -317,21 +324,15 @@ public class CloudIntegrationConfiguration {
 }
 ```
 
-Eine Anpassung des ``cloudProviderName`` wäre dann über die ``application.properties`` möglich:
+Eine Anpassung des ``cloudProviderName`` ist über die ``application.properties`` möglich:
 
     de.cachaca.myapp.cloudProviderName = Microsoft Azure
   
 Möchte man die Konfiguration in einer anderen Datei als ``application.properties`` vornehmen, dann geht das über ``@ConfigurationProperties(prefix="test", locations = "classpath:MyConfiguration.properties")``. Aus meiner Sicht besteht dafür i. a. kein Grund ... ich bevorzuge hier den Standardweg und mag es lieber eine einzige Datei zu haben.
 
-Im Anwendungscode kann dieses Property auch folgendermaßen verwendet werden:
-
-```java
-@.springframework.beans.factory.annotation.Value(
-    "${de.cachaca.myapp.cloudProviderName}")
-private String systemName;
-```
-
 Beim Maven-Build wird eine Datei ``spring-configuration-metadata.json`` generiert, die Metadaten für Spring-Boot bereitstellt.
+
+> ACHTUNG: will man innerhalb der IDE bleiben (ohne maven builds anschmeißen zu müssen), dann muß die IDE die Generierung dieser ``spring-configuration-metadata.json`` unterstützen (z. B. m2e bei Eclipse) ... ansonsten wundert man sich warum Änderungen nicht sichtbar sind. 
 
 IntelliJ bietet hier sogar die Möglichkeit zur Autovervollständigung. Willkommen im 21. Jahrhundert der Softwareentwicklung.
 
@@ -348,7 +349,6 @@ Diese Annotation wird benötigt, um die Spring-Xml-Kontextbeschreibungen nicht-a
 In diesem Link sind die Konfigurationseinstellungen zu ganz vielen Komponenten dargestellt. Wenn man besipielsweise Velocity (Template-Engine) verwedet, dann wird man dort sicher fündig werden, wenn man die Konfiguration anpassen will.
 
 Da der Application-Server in einem Executable-Jar auch Komponente der Anwendung ist, findet man dort also auch Konfigurationsmöglichkeiten.
-
 
 ## @ComponentScan
 

@@ -6,40 +6,33 @@
 
 * http://www.sonatype.com/books/maven-book/reference/
 
-Build-Tool der Apache Foundation - Apache verkauft maven als Projektmanagement-Tool, weil es auch Reports erzeugen kann und die Kommunikation der Entwickler unterstützt. Es ist also mehr als ant, mehr als nur ein Build-Tool.
+Build-Tool der Apache Foundation - Apache preist maven als Projektmanagement-Tool an, weil es auch Reports erzeugen kann und die Kommunikation der Entwickler unterstützt. Es ist also mehr als ant, mehr als nur ein Build-Tool.
 
-Die in ant genannten "Targets" heißen bei Maven "Goals", sie können wie bei ant als Parameter angegeben werden, um bestimmte Ziele zu erreichen (z. B. maven clean build). Hier ein Beispiel:
+Die in ant genannten "Targets" heißen bei Maven "Goals", sie können wie bei ant als Parameter angegeben werden, um bestimmte Ziele zu erreichen (z. B. maven clean build).
+
+Hier ein Beispiel:
 
 ```
 maven eclipse:eclipse
 ```
 
-ruft das Goal eclipse im PlugIn mit dem Namen eclipse auf.
+ruft das Goal ``eclipse`` (hinter dem Doppelpunkt) im PlugIn mit dem Namen ``eclipse`` (vor dem Doppelpunkt) auf.
+
+---
 
 # Repositories
 
-Maven unterscheidet zwischen Remote- und Local-Repositories. Das Local-Repository liegt lokal auf der Festplatte und hier gibt es nur eins. Der maven-Bauprozess kann allerdings mehrere Remote-Repositories verwenden, von denen als Dependency formulierte notwendige Bibliotheken (bei Maven 2 auch Plugins) runtergeladen werden. Eine andere Lösung besteht darin, nicht die Clients mit unterschiedlichen Repositories zu konfigurieren, sondern lokal einen Repository Manager aufzusetzen und diesen so zu konfigurieren, daß externe Artefakte automatisch aus anderen Repositories gezogen und gecached werden (siehe unten Nexus Reposititory Manager).
+Maven unterscheidet zwischen 
 
-Durch das lokale Repository ist das Arbeiten im Offline-Modus (also z. B. auch ohne Netzwerkverbindung) möglich. Im Online-Modus wird der Timestamp der lokalen Bibliothek mit dem der Remote-Bibliothek verglichen und nur bei Änderungen am Remote-File erfolgt ein Download und somit ein Update des Local-Repositories.
+* **Remote-Repository:** Der maven-Bauprozess kann  mehrere Remote-Repositories verwenden, von denen als Dependency formulierte notwendige Bibliotheken (bei Maven 2 auch Plugins) runtergeladen werden. Eine andere Lösung besteht darin, nicht die Clients mit unterschiedlichen Repositories zu konfigurieren, sondern lokal einen Repository Manager aufzusetzen und diesen so zu konfigurieren, daß externe Artefakte automatisch aus anderen Repositories gezogen und gecached werden (siehe unten Nexus Reposititory Manager).
+* **Local-Repository:** liegt lokal auf der Festplatte und hier gibt es nur eins. Durch das lokale Repository ist das Arbeiten im Offline-Modus (also z. B. auch ohne Netzwerkverbindung) möglich. 
+ 
+Im Online-Modus wird der Timestamp der lokalen Bibliothek mit dem der Remote-Bibliothek verglichen und nur bei Änderungen am Remote-File erfolgt ein Download in das Local-Repository.
 
-Maven ist eng mit der Nutzung eines Continous Integration (CI) Prozesses verbunden. Eine typische CI-Infrastruktur besteht aus Subversion und Hudson bzw. CruiseControl. Hudson prüft in regelmässigen Abständen, ob Commits im Subversion stattgefunden haben. Wenn ein Commit erfolgt ist, wird die Komponente z. B. per maven gebaut und im Falle eines Erfolges aufs Remote-Repository kopiert/deployed. Dadurch stehen auf dem Remote-Repository immer die aktuellsten Bibliotheken/Artefakte zur Verfügung, die dann beim Bauen per maven durch andere Entwickler automatisch sofort genutzt werden (falls diese im Online-Modus arbeiten). Innerhalb eines Entwicklungsprojekts wird man also ein Remote-Repository aufsetzen (Stichwort Nexus Repository Manager: http://nexus.sonatype.org/) - in einem solchen Projekt-Repository lassen sich auch einige der bekannten Repositories sind Apache (von hier zieht man sich auch die maven-2-Plugins), Codehaus, ...
-Convention over Configuration:
+Maven ist eng mit der Nutzung eines Continous Integration (CI) Prozesses verbunden. Eine typische CI-Infrastruktur besteht aus Subversion und Jenkins. Jenkins prüft in regelmäßigen Abständen, ob Commits im Subversion stattgefunden haben. Wenn ein Commit erfolgt ist, wird die Komponente z. B. per maven gebaut und im Falle eines Erfolges aufs Remote-Repository kopiert/deployed. Dadurch stehen auf dem Remote-Repository immer die aktuellsten Bibliotheken/Artefakte zur Verfügung, die dann beim Bauen per maven durch andere Entwickler automatisch sofort genutzt werden (falls diese im Online-Modus arbeiten). Innerhalb eines Entwicklungsprojekts wird man also ein Remote-Repository aufsetzen (Stichwort Nexus Repository Manager: http://nexus.sonatype.org/) - in einem solchen Projekt-Repository lassen sich auch einige der bekannten Repositories sind Apache (von hier zieht man sich auch die maven-2-Plugins), Codehaus, ...
 
-Maven definiert eine Standard-Verzeichnisstruktur für Komponenten. Hält man sich an diese Verzeichnisstruktur muss man wesentlich weniger im pom.xml (maven 1) bzw. project.xml (maven 2) konfigurieren (im Gegensatz zu ant, bei dem man all diese Dinge konfigurieren muss).
+## Nexus Repository Manager
 
-Standardverzeichnisstruktur:
-
-    src
-        main
-            java
-            resources
-        test
-            java
-            resources
-    target
-        classes
-
-Nexus Repository Manager
 Jeder, der Continous Integration mit maven abbildet, kommt nicht umhin einen Repository Manager aufzusetzen oder einen zu verwenden. Für Closed-Source-Projekte wird man einen eigenen Repository Manager aufsetzen (z. B. Nexus Repository Manager: http://nexus.sonatype.org/), da man die Artefakte sicher nicht öffentlich bereitstellen will.
 
 Der Nexus Repository Manager ist ein Tool zur Verwaltung von Build-Artefakten. Man unterscheidet:
@@ -79,9 +72,30 @@ Wichtige Schalter:
 Maven 2
 Viele OpenSource-Projecte (Spring, Hibernate, Apache ...) deployen ihre Artefakte ins offizielle Maven 2 Repository: http://search.maven.org/. Somit ist das eine gute Anlaufstelle für öffentliche Libs. Für ein Projekt wird man sein eigenes Repository aufsetzen, so daß die gebauten Artefakte nur lokal verfügbar sind - die öffentlichen zieht man sich aus einem öffentlichen Repository.
 
-pom.xml
+---
 
-Die project.xml von maven 1 wurde ersetzt durch die pom.xml. Darin werden u. a. folgende Aspekte behandelt:
+# Maven Konzepte
+## Convention over Configuration
+
+Maven definiert eine Standard-Verzeichnisstruktur für Komponenten. Hält man sich an diese Verzeichnisstruktur muss man wesentlich weniger im ``pom.xml`` (maven 2) bzw. ``project.xml`` (maven 1) konfigurieren (im Gegensatz zu ant, bei dem man all diese Dinge konfigurieren muss).
+
+Standardverzeichnisstruktur:
+
+    src/
+      main/
+        java/
+        resources/
+      test/
+        java/
+        resources/
+    target/
+      classes/
+
+---
+
+## Project-Object-Model ... pom.xml
+
+Die ``project.xml`` von maven 1 wurde ersetzt durch die ``pom.xml``. Darin werden u. a. folgende Aspekte behandelt:
 
     Module:
         eine pom.xml kann Untermodule haben. Auf diese Weise lässt sich eine Hierarchie aufbauen, so daß ein mvn install auf oberster Ebene zu einem mvn install auf den darunterliegenden Modulen/Projekten führt
@@ -90,18 +104,22 @@ Die project.xml von maven 1 wurde ersetzt durch die pom.xml. Darin werden u. a. 
 
 So siehts in der parent-pom aus:
 
+```xml
 <groupId>com.icw.ehf.test</groupId>
 <artifactId>ehf-template-test-parent-pom</artifactId>
 <version>2.12-SNAPSHOT</version>
 <packaging>pom</packaging>
+```
 
 und so wird das Artefakt in einer anderen pom als parent referenziert:
 
+```xml
 <parent>
 <groupId>com.icw.ehf.test</groupId>
 <artifactId>ehf-template-test-parent-pom</artifactId>
 <version>2.12-SNAPSHOT</version>
 </parent>
+```
 
     distributionManagement
     repositories
