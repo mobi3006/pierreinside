@@ -431,7 +431,7 @@ Anschließend wechselt man als root-User (ACHTUNG: das ist nicht der Admin-User,
     
 auf die Diskstation, um ein sog. *Bare-Repository* anzulegen:
 
-    cd /volume1/myuser/    # (A)
+    cd /volume1/myuser/                # (A)
     mkdir git-repos
     cd git-repos
     mkdir myrepo.git
