@@ -187,33 +187,28 @@ konfiguriert werden.
 
 # Applicationscode
 
-Spring-Boot verwendet - Spring-typisch - Java-Annotation en-masse, um den ApplicationContext aufzubauen. Sie werden verwendet, um die Eigenschaften der Anwendung festzulegen. Beispiele:
+Spring-Boot verwendet - [Spring-typisch ... siehe auch Spring-Core](springCore.md) - Java-Annotation en-masse, um den ApplicationContext aufzubauen. Sie werden verwendet, um die Springinitialisierung durch den Spring-Boot-Loader zu ermöglichen. Beispiele:
 
 * ``@SpringBootApplication``
 * ``@EnableAutoConfiguration``
-* ``@Configuration``
-* ``@ComponentScan``
 * ...
 
-Auf diese Weise weiß der Spring-Boot-Loader (und somit auch der Leser dieser Klasse) beispielsweise wie die Anwendung zu initialisieren ist.
-
-Die zentralen Annotationen macht man am besten an die Main-Class, denn das ist die erste Klasse, die geladen wird.
+Zudem erhöht diese Vorgehensweise die Semantik der Klassen, so daß der Leser ein besseres Verständnis erhält (das ist aus meiner Sicht bei einer Trennung von Java-Code und XML-Code immer ein Problem gewesen).
 
 > i. a. gibt es xml-basierte Alternativen zur Annotation aber die Spring-Macher empfehlen die Verwendung von Annotationen).
 
-
-## Strukturierung
+## Steuerung der Spring-Initialisierung
 
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-locating-the-main-class
 
-## @SpringBootApplication
+### @SpringBootApplication
 Convenience Annotation ... subsumiert die empfohlenen Annotationen 
 
 * ``@EnableAutoConfiguration``
 * ``@Configuration``
 * ``@ComponentScan``
 
-## @EnableAutoConfiguration
+### @EnableAutoConfiguration
 
 Ist diese Eigenschaft gesetzt, so versucht Spring sich die Spring-Konfiguration der Anwendung selbst zu erschließen. Hierin steckt schon eine Menge Magie ...
 
@@ -221,14 +216,14 @@ Ist diese Eigenschaft gesetzt, so versucht Spring sich die Spring-Konfiguration 
 
 ... solange das zuverlässig und intuitiv funktioniert ist alles gut ;-)
 
-### Auto-Configuration gezielt abschalten
+#### Auto-Configuration gezielt abschalten
 
 Über Excludes lassen sich einzelne Ressourcen von der Auto-Configuration ausschließen:
 
     @EnableAutoConfiguration(
       exclude={DataSourceAutoConfiguration.class})
 
-### Auto Configuration Report
+#### Auto Configuration Report
 
 Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --debug``) wird ein sog. Auto-Configuration Report ausgegeben:
 
@@ -249,10 +244,23 @@ Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --de
     
 Dieser Report kann sehr hilfreich sein, wenn man der Spring-Magie auf die SChliche kommen will.
 
-### @Configuration
-Mit dieser Annotation werden Klassen gekennzeichnet, die Beans beispielsweise über Methoden (``@Bean public MyBean getMyBean``) bereitstellen.
+### @ConditionalOnProperty
+Über 
 
-Eine mit ``@Component public class MyConfiguration`` oder ``@Service public class MyService`` gekennzeichnete Klasse exponiert Instanzen dieser Klasse automatisch als Beans, so daß ein ``@Autowired`` darauf möglich ist.
+```java
+@ConditionalOnProperty(
+  name = "deployment.environment", 
+  havingValue = "DEV")
+public class MyService{ ... }
+```
+
+wird die Integration der Klasse in die Initialisierung der Anwendung (durch Spring) von bestimmten Bedingungen abhängig gemacht.
+
+Über die ``application.properties`` 
+
+    deployment.environment=DEV
+
+erfolgt die Konfiguration.
 
 ## Konfiguration von Applikationseigenschaften
 * Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
@@ -278,7 +286,7 @@ java
 Hierzu muß die Spring-Boot-Applikation allerdings Command-Line-Parameter unterstützen (``SpringApplication.setAddCommandLineProperties(true)``), was aber per Default der Fall ist.
 
 ### Laufzeitänderungen
-Ist der ``spring-boot-starter-actuator`` aktiviert (als Dependency vorhanden), dann wird ein Rest-Service bereitgestellt, über den die Konfiguration zur Laufzeit geändert werden kann.
+Ist der ``spring-boot-starter-actuator`` aktiviert (als Dependency vorhanden), dann wird ein Rest-Service bereitgestellt, über den die Konfiguration zur Laufzeit geändert werden kan
 
 ### Property Injection mit Spring-EL
 Ganz ohne weiteres zutun unterstützt Spring bereits das Injecten von Property-Values in Beans per
@@ -336,30 +344,26 @@ Beim Maven-Build wird eine Datei ``spring-configuration-metadata.json`` generier
 
 IntelliJ bietet hier sogar die Möglichkeit zur Autovervollständigung. Willkommen im 21. Jahrhundert der Softwareentwicklung.
 
-## @ImportResource
-Diese Annotation wird benötigt, um die Spring-Xml-Kontextbeschreibungen nicht-annotationsbasierter Komponenten zu integrieren.
-
-    @ImportResource("classpath:my-context.xml")
-
 ## Konfiguration über ``application.properties``/``application.yml``
 
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
+* Standard-Konfigurationseinstellungen (für alle von Spring-Boot direkt unterstützte Komponenten): http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
 
-In diesem Link sind die Konfigurationseinstellungen zu ganz vielen Komponenten dargestellt. Wenn man besipielsweise Velocity (Template-Engine) verwedet, dann wird man dort sicher fündig werden, wenn man die Konfiguration anpassen will.
+Die Konfiguration der Anwendungskomponenten erfolgt in erster Linie über die Dateien
+
+* ``application.properties``
+* ``application.yml``
+
+Die Yaml-Datei ist bei komplexen Anwendungen aus meiner Sicht besser geeignet, da die Struktur in YAML hierarchisch (statt bei Property-Files flach) aufgebaut ist. Das erhöht die Lesbarkeit und erfordert auch sofort die richtige Eingliederung der Properties in die Hierarchie. Bei Property-Files können zwischen  ``mail.sender.host=localhost`` und ``mail.sender.port=4711`` beliebig viele andere Properties stehen. Bei YAML hingegen stehen die beiden Eigenschaften der gleichen Ebene nebeneinander:
+
+```yaml
+mail:
+  sender:
+    host: localhost
+    port: 4711
+```
 
 Da der Application-Server in einem Executable-Jar auch Komponente der Anwendung ist, findet man dort also auch Konfigurationsmöglichkeiten.
-
-## @ComponentScan
-
-Ist diese Eigenschaft gesetzt, dann sucht der Spring-Loader selbst nach Spring-Beans, d. h. nach Anwendungskomponenten wie 
-
-* ``@Component``
-* ``@Service``
-* ``@Repository``
-* ``@Controller``
-
-Zusammen mit ``@Autowire`` ergibt sich dadurch kaum noch expliziter Konfigurationsaufwand.
 
 ---
 
@@ -396,7 +400,11 @@ Dieser JUnit-Testrunner sollte grundsätzlich bei Spring-basierten Komponenten v
 ## @SpringApplicationConfiguration
 Diese Annotation wird häufig in Spring-Boot-Tests eingesetzt, um den ApplicationContext aufzubauen. Es ist eine Erweiterung des Spring-Core Annotation 
 
-    @ContextConfiguration(locations = { "classpath:mymodule-context.xml" })
+```java
+@ContextConfiguration(
+  locations = { 
+    "classpath:mymodule-context.xml" })
+```
 
 Hier werden i. a.  zentrale Klassen ausgeführt (z. B. die Spring-Boot-Application-Klasse), die dann weitere Spring-Komponenten anziehen. Ausserdem lassen sich darüber XML-basierte ApplicationContext-Eweiterungen anziehen:
 

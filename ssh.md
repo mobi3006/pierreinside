@@ -2,6 +2,8 @@
 
 # Clientsicht
 ## Public-Private-Key-Generierung
+* https://wiki.ubuntuusers.de/SSH/
+
 Will man ohne Password auf einen anderen Rechner zugreifen, dann tut man das i. d. R. über Public-Private-Keys. Es gibt viele Use-Cases, in denen diese Variante genutzt wird:
 
 * ssh-connects zwischen Rechnern

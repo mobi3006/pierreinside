@@ -42,14 +42,16 @@
 * Git Ecosystem
    * [Git](git.md)
    * [GitHub](github.md)
+   * [GitHub Pages](githubPages.md)
    * [GitBook](gitbook.md)
    * [Bitbucket](bitbucket.md)
+   * [Jekyll](jekyll.md)
 * [Static Site Generators](staticSiteGenerators.md)
    * [Markdown](markdown.md)
    * [Hugo](hugo.md)
-   * Jeckyll
 * Devices
    * [iPad Pro](ipadPro.md)
    * [Auto](auto.md)
 * [Englisch](englisch.md)
+* [Leanpub](leanpub.md)
 

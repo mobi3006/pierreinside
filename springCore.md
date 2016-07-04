@@ -6,12 +6,43 @@ Spring Core ist ein Factory-Ansatz, d. h. Spring kümmert sich um die Instanziie
 ---
 
 # ApplicationContext
+## @ComponentScan
+Ist diese Eigenschaft gesetzt, dann sucht der Spring-Loader selbst nach Spring-Beans, d. h. nach Anwendungskomponenten wie 
+
+* ``@Component``
+* ``@Service``
+* ``@Repository``
+* ``@Controller``
+
+Zusammen mit ``@Autowire`` ergibt sich dadurch kaum noch expliziter Konfigurationsaufwand.
+
 ## @ImportResource
-Importiert eine Spring-Konfiguration in Form von xml-Files.
+Diese Annotation wird benötigt, um die Spring-Xml-Kontextbeschreibungen nicht-annotationsbasierter Komponenten zu integrieren.
+
+    @ImportResource("classpath:my-context.xml")
+
+## @Configuration
+Mit dieser Annotation werden Klassen gekennzeichnet, die Beans beispielsweise über Methoden (``@Bean public MyBean getMyBean``) bereitstellen.
+
+Eine mit ``@Component public class MyConfiguration`` oder ``@Service public class MyService`` gekennzeichnete Klasse exponiert Instanzen dieser Klasse automatisch als Beans, so daß ein ``@Autowired`` darauf möglich ist.
+
+## @Conditional
+
+## @Profile
+Über
 
 ```java
-@ImportResource("classpath:application-context.xml")
+@org.springframework.context.annotation.Profile("swagger")
+public class MyService{ ... }
 ```
+
+wird die Integration der Klasse in die Initialisierung der Anwendung (durch Spring) davon abhängig gemacht, ob ein bestimmtes Profil in ``application.properties`` 
+
+    spring.profiles.active=swagger
+
+gesetzt wurde.
+
+> Handelt es sich hierbei nicht nur um einen Spezialfall von ``@Conditional``?
 
 ---
 

@@ -72,6 +72,7 @@ Ich werde die Installation und Konfiguration dieses Images zumindest teilweise s
 Danach muß ansible noch konfiguriert werden (ssh-keys, ssh-agent, ``~/.ssh/authorized_keys``) ... siehe [Ansible](ansible.md#).
 
 ## Weitere Installationen über Ansible
+Meine Erklärungen fallen hier recht kurz aus, weil der Code die Dokumentation ist.
     
 * midnight-commander
 * awesome Fenstermanager

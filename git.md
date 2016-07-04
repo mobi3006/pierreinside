@@ -38,6 +38,7 @@ Ich habe jehrelang mit Subversion und maven gearbeitet. Dabei bin ich nach einig
 # Idee
 
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml
+* Git Workflows: https://git-scm.com/about/distributed
 
 Bei Git handelt es sich um ein Versionssystem, das ohne dedizierten zentralen Server auskommt. Stattdessen gibt es viele mehr oder weniger gleichberechtigte vollwertige Repositories (mit allen Versionen der verwalteten Ressourcen), die bei Bedarf synchronisiert werden.
 

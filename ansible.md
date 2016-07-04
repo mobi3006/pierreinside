@@ -13,9 +13,11 @@ Bricht das Shellscript nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeut
 * http://docs.ansible.com/ansible/index.html
 
 ## Nur Linux - kein Windows
-Windows-User müssen leider draußen bleiben. Es ist weder möglich ein Windows-System mit Ansible aufzusetzen noch einen Windows-Rechner als Controller zu verwenden.
+Windows-User müssen vorerst leider draußen bleiben. Es ist weder möglich ein Windows-System mit Ansible aufzusetzen noch einen Windows-Rechner als Controller zu verwenden.
 
 **Ansible wird für Windows nicht unterstützt.**
+
+**UPDATE 4. Juli 2016:** ich habe gelesen, daß es mit ein paar Klimmtzügen möglich ist (basierend auf Cygwin).
 
 ## Controller-Konzept
 Ansible kennt das Controller-System und die Zielsysteme. Auf dem Controller-System muß  Ansible installiert werden ... auf den zu verwaltenden Systemen genügt ein SSH-Server und Python.
@@ -28,16 +30,9 @@ Ansible kennt das Controller-System und die Zielsysteme. Auf dem Controller-Syst
 Die Kommandos aus dem Ansible-Playbook werden später über ssh auf die Zielsysteme übertragen und dort ausgeführt. Um eine scriptgesteuerte Ausführung zu ermöglichen, darf kein Passwort abgefragt werden. Das wird über die Verwendung von Public/Private Keys erreicht. Der Private-Key unterliegt strengster Geheimhaltung 
 
 ### SSH-Key erzeugen
-* https://wiki.ubuntuusers.de/SSH/
+[siehe separate Seite](ssh.md)
 
-Folgender Befehl erzeugt einen Public-Key und einen Private-Key:
-
-```shell
-    ssh-keygen -t rsa -b 4096 -C "info@cachaca.de"
-```    
-Dabei wird eine Passphrase abgefragt, die man später bei Verwendung des Private-Key eingeben muß. 
-
-### Zielrechner definieren
+### Zielrechner definieren (Inventory File)
 
 Die Zielrechner können gruppiert werden - das ist sehr praktisch, wenn man mit einem Befehl gleich mehrere Rechner adressieren möchte.
 
@@ -61,6 +56,8 @@ Unter ``/etc/ansible/hosts`` müssen die zu verwaltenden Rechner eingetragen wer
           SSH debugging output to help diagnose the issue", 
     "unreachable": true
     }
+    
+**ACHTUNG:** Will man später Tasks als User ``root`` durchführen (``remote_user: root``), so muß der Public-Key in ``/root/.ssh/authorized_keys`` eingetragen werden.
 
 ## Das erste Kommando ...
 Gib auf allen konfigurierten Zielsystemen den gleichen altbekannten Text aus:
@@ -87,16 +84,9 @@ Die Skipte heißen bei Ansible Playbook. Das folgende Ansible-Playbook (``myplay
 wird per ``ansible-playbook myplaybook.yml`` ausgeführt und installiert das Paket *Midnight Commander*. Wenn es nicht funktionieren sollte, die Option ``-vvv`` bzw. ``-vvvv`` macht Ansible ein wenig geschwätziger.
 
 ## SSH-Agent starten und konfigurieren
-Der Private-Key ist durch eine Passphrase geschützt. Da Ansible-Playbooks aber i. d. R. vollautomatisiert im Hintergrund laufen und somit nicht ständig um die Eingabe dieser Passphrase betteln wollen, starten wir einen ssh-agent ...
-
-    eval $(ssh-agent -s)
-    
-und geben ihm die Passphrase (wird im Speicher gehalten und nicht persistiert)
-
-    ssh-add ~/.ssh/id_rsa
+[siehe separate Seite](ssh.md)
 
 ---
-
 
 # Ansible Runtime Engine
 
@@ -128,12 +118,17 @@ Lösung 2: idempotent
 
     lineinfile: dest=~/.zshrc state=present line='ZSH_THEME=robbyrussell'
 
+## Variablen
+* http://docs.ansible.com/ansible/playbooks_variables.html
+
 ## Umgebungsinformationen
+* http://docs.ansible.com/ansible/playbooks_variables.html
+
 Ansible sammelt zu den Hosts Informationen (z. B. CPU, OS), die als Variablen zur Verfügung stehen. Diese Variablen können per 
 
     ansible -m setup localhost
     
-Statt ``localhost`` kann jeder registrierte Host eingetragen werden (siehe ``/etc/ansible/hosts``).
+Statt ``localhost`` kann jeder registrierte Host eingetragen werden (siehe ``/etc/ansible/hosts``). Auf diese Weise findet man beispielsweise heraus, daß es eine Variable ``ansible_kernel`` gibt, die die die Kernel-Version enthält (anstatt ``uname -r``).
 
 Umgebungsvariablen werden per
 
