@@ -28,10 +28,10 @@
    * [Easymock](easymock.md)
    * [Mockito](mockito.md)
 * Performance & Scalability
-   * [Java Performance](javaPerformance.md)
-   * [Java Concurrency](javaConcurrency.md)
+   * [Java Performance](java_performance.md)
+   * [Java Concurrency](java_concurrency.md)
 * DevOps
-   * [Linux-Paketverwaltung](linuxPaketverwaltung.md)
+   * [Linux-Paketverwaltung](linux_paketverwaltung.md)
    * [ssh](ssh.md)
    * [Maven](maven.md)
    * [Vagrant](vagrant.md)
@@ -54,4 +54,6 @@
    * [Auto](auto.md)
 * [Englisch](englisch.md)
 * [Leanpub](leanpub.md)
+* [cygwin](cygwin.md)
+* [Babun](babun.md)
 

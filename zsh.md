@@ -6,12 +6,11 @@ Die Linux-Konsolen sind von jeher sehr mächtig. Die ``zsh`` in Kombination mit 
 ---
 
 # Getting started ...
-## Installation
 Die zsh Shell installieren
 
     apt-get install -y zsh
     
-dann die oh-my-zsh Erweiterungen hinzufügen
+und die oh-my-zsh Erweiterungen hinzufügen
 
     bash -c
       "$(curl 
@@ -20,13 +19,18 @@ dann die oh-my-zsh Erweiterungen hinzufügen
             /robbyrussell/oh-my-zsh/
             master/tools/install.sh)"
 
-und zu guter letzt noch zsh als Default Shell festlegen:
+Zu guter letzt noch zsh als Default Shell festlegen:
 
     sudo chsh -s $(which zsh) $(whoami)
-      
-## Konfiguration
+ 
+Ausloggen und neu anmelden - das Terminal sollte nun eine oh-my-zsh-Shell präsentieren.
+
+---
+
+# Konfiguration
 Die Konfiguration erfolgt in ``~/.zshrc``.
 
+## GRML-Konfiguration
 Eine sehr umfassende Konfiguration erfolgt in der Distribution GRML, die zsh als default-Shell verwendet. Über 
 
     wget -O ~/.zshrc 
@@ -41,7 +45,7 @@ wird das GRML-zsh-Template heruntergeladen und in ``~/.zshrc`` abgelegt.
 * https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 * https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes
 
-zsh kommt mit hunderten von Themes ... robbyrussell hat mir ganz gut gefallen
+zsh kommt mit hunderten von Themes ... *robbyrussell* hat mir ganz gut gefallen
 
 ## intheloop
 * kommt mit dem git-Plugin, das die Arbeit mit Git komfortabler gestaltet
@@ -52,4 +56,3 @@ zsh kommt mit hunderten von Themes ... robbyrussell hat mir ganz gut gefallen
 * https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins
 
 Die meisten Plugins enthalten eine gute README Datei.
-
