@@ -5,6 +5,8 @@
    * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
    * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
    * [zsh](zsh.md)
+   * [cygwin](cygwin.md)
+   * [Babun](babun.md)
    * [JRebel](jrebel.md)
 * [Architektur](architecture.md)
    * [Microservices](microservices.md)
@@ -39,6 +41,7 @@
    * [Saltstack](saltstack.md)
    * [Docker](docker.md)
    * [Kubernetes](kubernetes.md)
+   * [Synology](synology.md)
 * Git Ecosystem
    * [Git](git.md)
    * [GitHub](github.md)
@@ -46,15 +49,14 @@
    * [GitBook](gitbook.md)
    * [Bitbucket](bitbucket.md)
    * [Jekyll](jekyll.md)
-* [Static Site Generators](staticSiteGenerators.md)
+* Publishing
    * [Markdown](markdown.md)
-   * [Hugo](hugo.md)
+   * [Static Site Generators](staticSiteGenerators.md)
+     * [Hugo](hugo.md)
+     * [GitBook](gitbook.md)
+   * [Leanpub](leanpub.md)
 * Devices
    * [iPad Pro](ipadPro.md)
    * [Auto](auto.md)
 * [Englisch](englisch.md)
-* [Leanpub](leanpub.md)
-* [cygwin](cygwin.md)
-* [Babun](babun.md)
-* [Synology](synology.md)
 
