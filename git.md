@@ -421,16 +421,20 @@ Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
     * per Pull-Request die Änderungen am Branch in den master-Branch mergen
 
 ## Zentraler-Repository-Ansatz mit Synology-Git
-
+[siehe Abschnitt Synology](synology.md)
 * http://blog.osdev.org/git/2014/02/13/using-git-on-a-synology-nas.html
 
-Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern (evtl. legt man auch einen User ``gituser`` an) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist und läuft.
+Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern (evtl. legt man auch einen User ``gituser`` an) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist und läuft. Der ssh-Server wird benötigt, um
 
-Anschließend wechselt man als root-User (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet)
+* im folgenden ein Bare-Repository auf der Synology-Diskstation anzulegen (siehe unten)
+* zwischen Git-Client und Git-Bare-Repository zu kommunizieren (u. a. ``git clone``, ``git push``)
+
+### Bare-Repository auf Diskstation anlegen
+Als User ``root`` (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet) per ssh auf die Diskstation wechseln:
 
     ssh root@diskstation
     
-auf die Diskstation, um ein sog. *Bare-Repository* anzulegen:
+und dort per
 
     cd /volume1/myuser/                # (A)
     mkdir git-repos
@@ -442,13 +446,39 @@ auf die Diskstation, um ein sog. *Bare-Repository* anzulegen:
     cd ../..
     chown -R myuser:users myrepo.git   # (B)
     
+ein sog. *Bare-Repository* anlegen.
+
 **ACHTUNG:** natürlich muß man die Location (A) und den Owner bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend/schreibend zugreifen kann.
 
-Anschließend wird das ssh-Terminal geschlossen und das Repository wird lokal geclont (Achtung: es ist eine ssh-URL, d. h. 
+### Diskstation Repository clonen
+Auf dem Client wird das Repository lokal geclont (Achtung: es handelt sich hier um eine ssh-URL - nicht um https): 
 
     git clone ssh://myuser@diskstation/volume1/homes/myuser/git-repos/myrepo.git
 
-**ACHTUNG:** es handelt sich hier um eine ssh-Url und nicht um https!!! Will man die https-Url verwenden, so muß noch WebDAV auf der Synology-Diskstation installiert und konfiguriert sein.
+**ACHTUNG:** Für den Support von https-Urls muß noch WebDAV auf der Synology-Diskstation installiert und konfiguriert werden - aber ssh-Verbindungen sind viel besser, da eine passwortfreie Authentifizierung möglich ist.
+
+### Passwortfreie ssh-Verbindung konfigurieren
+Voraussetzung ist die korrekte Konfiguration des ssh-Connects für den zu verwendenden User - siehe hier
+Nach der Konfiguration von ssh über die Synology-Adminoberfläche ist es nur dem User ``root`` möglich, eine ssh-Verbindung aufzubauen. Jeder andere User 
+
+    ssh pfh@diskstation
+    
+erhält die Fehlermeldung (http://gresch.io/2016/01/fatal-interactive-git-shell-is-not-enabled-on-synology/)
+
+    fatal: Interactive git shell is not enabled.
+    hint: ~/git-shell-commands should exist and have read and execute access.
+
+Die Ursache liegt an der Default-Shell dieser non-root-User ... in ``/etc/passwd`` findet sich dieser Eintrag:
+
+    DiskStation> cat /etc/passwd
+    pfh:x:1027:100::/var/services/homes/pfh:/var/packages/Git/target/bin/git-shell
+
+der in die Richtung "git-shell" geht. Das muß per vi-Editor (``vi /etc/passwd``) in 
+
+    DiskStation> cat /etc/passwd
+    pfh:x:1027:100::/var/services/homes/pfh:/bin/sh
+
+abgeändert werden. 
 
 ---
 
