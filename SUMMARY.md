@@ -52,11 +52,11 @@
 * Publishing
    * [Markdown](markdown.md)
    * [Static Site Generators](staticSiteGenerators.md)
-     * [Hugo](hugo.md)
-     * [GitBook](gitbook.md)
+       * [Hugo](hugo.md)
    * [Leanpub](leanpub.md)
 * Devices
    * [iPad Pro](ipadPro.md)
    * [Auto](auto.md)
 * [Englisch](englisch.md)
+* [Glossar](GLOSSARY.md)
 

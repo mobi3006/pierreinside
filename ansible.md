@@ -126,7 +126,7 @@ Vagrant unterstützt neben dem normalen ``ansible``-Provider auch den sog. ``ans
 
 In diesem Fall muß Ansible auf dem Guest-System (= Linux-System) installiert werden. Das erfolgt 
 
-* entweder automatisch durch die Option ``install``:
+* entweder automatisch durch die Option ``install`` (ACHTUNG: funktioniert nicht mit Vagrant 1.8.1 ... https://github.com/mitchellh/vagrant/issues/6858):
 
 
     config.vm.provision "ansible_local" do |ansible|
@@ -134,14 +134,14 @@ In diesem Fall muß Ansible auf dem Guest-System (= Linux-System) installiert we
        install = true
     end
 
-* oder per Shellscript-Provisioning im Vagrantfile:
+* oder per Shellscript-Provisioning im Vagrantfile - vorher muß natürlich das entsprechende Repository im Guest-System eingetragen sein (beim ``install_mode = default``) oder Ansible wird über den Python-Paketmanager installiert (beim ``install_mode = pip``):
 
 
     config.vm.provision "shell", inline: <<-SHELL
         sudo apt-get install -y ansible
     SHELL
 
-Die ``ansible_local`` Variante hat den Vorteil, daß Ansible auf dem Host-System nicht erst installiert werden muß. Das hat folgende Vorteile:
+Die ``ansible_local`` Variante hat den Charme, daß Ansible auf dem Host-System nicht installiert werden muß. Das hat folgende Vorteile:
 
 * das Host-System wird nicht verändert
 * die Installation kann komplett vagrant-scriptbasiert erfolgen
