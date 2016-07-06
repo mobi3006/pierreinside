@@ -36,8 +36,11 @@
    * [Linux-Paketverwaltung](linux_paketverwaltung.md)
    * [ssh](ssh.md)
    * [Maven](maven.md)
+   * [Shellprogrammierung](shellprogramming.md)
    * [Vagrant](vagrant.md)
+     * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
    * [Ansible](ansible.md)
+     * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
    * [Saltstack](saltstack.md)
    * [Docker](docker.md)
    * [Kubernetes](kubernetes.md)
@@ -59,5 +62,4 @@
    * [Auto](auto.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [Shellprogrammierung](shellprogramming.md)
 

@@ -4,7 +4,58 @@ Ansible wird zum automatisierten Provisioning von Systemen eingesetzt.
 
 In einem Multimachine-Vagrant-Projekt, das aus 5 verschiedenen Images bestand und dessen Provisioning eine knappe Stunde dauerte, haben wir Shellscripting zum Provisioning eingesetzt. Das hatte einige Vorteile, **aber auch einen ganz entscheidenden Nachteil**: Fehlende Idempotenz.
 
-Bricht das Shellscript nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeutet das nach Beheben des Fehlers oftmals (wenn man nicht mehrere Minuten in das manuelle Anpassen der Scripte investieren will), daß das Image komplett platt gemacht und neu aufgebaut wird ... also wieder 20 Minuten warten bis man überhaupt wieder so weit ist wie man schon mal war.
+**Warum ist Idempotenz so wichtig?**
+
+Beispiel 1: [für meinen Workbench-Anwendnungsfall besonders wichtig](workbench.md)
+
+Die Skripte entwickeln sich weiter und neu entwickelte Teile sollen auch sofort genutzt werden können. Ohne Idempotenz darf/kann ich bereits ausgeführte Schritte nicht einfach wiederholen, sondern muß sie auskommentieren (o. ä. ... was evtl. gar nicht so einfach ist).
+
+
+Beispiel 2:
+
+Bricht das Provisioning nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeutet das nach Beheben des Fehlers oftmals (wenn man nicht mehrere Minuten in das manuelle Anpassen der Scripte investieren will), daß das Image komplett platt gemacht und neu aufgebaut wird ... also wieder 20 Minuten warten bis man überhaupt wieder so weit ist wie man schon mal war.
+
+---
+
+# Wichtige Konzepte
+## Multimachine
+Während man es bei Shellscripting und Vagrantscripting gewohnt ist auf EINER Maschine zu arbeiten, ist Ansible dazu gedacht Kommandos auf vielen Maschinen (evtl. Tausende) gleichzeitig auszuführen. Das erleichtert insbesondere die Wartung von Serverfarmen. Hierzu lassen sich Maschinen über das Inventory-File (``/etc/ansible/hosts``) kategorisieren, so daß per 
+
+    ansible webservers -a ""
+    
+alle als Webserver kategorisierte Maschinen ihre Plattenbelegung ausgeben:
+
+
+Diese Sichtweise sollte man sich vergegenwärtigen.
+
+## AdHoc vs. Playbook
+* http://docs.ansible.com/ansible/intro_adhoc.html
+
+AdHoc-Kommandos werden per ``ansible``
+
+     ansible all -a "/bin/echo hello"
+
+abgeschickt und sind so komfortabel wie Shell-Kommandos ... nur eben mit der Mächtigkeit sehr viele Hosts mit der Abarbeitung des Kommandos zu beauftragen.
+
+Ein Playbook hingegen ist eher für umfangreichere Aktionen gedacht:
+
+    ansible-playbook myplaybook.yml
+    
+Hierzu wird eine Playbook-Datei benötigt.
+
+## Local vs. Remote
+Ansible unterscheidet zwischen
+
+* **Local-Verbindung:** hierbei wird das Ansible-Skript/Kommando nicht per ssh zum Zielrechner (= localhost) gebracht ... insofern muß die ssh-Infrastruktur auch nicht existieren. Allerdings funktionieren dann Properties wie ``remote_user`` nicht ... stattdessen wird ``become`` verwendet, um in eine andere Rolle zu schlüpfen (beispielsweise als ``root`` zu agieren)
+* **Remote-Verbindung:** hierbei wird das Kommando auf dem Zielrechner per ``ssh -c ...`` ausgeführt. Das kann auch passieren, wenn der Zielrechner ``localhost`` ist.
+
+Wenn nicht explizit angegeben wurde, ob Ansible local oder remote verwenden soll, dann versucht Ansible ein Auto-Detection.
+
+Für localhost sollte man am besten 
+
+    localhost ansible_connection=local
+    
+in das Ansible-Inventory-File (z. B. ``/etc/ansible/hosts``) aufnehmen.
 
 ---
 
@@ -87,12 +138,18 @@ Windows-User werden von RedHat (dem Ansible-Sponsor)  derzeit nicht unterstützt
 
 Es gibt dennoch ein paar Ansätze, unter einem Windows-Host Linux-Zielsysteme zu steuern.
 
-## cygwin + ansible_remote
+In diesem Zuge spricht man von 
+
+* **Ansible-Remote:** in diesem Fall werden vom Controller Kommandos via ssh zum Zielsystem geschickt. Das Controller-System muß mit Ansible und Python ausgestattet sein
+* **Ansible-Local:** in diesem Fall wird das Playbook auf den Zielrechner transportiert und dort lokal ausgeführt. Der Controller-System braucht kein Ansible/Python
+  * **besonders für Controller auf Windows-Basis interessant**
+
+## cygwin + ansible-remote
 * https://www.azavea.com/blog/2014/10/30/running-vagrant-with-ansible-provisioning-on-windows/
 
-Bei diesem Ansatz wird der Python-Paketmanager (``pip``) verwendet, um das ``ansible`` Paket zu installieren.
+Bei diesem Ansatz wird der Python-Paketmanager (``pip``) verwendet, um das ``ansible`` Paket unter [cygwin](cygwin.md) zu installieren.
 
-Sicherstellen, daß die Umgebungsvariablen in cygwin/babun gesetzt sind:
+Sicherstellen, daß die Umgebungsvariablen in [cygwin](cygwin.md)/[babun](babun.md) gesetzt sind:
 
     export PYTHONHOME=/usr
     export PYTHONPATH=/usr/lib/python2.7
@@ -116,36 +173,10 @@ und anschließend das Ansible-Paket
 
     pip install ansible
 
-Danach muß ``ansible-playbook`` noch in ``$PATH`` aufgenommen werden. 
+Danach muß ``ansible-playbook`` noch in ``$PATH`` aufgenommen werden und los gehts ... äh, war da nicht noch was in obigem Link beschrieben? 
 
-## Vagrant: Option ansible_remote
-Könnte ansible_remote auch klappen, wenn cygwin+ansible_remote klappt? 
-
-## Vagrant: Option ansible_local
-Vagrant unterstützt neben dem normalen ``ansible``-Provider auch den sog. ``ansible_local``-Provider.
-
-In diesem Fall muß Ansible auf dem Guest-System (= Linux-System) installiert werden. Das erfolgt 
-
-* entweder automatisch durch die Option ``install`` (ACHTUNG: funktioniert nicht mit Vagrant 1.8.1 ... https://github.com/mitchellh/vagrant/issues/6858):
-
-
-    config.vm.provision "ansible_local" do |ansible|
-       ansible.playbook = "playbook.yml"
-       install = true
-    end
-
-* oder per Shellscript-Provisioning im Vagrantfile - vorher muß natürlich das entsprechende Repository im Guest-System eingetragen sein (beim ``install_mode = default``) oder Ansible wird über den Python-Paketmanager installiert (beim ``install_mode = pip``):
-
-
-    config.vm.provision "shell", inline: <<-SHELL
-        sudo apt-get install -y ansible
-    SHELL
-
-Die ``ansible_local`` Variante hat den Charme, daß Ansible auf dem Host-System nicht installiert werden muß. Das hat folgende Vorteile:
-
-* das Host-System wird nicht verändert
-* die Installation kann komplett vagrant-scriptbasiert erfolgen
-* auch **Windows-Host-Systeme** (für die es keinen offiziellen Ansible-Support gibt) **können Ansible-Provisioning verwenden** 
+## Vagrant + ansible_local
+[siehe eigener Abschnitt](vagrant_ansibleIntegration.md)
 
 ---
 
@@ -200,20 +231,6 @@ abgefragt (hier: der ausführende User).
 
 ## SSH-Agent starten und konfigurieren
 [siehe separate Seite](ssh.md)
-
----
-
-# Vagrant-Ansible-Integration unter Windows-Host
-
-Für eine komplette Automatisierung meiner [Workbench (VirtualBox-Linux-Image)](workbench.md) hatte ich die Idee, mittels Vagrant und Ansible ein komplett automatisiertes Setup zu scripten.
-
-## Variante 1: Remote Ansible
-
-* http://docs.ansible.com/ansible/guide_vagrant.html
-
-Der typische Ansible-Ansatz ermöglicht die Ausführung von Kommandos via ssh. Insofern paßt es perfekt in ein Vagrant-Host/Guest-Szenario - der Host sendet via ssh (wird von Vagrant eh schon konfiguriert) die entsprechenden Shell-Kommandos zum Guest. 
-
-Einzige Voraussetzung ist die Installation von Ansible auf dem Host-System. Leider wird diese Einschränkung für Windows-Host-Systeme zum Ausschlußkriterium, denn Ansible wird für Windows nicht unterstützt. Für mein Workbench-Szenario kam diese Lösung demnach nicht in Frage.
 
 ---
 
