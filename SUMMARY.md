@@ -59,4 +59,5 @@
    * [Auto](auto.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
+* [Shellprogrammierung](shellprogramming.md)
 
