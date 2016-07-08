@@ -14,7 +14,7 @@ Public-Private-Key erzeugen:
 
     ssh-keygen -t rsa -b 4096 -C "anyEmailOfMyUser@example.com"
 
-Dabei wird eine Passphrase (ein Kennwort) abgefragt, mit dem der Private-Key geschützt ist. der erzeugte Public-Private-Key wird unter ``~/.ssh/id_rsa`` bzw. ``~/.ssh/id_rsa.pub`` abgelegt. Entscheidend sind nun auch die Permissions (ansonsten funktioniert die Nutzung im worst-case nicht):
+Dabei wird eine Passphrase (ein Kennwort) abgefragt, mit dem der Private-Key geschützt ist. der erzeugte Public-Private-Key wird unter ``~/.ssh/id_rsa`` bzw. ``~/.ssh/id_rsa.pub`` abgelegt. Entscheidend sind nun auch die Permissions (**ansonsten verweigert der ssh-Client die Nutzung!!!**):
 
 * Verzeichnis ``~/.ssh`` sollte die Permissions 700 haben
 * die Key-Dateien sollten die Permissions 600 haben

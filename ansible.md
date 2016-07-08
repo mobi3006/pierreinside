@@ -18,16 +18,6 @@ Bricht das Provisioning nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeu
 ---
 
 # Wichtige Konzepte
-## Multimachine
-Während man es bei Shellscripting und Vagrantscripting gewohnt ist auf EINER Maschine zu arbeiten, ist Ansible dazu gedacht Kommandos auf vielen Maschinen (evtl. Tausende) gleichzeitig auszuführen. Das erleichtert insbesondere die Wartung von Serverfarmen. Hierzu lassen sich Maschinen über das Inventory-File (``/etc/ansible/hosts``) kategorisieren, so daß per 
-
-    ansible webservers -a ""
-    
-alle als Webserver kategorisierte Maschinen ihre Plattenbelegung ausgeben:
-
-
-Diese Sichtweise sollte man sich vergegenwärtigen.
-
 ## AdHoc vs. Playbook
 * http://docs.ansible.com/ansible/intro_adhoc.html
 
@@ -43,19 +33,26 @@ Ein Playbook hingegen ist eher für umfangreichere Aktionen gedacht:
     
 Hierzu wird eine Playbook-Datei benötigt.
 
+## Multimachine
+Während man es bei Shellscripting und Vagrantscripting gewohnt ist auf EINER Maschine zu arbeiten, ist Ansible dazu gedacht Kommandos auf vielen Maschinen (evtl. Tausende) gleichzeitig auszuführen. Das erleichtert insbesondere die Wartung von Serverfarmen. Hierzu lassen sich Maschinen über das Inventory-File (``/etc/ansible/hosts``) kategorisieren, so daß per 
+
+    ansible webservers -a "/bin/df -h"
+    
+alle als Webserver kategorisierte Maschinen ihre Plattenbelegung ausgeben.
+
+Diese Sichtweise sollte man sich vergegenwärtigen.
+
 ## Local vs. Remote
 Ansible unterscheidet zwischen
 
 * **Local-Verbindung:** hierbei wird das Ansible-Skript/Kommando nicht per ssh zum Zielrechner (= localhost) gebracht ... insofern muß die ssh-Infrastruktur auch nicht existieren. Allerdings funktionieren dann Properties wie ``remote_user`` nicht ... stattdessen wird ``become`` verwendet, um in eine andere Rolle zu schlüpfen (beispielsweise als ``root`` zu agieren)
 * **Remote-Verbindung:** hierbei wird das Kommando auf dem Zielrechner per ``ssh -c ...`` ausgeführt. Das kann auch passieren, wenn der Zielrechner ``localhost`` ist.
 
-Wenn nicht explizit angegeben wurde, ob Ansible local oder remote verwenden soll, dann versucht Ansible ein Auto-Detection.
-
-Für localhost sollte man am besten 
+Wenn nicht explizit angegeben wurde, ob Ansible local oder remote verwenden soll, dann versucht Ansible ein Auto-Detection. Man kann Ansible aber auch unter die Arme greifen, um die Connection-Variante explizit zu bestimmen (``/etc/ansible/hosts``): 
 
     localhost ansible_connection=local
     
-in das Ansible-Inventory-File (z. B. ``/etc/ansible/hosts``) aufnehmen.
+Das Scripting unterscheidet sich bei den Ausführungsformen nicht. Allerdings benötigt die Remote-Ausführung ein erweitertes Setup (ssh-Infrastrutur).
 
 ---
 
@@ -63,7 +60,9 @@ in das Ansible-Inventory-File (z. B. ``/etc/ansible/hosts``) aufnehmen.
 * http://docs.ansible.com/ansible/index.html
 
 ## Controller-Konzept
-Ansible kennt das Controller-System und die Zielsysteme. Software-Voraussetzungen:
+Ansible unterscheidet bei den beteiligten Rechnern zwischen *Controller-System* (steuert die Ausführung des Playbooks) und *Zielsystem*. 
+
+Software-Voraussetzungen:
 
 * Controller-System:
   * Ansible installiert (und Python)
@@ -76,13 +75,13 @@ Ansible kennt das Controller-System und die Zielsysteme. Software-Voraussetzunge
 * http://docs.ansible.com/ansible/intro_installation.html
 
 ## Konfiguration des Controller-Systems
-Die Kommandos aus dem Ansible-Playbook werden später über ssh auf die Zielsysteme übertragen und dort ausgeführt. Um eine scriptgesteuerte Ausführung zu ermöglichen, darf kein Passwort abgefragt werden. Das wird über die Verwendung von Public/Private Keys erreicht. Der Private-Key unterliegt strengster Geheimhaltung 
+Die Kommandos aus dem Ansible-Playbook werden später über ssh auf die Zielsysteme übertragen und dort ausgeführt. Um eine scriptgesteuerte Ausführung zu ermöglichen, darf kein Passwort abgefragt werden. Das wird über die Verwendung von Public/Private Keys erreicht ([siehe auch ssh](ssh.md)). 
 
 ### SSH-Key erzeugen
-[siehe separate Seite](ssh.md)
+[siehe ssh](ssh.md)
 
 ### Zielrechner definieren (Inventory File)
-Die Zielrechner können gruppiert werden - das ist sehr praktisch, wenn man mit einem Befehl gleich mehrere Rechner adressieren möchte.
+Die Zielrechner können gruppiert werden - das ist sehr praktisch, um mit einem Befehl gleich mehrere Rechner adressieren zu adressieren.
 
 **Option 1: sytemweit**
 
@@ -144,6 +143,9 @@ In diesem Zuge spricht man von
 * **Ansible-Local:** in diesem Fall wird das Playbook auf den Zielrechner transportiert und dort lokal ausgeführt. Der Controller-System braucht kein Ansible/Python
   * **besonders für Controller auf Windows-Basis interessant**
 
+## Vagrant + ansible_local
+[siehe eigener Abschnitt](vagrant_ansibleIntegration.md)
+
 ## cygwin + ansible-remote
 * https://www.azavea.com/blog/2014/10/30/running-vagrant-with-ansible-provisioning-on-windows/
 
@@ -174,9 +176,6 @@ und anschließend das Ansible-Paket
     pip install ansible
 
 Danach muß ``ansible-playbook`` noch in ``$PATH`` aufgenommen werden und los gehts ... äh, war da nicht noch was in obigem Link beschrieben? 
-
-## Vagrant + ansible_local
-[siehe eigener Abschnitt](vagrant_ansibleIntegration.md)
 
 ---
 
@@ -231,6 +230,22 @@ abgefragt (hier: der ausführende User).
 
 ## SSH-Agent starten und konfigurieren
 [siehe separate Seite](ssh.md)
+
+---
+
+# Inventory
+* http://docs.ansible.com/ansible/intro_inventory.html
+
+Im Inventory-File (konfigurierbar über ``--inventory-file=/tmp/myinventory``) werden die Zielsysteme definiert, gruppiert und der Zugriff konfiguriert (Host, Port, Private-Keys, ...).
+
+---
+
+# Best Practices
+* Offizielle Best-Practices: http://docs.ansible.com/ansible/playbooks_best_practices.html
+* Code-Beispiele: https://github.com/ansible/ansible-examples
+
+## Verwende Roles
+Über Rollen lassen sich wiederverwendbare Ansible-Skripte erreichen.
 
 ---
 
