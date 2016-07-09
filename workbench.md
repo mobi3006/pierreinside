@@ -10,6 +10,12 @@ Auf diese Weise könnte ich auch anderen Entwicklern den Einstieg in eine Linux-
 
 Ich frage ich allerdings bereits am Anfang dieser Idee, ob ich denn dauerhaft die Muße haben werde alle Anpassungen an meiner Workbench auch zu scripten und - VOR ALLEM - auch zu testen, denn das ist häufig sehr aufwendig ...
 
+... aber scheinbar bin ich nicht der Einzige:
+
+* https://danielgroves.net/notebook/2014/05/development-environments/
+* http://digitalshore.io/set-up-a-local-linux-development-environment-with-vagrant/
+* ...
+
 ## Umsetzung - ERFOLGLOS
 Meine ursprüngliche Idee war, ein Vagrant-Ansible-Setup unter einem Windows-Host zu fahren. Für Windows gibt es keinen Ansible-Support. Deshalb schied das typische *Ansible-Remote-Provisioning* (über ssh in das Guest-System hinein) aus. Mir blieb nur das *Ansible-Local-Provisioning*, bei dem Ansible auf dem Guest-System (Linux) installiert wird und dann der übliche ssh-execute-command verwendet wird ([Details siehe hier](ansible.md)). Leider hat das auch nicht funktioniert ... nach einigen Versuchen war ich frustriert und habe aufgegeben.
 

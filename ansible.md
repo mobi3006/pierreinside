@@ -236,7 +236,11 @@ abgefragt (hier: der ausführende User).
 # Inventory
 * http://docs.ansible.com/ansible/intro_inventory.html
 
-Im Inventory-File (konfigurierbar über ``--inventory-file=/tmp/myinventory``) werden die Zielsysteme definiert, gruppiert und der Zugriff konfiguriert (Host, Port, Private-Keys, ...).
+Im Inventory-File (konfigurierbar über ``--inventory-file=/tmp/myinventory``) werden die Zielsysteme definiert, gruppiert und der Zugriff konfiguriert, u. a.
+
+* Host und Port für den ssh-Zugriff
+* Private-Keys
+* ...
 
 ---
 
@@ -286,3 +290,4 @@ Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 ## Performance
 Tatsächlich scheint mir die Performance nicht so berauschend. Für meinen Anwendungsfall (wenige Tasks auf wenigen Knoten) ist es aber ok.
 
+Vielleicht helfen die Einstellungen ``pipelining = True`` und ``host_key_checking = False`` in ``ansible.cfg``.

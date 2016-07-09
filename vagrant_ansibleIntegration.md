@@ -82,7 +82,7 @@ In dem Beispiel (https://www.vagrantup.com/docs/provisioning/ansible_local.html)
         group: "vagrant", 
         mount_options: ["dmode=700,fmode=600"]
 
-Aud meiner Sicht ist das eh die beste Konfiguration, denn niemand soll den Shared-Folder ``.`` (in dem das ``Vagrantfile`` und weitere Skripte/Konfigurationen für das Provisioning liegen) ändern können (**Vorsicht: Seiteneffekte**). Sollte der Gast Daten mit dem Host austauschen wollen, dann kann ein weiterer Shared-Folder konfiguriert werden.
+Aus meiner Sicht ist das eh die beste Konfiguration, denn niemand soll den Shared-Folder ``.`` (in dem das ``Vagrantfile`` und weitere Skripte/Konfigurationen für das Provisioning liegen) ändern können (**Vorsicht: Seiteneffekte**). Sollte der Gast Daten mit dem Host austauschen wollen, dann kann ein weiterer Shared-Folder konfiguriert werden.
 
 ---
 
