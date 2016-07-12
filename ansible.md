@@ -81,6 +81,8 @@ Die Kommandos aus dem Ansible-Playbook werden später über ssh auf die Zielsyst
 [siehe ssh](ssh.md)
 
 ### Zielrechner definieren (Inventory File)
+* http://docs.ansible.com/ansible/intro_inventory.html
+
 Die Zielrechner können gruppiert werden - das ist sehr praktisch, um mit einem Befehl gleich mehrere Rechner adressieren zu adressieren.
 
 **Option 1: sytemweit**
@@ -194,6 +196,9 @@ Danach muß ``ansible-playbook`` noch in ``$PATH`` aufgenommen werden und los ge
 * alle Module: http://docs.ansible.com/ansible/list_of_all_modules.html
 * https://liquidat.wordpress.com/2016/01/26/howto-introduction-to-ansible-variables/
 
+## YAML-Syntax
+[siehe eigener Abschnitt](yaml.md)
+
 ## Module
 Ansible DSL baut auf Modulen auf: http://docs.ansible.com/ansible/modules_by_category.html
 
@@ -228,9 +233,6 @@ Umgebungsvariablen werden per
 
 abgefragt (hier: der ausführende User).
 
-## SSH-Agent starten und konfigurieren
-[siehe separate Seite](ssh.md)
-
 ---
 
 # Inventory
@@ -244,19 +246,173 @@ Im Inventory-File (konfigurierbar über ``--inventory-file=/tmp/myinventory``) w
 
 ---
 
+# Wiederverwendung
+* http://docs.ansible.com/ansible/playbooks_roles.html
+
+Über Rollen läßt sich in Ansible Modularisierung abbilden, um Wiederverwendung zu erreichen. Wiederverwendung ist sicherlich erst dann erforderlich, wenn man mehr macht als nur ein einziges Playbook zusammenzubasteln.
+
+Verwendet man Playbook für verschiedene Use-Cases, dann ergibt sich allerdings sehr schnell der Wunsch nach einer Modularisierung (Beispiel: Sicherstellung einer Java-JDK-Installation).
+
+## Includes
+Modularisierung über Includes läßt sich auf allen abstrakten Ebenen verwenden:
+
+* Playbooks verwenden weitere Playbooks
+
+```yaml
+- name: this is a playbook
+  hosts: all
+  tasks:
+  - name: greetings
+    shell: echo "hello world"
+- include: otherPlaybook1.yml
+- include: otherPlaybook2.yml
+```
+
+* Tasks verwenden weitere Tasks
+
+```yaml
+tasks:
+  - include: java.yml
+    vars:
+        version: 8
+        provider: oracle
+```
+
+* Handlers verwenden weitere Handlers
+
+```yaml
+handlers:
+  - include: handlers/myhandler.yml
+```
+
+### Parametrisierung
+Da der Use-Case dem zu verwendenden Modul nicht bekannt ist, müssen die Module entsprechend parametrisiert werden.
+
+**Beispiel: Ensure-Java**
+
+Die Sicherstellung einer passenden Java-Installation könnte ein wiederverwendbarer Baustein sein, der in vielen Playbooks benötigt wird. In manchen Situationen wird Java 7 und in anderen Java 8 benötigt. Das Modul ``ensureJdkInstallation.yml`` erhält hierzu einen Parameter ``version``:
+
+```yaml
+tasks:
+  - include: ensureJdkInstallation.yml
+    vars:
+        version: 8
+        provider: oracle
+```
+
+In ``java.yml`` wird der Parameter per ``{{ version }}`` erferenziert.
+
+### Conditionals
+Mit *Conditionals* können beispielsweise Include-Anweisungen bestückt werden, um auf diese Weise  betriebssystemabhängige Weichen einzubauen:
+
+```yaml
+---
+
+- include: centos7.yml
+  when: ansible_distribution == "CentOS" 
+        and ansible_distribution_major_version == "7"
+- include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+```
+
+## Roles
+Roles bauen einen Convention-over-Configuration-Mechanismus um Includes auf. Auf Basis einer vorgegebenen Ordnerstruktur erfolgt der Aufbau eines *Plays* (= Playbook zur Laufzeit) nahezu automatisch. Durch Verzicht auf explizite Konfiguration sind Skripte leichter erweiterbar/anpassbar. Das erinnert sehr stark an den Ansatz, den [Spring-Boot mit der annotationsbasierten ApplicationContext-Aufbau geht](springBoot.md).
+
+### Convention: Ordnerstruktur
+Zentrales Element der Konvention ist die Filesystem-Struktur (http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout):
+
+    site.yml
+    webservers.yml
+    fooservers.yml
+    roles/
+       myRole/
+         files/
+         templates/
+         tasks/
+         handlers/
+         vars/
+         defaults/
+         meta/
+
+Ausgehend davon werden sog. *Plays* (Playbooks zur Laufzeit) nach folgenden Regeln dynamisch zusammengebaut (kopiert von hier: http://docs.ansible.com/ansible/playbooks_roles.html):
+
+* If ``roles/x/tasks/main.yml`` exists, tasks listed therein will be added to the play
+* If ``roles/x/handlers/main.yml`` exists, handlers listed therein will be added to the play
+* If ``roles/x/vars/main.yml`` exists, variables listed therein will be added to the play
+* If ``roles/x/meta/main.yml`` exists, any role dependencies listed therein will be added to the list of roles (1.3 and later)
+* Any copy, script, template or include tasks (in the role) can reference files in ``roles/x/{files,templates,tasks}/`` (dir depends on task) without having to path them relatively or absolutely
+
+**Es besteht allerdings weiterhin die Möglichkeit, Tasks, Handlers, Variablen explizit in Playbooks zu verwenden.**
+
+Das Playbook (``site.yml``) sieht dann beispielsweise so aus:
+
+```yaml
+---
+- hosts: webservers
+  roles:
+     - common
+     - webservers
+```
+
+Darin werden Rollen referenziert, wodurch der *Play* größer wird. In Rollen selbst können *Role Dependencies* (s. u.) definiert werden, die den Play ihrerseits erweitern.
+
+Ansible wird dadurch sehr mächtig ... aber vielleicht auch sehr komplex.
+
+### Role Dependencies
+Eine Rolle kann in ``<role>/meta/main.yml`` Abhängigkeiten auf weitere Rollen definieren ... diese Abhängigkeiten können parametrisiert werden.
+
+### Conditionals
+Rollen können in Abhängigkeit bestimmter Zustände (z. B. Betriebssystem) gezogen werden.
+
+Auf diese Weise lassen sich beispielsweise betriebssystemabhängige Weichen einbauen wie diese:
+
+```yaml
+---
+
+- include: centos7.yml
+  when: ansible_distribution == "CentOS" 
+        and ansible_distribution_major_version == "7"
+- include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+```
+
+### Ansible Galaxy
+... ist ein Repository für Community-Developed Ansible Roles ...
+
+## Role Java
+In meinem ersten Ansible-Projekt stand ich vor der Aufgabe Java 8 auf mindestens CentOS zu installieren.
+
+## Projektübergreifende Wiederverwendung
+Die oben vorgestellte Wiederverwendung über Roles funktioniert gut, wenn das gesamte Projekt unter der eigenen Kontrolle ist. Wenn nun aber drei getrennte Projekte auf eine gemeinsame Scripting-Basis (im wesentlichen Roles) zugreifen sollen, dann hat Ansible derzeit noch keine passende Antwort.
+
+Ansible Galaxy scheint in diese Richtung zu gehen ... 
+
+---
+
 # Best Practices
 * Offizielle Best-Practices: http://docs.ansible.com/ansible/playbooks_best_practices.html
 * Code-Beispiele: https://github.com/ansible/ansible-examples
 
+## Nicht verwenden "remote_user: root"
+Besser ist, sich als normaler User zu verbinden und dann gezielt für einzelne Kommandos per ``become`` in die Rolle des ``root`` zu schlüpfen.
+
+## SSH-Agent starten und konfigurieren
+[siehe separate Seite](ssh.md)
+Um Ansible-Skripte komplett automatisiert (also nicht interaktiv) ausführen zu lassen, muß der SSH-Agent mit dem/den Private-Key(s) gefüttert werden, denn ansonsten muß der Benutzer die Passphrase interaktiv eingeben.
+
 ## Verwende Roles
-Über Rollen lassen sich wiederverwendbare Ansible-Skripte erreichen.
+* http://docs.ansible.com/ansible/playbooks_roles.html
+
+Über Rollen läßt sich in Ansible Modularisierung abbilden, um Wiederverwendung zu erreichen. Wiederverwendung ist sicherlich erst dann erforderlich, wenn man mehr macht als nur ein einziges Playbook zusammenzubasteln.
+
+weitere Details: siehe oben
 
 ---
 
 # Bewertung
-## Was macht Ansible so angenehm?
+## Pro
 
-* **IDEMPOTENZ**
+* **IDEMPOTENZ** ist leichter möglich als bei Shellscripts (der Entwickler muß die Skripte aber auch idempotent gestalten!!!)
 * Remote-Installationen möglich
 * flache Lernkurve, Komplexität überschaubar
   * keine Agenten (Puppet) notwendig, die auf den Zielsystemen installiert sein müssen ... ssh + sudo + python 
@@ -270,6 +426,10 @@ Im Inventory-File (konfigurierbar über ``--inventory-file=/tmp/myinventory``) w
 * gute Vagrant-Integration
 * Ansible basiert auf Python ... für mich als nicht Ruby (Puppet) Entwickler könnte das Vorteile haben
 * Templating basiert auf dem Jinja2-Templating (Subset von Django), mit dem viele Entwickler vertrauter sind
+* die Fehlermeldungen sind meistens ganz brauchbar
+
+## Contra
+* manchmal (u. a. fehlende schließende Gänsefüßchen, falsche Einrückungen im Ansible-Playbook) sind die Fehlermeldungen wenig hilfreich 
 
 ## Vergleich von Alternativen
 

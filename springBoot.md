@@ -354,14 +354,7 @@ Die Konfiguration der Anwendungskomponenten erfolgt in erster Linie über die Da
 * ``application.properties``
 * ``application.yml``
 
-Die Yaml-Datei ist bei komplexen Anwendungen aus meiner Sicht besser geeignet, da die Struktur in YAML hierarchisch (statt bei Property-Files flach) aufgebaut ist. Das erhöht die Lesbarkeit und erfordert auch sofort die richtige Eingliederung der Properties in die Hierarchie. Bei Property-Files können zwischen  ``mail.sender.host=localhost`` und ``mail.sender.port=4711`` beliebig viele andere Properties stehen. Bei YAML hingegen stehen die beiden Eigenschaften der gleichen Ebene nebeneinander:
-
-```yaml
-mail:
-  sender:
-    host: localhost
-    port: 4711
-```
+Das [YAML-Format](yaml.md) ist aus meiner Sicht bei komplexen Anwendungen besser geeignet, da die Struktur in YAML hierarchisch aufgebaut ist. Das erhöht die Lesbarkeit und erfordert auch sofort die richtige Eingliederung der Properties in die semantisch passende Ebene. 
 
 Da der Application-Server in einem Executable-Jar auch Komponente der Anwendung ist, findet man dort also auch Konfigurationsmöglichkeiten.
 
@@ -492,6 +485,15 @@ Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application
 ---
 
 # Production-Ready Features
+
+## Spring Boot as a Service
+* http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html
+
+Spring Boot ermöglich die Installation der Anwendung als Service (``init.d`` und ``systemd``). Hierzu besteht der Vordere Teil der Datei aus dem Init-Skript und mittendrin beginnt dann der binäre Teil des War/Jar-Datei:
+
+![Init-Skript](images/springBootWar.jpg)
+
+Unter CentOS und Ubuntu funktioniert diese seltsam anmutende Artefakt ... bei anderen hingegen muß evtl. ein Launch-Skript beigefügt werden.
 
 ## Actuator
 

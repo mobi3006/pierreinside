@@ -38,9 +38,8 @@
    * [Maven](maven.md)
    * [Shellprogrammierung](shellprogramming.md)
    * [Vagrant](vagrant.md)
-     * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
+       * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
    * [Ansible](ansible.md)
-     * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
    * [Saltstack](saltstack.md)
    * [Docker](docker.md)
    * [Kubernetes](kubernetes.md)
@@ -62,4 +61,5 @@
    * [Auto](auto.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
+* [YAML](yaml.md)
 
