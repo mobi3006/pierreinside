@@ -7,6 +7,11 @@ Leanpub-Bücher sind DRM-frei.
 
 ---
 
+# Alternativen
+* https://www.packtpub.com/
+
+---
+
 # Vorteile für Autoren
 * Leanpub bietet eine Publishing-und Sales-Plattform inkl. Toolchain
 * 90% der Verkaufserlöse landen beim Verkäufer ... nicht beim Plattformbetreiber

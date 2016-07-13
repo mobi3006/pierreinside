@@ -88,7 +88,7 @@ Aus meiner Sicht ist das eh die beste Konfiguration, denn niemand soll den Share
 
 # Fehlersuche
 ## vagrant up --debug
-so halt ...
+Der Standard Vagrant-Mechanismus.
 
 ## ansible.verbose = true
 Das leidige Thema ... auf jeden Fall sollte man den Schalter ``ansible.verbose = true`` im Vagrantfile setzen:
@@ -126,3 +126,5 @@ Mit diesen Informationen lässt sich die Suche fortsetzen. Per ``vagrant ssh`` a
       -v 
       playbook.yml
       -vvvv
+      
+Das erspart zumindest mal das teure Neuaufsetzen des gesamten Deployments.

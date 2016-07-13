@@ -410,11 +410,21 @@ weitere Details: siehe oben
 ---
 
 # Bewertung
-## Pro
+## Lernkurve
+Man kommt tatsächlich sehr schnell (wenn man mal die Ansible-Infrastruktur mit ssh, sudo aufgebaut hat) zu brauchbaren Ergebnissen. Häufig braucht man gar nicht so viele Module ... es sind 5-10 Module, die wirklich ständig im Einsatz sind.
 
+Ich arbeite an einer Infrastruktur bestehend aus Controller und verschiedenen Target-Hosts. Mir ist es schon häufiger passiert, daß
+
+* ich vom Target-Host das Ansible-Skript starten wollte ... dort ist aber gar kein Ansible installiert
+* ich vom Controller-System Remote-Konfigurationen angestoßen habe und die Änderungen lokal gesucht habe
+
+An diese Denkweise muß man sich erst einmal gewöhnen. Insbesonder, wenn man - wie ich - im privaten Gebrauch ausschließlich lokal arbeitet ([um die Workbench aufzubauen](ubuntu_1604_lts.md)) und im geschäftlichen Umfeld ausschließlich remote.
+
+## Pro
 * **IDEMPOTENZ** ist leichter möglich als bei Shellscripts (der Entwickler muß die Skripte aber auch idempotent gestalten!!!)
+* gute Dokumentation
 * Remote-Installationen möglich
-* flache Lernkurve, Komplexität überschaubar
+* flache Lernkurve (s. o.), Komplexität überschaubar
   * keine Agenten (Puppet) notwendig, die auf den Zielsystemen installiert sein müssen ... ssh + sudo + python 
   * die Reihenfolge der Taskausführung ist bei Ansible klar definiert (nämlich genau die aus dem Playbook)  
   * nur Push, kein Pull (kann auch als Nachteil gesehen werden)
@@ -427,11 +437,43 @@ weitere Details: siehe oben
 * Ansible basiert auf Python ... für mich als nicht Ruby (Puppet) Entwickler könnte das Vorteile haben
 * Templating basiert auf dem Jinja2-Templating (Subset von Django), mit dem viele Entwickler vertrauter sind
 * die Fehlermeldungen sind meistens ganz brauchbar
+* Ausgabe bei der Abarbeitung der Playbooks sehr übersichtlich:
+
+
+    pfh@workbench ~/windows_de.cachaca.workbench (git)-[master] % ansible-playbook playbook.yml      
+
+    PLAY ***************************************************************************
+
+    TASK [setup] *******************************************************************
+    ok: [localhost]
+
+    TASK [system | update package meta-data] ***************************************
+    ok: [localhost]
+
+    TASK [system | install aptitude ... needed for succeeding "upgrade system"] ***
+    ok: [localhost]
+
+    TASK [system | upgrade system] *************************************************
+    ok: [localhost]
+
+    TASK [devcon | create directory strcuture for user pfh] ************************
+    ok: [localhost] => (item=~/bin)
+    ok: [localhost] => (item=~/src)
+    ok: [localhost] => (item=~/temp)
+    ok: [localhost] => (item=~/zipfiles)
+
 
 ## Contra
 * manchmal (u. a. fehlende schließende Gänsefüßchen, falsche Einrückungen im Ansible-Playbook) sind die Fehlermeldungen wenig hilfreich 
 
-## Vergleich von Alternativen
+## Performance
+Tatsächlich scheint mir die Performance nicht so berauschend. Für meinen Anwendungsfall (wenige Tasks auf wenigen Knoten) ist es aber ok.
+
+Vielleicht helfen die Einstellungen ``pipelining = True`` und ``host_key_checking = False`` in ``ansible.cfg``.
+
+--- 
+
+## Alternativen
 
 * https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-overview/
 * https://dantehranian.wordpress.com/2015/01/20/ansible-vs-puppet-hands-on-with-ansible/
@@ -447,7 +489,6 @@ Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
 * ganz dicht am manuellen Aufsetzen - klar Scripting bedeutet dann oftmals auch, daß eine gewisse Art von Konfigurierbarkeit in die Scripte eingebaut wird, um sie an bestimmte Umgebungen anzupassen. Verzichtet man aber auf die Konfigurierbarkeit, dann genügt es, die für eine manuelle Installation/Konfiguration eines System erforderlichen Befehle, in eine Shelldatei zu packen. Viola :-)
 * kein weiteres Layer zwischen den Befehlen und dem System ... ich bin mir aber nicht sicher, ob das wirklich ein Vorteil ist, denn Fehlersuche in Shellscripten ist wirklich alles andere als eine Freude ... insbes. aufgrund der fehlenden Idempotenz
 
-## Performance
-Tatsächlich scheint mir die Performance nicht so berauschend. Für meinen Anwendungsfall (wenige Tasks auf wenigen Knoten) ist es aber ok.
+Ich habe ein komplexes Setup über Vagrant und Shellscripting-Provisioning umgesetzt (Laufzeit 50 Minuten). Erst danach habe ich Ansible kennengelernt. 
 
-Vielleicht helfen die Einstellungen ``pipelining = True`` und ``host_key_checking = False`` in ``ansible.cfg``.
+**Mein Fazit: Ansible ist der klare Sieger**

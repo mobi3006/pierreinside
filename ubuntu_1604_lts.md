@@ -53,6 +53,18 @@ Der im vorigen Abschnitt erzeugte Public-Key jedes zugreifenden Users muß im zu
 
 Das Ansible-Skript soll ohne Interaktion auskommen. Da man i. a. aber eine Passphrase über den Private-Key legt, müßte dem Ansible-Controller die Passphrase bekannt sein. Das will man aber eigentlich nicht ... deshalb kann man den SSH-Agent damit beauftragen. 
 
+## sudo ohne Passwortabfrage
+Für meinen Standarduser ``pfh`` (der später mal die Ansible-Playbooks ausführen wird) wird per ``visudo`` die sudo-Ausführung ohne Passwortabfrage konfiguriert:
+
+    pfh ALL=(ALL) NOPASSWD: ALL
+
+Diese Einstellung ist werforderlich, weil ich in den Ansible-Skripten die Einstellung
+
+    remote_user: pfh
+    become: yes
+    
+verwende. 
+
 ---
 
 # Software Installation

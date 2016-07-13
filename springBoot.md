@@ -1,12 +1,13 @@
 # Spring Boot
 
 * [Offizielle Dokumentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
+* [Spring Boot Cookbook](http://file.allitebooks.com/20151028/Spring%20Boot%20Cookbook.pdf)
 
 ... vereinfacht die Entwicklung von Java-Server-Applikationen indem ein ausführbares jar-File erstellt wird, das sich selbst in der jeweiligen Umgebung deployed. Das jar enthält in diesem Fall ALLE notwendigen Third-Party-Bibliotheken und zudem noch die notwendige Laufzeitumgebung. Handelt es sich um eine Web-Applikation, so ist ein Servlet-Container (Tomcat, Jetty) eingebettet, in dem die Web-Applikation deployed wird. Eine Spring-Boot-Applikation kann dann ganz einfach per
 
     java -jar my-application.jar
 
-gestartet werden.
+gestartet werden. Ein Start als Betriebssystem-Service wird auch unterstützt.
 
 ---
 
@@ -63,6 +64,8 @@ oder (was hat welche Vorteile???)
     java -jar my-application.jar
 
 Voila ... sehr schlank. Wir sind nun innerhalb weniger Minuten zu einer komfortabel deploybaren Server-Applikation gekommen. Jetzt kanns losgehen mit der Implementierung der Business-Logik.
+
+**ACHTUNG:** Unter Windows kann ein Doppelclick auf das jar/war-Artefakt dazu führen, daß die Anwendung automatisch als Dienst installiert wird.
 
 ## Eclipse-Integration der Applikation
 Über
@@ -488,12 +491,74 @@ Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application
 
 ## Spring Boot as a Service
 * http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html
+* http://file.allitebooks.com/20151028/Spring%20Boot%20Cookbook.pdf
 
-Spring Boot ermöglich die Installation der Anwendung als Service (``init.d`` und ``systemd``). Hierzu besteht der Vordere Teil der Datei aus dem Init-Skript und mittendrin beginnt dann der binäre Teil des War/Jar-Datei:
+Spring Boot ermöglich die Installation der Anwendung als Service (unter Linux über ``init.d``, ``systemd`` und unter Windows). Die Installation als Service hat den Vorteil, daß sich das Betriebssystem um einen evtl. notwendigen Restart kümmert. 
+
+Der vordere Teil des Jar/War-Artefakts besteht aus dem Launch-Skript (das scheinbar auch unter Windows funktioniert) - mittendrin beginnt dann der binäre Teil des Artefakts:
 
 ![Init-Skript](images/springBootWar.jpg)
 
-Unter CentOS und Ubuntu funktioniert diese seltsam anmutende Artefakt ... bei anderen hingegen muß evtl. ein Launch-Skript beigefügt werden.
+> Will man das Startskript nicht so seltsam vermischt haben, [so muß man es beim Build entsprechend konfigurieren](http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html) ... unter Maven folgendermaßen:
+
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <executable>true</executable>
+    </configuration>
+</plugin>
+```
+
+Unter CentOS und Ubuntu funktioniert diese seltsam anmutende Artefakt ... bei anderen hingegen muß evtl. ein Launch-Skript beigefügt werden (habe ich gelesen). Hier findet man ein Skeleton für das Launch-Skript:
+
+* https://github.com/spring-projects/spring-boot/blob/master/spring-boot-tools/spring-boot-loader-tools/src/main/resources/org/springframework/boot/loader/tools/launch.script
+
+Will man die JRE-Einstellungen der Anwendung konfigurieren, so sollte man eine ``conf``-Datei verwenden (http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-script-customization-conf-file), die neben das war/jar-Artefakt gelegt wird. Alternativ könnte man das Launch-Skript anpassen.
+
+### Linux: systemd
+* http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-systemd-service
+
+Systemd benötigt eine Service-Datei in ``/etc/systemd/system/myapp.service`` mit den Permissions 0644:
+
+```
+[Unit]
+Description=MyApp
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=pfh
+Group=users
+ExecStart=/opt/myapp.jar
+Restart=always
+```
+
+In diesem Beispiel gehe ich davon aus, daß die Anwendnung in ``/opt/myapp.jar`` liegt.
+
+Danach muß der systemd seine Konfiguration neu einlesen
+
+```
+sudo systemctl daemon-reload
+```
+
+und dann kann der Service gestartet werden:
+
+```
+sudo systemctl start myapp.service
+```
+
+### Linux: init.d
+* http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-initd-service
+
+### OS/X: launchd
+... hab ich keine Ahnung
+
+### Windows Dienst
+Ein Doppelclick auf der Spring-Boot-jar/war-Artefakt reicht für die Installation als Dienst ... also ACHTUNG!!!
 
 ## Actuator
 

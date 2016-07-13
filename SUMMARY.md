@@ -62,4 +62,5 @@
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
 * [YAML](yaml.md)
+* [Linux Initialisierung](linux_initialization.md)
 
