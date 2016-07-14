@@ -40,6 +40,7 @@
    * [Vagrant](vagrant.md)
        * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
    * [Ansible](ansible.md)
+     * [Getting Started](ansible_gettingStarted.md)
    * [Saltstack](saltstack.md)
    * [Docker](docker.md)
    * [Kubernetes](kubernetes.md)

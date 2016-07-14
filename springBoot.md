@@ -495,25 +495,33 @@ Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application
 
 Spring Boot ermöglich die Installation der Anwendung als Service (unter Linux über ``init.d``, ``systemd`` und unter Windows). Die Installation als Service hat den Vorteil, daß sich das Betriebssystem um einen evtl. notwendigen Restart kümmert. 
 
-Der vordere Teil des Jar/War-Artefakts besteht aus dem Launch-Skript (das scheinbar auch unter Windows funktioniert) - mittendrin beginnt dann der binäre Teil des Artefakts:
+Der vordere Teil des Jar/War-Artefakts besteht aus dem sog. Launch-Skript (das scheinbar auch unter Windows funktioniert) - mittendrin beginnt der binäre Teil des Artefakts:
 
 ![Init-Skript](images/springBootWar.jpg)
 
-> Will man das Startskript nicht so seltsam vermischt haben, [so muß man es beim Build entsprechend konfigurieren](http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html) ... unter Maven folgendermaßen:
+Will man das Startskript nicht so seltsam vermischt haben[^1], [so muß man es beim Build entsprechend konfigurieren](http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html) ... unter Maven folgendermaßen (``executable``) - per Default steht diese Option auf ``true``:
 
 ```xml
 <plugin>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-maven-plugin</artifactId>
     <configuration>
-        <executable>true</executable>
+        <executable>false</executable>
     </configuration>
 </plugin>
 ```
 
-Unter CentOS und Ubuntu funktioniert diese seltsam anmutende Artefakt ... bei anderen hingegen muß evtl. ein Launch-Skript beigefügt werden (habe ich gelesen). Hier findet man ein Skeleton für das Launch-Skript:
+[^1] ACHTUNG: Nicht alle ZIP-Clients kommen mit dieser Art klar und werfen evtl. einen Fehler. 
 
-* https://github.com/spring-projects/spring-boot/blob/master/spring-boot-tools/spring-boot-loader-tools/src/main/resources/org/springframework/boot/loader/tools/launch.script
+Unter CentOS und Ubuntu funktioniert das Default-Launch-Sktipt bei der Einbindung als systemd-Service. Bei anderen Distributionen hingegen muß evtl. ein eigenes Launch-Skript geschrieben werden[^2]. Entweder bindet man es bereits im ``spring-boot-maven-plugin`` über ``embeddedLaunchScript`` (und evtl. ``embeddedLaunchScriptProperties``) ein oder man konfiguriert es in der systemd-Service Datei (liegt unter ``/etc/systemd/system/myapp.service``). Dort wird das Launcher-Script referenziert und die Variable ``JARFILE`` gesetzt:
+
+```
+[Service]
+Environment="JARFILE=/opt/myapp.war"
+ExecStart=/opt/myapp-launcher.sh
+```
+
+[^2] Hier findet man ein Skeleton für das Launch-Skript: https://github.com/spring-projects/spring-boot/blob/master/spring-boot-tools/spring-boot-loader-tools/src/main/resources/org/springframework/boot/loader/tools/launch.script
 
 Will man die JRE-Einstellungen der Anwendung konfigurieren, so sollte man eine ``conf``-Datei verwenden (http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-script-customization-conf-file), die neben das war/jar-Artefakt gelegt wird. Alternativ könnte man das Launch-Skript anpassen.
 
@@ -611,7 +619,7 @@ Solche Banner macht niemand selber ... http://patorjk.com/software/taag (die Fon
 ---
 
 # Fazit
-Spring zeigt mit seinen neuen Projekten (Boot, Config, ...), daß es sich innovativ weiterentwickelt und echte Mehrwerte für die Nutzer schafft. Der Einstieg in die Java-Welt wird generell (und insbesondere mit Blick auf Microservices) extrem vereinfacht. Verteilte Systeme - wie ich sie bisher aus meinem Studium kannte - sind nun auch für Startups in greifbare Nähe gerückt. Und dazu muß man nicht 3 Monate auf Schulung gehen ...
+Spring zeigt mit seinen neuen Projekten (Boot, Config, ...), daß es sich innovativ weiterentwickelt und echte Mehrwerte für die Nutzer schafft. Der Einstieg in die Java-Welt wird generell (und insbesondere mit Blick auf Microservices) extrem vereinfacht. Verteilte Systeme - wie ich sie vor 20 Jahren im Studium theoretisch kennengelernt habe - werden nun auch für kleine Unternehmen/Startups realisierbar. Und dazu muß man nicht 3 Monate auf Schulung gehen ...
 
 Seit 2010 hat sich in den Bereichen Microservices, Cloud-Deployment, DevOps, Continous Delivery so viel getan, daß die Softwareentwicklung auf einem neuen Level angekommen ist.
 

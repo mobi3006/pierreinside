@@ -37,38 +37,6 @@ wird das Image gestartet und in den alten Zustand gebracht.
 
 ---
 
-# Nice2Know
-## Misc
-* das erzeugte VirtualBox-Image wird im Standard Verzeichnis von VirtualBox für Images abgelegt ... unter Windows ist das: ``${HOME}\VirtualBox VMs``
-* über die VirtualBox Oberfläche ist das Image auch sichtbar (dort sind viele Zahlen drin: z. B. ``Mu2CertificationTools_default_1433340495394_70941``) ... aber ACHTUNG: besser man startet/stoppt das Image über das Vagrant-CLI, sonst kann das zu Seiteneffekten führen. Beim Starten des Images über das CLI wird kein Fenster für das Image gestartet (im Gegensatz zu einem Start - NICHT EMPFOHLEN - über das VirtualBox-GUI).
-
-## Filesystem
-So siehts auf dem Filesystem aus:
-
-    VAGRANT_PROJECT_DIR/
-        .vagrant/
-            machines/
-                default/
-                    virtualbox/
-                        id: referenziert die UUID der VirtualBox-VM
-                        private_key: ssh private key
-                        synced_folders: welche Verzeichnisse werden zwischen Wirt und Gast synchron gehalten
-        Vagrantfile
-    ~/.vagrant.d/
-        boxes/: hier liegen die Base-Images
-        data/:
-        gems/: Code/Module für Vagrant
-        rgloader/:
-        tmp/:
-
-Bei der Verwendung von Virtualbox als Provider wird man noch folgende Struktur finden:
-
-    ~/.VirtualBox VMs/: hier wird Vagrant die Konfiguration und Festplatten-Files der Images ablegen
-        vagrant_foo
-        ...
-
----
-
 # CLI Kommandos
 * https://docs.vagrantup.com/v2/cli/index.html
 
@@ -184,6 +152,43 @@ Im Shellskript wird auf diese Parameter wie üblich zugegriffen (${1}, ${2}, ${3
 
 ---
 
+# Background Informationen
+* das erzeugte VirtualBox-Image wird im Standard Verzeichnis von VirtualBox für Images abgelegt ... unter Windows ist das: ``${HOME}\VirtualBox VMs``
+* über die VirtualBox Oberfläche ist das Image auch sichtbar (dort sind viele Zahlen drin: z. B. ``Mu2CertificationTools_default_1433340495394_70941``) ... aber ACHTUNG: besser man startet/stoppt das Image über das Vagrant-CLI, sonst kann das zu Seiteneffekten führen. Beim Starten des Images über das CLI wird kein Fenster für das Image gestartet (im Gegensatz zu einem Start - NICHT EMPFOHLEN - über das VirtualBox-GUI).
+
+## Filesystem
+So siehts auf dem Filesystem aus:
+
+    VAGRANT_PROJECT_DIR/
+        .vagrant/
+            machines/
+                default/
+                    virtualbox/
+                        id: referenziert die UUID der VirtualBox-VM
+                        private_key: ssh private key
+                        synced_folders: 
+                          welche Verzeichnisse werden 
+                          zwischen Wirt und Gast
+                          synchron gehalten
+        Vagrantfile
+    ~/.vagrant.d/
+        boxes/: hier liegen die Base-Images
+        data/:
+        gems/: Code/Module für Vagrant
+        rgloader/:
+        tmp/:
+
+Bei der Verwendung von Virtualbox als Provider wird man noch folgende Struktur finden:
+
+    ~/.VirtualBox VMs/: 
+      hier wird Vagrant die Konfiguration und
+      Festplatten-Files der Images ablegen
+        vagrant_foo
+        ...
+
+
+---
+
 # SSH
 Bei der Erzeugung des Images per ``vagrant up`` werden von Vagrant i. d. R. Public/Private-Keys für den ssh-Connect erzeugt (hier für die Maschine INBOUND):
 
@@ -234,7 +239,11 @@ Vagrant erzeugt beim Image-Start auch gleich SSH-Keys. Der Private-Key wird z. B
 
     .vagrant/.../virtualbox/private_key
 
-abgelegt.
+abgelegt. Der Public-Key steht im erzeugten System unter ``/home/vagrant/.ssh/authorized_keys``, so daß ein ``vagrant ssh`` (macht eine Verbindung mit dem User ``vagrant`` auf) ohne Passwortabfrage erfolgt.
+
+> Ich habe es mir zur Angewohnheit gemacht (mit [Ansible gescriptet](ansible.md)), 
+> * den Inhalt von ``authorized_keys`` nach dem Bootstrapping unter ``/home/vagrant/.ssh/id_rsa.pub`` abzulegen
+> * ``.vagrant/.../virtualbox/private_key`` (vom Host-System) unter ``/home/vagrant/.ssh/id_rsa`` (im Gastsystem) abzulegen
 
 ---
 
@@ -450,6 +459,11 @@ Ein paar Ansätze:
 
 * über das VirtualBox-GUI bekommt man ein brauchbares Logfile, über das ich dann auch das Problem mit den fehlenden Ressourcen entdeckt habe.
 * per ``vagrant up --debug`` kann man Vagrant geschwätziger machen oder eben die Langversion davon: ``export VAGRANT_LOG=debug; vagrant up`` (siehe http://docs.vagrantup.com/v2/other/environmental-variables.html)
+
+## Hostmanager-Plugin
+* https://github.com/devopsgroup-io/vagrant-hostmanager
+
+Mit diesem Plugin kann auf den Guest-Systemen die ``/etc/hosts``-Datei automatisch befüllt werden. Bei Multi-Machine-Projekten ist das sehr praktisch.
     
 ---
 
