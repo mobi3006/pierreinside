@@ -29,18 +29,19 @@ Ein einfaches Property wird als ``Key: Value`` geschrieben:
 
     employee: Pierre
 
-oder komplexe
+oder komplexe (hier ein sog. Dictionary)
 
     lineinfile: 
-      dest=/tmp/playbook.run.log 
-      create=yes 
-      state=present 
-      line='pierre'
+      dest: /tmp/playbook.run.log 
+      create: yes 
+      state: present 
+      line: pierre
 
-, die aber auch in einer Zeile geschrieben werden können:
+, die aber auch in einer Zeile geschrieben werden können (dann aber ``=`` statt ``:``):
 
     lineinfile: dest=/tmp/playbook.run.log, create=yes, state=present, line='pierre'
 
+Mir gefällt die Mehrzeilenversion besser.
 
 ### Liste
 Ein Property kann eine Liste abbilden, wobei alle Elemente einer Liste haben ein ``-`` davor:
