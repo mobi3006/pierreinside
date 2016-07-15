@@ -487,6 +487,30 @@ Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application
 
 ---
 
+# Cloud-Deployment
+* http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#cloud-deployment
+
+Spring Boot Applikationen mit ihrem Executable-Jar-Ansatz (mit inkludierten Third-Party-Apps) sind relativ leicht auf beliebten PaaS-Providern deploybar.
+
+## CloudFoundry
+CloudFoundry ist - genauso wie Spring - ein Produkt von [Pivotal](http://pivotal.io/). Insofern ist es fast zwangsläufig, daß Spring Boot Applikationen komfortabel auf der CloudFoundry-Plattform deployed werden können.
+
+Nach der Erstellung der Spring Boot Applikation per Maven 
+
+    mvn clean package
+    
+wird die Anwendnung per (das CLI ``cf`` muß vorher natürlich installiert werden)
+
+    cf login -u myuser -p mypassword
+    cf push myapp -p target/myapp.jar
+
+Danach ist die Anwendung über http://myapp.cfapps.io erreichbar.
+
+## Heroku
+Der Heroku-Cloud-Deployment ist nur unwesentlich aufwendiger als das CloudFoundry-Deployment.
+
+---
+
 # Production-Ready Features
 
 ## Spring Boot as a Service
@@ -628,7 +652,9 @@ Spring trifft den Nerv der Zeit ... Hut ab :-)
 ## Kritikpunkte
 Auch wenn der Einstieg sehr leicht fällt ... ums Lesen von Dokumentation kommt man nicht rum ;-)
 ### Magie
-Spring hat schon recht viel magic eingebaut. Beispielsweise kann Code compilierbar sein, aber durch eine fehlende Abhängigkeit verhält er sich zur Laufzeit einfach nicht wie erwartet, weil eben die zur Laufzeit ausgewertete Abhängigkeit fehlt. 
+> "The Spring Boot auto-configuration tries its best to ‘do the right thing’, but sometimes things fail and it can be hard to tell why." (siehe [Spring Boot Dokumentation](http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-troubleshoot-auto-configuration))
+
+Spring hat schon recht viel Magic eingebaut. Beispielsweise kann Code compilierbar sein, aber durch eine fehlende Abhängigkeit verhält er sich zur Laufzeit einfach nicht wie erwartet, weil eben die zur Laufzeit ausgewertete Abhängigkeit fehlt. 
 
 Es hat etwas von Pluggable-Extensions, wenn ich zur Applikation die Bibliothek ``spring-boot-starter-actuator-1.3.5.RELEASE.jar`` hinzufüge und dadurch weitere REST-Endpunkte vorhanden sind. Sehr komfortabel ... aber erst mal gewöhnungsbedürftig.
 

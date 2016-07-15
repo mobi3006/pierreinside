@@ -1,0 +1,28 @@
+# Thymeleaf
+Ich hatte bisher mit JSF/JSP- und Velocity-Templating-Engines gearbeitet. Im Zuge der Nutzung von Spring Boot haben wir Thymeleaf für unser HTML-Frontend genutzt (ohne JSF).
+
+---
+
+# Thymeleaf: ALternative zu JSF?
+* http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
+
+---
+
+# Spring-Integration
+* http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
+
+Thymeleaf wird in [Spring Boot](springBoot.md) direkt supported (Bestandteil der Starter-Pakete). Es ist leicht möglich - ähnlich wie in JSF - Werte über Beans bereitzustellen, um so beispielsweise den Content einer HTML-Seite dynamisch zusammenzubauen.
+
+---
+
+# Plain-Text-Emails
+> DISCLAIMER: Thymeleaf hat sich - [laut eigener Aussage in den FAQ](http://www.thymeleaf.org/faq.html#compare-other-engines) - auf XML/HTML-Content spezialisiert.
+
+> HINWEIS: in der Version 3.x wird aber auch explizit nicht-XML-Inhalt unterstützt ... beispielsweise Plain-Text-Emails.
+
+Bei GitHub findet man dieses Beispiel:
+
+* https://github.com/thymeleaf/thymeleafexamples-springmail
+
+
+

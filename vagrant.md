@@ -279,7 +279,7 @@ wird das Base-Image precise32 des Users hashicorp für das eigene Vagrant-Projek
 
 Base-Images sind auf den Virtualisierungsprovider zugeschnitten ... man kann also kein VirtualBox-Base-Image mit einem VMWare-Provider verwenden. Über ``vagrant up --provider=vmware_fusion`` kann man explizit den Provider angeben, wenn nicht der Default-Provider verwendet werdenn soll. Man kann aber auch den Default-Provider (per Default VirtualBox) umdefinieren.
 
-Man kann eigene Base Images veröffentlichen (public oder private).
+Man kann eigene Base Images veröffentlichen (public oder private) ... siehe unten.
 
 ---
 
@@ -446,9 +446,13 @@ Um einen anderen Provider als VirtualBox zu verwenden, muß man das Vagrant Plug
 Für Vagrant gibt es eine Reihe nützlicher Plugins: http://vagrant-lists.github.io/plugins.html
 
 ## Snapshot-Plugin
-Snapshot-Plugin:
+* https://github.com/dergachev/vagrant-vbox-snapshot
 
-    https://github.com/dergachev/vagrant-vbox-snapshot
+Installation über
+
+```
+vagrant plugin install vagrant-vbox-snapshot
+```
 
 Dieses praktische Plugin hilft bei der Verwendung von Snapshots (take, list, back, ...). Sehr praktisch, wenn man in den Images rumkonfiguriert und ohne minutenlanges neu-Provisioning neu anzufangen.
 Fehlersuche
@@ -463,8 +467,17 @@ Ein paar Ansätze:
 ## Hostmanager-Plugin
 * https://github.com/devopsgroup-io/vagrant-hostmanager
 
+Installation über
+
+```
+vagrant plugin install vagrant-hostmanager
+```
+
 Mit diesem Plugin kann auf den Guest-Systemen die ``/etc/hosts``-Datei automatisch befüllt werden. Bei Multi-Machine-Projekten ist das sehr praktisch.
-    
+
+## Dnsmasq
+* https://github.com/mattes/vagrant-dnsmasq
+
 ---
 
 # Box-Datei
@@ -488,7 +501,7 @@ Push
 ---
 
 # Push
-Hierbei geht es nicht darum fertige Base-Images in ein Repository zu pushen, sondern darum den Code des Vagrant-Projects auf einen anderen Server zu transferieren, um das Projekt dort zu deployen (z. B. für die QA). Das push muss im Vagrantfile konfiguriert werden - hier gibt man das Ziel oder eben verschiedene Ziele (z. B. staging, production). Mit einem
+Hierbei geht es nicht darum fertige Base-Images in ein Repository zu pushen, sondern darum den Code des Vagrant-Projects auf einen anderen Server zu transferieren, um das Projekt dort zu deployen (z. B. für die QA). Das Push muss im Vagrantfile konfiguriert werden - hier gibt man das Ziel oder eben verschiedene Ziele (z. B. staging, production). Mit einem
 
     vagrant push
 
@@ -508,6 +521,15 @@ wird das Projekt auf einen anderen Server (oder gar einem anderen Provider - z. 
 
 * Heroku
 * FTP
+
+```
+    config.push.define "ftp" do |push|
+      push.host = "ftp.company.com"
+      push.username = "username"
+      push.password = "mypassword"
+    end
+```
+
 * Local Exec
   * hier kann man ein Script verwenden, um das Image beispielsweise per SCP auf einen Fileserver zu kopieren
 

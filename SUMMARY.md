@@ -40,7 +40,7 @@
    * [Vagrant](vagrant.md)
        * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
    * [Ansible](ansible.md)
-     * [Getting Started](ansible_gettingStarted.md)
+       * [Getting Started](ansible_gettingStarted.md)
    * [Saltstack](saltstack.md)
    * [Docker](docker.md)
    * [Kubernetes](kubernetes.md)
@@ -64,4 +64,6 @@
 * [Glossar](GLOSSARY.md)
 * [YAML](yaml.md)
 * [Linux Initialisierung](linux_initialization.md)
+* [Cloud Deployment Provider](cloudDeployment_provider.md)
+* [Thymeleaf](thymeleaf.md)
 
