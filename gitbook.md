@@ -232,7 +232,7 @@ Auf diese Weise läßt sich eine gewisse Art von Modularisierung erreichen.
 
 # GitBook Editor
 * https://www.gitbook.com/editor
-* alte 5.0.5: http://downloads.editor.gitbook.com/download/version/5.0.5/
+* alte 5.0.5 (SUPER!!!): http://downloads.editor.gitbook.com/download/version/5.0.5/
 
 Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. Als ich dann aber mit GitBook anfing wollte ich dem diesem Editor mal eine Chance geben ... und tatsächlich adressiert er schon sehr viele Aspekte, die man ansonsten vermutlich über mehrere Tools (Editor mit Live-Vorschau, Git-Client) abbilden müßte ... hier ist alles integriert (es handelt sich eher um eine Desktop Publishing Solution als um einen einfachen Editor) und somit für Newbies auf jeden Fall ein guter Startpunkt:
 
