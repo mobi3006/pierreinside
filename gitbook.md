@@ -15,7 +15,7 @@ Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit H
   * verteiltes offline Arbeiten möglich 
   * Versionskontrolle für Dokumentation ... diffs möglich
 * GitHub-Features: [siehe hier](github.md)
-* GitBook-Features:s
+* GitBook-Features:
   * Output-Formate:
     * HTML
     * PDF
