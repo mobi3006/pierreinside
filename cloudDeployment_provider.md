@@ -1,5 +1,12 @@
 # Cloud Deployment Provider
 
+**Software-as-a-Service:**
+* [GitHub](https://github.com/): Hosting von Source-Code ... und mehr
+* [Travis-CI](https://travis-ci.org/)
+  * hiermit lassen sich Builds von GitHub-Projekten automatisiert triggern - die Deployment-Artefakte werden nach GitHub-Releases geschoben
+  * [kostenlos](https://travis-ci.org/) für public Repositories 
+  * [Kommerziell](https://travis-ci.com/) für private Repositories 
+
 **Infrastructure-as-a-Service:**
 * [Amazon Web Services](https://aws.amazon.com) 
 * [Digital Ocean](https://www.digitalocean.com/)
@@ -9,6 +16,12 @@
 **Platform-as-a-Service:**
 * [Heroku](https://devcenter.heroku.com/categories/java)
 * [CloudFoundry](https://www.cloudfoundry.org)
+
+---
+
+# Travis
+* https://docs.travis-ci.com/
+
 
 ---
 
