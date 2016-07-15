@@ -251,8 +251,6 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
 
 ![Gitbook Editor commit und sync](images/gitbookEditorCommitSync.jpg)
 
-Nachdem ich zwei Monate mit der 5.x Version gearbeitet hatte und wirklich begeistert war, freute ich mich auf die neue 6.0.4 Version. Doch die enttäuschte mich derartig, daß ich schon nach 2 Stunden wieder auf die alte Version zurückwechselte. Hier fehlte der für mich so wichtige Dateibaum, über den ich die Dateinamen für Links abschreiben kann
-
 #### Was bedeutet "Import"? Wo liegen die Dateien?
 Bei meinem ersten Buch hatte ich meine Sourcen in ``C:\Dev\pierreinside`` liegen und hatte das in GitBook Editor importiert.
 
