@@ -91,7 +91,7 @@ Mit dem GitBook-CLI kann das Buch lokal in verschiedenen Formaten deployed werde
 
 ## Buch online deployen
 * über den GitBookEditor erfolgt ein sync (= push) mit GitHub
-* nach einer Weile wird das Buch automatisch neu gebaut (HTML, PDF, eBook-Formate) und deployed ... z. B. hier: https://mobi3006.gitbooks.io/pierreinside/content/
+* nach einer Weile wird das Buch automatisch durch einen GitBook-Job neu gebaut (https://www.gitbook.com/book/mobi3006/pierreinside/activity) und in HTML, PDF, eBook-Formaten deployed (https://mobi3006.gitbooks.io/pierreinside/content/)
   * sollte das nicht automatisch funktionieren, so muß man im GitBook-Admin-Weboberfläche evtl. die Verbindung zum GitHub-Repository herstellen und einen Webhook konfigurieren (der Webhook stößt dann den Build an)
 
 ---
