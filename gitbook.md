@@ -3,6 +3,7 @@
 * https://help.gitbook.com/
 * https://www.youtube.com/watch?v=KFF5bBLX7ME
 * [Sehr guter Überblick](http://www.linux-magazine.com/Issues/2014/166/Workspace-GitBook)
+* Slack-Channel: https://gitbook-community.slack.com
 
 Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit Hugo Probleme bei der Erstellung einer Menüstruktur hatte, habe ich mich dann doch mal mit GitBook beschäftigt. So könnte ich zumindest mal mit dem Markdown-Style in Fahrt kommen und mir dann aber mittelfristig eine andere Lösung überlegen (oder vielleicht gefällt es mir ja so gut, daß ich dabei bleibe).
 
