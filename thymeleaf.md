@@ -44,6 +44,13 @@ Hierzu werden sog. Prototypen verwendet:
 
 ---
 
+# Localized Templates
+Häufig haben Seiten einen hohen statischen Anteil und nur einen geringen dynamischen, der dann häufig auch sprachunabhängig ist. Insofern würde es Sinn machen für jede Sprache eine eigene Datei zu verwenden.
+
+* https://github.com/thymeleaf/thymeleaf/issues/497
+
+---
+
 # Spring Boot Integration
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 
