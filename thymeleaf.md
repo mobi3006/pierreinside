@@ -67,8 +67,8 @@ Mit diesem Template (``emailplain.html``):
 
 ```html
 <html th:inline="text" th:remove="tag">
-  Hallo [[${name}]],
-  viele Grüße.
+  Hello [[${name}]],
+  cheers
 </html>
 ```
 
@@ -82,7 +82,15 @@ templateEngine.process("emailplain", ctx);
 
 wird dann 
 
-    Hallo Pierre,
-    viele Grüße.
+    Hello Pierre,
+    cheers.
 
+und 
+
+```html
+<html th:inline="text" th:remove="tag">
+  Hello [[${name}]],
+  cheers
+</html>
+```
 
