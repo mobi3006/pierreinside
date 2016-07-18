@@ -10,7 +10,7 @@ Dieses Template
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title th:remove="all">My first Thymeleaf Template</title>
+    <title>My first Thymeleaf Template</title>
   </head>
   <body>
     <p th:text="#{home.welcome}">Welcome to my App</p>
