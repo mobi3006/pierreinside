@@ -50,11 +50,6 @@ Wird diese Datei einfach so im Browser angezeigt, dann wird daraus (sie *Natural
 </html>
 ```
 
-im Browser ... ohne, daß eine Anwendnung laufen muß. Dies
-sofern die 
-
-
-
 > Am Anfang hatte ich nicht genau hingeschaut und ``th:text`` für ein Table-Header Element gehalten. Hier gehört das aber zum Namespace http://www.thymeleaf.org und wird dementsprechend von der Thymeleaf-Template-Engine interpretiert.
 
 Hier die Thymeleaf-DSL:
