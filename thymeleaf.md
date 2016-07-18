@@ -20,7 +20,7 @@ So siehts im Einsatz aus:
 
 Am Anfang hatte ich nicht genau hingeschaut und ``th:text`` für ein Table-Header Element gehalten. Hier gehört das aber zum Namespace http://www.thymeleaf.org und wird dementsprechend von der Thymeleaf-Template-Engine interpretiert.
 
-Hier die Thymeleaf:DSL:
+Hier die Thymeleaf-DSL:
 * http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#attribute-precedence
 
 
