@@ -40,7 +40,7 @@ Ich habe jehrelang mit Subversion und maven gearbeitet. Dabei bin ich nach einig
 * http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml
 * Git Workflows: 
   * https://git-scm.com/about/distributed
-  * https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow
+  * https://www.atlassian.com/git/tutorials/comparing-workflows
 
 Bei Git handelt es sich um ein Versionssystem, das ohne dedizierten zentralen Server auskommt. Stattdessen gibt es viele mehr oder weniger gleichberechtigte vollwertige Repositories (mit allen Versionen der verwalteten Ressourcen), die bei Bedarf synchronisiert werden.
 
@@ -67,6 +67,7 @@ Bei diesem Ansatz tauscht jeder Entwickler mit jedem Entwickler per Git-Pull ode
 Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe (ab 3-4 Leute) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher einen Shared-Repository-Ansatz zu fahren.
 
 ### Shared-Repository-Ansatz
+* https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow
 
 Bei diesem Ansatz synchronisieren sich die beteiligten Entwickler über ein zentrales Repository, auf das sie Lese- und Schreibrechte haben. Peer-to-Peer-Autausch ist aber weiterhin jederzeit möglich.
 
