@@ -70,7 +70,12 @@ Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http
 ## Spring MVC + Thymeleaf
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 
+### SpringStandard Dialect
+Der Dialect ermöglicht eine möglichst nahtlose Integration der Thymeleaf-View-Technologie mit einem Spring-Backend. Auf diese Weise wird es möglich, in Thymeleaf-Templates Spring-Beans zu referenzieren, um so
 
+* Daten bereitzustellen
+* Berechnungen/Formatierungen durchzuführen
+* Spring-Controller mit der Verarbeitung HTTP-Requests (POST/GET) zu beauftragen
 
 ## Natural Templating Ansatz
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
