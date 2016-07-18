@@ -11,6 +11,7 @@ Caching ist ein sehr wichtiger Aspekt - insbes. im heutigen [Microservices-Hype]
 Für Caching würde ich versuchen, vorhandene Bibliotheken einzusetzen. 
 
 ## Guava-Cache
+
 Hierüber läßt sich Caching annotationsbasiert abbilden.
 
 ## Caffeine
