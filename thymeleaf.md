@@ -10,15 +10,24 @@ Ich hatte bisher mit JSF/JSP- und Velocity-Templating-Engines gearbeitet. Im Zug
 Thymeleaf verfolgt den Ansatz, daß Thymeleaf-Templates im Browser auch ohne Ersetzung der Platzhalter vernünftig dargestellt werden sollen. Hierzu werden sog. Prototypen verwendet:
 
 ```html
-<input type="text" name="name" value="Pierre Feld" th:value="${user.name}" />
+<input 
+   type="text" 
+   name="name" 
+   value="Pierre Feld" 
+   th:value="${user.name}" />
 ```
 
 ---
 
-# Spring-Integration
+# Spring Boot Integration
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 
 Thymeleaf wird in [Spring Boot](springBoot.md) direkt supported (Bestandteil der Starter-Pakete). Es ist leicht möglich - ähnlich wie in JSF - Werte über Beans bereitzustellen, um so beispielsweise den Content einer HTML-Seite dynamisch zusammenzubauen.
+
+## Thymeleaf 3 - Spring Boot 1.3
+Hiermit gibts Probleme:
+
+* https://github.com/spring-projects/spring-boot/issues/4393
 
 ---
 
