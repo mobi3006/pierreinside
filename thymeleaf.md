@@ -74,9 +74,15 @@ Mit diesem Template (``emailplain.html``):
 
 und diesem Code
 
+```java
 Context ctx = new Context(Locale.US);
 ctx.setVariable("name", "Pierre");
 templateEngine.process("emailplain", ctx);    
+```
 
+wird dann 
+
+    Hallo Pierre,
+    viele Grüße.
 
 
