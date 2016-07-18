@@ -20,6 +20,33 @@ Dieses Template
 
 sorgt für die Ausgabe 
 
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>My first Thymeleaf Template</title>
+  </head>
+  <body>
+    <p>Willkommen bei Pierre</p>
+  </body>
+</html>
+```
+
+
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>My first Thymeleaf Template</title>
+  </head>
+  <body>
+    <p>Welcome to my App</p>
+  </body>
+</html>
+```
+
+im Browser ... ohne, daß eine Anwendnung laufen muß. Dies
 sofern die 
 
 
