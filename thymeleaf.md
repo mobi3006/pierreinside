@@ -81,6 +81,8 @@ Bei GitHub findet man dieses Beispiel:
 ## ... mit Thymeleaf 2
 Thymeleaf 2 ist stark auf die Verwendung von XML/HTML zugeschnitten ist. Bei Plain-Text gibt es aber keine Elemente, an die sich die Thymeleaf-DSL andocken kann. Stattdessen kann [*Text inlining*](http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#text-inlining) verwendet werden, um zu ersetzende Elemente zu referenzieren. 
 
+Das Inlining muß aber engekündigt werden ... aber auch die Ankündigung muß an einem Element hängen, z. B. an ``<html>``. Damit dieses notwendige Element nicht sichtbar wird (wir wollen ja kein ``<html>`` in den Nutzdaten haben), können wir uns eines ``th:remove="tag"`` bedienen, das eigentlich für den Natural-Templating-Ansatz (siehe oben) vorhanden ist.
+
 In diesem Template (``emailplain.html``) wird ``[[${name}]]``
 
 ```html
