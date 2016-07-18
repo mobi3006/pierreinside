@@ -11,7 +11,6 @@ So siehts im Einsatz aus:
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:remove="all">My first Thymeleaf Template</title>
-charset=UTF-8" />
   </head>
   <body>
     <p th:text="#{home.welcome}">Welcome to my App</p>
