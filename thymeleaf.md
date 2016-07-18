@@ -9,13 +9,14 @@ So siehts im Einsatz aus:
 ```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title th:remove="all">My first Thymeleaf Template</title>
 charset=UTF-8" />
-</head>
-<body>
-
-<p th:text="#{home.welcome}">Welcome to my App</p>
+  </head>
+  <body>
+    <p th:text="#{home.welcome}">Welcome to my App</p>
+  </body>
+</html>
 ```
 
 
