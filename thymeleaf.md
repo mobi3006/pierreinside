@@ -59,6 +59,7 @@ Hier die Thymeleaf-DSL:
 ---
 
 # Thymeleaf als UI Technologie
+* http://docs.spring.io/spring/docs/current/spring-framework-reference/html/view.html
 * http://spr.com/part-2-adding-views-using-thymeleaf-and-jsp-if-you-want/
 
 ## JSF-Alternative
