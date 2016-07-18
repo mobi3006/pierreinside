@@ -62,5 +62,19 @@ Bei GitHub findet man dieses Beispiel:
 
 * https://github.com/thymeleaf/thymeleafexamples-springmail
 
+## ... mit Thymeleaf 2
+Mit diesem Template (``emailplain.html``):
+
+```html
+<html th:inline="text" th:remove="tag">
+Hallo,
+das ist das Activation Secret: [[${activationSecret}]]
+
+Beste Grüße,
+    Patient-IDM
+</html>
+```
+
+und diesem 
 
 
