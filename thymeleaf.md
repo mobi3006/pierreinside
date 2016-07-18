@@ -9,9 +9,9 @@ Ich hatte bisher mit JSF/JSP- und Velocity-Templating-Engines gearbeitet. Im Zug
 ## Prototype-Ansatz
 Thymeleaf verfolgt den Ansatz, daß Thymeleaf-Templates im Browser auch ohne Ersetzung der Platzhalter vernünftig dargestellt werden sollen. Hierzu werden sog. Prototypen verwendet:
 
-```
+```html
 <input type="text" name="name" value="Pierre Feld" th:value="${user.name}" />
-
+```
 
 ---
 
