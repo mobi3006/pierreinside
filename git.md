@@ -59,6 +59,7 @@ Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflo
 
 * Peer-to-Peer-Ansatz
 * Shared-Repository-Ansatz
+  * Feature-Branches
 * Integration Manager Modell
 
 ### Peer-to-Peer-Ansatz
@@ -74,6 +75,9 @@ Bei diesem Ansatz synchronisieren sich die beteiligten Entwickler über ein zent
 Jeder Entwickler clont das zentrale GIT-Repository ... im neuen lokalen Repository entsteht ein Branch mit dem Namen *master*, der Remote-Heads besitzt. Auf diesem lokalen Repository arbeitet er allein solange er keine Änderungen vom zentralen Repository per ``git fetch``/``git merge`` reinzieht. Die anderen Entwickler sehen seine Änderungen allerdings auch nicht solange kein Push ins zentrale Repository oder Pull Requests erfolgen
 
 Lokal kann der Entwickler Branches und Tags erstellen und bei Bedarf sogar weitere Clones von seinem eigenen lokalen Repository machen.
+
+#### Shared-Repository-Ansatz + Feature-Branches
+* https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
 
 ### Integration Manager Modell
 
