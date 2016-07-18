@@ -62,6 +62,8 @@ Hier die Thymeleaf-DSL:
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
 
 ## Natural Templating Ansatz
+Mit JSF-Seiten kann ein Browser i. a. wenig anfangen, d. h. im Browser werden sie meistens nicht ordentlich dargestellt.
+
 Thymeleaf verfolgt den Ansatz, daß Thymeleaf-Templates im Browser auch ohne Ersetzung der Platzhalter vernünftig dargestellt werden sollen. Auf diese Weise können Contentersteller und Entwickler an dem gleichen Artefakt arbeiten.
 
 Hierzu werden sog. Prototypen verwendet:
