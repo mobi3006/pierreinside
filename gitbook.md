@@ -246,7 +246,12 @@ Eigentlich wollte ich die Markdown-Seiten mit dem Editor MEINER Wahl schreiben. 
 * Integration neuer Seiten ins Inhaltsverzeichnis (``SUMMARY.md``)
 * farbige Anzeige noch nicht gespeicherter Seiten
 
-> ACHTUNG:
+> ACHTUNG 1:
+> Man sollte die Einstellung *File - Preferences - Git - Automatically Commit Changes* abschalten ... ansonsten wird bei jedem Speichern ein lokales Commit gemacht, die  Änderung ins Remote-Repository gepusht und dadurch ein neues GitBook gebaut. 
+
+Und noch was
+
+> ACHTUNG 2:
 > Die Änderungen im Editor sind außerhalb des Editor (Filesystem, ``gitbook serve`` zunächst nicht sichtbar. Erst nach dem Sync (grüne Umrandung) auf das Remote-Repository werden die Änderungen auch außerhalb sichtbar ([Details siehe](#256143)).
 
 ![Gitbook Editor commit und sync](images/gitbookEditorCommitSync.jpg)
