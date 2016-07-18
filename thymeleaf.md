@@ -3,6 +3,24 @@ Ich hatte bisher mit JSF/JSP- und Velocity-Templating-Engines gearbeitet. Im Zug
 
 ---
 
+# Getting Started
+So siehts im Einsatz aus:
+
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">My first Thymeleaf Template</title>
+charset=UTF-8" />
+</head>
+<body>
+
+<p th:text="#{home.welcome}">Welcome to my App</p>
+```
+
+
+---
+
 # Thymeleaf: ALternative zu JSF?
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
 
