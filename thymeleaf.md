@@ -64,7 +64,7 @@ Hier die Thymeleaf-DSL:
 ## UI-Ansatz
 JSF ist ja auch nur ein Generator für HTML und da Thymeleaf ein Templating (= Generatur) für HTML ist, bietet sich dieser Einsatzbereich an ... und wurde auch dafür geschaffen.
 
-Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http://spring.io/guides/gs/serving-web-content/) von Spring als View-Technologie vorgestellt. SpringRoo verwendet Thymeleaf beispielsweise als Default-UI-Technologie.
+Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http://spring.io/guides/gs/serving-web-content/) von Spring als View-Technologie vorgestellt. [SpringRoo](http://projects.spring.io/spring-roo/) verwendet Thymeleaf beispielsweise als Default-UI-Technologie.
 
 ## Natural Templating Ansatz
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
