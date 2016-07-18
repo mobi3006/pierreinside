@@ -58,10 +58,10 @@ Hier die Thymeleaf-DSL:
 
 ---
 
-# Thymeleaf als Alternative zu JSF
+# Thymeleaf als UI Technologie
 * http://spr.com/part-2-adding-views-using-thymeleaf-and-jsp-if-you-want/
 
-## UI-Ansatz
+## JSF-Alternative
 JSF ist ja auch nur ein Generator für HTML und da Thymeleaf ein Templating (= Generatur) für HTML ist, bietet sich dieser Einsatzbereich an ... und wurde auch dafür geschaffen.
 
 Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http://spring.io/guides/gs/serving-web-content/) von Spring als View-Technologie vorgestellt. [SpringRoo](http://projects.spring.io/spring-roo/) verwendet Thymeleaf beispielsweise als Default-UI-Technologie.
