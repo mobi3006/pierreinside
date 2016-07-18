@@ -76,7 +76,7 @@ und diesem Code
 
 Context ctx = new Context(Locale.US);
 ctx.setVariable("name", "Pierre");
-        return this.templateEngine.process("plainemail", ctx);    
+templateEngine.process("emailplain", ctx);    
 
 
 
