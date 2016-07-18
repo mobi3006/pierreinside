@@ -67,14 +67,16 @@ Mit diesem Template (``emailplain.html``):
 
 ```html
 <html th:inline="text" th:remove="tag">
-Hallo,
-das ist das Activation Secret: [[${activationSecret}]]
-
-Beste Grüße,
-    Patient-IDM
+  Hallo [[${name}]],
+  viele Grüße.
 </html>
 ```
 
-und diesem 
+und diesem Code
+
+Context ctx = new Context(Locale.US);
+ctx.setVariable("name", "Pierre");
+        return this.templateEngine.process("plainemail", ctx);    
+
 
 
