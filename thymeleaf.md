@@ -61,7 +61,8 @@ Hier die Thymeleaf-DSL:
 # Thymeleaf als ALternative zu JSF
 * http://spr.com/part-2-adding-views-using-thymeleaf-and-jsp-if-you-want/
 
-## 
+## UI-Ansatz
+JSF ist ja auch nur ein Generator für HTML und da Thymeleaf ein Templating (= Generatur) für HTML ist, bietet sich dieser Einsatzbereich an ... und wurde auch dafür geschaffen.
 
 ## Natural Templating Ansatz
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
