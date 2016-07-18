@@ -32,8 +32,11 @@ sorgt für die Ausgabe
 </html>
 ```
 
+wennn zur Laufzeit diese ``message.properties``  verwendet wird:
 
+    home.welcome=Willkommen bei Pierre
 
+Wird diese Datei einfach so im Browser angezeigt, dann wird daraus (sie *Natural Templating* Idee) 
 ```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
