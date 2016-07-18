@@ -76,7 +76,7 @@ Der Dialect ermöglicht eine möglichst nahtlose Integration der Thymeleaf-View-
 
 * Daten bereitzustellen
 * Berechnungen/Formatierungen durchzuführen
-* Spring-Controller mit der Verarbeitung HTTP-Requests (POST/GET) zu beauftragen (``th:action``)
+* Spring-Controller mit der Verarbeitung HTTP-Requests (POST/GET) zu beauftragen (``th:action``, ``th:object``)
 
 ## Natural Templating Ansatz
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
