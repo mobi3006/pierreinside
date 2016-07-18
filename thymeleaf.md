@@ -58,8 +58,10 @@ Hier die Thymeleaf-DSL:
 
 ---
 
-# Thymeleaf: ALternative zu JSF?
+# Thymeleaf als ALternative zu JSF
 * http://spr.com/part-2-adding-views-using-thymeleaf-and-jsp-if-you-want/
+
+## 
 
 ## Natural Templating Ansatz
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
