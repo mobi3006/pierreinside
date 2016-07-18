@@ -66,7 +66,7 @@ Bei diesem Ansatz tauscht jeder Entwickler mit jedem Entwickler per Git-Pull ode
 
 Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe (ab 3-4 Leute) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher einen Shared-Repository-Ansatz zu fahren.
 
-### Shared-Repository-Ansatz
+### Shared-Repository-Ansatz - SVN-like
 * https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow
 
 Bei diesem Ansatz synchronisieren sich die beteiligten Entwickler über ein zentrales Repository, auf das sie Lese- und Schreibrechte haben. Peer-to-Peer-Autausch ist aber weiterhin jederzeit möglich.
