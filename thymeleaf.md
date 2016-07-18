@@ -4,7 +4,7 @@ Ich hatte bisher mit JSF/JSP- und Velocity-Templating-Engines gearbeitet. Im Zug
 ---
 
 # Getting Started
-So siehts im Einsatz aus:
+Dieses Template
 
 ```html
 <!DOCTYPE html>
@@ -18,7 +18,13 @@ So siehts im Einsatz aus:
 </html>
 ```
 
-Am Anfang hatte ich nicht genau hingeschaut und ``th:text`` für ein Table-Header Element gehalten. Hier gehört das aber zum Namespace http://www.thymeleaf.org und wird dementsprechend von der Thymeleaf-Template-Engine interpretiert.
+sorgt für die Ausgabe 
+
+sofern die 
+
+
+
+> Am Anfang hatte ich nicht genau hingeschaut und ``th:text`` für ein Table-Header Element gehalten. Hier gehört das aber zum Namespace http://www.thymeleaf.org und wird dementsprechend von der Thymeleaf-Template-Engine interpretiert.
 
 Hier die Thymeleaf-DSL:
 * http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#attribute-precedence
@@ -73,7 +79,9 @@ Bei GitHub findet man dieses Beispiel:
 * https://github.com/thymeleaf/thymeleafexamples-springmail
 
 ## ... mit Thymeleaf 2
-Mit diesem Template (``emailplain.html``):
+Thymeleaf 2 ist stark auf die Verwendung von XML/HTML zugeschnitten ist. Bei Plain-Text gibt es aber keine Elemente, an die sich die Thymeleaf-DSL andocken kann. Stattdessen kann [*Text inlining*](http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#text-inlining) verwendet werden, um zu ersetzende Elemente zu referenzieren. 
+
+In diesem Template (``emailplain.html``) wird ``[[${name}]]``
 
 ```html
 <html th:inline="text" th:remove="tag">
@@ -82,7 +90,7 @@ Mit diesem Template (``emailplain.html``):
 </html>
 ```
 
-und diesem Code
+bei diesem Code
 
 ```java
 Context ctx = new Context(Locale.US);
@@ -90,7 +98,7 @@ ctx.setVariable("name", "Pierre");
 templateEngine.process("emailplain", ctx);    
 ```
 
-wird dann 
+ersetzt durch ``Pierre``, so daß dieses Endergebnis zu erwarten ist: 
 
     Hello Pierre,
     cheers.
