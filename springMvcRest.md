@@ -8,7 +8,7 @@ Wie bei Spring üblich wird viel mit Java-Annotationen gearbeitet:
 * ``@RequestBody``
 * ``@RequestParam``
 * ``@ResponseBody``
-* ``@ResponseStatus``
+* ``@ResponseStatus``  
 
 ---
 
