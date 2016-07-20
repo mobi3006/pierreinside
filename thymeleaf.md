@@ -70,6 +70,24 @@ Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http
 ### JSF-Alternative?
 JSF definiert einen Lifecycle und ist insofern deutlich komplexer. Zudem hat JSF einen View-First-Ansatz ... im Gegensatz zum Controller-First-Ansatz von JSP/Thymeleaf.
 
+## Expression Language
+* http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#standard-expression-syntax
+
+> **ACHTUNG:** es werden verschiedene Symbole verwendet ... je nach Content: ``#{}``, ``${}``, ``*{}``, ``@{}``
+
+Über die Expression Language 
+* erfolgt die Verknüpfung von statischem Content und dynamischen Daten. Hier beispielsweise der Zugriff auf eine Spring-Bean:
+
+```xml
+<p th:text="${user.name}">Welcome home</p>
+```    
+
+* erfolgt Internationalisierung - Einbettung von Message-Properties via 
+
+```xml
+<p th:text="#{home.welcome}">Welcome home</p>
+```
+
 ## Spring MVC + Thymeleaf
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 * [Komplexeres Beispiel](https://github.com/thymeleaf/thymeleafexamples-stsm)
@@ -91,12 +109,12 @@ Thymeleaf verfolgt den Ansatz, daß Thymeleaf-Templates im Browser auch ohne Ers
 Hierzu werden sog. Prototypen verwendet:
 
 ```html
-<input 
-   type="text" 
-   name="name" 
-   value="Pierre Feld" 
-   th:value="${user.name}" />
+<p th:text="#{home.welcome}">Willkommen zuhause</p>
 ```
+
+In diesem Beispiel ist *Willkommen zuhause* ein Prototype (= Mock), der zur Laufzeit durch den Thymeleaf-Templating-Mechanismus ersetzt wird (der tatsächliche Wert kommt aus ``#{home.welcome}``).
+
+Manchmal kommt es vor, daß man ohne Laufzeitumgebung gar keine Informationen bekäme. Bei dynamisch generierten Tabellen ist das beispielsweise der Fall. Hier kann man dann eine/mehrere Zeilen per ``th:remove="all"`` als Prototyp kennzeichnen. Diese Zeile(n) werden zur Laufzeit nicht dargestellt. 
 
 ---
 

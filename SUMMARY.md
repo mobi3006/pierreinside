@@ -14,15 +14,18 @@
    * [Hystrix](hystrix.md)
    * [Reactive Programming](reactiveProgramming.md)
 * Programming
+   * [Bean Validation](java_beanValidation.md)
    * Webservices
-       * [Http](http.md)
+       * [HTTP](http.md)
        * [REST](rest.md)
        * [Spring MVC REST](springMvcRest.md)
+       * [Swagger](swagger.md)
    * Spring Ecosystem
        * [Spring Core](springCore.md)
        * [Spring Boot](springBoot.md)
        * [Spring Cloud](springCloud.md)
        * [Spring Cloud Config](springCloudConfig.md)
+       * [Spring MVC](springMvc.md)
        * [Spring Data](springData.md)
    * [Thymeleaf](thymeleaf.md)
    * Persistenz
@@ -64,9 +67,7 @@
    * [Leanpub](leanpub.md)
 * Devices
    * [iPad Pro](ipadPro.md)
-   * [Auto](auto.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
 * [YAML](yaml.md)
-* [Spring MVC](springMvc.md)
 

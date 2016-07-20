@@ -3,12 +3,14 @@
 
 Spring MVC ist Request-Driven, d. h. ein Controller erhält Http-Requests (GET, POST), die er verarbeitet und zu guter Letzt eine Antwort in Form eines Views (= UI) sendet. 
 
-![sds](http://docs.spring.io/spring-framework/docs/4.1.2.RELEASE/spring-framework-reference/html/images/mvc.png) Quelle: http://docs.spring.io/spring-framework/docs/4.1.2.RELEASE/spring-framework-reference/html/mvc.html#mvc
+* http://docs.spring.io/spring-framework/docs/4.1.2.RELEASE/spring-framework-reference/html/mvc.html#mvc
 
 ---
 
 # Spring MVC Rest
 [siehe eigenes Kapitel](springMvcRest.md)
+
+Frage: Wie stehen ``@Controller`` und ``@RestController`` zueinander ... die Grenzen zwischen UI-Client und Maschine-Client (= Rest-Client) verschwimmen irgendwie ...
 
 ---
 
@@ -68,4 +70,89 @@ public class WebPatientRegistrationController {
 Spring übernimmt das Mapping der einfachen HTTP-String-Attribute in Java-Objekte.
 
 ### @RequestMapping
+Mittlerweile gibt es auch spezialisierte RequestMappings: ``@GetMapping``, ...
+
+Solche Request-Mappings können relativ komplex werden, wenn beispielsweise ``@PathVariable`` verwendet werden ([ein Beispsiel von hier](http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-requestmapping)):
+
+```java
+@RequestMapping(
+  "/spring-web/
+    {symbolicName:[a-z-]+}-
+    {version:\\d\\.\\d\\.\\d}
+    {extension:\\.[a-z]+}")
+public void handle(@PathVariable String version, @PathVariable String extension) {
+    // ...
+}
+```
+
+Man kann auch Headerwerte zur Selektion der richtigen Controllermethode aufzunehmen.
+
+### @RequestMapping ... Parameter der Java-Methode
+
+**Default-Methoden-Parameter:**
+
+Man kann in eine Controller-Methode die folgenden Parameter aufnehmen und bekommt sie richtig injeziert:
+
+* ``BindingResult``
+* ``Model``
+* ``Locale`` - die im Browser eingestellte Sprache (kommt über den HTTP Accept-Language Header)
+
+**Methoden-Parameter:**
+
+Dieser Link beschreibt die Regeln für die Java-Methode, die an einem ``@RequestMapping`` hängt:
+
+* http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-methods
+
+**Typ-Konvertierung:**
+
+Im HTTP-Request sind nun Strings enthalten, in den Controller-Methoden arbeitet man häufig aber mit komplexeren Java-Klassen. Hierfür gibt es bereits häufig automatische Konvertierungen, häufig wird aber auch JAXB verwendet.
+
+Tritt beim Unmarshalling ein Fehler auf, so wird das in ``BindingResult`` hinterlegt. Dieser Parameter sollte in keiner HTTP-POST, so daß  der 
+Hier finden sich weitere Informationen zur Typ-Konvertierung:
+
+* http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-typeconversion
+
+Mit JAXB kann die Typ-Konvertierung unterstützt werden.
+
+**Semantische Prüfungen:**
+
+Neben diesen syntaktischen Typ-Prüfungen (ein String muß in ein ``java.util.Date`` konvertierbar sein) können weitere semantische Prüfungen sinnvoll sein. Diese können über [Java Bean Validation](java_beanValidation.md) mit ``@Valid`` sehr schön integriert werden:
+
+```java
+public String sayHello(
+   ModelMap m, 
+   @Valid Person p, 
+   BindingResult r) {
+  // ...
+}
+```
+
+### AOP-Proxying
+Will man im Controller Transaktionen deklarieren (``@Transactional``), so kann man *Class-Based Proxying* verwenden. Das wird im Spring-Context beispielweise über
+
+```xml
+<tx:annotation-driven proxy-target-class="true"/>
+```
+
+konfiguriert.
+
+### @RequestBody
+Mit dieser Annotation kann man den HTTP-Body (z. B. eines HTTP-POST) in einen Parameter injecten lassen:
+
+```java
+public void registerUser(@RequestBody String body) {}
+```
+
+Der gelieferte String kann über [HTTP Message Conversion](http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/remoting.html#rest-message-conversion) verarbeitet werden. Bei folgender Schnittstelle geschieht das automatisch ... das entsprechende Marshalling vorausgesetzt (z. B. über JSON-Jackson oder JAXB):
+
+```java
+public void registerUser(@RequestBody UserCredential c) {}
+```
+
+### @ResponseBody
+Mit dieser Annotation wird das Ergebnis einer Controller-Methode an den HTTP-Response-Body gebunden:
+
+```java
+public @ResponseBody User getUser(String username) {}
+```
 
