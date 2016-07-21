@@ -1,5 +1,12 @@
 # Thymeleaf
-Ich hatte bisher mit JSF/JSP- und Velocity-Templating-Engines gearbeitet. Im Zuge der Nutzung von Spring Boot haben wir Thymeleaf für unser HTML-Frontend genutzt (ohne JSF).
+Ich hatte bisher mit Velocity-Templating und JSPs gearbeitet. Im Zuge der Nutzung von Spring MVC/Boot haben wir Thymeleaf für ein HTML-Frontend genutzt und damit auch Email-Templates umgesetzt.
+
+[Spring MVC](springMvc.md) ist grundsätzlich unabhängig von der View-Technologie. Es sieht aber explizit die Nutzung von Thymeleaf für diese Aufgabe vor, was man schon daran sieht, daß Spring in den Parent-Poms als Dependency enthalten ist.
+
+---
+
+# Version 2 vs. 3
+* http://www.thymeleaf.org/doc/articles/thymeleaf3migration.html
 
 ---
 
@@ -59,8 +66,8 @@ Hier die Thymeleaf-DSL:
 ---
 
 # Thymeleaf als UI Technologie
-* http://docs.spring.io/spring/docs/current/spring-framework-reference/html/view.html
-* http://spr.com/part-2-adding-views-using-thymeleaf-and-jsp-if-you-want/
+* DSL-Sprachelemente: http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html
+* Ein praktisches Beispiel: http://spr.com/part-2-adding-views-using-thymeleaf-and-jsp-if-you-want/
 
 ## JSP-Alternative
 JSP ist ein Generator für HTML ... Thymeleaf ist ein Generator für HTML. 
@@ -70,13 +77,66 @@ Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http
 ### JSF-Alternative?
 JSF definiert einen Lifecycle und ist insofern deutlich komplexer. Zudem hat JSF einen View-First-Ansatz ... im Gegensatz zum Controller-First-Ansatz von JSP/Thymeleaf.
 
+## Natural Templating Ansatz
+* http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
+
+Verwendet man JSF als UI-Technologie, so können die JSF-Seiten (haben beispielsweise die Dateiendung ``*.xhtml``) im Browser ohne die dahinterliegende Applikation nicht vernünftig dargestellt werden, weil die Platzhalter nicht ersetzt sind.
+
+Thymeleaf adressiert dieses Problem mit dem sog. Natural Templating Ansatz, so daß Thymeleaf-Templates im Browser auch ohne Ersetzung der Platzhalter vernünftig dargestellt werden. Auf diese Weise können Contentersteller und Entwickler an dem gleichen Artefakt arbeiten noch bevor an eine lauffähige Version überhaupt zu denken ist.
+
+Hierzu werden sog. Prototypen verwendet:
+
+```html
+<p th:text="#{home.welcome}">Willkommen zuhause</p>
+```
+
+In diesem Beispiel ist *Willkommen zuhause* ein Prototype (= Mock), der zur Laufzeit durch den Thymeleaf-Templating-Mechanismus ersetzt wird (der tatsächliche Wert kommt aus ``#{home.welcome}``).
+
+### Dynamische Tabellen
+Manchmal kommt es vor, daß man ohne Laufzeitumgebung gar keine Informationen bekäme. Bei dynamisch generierten Tabellen ist das beispielsweise der Fall. Hier kann man dann eine/mehrere Zeilen per ``th:remove="all"`` als Prototyp kennzeichnen. Diese Zeile(n) werden zur Laufzeit nicht dargestellt.
+
+### Links über ``href``
+Bei ``href`` zeigt der Natural Templating Ansatz seine Stärke:
+
+```xml
+<a href="details.html" 
+   th:href="@{http://localhost:8080/gtvg/order/details(orderId=${o.id})}">view</a>
+```
+
+Dieser Link ist auch ohne Runtime-Engine - allein durch Öffnen der Seite im Browser - immer noch navigierbar, d. h. man kommt damit zur ``details.html`` und profitiert dort wieder vom Natural Templating.
+
+Der produktive Code ist somit gleichzeitig ein Mock.
+
+### ... vs. Inlining
+Man kann statt der ``th:foo`` Attribute die Expression-Language auch inline verwenden. In Ausnahmefällen ist das auch tatsächlich erforderlich (wenn das Template kein XML-Format ist) ... siehe unten Plaintext-Emails. 
+
+Statt
+
+```xml
+<p>Hello, <span th:text="${session.user.name}">Sebastian</span>!</p>
+```
+
+kann mit Inlining das geschrieben werden:
+
+```xml
+<body th:inline="text">
+  ...
+  <p>Hello, [[${session.user.name}]]!</p>
+  ...
+</body>
+```
+
+**Nachteil:** Man verliert dadurch aber das Natural Templating, d. h. im Browser ohne laufende Templating-Engine wird diese Seite nicht sinnvoll dargestellt.
+
+**Achtung:** In Thymeleaf 3 braucht man ``th:inline="text"`` nicht mehr ... es wird sogar empfohlen, es wegzulassen
+
 ## Expression Language
 * http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#standard-expression-syntax
 
 > **ACHTUNG:** es werden verschiedene Symbole verwendet ... je nach Content: ``#{}``, ``${}``, ``*{}``, ``@{}``
 
 Über die Expression Language 
-* erfolgt die Verknüpfung von statischem Content und dynamischen Daten. Hier beispielsweise der Zugriff auf eine Spring-Bean:
+* erfolgt die Verknüpfung von statischem Content (aka *Templates*) und dynamischen Daten. Hier beispielsweise der Zugriff auf eine Spring-Bean:
 
 ```xml
 <p th:text="${user.name}">Welcome home</p>
@@ -92,29 +152,79 @@ JSF definiert einen Lifecycle und ist insofern deutlich komplexer. Zudem hat JSF
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 * [Komplexeres Beispiel](https://github.com/thymeleaf/thymeleafexamples-stsm)
 
+### Konfiguration
+Thymeleaf bringt eine Auto-Konfiguration mit, die in einer Spring Boot Applikation auch automatisch gezogen wird. Man findet diese Auto-Konfiguration in der Klasse [``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration``](https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/thymeleaf/ThymeleafAutoConfiguration.java).
+
+Thymeleaf verwendet den Standard Spring Boot Mechanismus, d. h. man findet die Konfigurationsparameter in [``ThymeleafProperties``](https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/thymeleaf/ThymeleafProperties.java). Darin zeigt sich beispielsweise 
+
+```java
+@ConfigurationProperties("spring.thymeleaf")
+public class ThymeleafProperties {
+	public static final String DEFAULT_PREFIX = "classpath:/templates/";
+	private String prefix = DEFAULT_PREFIX;
+}
+```
+
+daß Templates per Default in ``classpath:/templates/`` gesucht werden und daß man über das Property ``spring.thymeleaf.prefix`` (bei einer Spring Boot Anwendung gesetzt in ``application.properties``) diese Einstellung überschreiben kann. Diese Information findet man übrigens nicht nur im Source-Code, sondern auch in der Spring-Dokumentation:
+
+* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
+
+Größere Anpassungen von Thymeleaf können über Spring-Annotationen erfolgen (hier in einer Spring Boot Applikation):
+
+```java
+@Configuration
+@EnableConfigurationProperties(ThymeleafProperties.class)
+@ConditionalOnClass(SpringTemplateEngine.class)
+@AutoConfigureAfter(WebMvcAutoConfiguration.class)
+public class ThymeleafConfiguration 
+  extends WebMvcConfigurerAdapter implements ApplicationContextAware {
+
+    private ApplicationContext applicationContext;
+
+    @Autowired
+    ThymeleafProperties properties;
+
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
+    @Bean
+    public TemplateEngine templateEngine() {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.addTemplateResolver(htmlTemplateResolver());
+        engine.addTemplateResolver(textTemplateResolver());
+        return engine;
+    }
+
+    private ITemplateResolver htmlTemplateResolver() {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("templates");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
+    }    
+}
+```
+
+Hier ist ein Weg über XML-Dateien beschrieben:
+
+* http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#spring-mvc-configuration
+
+Hat man eine Spring Boot Applikation, so ist Thymleaf über ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.java`` bereits auto-konfiguriert. Will man dann seine eigene ``ThymeleafConfiguration`` (siehe oben) einschieben, so muß man die Auto-Konfiguration folgendermaßen rauskonfigurieren:
+
+```java
+@SpringBootApplication(
+  exclude={
+    org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class})
+public class MyApplication { // ...}
+```
+
 ### SpringStandard Dialect
-Der Dialect ermöglicht eine möglichst nahtlose Integration der Thymeleaf-View-Technologie mit einem Spring-Backend. Auf diese Weise wird es möglich, in Thymeleaf-Templates Spring-Komponenten über Spring Expression Language einzubetten, um so
+Dieser Dialekt ermöglicht eine möglichst nahtlose Integration der Thymeleaf-View-Technologie mit einem Spring-Backend. Auf diese Weise wird es möglich, in Thymeleaf-Templates Spring-Komponenten über Spring Expression Language einzubetten, um so
 
 * Daten bereitzustellen
 * Berechnungen/Formatierungen durchzuführen
 * Spring-Controller mit der Verarbeitung HTTP-Requests (POST/GET) zu beauftragen (``th:action``, ``th:object``)
-
-## Natural Templating Ansatz
-* http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
-
-Mit JSF-Seiten kann ein Browser i. a. wenig anfangen, d. h. im Browser werden sie meistens nicht ordentlich dargestellt.
-
-Thymeleaf verfolgt den Ansatz, daß Thymeleaf-Templates im Browser auch ohne Ersetzung der Platzhalter vernünftig dargestellt werden sollen. Auf diese Weise können Contentersteller und Entwickler an dem gleichen Artefakt arbeiten.
-
-Hierzu werden sog. Prototypen verwendet:
-
-```html
-<p th:text="#{home.welcome}">Willkommen zuhause</p>
-```
-
-In diesem Beispiel ist *Willkommen zuhause* ein Prototype (= Mock), der zur Laufzeit durch den Thymeleaf-Templating-Mechanismus ersetzt wird (der tatsächliche Wert kommt aus ``#{home.welcome}``).
-
-Manchmal kommt es vor, daß man ohne Laufzeitumgebung gar keine Informationen bekäme. Bei dynamisch generierten Tabellen ist das beispielsweise der Fall. Hier kann man dann eine/mehrere Zeilen per ``th:remove="all"`` als Prototyp kennzeichnen. Diese Zeile(n) werden zur Laufzeit nicht dargestellt. 
 
 ---
 
@@ -126,6 +236,12 @@ Häufig haben Seiten einen hohen statischen Anteil und nur einen geringen dynami
 Bis Thymeleaf  
 
 ---
+
+# Erweiterbarkeit
+* http://www.thymeleaf.org/doc/articles/sayhelloextendingthymeleaf5minutes.html
+* http://www.thymeleaf.org/doc/articles/sayhelloagainextendingthymeleafevenmore5minutes.html
+
+Thymeleaf kann um eigene Dialekte erweitert werden, um so eine eigene DSL zu schaffen.
 
 # Spring Boot Integration
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
@@ -149,9 +265,9 @@ Bei GitHub findet man dieses Beispiel:
 * https://github.com/thymeleaf/thymeleafexamples-springmail
 
 ## ... mit Thymeleaf 2
-Thymeleaf 2 ist stark auf die Verwendung von XML/HTML zugeschnitten ist. Bei Plain-Text gibt es aber keine Elemente, an die sich die Thymeleaf-DSL andocken kann. Stattdessen kann [*Text inlining*](http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#text-inlining) verwendet werden, um zu ersetzende Elemente zu referenzieren. 
+Thymeleaf 2 ist stark auf die Verwendung von XML/HTML zugeschnitten ist. Bei Plain-Text gibt es aber keine Elemente, an die sich die Thymeleaf-DSL andocken kann. Stattdessen kann [*Text inlining*](http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#text-inlining) verwendet werden, um zu ersetzende Elemente zu referenzieren. Dieser Ansatz läuft dem *Natural Templating* zuwider, weil die Platzhalter eben nicht durch Prototypen ersetzt sind. Deshalb sollte *Inlining* nur im äußersten Notfall eingesetzt werden.
 
-Das Inlining muß aber engekündigt werden ... aber auch die Ankündigung muß an einem Element hängen, z. B. an ``<html>``. Damit dieses notwendige Element nicht sichtbar wird (wir wollen ja kein ``<html>`` in den Nutzdaten haben), können wir uns eines ``th:remove="tag"`` bedienen, das eigentlich für den Natural-Templating-Ansatz (siehe oben) vorhanden ist.
+Das Inlining muß aber engekündigt werden ... aber auch die Ankündigung muß an einem Element hängen, z. B. an ``<html>``. Damit dieses notwendige Element nicht sichtbar wird (wir wollen ja kein ``<html>`` in den Nutzdaten haben), können wir uns eines ``th:remove="tag"`` bedienen, das eigentlich für den Natural-Templating-Ansatz (siehe oben) vorhanden ist. Irgendwie schon sehr tricky ...
 
 In diesem Template (``emailplain.html``) wird ``[[${name}]]``
 
@@ -175,12 +291,4 @@ ersetzt durch ``Pierre``, so daß dieses Endergebnis zu erwarten ist:
     Hello Pierre,
     cheers.
 
-und 
-
-```html
-<html th:inline="text" th:remove="tag">
-  Hello [[${name}]],
-  cheers
-</html>
-```
-
+... schon tricky wie sich das künstliche ``html``-Element durch ``th:remove="tag"`` selbst entfernt.

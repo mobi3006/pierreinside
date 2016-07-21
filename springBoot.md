@@ -212,19 +212,111 @@ Convenience Annotation ... subsumiert die empfohlenen Annotationen
 * ``@ComponentScan``
 
 ### @EnableAutoConfiguration
+Ist diese Eigenschaft gesetzt, so versucht Spring sich die Spring-Konfiguration der Anwendung selbst zu erschließen. Da das DER Konfigurationsmechanismus von SpringBoot ist, sind zumindest alle Komponenten, die von Spring Boot direkt unterstützt werden mit einer ``*AutoConfiguration``-Klasse ausgestattet, z. B. 
 
-Ist diese Eigenschaft gesetzt, so versucht Spring sich die Spring-Konfiguration der Anwendung selbst zu erschließen. Hierin steckt schon eine Menge Magie ...
+* ActiveMQAutoConfiguration
+* CacheAutoConfiguration
+* CassandraAutoConfiguration
+* CloudAutoConfiguration
+* ConsulAutoConfiguration
+* ElasticSearchAutoConfiguration
+* FacebookAutoConfiguration
+* FlywayAutoConfiguration
+* JpaRepositoriesAutoConfiguration
+* MailSenderAutoConfiguration
+* ...
+
+In diesen ``*AutoConfiguration``-Klassen werden die entsprechenden Properties aus  ``application.properties`` gezogen, so daß die Komponenten weitestgehend über einache Properties anpassbar sind und keine spezielle Spring-Konfiguration erfordern. 
+
+Hierin steckt schon eine Menge Magie ...
 
 > Wenn eine JPA Dependency definiert ist und EnableAutoConfiguration gesetzt ist, dann sucht der Spring Boot (der Loader) nach entsprechenden ``@Entity`` Anntotaionen im Code
 
 ... solange das zuverlässig und intuitiv funktioniert ist alles gut ;-)
 
-#### Auto-Configuration gezielt abschalten
+#### Wie ist die Magie umgesetzt?
+
+Als ich mich der [Thymeleaf-Technologie (Bestandteil von Spring Boot)](thymeleaf.md) näherte, tat ich das an einer bereits existierenden Anwendnung. Die lief und ich wollte nun rausfinden wo ich denn nun meine Templates hinlegen soll. Ich fand im Code keine Konfiguration und in der umfassenden Dokumentation fand ich auch keine Hinweise. Erst über Umwege fand ich die Information, daß das über die automatisch gezogene ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration`` erfolgte.
+
+Thymeleaf liefert folgende Klasse:
+
+```java
+@Configuration
+@EnableConfigurationProperties(ThymeleafProperties.class)
+@ConditionalOnClass(SpringTemplateEngine.class)
+@AutoConfigureAfter(WebMvcAutoConfiguration.class)
+public class ThymeleafAutoConfiguration {
+
+	@Configuration
+	@ConditionalOnMissingBean(name = "defaultTemplateResolver")    // <--- ACHTUNG A
+	public static class DefaultTemplateResolverConfiguration { ... }
+    
+		@Autowired
+		private ThymeleafProperties properties;                   // <--- ACHTUNG B1
+    
+		@Bean
+		public TemplateResolver defaultTemplateResolver() {
+			TemplateResolver resolver = new TemplateResolver();
+			resolver.setResourceResolver(thymeleafResourceResolver());
+			resolver.setPrefix(this.properties.getPrefix());      // <--- ACHTUNG B2
+			resolver.setSuffix(this.properties.getSuffix());
+			resolver.setTemplateMode(this.properties.getMode());
+			if (this.properties.getEncoding() != null) {
+				resolver.setCharacterEncoding(
+                  this.properties.getEncoding().name());
+			}
+			resolver.setCacheable(this.properties.isCache());
+			Integer order = this.properties.getTemplateResolverOrder();
+			if (order != null) {
+				resolver.setOrder(order);
+			}
+			return resolver;
+		}
+	}
+    
+	@Configuration
+	@ConditionalOnMissingBean(SpringTemplateEngine.class)         // <--- ACHTUNG C
+	protected static class ThymeleafDefaultConfiguration {
+
+		@Autowired
+		private final Collection<ITemplateResolver> templateResolvers = 
+          Collections.emptySet();
+
+		@Autowired(required = false)
+		private final Collection<IDialect> dialects = 
+          Collections.emptySet();
+
+		@Bean
+		public SpringTemplateEngine templateEngine() {
+			SpringTemplateEngine engine = new SpringTemplateEngine();
+			for (ITemplateResolver templateResolver : this.templateResolvers) {
+				engine.addTemplateResolver(templateResolver);
+			}
+			for (IDialect dialect : this.dialects) {
+				engine.addDialect(dialect);
+			}
+			return engine;
+		}
+	}
+}
+```
+
+Diese Klasse ist ein Musterbeispiel dafür wie die AutoConfiguration bei Spring Boot läuft:
+
+* **ACHTUNG A:** Die Auto-Konfiguration ist als Fall-Back gedacht ... indem ich in meiner Anwendnung eine eigene Bean mit dem Namen ``defaultTemplateResolver`` definiere, hebel ich die AutoConfiguration aus.
+* **ACHTUNG B1/B2:** die ``ThymeleafProperties`` werden in der default-Konfiguration berücksichtigt, die beispielsweise aus den ``application.properties`` gefüttert werden.
+* **ACHTUNG C:** wie bei A nur auf Class-Level
+
+#### Auto-Configuration gezielt komplett abschalten/überschreiben
 
 Über Excludes lassen sich einzelne Ressourcen von der Auto-Configuration ausschließen:
 
-    @EnableAutoConfiguration(
-      exclude={DataSourceAutoConfiguration.class})
+```java
+@EnableAutoConfiguration(
+  exclude={org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class})
+```
+      
+Häufig will man die Komponente dann aber dennoch nutzen, dann muß man eine eigene Configuration beisteuern. Hier kann man sich aber immer an der entsprechenden AutoConfiguration-Klasse orientieren.
 
 #### Auto Configuration Report
 
@@ -247,35 +339,28 @@ Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --de
     
 Dieser Report kann sehr hilfreich sein, wenn man der Spring-Magie auf die SChliche kommen will.
 
-### @ConditionalOnProperty
-Über 
+#### Fazit AutoConfiguration
+Ich halte diese Form der Konfiguration für vorbildlich und werde es für meine eigenen Komponenten genauso umsetzen. In manchen IDEs kann man sogar Auto-Vervollständigung auf den Properties bekommen.
 
-```java
-@ConditionalOnProperty(
-  name = "deployment.environment", 
-  havingValue = "DEV")
-public class MyService{ ... }
-```
+Ein Anpassung des Verhaltens einer Komponente ist folgendermaßen möglich (die häufigste zuerst genannt):
 
-wird die Integration der Klasse in die Initialisierung der Anwendung (durch Spring) von bestimmten Bedingungen abhängig gemacht.
+1. in ``application.properties`` die entsprechenden ``ConfigurationProperties`` überschreiben - hierzu am beste Doku lesen oder die entsprechende ``ConfigurationProperties`` Klasse ausfindig machen (z. B. ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties``)
+2. in der eigenen Anwendung Beans instanziieren, die die Default-Konfiguration übersteuern - hierzu am beste Doku lesen oder die entsprechende AutoConfiguration-Klasse ausfindig machen (z. B. ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration``)
+3. AutoConfiguration einer Komponente komplett deaktivieren und eine eigene Konfiguration in der Anwendung bereitstellen - hierzu am beste Doku lesen oder die entsprechende AutoConfiguration-Klasse ausfindig machen (z. B. ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration``) und als Muster verwenden
+  * ACHTUNG: das sollte immer nur die letzte Möglichkeit sein, denn dadurch beraubt man sich evtl. der Forward-Kompatibilität, d. h. bei neuen Versionen ist der Code evtl. nicht mehr lauffähig
 
-Über die ``application.properties`` 
-
-    deployment.environment=DEV
-
-erfolgt die Konfiguration.
-
-## Konfiguration von Applikationseigenschaften
+### Konfiguration von Applikationseigenschaften
 * Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
 * https://blog.codecentric.de/2016/04/binding-configuration-javabeans-spring-boot/
 
+#### Konfigurationseinstellungen im Applikationscode nutzen
 Hier unterstützt Spring diese Ansätze
 
 * Property Injection mit Spring-EL
 * Type-safe @ConfigurationProperties
 * Spring-Cloud-Config
 
-### spring.config.location
+#### spring.config.location
 Über das Property ``spring.config.location`` können Dateien definiert werden, in der die Property-Werte gesetzt werden (es kann eine Übersteuerung erfolgen). Das ist sehr praktisch, wenn man die Anwendnung in einem anderen Environment laufen lassen möchte (statt in der Developer-Umgebung in der Staging-Umgebung):
 
 ```bash
@@ -288,10 +373,10 @@ java
     
 Hierzu muß die Spring-Boot-Applikation allerdings Command-Line-Parameter unterstützen (``SpringApplication.setAddCommandLineProperties(true)``), was aber per Default der Fall ist.
 
-### Laufzeitänderungen
+#### Laufzeitänderungen
 Ist der ``spring-boot-starter-actuator`` aktiviert (als Dependency vorhanden), dann wird ein Rest-Service bereitgestellt, über den die Konfiguration zur Laufzeit geändert werden kan
 
-### Property Injection mit Spring-EL
+#### Property Injection mit Spring-EL
 Ganz ohne weiteres zutun unterstützt Spring bereits das Injecten von Property-Values in Beans per
 
     @Value("${de.cachaca.cloudProvider})
@@ -301,10 +386,10 @@ Spring sucht in den Property-Dateien im Classpath nach entsprechenden Properties
 
 Über ``@ConfigurationProperties`` lässt sich dieser Prozess noch ein bisschen komfortabler gestalten.
 
-### Type-safe @ConfigurationProperties
+#### Type-safe @ConfigurationProperties
 * Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-typesafe-configuration-properties
 
-Auf diese Weise werden typensichere Konfigurationen ermöglicht. ``@ConfigurationProperties`` kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten einer Komponente abbildet.
+Diesen Ansatz verwendet Spring Boot bei der AutoConfiguration (s. o.). Auf diese Weise werden typensichere Konfigurationen ermöglicht. ``@ConfigurationProperties`` kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten einer Komponente abbildet.
 
 Voraussetzung ist diese Dependency:
 
@@ -347,7 +432,7 @@ Beim Maven-Build wird eine Datei ``spring-configuration-metadata.json`` generier
 
 IntelliJ bietet hier sogar die Möglichkeit zur Autovervollständigung. Willkommen im 21. Jahrhundert der Softwareentwicklung.
 
-## Konfiguration über ``application.properties``/``application.yml``
+#### Konfiguration über ``application.properties``/``application.yml``
 
 * Standard-Konfigurationseinstellungen (für alle von Spring-Boot direkt unterstützte Komponenten): http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
@@ -360,6 +445,24 @@ Die Konfiguration der Anwendungskomponenten erfolgt in erster Linie über die Da
 Das [YAML-Format](yaml.md) ist aus meiner Sicht bei komplexen Anwendungen besser geeignet, da die Struktur in YAML hierarchisch aufgebaut ist. Das erhöht die Lesbarkeit und erfordert auch sofort die richtige Eingliederung der Properties in die semantisch passende Ebene. 
 
 Da der Application-Server in einem Executable-Jar auch Komponente der Anwendung ist, findet man dort also auch Konfigurationsmöglichkeiten.
+
+## @ConditionalOnProperty
+Über 
+
+```java
+@ConditionalOnProperty(
+  name = "deployment.environment", 
+  havingValue = "DEV")
+public class MyService{ ... }
+```
+
+wird die Integration der Klasse in die Initialisierung der Anwendung (durch Spring) von bestimmten Bedingungen abhängig gemacht.
+
+Über die ``application.properties`` 
+
+    deployment.environment=DEV
+
+erfolgt die Konfiguration.
 
 ---
 

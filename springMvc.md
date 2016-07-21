@@ -14,7 +14,21 @@ Frage: Wie stehen ``@Controller`` und ``@RestController`` zueinander ... die Gre
 
 ---
 
-# DSL
+# Spring MVC - View-Technologie
+Spring MVC ist zunächst mal unabhängig von der konkret eingesetzten View-Technologie. Es bietet Adapter, um beispielsweise JSP oder [Thymeleaf](thymeleaf.md) zu verwenden. Hier findet man weitere Informationen:
+
+* http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-viewresolver
+
+## i18n - Internationalization
+Spring MVC kommt mit der in Spring Boot üblichen AutoConiguration (``org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration``) daher. Beim Blick in diese Klasse kann man schon erahnen was man tun muß, um Texte zu internationalisieren:
+
+```
+spring.messages.cacheSeconds = 1 
+```
+
+---
+
+# Spring MVC - Controller und Model
 
 ## Configuration
 Wie üblich verwendet Spring einen annotationsbasierten Ansatz. Die Annotationen werden bei Anwendungsstart gescannt und dadurch die Applikation initialisiert. Handelt es sich um eine Spring Boot Applikation mit ``@EnableAutoConfiguration`` so sollte alles automatisch initialisiert werden. Ansonsten muß 
@@ -27,11 +41,11 @@ eingesetzt werden, um die Annotationen in den Initialisierungsfokus zu rücken.
 
 
 ## @Controller
-* http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-requestmapping
+* http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-controller
 
-Kennzeichnet eine Klasse in der Rolle eines Controllers. Ein Controller erhält Http-Requests, z. B. aus Http-Pots-Form-Requests.
+Kennzeichnet eine Klasse in der Rolle eines Controllers. Ein Controller erhält HTTP-Requests, z. B. aus Http-Post-Form-Requests. Spring MVC versucht, den Lücke zwischen textbasiertem HTTP und der Arbeit mit Java-Objekten im Controller so klein wie möglich erscheinen zu lassen. Hier muß sich niemand mehr um das Marshalling/Unmarshalling (aus HTTP-Stringwerten Java-Objekte machen) kümmern.
 
-Ein Controller ist zudem für den Web-Flow zuständig und liefert deshalb den zu rendernden View im Return-Value.
+Ein Controller ist zudem für den Web-Flow zuständig und liefert deshalb den zu rendernden View im Return-Value. Diese Information wird vom konfigurierten ``ViewResolver`` (hier ist die Brücke zur UI-technologie) verwendet, um die HTML-Seite zu erzeugen. Siehe unten *Typkonvertierung*.
 
 Einige der in diesem Kontext verwendeten Annotationen (z. B. ``@RequestMapping``) kommen auch beim [``@RestController`` zur Anwendung](springMvcRest.md).
 
