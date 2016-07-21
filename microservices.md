@@ -32,18 +32,34 @@ Spielt das für kleine Unternehmen eine Rolle? Solche Unternehmen werden vermutl
 ---
 
 # Herausforderungen
-* in Microservice-Architekturen erhöht sich die Anzahl an Schnittstellen ... und Schnittstellen sind immer teuer/schwierig (Abstimmungsaufwand, Testen)
-* geringerer Abstimmungsaufwand beim Bau der Lösung bedeutet auch geringer Anteil an Management - wieviele Manager werden dann noch benötigt?
-* die gewonnenen Freiheiten bedeuten auch mehr Verantwortung
-* Monitoring und Deployment vieler Komponenten
-* Deployment der Gesamtlösung ist aufwendiger, weil nun nicht mehr nur EIN Deployment existiert, sondern VIELE 
+
+## Mindset
+* die gewonnenen Freiheiten bedeuten auch mehr Verantwortung  
 * häufig ist das Team, das einen Microservice betreut/entwickelt, so klein, daß die Entwickler auch das Deployment und den Betrieb machen (inkl. Support) ... das muß man auch erst einmal wollen
-* in verteilten Systemen existieren Probleme, die es in Monolithen nicht gibt. Ein paar Beispiele:
-  * Fehler in der Netzwerkkommunikation
-  * Latenz
-  * Redundanz von Daten vs. Performance
-  * Debugging schwieriger
-  * Administration der Infrastruktur aufwendiger (viele Rechner beteiligt, Firewall, ...)
+
+## Komplexität
+* in Microservice-Architekturen erhöht sich die Anzahl an Schnittstellen ... und Schnittstellen sind immer teuer/schwierig (Abstimmungsaufwand, Testen)
+* Monitoring und Deployment vieler Komponenten
+  * Logging
+  * Healthchecks ... die evtl. auch in die Loadbalancer und die Anwendnung (Resilience) integriert sind
+* Deployment der Gesamtlösung ist aufwendiger, weil nun nicht mehr nur EIN Deployment existiert, sondern VIELE 
+* Debugging schwieriger
+* Administration der Infrastruktur aufwendiger (viele Rechner beteiligt, Firewall, ...)
+
+## Redundanz vs. Performance
+* Latenz
+* Redundanz von Daten vs. Performance
+  * insbes. bei Benutzer-Identität und den daran hängenden Authorisierungen ... Ansätze wie OAuth, SAML und XACML könnten Lösungen sein
+  * Caching wird ein zentraler Aspekt der Architektur
+
+## Datenkonsistenz
+* um den Durchsatz zu erhöhen (Skalierbarkeit ist ja häufig ein Grund für Microservices) wird man verteilte Transaktionen mit Two-Phase-Commit vermeiden wollen. Evtl. muß man sich von strikten Konsistenzgraden - wie wir sie aus relationalen Datenbanken kennen - verabschieden und pragmatischere Wege beschreiten (sofern möglich) 
+
+## Fehlermöglichkeiten
+* Fehler in der Netzwerkkommunikation
+
+## Auf organisatorischer Ebene
+* geringerer Abstimmungsaufwand beim Bau der Lösung bedeutet auch geringer Anteil an Management - wieviele Manager werden dann noch benötigt?
 
 ---
 
