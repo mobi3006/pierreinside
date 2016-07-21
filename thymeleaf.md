@@ -3,6 +3,8 @@ Ich hatte bisher mit Velocity-Templating und JSPs gearbeitet. Im Zuge der Nutzun
 
 [Spring MVC](springMvc.md) ist grundsätzlich unabhängig von der View-Technologie. Es sieht aber explizit die Nutzung von Thymeleaf für diese Aufgabe vor, was man schon daran sieht, daß Spring in den Parent-Poms als Dependency enthalten ist.
 
+> **DISCLAIMER:** Ich habe Thymeleaf in einer Spring-Boot-Applikation kennengelernt ... deshalb sind die Aussagen auf diesen Use-Case bezogen. In anderen Kontexten ist es möglicherweise anders.
+
 ---
 
 # Version 2 vs. 3
@@ -77,6 +79,22 @@ Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http
 ### JSF-Alternative?
 JSF definiert einen Lifecycle und ist insofern deutlich komplexer. Zudem hat JSF einen View-First-Ansatz ... im Gegensatz zum Controller-First-Ansatz von JSP/Thymeleaf.
 
+## Thymeleaf-DSL = Dialekt
+Thymeleaf arbeitet mit dem Konzept *Dialekt*. Ein Dialekt ist die DSL, die vom Thymeleaf ViewResolver interpretiert wird, um aus den Templates (in den die Dialekte verwendet werden) fertige Artefakte (z. B. HTML-Seiten) zu machen. Thymeleaf bringt folgende Dialekte mit:
+
+* ``org.thymeleaf.spring4.dialect.SpringStandardDialect``
+* ``org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect``
+* ``nz.net.ultraq.thymeleaf.LayoutDialect``
+
+Siehe *Getting Started ...* für ein Beispiel.
+
+### SpringStandardDialect
+Dieser Dialekt ermöglicht eine möglichst nahtlose Integration der Thymeleaf-View-Technologie mit einem Spring-Backend. Auf diese Weise wird es möglich, in Thymeleaf-Templates Spring-Komponenten über Spring Expression Language einzubetten, um so
+
+* Daten bereitzustellen
+* Berechnungen/Formatierungen durchzuführen
+* Spring-Controller mit der Verarbeitung HTTP-Requests (POST/GET) zu beauftragen (``th:action``, ``th:object``)
+
 ## Natural Templating Ansatz
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
 
@@ -148,6 +166,31 @@ kann mit Inlining das geschrieben werden:
 <p th:text="#{home.welcome}">Welcome home</p>
 ```
 
+### Bewertung
+Ich empfand die Expression Language als gewöhnungsbedürftig. Das ist syntaktisch falsch
+
+```html
+<div th:text="#{label.pin}: ${pin}" th:remove="tag">
+  PIN: 4711
+</div>
+```
+
+Stattdessen schreibt man
+
+```html
+<div th:text="#{label.pin} + ': ' + ${pin}" th:remove="tag">
+  PIN: 4711
+</div>
+```
+
+kann aber auch das schreiben: 
+
+```html
+<div th:text="|#{label.pin}: ${pin}|" th:remove="tag">
+  PIN: 4711
+</div>
+```
+
 ## Spring MVC + Thymeleaf
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 * [Komplexeres Beispiel](https://github.com/thymeleaf/thymeleafexamples-stsm)
@@ -215,16 +258,21 @@ Hat man eine Spring Boot Applikation, so ist Thymleaf über ``org.springframewor
 ```java
 @SpringBootApplication(
   exclude={
-    org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class})
+    org.springframework.boot.autoconfigure
+      .thymeleaf.ThymeleafAutoConfiguration.class})
 public class MyApplication { // ...}
 ```
 
-### SpringStandard Dialect
-Dieser Dialekt ermöglicht eine möglichst nahtlose Integration der Thymeleaf-View-Technologie mit einem Spring-Backend. Auf diese Weise wird es möglich, in Thymeleaf-Templates Spring-Komponenten über Spring Expression Language einzubetten, um so
+### i18n - Internationalisierung
+Per Default verwendet Thymeleaf in einer Spring-Boot Anwendnung den ``org.thymeleaf.spring4.messageresolver.SpringMessageResolver``, um den Key ``title.homepage`` 
 
-* Daten bereitzustellen
-* Berechnungen/Formatierungen durchzuführen
-* Spring-Controller mit der Verarbeitung HTTP-Requests (POST/GET) zu beauftragen (``th:action``, ``th:object``)
+```html
+<title th:text="#{title.homepage}">hier werden sie geholfen</title>
+```
+
+zu internationalisieren.
+
+Der Thymeleaf-``SpringMessageResolver`` verwendet den Spring-``MessageSource``-Ansatz, d. h. defaultmässig wird eine Datei ``messages.properties`` auf dem Classpath gesucht. Will man das Umkonfigurieren, dann hilft ein Blick in ``MessageSourceAutoConfiguration``. 
 
 ---
 

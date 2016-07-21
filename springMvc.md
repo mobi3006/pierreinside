@@ -20,7 +20,47 @@ Spring MVC ist zunächst mal unabhängig von der konkret eingesetzten View-Techn
 * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-viewresolver
 
 ## i18n - Internationalization
-Spring MVC kommt mit der in Spring Boot üblichen AutoConiguration (``org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration``) daher. Beim Blick in diese Klasse kann man schon erahnen was man tun muß, um Texte zu internationalisieren:
+* Gedanken von Mkkyong: https://www.mkyong.com/spring-mvc/spring-mvc-internationalization-example/
+
+### Locale-Resolver
+Per Default verwendet Spring MVC den ``org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver``, so daß die Sprache aus dem Accept-Header gewählt wird. Diese Sprache ist die Sprache, die im Browser eingestellt ist. Da dort mehrere Sprachen eingestellt sein können, wird die erste genommen (= man unterstellt, daß das die bevorzugte Sprache ist).
+
+Will man seine eigene Logik verwenden, so muß man nur einen eigenen ``MyLocaleResolver`` schreiben und als Bean konfigurieren:
+
+```java
+public class MyLocaleResolver extends AcceptHeaderLocaleResolver {
+
+    @Override
+    public Locale resolveLocale(HttpServletRequest r) {
+      // ... your implementation
+    }
+}
+```
+
+Dadurch wird dieser ``MyLocaleResolver`` automatisch eingebunden, wenn ich beispielsweise in einem Controller die Locale injecten lasse:
+
+```java
+@RequestMapping(path = "/doit"
+public String doIt(@Valid User user,
+        BindingResult bindingResult, Model model, Locale language);
+```
+
+### Message-Resolver
+Spring MVC kommt mit der in Spring Boot üblichen AutoConiguration (``org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration``) daher. Diese Klasse offenbart, was man tun muß, um Texte/Labels/Messages zu internationalisieren ... Dateien der Art:
+
+* ``src/main/resources/messages.properties``
+* ``src/main/resources/messages_de.properties``
+* ...
+
+anlegen. Gemeinsam mit dem LocaleResolver (s. o.) wird zur Laufzeit der richtige Wert ausgelesen. 
+
+Sollen die Dateien in einem anderen Verzeichnis liegen, sollen es mehrere sein oder sollen sie einen anderen Namen haben, dann müssen die ``application.properties`` angepaßt werden:
+
+```
+spring.messages.basename=i18n/my_messages,i18n/your_messages
+```
+
+So läßt sich beispielsweise auch das Caching konfigurieren:
 
 ```
 spring.messages.cacheSeconds = 1 
@@ -140,6 +180,28 @@ public String sayHello(
   // ...
 }
 ```
+
+### HttpServletRequest
+Wie kommt man an den ``HttpServletRequest`` im Controller?
+
+**Option 3:**
+
+```java
+HttpServletRequest request = 
+  ((ServletRequestAttributes)
+    RequestContextHolder.currentRequestAttributes())
+      .getRequest();
+```
+
+Hierzu braucht es aber noch einen 
+
+```java
+@Bean 
+public RequestContextListener requestContextListener(){
+    return new RequestContextListener();
+}     
+```
+
 
 ### AOP-Proxying
 Will man im Controller Transaktionen deklarieren (``@Transactional``), so kann man *Class-Based Proxying* verwenden. Das wird im Spring-Context beispielweise über

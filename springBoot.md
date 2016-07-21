@@ -55,13 +55,15 @@ erzeugt ein **Fat-Jar** (compilierte Klassen des Projekts + abhängige Libs), da
 
 ## Start der Applikation
 
-Der Start der Applikation erfolgt über 
+Der Start der Applikation erfolgt über (ODER-Optionen)
 
-    mvn spring-boot:run
-    
-oder (was hat welche Vorteile???)
+1. Start aus der IDE
+    * Debugging ist dann sehr leicht möglich 
+2. ``mvn spring-boot:run`` 
+    * Remote-Debugging  
+3. ``java -jar my-application.jar``
 
-    java -jar my-application.jar
+> **Empfehlung:** ich präferiere die ersten beiden, weil dadurch der Warm-Restart-Mechnismus verwendet werden kann.
 
 Voila ... sehr schlank. Wir sind nun innerhalb weniger Minuten zu einer komfortabel deploybaren Server-Applikation gekommen. Jetzt kanns losgehen mit der Implementierung der Business-Logik.
 
@@ -121,7 +123,7 @@ Per Default (d. h. wenn das Default Parent-Pom verwendet wird) werden zwei Typen
 
 ## Maven: Artefakt-Typ: jar vs. war
 
-* [How-To](https://spring.io/guides/gs/convert-jar-to-war/)
+* How-To: https://spring.io/guides/gs/convert-jar-to-war/
 
 Will man eine Spring-Boot Anwendung dennoch in einem externen Application-Server deployen, so benötigt man ein War-Artefakt. Für diesen Anwendungsfall verwendet man 
 
@@ -134,23 +136,33 @@ Hat man nun ein War-Artefakt erzeugt, so kann man aber dennoch den Executable-De
     java -jar mySpringBootApp.war
 
 
-## Maven: Dependency Version ändern
+## Maven: Version einer Dependency ändern
 
 * [How-To customize Dependency Versions](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-customize-dependency-versions)
 
-Verwendet man das Spring-Dependency-Management (via ``spring-boot-dependencies``), so kann man folgendermaßen im ``pom.xml`` die Version einer Dependency ändern ... ohne Gewähr, daß dann noch alles funktioniert:
+Spring pflegt zueinander passende Versionen ausgewählter Bibliotheken, d. h. verwendet man Spring-Boot 1.3.6, so sind in [spring-boot-dependencies](http://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.3.6.RELEASE/spring-boot-dependencies-1.3.6.RELEASE.pom) automatisch viele Versionen festgelegt:
 
-    <commons-collections.version>3.2.2</commons-collections.version>
+```
+<spring.version>4.2.7.RELEASE</spring.version>
+<hibernate.version>4.3.11.Final</hibernate.version>
+<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+...
+```
 
-## Maven: Interessante Properties
+Im eigenen ``pom.xml`` kann man die Version folgendermaßen ändern ... Spring kann dann natürlich die Kompatibilität nicht mehr garantieren:
+
+```
+<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
+```
+
+## pom.xml: Interessante Properties
 
 ```xml
 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 <java.version>1.8</java.version>
 ``` 
 
-## Debug-Port einschalten
-
+## Remote-Debugging
 Über 
 
 ```xml
@@ -188,332 +200,14 @@ konfiguriert werden.
 
 ---
 
-# Applicationscode
-
-Spring-Boot verwendet - [Spring-typisch ... siehe auch Spring-Core](springCore.md) - Java-Annotation en-masse, um den ApplicationContext aufzubauen. Sie werden verwendet, um die Springinitialisierung durch den Spring-Boot-Loader zu ermöglichen. Beispiele:
-
-* ``@SpringBootApplication``
-* ``@EnableAutoConfiguration``
-* ...
-
-Zudem erhöht diese Vorgehensweise die Semantik der Klassen, so daß der Leser ein besseres Verständnis erhält (das ist aus meiner Sicht bei einer Trennung von Java-Code und XML-Code immer ein Problem gewesen).
-
-> i. a. gibt es xml-basierte Alternativen zur Annotation aber die Spring-Macher empfehlen die Verwendung von Annotationen).
-
-## Steuerung der Spring-Initialisierung
-
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-locating-the-main-class
-
-### @SpringBootApplication
-Convenience Annotation ... subsumiert die empfohlenen Annotationen 
-
-* ``@EnableAutoConfiguration``
-* ``@Configuration``
-* ``@ComponentScan``
-
-### @EnableAutoConfiguration
-Ist diese Eigenschaft gesetzt, so versucht Spring sich die Spring-Konfiguration der Anwendung selbst zu erschließen. Da das DER Konfigurationsmechanismus von SpringBoot ist, sind zumindest alle Komponenten, die von Spring Boot direkt unterstützt werden mit einer ``*AutoConfiguration``-Klasse ausgestattet, z. B. 
-
-* ActiveMQAutoConfiguration
-* CacheAutoConfiguration
-* CassandraAutoConfiguration
-* CloudAutoConfiguration
-* ConsulAutoConfiguration
-* ElasticSearchAutoConfiguration
-* FacebookAutoConfiguration
-* FlywayAutoConfiguration
-* JpaRepositoriesAutoConfiguration
-* MailSenderAutoConfiguration
-* ...
-
-In diesen ``*AutoConfiguration``-Klassen werden die entsprechenden Properties aus  ``application.properties`` gezogen, so daß die Komponenten weitestgehend über einache Properties anpassbar sind und keine spezielle Spring-Konfiguration erfordern. 
-
-Hierin steckt schon eine Menge Magie ...
-
-> Wenn eine JPA Dependency definiert ist und EnableAutoConfiguration gesetzt ist, dann sucht der Spring Boot (der Loader) nach entsprechenden ``@Entity`` Anntotaionen im Code
-
-... solange das zuverlässig und intuitiv funktioniert ist alles gut ;-)
-
-#### Wie ist die Magie umgesetzt?
-
-Als ich mich der [Thymeleaf-Technologie (Bestandteil von Spring Boot)](thymeleaf.md) näherte, tat ich das an einer bereits existierenden Anwendnung. Die lief und ich wollte nun rausfinden wo ich denn nun meine Templates hinlegen soll. Ich fand im Code keine Konfiguration und in der umfassenden Dokumentation fand ich auch keine Hinweise. Erst über Umwege fand ich die Information, daß das über die automatisch gezogene ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration`` erfolgte.
-
-Thymeleaf liefert folgende Klasse:
-
-```java
-@Configuration
-@EnableConfigurationProperties(ThymeleafProperties.class)
-@ConditionalOnClass(SpringTemplateEngine.class)
-@AutoConfigureAfter(WebMvcAutoConfiguration.class)
-public class ThymeleafAutoConfiguration {
-
-	@Configuration
-	@ConditionalOnMissingBean(name = "defaultTemplateResolver")    // <--- ACHTUNG A
-	public static class DefaultTemplateResolverConfiguration { ... }
-    
-		@Autowired
-		private ThymeleafProperties properties;                   // <--- ACHTUNG B1
-    
-		@Bean
-		public TemplateResolver defaultTemplateResolver() {
-			TemplateResolver resolver = new TemplateResolver();
-			resolver.setResourceResolver(thymeleafResourceResolver());
-			resolver.setPrefix(this.properties.getPrefix());      // <--- ACHTUNG B2
-			resolver.setSuffix(this.properties.getSuffix());
-			resolver.setTemplateMode(this.properties.getMode());
-			if (this.properties.getEncoding() != null) {
-				resolver.setCharacterEncoding(
-                  this.properties.getEncoding().name());
-			}
-			resolver.setCacheable(this.properties.isCache());
-			Integer order = this.properties.getTemplateResolverOrder();
-			if (order != null) {
-				resolver.setOrder(order);
-			}
-			return resolver;
-		}
-	}
-    
-	@Configuration
-	@ConditionalOnMissingBean(SpringTemplateEngine.class)         // <--- ACHTUNG C
-	protected static class ThymeleafDefaultConfiguration {
-
-		@Autowired
-		private final Collection<ITemplateResolver> templateResolvers = 
-          Collections.emptySet();
-
-		@Autowired(required = false)
-		private final Collection<IDialect> dialects = 
-          Collections.emptySet();
-
-		@Bean
-		public SpringTemplateEngine templateEngine() {
-			SpringTemplateEngine engine = new SpringTemplateEngine();
-			for (ITemplateResolver templateResolver : this.templateResolvers) {
-				engine.addTemplateResolver(templateResolver);
-			}
-			for (IDialect dialect : this.dialects) {
-				engine.addDialect(dialect);
-			}
-			return engine;
-		}
-	}
-}
-```
-
-Diese Klasse ist ein Musterbeispiel dafür wie die AutoConfiguration bei Spring Boot läuft:
-
-* **ACHTUNG A:** Die Auto-Konfiguration ist als Fall-Back gedacht ... indem ich in meiner Anwendnung eine eigene Bean mit dem Namen ``defaultTemplateResolver`` definiere, hebel ich die AutoConfiguration aus.
-* **ACHTUNG B1/B2:** die ``ThymeleafProperties`` werden in der default-Konfiguration berücksichtigt, die beispielsweise aus den ``application.properties`` gefüttert werden.
-* **ACHTUNG C:** wie bei A nur auf Class-Level
-
-#### Auto-Configuration gezielt komplett abschalten/überschreiben
-
-Über Excludes lassen sich einzelne Ressourcen von der Auto-Configuration ausschließen:
-
-```java
-@EnableAutoConfiguration(
-  exclude={org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.class})
-```
-      
-Häufig will man die Komponente dann aber dennoch nutzen, dann muß man eine eigene Configuration beisteuern. Hier kann man sich aber immer an der entsprechenden AutoConfiguration-Klasse orientieren.
-
-#### Auto Configuration Report
-
-Durch den Start der Anwendung per ``--debug`` Option (``java -jar myapp.jar --debug``) wird ein sog. Auto-Configuration Report ausgegeben:
-
-
-    =========================
-    AUTO-CONFIGURATION REPORT
-    =========================
-    
-
-    Positive matches:
-    -----------------
-
-     AuditAutoConfiguration.AuditEventRepositoryConfiguration matched
-        - @ConditionalOnMissingBean (types:
-              org.springframework.boot.actuate.audit.AuditEventRepository;
-              SearchStrategy: all) found no beans (OnBeanCondition)
-    ... blablabla ...
-    
-Dieser Report kann sehr hilfreich sein, wenn man der Spring-Magie auf die SChliche kommen will.
-
-#### Fazit AutoConfiguration
-Ich halte diese Form der Konfiguration für vorbildlich und werde es für meine eigenen Komponenten genauso umsetzen. In manchen IDEs kann man sogar Auto-Vervollständigung auf den Properties bekommen.
-
-Ein Anpassung des Verhaltens einer Komponente ist folgendermaßen möglich (die häufigste zuerst genannt):
-
-1. in ``application.properties`` die entsprechenden ``ConfigurationProperties`` überschreiben - hierzu am beste Doku lesen oder die entsprechende ``ConfigurationProperties`` Klasse ausfindig machen (z. B. ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties``)
-2. in der eigenen Anwendung Beans instanziieren, die die Default-Konfiguration übersteuern - hierzu am beste Doku lesen oder die entsprechende AutoConfiguration-Klasse ausfindig machen (z. B. ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration``)
-3. AutoConfiguration einer Komponente komplett deaktivieren und eine eigene Konfiguration in der Anwendung bereitstellen - hierzu am beste Doku lesen oder die entsprechende AutoConfiguration-Klasse ausfindig machen (z. B. ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration``) und als Muster verwenden
-  * ACHTUNG: das sollte immer nur die letzte Möglichkeit sein, denn dadurch beraubt man sich evtl. der Forward-Kompatibilität, d. h. bei neuen Versionen ist der Code evtl. nicht mehr lauffähig
-
-### Konfiguration von Applikationseigenschaften
-* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
-* https://blog.codecentric.de/2016/04/binding-configuration-javabeans-spring-boot/
-
-#### Konfigurationseinstellungen im Applikationscode nutzen
-Hier unterstützt Spring diese Ansätze
-
-* Property Injection mit Spring-EL
-* Type-safe @ConfigurationProperties
-* Spring-Cloud-Config
-
-#### spring.config.location
-Über das Property ``spring.config.location`` können Dateien definiert werden, in der die Property-Werte gesetzt werden (es kann eine Übersteuerung erfolgen). Das ist sehr praktisch, wenn man die Anwendnung in einem anderen Environment laufen lassen möchte (statt in der Developer-Umgebung in der Staging-Umgebung):
-
-```bash
-java 
-  -jar myapp.jar 
-  --spring.config.location=
-      classpath:/default.properties,
-      classpath:/override.properties
-```
-    
-Hierzu muß die Spring-Boot-Applikation allerdings Command-Line-Parameter unterstützen (``SpringApplication.setAddCommandLineProperties(true)``), was aber per Default der Fall ist.
-
-#### Laufzeitänderungen
-Ist der ``spring-boot-starter-actuator`` aktiviert (als Dependency vorhanden), dann wird ein Rest-Service bereitgestellt, über den die Konfiguration zur Laufzeit geändert werden kan
-
-#### Property Injection mit Spring-EL
-Ganz ohne weiteres zutun unterstützt Spring bereits das Injecten von Property-Values in Beans per
-
-    @Value("${de.cachaca.cloudProvider})
-    private String cloudProvider;
-    
-Spring sucht in den Property-Dateien im Classpath nach entsprechenden Properties.
-
-Über ``@ConfigurationProperties`` lässt sich dieser Prozess noch ein bisschen komfortabler gestalten.
-
-#### Type-safe @ConfigurationProperties
-* Spring Referenzdokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config-typesafe-configuration-properties
-
-Diesen Ansatz verwendet Spring Boot bei der AutoConfiguration (s. o.). Auf diese Weise werden typensichere Konfigurationen ermöglicht. ``@ConfigurationProperties`` kennzeichnet eine Klasse, die Konfigurationsmöglichkeiten einer Komponente abbildet.
-
-Voraussetzung ist diese Dependency:
-
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-configuration-processor</artifactId>
-    <optional>true</optional>
-</dependency>
-```
-
-Beispiel:
-
-```java
-@Component
-@ConfigurationProperties(prefix = "de.cachaca.myapp")
-public class CloudIntegrationConfiguration {
-
-    private String cloudProviderName = "AWS";
-
-    public void setCloudProviderName(String name) {
-      cloudProviderName = name;
-    }
-
-    public String getCloudProviderName() {
-      return cloudProviderName;
-    }
-}
-```
-
-Eine Anpassung des ``cloudProviderName`` ist über die ``application.properties`` möglich:
-
-    de.cachaca.myapp.cloudProviderName = Microsoft Azure
-  
-Möchte man die Konfiguration in einer anderen Datei als ``application.properties`` vornehmen, dann geht das über ``@ConfigurationProperties(prefix="test", locations = "classpath:MyConfiguration.properties")``. Aus meiner Sicht besteht dafür i. a. kein Grund ... ich bevorzuge hier den Standardweg und mag es lieber eine einzige Datei zu haben.
-
-Beim Maven-Build wird eine Datei ``spring-configuration-metadata.json`` generiert, die Metadaten für Spring-Boot bereitstellt.
-
-> ACHTUNG: will man innerhalb der IDE bleiben (ohne maven builds anschmeißen zu müssen), dann muß die IDE die Generierung dieser ``spring-configuration-metadata.json`` unterstützen (z. B. m2e bei Eclipse) ... ansonsten wundert man sich warum Änderungen nicht sichtbar sind. 
-
-IntelliJ bietet hier sogar die Möglichkeit zur Autovervollständigung. Willkommen im 21. Jahrhundert der Softwareentwicklung.
-
-#### Konfiguration über ``application.properties``/``application.yml``
-
-* Standard-Konfigurationseinstellungen (für alle von Spring-Boot direkt unterstützte Komponenten): http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
-
-Die Konfiguration der Anwendungskomponenten erfolgt in erster Linie über die Dateien
-
-* ``application.properties``
-* ``application.yml``
-
-Das [YAML-Format](yaml.md) ist aus meiner Sicht bei komplexen Anwendungen besser geeignet, da die Struktur in YAML hierarchisch aufgebaut ist. Das erhöht die Lesbarkeit und erfordert auch sofort die richtige Eingliederung der Properties in die semantisch passende Ebene. 
-
-Da der Application-Server in einem Executable-Jar auch Komponente der Anwendung ist, findet man dort also auch Konfigurationsmöglichkeiten.
-
-## @ConditionalOnProperty
-Über 
-
-```java
-@ConditionalOnProperty(
-  name = "deployment.environment", 
-  havingValue = "DEV")
-public class MyService{ ... }
-```
-
-wird die Integration der Klasse in die Initialisierung der Anwendung (durch Spring) von bestimmten Bedingungen abhängig gemacht.
-
-Über die ``application.properties`` 
-
-    deployment.environment=DEV
-
-erfolgt die Konfiguration.
+# Programming
+[siehe eigener Abschnitt
+Spring-Boot verwendet - [Spring-typisch ... siehe auch Spring-Core](springCore.md)
 
 ---
 
-# Integrationtest
-
-* http://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html
-* https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/
-
-Eine typische Testklasse für eine Webapplikation sieht so aus:
-
-```java
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(
-        classes = MyApplication.class,
-        locations = { "classpath:META-INF/test-context.xml" })
-@WebAppConfiguration
-@IntegrationTest("server.port:0")
-public class MyApplicationTest {
-
-    @Autowired
-    private MyService service; 
-    
-    @Test
-    public void testServiceCall() {
-        service.method();
-    }
-    
-}
-```
-
-## @RunWith(SpringJUnit4ClassRunner.class)
-Dieser JUnit-Testrunner sollte grundsätzlich bei Spring-basierten Komponenten verwendet werden. Er stellt die Grundvoraussetzung dar - sonst darf man sich nicht wundern, wenn spring-spezifische Aspekte (z. B. der Aufbau des ApplicationContext aus xml-Dateien ``@ContextConfiguration(locations = { "classpath:mymodule-context.xml" })``) nicht funktionieren.
-
-## @SpringApplicationConfiguration
-Diese Annotation wird häufig in Spring-Boot-Tests eingesetzt, um den ApplicationContext aufzubauen. Es ist eine Erweiterung des Spring-Core Annotation 
-
-```java
-@ContextConfiguration(
-  locations = { 
-    "classpath:mymodule-context.xml" })
-```
-
-Hier werden i. a.  zentrale Klassen ausgeführt (z. B. die Spring-Boot-Application-Klasse), die dann weitere Spring-Komponenten anziehen. Ausserdem lassen sich darüber XML-basierte ApplicationContext-Eweiterungen anziehen:
-
-```java
-@SpringApplicationConfiguration(
-        classes = MySpringBootApplication.class,
-        locations = { "classpath:test-context.xml" })
-```
-
-## @IntegrationTest
+# Integrationtesting
+[siehe eigener Abschnitt](springBoot_testing.md)
 
 ## Remote Debugging ermöglichen
 
@@ -615,133 +309,7 @@ Der Heroku-Cloud-Deployment ist nur unwesentlich aufwendiger als das CloudFoundr
 ---
 
 # Production-Ready Features
-
-## Spring Boot as a Service
-* http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html
-* http://file.allitebooks.com/20151028/Spring%20Boot%20Cookbook.pdf
-
-Spring Boot ermöglich die Installation der Anwendung als Service (unter Linux über ``init.d``, ``systemd`` und unter Windows). Die Installation als Service hat den Vorteil, daß sich das Betriebssystem um einen evtl. notwendigen Restart kümmert. 
-
-Der vordere Teil des Jar/War-Artefakts besteht aus dem sog. Launch-Skript (das scheinbar auch unter Windows funktioniert) - mittendrin beginnt der binäre Teil des Artefakts:
-
-![Init-Skript](images/springBootWar.jpg)
-
-Will man das Startskript nicht so seltsam vermischt haben[^1], [so muß man es beim Build entsprechend konfigurieren](http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html) ... unter Maven folgendermaßen (``executable``) - per Default steht diese Option auf ``true``:
-
-```xml
-<plugin>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-maven-plugin</artifactId>
-    <configuration>
-        <executable>false</executable>
-    </configuration>
-</plugin>
-```
-
-[^1] ACHTUNG: Nicht alle ZIP-Clients kommen mit dieser Art klar und werfen evtl. einen Fehler. 
-
-Unter CentOS und Ubuntu funktioniert das Default-Launch-Sktipt bei der Einbindung als systemd-Service. Bei anderen Distributionen hingegen muß evtl. ein eigenes Launch-Skript geschrieben werden[^2]. Entweder bindet man es bereits im ``spring-boot-maven-plugin`` über ``embeddedLaunchScript`` (und evtl. ``embeddedLaunchScriptProperties``) ein oder man konfiguriert es in der systemd-Service Datei (liegt unter ``/etc/systemd/system/myapp.service``). Dort wird das Launcher-Script referenziert und die Variable ``JARFILE`` gesetzt:
-
-```
-[Service]
-Environment="JARFILE=/opt/myapp.war"
-ExecStart=/opt/myapp-launcher.sh
-```
-
-[^2] Hier findet man ein Skeleton für das Launch-Skript: https://github.com/spring-projects/spring-boot/blob/master/spring-boot-tools/spring-boot-loader-tools/src/main/resources/org/springframework/boot/loader/tools/launch.script
-
-Will man die JRE-Einstellungen der Anwendung konfigurieren, so sollte man eine ``conf``-Datei verwenden (http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-script-customization-conf-file), die neben das war/jar-Artefakt gelegt wird. Alternativ könnte man das Launch-Skript anpassen.
-
-### Linux: systemd
-* http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-systemd-service
-
-Systemd benötigt eine Service-Datei in ``/etc/systemd/system/myapp.service`` mit den Permissions 0644:
-
-```
-[Unit]
-Description=MyApp
-After=syslog.target
-
-[Install]
-WantedBy=multi-user.target
-
-[Service]
-User=pfh
-Group=users
-ExecStart=/opt/myapp.jar
-Restart=always
-```
-
-In diesem Beispiel gehe ich davon aus, daß die Anwendnung in ``/opt/myapp.jar`` liegt.
-
-Danach muß der systemd seine Konfiguration neu einlesen
-
-```
-sudo systemctl daemon-reload
-```
-
-und dann kann der Service gestartet werden:
-
-```
-sudo systemctl start myapp.service
-```
-
-### Linux: init.d
-* http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-initd-service
-
-### OS/X: launchd
-... hab ich keine Ahnung
-
-### Windows Dienst
-Ein Doppelclick auf der Spring-Boot-jar/war-Artefakt reicht für die Installation als Dienst ... also ACHTUNG!!!
-
-## Actuator
-
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready
-* [Endpunkte](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html)
-
-Die sog. Production-Ready Features werden über die Dependency
-
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-      </dependency>
-    </dependencies>
-
-aktiviert. Dadurch werden einige nützliche Webservice-[Endpunkte](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) exponiert.
-
-Optional kann der ``/docs`` Endpunkt (http://IP_ADDRESS:PORT/docs) aktiviet werden:
-
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-actuator-docs</artifactId>
-      </dependency>
-    </dependencies>
-
-## Custom application info
-
-* http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-application-info
-
-Features:
-
-* Monitoring/Health-Checks
-
-## Startup-Banner
-
-* http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-spring-application.html
-
-Beim Start der Applikation wird standardmäßig ein Banner angezeigt ... das ist konfigurierbar. Einfach eine ``banner.txt`` in den Classpath legen.
-
-Solche Banner macht niemand selber ... http://patorjk.com/software/taag (die Fonts *Ogre*, *Doom*, *Standard*, *ANSI Shadow*, *CalvinS* sind meine Favoriten):
-
-            _                    
-      _ __ (_) ___ _ __ _ __ ___ 
-     | '_ \| |/ _ \ '__| '__/ _ \
-     | |_) | |  __/ |  | | |  __/
-     | .__/|_|\___|_|  |_|  \___|
-     |_|                         
+[siehe eigener Abschnitt](springBoot_productionReady.md)
 
 ---
 
