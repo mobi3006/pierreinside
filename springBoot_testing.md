@@ -82,10 +82,45 @@ Diese Abkürzungen fangen am Anfang vielleicht gar nicht auf, doch spätestens, 
 
 ### Option 1: TestRestTemplate
 
+**Basic-Authentication:**
+
+``new TestRestTemplate("username", "password")``
+
+**MessageConverters:**
+
+```
+restTemplate = new RestTemplate();
+List<HttpMessageConverter<?>> list = new ArrayList<HttpMessageConverter<?>>();
+list.add(new MappingJacksonHttpMessageConverter());
+restTemplate.setMessageConverters(list);
+```
+
 **RestTemplate: postForObject vs. postForEntity**
 
 Entity liefert nicht nur das eigentliche Result-Objekt des Webservice, sondern auch gleichzeitig Status-Code, ...
 
 Empfehlung: verwende ``postForEntity``
 
+**Beispiel:**
+
+```java
+RestTemplate restTemplate = new RestTemplate();
+
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.APPLICATION_JSON);
+
+String requestInJsonFormat = 
+    "{\"question\":\"What is your name?\"}";
+HttpEntity<String> requestEntity = 
+    new HttpEntity<String>(requestInJsonFormat, headers);
+String answer = 
+    restTemplate.postForObject(
+        "http://localhost/orakel", 
+        requestEntity,
+        String.class);
+```
+
 ### Option 2: MockMvc
+
+### Option 3...n:
+Irgendweinen anderen Http-Client verwenden.

@@ -20,6 +20,7 @@ Spring MVC ist zunächst mal unabhängig von der konkret eingesetzten View-Techn
 * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-viewresolver
 
 ## i18n - Internationalization
+* https://justinrodenbostel.com/2014/05/13/part-4-internationalization-in-spring-boot/
 * Gedanken von Mkkyong: https://www.mkyong.com/spring-mvc/spring-mvc-internationalization-example/
 
 ### Locale-Resolver
@@ -45,6 +46,46 @@ public String doIt(@Valid User user,
         BindingResult bindingResult, Model model, Locale language);
 ```
 
+### LocaleContextHolder
+Über
+
+* ``LocaleContextHolder.getLocale()``
+* ``LocaleContextHolder.getTimezone()`` 
+
+lassen sich Informationen zum aktuellen Thread ermitteln. Dort steckt beispielsweise die Locale drin, die der konfigurierte LocaleResolver ermittelt hat.
+
+### LocaleChangeInterceptor
+Hat man diesen Interceptor konfiguriert (
+
+```java
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+public class WebAppConfig extends WebMvcConfigurerAdapter {
+ 
+    @Bean
+    public LocaleChangeInterceptor myLocaleChangeInterceptor() {
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("language");
+        return lci;
+    }
+ 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(myLocaleChangeInterceptor());
+    }
+ 
+}
+```
+
+so läßt sich über 
+
+```
+http://localhost:8081/persondetails?language=de
+```
+
+die Sprache auf deutsch umschalten.
+
 ### Message-Resolver
 Spring MVC kommt mit der in Spring Boot üblichen AutoConiguration (``org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration``) daher. Diese Klasse offenbart, was man tun muß, um Texte/Labels/Messages zu internationalisieren ... Dateien der Art:
 
@@ -65,6 +106,9 @@ So läßt sich beispielsweise auch das Caching konfigurieren:
 ```
 spring.messages.cacheSeconds = 1 
 ```
+
+## Caching
+Die vom Server bereitgestellten Ressourcen (JavaScript, Images, ...) sollten clientseitig gecached werden. Hierzu bietet Spring die ``org.springframework.boot.autoconfigure.web.ResourceProperties`` an, in der sich viele interessante Schalter befinden
 
 ---
 

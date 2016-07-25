@@ -63,9 +63,17 @@ Aus meiner Sicht macht implizites Wiring den Code besser lesbar, da die Rolle ei
 Hybrid-Ansätze sind problemlos möglich, so daß beispielsweise ein ``@Autowired`` einer per Spring-Bean erfolgen kann, die per xml-Konfiguration instanziiert wird.
 
 ## Injection Varianten
-### Setter Injection
-Die setter-Injection ist die präferierte Methode in Spring
+Ich präferiere grundsätzlich voll-valide Objekte, d. h. Mandatory-Properties MÜSSEN nach Erzeugung der Instanz (über den vorgesehenen Konstruktor) einsatzbereit sein. Ein Client muß nicht erst noch fünf Setter aufrufen müssen. Das erhöht auch die Semantik.
+
+**Insofern präferiere ich Constructor-Injection.**
+
+**Spring nutze ich eigentlich nur über Annotationen.**
+
+In den letzten Jahren bin ich immer mehr ein Freund des Autowiring geworden, weil es den Boilerplate-Code deutlich reduziert. Häufig passiert es mir, daß ich einen Service benötige (auch aus dem Spring-Framework) und einfach mal ein ``@Autowired`` dranpacke ... schon habe ich den notwendigen Service im Zugriff.
+
 ### Constructor Injection
+
+### Setter Injection
 
 ### Injection by Reflection
 Das funktioniert nur, wenn die Java-Policy dies nicht verbietet.

@@ -18,7 +18,7 @@
    * Webservices
        * [HTTP](http.md)
        * [REST](rest.md)
-       * [Spring MVC REST](springMvcRest.md)
+       * [Spring MVC REST](springMvc_rest.md)
        * [Swagger](swagger.md)
    * Spring Ecosystem
        * [Spring Core](springCore.md)
@@ -29,6 +29,7 @@
        * [Spring Cloud](springCloud.md)
        * [Spring Cloud Config](springCloudConfig.md)
        * [Spring MVC](springMvc.md)
+         * [Spring MVC REST](springMvc_rest.md)
        * [Spring Data](springData.md)
    * [Thymeleaf](thymeleaf.md)
    * Persistenz

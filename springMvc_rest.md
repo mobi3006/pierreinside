@@ -18,25 +18,38 @@ Wie bei Spring üblich wird viel mit Java-Annotationen gearbeitet:
 * XML-base-Payload ... hier bietet sich JAXB an
 * andere Formate kann man natürlich auch verwenden, doch muß man sich dann evtl. selbst um das Marshalling/Unmarshalling kümmern
 
-## ResponseEntity
-Eine Schnittstelle
+## HttpEntity, RequestEntity, ResponseEntity
+``HttpEntity`` repräsentiert eine HttpRequest (``RequestEntity``) oder HttpResponse (= ``ResponseEntity``).
 
-    public String getName();
-    
+### RequestEnity
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.TEXT_PLAIN);
+HttpEntity<String> entity = 
+  new HttpEntity<String>(helloWorld, headers);
+URI location = template.postForLocation("http://example.com", entity);
+```
+
+### ResponseEnity
+
+Eine ``@RestController``-Schnittstelle
+
+```java
+public String getName();
+```
+
 kann auch als 
 
-    public ResponseEntity<String> String getName();
+```java
+public ResponseEntity<String> String getName();
+```
 
-modelliert werden. In letzterem Fall hat man größeren Einfluß auf den HTTP-Status-Code-Value und Http-Response-Header.
+modelliert werden. Verwendet man die ``FooEntity`` Objekte, so hat man mehr Informationen (z. B. HTTP-Status-Code-Value und Http-Header).
 
-Die Schnittstelle zur Erzeugung sieht so aus:
+### Zugriff per RestTemplate 
 
-    public ResponseEntity(
-      T body, 
-      MultiValueMap<String, String> headers, 
-      HttpStatus statusCode)
-    
-Die Benutzung ist straight-forward.
+[siehe Abschnitt zum Testen](springBoot_testing.md)
+
 
 ---
 
