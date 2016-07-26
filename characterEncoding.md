@@ -154,13 +154,13 @@ Das Windows-Clipboard unterstützt Unicode ... so kann man zumindest leicht mal 
 ## Wie werden die Codierungen verwendet - Textdateien?
 Textdateien verwenden zumeist ASCII/ANSI als Zeichensatz. Will man einen anderen Zeichensatz verwenden, so muss man das Encoding umstellen - gute Editoren wie beispielsweise Notepad++ unterstützen dies. Leider wird die Codierung in den meisten Fällen  nicht in der Datei abgespeichert (Ausnahme ByteOrderMark bei UTF-8, UTF-16, ... siehe oben) - stattdessen wird diese Information vom Benutzer gesetzt, so daß der Interpreter (z. B. Notepad++) dies entsprechend fürs Rendern der Dateiansicht umsetzen kann.
 
-So sieht die Ansicht bei Encoding UTF-8 im Notepadd++ aus:
+So sieht die Ansicht bei Encoding UTF-8 im Notepad++ aus:
 
-
+![Ansicht bei Encoding UTF-8](images/textfileEncodingUtf_8.png)
 
 So sieht sie aus, wenn man die gleiche Datei als ASCII/ANSI interpretiert (im Notepad++):
 
-
+![Ansicht bei Encoding ASCII/ANSI](images/textfileEncodingAscii.png)
 
 Ähnliche Probleme kann man beispielsweise auch haben, wenn man den Source-Code von Java-Klassen plattformübergreifend bearbeitet (neben dem Problem der unterschiedlichen Zeilenendemarkierung). Im Eclipse kann man beispielsweise die Codierung der Source-Files einstellen. Zumeist arbeitet man mit Windows-Entwicklern, die per Default die Windows-Default-Codierung (ANSI mit Codepage Cp1252).
 
