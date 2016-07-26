@@ -72,16 +72,20 @@ Kennzeichnet in welchem Style die Antwort akzeptiert wird
     Accept: application/xml
     Accept: application/json
     ...
+    
+Hierüber kann der Client entscheiden, in welchem Format die Ressource vom Server geliefert werden soll (XML, Json, ...). Ein Server muß natürlich nicht alle Formate unterstützen ... das hängt von der Schnittstelle ab. 
 
 ### Accept-Language
-In welcher Sprache soll der Request verarbeitet werden
+Hiermit kann der Client seine gewünschte Sprache mitteilen ... das ist evtl. in einer Consumer-Schnittstelle relevant (z. B. die Antwort enthält menschenlesbare Informationen oder es wird vom Server eine eMail verschickt). 
 
 ### Content-Type
-Kennzeichnet in welchem Style der POST-Body versendet wird
+Der Server Kennzeichnet hiermit in welchem Format die Antwort versendet wird
 
     application/xml
     application/json
     ...
+    
+Bei einem HTTP-POST oder -PUT kann der Client aber auch das Format des Request-Body kennzeichnen.
     
 ### Cache-Control
 

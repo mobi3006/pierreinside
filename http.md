@@ -8,6 +8,9 @@ HTTP ist ein schon recht altes Protokoll, zu dem es aber nur zwei Major Releases
 
 Das neuere Protokoll ist soll den Anforderungen heutiger Webapplikationen gerecht werden und die Performance erhöhen.
 
+## Urlencode
+[siehe anderer Abschnitt](characterEncoding.md)
+
 ---
 
 # Inputdaten

@@ -135,7 +135,34 @@ Einige der in diesem Kontext verwendeten Annotationen (z. B. ``@RequestMapping``
 
 > ACHTUNG: im Gegensatz zu JSF ist Spring MVC ein Controller-First-Ansatz (ähnlich wie JSP). JSF ist ein View-First-Ansatz.
 
-### GET-Controller
+### @RequestMapping
+Hierüber werden die Controller-Actions deklariert:
+
+```java
+@RequestMapping(path = "/user")
+public String getUser(){ //...}
+```
+
+Hierüber wird ein HTTP-Endpunkt, der dann über ``http://.../user`` auf **ALLE** HTTP-Methoden (GET, POST, PUT, ...) reagiert. Über ``method = RequestMethod.GET`` läßt sich das auf GET-Requests einschränken.
+
+Solche Request-Mappings können relativ komplex werden, wenn beispielsweise ``@PathVariable`` verwendet werden ([ein Beispsiel von hier](http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-requestmapping)):
+
+```java
+@RequestMapping(
+  "/spring-web/
+    {symbolicName:[a-z-]+}-
+    {version:\\d\\.\\d\\.\\d}
+    {extension:\\.[a-z]+}")
+public void handle(
+    @PathVariable String version, 
+    @PathVariable String extension) {
+    // ...
+}
+```
+
+Man kann auch Headerwerte zur Selektion der richtigen Controllermethode aufzunehmen.
+
+### @GetMapping
 Ein typischer HTTP-GET ``@Controller``:
 
 ```java
@@ -143,14 +170,26 @@ Ein typischer HTTP-GET ``@Controller``:
 public class MyController {
 
   @RequestMapping(path = "/user", method = RequestMethod.GET)
-  public String getUser(Model model) {
+  public String getUser(Model model) { // ... }
       model.addAttribute("user", new User());
       return "index";
   }
 }
 ```
 
-### POST-Controller
+Mittlerweile gibt es auch spezialisierte RequestMappings: ``@GetMapping``, ...
+
+```java
+@Controller
+public class MyController {
+
+  @GetMapping(path = "/user")
+  public String getUser(Model model) { // }
+}
+```
+
+
+### @PostMapping
 Ein typischer HTTP-POST-Controller:
 
 ```java
@@ -165,27 +204,8 @@ public class WebPatientRegistrationController {
 }
 ```
 
-Spring übernimmt das Mapping der einfachen HTTP-String-Attribute in Java-Objekte.
-
-### @RequestMapping
-Mittlerweile gibt es auch spezialisierte RequestMappings: ``@GetMapping``, ...
-
-Solche Request-Mappings können relativ komplex werden, wenn beispielsweise ``@PathVariable`` verwendet werden ([ein Beispsiel von hier](http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-requestmapping)):
-
-```java
-@RequestMapping(
-  "/spring-web/
-    {symbolicName:[a-z-]+}-
-    {version:\\d\\.\\d\\.\\d}
-    {extension:\\.[a-z]+}")
-public void handle(@PathVariable String version, @PathVariable String extension) {
-    // ...
-}
-```
-
-Man kann auch Headerwerte zur Selektion der richtigen Controllermethode aufzunehmen.
-
 ### @RequestMapping ... Parameter der Java-Methode
+* Spring Doku: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html#mvc-ann-typeconversion
 
 **Default-Methoden-Parameter:**
 
@@ -205,6 +225,8 @@ Dieser Link beschreibt die Regeln für die Java-Methode, die an einem ``@Request
 
 Im HTTP-Request sind nun Strings enthalten, in den Controller-Methoden arbeitet man häufig aber mit komplexeren Java-Klassen. Hierfür gibt es bereits häufig automatische Konvertierungen, häufig wird aber auch JAXB verwendet.
 
+Ist keine automatische Konvertierung möglich, so könnte es zu einer ``org.springframework.web.method.annotation.MethodArgumentConversionNotSupportedException`` kommen. In solchen Fällen muß man im worst-case entsprechende ``Converter`` schreiben ([weitere Details](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html#core-convert)).
+
 Tritt beim Unmarshalling ein Fehler auf, so wird das in ``BindingResult`` hinterlegt. Dieser Parameter sollte in keiner HTTP-POST, so daß  der 
 Hier finden sich weitere Informationen zur Typ-Konvertierung:
 
@@ -217,11 +239,33 @@ Mit JAXB kann die Typ-Konvertierung unterstützt werden.
 Neben diesen syntaktischen Typ-Prüfungen (ein String muß in ein ``java.util.Date`` konvertierbar sein) können weitere semantische Prüfungen sinnvoll sein. Diese können über [Java Bean Validation](java_beanValidation.md) mit ``@Valid`` sehr schön integriert werden:
 
 ```java
+@ValidUsername
+@Size(min=8, max=12)
+private String username;
+
 public String sayHello(
    ModelMap m, 
    @Valid Person p, 
    BindingResult r) {
   // ...
+}
+```
+
+Die Fehlermeldungen können über den üblichen i18n-Mechanismus (e. g. ``messages.properties``) konfiguriert werden. Allerdings muß dann folgende Konfiguration durchgeführt werden:
+
+```java
+public class MvcConfig extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    private MessageSource messageSource;
+
+    @Override
+    public Validator getValidator() {
+        LocalValidatorFactoryBean factory = 
+            new LocalValidatorFactoryBean();
+        factory.setValidationMessageSource(messageSource);
+        return factory;
+    }
 }
 ```
 

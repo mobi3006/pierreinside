@@ -16,3 +16,10 @@ Verwendet man [Spring MVC](springMvc.md), so kann darüber die Parameterprüfung
 </dependency>
 ```
 
+---
+
+# Eigene Validators
+
+# Anpassung der Fehlermeldung
+## i18n
+

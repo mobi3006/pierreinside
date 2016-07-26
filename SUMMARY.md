@@ -29,7 +29,6 @@
        * [Spring Cloud](springCloud.md)
        * [Spring Cloud Config](springCloudConfig.md)
        * [Spring MVC](springMvc.md)
-         * [Spring MVC REST](springMvc_rest.md)
        * [Spring Data](springData.md)
    * [Thymeleaf](thymeleaf.md)
    * Persistenz
@@ -74,4 +73,5 @@
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
 * [YAML](yaml.md)
+* [Zeichenkodierung](characterEncoding.md)
 

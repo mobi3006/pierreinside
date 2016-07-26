@@ -70,7 +70,7 @@ sudo systemctl list-unit-files
 ```
 
 ### Unit: Service
-systemd erwartet für jeden Service eine Konfigurationsdatei, die folgendermaßen aussehen kann (wird per ``systemctl cat myapp.service`` angezeigt):
+``systemd`` erwartet für jeden Service eine Konfigurationsdatei, die folgendermaßen aussehen kann (wird per ``systemctl cat myapp.service`` angezeigt):
 
     [vagrant@management system]$ systemctl cat sshd.service
     # /usr/lib/systemd/system/sshd.service
@@ -90,6 +90,8 @@ systemd erwartet für jeden Service eine Konfigurationsdatei, die folgendermaße
 
     [Install]
     WantedBy=multi-user.target
+
+Wichtig ist, daß alle Umgebungsvariablen (z. B. ``JAVA_HOME``) hier gesetzt werden müssen, da ein Systemd-Service auf der grünen Wiese aufsetzt.
 
 Über ``systemctl list-dependencies myapp.service`` werden die Services aufgelistet, von denen der Service abhängig ist:
 
