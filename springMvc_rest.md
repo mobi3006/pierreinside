@@ -46,6 +46,21 @@ public ResponseEntity<String> String getName();
 
 modelliert werden. Verwendet man die ``FooEntity`` Objekte, so hat man mehr Informationen (z. B. HTTP-Status-Code-Value und Http-Header).
 
+### ResponseStatus
+Exceptions kann man direkt mit einem ResponseStatus (HTTP-Code) verknüpfen. In 
+
+```java
+```
+
+kann die Exception geworfen werden:
+
+```java
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class PersonNotFoundException extends RuntimeException {
+```
+
+In der HttpServletResponse landet in diesem Fall automatisch ein ``HttpStatus.NOT_FOUND`` (404).
+
 ### Zugriff per RestTemplate 
 
 [siehe Abschnitt zum Testen](springBoot_testing.md)

@@ -39,3 +39,19 @@ Das erste System, das ich auf diese Weise aufsetze ist [Ubuntu 16.04 LTS](ubuntu
 
 # Ubuntu Desktop 16.04 LTS
 [siehe extra Abschnitt](ubuntu_1604_lts.md)
+
+---
+
+# Chrome
+Ich war jahrelanger zufriedener Nutzer von Firefox. Als Entwickler haben mich aber die Chrome-Tools sehr begeistert, so daß ich den Umstieg vollzogen habe.
+
+## pierreinside als Suchmaschine
+Um schnell in diesem GitBook suchen zu können, habe ich unter Einstellungen - Suchmaschinen verwalten ... eine neue Suchmaschine mit diesem Querystring
+
+```
+https://mobi3006.gitbooks.io/pierreinside/content/?q=%s
+```
+
+definiert und das Kürzel ``p`` zugewiesen.
+
+Nun kann ich im Browser elegant per ``p wasichsuchenwill`` suchen.

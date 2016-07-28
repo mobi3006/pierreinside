@@ -10,7 +10,9 @@ Spring MVC ist Request-Driven, d. h. ein Controller erhält Http-Requests (GET, 
 # Spring MVC Rest
 [siehe eigenes Kapitel](springMvcRest.md)
 
-Frage: Wie stehen ``@Controller`` und ``@RestController`` zueinander ... die Grenzen zwischen UI-Client und Maschine-Client (= Rest-Client) verschwimmen irgendwie ...
+Ein ``@RestController`` und ein ``@Controller`` (für UIs) sehen fast identisch aus. Während der RestController allerdings HttpResponses zurückliefert, liefert der Controller View-Identifier, über die dann eine HTML-Response gebaut und zum Client (= Browser) geliefert wird. 
+
+Die Grenzen zwischen UI-Client und Rest-Client verschwimmen ... und das ist auch gut so.
 
 ---
 
@@ -113,6 +115,19 @@ Die vom Server bereitgestellten Ressourcen (JavaScript, Images, ...) sollten cli
 ---
 
 # Spring MVC - Controller und Model
+Der Controller übernimmt die Seitensteuerung, d. h. die Controller-Methode liefert einen String als Rückgabewert, der die nachfolgende View-Page repräsentiert, z. B. 
+
+```
+return "login";
+```
+
+Je nach gewählter View-Technologie (z. B. [Thymeleaf](thymeleaf.md)) und deren Konfiguration wird dann beispielsweise eine Seite ``login.html`` gebaut (aus einem Template) und zum Client geschickt.
+
+Hier kann aber beispielsweise auch ein Redirect-Request auf eine externe Seite getriggert werden:
+
+```java
+return "redirect:http://www.cachaca.de";
+```
 
 ## Configuration
 Wie üblich verwendet Spring einen annotationsbasierten Ansatz. Die Annotationen werden bei Anwendungsstart gescannt und dadurch die Applikation initialisiert. Handelt es sich um eine Spring Boot Applikation mit ``@EnableAutoConfiguration`` so sollte alles automatisch initialisiert werden. Ansonsten muß 

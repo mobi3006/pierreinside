@@ -2,6 +2,45 @@
 
 ---
 
+# Externalize Configuration
+* Spring Boot Dokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
+* Spring Boot Howto: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-properties-and-configuration.html
+
+Die im WAR/JAR verbackene ``application.properties`` muß in verschiedenen Deployment-Umgebungen entsprechend angepaßt werden.
+
+## Übersteuern mit Aufrufparametern
+```
+java -jar myapp.jar --de.cachaca.myapp.host=www.cachaca.de
+```
+
+## Übersteuern mit externer ``application.properties``
+Bei folgender Organisation
+
+```
+target/
+  myapp.jar
+    application.properties    # 3
+      myprop1=A
+      myprop2=D
+      myprop3=F
+  config/
+    application.properties    # 2
+      myprop1=B
+      myprop2=E
+  application.properties      # 1
+    myprop1=C
+```
+
+Die Properties werden in der Reihenfolge #1, #2, #3 gezogen, d. h. die Properties haben zur Laufzeit folgende Werte:
+
+```
+myprop1=C
+myprop2=E
+myprop3=F
+```
+
+---
+
 # Spring Boot as a Service
 * http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html
 * http://file.allitebooks.com/20151028/Spring%20Boot%20Cookbook.pdf
