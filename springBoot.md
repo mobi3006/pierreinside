@@ -243,7 +243,9 @@ Spring Boot bringt eine Warm-Restart-Funktionalität (siehe unten) mit. Hierzu m
     </dependencies>
 ```
 
-erfolgt die Integration der Developer Tools. 
+erfolgt die Integration der Developer Tools. Dann sollte man noch folgende Konfiguration in der ``application.properties`` setzen:
+
+* ``spring.devtools.livereload.enabled=true`` 
 
 ### Cold-Start vs. Warm-Restart vs. Reload 
 
