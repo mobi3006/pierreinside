@@ -70,7 +70,7 @@ Bei der Verwendung von NetworkAddressTranslation fungiert die VirtualBox-Softwar
 Das Gastbetriebssystem
 
 * kann DHCP verwenden (der DHCP-Server wird dann von VirtualBox bereitgestellt)
-* kann vom VirtualBox-Software-Router eine statische IP-Adresse erhalten ... dann sollte man aber private IP-Adressen verwenden (keine öffentlichen)
+* kann vom VirtualBox-Software-Router eine statische IP-Adresse erhalten ... dann sollte man aber [private IP-Adressen](http://de.wikipedia.org/wiki/Private_IP-Adresse) verwenden (keine öffentlichen)
 
 In beiden Fällen sind die Gastbetriebssysteme und deren Services nicht von aussen nutzbar - Antworten auf vom Gastsystem initiierten Requests kommen aber an - über NetworkAddressTranslation. Über Port-Forwarding kann man Ports des Gastbetriebssystems (z. B. Port 80) an das Host-Betriebssystem (z. B. Port 8080) weiterleiten, so daß der Service des Gastbetriebssystems per ``localhost:8080`` (oder ip_address_host_machine:8080) erreichbar ist.
 
@@ -310,11 +310,11 @@ Ein wenig problematischer gestaltete sich die Netzwerkkonfiguration. In VMWare h
 
 Schließlich hatte ich doch den piep-einfachen Bridged-Mode verwendet, der bei VMWare doch auch immer klappte. Nach mehrmaligem RTFM fand ich doch noch heraus, dass man den virtuellen Netzwerkadapter an ein physisches Gerät binden muss - in den VirtualBox Administrationstools:
 
-
+![Bidged-Mode](images/virtualbox_bridgedMode.png)
 
 So schaffte ich zumindest, aus dem Gastsystem wieder aufs Internet zugreifen zu können. Um beim Wechsel auf meine kabelgebundene Netzwerkverbindung nicht immer wieder das Image runterfahren zu müssen, habe ich einen Adapter für die kabelgebundene Variante und einen Adapter für die wireless-Variante konfiguriert:
 
-
+![zwei Netzwerkadapter](images/virtualbox_networkConfiguration.png)
 
 Doch leider klappte der Zugriff vom Host-System auf mein im Gastsystem mittlerweile wieder laufendes Exponent-CMS (LAMP - Linux, Apache, MySql, PHP) nicht. Da der Firefox 3.5 im Gastsystem doch sehr, sehr langsam mit meinem Exponent-System kommunizieren wollte (der Seitenaufbau war schnarch-lahm - keine Ahnung warum) war ich extrem frustriert und hielt schon Ausschau nach einem Ersatz-Laptop (oder gar einer fetten Workstation) - zugegeben: ich wollte mir auch endlich mal wieder was gönnen und nahm das Problem jetzt zum Anlass ...
 Nachdem ich dann doch ein wenig ziellos bei der Rechnersuche war, widmete ich mich doch ein wenig entspannter dem Problem und gleich meine erste Vermutung stimmte: die Linux-Firewall verhinderte den Zugriff. Schnell eine Ausnahme eingebaut (Zugriff auf den HTTP-Server) und schon konnte ich die Seiten aus meinem Hostsystem (Windows XP) in gewohnter Geschwindigkeit editieren :-)
