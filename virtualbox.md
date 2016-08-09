@@ -183,18 +183,24 @@ Das folgende ``clonehd`` sorgt dafür, daß eine Disk mit dynamisch wachsender G
 **clonehd:**
 
 ```
-$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe clonehd OpenSuseIcw_20130517.vdi suseIcw.vdi --variant Standard
+$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe clonehd
+      OpenSuseIcw_20130517.vdi suseIcw.vdi --variant Standard
     0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-    Clone hard disk created in format 'VDI'. UUID: b6462b06-3e89-496f-aa6f-009977a75e1c
+    Clone hard disk created in format 'VDI'. 
+    UUID: b6462b06-3e89-496f-aa6f-009977a75e1c
 ```
 
 Ich habe hier schon mal folgende Fehlermeldung bekommen:
 
 ```
-VBoxManage.exe: error: Cannot register the hard disk '...UbuntuIncreased.vdi' {f9030452-7e4c-4eef-b833-2d86dad01111}
-because a hard disk 'C:\Dev\UbuntuIcwIncreased.vdi' with UUID {f9030452-7e4c-4eef-b833-2d86dad01111} already exists
-VBoxManage.exe: error: Details: code E_INVALIDARG (0x80070057), component VirtualBox, interface IVirtualBox, callee IUnknown
-VBoxManage.exe: error: Context: "OpenMedium(Bstr(pszFilenameOrUuid).raw(), enmDevType, enmAccessMode, fForceNewUuidOnOpen, pMedium.asOutParam())"
+VBoxManage.exe: error: Cannot register the hard disk 
+  '...UbuntuIncreased.vdi' {f9030452-7e4c-4eef-b833-2d86dad01111}
+because a hard disk 'C:\Dev\UbuntuIcwIncreased.vdi' with 
+  UUID {f9030452-7e4c-4eef-b833-2d86dad01111} already exists
+VBoxManage.exe: error: Details: code E_INVALIDARG (0x80070057), 
+  component VirtualBox, interface IVirtualBox, callee IUnknown
+VBoxManage.exe: error: Context: "OpenMedium(Bstr(pszFilenameOrUuid).raw(),
+  enmDevType, enmAccessMode, fForceNewUuidOnOpen, pMedium.asOutParam())"
         at line 178 of file VBoxManageDisk.cpp
 ```
 
@@ -204,10 +210,12 @@ Das lag daran, daß die zu erweiternde Festplatte noch als Virtuelles Medium ein
 
 ```
 pfh@WDF-LAP-1103 /cygdrive/c/Dev
-$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe modifyhd suseIcw.vdi --resize 30000
+$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe modifyhd 
+    suseIcw.vdi --resize 30000
     0%...
 Progress state: VBOX_E_NOT_SUPPORTED
-VBoxManage.exe: error: Resize hard disk operation for this format is not implemented yet!
+VBoxManage.exe: error: 
+  Resize hard disk operation for this format is not implemented yet!
 ```
 
 Also auch net ... und das obwohl es sich um ein dynamisches VDI-Format handelt:

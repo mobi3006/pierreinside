@@ -30,6 +30,7 @@
        * [Spring Cloud Config](springCloudConfig.md)
        * [Spring MVC](springMvc.md)
        * [Spring Data](springData.md)
+       * [Spring Petclinic](spring_petclinic.md)
    * [Thymeleaf](thymeleaf.md)
    * Persistenz
        * [JPA](jpa.md)

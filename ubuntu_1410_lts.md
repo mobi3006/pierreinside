@@ -189,6 +189,8 @@ Es wird eine neue Connection mit dem Connection Type per *Import a saved VPN con
 
 Nach Initiierung der VPN-Verbidnung muss man die Credentials eingeben (in meinem Falle Passwort und Yubikey) und dann wird die Verbindung aufgebaut. Der Tunnel ist als ``tun`` per ``ifconfig`` sichtbar.
 
+ACHTUNG: verwendet man eine Two-Factor-Authentifizierung (z. B. Passwort + YubiKey), dann sollte man in den Einstellungen *Credentials - Always Ask* verwenden, sonst wird der 
+
 ### Historie: seit Dezember 2014 geht es ohne Probleme
 
 Unter einem frühen Ubuntu 14.04 schlug der Import meiner OpenVPN-Einstellungen kommentarlos mit einem Segmentation-Fault fehl ... Herr Google liefert einen Bug in Ubuntu 14.04:
