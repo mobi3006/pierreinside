@@ -7,6 +7,15 @@ Ich hatte bisher mit Velocity-Templating und JSPs gearbeitet. Im Zuge der Nutzun
 
 ---
 
+# Spring-Petclinic mit Thymeleaf
+* https://github.com/thymeleaf/thymeleafexamples-petclinic
+
+Hier findet man Best-Practices für die Thymeleaf-Nutzung. Hallo Robin
+
+
+
+---
+
 # Version 2 vs. 3
 * http://www.thymeleaf.org/doc/articles/thymeleaf3migration.html
 
