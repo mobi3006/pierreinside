@@ -90,6 +90,9 @@ Hiermit hatte ich mein erstes wirkliches Problem, dann das Pairing hat nicht fun
 
 Allerdings klappt es seitdem nicht mehr mit meinen Android-Geräten ;-)
 
+## Bilder und Videos
+Meine selbst aufgenommenen Bilder/Videos liegen auf meinem [Synology](synology.md) und werden dort auch regelmäßig gesichert. Von dort möchte ich die Bilder/Videos anzeigen und komfortabel navigieren. Die [DSPhoto App von Synology](https://itunes.apple.com/de/app/ds-photo/id321493106?mt=8) eignet sich hierfür hervorragend.
+
 ---
 
 # Best-of-Apps
@@ -108,6 +111,21 @@ Ich liebe es, mit dieser App unter iOS und Android, Komponenten- und Sequenzdiag
 
 ## Documents
 Das scheint mir ein recht brauchbarer Dateiexplorer zu sein ... wenngleich ich sagen muß, daß ich den Eindruck gewinne Apple wolle uns von diesen Details fernhalten. Ich komme aber (noch) nicht ohne aus.
+
+## DS Photo
+* https://itunes.apple.com/de/app/ds-photo/id321493106?mt=8
+
+Diese App ist auch mit WLAN schnell genug, um zügig durch meine Bilder zu browsen. Sie unterstützt außerdem das Streaming über Chromecast.
+
+ACHTUNG: anfangs hatte ich Schwierigkeiten mit der Wiedergabe von Videos - die Fehlermeldung empfahl die Installation der [Synology App DS File](https://itunes.apple.com/de/app/ds-file/id416751772?mt=8). Jetzt funktioniert es :-)
+
+## Infuse
+* AppStore: https://itunes.apple.com/us/app/infuse-pro/id893249751?mt=8
+* YouTube: https://www.youtube.com/watch?v=IMxArzHf8VM
+
+iTunes ist die von Apple vorgesehene Multimedia-Plattform. Hier kann man Inhalte kaufen und eigene Bereitstellen, die man dann auch lokal synchronisieren kann. Hierzu muß man eigene Inhalte (z. B. von [onlinetvrecorder.com](http://www.onlinetvrecorder.com)) aber erst mal auf den iTunes-Server hochladen. Hat man nur einen langsamen Upload oder möchte man das nicht, bietet sich mit Infuse eine Alternative an.
+
+Infuse ermöglicht die Einbindung eines NAS (z. B. [Synology](synology.md)), um von dort z. B. Videos auf dem iPad wiederzugeben oder die Inhalte lokal zu speichern (Offlineverfügbarkeit).
 
 ---
 
