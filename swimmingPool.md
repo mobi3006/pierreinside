@@ -19,6 +19,11 @@ Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege 
 ---
 
 # Pumpe
+Die Pumpe hat folgende Aufgaben:
+* Dreck rausfiltern (über Kartusche, Sand oder Filter Balls)
+* Chemieverteilung im Pool
+
+
 ## Steinbach Poolpumpe Speedclean Comfort 50
 Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranlagen vorbeigekommen. Spontan entschloß ich mich für den Kauf _Speedclean Comfort 50_ von Steinbach für 200 Euro. Diese ist zwar mit 6.600 l/h Pumpvolumen für Pools bis 33.000 Liter ausgelegt ... aber dadurch schafft sie unseren Pool locker in 2,5 Stunden zweimal durchgespült zu haben. Mit der eingebauten Zeitschaltuhr kann ich die Pumpe dann nachts laufen lassen und habe morgens schon wieder frisches Wasser.
 
