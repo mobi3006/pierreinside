@@ -7,6 +7,9 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
   * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
   * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
+* bei grünlichem Wasser Algicid reingeben
+* bei bräunlichem Wasser ...
+* bei milchigem Wasser ...
 * Skimmer verwenden, um groben Schmutz VOR der Pumpe rauszufiltern
 * bei Nichtnutzung die Plane drüberziehen:
   * Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)  
