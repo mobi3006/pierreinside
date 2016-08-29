@@ -64,8 +64,9 @@ Gut, daß ich mich für die leistungsfähiger Pumpe entschieden habe.
 * https://www.amazon.de/Steinbach-Filter-Balls-handels%C3%BCblichen-Sandfilteranlagen/dp/B01BVF66EG/ref=sr_1_1?s=garden&ie=UTF8&qid=1472486586&sr=1-1&keywords=filter+balls
 
 Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteile:
+
 * feinere Filterung
-* geringe Gewicht (vielleicht muß man die Pumpe auch mal bewegen)
+* geringes Gewicht (vielleicht muß man die Pumpe auch mal bewegen)
 * Wiederverwendung - am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
 * kein Sand im Pool
 
