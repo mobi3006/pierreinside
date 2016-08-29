@@ -88,7 +88,7 @@ Der Druck lag zu Beginn bei 0,5 bar.
 Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). 
 
 ## Tipps
-Während des Pumpenbetriebs sollte man aus Sicherheitsgründen nicht baden.
+* während des Pumpenbetriebs sollte man aus Sicherheitsgründen nicht baden
 
 ---
 
