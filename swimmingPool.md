@@ -18,7 +18,8 @@ Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege 
 
 ---
 
-# Steinbach Poolpumpe Speedclean Comfort 50
+# Pumpe
+## Steinbach Poolpumpe Speedclean Comfort 50
 Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranlagen vorbeigekommen. Spontan entschloß ich mich für den Kauf _Speedclean Comfort 50_ von Steinbach für 200 Euro. Diese ist zwar mit 6.600 l/h Pumpvolumen für Pools bis 33.000 Liter ausgelegt ... aber dadurch schafft sie unseren Pool locker in 2,5 Stunden zweimal durchgespült zu haben. Mit der eingebauten Zeitschaltuhr kann ich die Pumpe dann nachts laufen lassen und habe morgens schon wieder frisches Wasser.
 
 Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen, zweitens war die Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
@@ -28,7 +29,7 @@ Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch kein
 
 So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich den Filter auch in 20 Minuten anschließen können.
 
-## Bewertung
+### Bewertung
 Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). 
 
 
