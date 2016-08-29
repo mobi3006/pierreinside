@@ -6,8 +6,8 @@ Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege 
 # Pflegetips
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
 * bei Nichtnutzung die Plane drüberziehen:
-** Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)
-** Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
+  * Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)
+  * Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
 
 ---
 
