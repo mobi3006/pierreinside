@@ -83,6 +83,10 @@ Achtung: die Pumpe kommt ohne Schläuche für den Poolanschluß und den Ablaß d
 Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen (und die Comfort 50 ist ein 7-Wege-Ventil-Gerät), zweitens war die [Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben](http://www.steinbach.at/images_mam?ID=7585da68858@steinbach&rand=694abddbd449d2a3e16df6a4eade52ca&force=true&download=true&omitPreview=true) (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
 
 * für ein Youtube Video vom Hersteller: https://www.youtube.com/watch?v=IXwv5fyoC0
+
+<a href="http://www.youtube.com/watch? feature=player_embedded&v=idLyobOhtO4" target="_blank"> <img src="http://img.youtube.com/vi/idLyobOhtO4/0.jpg" alt="Linus Torvalds über Git-Alternativen" width="240" height="180" border="10" /> </a>
+
+
 * diese hervorragende PDF-Anleitung: http://www.king-of-sports.de/res/steinbach_sandfilteranlage-speed-comfort_gebrauchsanleitung.pdf
 
 So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich den Filter auch in 20 Minuten anschließen können.
