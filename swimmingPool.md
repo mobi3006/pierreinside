@@ -8,6 +8,7 @@ Links:
 * http://www.hornbach.de/cms/de/de/projekte/wellness_zuhause/pool_bauen/poolwasser_pflegen/poolwasser_pflegen.html
 * sehr gute umfassende Brochüre: http://www.hornbach.de/cms/media/de/projektbereich/wellness_1/pool_1/poolwasser_pflegen/Broschuere_Pool_fachgerecht_pflegen.pdf
 
+## Motivation
 Die Poolpflege ist sehr wichtig, um nicht durch Keime und Bakterien krank zu werden. Je höher die Temperaturen desto wichtiger ist die 
 
 * regelmäßige Poolkontrolle
@@ -16,7 +17,13 @@ Die Poolpflege ist sehr wichtig, um nicht durch Keime und Bakterien krank zu wer
 
 um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
 
-Meine gesammelten Tipps:
+## Tools
+* Chemikalien:
+  * 
+* Pumpe, um Dreck rauszuwaschen
+
+## Tipps
+Meine gesammelten Tipps aus verschiedenen Quellen:
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
   * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
   * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
@@ -34,6 +41,9 @@ Meine gesammelten Tipps:
   * Sand und Filter Balls: Rückspülen und Nachspülen sobald der Druck in den gelben Bereich wechselt (siehe Manometer), um den Dreck aus dem Sand zu waschen und abzulassen
 * Wintereinlagerung:
   * Pool gründlich waschen (Putzmittel für Pools) und dann ausgiebig trocknen
+* Poolaufbau:
+  * auswaschen
+
 
 ---
 
