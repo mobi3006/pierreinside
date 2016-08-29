@@ -15,7 +15,7 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
   * wir haben den: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
 * Filterreinigung:
   * Kartusche: entnehmen und abspritzen
-  * Sand: Rückspülen und Nachspülen, um den Dreck aus dem Sand zu waschen und abzulassen
+  * Sand und Filter Balls: Rückspülen und Nachspülen, um den Dreck aus dem Sand zu waschen und abzulassen
 
 ---
 
@@ -63,9 +63,11 @@ Gut, daß ich mich für die leistungsfähiger Pumpe entschieden habe.
 ### Filter Balls
 * https://www.amazon.de/Steinbach-Filter-Balls-handels%C3%BCblichen-Sandfilteranlagen/dp/B01BVF66EG/ref=sr_1_1?s=garden&ie=UTF8&qid=1472486586&sr=1-1&keywords=filter+balls
 
-Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteil ist das geringe Gewicht und die Wiederverwendung. Am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
-
-Außerdem hat man dadurch keine Probleme mit Sand im Pool.
+Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteile:
+ * feinere Filterung
+* geringe Gewicht (vielleicht muß man die Pumpe auch mal bewegen)
+* Wiederverwendung - am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
+* kein Sand im Pool
 
 Soweit die Theorie.
 
