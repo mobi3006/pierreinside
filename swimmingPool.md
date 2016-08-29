@@ -84,9 +84,7 @@ Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch kein
 
 * für ein Youtube Video vom Hersteller: 
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=idLyobOhtO4" target="_blank"> <img src="http://img.youtube.com/vi/idLyobOhtO4/0.jpg" alt="Linus Torvalds über Git-Alternativen" width="240" height="180" border="10" />https://www.youtube.com/watch?v=IXwv5fyoC0
-
-
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=IXwv5fyoC0g" target="_blank"> <img src="http://img.youtube.com/vi/idLyobOhtO4/0.jpg" alt="Steinbach Produkt-Präsentation" width="240" height="180" border="10" />https://www.youtube.com/watch?v=IXwv5fyoC0g</a>
 
 * diese hervorragende PDF-Anleitung: http://www.king-of-sports.de/res/steinbach_sandfilteranlage-speed-comfort_gebrauchsanleitung.pdf
 
