@@ -34,7 +34,11 @@ Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch kein
 So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich den Filter auch in 20 Minuten anschließen können.
 
 ### Filter Balls
+* https://www.amazon.de/Steinbach-Filter-Balls-handels%C3%BCblichen-Sandfilteranlagen/dp/B01BVF66EG/ref=sr_1_1?s=garden&ie=UTF8&qid=1472486586&sr=1-1&keywords=filter+balls
+
 Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteil ist das geringe Gewicht und die Wiederverwendung. Am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
+
+Außerdem hat man dadurch keine Probleme mit Sand im Pool.
 
 Soweit die Theorie.
 
