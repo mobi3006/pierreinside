@@ -7,8 +7,8 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
   * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
   * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
-* bei grünlichem Wasser Algicid reingeben
-* bei bräunlichem Wasser ...
+* bei grünlichem Wasser Algicid reingeben und Pumpe länger laufen lassen
+* bei bräunlichem Wasser ... 
 * bei milchigem Wasser ...
 * Skimmer verwenden, um groben Schmutz VOR der Pumpe rauszufiltern
 * bei Nichtnutzung die Plane drüberziehen:
@@ -19,6 +19,8 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
 * Filterreinigung:
   * Kartusche: regelmäßig entnehmen und abspritzen 
   * Sand und Filter Balls: Rückspülen und Nachspülen sobald der Druck in den gelben Bereich wechselt (siehe Manometer), um den Dreck aus dem Sand zu waschen und abzulassen
+* Wintereinlagerung:
+  * Pool gründlich waschen (Putzmittel für Pools) und dann ausgiebig trocknen
 
 ---
 
