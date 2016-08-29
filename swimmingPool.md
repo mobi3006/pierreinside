@@ -45,7 +45,7 @@ Ein paar Tipps:
 
 * Gewinde der Schläuche und Adapter zusätzlich mit Gewindeband/Teflonband abdichten ... sonst könnte es schon mal tropfen
 * in den Stellungen 5 - 7 sollte man die Pumpe nicht einschalten
-* Während des Betriebs nicht den Modus wechseln
+* Während des Betriebs nicht den Modus wechseln (z. B. 1 auf 2)
 
 ### Wie oft soll sie laufen?
 Steinbach gibt hierzu [folgende Empfehlung](http://www.steinbach.at/info/detail.php?viewID=16344):
