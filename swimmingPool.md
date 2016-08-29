@@ -35,8 +35,8 @@ Die Alternative im Baumarkt war die [Steinbach Speedclean Eco 30](https://www.am
 
 Achtung: die Pumpe kommt ohne Schläuche für den Poolanschluß und den Ablaß daher!!!
 
-### Ausfbau und Inbetriebnahme
-Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen (und die Comfort 50 ist ein 7-Wege-Ventil-Gerät), zweitens war die Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
+### Aufbau und Inbetriebnahme
+Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen (und die Comfort 50 ist ein 7-Wege-Ventil-Gerät), zweitens war die [Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben](http://www.steinbach.at/images_mam?ID=7585da68858@steinbach&rand=694abddbd449d2a3e16df6a4eade52ca&force=true&download=true&omitPreview=true) (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
 
 * für ein Youtube Video vom Hersteller: https://www.youtube.com/watch?v=IXwv5fyoC0
 * diese hervorragende PDF-Anleitung: http://www.king-of-sports.de/res/steinbach_sandfilteranlage-speed-comfort_gebrauchsanleitung.pdf
@@ -87,8 +87,11 @@ Der Druck lag zu Beginn bei 0,5 bar.
 ### Bewertung
 Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). 
 
+Ersatzteile scheinen kein Problem zu sein - [siehe hier](http://www.steinbach.at/info/detail.php?viewID=16344).
+
 ## Tipps
 * während des Pumpenbetriebs sollte man aus Sicherheitsgründen nicht baden
+* Druck am Manometer beobachten ... sobald im gelben Bereich: Rückspülen und Nachspülen, um den Dreck aus dem Filter zu waschen 
 
 ---
 
