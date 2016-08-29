@@ -33,7 +33,8 @@ um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
 * Pumpe, um Dreck rauszuwaschen
 * Kescher
 * Sauger
-* Bürste, um den Boden und Rand abzubürsten und dadurch den Wirkungsgrad der Chemikalien zu erhöhen
+* Becken-Bürste, um den Boden und Rand abzubürsten und dadurch den Wirkungsgrad der Chemikalien zu erhöhen
+* Abdeckplane (Algen brauchen Licht zum Wachsen)
 
 ## Tipps
 Meine gesammelten Tipps aus verschiedenen Quellen:
