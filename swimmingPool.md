@@ -44,7 +44,7 @@ Steinbach gibt hierzu [folgende Empfehlung](http://www.steinbach.at/info/detail.
 * Bis zu einer Wassertemperatur von ca. 20 °C: Das Wasser soll mindestens 2 x täglich umgewälzt werden.
 * Bis zu einer Wassertemperatur von ca. 24 °C: Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 2 Stunden
 * Ab einer Wassertemperatur von ca. 24 °C: Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 4 Stunden
-`` 
+```
 
 Pro Umwälzung braucht die Pumpe eine gute Stunde ... also 2 Stunden für 2 Umwälzungen. Obigen Empfehlungen ergeben also folgende Laufzeiten:
 
