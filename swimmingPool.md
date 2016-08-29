@@ -44,7 +44,6 @@ Meine gesammelten Tipps aus verschiedenen Quellen:
 * Poolaufbau:
   * auswaschen
 
-
 ---
 
 # Pumpe
