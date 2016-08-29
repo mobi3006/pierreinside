@@ -9,7 +9,6 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
   * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
 * bei grünlichem Wasser Algicid reingeben und Pumpe länger laufen lassen
 * bei bräunlichem Wasser ... und Pumpe länger laufen lassen
-
 * bei milchigem Wasser ... und Pumpe länger laufen lassen
 * Skimmer verwenden, um groben Schmutz VOR der Pumpe rauszufiltern
 * bei Nichtnutzung die Plane drüberziehen:
