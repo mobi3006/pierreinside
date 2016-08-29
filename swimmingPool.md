@@ -37,6 +37,22 @@ Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch kein
 
 So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich den Filter auch in 20 Minuten anschließen können.
 
+### Wie oft soll sie laufen?
+Steinbach gibt hierzu [folgende Empfehlung](http://www.steinbach.at/info/detail.php?viewID=16344):
+
+* Bis zu einer Wassertemperatur von ca. 20 °C: Das Wasser soll mindestens 2 x täglich umgewälzt werden.
+* Bis zu einer Wassertemperatur von ca. 24 °C: Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 2 Stunden
+* Ab einer Wassertemperatur von ca. 24 °C: Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 4 Stunden
+
+Pro Umwälzung braucht die Pumpe eine gute Stunde ... also 2 Stunden für 2 Umwälzungen. Obigen Empfehlungen ergeben also folgende Laufzeiten:
+
+* Bis zu einer Wassertemperatur von ca. 20 °C: 2 Stunden
+* Bis zu einer Wassertemperatur von ca. 24 °C: 4 Stunden
+* Ab einer Wassertemperatur von ca. 24 °C: 6 Stunden
+
+
+
+
 ### Filter Balls
 * https://www.amazon.de/Steinbach-Filter-Balls-handels%C3%BCblichen-Sandfilteranlagen/dp/B01BVF66EG/ref=sr_1_1?s=garden&ie=UTF8&qid=1472486586&sr=1-1&keywords=filter+balls
 
