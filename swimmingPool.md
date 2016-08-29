@@ -1,7 +1,5 @@
 # Swimming Pool
-Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000 Liter) ... das sollte mal reichen, um erste Erfahrungen zu sammeln (und zu testen, ob es den Kindern und uns überhaupt Spaß macht oder wir doch lieber ins Schwimmbad gehen). Der beiliegende Kartuschenfilter machte keinen besonders guten Eindruck, denn die Pumpleistung war an sich schon nicht groß und zudem wurde häufig Luft gezogen, so daß eine manuelle Entlüftung (geht schnell - Pumpe aus, Schraube aufdrehen, warten bis Wasser rausläuft, Schraube zudrehen, Pumpe an) erforderlich war, um zumindest diese schlechte Filterung zu bekommen.
-
-Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege durch unseren Aushilfspoolmeister - grün. Ende August wollten wir natürlich nicht nochmal das Wasser wechseln.
+Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000 Liter) ... das sollte mal reichen, um erste Erfahrungen zu sammeln (und zu testen, ob es den Kindern und uns überhaupt Spaß macht oder wir doch lieber ins Schwimmbad gehen). 
 
 ---
 
@@ -24,6 +22,10 @@ Die Pumpe hat folgende Aufgaben:
 * Chemieverteilung im Pool
 
 ## Steinbach Poolpumpe Speedclean Comfort 50
+Der beiliegende Kartuschenfilter machte keinen besonders guten Eindruck, denn die Pumpleistung war an sich schon nicht groß und zudem wurde häufig Luft gezogen, so daß eine manuelle Entlüftung (geht schnell - Pumpe aus, Schraube aufdrehen, warten bis Wasser rausläuft, Schraube zudrehen, Pumpe an) erforderlich war, um zumindest diese schlechte Filterung zu bekommen.
+
+Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege durch unseren Aushilfspoolmeister - grün. Ende August wollten wir natürlich nicht nochmal das Wasser wechseln.
+
 Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranlagen vorbeigekommen. Spontan entschloß ich mich für den Kauf der _Speedclean Comfort 50_ von Steinbach für 200 Euro. Diese ist zwar mit 6.600 l/h Pumpvolumen für Pools bis 33.000 Liter ausgelegt ... aber dadurch schafft sie unseren Pool locker in 2,5 Stunden zweimal durchgespült zu haben. Mit der eingebauten Zeitschaltuhr kann ich die Pumpe dann nachts laufen lassen und habe morgens schon wieder frisches Wasser.
 
 Die Alternative im Baumarkt war die [Steinbach Speedclean Eco 30](https://www.amazon.de/Speedclean-Eco-30-Sandfilteranlage-40250/dp/B002ID575K), deren Pumpe allerdings auf dem Sandfilter montiert ist. Da die Pumpe nicht über eine Ansaugung verfügt, müßte der Pumpeneinlaß unterhalb des Poolauslasses liegen. Ich hätte die Pumpe vergraben müssen ... dazu war ich nicht bereit (im Baumarkt wäre sie mit 170 Euro nur 30 Euro günstiger gewesen).
