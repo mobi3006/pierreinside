@@ -4,6 +4,10 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
 ---
 
 # Pflegetips
+Links:
+* http://www.hornbach.de/cms/de/de/projekte/wellness_zuhause/pool_bauen/poolwasser_pflegen/poolwasser_pflegen.html
+
+Meine gesammelten Tipps:
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
   * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
   * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
@@ -79,7 +83,7 @@ Gut, daß ich mich für die leistungsfähiger Pumpe entschieden habe.
 
 Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteile:
 
-* feinere Filterung (Sand filtert Teilchen bis 
+* feinere Filterung (Filter Balls filtern viel kleinere Teilchen, so daß man sich auch Zusatzstoffe wie Flockfix sparen kann, die man einsetzt, um die Teilchen größer zu machen)
 * geringes Gewicht (vielleicht muß man die Pumpe auch mal bewegen)
 * Wiederverwendung - am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
 * kein Sand im Pool
