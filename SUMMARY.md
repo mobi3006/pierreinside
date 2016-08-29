@@ -71,6 +71,8 @@
    * [Leanpub](leanpub.md)
 * Devices
    * [iPad Pro](ipadPro.md)
+* Misc
+   * [Swimming Pool](swimmingPool.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
 * [YAML](yaml.md)
