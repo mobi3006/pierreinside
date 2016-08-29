@@ -36,6 +36,9 @@ So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich
 ### Filter Balls
 Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteil ist das geringe Gewicht und die Wiederverwendung. Am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
 
+### Startwerte
+Der Druck lag zu Beginn bei 0,5 bar. 
+
 ### Bewertung
 Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). 
 
