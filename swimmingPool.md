@@ -43,7 +43,7 @@ Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch kein
 
 So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich den Filter auch in 20 Minuten anschließen können.
 
-Ein paar Tipps:
+**Ein paar Tipps:**
 
 * Gewinde der Schläuche und Adapter zusätzlich mit [Gewindeband/Teflonband](https://www.amazon.de/mediPOOL-Gewindeband-Teflonband-Schwimmbad-Gartenpool/dp/B0084Y7LWE/ref=sr_1_2?s=garden&ie=UTF8&qid=1472499007&sr=1-2&keywords=Gewindeband) abdichten ... sonst könnte es schon mal tropfen
 * in den Stellungen 5 - 7 sollte man die Pumpe nicht einschalten
