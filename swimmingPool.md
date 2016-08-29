@@ -13,6 +13,9 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
   * Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
 * Poolsauger nutzen
   * wir haben den: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
+* Filterreinigung:
+  * Kartusche: entnehmen und abspritzen
+  * Sand: Rückspülen und Nachspülen, um den Dreck aus dem Sand zu waschen und abzulassen
 
 ---
 
@@ -49,7 +52,7 @@ Steinbach gibt hierzu [folgende Empfehlung](http://www.steinbach.at/info/detail.
   * Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 4 Stunden
 ```
 
-Pro Umwälzung braucht die Pumpe eine gute Stunde ... also 2 Stunden für 2 Umwälzungen. Obigen Empfehlungen ergeben also folgende Laufzeiten:
+Pro Umwälzung braucht die Comfort 50 eine gute Stunde ... also 2 Stunden für 2 Umwälzungen. Obige Empfehlungen ergeben also folgende Laufzeiten:
 
 * Bis zu einer Wassertemperatur von ca. 20 °C: 2 Stunden
 * Bis zu einer Wassertemperatur von ca. 24 °C: 4 Stunden
