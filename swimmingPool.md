@@ -8,9 +8,13 @@ Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege 
 # Steinbach Poolpumpe Speedclean Comfort 50
 Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranlagen vorbeigekommen. Spontan entschloß ich mich für den Kauf _Speedclean Comfort 50_ von Steinbach für 200 Euro.
 
-Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen, zweitens war die Bedienungsaufbauanleitung schlecht und drittens war sie noch für ein anderes Modell beschrieben. Nach ein paar verzweifelten Eigenversuchen entschied ich mich für ein Youtube Video
+Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen, zweitens war die Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben. Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
 
-* https://www.youtube.com/watch?v=IXwv5fyoC0
+* für ein Youtube Video vom Hersteller: https://www.youtube.com/watch?v=IXwv5fyoC0
+* diese hervorragende PDF-Anleitung: http://www.king-of-sports.de/res/steinbach_sandfilteranlage-speed-comfort_gebrauchsanleitung.pdf
+
+
+
 
 
 
