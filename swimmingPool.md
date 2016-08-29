@@ -33,7 +33,7 @@ Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranl
 
 Die Alternative im Baumarkt war die [Steinbach Speedclean Eco 30](https://www.amazon.de/Speedclean-Eco-30-Sandfilteranlage-40250/dp/B002ID575K), deren Pumpe allerdings AUF dem Sandfilter montiert ist. Da die Pumpe nicht über eine Ansaugung verfügt, müßte der Pumpeneinlaß unterhalb des Poolauslasses liegen. Ich hätte die Pumpe vergraben müssen ... dazu war ich nicht bereit (im Baumarkt wäre sie mit 170 Euro nur 30 Euro günstiger gewesen).
 
-A
+Achtung: die Pumpe kommt ohne Schläuche für den Poolanschluß und den Ablaß daher!!!
 
 ### Ausfbau und Inbetriebnahme
 Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen (und die Comfort 50 ist ein 7-Wege-Ventil-Gerät), zweitens war die Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
