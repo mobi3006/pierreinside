@@ -9,6 +9,7 @@ Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege 
   * Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)  
   * Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
 * Poolsauger nutzen
+  * wir haben den: 
 
 ---
 
