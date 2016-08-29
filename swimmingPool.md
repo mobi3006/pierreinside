@@ -25,6 +25,7 @@ um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
 ## Tools
 * Chemikalien:
   * pH-plus oder pH-Minus
+    * Wasserpflegemittel wirken nur dann optimal, wenn der pH-Wert richtig eingestellt ist.
   * Chlor
     * Schockchlorierung (zumeist Granulat)
     * Dauerchlorierung (zumeist Tabletten)
