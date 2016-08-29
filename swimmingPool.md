@@ -1,5 +1,5 @@
 # Swimming Pool
-Im Mai 2016 haben wir einen günstogen Pool bei Aldi für 129 Euro gekauft (8000 Liter). Der beiliegende Kartuschenfilter machte keinen besonders guten Eindruck, denn die Pumpleistung war an sich schon nicht groß und zudem wurde häufig Luft gezogen, so daß eine manuelle Entlüftung (geht schnell - Pumpe aus, Schraube aufdrehen, warten bis Wasser rausläuft, Schraube zudrehen, Pumpe an) erforderlich war, um zumindest diese schlechte Filterung zu bekommen.
+Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000 Liter) ... das sollte mal reichen, um erste Erfahrungen zu sammeln (und zu testen, ob es den Kindern und uns überhaupt Spaß macht oder wir doch lieber ins Schwimmbad gehen). Der beiliegende Kartuschenfilter machte keinen besonders guten Eindruck, denn die Pumpleistung war an sich schon nicht groß und zudem wurde häufig Luft gezogen, so daß eine manuelle Entlüftung (geht schnell - Pumpe aus, Schraube aufdrehen, warten bis Wasser rausläuft, Schraube zudrehen, Pumpe an) erforderlich war, um zumindest diese schlechte Filterung zu bekommen.
 
 Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege durch unseren Aushilfspoolmeister - grün. Ende August wollten wir natürlich nicht nochmal das Wasser wechseln.
 
@@ -51,7 +51,10 @@ Der Druck lag zu Beginn bei 0,5 bar.
 Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). 
 
 
+---
 
+# Bewertung
+Es hat sich gelohnt ... der Garten ist nun zwar zu etwas anderem kaum noch zu gebrauchen (3,7m Durchmesser), aber er wird genutzt. Von den Kindern, den Eltern und den Großeltern. Das Schwimmbad wird zwar nicht ersetzt, aber wenn man mal nicht die Zeit/Muße fürs Schwimmbad hat oder das Wetter nur durchwachsen ist (wie im Sommer 2016 häufiger), dann ist der Pool perfekt. Im nächsten Jahr wird er wieder aufgebaut und sicherlich wird die ein oder andere Optimierung vorgenommen 
 
 
 
