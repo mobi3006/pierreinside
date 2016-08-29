@@ -26,7 +26,7 @@ Der beiliegende Kartuschenfilter machte keinen besonders guten Eindruck, denn di
 
 Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege durch unseren Aushilfspoolmeister - grün. Ende August wollten wir natürlich nicht nochmal das Wasser wechseln.
 
-Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranlagen vorbeigekommen. Spontan entschloß ich mich für den Kauf der _Speedclean Comfort 50_ von Steinbach für 200 Euro. Diese ist zwar mit 6.600 l/h Pumpvolumen für Pools bis 33.000 Liter ausgelegt ... aber dadurch schafft sie unseren Pool locker in 2,5 Stunden zweimal durchgespült zu haben. Mit der eingebauten Zeitschaltuhr kann ich die Pumpe dann nachts laufen lassen und habe morgens schon wieder frisches Wasser.
+Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranlagen vorbeigekommen. Spontan entschloß ich mich für den Kauf der _Speedclean Comfort 50_ von Steinbach für 200 Euro. Diese ist zwar mit 6.600 l/h Pumpvolumen für Pools bis 33.000 Liter ausgelegt (unserer hat nur 8.000 Liter) ... aber dadurch schafft sie, unseren Pool locker in einer guten Stunde einmal durchzuspülen. Mit der eingebauten Zeitschaltuhr kann ich die Pumpe dann nachts zwei Stunden laufen lassen und habe morgens schon wieder frisches Wasser.
 
 Die Alternative im Baumarkt war die [Steinbach Speedclean Eco 30](https://www.amazon.de/Speedclean-Eco-30-Sandfilteranlage-40250/dp/B002ID575K), deren Pumpe allerdings auf dem Sandfilter montiert ist. Da die Pumpe nicht über eine Ansaugung verfügt, müßte der Pumpeneinlaß unterhalb des Poolauslasses liegen. Ich hätte die Pumpe vergraben müssen ... dazu war ich nicht bereit (im Baumarkt wäre sie mit 170 Euro nur 30 Euro günstiger gewesen).
 
