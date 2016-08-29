@@ -85,8 +85,6 @@ Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch kein
 * für ein Youtube Video vom Hersteller: 
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=IXwv5fyoC0g" target="_blank"> <img src="http://img.youtube.com/vi/IXwv5fyoC0g/0.jpg" alt="Steinbach Produkt-Präsentation" width="240" height="180" border="10" /></a>
-
-
 * diese hervorragende PDF-Anleitung: http://www.king-of-sports.de/res/steinbach_sandfilteranlage-speed-comfort_gebrauchsanleitung.pdf
 
 So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich den Filter auch in 20 Minuten anschließen können.
