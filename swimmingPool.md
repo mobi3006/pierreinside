@@ -50,6 +50,13 @@ Der Druck lag zu Beginn bei 0,5 bar.
 ### Bewertung
 Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). 
 
+---
+
+# Tools
+* Poolsauger: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
+
+
+
 
 ---
 
