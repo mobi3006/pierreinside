@@ -37,7 +37,7 @@ um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
 * Becken-Bürste, um den Boden und Rand abzubürsten und dadurch den Wirkungsgrad der Chemikalien zu erhöhen
 * Abdeckplane (Algen brauchen Licht zum Wachsen)
 
-## Tipps
+## Vorgehensweise
 Meine gesammelten Tipps aus verschiedenen Quellen:
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
   * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
