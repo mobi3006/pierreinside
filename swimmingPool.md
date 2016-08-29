@@ -50,8 +50,7 @@ Pro Umwälzung braucht die Pumpe eine gute Stunde ... also 2 Stunden für 2 Umw�
 * Bis zu einer Wassertemperatur von ca. 24 °C: 4 Stunden
 * Ab einer Wassertemperatur von ca. 24 °C: 6 Stunden
 
-
-
+Gut, daß ich mich für die leistungsfähiger Pumpe entschieden habe.
 
 ### Filter Balls
 * https://www.amazon.de/Steinbach-Filter-Balls-handels%C3%BCblichen-Sandfilteranlagen/dp/B01BVF66EG/ref=sr_1_1?s=garden&ie=UTF8&qid=1472486586&sr=1-1&keywords=filter+balls
