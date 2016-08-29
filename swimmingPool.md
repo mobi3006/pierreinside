@@ -5,12 +5,13 @@ Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege 
 
 # Pflegetips
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
+  * Dauerchlorierung mit Tabs
+  * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
 * bei Nichtnutzung die Plane drüberziehen:
   * Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)  
   * Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
 * Poolsauger nutzen
   * wir haben den: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
-
 
 ---
 
