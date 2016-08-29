@@ -56,6 +56,7 @@ Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-f
 
 # Tools
 * Poolsauger und -kescher: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
+  * das Absaugen klappt erstaunlich gut :-)
 
 ---
 
