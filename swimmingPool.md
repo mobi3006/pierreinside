@@ -43,7 +43,7 @@ So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich
 
 Ein paar Tipps:
 
-* Gewinde der Schläuche und Adapter zusätzlich mit Gewindeband/Teflonband abdichten ... sonst könnte es schon mal tropfen
+* Gewinde der Schläuche und Adapter zusätzlich mit [Gewindeband/Teflonband](https://www.amazon.de/mediPOOL-Gewindeband-Teflonband-Schwimmbad-Gartenpool/dp/B0084Y7LWE/ref=sr_1_2?s=garden&ie=UTF8&qid=1472499007&sr=1-2&keywords=Gewindeband) abdichten ... sonst könnte es schon mal tropfen
 * in den Stellungen 5 - 7 sollte man die Pumpe nicht einschalten
 * Während des Betriebs nicht den Modus wechseln (z. B. 1 auf 2)
 
