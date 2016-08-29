@@ -33,6 +33,7 @@ Auf der Suche nach Algenvernichter bin ich im Baumarkt auch an den Sandfilteranl
 
 Die Alternative im Baumarkt war die [Steinbach Speedclean Eco 30](https://www.amazon.de/Speedclean-Eco-30-Sandfilteranlage-40250/dp/B002ID575K), deren Pumpe allerdings AUF dem Sandfilter montiert ist. Da die Pumpe nicht über eine Ansaugung verfügt, müßte der Pumpeneinlaß unterhalb des Poolauslasses liegen. Ich hätte die Pumpe vergraben müssen ... dazu war ich nicht bereit (im Baumarkt wäre sie mit 170 Euro nur 30 Euro günstiger gewesen).
 
+### Ausfbau und Inbetriebnahme
 Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen (und die Comfort 50 ist ein 7-Wege-Ventil-Gerät), zweitens war die Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
 
 * für ein Youtube Video vom Hersteller: https://www.youtube.com/watch?v=IXwv5fyoC0
@@ -65,12 +66,12 @@ Gut, daß ich mich für die leistungsfähiger Pumpe entschieden habe.
 
 Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteile:
 
-* feinere Filterung
+* feinere Filterung (Sand filtert Teilchen bis 
 * geringes Gewicht (vielleicht muß man die Pumpe auch mal bewegen)
 * Wiederverwendung - am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
 * kein Sand im Pool
 
-Soweit die Theorie.
+Soweit die Theorie ... mal sehen wie es in der Praxis aussieht
 
 ### Startwerte
 Der Druck lag zu Beginn bei 0,5 bar. 
