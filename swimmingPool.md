@@ -33,6 +33,7 @@ um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
   * Algicid
   * Metall- und Kalkstabilisator
 * Pumpe, um Dreck rauszuwaschen
+* Skimmer
 * Kescher
 * Sauger
 * Becken-Bürste, um den Boden und Rand abzubürsten und dadurch den Wirkungsgrad der Chemikalien zu erhöhen
