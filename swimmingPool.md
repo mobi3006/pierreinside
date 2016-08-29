@@ -14,8 +14,8 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
 * Poolsauger nutzen
   * wir haben den: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
 * Filterreinigung:
-  * Kartusche: entnehmen und abspritzen
-  * Sand und Filter Balls: Rückspülen und Nachspülen, um den Dreck aus dem Sand zu waschen und abzulassen
+  * Kartusche: regelmäßig entnehmen und abspritzen 
+  * Sand und Filter Balls: Rückspülen und Nachspülen sobald der Druck in den gelben Bereich wechselt (siehe Manometer), um den Dreck aus dem Sand zu waschen und abzulassen
 
 ---
 
