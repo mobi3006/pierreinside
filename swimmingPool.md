@@ -17,9 +17,19 @@ Die Poolpflege ist sehr wichtig, um nicht durch Keime und Bakterien krank zu wer
 
 um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
 
+## Gegner
+* Keime und Bakterien
+* Kalk
+* Algen, da sie der Nährboden für Bakterien sind 
+
 ## Tools
 * Chemikalien:
-  * 
+  * pH-plus oder pH-Minus
+  * Chlor
+    * Schockchlorierung (zumeist Granulat)
+    * Dauerchlorierung (zumeist Tabletten)
+  * Algicid
+  * Metall- und Kalkstabilisator
 * Pumpe, um Dreck rauszuwaschen
 
 ## Tipps
