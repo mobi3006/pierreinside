@@ -31,6 +31,9 @@ um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
   * Algicid
   * Metall- und Kalkstabilisator
 * Pumpe, um Dreck rauszuwaschen
+* Kescher
+* Sauger
+* Bürste, um den Boden und Rand abzubürsten und dadurch den Wirkungsgrad der Chemikalien zu erhöhen
 
 ## Tipps
 Meine gesammelten Tipps aus verschiedenen Quellen:
