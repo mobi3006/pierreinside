@@ -3,9 +3,12 @@ Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000
 
 ---
 
-# Pflegetips
+# Pflege
 Links:
 * http://www.hornbach.de/cms/de/de/projekte/wellness_zuhause/pool_bauen/poolwasser_pflegen/poolwasser_pflegen.html
+* sehr gute umfassende Brochüre: http://www.hornbach.de/cms/media/de/projektbereich/wellness_1/pool_1/poolwasser_pflegen/Broschuere_Pool_fachgerecht_pflegen.pdf
+
+Die Poolpflege ist sehr wichtig, um nicht durch Keime und Bakterien krank zu werden.
 
 Meine gesammelten Tipps:
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
