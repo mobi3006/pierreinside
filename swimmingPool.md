@@ -20,7 +20,8 @@ um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
 ## Gegner
 * Keime und Bakterien
 * Kalk
-* Algen, da sie der Nährboden für Bakterien sind 
+* Algen, da sie der Nährboden für Bakterien sind
+* Schnaken - man entdeckt sie immer wieder: Schnakenlarven 
 
 ## Tools
 * Chemikalien:
