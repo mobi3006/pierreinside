@@ -3,6 +3,10 @@ Im Mai 2016 haben wir einen günstogen Pool bei Aldi für 129 Euro gekauft (8000
 
 Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege durch unseren Aushilfspoolmeister - grün. Ende August wollten wir natürlich nicht nochmal das Wasser wechseln.
 
+# Pflegetips
+* regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
+* 
+
 ---
 
 # Steinbach Poolpumpe Speedclean Comfort 50
