@@ -22,7 +22,7 @@ Die Pumpe hat folgende Aufgaben:
 * Chemieverteilung im Pool
 
 ## Steinbach Poolpumpe Speedclean Comfort 50
-Der beiliegende Kartuschenfilter machte keinen besonders guten Eindruck, denn die Pumpleistung war an sich schon nicht groß und zudem wurde häufig Luft gezogen, so daß eine manuelle Entlüftung (geht schnell - Pumpe aus, Schraube aufdrehen, warten bis Wasser rausläuft, Schraube zudrehen, Pumpe an) erforderlich war, um zumindest diese schlechte Filterung zu bekommen.
+Der [beiliegende Kartuschenfilter](https://www.amazon.de/Intex-28604GS-Kartuschenfilteranlage-2270GS-2-271/dp/B005FLOAZU/ref=sr_1_1?s=garden&ie=UTF8&qid=1472487778&sr=1-1&keywords=intex+filterpumpe) machte keinen besonders guten Eindruck, denn die Pumpleistung war an sich schon nicht groß und zudem wurde häufig Luft gezogen, so daß eine manuelle Entlüftung (geht schnell - Pumpe aus, Schraube aufdrehen, warten bis Wasser rausläuft, Schraube zudrehen, Pumpe an) erforderlich war, um zumindest diese schlechte Filterung zu bekommen.
 
 Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege durch unseren Aushilfspoolmeister - grün. Ende August wollten wir natürlich nicht nochmal das Wasser wechseln.
 
