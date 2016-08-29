@@ -5,8 +5,9 @@ Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege 
 
 # Pflegetips
 * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
-  * Dauerchlorierung mit Tabs
+  * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
   * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
+* Skimmer verwenden, um groben Schmutz VOR der Pumpe rauszufiltern
 * bei Nichtnutzung die Plane drüberziehen:
   * Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)  
   * Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
