@@ -148,6 +148,12 @@ Ein Branch repräsentiert alle CommitObjects eines Commit-Threads. Man kann zwis
 Hat man eine nicht commitete Änderung an einer Ressource, die bereits unter Version-Control steht, in dem zu verlassenden Branch, dann wird das unterbunden. Man muß erst entscheiden, ob man die Änderung committet oder rückgängig macht.
 Hat man eine nicht commitete Änderung an einer Ressource, die nocht nicht unter Version-Control steht, in
 
+**Zugriffsprotokoll:**
+Git-Repository-Server erlauben i. a. einen Zugriff per 
+* HTTPS
+* SSH
+  * hiermit ist auch passwortlose Authentifizierung über den [SSH-Mechanismus](ssh.md) möglich 
+
 ---
 
 # Befehle
