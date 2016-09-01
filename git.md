@@ -417,11 +417,18 @@ Man unterscheidet die Konfiguration auf verschiedenen Ebenen
 Jedes Git-Repository hat ein Verzeichnis .git \(im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat\). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
 
 * config
-  * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen \(GitHub, BitBucket, lokales Synology, ...\)
+  * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` benutzerspezifisch zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen \(GitHub, BitBucket, lokales Synology, ...\)
 
+Änderungen daran lassen sich beispielsweise per 
+
+```
+git config user.name "Your Name Here" 
+git config user.email your@email.com
+```
+
+durchführen ... BEACHTE: ``--global`` fehlt hier!!!
 
 ## Benutzerspezifische Konfiguration
-
 Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei `~/.gitconfig` machen.
 
 Nach der Erstinstallation von git sollte man beispielsweise
