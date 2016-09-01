@@ -152,7 +152,7 @@ Hat man eine nicht commitete Änderung an einer Ressource, die nocht nicht unter
 Git-Repository-Server erlauben i. a. einen Zugriff per 
 * HTTPS
 * SSH
-  * hiermit ist auch passwortlose Authentifizierung über den [SSH-Mechanismus](ssh.md) möglich 
+  * hiermit ist auch passwortlose Authentifizierung per [SSH-Key über den SSH-Mechanismus](ssh.md) möglich 
 
 ---
 
