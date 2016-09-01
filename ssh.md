@@ -45,6 +45,21 @@ Ein bissl umständlich ... alternativ könnte man einen symbolischen Link erzeug
     ln -s ~/.ssh/myRoleB_rsa ~/.ssh/id_rsa
     ln -s ~/.ssh/myRoleB_rsa.pub ~/.ssh/id_rsa.pub
 
+Die beste Lösung besteht in der Verwendung eine ``~/.ssh/config`` Datei, mit der man die zu verwendenden Keys und Optionen angeben kann:
+
+```
+Host mynas 
+    HostName 192.168.1.100 
+    User pfh 
+    IdentityFile ~/.ssh/nas.key
+Host yournas 
+    HostName 192.168.1.99
+    User pfh
+    IdentityFile ~/.ssh/yournas.key
+```
+
+Danach kann man sich geschmeidig mit ``ssh mynas`` und ``ssh yournas`` einloggen.
+
 ## SSH-Agent - Passphraseabfrage umgehen
 In manchen Fällen (z. B. [automatisiertes Scripting mit Ansible](ansible.md)) möchte man die Passphrase des Private-Keys nicht eingeben müssen. Hierzu kann man den SSH-Agent starten
 
