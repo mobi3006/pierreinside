@@ -412,22 +412,6 @@ Man unterscheidet die Konfiguration auf verschiedenen Ebenen
 * `--global`: userspezifisch ... für alle Repositories \(liegt in `~/.gitconfig`\)
 * `--local`: Repository-spezifisch \(liegt in `$REPOSITORY_HOME/.git/config`\)
 
-## Repositoryspezifische Konfiguration
-
-Jedes Git-Repository hat ein Verzeichnis .git \(im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat\). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
-
-* config
-  * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` benutzerspezifisch zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen \(GitHub, BitBucket, lokales Synology, ...\)
-
-Änderungen daran lassen sich beispielsweise per 
-
-```
-git config user.name "Your Name Here" 
-git config user.email your@email.com
-```
-
-durchführen ... BEACHTE: ``--global`` fehlt hier!!!
-
 ## Benutzerspezifische Konfiguration
 Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei `~/.gitconfig` machen.
 
@@ -452,6 +436,21 @@ Dadurch wird die Datei `~/.gitconfig` um die Properties erweitert. Hier sollte m
 ```
 
 aufnehmen, damit LineEndings immer als LF \(Linux-like\) im Repository landen und nicht Windows-like als CRLF \(näheres siehe [http:\/\/help.github.com\/line-endings\/](http://help.github.com/line-endings/)\). Dies sollten ALLE Git-Nutzer tun, denn auch Linux\/Unix-User könnten von anderen Quellen \(z. B. ein Source File kommt per Mail von einem Windows-User\) eingeschleust werden.
+
+## Repositoryspezifische Konfiguration
+Jedes Git-Repository hat ein Verzeichnis .git \(im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat\). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
+
+* config
+ * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` benutzerspezifisch zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen \(GitHub, BitBucket, lokales Synology, ...\)
+
+Änderungen daran lassen sich beispielsweise per
+
+```
+git config user.name "Your Name Here"
+git config user.email your@email.com
+```
+
+durchführen ... BEACHTE: ``--global`` fehlt hier!!!
 
 ---
 
