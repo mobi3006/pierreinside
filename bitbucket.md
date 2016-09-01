@@ -1,4 +1,7 @@
-# Bitbucket
+# Bitbucket aka Stash
+
+HINWEIS: Die (selbstgehostete) On-Premise-Version von BitBucket wird unter dem Namen **Stash** vertrieben.
+
 Mit BitBucket steht ein Git/Mercurial-Hoster zur Verfügung, der kostenlos private Repositories ermöglicht. GitHub ist zwar einer der bekanntesten Git-Repository-Hoster, dafür sind aber nur öffentliche Repositories kostenlos.
 
 BitBucket liefert aber nicht nur Git-Repositories, sondern auch 
