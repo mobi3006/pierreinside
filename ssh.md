@@ -48,6 +48,9 @@ Ein bissl umständlich ... alternativ könnte man einen symbolischen Link erzeug
 Die beste Lösung besteht in der Verwendung eine ``~/.ssh/config`` Datei, mit der man die zu verwendenden Keys und Optionen angeben kann:
 
 ```
+### default for all ## 
+Host * 
+    ForwardX11 no
 Host mynas 
     HostName 192.168.1.100 
     User pfh 
@@ -58,7 +61,7 @@ Host yournas
     IdentityFile ~/.ssh/yournas.key
 ```
 
-Danach kann man sich geschmeidig mit ``ssh mynas`` und ``ssh yournas`` einloggen.
+Danach kann man sich geschmeidig mit ``ssh mynas`` und ``ssh yournas`` einloggen (hier findet man weitere Details: http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/)
 
 ## SSH-Agent - Passphraseabfrage umgehen
 In manchen Fällen (z. B. [automatisiertes Scripting mit Ansible](ansible.md)) möchte man die Passphrase des Private-Keys nicht eingeben müssen. Hierzu kann man den SSH-Agent starten
