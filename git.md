@@ -455,19 +455,15 @@ durchführen ... BEACHTE: ``--global`` fehlt hier!!!
 ---
 
 # Tooling
-
 Für die Arbeit mit Git benötigt man einen Git Client.
 
 ## GitHub Desktop
-
 Der [GitHub Desktop](https://desktop.github.com/) hat mir wirklich Spaß gemacht als ich mit [GitBook](gitbook.md) begonnen habe.
 
 ---
 
 # Typische Use-Cases
-
 ## Neues lokales Repository aufsetzen
-
 Im folgenden gehe ich davon aus, dass der Benutzer bereits Dateien angelegt hat \(in ~\/mySources\), aber noch nicht unter Git-Versionskontrolle gestellt hat. Dann:
 
 ```
