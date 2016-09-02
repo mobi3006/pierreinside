@@ -268,6 +268,8 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 * Änderungen, die noch nicht im Index gestaged wurden, rückgängig machen
 
   * `git checkout -- datei.txt`
+  * ``git checkout -- .``
+
 
 * Ressourcen löschen
 
