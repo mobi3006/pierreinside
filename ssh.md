@@ -51,7 +51,7 @@ Die beste Lösung besteht in der Verwendung eine ``~/.ssh/config`` Datei, mit de
 ### default for all ## 
 Host * 
     ForwardX11 no
-Host mynas 
+Host mynas mynas-alias
     HostName 192.168.1.100 
     User pfh 
     IdentityFile ~/.ssh/nas.key
