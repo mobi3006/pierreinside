@@ -270,7 +270,6 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
   * `git checkout -- datei.txt`
 
 * Ressourcen löschen
-
   * `git rm myfile.txt`
 
 
