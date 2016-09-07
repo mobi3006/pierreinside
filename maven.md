@@ -346,3 +346,14 @@ Ziel des Continous Integration ist ein Fail-Fast zu erreichen. Aus meiner Sicht 
 Continous Integration dient dem Gesamtprodukt und ist ein gutes Feedback, das man berücksichtigen sollte. ABER: es darf nicht dazu führen, daß die Entwickler in ihrer Geschwindigkeit ausgebremst werden. Und genau dazu führt die Verwendung von Remot-Snapshot-Abhängigkeiten. Und diese Aussage gilt auch, wenn es 30 Minuten dauert, um den gesamten Source-Tree durchzubauen. Das muss man nur ganz selten machen. Danach erfolgen Builds nur noch sehr selektiv und auch nur dann wenn man mit anderen zusammenarbeitet. Arbeitet man allein, kann man alles lokal machen. In den Offline-Mode kann man oftmals nicht gehen, weil manchmal doch stable-Versions gebraucht werden (weil man ein Goal aufruft, das weitere Plugins benötigt oder weil sich am pom-File was geändert hat). Hat man den eigenen Meilenstein erreicht, committet man - hierauf sollte man mit Hinblick auf den Continous Integration Gedanken nicht allzu lange Warten (eher im Stunden/Tage-Bereich als im Tage/Wochen-Bereich). Hierzu sollte man mit den aktuellen Sourcen synchronisieren und wird dann ein "svn update" machen (was dann wiederum einen lokalen Build vieler Module nach sich zieht).
 Ant vs. Maven
 siehe hier: http://www.sonatype.com/books/maven-book/reference/installation-sect-compare-ant-maven.html
+
+# Maven ist langsam
+* https://zeroturnaround.com/rebellabs/your-maven-build-is-slow-speed-it-up/
+
+Je nach Modulabhängigkeiten ist eine parallele Verarbeitung der Module-Builds möglich:
+
+```
+mvn -T 4 install
+```
+
+Auf diese Weise werden im Maximalfall 4 parallele Threads genutzt. 
