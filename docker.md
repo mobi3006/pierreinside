@@ -156,9 +156,9 @@ Hier jetzt nur ein paar Befehle:
 * ``docker --help``
 * ``docker <COMMAND> --help``
   * z. B. ``docker run --help``
-* ``docker build``
+* ``docker build -t <<IMAGE_NAME>>``
   * aus einem Dockerfile ein DockerImage erzeugen.
-* ``docker run``
+* ``docker run <<IMAGE_NAME>>``
   * Basierend auf einem DockerImage ein DockerContainer zu starten
 * ``docker stop``
   * docker stop a7708b93c390
@@ -183,4 +183,15 @@ Benutzt man Docker innerhalb eines Vagrant-Images, so gibt es ein paar Besonderh
 ## Port-Forwarding
 
 Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen werden, damit man vom Host auf die Ports zugreifen kann. Leider unterstützt Vagrant kein on-the-fly Port-Forwarding (zumindest habe ich noch nichts gefunden). Deshalb sollte man in diesem Fall aus Docker-Images immer mit einem festen Port (-p 5000:8080) und nicht mit einem zufälligen (-P)  weiterleiten. So kann man in Vagrant ein paar Ports per Default forwarden und die Docker-Image-Ports dann bei Bedarf auf diese Ports weiterleiten.  
+
+---
+
+# Dockerfile Best-Practices
+* https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
+
+* Containers should be ephemeral:
+  * man kann sie einfach wegwerfen und ersetzen
+* Run only one process per Container
+
+
 
