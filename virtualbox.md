@@ -7,6 +7,15 @@ Nach jetzt 6-monatiger Nutzung bin ich immer noch begeistert von VirtualBox und 
 
 ---
 
+# Virtualisierung Background Informationen
+Hypervisor-Typen
+* Typ 1: läuft direkt auf der Hardware 
+  * VmWare ESX
+* Typ 2: läuft auf einem Betriebssystem
+  * VirtualBox
+
+---
+
 # Basis-Installation
 verlief problemlos - click and go
 
