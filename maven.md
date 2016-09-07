@@ -350,6 +350,7 @@ siehe hier: http://www.sonatype.com/books/maven-book/reference/installation-sect
 # Maven ist langsam
 * https://zeroturnaround.com/rebellabs/your-maven-build-is-slow-speed-it-up/
 
+## Option: Parallelisierung der Module-Builds
 Je nach Modulabhängigkeiten ist eine parallele Verarbeitung der Module-Builds möglich:
 
 ```
@@ -357,3 +358,5 @@ mvn -T 4 install
 ```
 
 Auf diese Weise werden im Maximalfall 4 parallele Threads genutzt. Die Module müssen natürlich dennoch in der richtigen Reihenfolge gebaut werden, von den Ästen zur Wurzel. Parallele Geschwisterprojekte lassen sich aber unabhängig voneinander parallel bauen.
+
+# Option: Parallelisierung der Testausführung
