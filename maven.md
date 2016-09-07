@@ -361,3 +361,5 @@ Auf diese Weise werden im Maximalfall 4 parallele Threads genutzt. Die Module m�
 
 # Option: Parallelisierung der Testausführung
 Die Reihenfolge der Tests sollte eigentlich - bei sauberer Testausführung - keine Rolle spielen ... zumal die Reihenfolge von vielen Aspekten abhängig ist und sich zwischen den Java-Versionen, Betriebssystemen unterscheidet. 
+
+Deshalb sollte die Parallelisierung der Testausführung eine gute Option sein.
