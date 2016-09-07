@@ -359,7 +359,14 @@ mvn -T 4 install
 
 Auf diese Weise werden im Maximalfall 4 parallele Threads genutzt. Die Module müssen natürlich dennoch in der richtigen Reihenfolge gebaut werden, von den Ästen zur Wurzel. Parallele Geschwisterprojekte lassen sich aber unabhängig voneinander parallel bauen.
 
-# Option: Parallelisierung der Testausführung
+## Option: Parallelisierung der Testausführung
 Die Reihenfolge der Tests sollte eigentlich - bei sauberer Testausführung - keine Rolle spielen ... zumal die Reihenfolge von vielen Aspekten abhängig ist und sich zwischen den Java-Versionen, Betriebssystemen unterscheidet. 
 
 Deshalb sollte die Parallelisierung der Testausführung eine gute Option sein.
+
+## Option: nur notwendige Module bauen
+Hat man eine Änderung in Modul A vorgenommen, dann will man i. a. nur Modul A und alle davon abhängigen Module bauen:
+
+```
+mvn install -pl modules/moduleA -am
+```
