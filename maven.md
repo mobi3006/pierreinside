@@ -359,6 +359,26 @@ mvn -T 4 install
 
 Auf diese Weise werden im Maximalfall 4 parallele Threads genutzt. Die Module müssen natürlich dennoch in der richtigen Reihenfolge gebaut werden, von den Ästen zur Wurzel. Parallele Geschwisterprojekte lassen sich aber unabhängig voneinander parallel bauen.
 
+## Option: Incremental Builds
+*  http://stackoverflow.com/questions/16963012/maven-compiler-recompile-all-files-instead-modified
+ 
+
+```
+<plugins>
+   <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-compiler-plugin</artifactId>
+       <version>3.1</version>
+       <configuration>
+          <staleMillis>1</slateMillis>      
+          <useIncrementalCompilation>false</useIncrementalCompilation> <!-- MCOMPILER-209 -->
+       </configuration>
+    </plugin>
+</plugins>
+```
+
+see https://issues.apache.org/jira/browse/MCOMPILER-209
+
 ## Option: Parallelisierung der Testausführung
 Die Reihenfolge der Tests sollte eigentlich - bei sauberer Testausführung - keine Rolle spielen ... zumal die Reihenfolge von vielen Aspekten abhängig ist und sich zwischen den Java-Versionen, Betriebssystemen unterscheidet. 
 
