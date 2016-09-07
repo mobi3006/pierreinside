@@ -1,0 +1,2 @@
+# Docker Compose
+Hiermit lassen sich Landschaften aus Docker-Containern aufbauen und miteinander vernetzen. Ein Docker-Container ist ja eigentlich nur ein Service (= Prozess) ... das ist auch die Empfehlung. 
