@@ -356,4 +356,4 @@ Je nach Modulabhängigkeiten ist eine parallele Verarbeitung der Module-Builds m
 mvn -T 4 install
 ```
 
-Auf diese Weise werden im Maximalfall 4 parallele Threads genutzt. 
+Auf diese Weise werden im Maximalfall 4 parallele Threads genutzt. Die Module müssen natürlich dennoch in der richtigen Reihenfolge gebaut werden, von den Ästen zur Wurzel. Parallele Geschwisterprojekte lassen sich aber unabhängig voneinander parallel bauen.
