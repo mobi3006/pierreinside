@@ -17,7 +17,12 @@ Hypervisor-Typen
 ---
 
 # Basis-Installation
-verlief problemlos - click and go
+verlief problemlos - click and go. Hier sollte man dann auch gleich das _Extension Pack_ (USB2/3-Support, RDP-Verbindungen zum Gast, PXE-Support, Plattenverschlüsselung) installieren.
+
+## PUE Lizenz des Extension Packs
+In der iX stand mal, daß VirtualBox mit dieser Lizenz "[...] theoretisch sogar in Großunternehmen auf jedem PC installiert werden - dofern jeder Anwender dies selbst erledigt" (iX 9/2016).
+
+
 
 ---
 
