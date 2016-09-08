@@ -247,5 +247,6 @@ Nachdem ich den auf den Unternehmens-DNS umgestellt hatte, war alles ok.
 Hänge ich ``--net=host`` an den Befehl, dann funktioniert es auch mit dem VirtualBox-DNS (``nameserver 127.0.1.1``).:
 
 ```
-pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm --net=host ubuntu apt-get update                                                                                                                      ```
+pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm --net=host ubuntu apt-get update
+```
 
