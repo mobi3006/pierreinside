@@ -101,6 +101,13 @@ Hier jetzt nur ein paar Befehle:
 
 ---
 
+# Eigene Images erzeugen
+
+> Mit Alpine Linux gibt es ein Linux Image, das nur 5 MB groß ist und somit bestens geeignet ist, wenn man ein minimales Docker-Image aufbauen will - natürlich muss man dann um so mehr Packages manuell nachinstallieren.
+
+
+
+
 # Docker und Vagrant
 Benutzt man Docker innerhalb eines Vagrant-Images, so gibt es ein paar Besonderheiten.
 
