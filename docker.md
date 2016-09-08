@@ -199,21 +199,8 @@ Will man den Zustand des Containers nach dem fehlerhaften Kommando erhalten, so 
 ```
 docker ps -a
 ```
-und dann ein Commit ausführen, um den Zustand zu persistieren:
 
-
-im Fehlerfall Eine andere Variante ist 
-
-```
-pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker ps -a
-CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
-
-7c1c034d0b4a 784650b6da23 "/bin/sh -c 'wget htt" 49 minutes ago Exited (4) 49 minutes ago stoic_pare
-
-37664f444f8a 784650b6da23 "/bin/sh -c 'wget htt" 53 minutes ago Exited (4) 52 minutes ago backstabbing_kalam
-
-2c3fb351f200 gessnerfl/glassfish:3.1.2.2 "sh /opt/deploy.sh" 4 hours ago Exited (137) About an hour ago glassfish
-
+und dann ein Commit ausführen, um den Zustand per ``docker commit`` zu persistieren und dann den Container per ``docker run -it 23621632143126 bash`` zu starten und eine Console zu bekommen.
 
 
 ## Dockerfile Best-Practices
@@ -241,19 +228,24 @@ Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen wer
 **Frage 1:** Ich nutze Docker auf einem Ubuntu 16.04 LTS VirtualBox-Image. Leider scheine ich keinen Internetzugriff aus dem Container heraus zu haben (innerhalb des VirtualBox-Images funktioniert alles wunderbar):
 
 ```
-100 pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm ubuntu apt-get update                                                                                                                      :(
+pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm ubuntu apt-get update
 0% [Connecting to archive.ubuntu.com]
 ```
 
-**Antwort 1:** 
+**Antwort 1a:** 
 
 Ich hatte in meinem Virtual-Box-Linux-System den DNS von VirtualBox angegeben:
 
 ```
 pfh@workbench ~/% cat /etc/resolv.conf 
 nameserver 127.0.1.1
-
 ```
 
+Nachdem ich den auf den Unternehmens-DNS umgestellt hatte, war alles ok.
 
+**Antwort 1b:**
+Hänge ich ``--net=host`` an den Befehl, dann funktioniert es auch mit dem VirtualBox-DNS (``nameserver 127.0.1.1``).:
+
+```
+pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm --net=host ubuntu apt-get update                                                                                                                      ```
 
