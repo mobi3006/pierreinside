@@ -131,6 +131,10 @@ docker run myFirstDockerImage
 
 gestartet werden.
 
+### Fehlersuche
+Natürlich geht nicht immer alles glatt bei der Erstellung eines Docker-Images aus einem ``Dockerfile``. Gelegentlich kommt es zu Abbrüchen und man muß rausfinden warum der Build abgebrochen ist:
+
+
 ## Dockerfile Best-Practices
 * https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 * Containers should be ephemeral:  
