@@ -120,7 +120,7 @@ Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderung
 Hat man ein ``Dockerfile`` erzeugt, dann baut man das entsprechende Image per
 
 ```
-docker build -t pfh:myFirstDockerImage . 
+docker build -t mobi3006:myFirstDockerImage . 
 ```
 
 aus dem Verzeichnis, in dem sich das ``Dockerfile`` befindet. In obigen Beispiel bekommt das Image den Namen ``myFirstDockerImage``. Unter diesem Namen kann es dann beispielsweise per
@@ -134,6 +134,24 @@ gestartet werden.
 ### Fehlersuche
 Natürlich geht nicht immer alles glatt bei der Erstellung eines Docker-Images aus einem ``Dockerfile``. Gelegentlich kommt es zu Abbrüchen und man muß rausfinden warum der Build abgebrochen ist:
 
+```
+pfh@workbench ~/src/de.cachaca.learn.docker % docker build -t mobi3006:myFirstDockerImage .
+Sending build context to Docker daemon 3.072 kB
+Step 1 : FROM python:2.7
+ ---> 6b494b5f019c
+Step 2 : ADD . /code
+ ---> 84a8af1f094d
+Removing intermediate container de191afbd859
+Step 3 : WORKDIR /code
+ ---> Running in cc10315026b0
+ ---> ba40591c8dc8
+Removing intermediate container cc10315026b0
+Step 4 : RUN pip install redis
+ ---> Running in 8d81897ba9aa
+Collecting redis
+  Retrying (Retry(total=4, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f0a56258810>: Failed to establish a new connection: [Errno -2] Name or service not known',)': /simple/redis/
+
+```
 
 ## Dockerfile Best-Practices
 * https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
