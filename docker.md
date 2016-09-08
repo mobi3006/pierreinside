@@ -108,7 +108,8 @@ Hier jetzt nur ein paar Befehle:
 # Eigene Images erzeugen
 Für die Erzeugung eigener Docker-Images gibt es zwei Möglichkeiten:
 
-1. basierend auf einem existierenden Docker-Image (z. B. von DockerHub) einen Container instanziieren. Am laufenden Container Änderungen vornehmen und vom Endergebnis ein neues Image ziehen
+1. basierend auf einem existierenden Docker-Image (z. B. von DockerHub) einen Container instanziieren. Am laufenden Container Änderungen vornehmen und vom Endergebnis ein neues Image ziehen. siehe https://docs.docker.com/engine/tutorials/dockerimages/#/creating-our-own-images
+
 2. ein ``Dockerfile`` erzeugen, das die Bauanleitung für das Image darstellt
 
 Im ersten Fall kann man von außen nicht beurteilen, in welchem Zustand das Image ist (welche Änderungen wurden vorgenommen). 
