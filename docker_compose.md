@@ -3,6 +3,12 @@ Hiermit lassen sich Landschaften aus Docker-Containern aufbauen und miteinander 
 
 ---
 
+# Links
+* https://docs.docker.com/compose/gettingstarted/
+
+
+---
+
 # Installation
 Unter [Ubuntu 16.04 LTS](ubuntu_1604_lts.md) konnte ich mit ``apt-get`` zwar ``docker-compose`` installieren, bekam aber nur eine sehr alte Version (1.5.2). Neuere Packages habe ich nicht gefunden.
 
@@ -16,3 +22,5 @@ habe ich dann rausgefunden, daß man das scheinbar auch ohne Paket sehr leicht i
 curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose 
 chmod +x /usr/local/bin/docker-compose 
 ```
+
+---
