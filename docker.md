@@ -117,6 +117,8 @@ Hier jetzt nur ein paar Befehle:
   * aus einem Dockerfile ein DockerImage erzeugen.
 * ``docker run <<IMAGE_NAME>>``
   * Basierend auf einem DockerImage ein DockerContainer zu starten
+  * **DER WOHL WICHTIGSTE BEFEHL**: ``docker run -it <<IMAGE_NAME/CONTAINER_ID>> bash``
+    * so erhält man eine Console in dem gestarteten Container
 * ``docker stop``
   * docker stop a7708b93c390
 * ``docker ps``
