@@ -107,8 +107,13 @@ Hier jetzt nur ein paar Befehle:
 
 > Mit Alpine Linux gibt es ein Linux Image, das nur 5 MB groß ist und somit bestens geeignet ist, wenn man ein minimales Docker-Image aufbauen will - natürlich muss man dann um so mehr Packages manuell nachinstallieren.
 
+# Dockerfile Best-Practices
+* https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
+* Containers should be ephemeral:  
+  * man kann sie einfach wegwerfen und ersetzen
+* Run only one process per Container
 
-
+---
 
 # Docker und Vagrant
 Benutzt man Docker innerhalb eines Vagrant-Images, so gibt es ein paar Besonderheiten.
@@ -119,12 +124,6 @@ Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen wer
 
 ---
 
-# Dockerfile Best-Practices
-* https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
-
-* Containers should be ephemeral:
-  * man kann sie einfach wegwerfen und ersetzen
-* Run only one process per Container
 
 
 
