@@ -150,7 +150,6 @@ Step 4 : RUN pip install redis
  ---> Running in 8d81897ba9aa
 Collecting redis
   Retrying (Retry(total=4, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f0a56258810>: Failed to establish a new connection: [Errno -2] Name or service not known',)': /simple/redis/
-
 ```
 
 ## Dockerfile Best-Practices
