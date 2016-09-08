@@ -106,14 +106,23 @@ Hier jetzt nur ein paar Befehle:
 ---
 
 # Eigene Images erzeugen
+Für die Erzeugung eigener Docker-Images gibt es zwei Möglichkeiten:
 
-> Mit Alpine Linux gibt es ein Linux Image, das nur 5 MB groß ist und somit bestens geeignet ist, wenn man ein minimales Docker-Image aufbauen will - natürlich muss man dann um so mehr Packages manuell nachinstallieren.
+1. basierend auf einem existierenden Docker-Image (z. B. von DockerHub) einen Container instanziieren. Am laufenden Container Änderungen vornehmen und vom Endergebnis ein neues Image ziehen
+2. ein ``Dockerfile`` erzeugen, das die Bauanleitung für das Image darstellt
+
+Im ersten Fall kann man von außen nicht beurteilen, in welchem Zustand das Image ist (welche Änderungen wurden vorgenommen). 
+
+Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderungen basierend auf einem Base-Image durchgeführt wurden.
 
 ## Dockerfile Best-Practices
 * https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 * Containers should be ephemeral:  
   * man kann sie einfach wegwerfen und ersetzen
 * Run only one process per Container
+* mach das Image so schlank wie möglich
+
+> Mit Alpine Linux gibt es ein Linux Image, das nur 5 MB groß ist und somit bestens geeignet ist, wenn man ein minimales Docker-Image aufbauen will - natürlich muss man dann um so mehr Packages manuell nachinstallieren.
 
 ---
 
