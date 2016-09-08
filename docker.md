@@ -233,7 +233,6 @@ pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --r
 ```
 
 **Antwort 1a:** 
-
 Ich hatte in meinem Virtual-Box-Linux-System den DNS von VirtualBox angegeben:
 
 ```
