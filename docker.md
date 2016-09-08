@@ -116,6 +116,21 @@ Im ersten Fall kann man von außen nicht beurteilen, in welchem Zustand das Imag
 
 Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderungen basierend auf einem Base-Image durchgeführt wurden.
 
+## Dockerfile
+Hat man ein ``Dockerfile`` erzeugt, dann baut man das entsprechende Image per
+
+```
+docker build -t myFirstDockerImage . 
+```
+
+aus dem Verzeichnis, in dem sich das ``Dockerfile`` befindet. In obigen Beispiel bekommt das Image den Namen ``myFirstDockerImage``. Unter diesem Namen kann es dann beispielsweise per
+
+```
+docker run myFirstDockerImage
+```
+
+gestartet werden.
+
 ## Dockerfile Best-Practices
 * https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 * Containers should be ephemeral:  
