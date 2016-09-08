@@ -107,7 +107,7 @@ Hier jetzt nur ein paar Befehle:
 
 > Mit Alpine Linux gibt es ein Linux Image, das nur 5 MB groß ist und somit bestens geeignet ist, wenn man ein minimales Docker-Image aufbauen will - natürlich muss man dann um so mehr Packages manuell nachinstallieren.
 
-# Dockerfile Best-Practices
+## Dockerfile Best-Practices
 * https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 * Containers should be ephemeral:  
   * man kann sie einfach wegwerfen und ersetzen
