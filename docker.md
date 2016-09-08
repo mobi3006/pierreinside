@@ -100,8 +100,6 @@ docker ps -a
 
 wird die Liste ALLER Container angezeigt (im Gegensatz dazu liefert ``docker ps`` nur die laufenden Container). 
 
-Hier sieht man, daß einige Container nur eine 
-
 ## Container-Zwischenstände
 
 ---
