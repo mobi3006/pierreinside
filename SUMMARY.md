@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [Workbench](workbench.md)
+   * [VirtualBox](virtualbox.md)
    * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
    * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
    * [zsh](zsh.md)
@@ -35,6 +36,8 @@
    * Persistenz
        * [JPA](jpa.md)
        * [Eclipse Link - JPA](eclipseLink.md)
+   * [YAML](yaml.md)
+   * [Zeichenkodierung](characterEncoding.md)
 * Testen
    * [Easymock](easymock.md)
    * [Mockito](mockito.md)
@@ -77,7 +80,4 @@
    * [Swimming Pool](swimmingPool.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [YAML](yaml.md)
-* [Zeichenkodierung](characterEncoding.md)
-* [VirtualBox](virtualbox.md)
 
