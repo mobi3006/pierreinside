@@ -76,6 +76,36 @@ sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sle
 
 ---
 
+# Grundsätzliches
+## Container-ID vs. COntainer-NAME
+Container haben eine ID und einen NAME ... in dieser Art:
+
+* CONTAINER ID: 7c1c034d0b4a
+* NAME: stoic_pare
+
+Für menschliche Nutzer ist der NAME leichter zu verwenden als die ID ... beides identifiziert den Conatiner auf dem System aber eindeutig. Beim Start eines Images kann man dem zu erstellenden Container einen Namen geben:
+
+``` 
+docker run --name myname
+```
+
+Dann bekommt der Container eine ID und diesen Namen "myname". Gibt man keinen Namen an, dann vergibt Docker einen eigenen wie beispielsweise ``stoic_pare``.
+
+## Alle Container verfügbar
+Docker speichert alle jemals erstellten Container ... d. h. auch auf die nicht mehr laufenden Container hat man noch Zugriff. Über
+
+```
+docker ps -a
+```
+
+wird die Liste ALLER Container angezeigt (im Gegensatz dazu liefert ``docker ps`` nur die laufenden Container). 
+
+Hier sieht man, daß einige Container nur eine 
+
+## Container-Zwischenstände
+
+---
+
 # Befehle
 Eine Auflistung aller Befehle erhält man per ``docker`` - per ``docker run --help`` bekommt man alle Parameter erklärt.
 
@@ -131,7 +161,7 @@ docker run myFirstDockerImage
 
 gestartet werden.
 
-### Fehlersuche
+### Fehlersuche - letzten erfolgreichen Zustand herstellen
 Natürlich geht nicht immer alles glatt bei der Erstellung eines Docker-Images aus einem ``Dockerfile``. Gelegentlich kommt es zu Abbrüchen und man muß rausfinden warum der Build abgebrochen ist:
 
 ```
@@ -149,7 +179,9 @@ Removing intermediate container cc10315026b0
 Step 4 : RUN pip install redis
  ---> Running in 8d81897ba9aa
 Collecting redis
-  Retrying (Retry(total=4, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f0a56258810>: Failed to establish a new connection: [Errno -2] Name or service not known',)': /simple/redis/
+  Retrying (Retry(total=4, connect=None, read=None, redirect=None)) after connection broken by 
+ 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f0a56258810>: 
+  Failed to establish a new connection: [Errno -2] Name or service not known',)': /simple/redis/
 ```
 
 Docker hier im Hintergrund einen Docker-Container, der über die Kommandos aus dem ``Dockerfile`` verändert wird. Nach jedem erfolgreichen Kommando wird der vorhergehende Container gelöscht. Schlägt ein Komando fehl, dann kann man den Container in dem letzten erfolgreichen Zustand (in obigem Fall der Containerzustand) besuchen:
@@ -159,6 +191,29 @@ docker run --rm -it ba40591c8dc8 bash -il
 ```
 
 um daurauf dann die Fehleranalyse zu machen. Man wiederholt dann beispielsweise den fehlgeschlagenen Befehl.
+
+### Fehlersuche - Zugriff auf fehlerhaften Zustand erhalten
+Will man den Zustand des Containers nach dem fehlerhaften Kommando erhalten, so muß man zunächst die Container-ID rausfinden:
+
+```
+docker ps -a
+```
+und dann ein Commit ausführen, um den Zustand zu persistieren:
+
+
+im Fehlerfall Eine andere Variante ist 
+
+```
+pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker ps -a
+CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+
+7c1c034d0b4a 784650b6da23 "/bin/sh -c 'wget htt" 49 minutes ago Exited (4) 49 minutes ago stoic_pare
+
+37664f444f8a 784650b6da23 "/bin/sh -c 'wget htt" 53 minutes ago Exited (4) 52 minutes ago backstabbing_kalam
+
+2c3fb351f200 gessnerfl/glassfish:3.1.2.2 "sh /opt/deploy.sh" 4 hours ago Exited (137) About an hour ago glassfish
+
+
 
 ## Dockerfile Best-Practices
 * https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
