@@ -152,6 +152,14 @@ Collecting redis
   Retrying (Retry(total=4, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f0a56258810>: Failed to establish a new connection: [Errno -2] Name or service not known',)': /simple/redis/
 ```
 
+Docker hier im Hintergrund einen Docker-Container, der über die Kommandos aus dem ``Dockerfile`` verändert wird. Nach jedem erfolgreichen Kommando wird der vorhergehende Container gelöscht. Schlägt ein Komando fehl, dann kann man den Container in dem letzten erfolgreichen Zustand (in obigem Fall der Containerzustand) besuchen:
+
+```
+docker run --rm -it ba40591c8dc8 bash -il
+```
+
+um daurauf dann die Fehleranalyse zu machen. Man wiederholt dann beispielsweise den fehlgeschlagenen Befehl.
+
 ## Dockerfile Best-Practices
 * https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 * Containers should be ephemeral:  
