@@ -68,8 +68,9 @@ anschließend landet man auf der Konsole des Containers ... und siehe da: es sie
 Wenn die Console (per exit oder Ctrl-D) verlassen wird, dann wird der Container auch gestoppt.
 
 **Dämonized:**
-
-    sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+```
+sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+```
 
 ---
 
