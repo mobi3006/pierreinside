@@ -236,6 +236,24 @@ Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen wer
 
 ---
 
+# FAQ
+
+**Frage 1:** Ich nutze Docker auf einem Ubuntu 16.04 LTS VirtualBox-Image. Leider scheine ich keinen Internetzugriff aus dem Container heraus zu haben (innerhalb des VirtualBox-Images funktioniert alles wunderbar):
+
+```
+100 pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm ubuntu apt-get update                                                                                                                      :(
+0% [Connecting to archive.ubuntu.com]
+```
+
+**Antwort 1:** 
+
+Ich hatte in meinem Virtual-Box-Linux-System den DNS von VirtualBox angegeben:
+
+```
+pfh@workbench ~/% cat /etc/resolv.conf 
+nameserver 127.0.1.1
+
+```
 
 
 
