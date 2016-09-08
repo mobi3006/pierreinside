@@ -430,3 +430,9 @@ Ich wollte eine Appliance zwischen zwei Rechnern durch Neuanlage einer VM und Ei
 **Antwort 6:**
 
 In meinem Fall hatte ich die Festplatte als SATA-Platte eingebunden ... die Platte war in der alten VM aber als IDE-Platte eingebunden. Nachdem ich sie als IDE-Platte eingebunden habe, hat es einwandfrei funktioniert.
+
+**Frage 7:**
+Nach der Installation von VirtualBox 5.1 unter Windows bekomme ich in meinen Linux-Boxen mit UI öffnet sich beim Drücken der Windows-Taste immer das Windows-Start-Menü. Leider verwende ich [awesome](https://awesome.naquadah.org/) als Fenstermanager und dort ist die Windows-Taste als Meta-Key eingestellt.
+
+**Antwort 7:**
+Im Menü der Virtualbox-VM muß die Einstellung _Input - Keyboard - Keyboard Settings - Virtual Machine - Auto Capture Keyboard_ angehakt werden. 
