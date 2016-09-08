@@ -248,4 +248,7 @@ Hänge ich ``--net=host`` an den Befehl, dann funktioniert es auch mit dem Virtu
 ```
 pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm --net=host ubuntu apt-get update
 ```
+**Antwort 1c:**
+Vielleicht kann man da auch was in ``/etc/default/docker`` konfigurieren ...
+
 
