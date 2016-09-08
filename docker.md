@@ -43,7 +43,6 @@ Docker ist aber nur eine von vielen Möglichkeiten, Linux Containers zu nutzen. 
     * automatische Image-Rebuilds wenn sich die im Image verbauten Quellen ändern (GitHub)
 
 ## Docker Hub
-
 * https://hub.docker.com/
 
 Dies ist ein DockerImage-Repository. Am besten legt man sich hier mal einen Account an.
@@ -53,14 +52,16 @@ DockerHub stellt auch Officzielle Images von Herstellern/Communities bereit (den
 ## Ausführungsmodi eines Containers
 
 **Temporär:**
-
-    sudo docker run ubuntu:14.04 /bin/echo 'Hello world'
+```
+sudo docker run ubuntu:14.04 /bin/echo 'Hello world'
+``` 
 
 Nachdem Hello world ausgegeben wurde, wird der Container auch gleich wieder gestoppt.
 
 **Interaktiv:**
-
-     sudo docker run -t -i ubuntu:14.04 /bin/bash
+```
+sudo docker run -t -i ubuntu:14.04 /bin/bash
+```
 
 anschließend landet man auf der Konsole des Containers ... und siehe da: es sieht aus wie ein typisches Linux-Filesystem. Ausschließlich am geänderten Prompt (z. B. ``root@aab3edb0b6f3:/etc#``) merkt man, daß die Shell scheinbar gewechselt wurde.
 
