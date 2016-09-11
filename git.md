@@ -2,11 +2,12 @@
 
 Sehr gute Quellen:
 
-* SUPER: [https:\/\/git-scm.com\/book\/de\/v1](https://git-scm.com/book/de/v1)
-* Refcardz: [https:\/\/dzone.com\/refcardz\/getting-started-git](https://dzone.com/refcardz/getting-started-git)
-* [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/](http://www.eecs.harvard.edu/~cduan/technical/git/)
-* [http:\/\/book.git-scm.com\/](http://book.git-scm.com/)
-* Ultra-Kurzeinführung: [http:\/\/rogerdudler.github.io\/git-guide\/](http://rogerdudler.github.io/git-guide/)
+* SUPER: [https://git-scm.com\/book\/de\/v1](https://git-scm.com/book/de/v1)
+* Refcardz: [https://dzone.com\/refcardz\/getting-started-git](https://dzone.com/refcardz/getting-started-git)
+* [http://www.eecs.harvard.edu\/~cduan\/technical\/git\/](http://www.eecs.harvard.edu/~cduan/technical/git/)
+* [http://book.git-scm.com\/](http://book.git-scm.com/)
+* https://git-scm.com/book/en/v2
+* Ultra-Kurzeinführung: [http://rogerdudler.github.io\/git-guide\/](http://rogerdudler.github.io/git-guide/)
 * \[1\]: [https:\/\/www.youtube.com\/watch?v=0fKg7e37bQE](https://www.youtube.com/watch?v=0fKg7e37bQE)
 
 ---
@@ -232,10 +233,15 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 
 ## Lokale Änderungen
 
-* Ressourcen ignorieren: das kann man zentral machen oder lokal \(für ein Repository\)
+* Ressourcen ignorieren: das kann man per User oder per Repository machen oder lokal \(für ein Repository\)
+  * per Repository: eine Datei mit dem Namen `.gitignore` anlegen und dort die Dateien aufführen \(reguläre Ausdrücke sind meines Wissens erlaubt\)
+  * per User:
+    * in ``~/.gitconfig`` folgenden Eintrag machen und dann die Ignores in der angegebenen Datei machen:
 
-  * lokal: eine Datei mit dem Namen `.gitignore` anlegen und dort die Dateien aufführen \(reguläre Ausdrücke sind meines Wissens erlaubt\)
-  * zentral: ...
+```
+[core]
+        excludesfile = /home/pfh/.gitignore
+```
 
 * `git diff`
 
@@ -412,6 +418,7 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 ---
 
 # Konfiguration
+* https://git-scm.com/docs/gitattributes
 
 Man unterscheidet die Konfiguration auf verschiedenen Ebenen
 
@@ -420,7 +427,15 @@ Man unterscheidet die Konfiguration auf verschiedenen Ebenen
 * `--local`: Repository-spezifisch \(liegt in `$REPOSITORY_HOME/.git/config`\)
 
 ## Benutzerspezifische Konfiguration
-Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei `~/.gitconfig` machen.
+Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei `~/.gitconfig` machen. 
+
+Hierin können weitere benutzerspezifische Konfigurationen referenziert werden:
+
+```
+[core]
+        excludesfile = /home/pfh/.gitignore
+        attributesFile = /home/pfh/.gitattributes
+```
 
 Nach der Erstinstallation von git sollte man beispielsweise
 
@@ -458,6 +473,11 @@ git config user.email your@email.com
 ```
 
 durchführen ... BEACHTE: ``--global`` fehlt hier!!!
+
+## Line-Endings
+* https://help.github.com/articles/dealing-with-line-endings/
+
+In heterogenen Umngebungen mit Windows-, Linux-, MacOS-Nutzern muß man sich mit dem Thema auseinandersetzen.
 
 ---
 
