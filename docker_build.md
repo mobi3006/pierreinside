@@ -30,6 +30,9 @@ Der Build eines Images besteht darin, die Anweisungen aus dem Dockerfile in eine
 
 Am Ende wird der Zustand des Containers in ein Image persistiert und der angegebene Tag (= Name) verpaßt.
 
+### Versionierung
+Ein Docker-Build kann sehr schnell sein, denn durch die Versionierung der einzelnen Steps, müssen nur noch die geänderten Steps neu durchgeführt werden. Ändert sich nichts, dann wird auch nichts getan.
+
 ### Fehlersuche
 * ``docker inspect mysql``
   * hiermit bekommt man schon mal einen guten Überblick über die Container-Konfiguration (Status, Netwerk, Umgebungsvariablen, Mounts, ...)
