@@ -32,7 +32,29 @@ Wenn die Console (per exit oder Ctrl-D) verlassen wird, dann wird der Container 
 sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
 ```
 
-## Zugriffsmöglichkeiten auf einen laufenden Container
+Verläßt man einen laufenden Container mit ``Ctrl-C``, so erhält er ein ``SIGKILL`` Event, so daß der Container noch sauber runterfahren kann. Will man den Container stattdessen im Hintergrund weiterlaufen lassen, so sollte man ``Ctrl-p`` ``Ctrl-q`` verwenden, um die Console zu verlassen.
+
+## Umgebungsvariablen setzen
+Häufig basieren Docker-Container auf Umgebungsvariablen, um eine Integration in die jeweilige Infrastruktur zu ermöglichen. Solche Umgebungsvraiablen können per ``-e `` gesetzt werden:
+
+```
+docker run -e MYSQL_ROOT_PASSWORD=my-secret-pw
+```
+
+## Fehlersuche in Containern
+Die Fehlersuche hat mich anfangs vor ein ziemliches Problem gestellt und dazu bewogen, die Docker-Konzepte zunächst mal ansatzweise zu verstehen. Nichtsdestotrotz stand ich auch danach erst mal wie der Ochs vorm Berg.
+
+Weiterhin problematisch finde ich, daß in den meisten Images nicht mal die einfachsten Tools (z. B. ``less``) verfügbar sind ... von Analysewerkzeugen (z. B. ``netstat``, ``dig``) ganz zu schweigen. 
+
+### Logs anschauen
+Mit 
+
+```
+docker logs silly_wozniak
+```
+
+erhält die Konsolenausgabe des Containers - das funktioniert auch mit nicht mehr laufenden Containern (siehe ``docker ps -a``).
+
 ### Konfiguration anschauen
 Mit 
 
@@ -40,16 +62,21 @@ Mit
 docker inspect silly_wozniak
 ```
 
-erhält man Informationen über den Container - das funktioniert auch mit nicht mehr laufenden Containern.
+erhält man Informationen über den Container - das funktioniert auch mit nicht mehr laufenden Containern (siehe ``docker ps -a``).
 
 ### Shellzugriff
+```
+docker exec -it my-container bash
+```
+
+### Konsolenzugriff
 Mit 
 
 ```
 docker attach silly_wozniak
 ```
 
-erhält man eine Console auf dem Container (sofern der Container tatsächlich noch läuft). Sollte der Container nicht mehr laufen, so kann man ihn natürlich mit ``docker start`` starten.
+erhält man die Shell-Console auf dem Container (sofern der Container tatsächlich noch läuft). Sollte der Container nicht mehr laufen, so  kann man ihn evtl. mit ``docker start `` starten.
 
 >ACHTUNG: um einen Container zu verlassen, ohne ihn zu stoppen, muß man ``CTRL-p`` ``CTRL-q`` verwenden.
 
@@ -57,4 +84,43 @@ erhält man eine Console auf dem Container (sofern der Container tatsächlich no
 ```
 docker logs silly_wozniak
 ```
+
+### docker events
+Per 
+
+```
+docker events
+```
+
+erhält man auf der Konsole zusätzliche Informationen wie diese:
+
+```
+137 pfh@workbench ~ % docker events                                                                                                                                     :(
+2016-09-12T13:25:39.211049880+02:00 container create 55260... 
+	(image=mobi3006/glassfish:3.1.2.2, name=nostalgic_bohr)
+2016-09-12T13:25:39.212171664+02:00 container attach 55260... 
+	(image=mobi3006/glassfish:3.1.2.2, name=nostalgic_bohr)
+2016-09-12T13:25:39.230392314+02:00 network connect fdd42... 
+	(container=55260..., name=bridge, type=bridge)
+2016-09-12T13:25:39.233426688+02:00 volume mount ffadc... 
+	(container=55260..., destination=/mnt/containerContributions/artifacts, driver=local, propagation=, read/write=true)
+2016-09-12T13:25:39.233447617+02:00 volume mount e3ebb... 
+	(container=55260..., destination=/mnt/containerContributions/config, driver=local, propagation=, read/write=true)
+2016-09-12T13:25:39.378383107+02:00 container start 55260... 
+	(image=mobi3006/glassfish:3.1.2.2, name=nostalgic_bohr)
+2016-09-12T13:25:39.379673101+02:00 container resize 5526... 
+	(height=35, image=mobi3006/glassfish:3.1.2.2, name=nostalgic_bohr, width=171)
+2016-09-12T13:25:39.416374044+02:00 container die 55260... 
+	(exitCode=99, image=mobi3006/glassfish:3.1.2.2, name=nostalgic_bohr)
+2016-09-12T13:25:39.526018442+02:00 network disconnect fdd42... 
+	(container=55260..., name=bridge, type=bridge)
+2016-09-12T13:25:39.550278951+02:00 volume unmount ffadc... 
+	(container=55260..., driver=local)
+2016-09-12T13:25:39.550304339+02:00 volume unmount e3ebb... 
+	(container=55260..., driver=local)
+```
+
+ Am besten führt man diesen Befehl in einem anderen Konsolenfenster aus, damit sich die Informationen nicht so mitt rein mischen.
+
+
 

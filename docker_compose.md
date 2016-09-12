@@ -33,3 +33,25 @@ chmod +x /usr/local/bin/docker-compose
 ```
 
 ---
+
+# Nutzung
+Das ``docker-composse.yml`` ist die Spezifikation des Compose. Hier werden 
+
+* Services
+* Links
+* volumes
+* Netwerke
+* Umgebungsvariablen
+* Port-Forwarding
+* ...
+
+spezifiziert und die Anwendnung dadurch aufgebaut.
+
+---
+
+# Befehle
+* ``docker-compose up``
+  * gesamte Anwendung hochfahren
+* ``docker-compose up my-service``
+  * nur den ``my-service`` starten
+* 

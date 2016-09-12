@@ -33,6 +33,8 @@ Am Ende wird der Zustand des Containers in ein Image persistiert und der angegeb
 ### Versionierung
 Ein Docker-Build kann sehr schnell sein, denn durch die Versionierung der einzelnen Steps, müssen nur noch die geänderten Steps neu durchgeführt werden. Ändert sich nichts, dann wird auch nichts getan.
 
+**DESHALB:** um beste Build-Performance zu erzielen, sollte die Reihenfolge der Statements geeignet gewählt sein!!!
+
 ### Fehlersuche
 * ``docker inspect mysql``
   * hiermit bekommt man schon mal einen guten Überblick über die Container-Konfiguration (Status, Netwerk, Umgebungsvariablen, Mounts, ...)
