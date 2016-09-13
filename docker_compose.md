@@ -47,6 +47,8 @@ Das ``docker-composse.yml`` ist die Spezifikation des Compose. Hier werden
 
 spezifiziert und die Anwendnung dadurch aufgebaut.
 
+Die Ausführung kann lokal aber auch remote erfolgen, so daß man dadurch ganz leicht die Anwendung nicht lokal, sondern bei einem Docker-Cloud-Provider wie DigitalOcean fahren kann.
+
 ---
 
 # Befehle
@@ -54,4 +56,7 @@ spezifiziert und die Anwendnung dadurch aufgebaut.
   * gesamte Anwendung hochfahren
 * ``docker-compose up my-service``
   * nur den ``my-service`` starten
-* 
+* ``docker-compose logs``
+  * aggregierte Log-Ansicht von allen Services (bzw. Machines)
+* ``docker-compose build web``
+  * Image des Service ``web`` neu bauen
