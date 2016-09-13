@@ -54,6 +54,7 @@ Die Ausführung kann lokal aber auch remote erfolgen, so daß man dadurch ganz l
 # Befehle
 * ``docker-compose up``
   * gesamte Anwendung hochfahren
+  * ``-d`` daemonized hochfahren
 * ``docker-compose up my-service``
   * nur den ``my-service`` starten
 * ``docker-compose logs``
