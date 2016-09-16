@@ -1,5 +1,5 @@
 # Docker Compose
-Hiermit lassen sich Landschaften aus Docker-Containern aufbauen und miteinander vernetzen. Ein Docker-Container ist ja eigentlich nur ein Service (= Prozess) ... das ist auch die Empfehlung.
+Hiermit lassen sich komplexe Softwaresystem aus einzelnen Docker-Containern (repräsentieren i. a. Services, die aus einem einzigen Prozess bestehen) aufbauen und miteinander vernetzen. Im Hinblick auf Microservices ist das natürlich sehr interessant.
 
 Ein Docker-Compose ist eine Beschreibung (``docker-compose.yml``) einer Vernetzung von Docker-Images. Per ``docker-compose up`` wird diese Beschreibung interpretiert, die Container gestartet (aus den Images werden nun Container) und die Docker-Container miteinander vernetzt.
 
@@ -57,6 +57,12 @@ Die Ausführung kann lokal aber auch remote erfolgen, so daß man dadurch ganz l
   * ``-d`` daemonized hochfahren
 * ``docker-compose up my-service``
   * nur den ``my-service`` starten
+* ``docker-compose down``
+  * gesamte Anwendung runterfahren und die Container löschen - im Gegensatz zu ``docker-compose stop``
+* ``docker-compose start``
+  * gesamte Anwendung aus den existierenden (gestoppten) Containern starten. Sollten bereits einige Container der Anwendung schon laufen, dann stört das nicht
+* ``docker-compose start mysql``
+  * Container ``mysql`` starten
 * ``docker-compose logs``
   * aggregierte Log-Ansicht von allen Services (bzw. Machines)
 * ``docker-compose build web``

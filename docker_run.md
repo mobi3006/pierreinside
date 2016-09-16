@@ -1,12 +1,16 @@
 # docker run
 Beim Erzeugen eines Containers per ``docker run`` wird aus einem Image ein Container instanziiert. Es wird geschaut, ob das Image lokal schon vorhanden ist. Wenn nicht, wird es vom konfigurierten Repository (z. B. DockerHub) automatisch runtergeladen.
 
+Container können nur einen einzigen Befehl ausführen (ich nenne die mal **Command-Container**) und stoppen dann automatisch. Sie bleiben dann als Container noch lokal auf der Platte vorhanden (sichtbar per ``docker ps -a``). Bei solchen Containern macht ein start per ``docker start container-id`` keinen Sinn, weil sie sofort bereits alles getan haben, was ihnen aufgetragen wurde. Die Logausgabe kann per ``docker logs container-id`` sowohl bei laufenden als auch bei gestoppten Containern ansehen. Man kann sie dementsprechend auch einfach per ``docker rm container-id`` löschen.
+
+Container, die als dauerhafter Service laufen sollen (ich nenne sie **Service-Container**), arbeiten hingegen dauerhaft ... werden also nicht sofort wieder gestoppt. Auf solche Container kann man sich dann per ``docker exec -it bash`` auf die Console verbinden und umschauen. Solche Container können auch gestoppt werden (``docker stop container-id``) und später wieder gestartet werden (``docker start container-id``) wodurch sie wieder in den letzten Status gehen und im best-case einfach ihren Dienst wieder absolvieren. Sie behalten somit also ihren Zustand!!! Hat man dem Container einen Namen beim Start gegeben (``docker run --name bla hello-world``), dann ist der Container benannt (hier ``bla``) und ein anschließendes ``docker run --name bla hello-world`` ist nicht möglich, weil der Container noch existiert (aber evtl. gestoppt ist). Man muß den Container dann evtl. erst stoppen (``docker stop bla``) und dann löschen (``docker rm bla``) bevor ein neuer Container mit diesem Namen angelegt werden kann.
+
 >ACHTUNG: es gibt auch den Befehl ``docker start my-container``, der einen beendeten Container startet (``docker stop my-container`` stoppt einen laufenden Container).
 
 ## Images zum Rumspielen
 Zum Rumspielen genügen sehr kleine Images wie
 
-* helo-world
+* hello-world
 * busybox (< 5MB)
 
 ## Ausführungsmodi eines Containers
@@ -65,6 +69,8 @@ docker inspect silly_wozniak
 erhält man Informationen über den Container - das funktioniert auch mit nicht mehr laufenden Containern (siehe ``docker ps -a``).
 
 ### Shellzugriff
+Ein Shellzugriff ist nur auf einen laufenden Container möglich (das gestaltet die Fehlersuche manchmal recht schwierig). Insofern macht das auch nur bei Service-Containern Sinn, die dauerhaft laufen und nicht nur ein Kommando ausführen.
+
 ```
 docker exec -it my-container bash
 ```

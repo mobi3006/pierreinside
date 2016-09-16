@@ -2,7 +2,7 @@
 
 https://docs.docker.com/toolbox/toolbox_install_windows/
 
-Docker Machine ermöglich die Nutzung von Docker für Windows-Nutzer. Docker hat keinen nativen Windows-Support, sondern verwendet ``docker-machine``, um eine Linux-VM (z. B. unter VirtualBox) zu erzeugen, in der dann die Docker Tools (``docker``, ``docker-compose``, ...) nativ laufen.
+Docker Machine ermöglich die Nutzung von Docker für Windows-Nutzer. Docker hat keinen nativen Windows-Support, sondern verwendet Virtualisierungslösungen wie VirtualBox oder der Microsoft-Pendant Hyper-V, um eine Linux-VM zu erzeugen, in der dann die Docker Tools (``docker``, ``docker-compose``, ...) nativ laufen.
 
 --- 
 
@@ -24,7 +24,7 @@ Bringt folgende Tools mit:
 * Docker Quickstart Terminal
   * vorkonfgurierte Shell basierend auf MinGW 
 
-Beim Start des Docker Quickstart Terminal wird - sofern noch nicht vorhanden (also beim ersten Start beispielsweise - automatisch ein VirtualBox Image namens *default* erzeugt und gestartet. Zudem werden ssh-Keys erzeugt und eingebunden (für spätere ``docker-machine ssh default``) - sehr ähnlich zu [Vagrant](vagrant.md). Dieses Image basiert auf der [Boot2docker](https://github.com/boot2docker/boot2docker) Distribution, die mit 40 MB und einer Bootzeit von unter 5 Sekunden recht leichtgewichtig ist.
+Beim Start des Docker Quickstart Terminal wird - sofern noch nicht vorhanden (also beim ersten Start beispielsweise) - automatisch ein VirtualBox Image namens *default* erzeugt und gestartet. Zudem werden ssh-Keys erzeugt und eingebunden (für spätere ``docker-machine ssh default``) - sehr ähnlich zu [Vagrant](vagrant.md). Dieses Image basiert auf der [Boot2docker](https://github.com/boot2docker/boot2docker) Distribution, die mit 40 MB und einer Bootzeit von unter 5 Sekunden recht leichtgewichtig ist ... diese Bootzeit wurde im Praxiseinsatz deutlich überschritten.
 
 Anschließend prüft man 
 
@@ -46,22 +46,35 @@ kann man sich auf die Console des Images verbinden..
 
 Mal sehen wie transparent die Windows-Docker-Integration über das VirtualBox-Image ist.
 
-## Docker for Windows
->ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen geben
-
-
----
-
-# Docker Quickstart Terminal
+### Docker Quickstart Terminal
 Diese vorkondigurierte Console (basierend auf MinGW) kommt mit der Docker Toolbox mit.
 
 > ACHTUNG: es war mir spontan nicht möglich eine nicht-vorkonfigurierte Console (z. B. babun) zu verwenden ... folgendes Problem:
 > ```
-{ ~ } » docker run hello-world ~
-C:\Program Files\Docker Toolbox\docker.exe: An error occurred trying to connect:
+{ ~ } » docker run hello-world
+C:\Program Files\Docker Toolbox\docker.exe: 
+An error occurred trying to connect:
 Post http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/containers/create: open //./pipe/docker_engine: 
 The system cannot find the file specified..
 ```
+
+Leider kann sie meine Default-Konsole [babun](babun.md) nicht vollständig ersetzen. Mir fehlt hier einfach ein konsolenbasierte Paketmanager.
+
+## Docker for Windows
+* https://docs.docker.com/machine/drivers/hyper-v/
+
+>ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen geben!!!
+
+## Vergleich der beiden Ansätze
+Ich hatte mit der Docker Toolbox folgende Probleme:
+
+* das Handling mit dem zu startenden Boot2Docker-Virtualbox-Image klappt meistens ganz gut (weil es beim Docker Quickstart Terminal automatisch gestartet wird - sofern es noch nicht läuft), aber leider nicht immer. Es ist spürbar, daß es sich eher um einen Workaround handelt. Das ist beim Docker for Windows viel besser.
+* der Start des Boot2Docker-Images (insbes. die Netzwerk-Konfiguration ... ``Waiting for an IP``) dauert recht lang
+* Volumes mit relativen Pfaden (``- ./myfolder:/opt/myfolder``) haben nicht funktioniert. Ich mußte stattdessen absolute Pfade verwenden, die dann aber i. a. nicht bei allen Nutzern passen. Insbesondere wenn unterschiedliche Betriebssystem genutzt werden (siehe FAQ Frage 1) ist das wirklich ein Problem, weil man Fallunterscheidungen machen muß oder in den Docker-Hosts entsprechende Konfigurationen vornehmen muß. Das kann man alles lösen, macht die Erstkonfiguration aber dementsprechend aufwendig und reduziert dadurch die Akzeptanz durch Nutzer, die an der dahinterliegenden Technik nicht interessiert sind ... es muss einfach laufen (PO, Sales, QA)
+* die Berechtigungen in den Volumes haben nicht gepaßt, so daß sich MySQL beschwerte, daß ein Konfigurationsfile world-writabe ist und deshalb ignoriert wird (siehe FAQ Frage 2)
+* das Docker Quickstart Terminal konnte eine vollwertige Shell wie cygwin/babun nicht ersetzen, weil hier essentielle Tools wie beispielsweise ``wget`` fehlten. Andererseits wurde das Quickstart Terminal benötigt, weil in den Alternativen Shells die Docker-Tools (``docker-compose``, ``docker``, ...) nicht out-of-the-box funktionierten
+
+**KLARER GEWINNER:** Docker for Windows
 
 --- 
 
@@ -143,3 +156,17 @@ Nicht unbedingt das was man möchte (gelegentlich will man hier ja vielleicht Ä
 **Antwort 2b:** Über ein Zwischenvolume und das Kopieren ins Filesystem des Docker Containers mit entsprechenden Berechtigungen lässt sich das Problem auch lösen: wird hier dargestellt: http://stackoverflow.com/questions/37001272/fixing-world-writable-mysql-error-in-docker. Nachteil ist allerdings, daß man noch Scripting drumrumbasteln muß ... nicht gerade das, was man will.
 
 **Antwort 2c:** Mounten des Volumes als read-only (``/docker-platform/containerContributions/mysql:/etc/mysql/conf.d:ro``) hilft leider nicht.
+
+**Frage 3:** Ich verwende den Docker Toolbox Ansatz. Die Docker-Tools funktionieren auch im Docker Quickstart Terminal ganz wunderbar. Leider aber nicht in meiner Default-Shell Babun.
+
+**Antwort 3:** Out-of-the-box geht das nicht ... immer wieder seltsame Probleme wie diese:
+
+```
+{ docker-platform } master » docker-machine start default
+Starting "default"...
+Machine "default" is already running.
+{ docker-platform } master » docker-compose up
+Couldn't connect to Docker daemon - you might need to run `docker-machine start default`.
+```
+
+oder auch der bereits oben aufgeführte ``open //./pipe/docker_engine`` Fehler.

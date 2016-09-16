@@ -64,6 +64,7 @@
            * [docker network](docker_network.md)
        * [Docker Compose](docker_compose.md)
        * [docker machine](docker_machine.md)
+       * [Docker@Windows](docker_windows.md)
    * [Kubernetes](kubernetes.md)
    * [Cloud Deployment Provider](cloudDeployment_provider.md)
    * [Synology](synology.md)
@@ -85,6 +86,5 @@
    * [Swimming Pool](swimmingPool.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [Docker@Windows](docker_windows.md)
 * [MySQL](mysql.md)
 
