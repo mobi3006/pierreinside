@@ -68,6 +68,23 @@ WINDOWS_C     /mnt/WINDOWS_C     vboxsf     uid=1000,gid=100      0 1
 
 ---
 
+# Snapshots
+Ein sehr angenehmes Features sind die Snapshots. Vor größeren Umbauten kann man hier einen Snapshot ziehen, auf den man dann wieder zurückwechseln kann. 
+
+> ACHTUNG: Nach einem Snapshot wird eine neue Virtualbox-Festplatte (Speicherort über *VirtualBox-Menü - Snapshot*) angelegt und dort werden die neuen Daten abgelegt. Die alte Festplatte wird ab dem Zeitpunkt nicht mehr angefaßt (das ist der alte Zustand!!!). GANZ WICHTIG: man sollte die Snapshots zeitnah löschen, so daß ein Merge in die alte Festplatte erfolgt - das Arbeiten mit mehreren Festplatten ist sicherlich nicht ganz optimal.
+
+Wer dem beim Löschen eines Snapshots durchgeführten Merge nicht traut clont sein Image am besten vorher (Full Clone, nur aktueller Zustand, MAC-Adresse beibehalten).
+
+## Performance
+Beim Snapshotting sollte man aufpassen wo die neuen Festplatten abgelegt werden. Per Default ist das ``~/VirtualBox VMs/imageName\Snapshots``. Je nach Festplatten-Layout kann das die evtl. kleine System-Platte "vollmüllen" (ich mag solche Layouts nicht und kann den Sinn auch nicht nachvollziehen). Viel schlimmer ist allerdings, daß in Unternehmen nur bestimmte Verzeichnisse vom Virenscanner ausgenommen sind (i. d. R. Developer-Verzeichnisse) und dieses evtl. nicht dabei ist. Dann sinkt natürlich die Performance.
+
+## Performance beim Löschen von Snapshots
+Beim Löschen eines Snapshots wird die neue Festplatte in die alte Festplatte gemergt.
+
+Ich hatte mal eine 22 GB große "neue Festplatte" und eine 40 GB große "alte Festplatte" (beide lagen auf einer SSD aber in unterschiedlichen Partitionen). Das Löschen war mit weniger als 60 Sekunden schneller als ich erwartet hätte.
+
+--- 
+
 # VM per Skript starten
 Um eine VM per Skript oder per Mausklick zu starten (ohne das VirtualBox-GUI zum Auswählen des Images zu starten:
 

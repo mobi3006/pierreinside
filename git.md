@@ -158,6 +158,7 @@ Git-Repository-Server erlauben i. a. einen Zugriff per
 ---
 
 # Befehle
+* https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf
 
 Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit bin ich beruflich ein Subversion-Nutzer\).
 
@@ -482,10 +483,15 @@ In heterogenen Umngebungen mit Windows-, Linux-, MacOS-Nutzern muß man sich mit
 ---
 
 # Tooling
-Für die Arbeit mit Git benötigt man einen Git Client.
+Für die Arbeit mit Git benötigt man einen Git Client. Auch wenn ich versuche, viele Dinge über die Command-Line zu tun, so mache ich einige Dinge doch lieber über eine GUI (z. B. in der History navigieren und Vergleiche machen).
+
+## Command-Line
 
 ## GitHub Desktop
 Der [GitHub Desktop](https://desktop.github.com/) hat mir wirklich Spaß gemacht als ich mit [GitBook](gitbook.md) begonnen habe.
+
+## Git-GUI
+schien mir auch ganz brauchbar
 
 ---
 
