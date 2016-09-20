@@ -62,10 +62,12 @@ Container haben eine ID und einen NAME ... in dieser Art:
 Für menschliche Nutzer ist der NAME leichter zu verwenden als die ID ... beides identifiziert den Conatiner auf dem System aber eindeutig. Beim Start eines Images kann man dem zu erstellenden Container einen Namen geben:
 
 ``` 
-docker run --name myname
+docker run --name my-container
 ```
 
-Dann bekommt der Container eine ID und diesen Namen "myname". Gibt man keinen Namen an, dann vergibt Docker einen eigenen wie beispielsweise ``stoic_pare``.
+Dann bekommt der Container eine ID und diesen Namen "my-container". Gibt man keinen Namen an, dann vergibt Docker einen eigenen wie beispielsweise ``stoic_pare``.
+
+>ACHTUNG: sollte man mit benannten Containern arbeiten, dann werden nachfolgende ``docker run --name my-container`` dazu führen, daß KEIN neuer Container erstellt wird, sondern der alte einfach gestart wird!!! Möchte man dann einen neuen Container erzeugen, dann muß der alte zunächst gelöscht werden (``docker rm my-container``).
 
 ## Alle Container verfügbar
 Docker speichert alle jemals erstellten Container ... d. h. auch auf die nicht mehr laufenden Container hat man noch Zugriff. Über
@@ -77,6 +79,25 @@ docker ps -a
 wird die Liste ALLER Container angezeigt (im Gegensatz dazu liefert ``docker ps`` nur die laufenden Container). 
 
 ## Container-Zwischenstände
+Docker Re-Builds sind so schnell, weil die Zwischenzustände archiviert werden. Ändert sich am Dockerfile gar nichts, dann muß auch gar nichts geändert werden. Durch den Aufbau des ``Dockerfiles`` kann man den Build einerseit langsamer machen und sogar falsch.
+
+Ein Beispiel:
+
+```
+RUN apt-get update
+RUN apt-get install -y perl
+```
+
+So sollte man es nicht machen, weil das erste RUN einen Zwischenzustand A erzeugt und das zweite einen Zwischenzustand B. Ändert man nun das zweite RUN (z. B. in ``RUN apt-get install -y perl python``), dann würde auf dem Zustand A aufgesetzt und das ``RUN apt-get update`` würde nicht mehr ausgeführt. In diesen Container würde also ein evtl. veraltetes Python eingebaut.
+
+Deshalb sollte man es so schreiben:
+
+```
+RUN apt-get update && apt-get install -y perl
+```
+
+## RUN vs. CMD vs. ENTRYPOINT
+
 
 ---
 
