@@ -109,3 +109,10 @@ PING 172.20.0.3 (172.20.0.3): 56 data bytes
 ```
 
 Die Auflösung von ``pierre2`` nach ``172.20.0.3`` macht in User-defined-Networks der Docker-interne DNS, der auch in ``/etc/resolv.conf`` des Containers eingetragen ist (mehr Details https://docs.docker.com/engine/userguide/networking/configure-dns/). 
+
+## Networking mit docker-compose
+* https://docs.docker.com/compose/networking/
+
+Docker-Compose erstellt beim Start sein eigenes Netzwerk, in dem die verschiedenen Container über deren Name erreichbar sind. Die Container kommunizieren über dieses eigene Netzwerk und dementsprechend kommen sich die Container verschiedener Docker-Compose-Projekte bei den Ports auch nicht in die Quere. Außerdem muß ich auch keinen Port zum Docker-Host exponieren ... und damit kann das natürlich auch mit den Ports des Docker-Host nicht in Konflikt stehen.
+
+Mit einem Overlay-Netzwerk kann man sogar über Maschinengrenzen hinweg transparent (für die ``docker-compose.yml``) kommunizieren. Das ist beispielsweise bei Docker-Swarm relevant. 
