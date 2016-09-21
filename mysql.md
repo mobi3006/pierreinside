@@ -33,6 +33,8 @@ Erfolgt über ``/etc/mysql/my.cnf``, die aber wiederum weitere ``*.cnf`` Dateien
 ---
 
 # MySQL Workbench
+* https://www.youtube.com/watch?v=X_umYKqKaF0
+
 MySQL stellt mit der Workbench auch Tooling für Developer bereit, um
 
 * die Datenbank zu administrieren

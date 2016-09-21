@@ -98,6 +98,16 @@ RUN apt-get update && apt-get install -y perl
 
 ## RUN vs. CMD vs. ENTRYPOINT
 
+---
+
+# Docker-Container Hooks
+Häufig will man ein Image wiederverwenden, muß aber Anpassungen vornehmen, damit der Container auch in der gewünschten Weise funktioniert. Docker sieht hier verschiedene Ansätze für Hooks vor. Der Entwickler des Image entscheided darüber welche Hooks er anbietet ... in der Dokumentation sollte das eigentlich stehen ... zur Not muß man sich den Code (``Dockerfile``, ``ENTRYPOINT``, ``CMD``, ...) anschauen, um es rauszufinden.
+
+## Umgebungsvariablen
+
+## Volumes
+
+## 
 
 ---
 
