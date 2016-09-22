@@ -3,6 +3,8 @@ Hiermit lassen sich komplexe Softwaresystem aus einzelnen Docker-Containern (rep
 
 Ein Docker-Compose ist eine Beschreibung (``docker-compose.yml``) einer Vernetzung von Docker-Images. Per ``docker-compose up`` wird diese Beschreibung interpretiert, die Container gestartet (aus den Images werden nun Container) und die Docker-Container miteinander vernetzt.
 
+Aber selbst wenn man keine komplexen Landschaften aufbauen muß, ist ``docker-compose`` in jedem Fall hilfreich, um komplexe ``docker run`` Kommandos (beispielsweise mit vielen Volume-Mounts) abzubilden, die sich dadurch persistieren und versionieren lassen.
+
 ---
 
 # Links
