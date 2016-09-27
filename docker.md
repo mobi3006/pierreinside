@@ -97,6 +97,9 @@ RUN apt-get update && apt-get install -y perl
 ```
 
 ## RUN vs. CMD vs. ENTRYPOINT
+> "The ENTRYPOINT specifies a command that will always be executed when the container starts. The CMD specifies arguments that will be fed to the ENTRYPOINT." ([von hier](http://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile))
+
+
 
 ---
 
@@ -151,6 +154,13 @@ Benutzt man Docker innerhalb eines Vagrant-Images, so gibt es ein paar Besonderh
 ## Port-Forwarding
 
 Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen werden, damit man vom Host auf die Ports zugreifen kann. Leider unterstützt Vagrant kein on-the-fly Port-Forwarding (zumindest habe ich noch nichts gefunden). Deshalb sollte man in diesem Fall aus Docker-Images immer mit einem festen Port (-p 5000:8080) und nicht mit einem zufälligen (-P)  weiterleiten. So kann man in Vagrant ein paar Ports per Default forwarden und die Docker-Image-Ports dann bei Bedarf auf diese Ports weiterleiten.  
+
+---
+
+# Fazit
+Ich bin ziemlich begeistert von Docker.
+
+Als größtes Problem, über das ich bisher gestolpert bin, empfand ich die Probleme mit den Permissions beim Zugriff auf Volumes. Das hat sowohl unter Windows als auch unter Linux nicht funktioniert ... vielleicht fehlt mir aber auch noch das notwendige Know-How - [siehe hier](docker_mysql.md).
 
 ---
 

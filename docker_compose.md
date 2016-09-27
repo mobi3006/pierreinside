@@ -51,6 +51,17 @@ spezifiziert und die Anwendnung dadurch aufgebaut.
 
 Die Ausführung kann lokal aber auch remote erfolgen, so daß man dadurch ganz leicht die Anwendung nicht lokal, sondern bei einem Docker-Cloud-Provider wie DigitalOcean fahren kann.
 
+## Services
+Docker Compose abstrahiert von den Containern und hat Services als zentrales Konzept. Das zeigt sich beispielsweise daran, daß
+
+* die Services sind unter ihrem Servicenamen als Hostname erreichbar sind
+* man Services über den Servicenamen referenziert und nicht den evtl. auch vergebenene Containernamen
+* man bei ``docker-compose up mysql`` den Servicenamen angibt, auch wenn der Container, der im Hintergrund gestartet wird den Namen ``pfh_mysql``. Deshalb sind folgende Befehle identisch:
+  *  ``docker logs pfh_mysql``
+  *  ``docker-compose logs mysql``
+
+Die ``docker-compose.yml`` liefert hier den entsprechenden Kontext und muß sich deshalb auch im aktuellen Verzeichnis befinden.
+
 ---
 
 # Befehle
@@ -67,5 +78,7 @@ Die Ausführung kann lokal aber auch remote erfolgen, so daß man dadurch ganz l
   * Container ``mysql`` starten
 * ``docker-compose logs``
   * aggregierte Log-Ansicht von allen Services (bzw. Machines)
+* ``docker-compose logs -f``
+  * forwarding Log-Ansicht von allen Services (bzw. Machines)
 * ``docker-compose build web``
   * Image des Service ``web`` neu bauen
