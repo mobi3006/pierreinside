@@ -22,6 +22,11 @@ Eine leichtgewichtige Lösung sind *Linux Containers* ... Docker ist eine Implem
 
 ---
 
+# Appetizer - what makes it sexy
+* https://codefresh.io/blog/using-docker-generate-ssl-certificates/
+
+---
+
 # Basics
 
 Docker basiert auf Linux Containers. Linux Containers sind - wie der Name vermuten lässt - im Kernel (= Linux) verankert. Es ermöglicht den Aufbau virtueller Systemlanschaften in einem Linux-System ... beispielsweise sogar in einem Linux-Virtualisierunsgimage. Weitere Linux-Systeme (= Container) laufen im Linux-Wirt werden über Prozesse abgebildet. Diese Linux Container basieren zwingend auf dem gleichen Kernel ... man kann also einen Container nicht mit einem anderen Kernel laufen lassen.
@@ -154,6 +159,16 @@ Benutzt man Docker innerhalb eines Vagrant-Images, so gibt es ein paar Besonderh
 ## Port-Forwarding
 
 Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen werden, damit man vom Host auf die Ports zugreifen kann. Leider unterstützt Vagrant kein on-the-fly Port-Forwarding (zumindest habe ich noch nichts gefunden). Deshalb sollte man in diesem Fall aus Docker-Images immer mit einem festen Port (-p 5000:8080) und nicht mit einem zufälligen (-P)  weiterleiten. So kann man in Vagrant ein paar Ports per Default forwarden und die Docker-Image-Ports dann bei Bedarf auf diese Ports weiterleiten.  
+
+--- 
+
+# Docker Hub
+Docker HUb ist DAS Docker-Image-Repository. 
+
+Für GitHub User hat es den Charme, daß Builds über einen Hook automatisch gestartet werden, d. h. 
+
+* Docker Hub und GitHub hier vernetzen: https://docs.docker.com/docker-hub/github/
+* im Docker-Projekt auf GitHub einchecken und direkt ein Docker-Image bauen lassen, das für jeden verfügbar ist
 
 ---
 
