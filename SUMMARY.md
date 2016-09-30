@@ -1,6 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
+   * [Zertifikate](certificates.md)
 * [Workbench](workbench.md)
    * [VirtualBox](virtualbox.md)
    * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)

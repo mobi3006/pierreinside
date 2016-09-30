@@ -225,6 +225,7 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 * Ressourcen zum Index hinzufügen \(in Vorbereitung eines Commits\):
   * `git add myfile.txt`
     * Dateien zu einem Index hinzufügen \(ACHTUNG: Im Gegensatz zu Subversion, sind alle unveränderten Dateien automatisch Bestandteil eines Commits - man muss also nur die neuen oder geänderten Dateien explizit hinzufügen\)
+    * etwas seltsam erscheint auf den ersten Blick, daß die Löschung einer Datei auf dem Filesystem (``rm myfile.txt``) auch per ``git add myfile.txt`` in den Index aufgenommen wird
 
 
 

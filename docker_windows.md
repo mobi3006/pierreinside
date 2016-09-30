@@ -78,6 +78,15 @@ Ich hatte mit der Docker Toolbox folgende Probleme:
 
 --- 
 
+# Babun/Cygwin
+Die Nutzung von alternativen Shells scheint sowohl mit Docker Toolbox als auch mit Docker for Windows nicht ganz einfach ... und wirkt ziemlich abschreckend und wenig vertrauenerweckend.
+
+Glücklicherweise muß ich Docker nicht unter Windows nutzen, aber meine Windows-Kollegen müssen natürlich auch Docker nutzen können, wenn es mal ein zentraler Aspekt der Anwendungsarchitektur werden soll. Aber es kann ja nicht sein, daß ein Developer-Betriebssystem (naja, ist Windows tatsächlich ein?) entscheidet, ob eine Architektur eingeführt werden kann.
+
+Unter Babun ist das ``docker`` Kommando interessanterweise nur eine ``function``, die in ``~/.babun-docker/bin/babun-docker.sh`` definiert wird und in den Start der zsh eingehangen ist. Dort steckt allerdings Handling bzlg. Babun, Cygwin, Virtualbox drin.
+
+---
+
 # FAQ
 **Frage 1:** Unter Windows mit der Docker Toolbox (!!! ... unter Linux problemlos) hat die relative Adressierung in einer Volume-Definition von ``docker-composse.yml`` nicht funktioniert. Das Verzeichnis wurde einfach nicht eingebunden und ich konnte somit auch nicht auf die darin befindlichen Dateien zugreifen. 
 
@@ -159,7 +168,7 @@ Nicht unbedingt das was man möchte (gelegentlich will man hier ja vielleicht Ä
 
 **Frage 3:** Ich verwende den Docker Toolbox Ansatz. Die Docker-Tools funktionieren auch im Docker Quickstart Terminal ganz wunderbar. Leider aber nicht in meiner Default-Shell Babun.
 
-**Antwort 3:** Out-of-the-box geht das nicht ... immer wieder seltsame Probleme wie diese:
+**Antwort 3a:** Out-of-the-box geht das nicht ... immer wieder seltsame Probleme wie diese:
 
 ```
 { docker-platform } master » docker-machine start default
@@ -170,3 +179,22 @@ Couldn't connect to Docker daemon - you might need to run `docker-machine start 
 ```
 
 oder auch der bereits oben aufgeführte ``open //./pipe/docker_engine`` Fehler.
+
+Antwort 3b: Vielleicht hilft hier babun-docker (https://github.com/tiangolo/babun-docker)?
+
+**Frage 4:** Ich verwende unter Windows Babun mit der zsh-Shell, doch ich bekomme folgenden Fehler (Docker Toolbox wird genutzt) - dieser Fehler kommt mit dem Docker Quickstart Terminal (aus der Docker Toolbox) übrigens nicht: 
+
+```
+{ Dev } master » docker run \
+      -v $PWD:/work \
+      -it nginx \
+      openssl genrsa -des3 -out /work/client.key.pem 1024
+the input device is not a TTY.  If you are using mintty, try prefixing the command with 'winpty'
+-- babun-docker: Using winpty
+```
+
+**Antwort 4:** Tatsächlich hilft es, wenn ich statt ``docker run ...`` ein ``winpty docker run ...`` verwende, aber das wollt ich natürlich nicht immer machen (vor allem nicht bei Skripten, die zwischen Windows- und Linux-Users geteilt werden). 
+
+**Frage 5:** Ich verwende unter Windows Babun mit der zsh-Shell, doch ich bekomme folgenden Fehler (Docker for Windows) - diese Abfrage kommt immer wieder: 
+
+**Antwort 5:** Bei der Recherche stellte  sich dann raus (bei der Suche nach dem Executable per ``which docker``), daß ``docker`` in Wahrheit unter Babun-Zsh nur eine Function ist (definiert in ``~/.babun-docker/bin/babun-docker.sh``
