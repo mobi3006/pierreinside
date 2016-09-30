@@ -453,3 +453,13 @@ Nach der Installation von VirtualBox 5.1 unter Windows bekomme ich in meinen Lin
 
 **Antwort 7:**
 Im Menü der Virtualbox-VM muß die Einstellung _Input - Keyboard - Keyboard Settings - Virtual Machine - Auto Capture Keyboard_ angehakt werden. 
+
+**Frage 8:**
+Wie nutze ich mehrere Bildschirme unter VirtualBox 5.1.x ... ich schaffe das nicht mit den vielen View-Einstellungen?
+
+**Antwort 8:**
+In der VM muß die Anzahl der Bildschirme eingestellt werden (http://www.ashokraja.me/tips/How-to-enable-dual-or-multi-monitor-support-in-Oracle-Virtual-Box). Und dann sollte das auch mit den View-Einstellungen irgendwie funktionieren.
+Ich konnte den Bildschirm sogar über 3 Bildschirme ziehen ... hierzu hilft es vielleicht - bei unterschiedlicher Größe der Bildschirme - die Bildschirme über die Windows 10 Settings leicht in der Höhe zu verschieben:
+
+![Multiple Screens on Windows](images/windows10_multipleScreens.png)
+

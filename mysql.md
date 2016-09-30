@@ -52,11 +52,34 @@ DESHALB:
 * ``sudo apt-get install mysql-workbench-community``
 * MySQL Workbench starten: ``mysql-workbench``
 
+## Performance Analyse
+siehe eigener Abschnitt
+
 ---
 
 # MySQL im Docker Container
 ## Backup und Restore
 * http://depressiverobot.com/2015/02/19/mysql-dump-docker.html
+
+---
+
+# Performance Analyse
+Das Server Feature *Performance Schema* (seit MySQL 5.5) muß einkonfiguriert sein, damit der Server entsprechende Daten mitloggt (in Datenbanktabellen schreibt). Über ``Server - Performance Server Setup`` kann hier auch den Detailgrad des Loggings definieren.
+
+> ACHTUNG: die Bereitstellung der Performance-Daten kostet auf jeden Fall Performance auf dem Server und sollte deshalb mit Vorsicht genutzt werden.
+
+## MySQL Enterprise Manager
+* https://www.mysql.com/products/enterprise/monitor.html
+* Youtube Video: https://www.youtube.com/watch?v=e5HhC0XiioY
+
+Da MySQL mittlerweile zu Oracle gehört, sieht der MySQL Enterprise Manager fast genauso aus wie der Oracle Enterprise Manager. Vom Oracle Enterprise Manager war ich sehr begeistert ... wir haben damit viele Bottlenecks entdeckt und konnte diese oft schon mit kleinen Änderungen (z. B. Index anlegen) beheben.
+
+Mit diesem Tool sind gezielte Realtime-Analysen möglich, um die Hotspots auf der Datenbank zu finden (Explain-Plans, Index-Nutzung, IO auf Filesystem und Netzwerk).
+
+## MySQL Workbench
+* https://www.mysql.de/products/workbench/performance/
+
+---
 
 # FAQ
 * https://dev.mysql.com/doc/refman/5.6/en/problems-connecting.html
