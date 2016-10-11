@@ -334,10 +334,10 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-3.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-3.shtml)
 
 * `git merge mybranch`
-
   * merge des _mybranch_ in den HEAD \(der HEAD sollte natürlich nicht _mybranch_ sein\)
   * sollte im HEAD keine Änderung seit dem Branching erfolgt sein, handelt es sich um einen Fast-Forward-Merge - dann werden HEAD und der Ziel-Branch \(z. B. master\) einfach auf des CommitObject von mybranch gesetzt, es entsteht kein neues CommitObject
 
+Beim Mergen können Konflikte entstehen ... das wird in der Ausgabe angezeigt und dann findet man in den automatisch gemergten Dateien Kennzeichen (``<<<<<``), die beide Versionen darstellen. Diese Dateien bearbeitet man nach und committed dann.
 
 ## Taggen von Branches
 

@@ -98,3 +98,16 @@ Meine Erklärungen fallen hier recht kurz aus, weil der Code die Dokumentation i
 * Docker 
   * https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
+---
+
+# FAQ
+**Frage 1:** Ich bekomme beim Update des Systems die Meldung "Package System is broken". Irgenwie weiß ich nicht weiter ...
+
+**Antwort 1:** Die Kommandos haben mir geholfen (http://askubuntu.com/questions/118749/package-system-is-broken-how-to-fix-it):
+
+```
+sudo apt-get clean
+sudo apt-get install -f
+sudo dpkg --configure -a
+sudo apt-get update
+```

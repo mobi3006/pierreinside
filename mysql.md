@@ -57,9 +57,22 @@ siehe eigener Abschnitt
 
 ---
 
-# MySQL im Docker Container
-## Backup und Restore
-* http://depressiverobot.com/2015/02/19/mysql-dump-docker.html
+# Information Schema
+MySQL hält neben dem *Performance Schema* (siehe unten) auch das sog. *Information Schema*. In diesem findet man beispielsweise die Größe der Datenbank und die Anzahl der Zeilen. 
+
+> ACHTUNG: es handelt sich hier nur um ungefähre Angaben ... insbes. bei der Zeilenanzahl wird man das schnell feststellen. Diese Daten verändern sich auch, wenn man ein ``ANALYZE TABLE`` durchführt.
+
+```
+SELECT 
+	TABLE_NAME, 
+    table_rows, 
+    round(((data_length) / 1024 / 1024),2) "Data Length in MB" , 
+    round(((index_length) / 1024 / 1024),2) "Index Length in MB", 
+	round(((data_length + index_length) / 1024 / 1024),2) "Size in MB"
+FROM information_schema.TABLES 
+WHERE table_schema = "mydatabase" and
+	  round(((data_length + index_length) / 1024 / 1024),2) > 10
+```
 
 ---
 
@@ -78,6 +91,16 @@ Mit diesem Tool sind gezielte Realtime-Analysen möglich, um die Hotspots auf de
 
 ## MySQL Workbench
 * https://www.mysql.de/products/workbench/performance/
+
+---
+
+# MySQL im Docker Container
+Vermutlich wird man die Datenbank-Dateien auf den Docker-Host legen wollen, um den MySQL-Container wegwerfen und neu deployen zu können, ohne die Daten zu verlieren.
+
+Hier läuft man allerdings schnell in Permission-Probleme, weil die User-Ids auf dem Docker-Host nicht mit den User-Ids im Docker-Container übereinstimmen und man somit auf dem Docker-Host nur als ``root`` volle Rechte auf die Dateien hat (um beispielsweise die Datenbank-Dateien zu löschen).  
+
+## Backup und Restore
+* http://depressiverobot.com/2015/02/19/mysql-dump-docker.html
 
 ---
 
