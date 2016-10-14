@@ -57,10 +57,18 @@ siehe eigener Abschnitt
 
 ---
 
+# Storage Engine
+MySQL bietet mehrere Storage Engines an, die teilweise hoistorisch gewachsen sind - teilweise aber auch unterschiedliche Einsatzbereiche haben:
+
+* InnoDB: transaktional
+* MyISAM: nicht transaktional
+
+---
+
 # Information Schema
 MySQL hält neben dem *Performance Schema* (siehe unten) auch das sog. *Information Schema*. In diesem findet man beispielsweise die Größe der Datenbank und die Anzahl der Zeilen. 
 
-> ACHTUNG: es handelt sich hier nur um ungefähre Angaben ... insbes. bei der Zeilenanzahl wird man das schnell feststellen. Diese Daten verändern sich auch, wenn man ein ``ANALYZE TABLE`` durchführt.
+> ACHTUNG: es handelt sich hier nur um ungefähre Angaben ... insbes. bei der Zeilenanzahl wird man das schnell feststellen. Diese Daten verändern sich auch, wenn man ein ``ANALYZE TABLE`` durchführt (und das sollte man auch tatsächlich tun bevor man verlässliche Angaben haben will!!!).
 
 ```
 SELECT 
@@ -91,6 +99,19 @@ Mit diesem Tool sind gezielte Realtime-Analysen möglich, um die Hotspots auf de
 
 ## MySQL Workbench
 * https://www.mysql.de/products/workbench/performance/
+
+---
+
+# Optimierung
+* http://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html
+
+Die SQL-Engine benötigt Informationen über die Datenbelegung der Tabellen, um den besten Execution Plan berechnen zu können. Das liegt daran, daß je nach Belegung unterschiedliche Indexzugriffe optimal sind.
+
+Bei Oracle verwendet man den sog. *Gather Stats Job* ... bei MySQL verwendet man ``mysqlcheck`` mit ``--analyze`` und ``--optimize`` Option:
+
+```
+mysqlcheck --analyze --databases mydatabase --user root -p
+```
 
 ---
 
