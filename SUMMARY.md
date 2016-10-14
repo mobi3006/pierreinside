@@ -9,13 +9,15 @@
    * [zsh](zsh.md)
    * [cygwin](cygwin.md)
    * [Babun](babun.md)
-   * [JRebel](jrebel.md)
+   * [awesome](awesome.md)
+   * [terminator](terminator.md)
 * [Architektur](architecture.md)
    * [Microservices](microservices.md)
    * [NoSQL](nosql.md)
    * [Hystrix](hystrix.md)
    * [Reactive Programming](reactiveProgramming.md)
 * Programming
+   * [JRebel](jrebel.md)
    * [Bean Validation](java_beanValidation.md)
    * Webservices
        * [HTTP](http.md)
@@ -37,6 +39,8 @@
    * Persistenz
        * [JPA](jpa.md)
        * [Eclipse Link - JPA](eclipseLink.md)
+       * [MySQL](mysql.md)
+         * [Docker MySQL](docker_mysql.md)
    * [YAML](yaml.md)
    * [Zeichenkodierung](characterEncoding.md)
 * Testen
@@ -66,6 +70,7 @@
        * [Docker Compose](docker_compose.md)
        * [docker machine](docker_machine.md)
        * [Docker@Windows](docker_windows.md)
+       * [Docker MySQL](docker_mysql.md)
    * [Kubernetes](kubernetes.md)
    * [Cloud Deployment Provider](cloudDeployment_provider.md)
    * [Synology](synology.md)
@@ -80,6 +85,7 @@
    * [Markdown](markdown.md)
    * [Static Site Generators](staticSiteGenerators.md)
        * [Hugo](hugo.md)
+   * [Tiddly Wiki](tiddlyWiki.md)
    * [Leanpub](leanpub.md)
 * Devices
    * [iPad Pro](ipadPro.md)
@@ -87,8 +93,4 @@
    * [Swimming Pool](swimmingPool.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [MySQL](mysql.md)
-* [Docker MySQL](docker_mysql.md)
-* [Tiddly Wiki](tiddlyWiki.md)
-* [awesome](awesome.md)
 
