@@ -33,4 +33,11 @@ Beim Start kann man per
 terminator -l programming -p cloud
 ```
 
-das Layout (``programming``) und das Profil (``cloud``) übergeben, um so eine vorkonfigurierte Umgeung zu erhalten.
+das Layout (``programming``) und das Profil (``cloud``) übergeben, um so eine vorkonfigurierte Umgebung zu erhalten.
+
+---
+
+# FAQ
+**Frage 1:** Die Anordnung der Widgets über *Preferences - Layout* ist kaum zu verstehen. Gibts da eine Alternative?
+
+Antwort 1: Man kann interaktiv die Widgets anlegen und verschieben. Wenn alles so aussieht wie man das m;chte speichert man das Lazout unter *Preferences - Layout* ab ... https://www.youtube.com/watch?v=RwrnRpwE3Mw
