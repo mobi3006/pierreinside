@@ -4,6 +4,8 @@
 
 Babun ist ein Tool, das [cygwin](cygwin.md) enthält ... aber zudem noch ein paar nette Features mitbringt. 
 
+... aber leider auch ein paar ziemliche Probleme mit sich bringt (siehe unten). Deshalb bin ichs mittlerweile leid unter Windows arbeiten zu wollen ... Office ok, Surfen ok, aber niemals nicht Software entwickeln
+
 ---
 
 # Features
@@ -81,4 +83,47 @@ oder über die Anpassung der ``/etc/passwd`` per
 
 ---
 
+# Probleme
+## Verwendung von Cygwin-Pfaden
+Ein 
 
+``java -jar /cygdrive/c/libs/MyComponent.jar``
+
+und 
+
+``java -jar /c/libs/MyComponent.jar``
+
+schlägt unter einer zsh-Shell mit 
+
+```
+Error: Unable to access jarfile /cygdrive/c/libs/MyComponent.jar
+```
+
+fehl, obwohl die Datein bei ``ls /cygdrive/c/libs/MyComponent.jar`` bzw. ``ls /c/libs/MyComponent.jar`` problemlos gefunden wird.
+
+Ein 
+
+``
+java -jar /c/libs/MyComponent.jar
+`` 
+
+hingegen funktioniert.
+
+Sicherlich kann man damit umgehen, wenn man auf der Shell arbeitet. Will man allerdings Skripte unter Windows-Babun wiederverwenden, die auch in Linux-Systemen (Staging, Live) verwendet werden und die laufen aus diesem Grund nicht, dann ist das ein **NO-GO**.
+
+In einigen meiner Skripte verwende ich:
+
+```
+_script=$(readlink -f "$0")
+_scriptpath=$(dirname "${_script}")
+```
+
+um dann Dateien relativ zum Pfad des ausgeführten Skripts referenzieren zu können:
+
+```
+java -jar ${_scriptpath}/../libs/MyComponent.jar
+```
+
+Das funktioniert unter Linux ganz prima ... unter Windows-Babun out-of-the-box leider nicht, weil als ``${_scriptpath}`` der elende Cygwin-Path ermittelt wird (``/cygdrive/c/libs/MyComponent.jar``).
+
+Ich will jetzt aber keine Babun-spezifische Logik in meine Skripte einbauen (``cygpath -u``), weil die eigentlich für Linux entwickelt werden und die Nutzung unter Windows nur ein Synergieeffekt (Abfallprodukt) darstellt.

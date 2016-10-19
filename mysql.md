@@ -53,7 +53,7 @@ DESHALB:
 * MySQL Workbench starten: ``mysql-workbench``
 
 ## Performance Analyse
-siehe eigener Abschnitt
+siehe eigene Seite
 
 ---
 
@@ -83,11 +83,6 @@ WHERE table_schema = "mydatabase" and
 ```
 
 ---
-
-# Performance Analyse
-Das Server Feature *Performance Schema* (seit MySQL 5.5) muß einkonfiguriert sein, damit der Server entsprechende Daten mitloggt (in Datenbanktabellen schreibt). Über ``Server - Performance Server Setup`` kann hier auch den Detailgrad des Loggings definieren.
-
-> ACHTUNG: die Bereitstellung der Performance-Daten kostet auf jeden Fall Performance auf dem Server und sollte deshalb mit Vorsicht genutzt werden.
 
 ## MySQL Enterprise Manager
 * https://www.mysql.com/products/enterprise/monitor.html

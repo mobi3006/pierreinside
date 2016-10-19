@@ -72,6 +72,61 @@ verwende.
 ---
 
 # Software Installation
+## Java
+Die Standard Java Installation als ``/etc/alternatives`` finde ich grottig, weil dabei folgendes entsteht:
+
+```
+/etc/alternatives/java -> /usr/lib/jvm/java-8-oracle/jre/bin/java*
+/etc/alternatives/java.1.gz -> /usr/lib/jvm/java-8-oracle/man/man1/java.1.gz
+/etc/alternatives/javac -> /usr/lib/jvm/java-7-oracle/bin/javac*
+/etc/alternatives/javac.1.gz -> /usr/lib/jvm/java-7-oracle/man/man1/javac.1.gz
+/etc/alternatives/javadoc -> /usr/lib/jvm/java-7-oracle/bin/javadoc*
+/etc/alternatives/javadoc.1.gz -> /usr/lib/jvm/java-7-oracle/man/man1/javadoc.1.gz
+/etc/alternatives/javafxpackager -> /usr/lib/jvm/java-7-oracle/bin/javafxpackager*
+/etc/alternatives/javafxpackager.1.gz -> /usr/lib/jvm/java-7-oracle/man/man1/javafxpackager.1.gz
+/etc/alternatives/javah -> /usr/lib/jvm/java-7-oracle/bin/javah*
+/etc/alternatives/javah.1.gz -> /usr/lib/jvm/java-7-oracle/man/man1/javah.1.gz
+/etc/alternatives/javap -> /usr/lib/jvm/java-7-oracle/bin/javap*
+/etc/alternatives/javap.1.gz -> /usr/lib/jvm/java-7-oracle/man/man1/javap.1.gz
+/etc/alternatives/javapackager -> /usr/lib/jvm/java-8-oracle/bin/javapackager*
+/etc/alternatives/javapackager.1.gz -> /usr/lib/jvm/java-8-oracle/man/man1/javapackager.1.gz*
+/etc/alternatives/java_vm -> /usr/lib/jvm/java-7-oracle/jre/bin/java_vm*
+/etc/alternatives/javaws -> /usr/lib/jvm/java-7-oracle/jre/bin/javaws*
+/etc/alternatives/javaws.1.gz -> /usr/lib/jvm/java-7-oracle/man/man1/javaws.1.gz
+```
+
+Wenn ich dann allerdings die Java-Version umschalten will, dann muß ich per (http://askubuntu.com/questions/121654/how-to-set-default-java-version)
+
+```
+sudo update-alternatives --config java
+```
+
+jedes einzelne Tool auf eine andere Location umschalten. Zudem bleibt davon die ``JAVA_HOME`` Variable unberührt ... die muß ich noch manuell umsetzen. Wer hat sich das ausgedacht????
+
+### I did it my way ...
+Ich lege meine Java-Versionen unter ``/usr/lib/jvm`` ab (so macht es das Paket ``ppa:webupd8team/java``) und erzeuge einen Link auf die aktuelle Version:
+
+```
+java -> java-7-oracle/
+java-7-oracle/
+java-8-oracle/
+```
+
+Der symbolische Link ``java`` zeigt immer auf die aktuelle Version. 
+
+Zudem setze ich ein paar Standard-JDK-Variablen auf eben diesen Link (``/ect/profile.d/jdk.sh``):
+
+```
+export J2SDKDIR=/usr/lib/jvm/java
+export J2REDIR=/usr/lib/jvm/java/jre
+export PATH=$PATH:/usr/lib/jvm/java/bin:/usr/lib/jvm/java/db/bin:/usr/lib/jvm/java/jre/bin
+export JAVA_HOME=/usr/lib/jvm/java
+export DERBY_HOME=/usr/lib/jvm/java/db
+```
+
+Dadurch erreiche ich, daß ich ALLEIN durch Umsetzen des Links ``/usr/lib/jvm/java`` die Version umschalten kann. Das verpacke ich noch in ein schönes Script ... voila.
+
+
 ## Installation ansible
 Ich werde versuchen, die Installation und Konfiguration dieses Images zumindest teilweise scripten (das ist mein Einstieg in die Ansible-Welt) ... keine Ahnung, ob ich die Disziplin aufbringen werde, mein gesamtes Setup dauerhaft zu scripten.
 

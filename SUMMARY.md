@@ -40,7 +40,8 @@
        * [JPA](jpa.md)
        * [Eclipse Link - JPA](eclipseLink.md)
        * [MySQL](mysql.md)
-         * [Docker MySQL](docker_mysql.md)
+           * [MySQL Performance](mysql_performance.md)
+           * [Docker MySQL](docker_mysql.md)
    * [YAML](yaml.md)
    * [Zeichenkodierung](characterEncoding.md)
 * Testen
@@ -70,7 +71,6 @@
        * [Docker Compose](docker_compose.md)
        * [docker machine](docker_machine.md)
        * [Docker@Windows](docker_windows.md)
-       * [Docker MySQL](docker_mysql.md)
    * [Kubernetes](kubernetes.md)
    * [Cloud Deployment Provider](cloudDeployment_provider.md)
    * [Synology](synology.md)
