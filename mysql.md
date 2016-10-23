@@ -25,6 +25,23 @@ Schritt für Schritt:
   * ACHTUNG: damit wird das System (die Repo-Konfiguration des Linux-Systems) nur so konfiguriert, daß man die offiziellen MySQL Pakete installieren kann
 * ``sudo apt-get update``, um die MySQL Repository Informationen upzudaten
 
+## User einrichten
+Bei der Einrcihtung eines Users gibt man den Usernamen und den Host an, mit dem man zugreifen möchte. Verwendet man
+
+```
+pfh@localhost
+```
+
+dann kann man sich nur vom Rechner anmelden, auf dem der Server läuft. Verwendet man stattdessen
+
+```
+pfh@*
+```
+
+dann kann man sich von jedem Rechner anmelden.
+
+Das hat aber scheinbar nichts mir der Bindung des Kommunikationsports an das Netzwerkinterface zu tun. Ich finde das sehr strange.
+
 ---
 
 # Konfiguration

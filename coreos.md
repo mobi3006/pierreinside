@@ -1,4 +1,5 @@
 # CoreOS
+* Videos: https://www.youtube.com/user/coreoslinux
 * http://www.linux-magazin.de/Ausgaben/2014/10/Core-OS
 
 # Idee und Konzepte
@@ -9,7 +10,9 @@
   * systemd
   * etcd
   * ssh
-  * docker engine
+  * Container Engine
+    * docker
+    * rocket
   * Update Agent 
 * basiert auf Chrome OS, das Google entwickelt hat, um in seinen Chrome-Geräten (Chromebook) mit besonders wenig Speicher eingesetzt zu werden
 * Root-Dateisystem ``/`` ist nur im Lesemodus eingehangen ... man kann gar keine Konfigurationsänderungen dort persistieren
@@ -42,7 +45,7 @@ Da ich mich noch für keinen Cloud-Provider entschieden habe
 * Fleet-Instanzen auf allen Knoten kommunizieren miteinander und führen dann über die lokalen Systemd-Instanzen Befehle aus
 * ``fleetctl`` als Scheduler/Controller zur Verwaltung des Deployment-Clusters
   * Alternativen:
-    * [Kubernetes](kubernetes.md)
+    * [Kubernetes](kubernetes.md) (``kubectl``)
     * Mesos
     * Docker Swarm 
 
