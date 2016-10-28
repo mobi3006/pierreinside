@@ -15,17 +15,21 @@
 
 **Platform-as-a-Service:**
 * [Heroku](https://devcenter.heroku.com/categories/java)
-* [CloudFoundry](https://www.cloudfoundry.org)
 
 ---
 
 # OpenStack
 * Abbildung privater und öffentlicher Clouds
-* vorangetrieben von der OpenStack Foundation (bestehend aus 500 Firmen)
+* ursprünglich von Rackspace ins Leben gerufen ... mittlerweile von der OpenStack Foundation vorangetrieben (bestehend aus 500 Firmen) ... deshalb gibt es u. a.
+  * RedHat Enterprise Platform for OpenStack
+  * SuSE OpenStack Cloud
+  * Ubuntu OpenStack
+* unterstützt werden unterschiedliche Hypervisoren (u. a. KVM, Xen, VMWare vSphere) 
 
 ---
 
 # Cloudfoundry
+* [CloudFoundry](https://www.cloudfoundry.org)
 * PaaS Anbieter
 
 ---

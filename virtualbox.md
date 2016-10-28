@@ -9,10 +9,12 @@ Nach jetzt 6-monatiger Nutzung bin ich immer noch begeistert von VirtualBox und 
 
 # Virtualisierung Background Informationen
 Hypervisor-Typen
-* Typ 1: läuft direkt auf der Hardware 
+* Typ 1: läuft direkt auf der Hardware ohne weiteres typisches Betriebssystem
   * VmWare ESX
-* Typ 2: läuft auf einem Betriebssystem
+  * Xen
+* Typ 2: setzt auf einem Betriebssystem auf, über das der Zugriff auf die Hardware erfolgt
   * VirtualBox
+  * VMWare Workstation
 
 ---
 
