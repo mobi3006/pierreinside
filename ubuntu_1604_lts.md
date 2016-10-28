@@ -166,3 +166,21 @@ sudo apt-get install -f
 sudo dpkg --configure -a
 sudo apt-get update
 ```
+
+---
+
+**Frage 2:** Die UI einiger Java-Programme wird nicht angezeigt (z. B. JVisualVM).
+
+**Antwort 2:** Bei mir lag es daran, daß ich ``awesome`` Windowmanager verwendet habe. Unter Gnome hat es problemlos funktioniert. Um es unter awesome nutzen zu können mußte ich ``/usr/bin/wmname Sawfish`` in die ``~/.bashrc`` eintragen (früher hatte ich mal ``/usr/bin/wmname LG3D`` verwenden - das hat unter LTS 16.04 nicht funktioniert).
+
+--- 
+
+**Frage 3:** Der Texteditor Atom von GitHub startet weder unter Gnome noch unter awesome in meinem Virtualbox Image vernünftig - es öffnet sich ein Fenster, aber das sieht aus wie ein Flickenteppich. Diese Fehlermeldung wird auf der Konsole ausgegeben:
+
+```
+[1328:1328:1028/132119:ERROR:gles2_cmd_decoder.cc(2291)] 
+[.CompositorWorker-0x55f041201a70]GL ERROR :GL_INVALID_VALUE : 
+ScopedTextureBinder::dtor: <- error from previous GL command
+```
+
+**Antwort 2:** Das Problem wurde durch den Parameter ``--disable-gpu`` in ``chromium-browser --disable-gpu`` behoben.  Weitere Details: https://forums.virtualbox.org/viewtopic.php?f=3&t=77404

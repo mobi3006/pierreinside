@@ -1,4 +1,19 @@
 # awesome
+* Keybindings: https://www.cheatography.com/fievel/cheat-sheets/awesome-window-manager-3-x/pdf/
+  * die meisten findet man auch über ``man awesome``
+
+# Konzepte
+**Window:**
+Ein Window ist das UI eines Programms. Ein Window ist immer der Master ... das die meiste Aufmerksamkeit hat.
+
+**Layout:**
+
+
+**Client:**
+
+
+**Tag:**
+
 
 ---
 
