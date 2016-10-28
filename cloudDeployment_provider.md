@@ -19,9 +19,19 @@
 
 ---
 
+# OpenStack
+* Abbildung privater und öffentlicher Clouds
+* vorangetrieben von der OpenStack Foundation (bestehend aus 500 Firmen)
+
+---
+
+# Cloudfoundry
+* PaaS Anbieter
+
+---
+
 # Travis
 * https://docs.travis-ci.com/
-
 
 ---
 
