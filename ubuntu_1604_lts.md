@@ -183,4 +183,17 @@ sudo apt-get update
 ScopedTextureBinder::dtor: <- error from previous GL command
 ```
 
-**Antwort 2:** Das Problem wurde durch den Parameter ``--disable-gpu`` in ``chromium-browser --disable-gpu`` behoben.  Weitere Details: https://forums.virtualbox.org/viewtopic.php?f=3&t=77404
+**Antwort 3:** Das Problem wurde durch den Parameter ``--disable-gpu`` in ``chromium-browser --disable-gpu`` behoben.  Weitere Details: https://forums.virtualbox.org/viewtopic.php?f=3&t=77404
+
+---
+
+**Frage 4:** Ich habe 9 GB Ram und ``top`` zeigt mir, daß 7,7 MB erst verbraucht sind. Dennoch habe ich 1,5 GB Swap-Space im Einsatz. Was soll das?
+
+**Antwort 4:** Das hängt mit dem Swappiness-Faktor zusammen, der auf meinem System per Default auf 60 konfiguriert war (``cat /proc/sys/vm/swappiness``) - http://askubuntu.com/questions/157793/why-is-swap-being-used-even-though-i-have-plenty-of-free-ram. Linux verwendet den RAM auch für internes Caching (Inodes, Page Chache, ... siehe Angabe ``2083016 buff/cache``) - dieser Speicher kann aber bei Bedarf jederzeit freigegeben werden und ist somit potentiell auch frei. Insofern kann es bei einem System, das mal am Rande eines Speicherengpasses war, auch vorkommen, daß Swap-Space allokiert wurde und dann aber auch nicht mehr zurückgebaut wurde (Linux macht das schon sehr schlau und man sollte sich darauf verlassen und nur in äußersten Notfällen Änderungen vornehmen). Unter diesem Gesichtspunkt muß man die Ausgabe von ``top`` verstehen:
+
+```
+KiB Mem :  9073168 total,   774328 free,  6215824 used,  2083016 buff/cache
+KiB Swap:  2097148 total,   153404 free,  1943744 used.  2453080 avail Mem
+```
+
+Will man den Swap-Space loswerden, dann kann man beispielsweise ``sudo swapoff -av`` verwenden (bzw. ``sudo swapon -av`` um es wieder rückgängig zu machen).

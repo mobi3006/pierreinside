@@ -35,3 +35,23 @@ TiddlyWiki verwendet standardmäßig die WikiText Syntax, die an Markdown angele
 
 Mit dem Plugin lassen sich Markdown-Tiddlers erstellen und werden im Browser ordentlich gerendert.
 
+---
+
+# TiddlyFox und TiddlyChrome
+Diese beiden Erweiterungen für Firefox bzw. Chrome machen die Arbeit mit dem TiddlyWiki sehr angenehm:
+* Speichern über Ctrl-Enter
+* Automatische Ersetzung der Tiddly-Datei - ansonsten wird die neue Datei nur zum Download angeboten ... so kann man nicht arbeiten
+
+## TiddlyFox
+... wird im Extension-Store out-of-the-box angeboten.
+
+## TiddlyChrome
+Wird nicht im Chrome-Extension-Store out-of-the-box angeboten. Stattdessen muß man es sich von
+
+* https://github.com/Arlen22/tiddly-chrome-app/releases
+
+runterladen und dieser Anleitung folgen, um es zu installieren:
+
+* http://www.tech-recipes.com/rx/47717/chrome-apps-extensions-and-user-scripts-cannot-be-added-from-this-website/
+
+... ich habe es leider nicht geschafft, die Extension zum Laufen zu bekommen.

@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-   * [Zertifikate](certificates.md)
 * [Workbench](workbench.md)
    * [VirtualBox](virtualbox.md)
    * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
@@ -80,6 +79,7 @@
        * [Container Infrastruktur](containerInfrastructure.md)
        * [Cloud Deployment Provider](cloudDeployment_provider.md)
    * [Synology](synology.md)
+   * [Zertifikate](certificates.md)
 * Git Ecosystem
    * [Git](git.md)
    * [GitHub](github.md)
@@ -93,11 +93,10 @@
        * [Hugo](hugo.md)
    * [Tiddly Wiki](tiddlyWiki.md)
    * [Leanpub](leanpub.md)
-* Devices
-   * [iPad Pro](ipadPro.md)
 * Misc
+   * [iPad Pro](ipadPro.md)
    * [Swimming Pool](swimmingPool.md)
+   * [Musik Streaming](musicstreaming.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [Musik Streaming](musicstreaming.md)
 
