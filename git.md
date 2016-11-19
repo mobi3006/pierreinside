@@ -182,8 +182,6 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
     * Remote-Repository lokal clonen - `myDir` kann optional weggelassen werden
     * dadurch entstehen Remote-Head-CommitObjects auf das Original-Repository, die den Namen `origin/[HEAD_NAME]` haben
 
-
-
 ## Arbeiten am Index
 
 * `git status`: welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
@@ -480,6 +478,16 @@ durchführen ... BEACHTE: ``--global`` fehlt hier!!!
 * https://help.github.com/articles/dealing-with-line-endings/
 
 In heterogenen Umngebungen mit Windows-, Linux-, MacOS-Nutzern muß man sich mit dem Thema auseinandersetzen.
+
+## Alias
+Manche Befehlskombinationen möchte man immer wieder verwenden und schnell im Zugriff haben. Hierzu kann man - ähnlich wie in der Shell - entsprechende Aliase in der ``~/.gitconfig`` definieren. Hat man beispielsweise diese definiert:
+
+```
+[alias]
+        hist = log --graph --oneline --decorate --all
+```
+
+dann lässt sich die pseudografische History-Darstellung per ``git hist`` auf den Schirm holen.
 
 ---
 
