@@ -9,8 +9,15 @@ docker run --network=isolated_nw -itd --name=container3 busybox
 
 Alle Container des gleichen Netzwerks können miteinander kommunizieren.
 
-## Bridge vs. Overlay
-Für kleine Netze reicht ein Bridge-Netzwerk ... für größere sollte man ein Overlay-Netwzwerk verwenden.
+## Netzwerktypen
+Docker bringt Ünterstützung für folgende Netzwerktypen ... jeder Netzwerktyp ist einem sog. *Diver* zugeordnet, hat einen Namen, eine ID :
+
+* ~~docker0~~ ... veraltet
+* Bridge
+  * ausreichend für kleine Netzwerke, die nur auf einem einzigen Host laufen
+* Overlay
+  * für verteilte Netzwerke (nicht nur auf einem Host) 
+* MACVLAN
 
 ## Docker-Network-Subsystem
 Einen Überblick über das Subsystem liefert
@@ -113,6 +120,6 @@ Die Auflösung von ``pierre2`` nach ``172.20.0.3`` macht in User-defined-Network
 ## Networking mit docker-compose
 * https://docs.docker.com/compose/networking/
 
-Docker-Compose erstellt beim Start sein eigenes Netzwerk, in dem die verschiedenen Container über deren Name erreichbar sind. Die Container kommunizieren über dieses eigene Netzwerk und dementsprechend kommen sich die Container verschiedener Docker-Compose-Projekte bei den Ports auch nicht in die Quere. Außerdem muß ich auch keinen Port zum Docker-Host exponieren ... und damit kann das natürlich auch mit den Ports des Docker-Host nicht in Konflikt stehen.
+Docker-Compose erstellt beim Start sein eigenes Netzwerk, in dem die verschiedenen Container über deren Name erreichbar sind. Das ist auf jeden Fall schon mal komfortabler als in einem reinen Docker-Setup (dort könnte man das per ``docker run --link`` nachbilden). Die Container kommunizieren über dieses eigene Netzwerk und dementsprechend kommen sich die Container verschiedener Docker-Compose-Projekte bei den Ports auch nicht in die Quere. Außerdem muß ich auch keinen Port zum Docker-Host exponieren ... und damit kann das natürlich auch mit den Ports des Docker-Host nicht in Konflikt stehen.
 
 Mit einem Overlay-Netzwerk kann man sogar über Maschinengrenzen hinweg transparent (für die ``docker-compose.yml``) kommunizieren. Das ist beispielsweise bei Docker-Swarm relevant. 

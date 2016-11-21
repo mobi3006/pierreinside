@@ -1,7 +1,7 @@
 # Docker Compose
 Hiermit lassen sich komplexe Softwaresystem aus einzelnen Docker-Containern (repräsentieren i. a. Services, die aus einem einzigen Prozess bestehen) aufbauen und miteinander vernetzen. Im Hinblick auf Microservices ist das natürlich sehr interessant.
 
-Ein Docker-Compose ist eine Beschreibung (``docker-compose.yml``) einer Vernetzung von Docker-Images. Per ``docker-compose up`` wird diese Beschreibung interpretiert, die Container gestartet (aus den Images werden nun Container) und die Docker-Container miteinander vernetzt.
+Ein Docker-Compose ist eine Beschreibung (``docker-compose.yml``) einer Vernetzung von Docker-Images. Per ``docker-compose up`` wird diese Beschreibung interpretiert, Container gestartet (aus den Images werden nun Container) und miteinander vernetzt ... bei ``docker-compose`` wird automatisch ein eigenes Bridge-Netzwerk aufgebaut, in dem die Hosts/Services über ihren Servicenamen aufgelöst werden können (es müssen keine IP-Adressen verwendet werden).
 
 Aber selbst wenn man keine komplexen Landschaften aufbauen muß, ist ``docker-compose`` in jedem Fall hilfreich, um komplexe ``docker run`` Kommandos (beispielsweise mit vielen Volume-Mounts) abzubilden, die sich dadurch persistieren und versionieren lassen.
 
@@ -52,7 +52,7 @@ spezifiziert und die Anwendnung dadurch aufgebaut.
 Die Ausführung kann lokal aber auch remote erfolgen, so daß man dadurch ganz leicht die Anwendung nicht lokal, sondern bei einem Docker-Cloud-Provider wie DigitalOcean fahren kann.
 
 ## Services
-Docker Compose abstrahiert von den Containern und hat Services als zentrales Konzept. Das zeigt sich beispielsweise daran, daß
+Docker Compose abstrahiert von den Containern und hat Services als zentrales Konzept. Die Servicenamen dienen auch der Adressierung (statt IP-Adressen oder Containernamen) und werden dementsprechend in Service-URLs verwendet. Das zeigt sich beispielsweise daran, daß
 
 * die Services sind unter ihrem Servicenamen als Hostname erreichbar sind
 * man Services über den Servicenamen referenziert und nicht den evtl. auch vergebenene Containernamen
