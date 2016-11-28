@@ -450,6 +450,14 @@ Ich wollte eine Appliance zwischen zwei Rechnern durch Neuanlage einer VM und Ei
 
 In meinem Fall hatte ich die Festplatte als SATA-Platte eingebunden ... die Platte war in der alten VM aber als IDE-Platte eingebunden. Nachdem ich sie als IDE-Platte eingebunden habe, hat es einwandfrei funktioniert.
 
+**Frage 6a:**
+
+Ich wollte eine Appliance zwischen zwei Rechnern durch Export und Import transportieren. Beim Start der Vm bekomme ich aber einer Fehlermeldung ``Could not find /dev/disk``.
+
+**Antwort 6a:**
+
+Die Festplatte war korrekt als IDE (statt SATA) eingebunden. Allerdings funktionierte es nicht mit dem VMDK Format. Nach Verwendung der Original-VDI-Datei klappte der Start einwandfrei.
+
 **Frage 7:**
 Nach der Installation von VirtualBox 5.1 unter Windows bekomme ich in meinen Linux-Boxen mit UI öffnet sich beim Drücken der Windows-Taste immer das Windows-Start-Menü. Leider verwende ich [awesome](https://awesome.naquadah.org/) als Fenstermanager und dort ist die Windows-Taste als Meta-Key eingestellt.
 
