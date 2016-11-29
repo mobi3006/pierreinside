@@ -97,8 +97,14 @@ VBoxManage startvm "NAME_DER_VM"
 ---
 
 # Netzwerkkonfiguration
+Die Netzwerkkarten von Virtualbox haben unter Linux das Namensschema ``enp0sX`` (z. B. ``enp0s3``).
+
 ## NAT
-Bei der Verwendung von NetworkAddressTranslation fungiert die VirtualBox-Software als Router (der das Gastnetzwerk mit dem Hostnetzwerk verbindet - beide haben ganz unterschiedliche IP-Adressen). Das Gastbetriebssystem erhält von VirtualBox eine IP-Adresse (z. B. 10.0.2.15), die nichts mit der IP-Adresse des Hostsystem (z. B. 192.168.1.1) zu tun hat. Virtualbox leitet die Nachrichten dann an die physische Netzwerkkarte des Hostsystems weiter.
+* http://www.virtualbox.org/manual/ch09.html#changenat
+
+Bei der Verwendung von NetworkAddressTranslation fungiert die VirtualBox-Software als Router (der das Gastnetzwerk mit dem Hostnetzwerk verbindet - beide haben ganz unterschiedliche IP-Adressen). Das Gastbetriebssystem erhält von VirtualBox eine IP-Adresse (per Default 10.0.2.15 ... wenn nur ein NAT-System existiert), die nichts mit der IP-Adresse des Hostsystem (z. B. 192.168.1.1) zu tun hat. Virtualbox agiert als Gateway (über die IP-Adresse 10.0.2.2), d. h. hierüber erfolgt die Einspeisung der Nachrichten in das Netzwerk des Hostsystems. Zudem stellt Virtualbox einen DNS-Server unter ``10.0.2.3`` bereit.
+
+Für JEDES NAT-Netzwerk wird ein eigenes Gast-Netzwerk aufgebaut.
 
 Das Gastbetriebssystem
 
