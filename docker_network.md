@@ -7,7 +7,9 @@ Beim Start eines Containers kann das zu verwendende Netzwerk per ``--network=bla
 docker run --network=isolated_nw -itd --name=container3 busybox
 ```
 
-Alle Container des gleichen Netzwerks können miteinander kommunizieren.
+Alle Container des gleichen Netzwerks können automatisch miteinander kommunizieren.
+
+Auf dem Docker Host werden IpTables-Einträge für die Kommunikation mit den Containern angelegt - siehe `iptables -t nat -L`.
 
 ## Netzwerktypen
 Docker bringt Ünterstützung für folgende Netzwerktypen ... jeder Netzwerktyp ist einem sog. *Diver* zugeordnet, hat einen Namen, eine ID :

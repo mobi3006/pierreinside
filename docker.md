@@ -208,4 +208,8 @@ pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --r
 **Antwort 1c:**
 Vielleicht kann man da auch was in ``/etc/default/docker`` konfigurieren ...
 
+**Frage 2:** 
+Wo finde ich die Log-Files der Docker-Engine?
 
+**Antwort 2:**
+Das hängt stark von der verwendeten Linux Distribution ab. Unter meinem Ubuntu 16.04 LTS bekomme ich es per `journalctl -u docker.service`.
