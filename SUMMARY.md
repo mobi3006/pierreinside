@@ -101,4 +101,6 @@
 * [Glossar](GLOSSARY.md)
 * [Terminal Multiplexer](terminalMultiplexer.md)
 * [Kali Linux](kaliLinux.md)
+* [TX Handling](txHandling.md)
+* [Schätzungen](estimations.md)
 

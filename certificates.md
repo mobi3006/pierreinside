@@ -61,5 +61,17 @@ Leider kann das Keytool von Oracle keine Zertifikate in das OpenSSL-Format expor
 
 ---
 
-# Debugging
+# Portecle
+Mit diesem GUI Tool lassen sich viele Operationen auf und mit Zertifikaten durchführen, für die man ansonsten die etwas kryptischen CLI-Tools wie ``openssl``, ``keytool`` verwenden müßte. Letzteres ist sicherlich fürs Scripting praktischer, erfordert aber stundenlages Man-page lesen. 
+
+---
+
+# XCA
+* https://sourceforge.net/projects/xca/
+
+GUI-Tool zum Aufbau einer eigenen CA.
+
+---
+
+# Debugging SSL-Verbindungen
 Mit ``openssl s_client`` (siehe oben) kann man sich den SSL-Handshake ansehen und dementsprechend auch den Austausch 
