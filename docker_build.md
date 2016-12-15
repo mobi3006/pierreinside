@@ -7,7 +7,7 @@ Für die Erzeugung eigener Docker-Images gibt es zwei Möglichkeiten:
 
 Im ersten Fall kann man von außen nicht beurteilen, in welchem Zustand das Image ist (welche Änderungen wurden vorgenommen). 
 
-Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderungen basierend auf einem Base-Image durchgeführt wurden.
+Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderungen basierend auf einem Base-Image durchgeführt wurden. 
 
 ---
 
@@ -106,3 +106,32 @@ Voila ... wenn man die Prinzipien mal verstanden hat, muß man auch vor der Fehl
 * mach das Image so schlank wie möglich
 
 > Mit Alpine Linux gibt es ein Linux Image, das nur 5 MB groß ist und somit bestens geeignet ist, wenn man ein minimales Docker-Image aufbauen will - natürlich muss man dann um so mehr Packages manuell nachinstallieren.
+
+---
+
+# Anwendung: ins Image vs. als ContainerContribution
+## Container Contribution
+Als ich mit Docker meine erste Landschaft (``docker-compose``) aufgebaut habe, sah das so aus:
+
+* Dockerfile
+* Entrypoint Script (``docker-entrypoint.sh``)
+* containerContributions
+
+Das Image enthielt nicht das Artefakt der zu startenden Anwendnung. Stattdessen wurde das Artefakt (durch ein ``prepare-deployment.sh`` Skript) in ``containerContributions``  abgelegt und das Entrypoint Skript zog sich die zu installierende Anwendung aus ``containerContributions``.
+
+Aus meiner Sicht hat das - zumindest solange man sich noch in einer Development-Phaase befindet folgende Vorteile:
+
+* Docker Images sind klein 
+* Docker Images müssen nicht neu gebaut werden, um eine andere Version der Anwendnung zu deployen
+* Änderungen an den Docker-Skripten sind auch nachträglich möglich
+
+## Maven builds Docker Image 
+
+Maven Plugin verwedenden, um beim Bau des Assembly-Artefakts der Anwendnung ein entsprechendes Docker Image zu bauen. 
+
+Bisher konnte ich mich mit dem Ansatz noch nicht anfreunden, weil zum Zeitpunkt des Builds des Anwendnungs-Artefakts das Skripting der Docker-Infrastruktur (``Dockerfile``, ``docker-entrypoint.sh``) noch nicht fertig sind. Die Wahrscheinlichkeit ist hoch, daß die erzeugten Docker Images nutzlos sind.
+
+## Entscheidung
+Vielleicht liegt die Wahrheit in der Mitte. Docker ist ein Synonym für einfache Deployments ... man startet ein Docker-Image und los gehts. Insofern ist der ``prepare-deployment.sh`` Ansatz sicher nicht Enduser geeignet (es sei denn das Docker Image ist eine Platform-as-a-Service). Allerdings würde ich diesen Schritt erst ganz zum Schluß gehen (beim Tag/Release). 
+
+
