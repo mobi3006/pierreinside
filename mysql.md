@@ -162,3 +162,4 @@ Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock'
 ```
 
 **Antwort 1:** Das liegt daran, daß die MySQL-Server im Container liegt und das Unix-Socket-File ``/var/run/mysqld/mysqld.sock`` auf dem Docker-Host gar nicht existiert. Es muß eine Network-Socket Kommunikation initiiert werden. Hierzu muß statt ``localhost:32768`` ein ``127.0.0.1:32768`` verwendet werden. 
+Alternativ kann man die Verbindungsart auch per ``--protocol=TCP`` angeben (http://serverfault.com/questions/337818/how-to-force-mysql-to-connect-by-tcp-instead-of-a-unix-socket)
