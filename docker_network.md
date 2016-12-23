@@ -1,4 +1,6 @@
 # docker network
+* sehr guter Beitrag: http://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach?rq=1
+
 Ein Container kann ein Netzwerk konfiguriert haben - muß aber nicht. Man kann auch nachträglich ein Netzwerk erzeugen (oder ein bestehendes verwenden) und einkonfigurieren.
 
 Beim Start eines Containers kann das zu verwendende Netzwerk per ``--network=blablubb`` angegeben werden:
@@ -8,6 +10,19 @@ docker run --network=isolated_nw -itd --name=container3 busybox
 ```
 
 Alle Container des gleichen Netzwerks können automatisch miteinander kommunizieren.
+
+Je nach Netzwerkkonfiguration wird ein neues Netzwerkdevice erzeugt, das man per `sudo ifconfig` sehen kann:
+
+```
+br-37a31f7f9696: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.18.0.1  netmask 255.255.0.0  broadcast 0.0.0.0
+        inet6 fe80::99:994ff:fe1a:4a71  prefixlen 64  scopeid 0x20<link>
+        ether 99:42:94:1a:4a:71  txqueuelen 0  (Ethernet)
+        RX packets 800513  bytes 173457174 (165.4 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 728155  bytes 294072701 (280.4 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
 
 Auf dem Docker Host werden IpTables-Einträge für die Kommunikation mit den Containern angelegt - siehe `iptables -t nat -L`.
 
@@ -20,6 +35,15 @@ Docker bringt Ünterstützung für folgende Netzwerktypen ... jeder Netzwerktyp 
 * Overlay
   * für verteilte Netzwerke (nicht nur auf einem Host) 
 * MACVLAN
+
+Nach der Installation von Docker sind bereits folgende Netzwerk-Interfaces im System registriert:
+
+* `docker0`: Default Bridge-Network - veraltet
+
+Zudem existieren schon folgende Docker-Netzwerke (`docker network ls`):
+* bridge
+* host
+* none
 
 ## Docker-Network-Subsystem
 Einen Überblick über das Subsystem liefert

@@ -105,4 +105,5 @@
 * [Schätzungen](estimations.md)
 * [Linux Tools](linux_tools.md)
 * [Handy](handy.md)
+* [Konfiguration Management](configurationManagement.md)
 

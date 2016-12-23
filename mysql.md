@@ -99,6 +99,10 @@ WHERE table_schema = "mydatabase" and
 	  round(((data_length + index_length) / 1024 / 1024),2) > 10
 ```
 
+> ACHTUNG: 
+> * man sollte vor der Nutzung des Information Schema ein Analyze Tables machen, ansonsten sind die Werte nicht aktuell
+> * `table_rows` kann man nicht gebrauchen ... es handelt sich um einen hochgerechneten Wert (aus der `data_length` und einem durchschnittlichen Datensatz
+
 ---
 
 ## MySQL Enterprise Manager
@@ -127,13 +131,40 @@ mysqlcheck --analyze --databases mydatabase --user root -p
 
 ---
 
-# MySQL im Docker Container
+# MySQL-Server im Docker Container
 Vermutlich wird man die Datenbank-Dateien auf den Docker-Host legen wollen, um den MySQL-Container wegwerfen und neu deployen zu können, ohne die Daten zu verlieren.
 
 Hier läuft man allerdings schnell in Permission-Probleme, weil die User-Ids auf dem Docker-Host nicht mit den User-Ids im Docker-Container übereinstimmen und man somit auf dem Docker-Host nur als ``root`` volle Rechte auf die Dateien hat (um beispielsweise die Datenbank-Dateien zu löschen).  
 
 ## Backup und Restore
 * http://depressiverobot.com/2015/02/19/mysql-dump-docker.html
+
+---
+
+# MySQL-Tooling im Docker Container
+Nicht jeder hat die MySQL Tools auf seinem Rechner installiert. Was liegt da näher als einen MySQL-Container zu starten und die Tools daraus zu nutzen.
+## Zugriff über MySQL Client aus Docker Container
+Das Tool `mysql` ist ein CLI zum Zugrifdf auf MySQL Datenbanken:
+
+```
+pfh@workbench ~ % docker run mysql:5.7 \ 
+   mysql \
+      --protocol=TCP \
+      --host="10.90.61.109" \
+      --port=53306 \
+      --user="root" \
+      --password=root \
+      --database=mydb \
+      --execute="select * from information_schema.TABLES"
+```
+
+Das funktioniert grundsätzlich ganz prima. Läuft die Datenbank allerdings auf dem Docker-Host in einem Docker-Container, dann darf man nicht ``localhost`` oder ``127.0.0.1`` als `` host`` verwenden, sondern die IP-Adresse des Docker-Hosts. Ansonsten bekommt man einen kryptischen Fehler dieser Art:
+
+```
+ERROR 2003 (HY000): Can't connect to MySQL server on '127.0.0.1' (111)
+```
+
+siehe auch http://dev.mysql.com/doc/refman/5.7/en/problems-connecting.html
 
 ---
 
@@ -161,5 +192,6 @@ Unable to connect to the database.
 Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
 ```
 
-**Antwort 1:** Das liegt daran, daß die MySQL-Server im Container liegt und das Unix-Socket-File ``/var/run/mysqld/mysqld.sock`` auf dem Docker-Host gar nicht existiert. Es muß eine Network-Socket Kommunikation initiiert werden. Hierzu muß statt ``localhost:32768`` ein ``127.0.0.1:32768`` verwendet werden. 
-Alternativ kann man die Verbindungsart auch per ``--protocol=TCP`` angeben (http://serverfault.com/questions/337818/how-to-force-mysql-to-connect-by-tcp-instead-of-a-unix-socket)
+**Antwort 1:** Das liegt daran, daß die MySQL-Server im Container liegt und das Unix-Socket-File ``/var/run/mysqld/mysqld.sock`` auf dem Docker-Host gar nicht existiert. Es muß eine Network-Socket Kommunikation initiiert werden. Hierzu muß statt ``localhost:32768`` ein ``127.0.0.1:32768`` verwendet werden. Alternativ kann man die Verbindungsart auch per ``--protocol=TCP`` explizit angeben (http://serverfault.com/questions/337818/how-to-force-mysql-to-connect-by-tcp-instead-of-a-unix-socket).
+
+Siehe auch http://dev.mysql.com/doc/refman/5.7/en/problems-connecting.html
