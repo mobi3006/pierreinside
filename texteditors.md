@@ -9,6 +9,7 @@ Meine Anforderungen an einen Texteditor:
 * schneller Start ... ich will zumindest schnell einzelne Dateien von der Konsole öffnen können
 
 # Sublime
+Hiermit habe ich ein wenig rumgespielt, war aber nicht bereit, den Preis zu zahlen ... Atom ist meine neue Alternative. 
 
 # Atom
 Vom Aussehen ähnelt Atom auf jeden Fall schon mal Sublime ... 
@@ -36,12 +37,30 @@ Nun ist der Editor einsatzbereit und ich werde ein wenig damit arbeiten ... hier
 * Schriftgröße mit Ctrl-+ und Ctrl-- verändern ... in Präsentationen ist das ganz praktisch
 * Markdown Preview
 
-# APM Paketmanager
+## APM Paketmanager
 * installierte Pakete befinden sich in ``/home/pfh/.atom/packages``
 
 ```
 apm install atom-shell-commands
 ```
 
+### Eclipse Keybindings
+Mit den Atom-Default-Keybindings konnte ich mich nicht anfreunden ... ich habe mich eben an die Eclipse Keybindings gewöhnt. Aber per `apm install eclipse-keybindings` findet sich ein Ausweg aus dieser Misere.
 
+Leider war ein Umschalten zwischen den Tabs nicht per `Ctrl-F6` out-of-the-box möglich. Durch Hinzufügen von
+
+```
+'body':
+  'ctrl-f6': 'pane:show-next-item'
+  'ctrl-shift-f6': 'pane:show-previous-item'
+```
+
+konnte das Problem gemindert werden. Doch eigentlich wollte ich durch zweeimaliges Drücken von `Ctrl-F6` zum ursprünglichen Tab zurückkehren ... der dafür zuständige Command `pane:show-next-recently-used-item` funktionierte aber nicht wie gewünscht.
+
+---
+
+# Visual Studio Code
+* [Homepage](https://code.visualstudio.com/?wt.mc_id=DX_841432&utm_source=vscom&utm_medium=ms%20web&utm_campaign=VSCOM%20Home)
+
+Aus einem Atom-Fork hervorgegangen ... 
 
