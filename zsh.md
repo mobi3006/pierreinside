@@ -12,14 +12,11 @@ Die zsh Shell installieren
     
 und die oh-my-zsh Erweiterungen hinzufügen
 
-    bash -c
-      "$(curl 
-         -fsSL
-         https://raw.githubusercontent.com
-            /robbyrussell/oh-my-zsh/
-            master/tools/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-Zu guter letzt noch zsh als Default Shell festlegen:
+Dadurch wird `~/.zshrc` und ein Verzeichnis `~/.oh-my-zsh` angelegt. Im Verzeichnis befinden sich Themes, Custom-Scripts, Templates, ....
+
+Zu guter letzt wird die ZSH-Shell als Default-Shell für den aktuellen User festgelegt:
 
     sudo chsh -s $(which zsh) $(whoami)
  
@@ -31,6 +28,8 @@ Ausloggen und neu anmelden - das Terminal sollte nun eine oh-my-zsh-Shell präse
 Die Konfiguration erfolgt in ``~/.zshrc``.
 
 ## GRML-Konfiguration
+> ACHTUNG: das würde ich zunächst mal nicht machen, weil einfach sehr viel mitbringt ... ich empfehle oh-my-zsh erst mal in der Standardausstattung kennenzulernen. Die Standard `.zshrc` wird aber nach `.zshrc_old` gesichert ... es gibt also einen Weg zurück
+
 Eine sehr umfassende Konfiguration erfolgt in der Distribution GRML, die zsh als default-Shell verwendet. Über 
 
     wget -O ~/.zshrc 
@@ -46,6 +45,14 @@ wird das GRML-zsh-Template heruntergeladen und in ``~/.zshrc`` abgelegt.
 * https://github.com/robbyrussell/oh-my-zsh/wiki/External-themes
 
 zsh kommt mit hunderten von Themes ... *robbyrussell* hat mir ganz gut gefallen
+
+## gnzh
+Dieses Theme hat aus meiner Sicht den Vorteil, daß der Prompt in einer eigenene Zeile steht:
+
+╭─pfh@muli ~  
+╰─➤  
+
+Insbesondere beim meinem [Awesome](awesome.md) Fenstermanager mit der automatischen Anordnung der Fenster ist das von Vorteil, da die Fenster teilweise recht schmal sind. Mit diesem Layout sieht man dann die meisten Kommandos auch ohne Zeilenumbruch, was bei Screen-Sharing mit Kollegen (oder bei Präsentationen) ganz praktisch ist.
 
 ## intheloop
 * kommt mit dem git-Plugin, das die Arbeit mit Git komfortabler gestaltet

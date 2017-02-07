@@ -109,6 +109,43 @@ Voila ... wenn man die Prinzipien mal verstanden hat, muß man auch vor der Fehl
 
 ---
 
+# Continuous Integration für Docker Images
+Natürlich will niemand die Images immer wieder manuell neu bauen ... man erwartet die Images eigentlich in einem Repository. Sobald ein Update auf die Image-Ressourcen erfolgt wird das Image neu gebaut, getestet und bei entsprechender Qualität ins Docker-Repository hochgeladen.
+
+Bei einem 
+
+```
+docker run image:latest
+```
+
+erfolgt dann automatisch ein Download der neuesten Version.
+
+## GitHub - DockerHub 
+DockerHub bietet schon eine einfache CI-Chain für GitHub-Docker-Repositories. Hierzu muß man im DockerHub das GitHub-Repository verlinken und einen Automated Build konfigurieren.
+
+Travis bietet sicherlich noch mehr Funktionalität - DockerHub ist aber ein guter Einstieg in die Welte der Docker-CI. 
+
+## GitHub - Travis - DockerHub 
+Diese Toolchain bildet CI für Docker-Images komfortabel ab. Im GitHub-Projekt wird eine `.travis.yml` im Root Verzeichnis erwartet. Diese Datei kündigt an, daß es sich um einen Docker-Service handelt und was beim Build geschehen soll (hier am Beispiel meines Forks von `groovy/docker-groovy` - https://github.com/mobi3006/docker-groovy):
+
+```
+language: bash
+services: docker
+...
+script:
+  - docker build -t "${image}" .
+  - cd ../test
+  - ./run.sh "${image}" "2.4.8"
+```
+
+In diesem Beispiel fehlt allerdings das Publishing auf ein Docker-Repository (Details hier: https://docs.travis-ci.com/user/docker/#Pushing-a-Docker-Image-to-a-Registry).
+
+In Travis (https://travis-ci.org/) muß der Build für das entsprechende GitHub Repository aktiviert werden.
+
+Beim nächsten Commit im GitHub-Repository erfolgt innerhalb weniger Sekunden/Minuten ein automatischer Build.
+
+---
+
 # Anwendung: ins Image vs. als ContainerContribution
 ## Container Contribution
 Als ich mit Docker meine erste Landschaft (``docker-compose``) aufgebaut habe, sah das so aus:
