@@ -15,7 +15,7 @@ Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderung
 Hat man ein ``Dockerfile`` erzeugt, dann baut man das entsprechende Image per
 
 ```
-docker build -t mobi3006:myFirstDockerImage . 
+docker build -t mobi3006/myFirstDockerImage . 
 ```
 
 aus dem Verzeichnis, in dem sich das ``Dockerfile`` befindet. In obigen Beispiel bekommt das Image den Namen ``myFirstDockerImage``. Unter diesem Namen kann es dann beispielsweise per
