@@ -3,15 +3,23 @@
 * [Introduction](README.md)
 * [Workbench](workbench.md)
    * [VirtualBox](virtualbox.md)
-   * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
-   * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
+   * Linux
+       * [Linux-Paketverwaltung](linux_paketverwaltung.md)
+       * [Linux Initialisierung](linux_initialization.md)
+       * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
+       * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
    * Konsole
+       * [ssh](ssh.md)
        * [zsh](zsh.md)
        * [cygwin](cygwin.md)
        * [Babun](babun.md)
        * [terminator](terminator.md)
+       * [Terminal Multiplexer](terminalMultiplexer.md)
+       * [Linux Tools](linux_tools.md)
    * [awesome](awesome.md)
    * [Texteditors](texteditors.md)
+* Softwareentwicklungsprozess
+   * [Schätzungen](estimations.md)
 * [Architektur](architecture.md)
    * [Microservices](microservices.md)
    * [NoSQL](nosql.md)
@@ -38,6 +46,7 @@
        * [Spring Petclinic](spring_petclinic.md)
    * [Thymeleaf](thymeleaf.md)
    * Persistenz
+       * [TX Handling](txHandling.md)
        * [JPA](jpa.md)
        * [Eclipse Link - JPA](eclipseLink.md)
        * [MySQL](mysql.md)
@@ -51,13 +60,10 @@
 * Performance & Scalability
    * [Java Performance](java_performance.md)
    * [Java Concurrency](java_concurrency.md)
-* DevOps
-   * Linux
-       * [Linux-Paketverwaltung](linux_paketverwaltung.md)
-       * [Linux Initialisierung](linux_initialization.md)
-   * [ssh](ssh.md)
+* Build und Deployment
    * [Maven](maven.md)
    * [Shellprogrammierung](shellprogramming.md)
+   * [Konfiguration Management](configurationManagement.md)
    * [Vagrant](vagrant.md)
        * [Vagrant-Ansible-Integration](vagrant_ansibleIntegration.md)
    * [Ansible](ansible.md)
@@ -93,18 +99,15 @@
        * [Hugo](hugo.md)
    * [Tiddly Wiki](tiddlyWiki.md)
    * [Leanpub](leanpub.md)
+* Sicherheit
+   * [Kali Linux](kaliLinux.md)
+* [Hausautomatisierung](homeAutomation.md)
+  * [Raspberry Pi](raspberrypi.md)
 * Misc
    * [iPad Pro](ipadPro.md)
    * [Swimming Pool](swimmingPool.md)
    * [Musik Streaming](musicstreaming.md)
+   * [Handy](handy.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [Terminal Multiplexer](terminalMultiplexer.md)
-* [Kali Linux](kaliLinux.md)
-* [TX Handling](txHandling.md)
-* [Schätzungen](estimations.md)
-* [Linux Tools](linux_tools.md)
-* [Handy](handy.md)
-* [Konfiguration Management](configurationManagement.md)
-* [Raspberry Pi](raspberrypi.md)
 
