@@ -102,7 +102,7 @@
 * Sicherheit
    * [Kali Linux](kaliLinux.md)
 * [Hausautomatisierung](homeAutomation.md)
-  * [Raspberry Pi](raspberrypi.md)
+   * [Raspberry Pi](raspberrypi.md)
 * Misc
    * [iPad Pro](ipadPro.md)
    * [Swimming Pool](swimmingPool.md)
@@ -110,4 +110,5 @@
    * [Handy](handy.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
+* [Projekt Sportstracker](projekt_sportstracker.md)
 

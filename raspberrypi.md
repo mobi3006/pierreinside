@@ -99,8 +99,22 @@ Man sollte darauf achten einen Raspberry PI Zero kompatiblen WLAN Sstick zu verw
 * https://thepihut.com/blogs/raspberry-pi-tutorials/16018016-how-to-setup-wifi-on-the-raspberry-pi-raspbian
 * http://strobelstefan.org/?p=4282
 
+---
+
+# Programmierung
+## Node RED
+Hiermit lassen sich sehr komfortabel Aktionsketten programmieren/konfigurieren.
+
+Installation per
+
+```
+sudo apt-get install nodered
+```
+
 --- 
 # Zubehör
+Zubehör gibt es häufig auch als Starter Kits ... das macht auf jeden Fall Sinn, um schon mal eine Basisausstattung zu haben.
+
 ## Breadboard
 * https://www.datenreise.de/raspberry-pi-wie-verwendet-man-ein-breadboard-steckplatine-anleitung/
 
@@ -110,3 +124,6 @@ Hiermit lassen sich GPIO-Verbindungen ohne Löten aufbauen ... also sehr praktis
 
 # Bastelideen
 * https://raspberry.tips/hausautomatisierung/raspberry-pi-software-zur-hausautomatisierung/
+* [Projekt Sportstracker](projekt_sportstracker.md)
+
+---
