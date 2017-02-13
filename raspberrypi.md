@@ -123,7 +123,8 @@ Hiermit lassen sich GPIO-Verbindungen ohne Löten aufbauen ... also sehr praktis
 ---
 
 # Bastelideen
+* [Projekt Sportstracker - unser eigenes Projekt](projekt_sportstracker.md) 
 * https://raspberry.tips/hausautomatisierung/raspberry-pi-software-zur-hausautomatisierung/
-* [Projekt Sportstracker](projekt_sportstracker.md)
+* http://raspberrypiguide.de/howtos/powerpi-raspberry-pi-haussteuerung/
 
 ---
