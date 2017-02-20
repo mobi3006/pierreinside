@@ -80,6 +80,9 @@ MySQL bietet mehrere Storage Engines an, die teilweise hoistorisch gewachsen sin
 * InnoDB: transaktional
 * MyISAM: nicht transaktional
 
+## InnoDB
+* jede Tabelle landet in einer eigenen Datei, die einen Tablespace repräsentiert (zumindest bei der Einstellung `innodb_file_per_table=1`) - ein Aufteilen auf verschiedene Festplatten (schnell/langsam) mit jeweils eigenen Festplattencontrollern (Zugriffsparallelisiserung) ist dadurch möglich
+
 ---
 
 # Information Schema

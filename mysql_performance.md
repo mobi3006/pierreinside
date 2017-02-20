@@ -1,4 +1,5 @@
 # MySQL Performance
+* http://www.tecmint.com/mysql-mariadb-performance-tuning-and-optimization/
 
 ---
 
@@ -12,6 +13,12 @@ Mit der MySQL Workbench können die Ergebnisse recht komfortabel ausgewertet wer
 
 ## MySQL Workbench
 Dieses kostenlose Tool ist schon sehr praktisch, wenn man auf der Suche nach Bottlenecks ist.
+
+## MySQL Enterprise Manager
+
+## MySQLTuner-perl
+* https://github.com/major/MySQLTuner-perl
+* Perl Skript, das ein paar wesentliche Konfigurationsparameter überprüft und Optimierungsvorschläge macht
 
 ## Logging
 In der Softwareentwicklung verwendet man häufig Prepared Queries, weil deren Execution Plan nur ein einziges mal berechnet werden muß und dann unabhängig von den Parameter-Bindings genutzt werden können. Explain Plan ist eine recht teure Operation und deshalb macht dieses Vorgehen Sinn.
@@ -33,13 +40,35 @@ Hierüber werden langlaufende Queries in eine Datei geloggt:
 ```
 slow_query_log=0
 slow_query_log_file=/var/lib/mysql/slow-query.log
+long_query_time=2
 ```
+
+Der letzte Parameter bestimmt welche Ausführungszeit als *slow* eingestuft wird.
 
 Sehr praktisch!!!
 
 ---
 
 # Tips
+## Konfiguration
+### InnoDB Buffer Pool
+* http://www.tecmint.com/mysql-mariadb-performance-tuning-and-optimization/2/
+* https://dev.mysql.com/doc/refman/5.7/en/innodb-buffer-pool-resize.html
+
+Der Schalter `innodb_buffer_pool_size` bestimmt wieviel RAM MySQL für Caching und Indizes verwenden darf. Bei einem MySQL dedicated Rechner sollte man 60-70% des verfügbaren RAM verwenden.
+
+### Query Cache Size
+Dieser Cache macht Sinn, wenn man immer wieder die gleichen Queries absetzt. Ist das nicht der Fall, dann macht es keinen Sinn. Ist der Wert zu hoch, dann hat das nachteilige Ausweirkungen auf die Performance, weil der Cache gelockt werden muß, um ihn zu aktualisieren, d. h. die Threads der anderen Queries werden auch blockiert. Ein Wert zwischen 64 und 256 MB sollte i. a. ausreichend sein.
+
+### Max Connections
+Jede Connection (die beispielsweise über die Konfiguration des Application Server Connection Pool aufgebaut wird) benötigt - auch wenn sie nicht genutzt wird - Speicher auf dem MySQL Server.
+
+### OS Swappiness
+Defaultmäßig fangen Betriebssysteme bei einer bestimmten RAM-Nutzung (Linux 60% - `sysctl vm.swappiness`) mit swappen an. Bei einer Datenbank. Hat man allerdings einen Dedicated MySQL Server und kann durch dessen Konfiguration den Hauptspeicherbedarf relativ genau bestimmen, dann sollte man den Wert reduzieren oder gar auf 0 setzen (`sysctl -w vm.swappiness=0`).
+
+### Richtiges Filesystem verwenden
+MariaDB (ein MySQL Fork) empfiehlt XFS, Ext4 und Btrfs.
+
 ## analyze table
 Die Ermittlung des optimalen Explain Plan hängt vom Inhalt der Tabellen ab. Das liegt daran, daß häufig - aufgrund von Indexen, die ähnlich sind - verschiedene Zugriffspfade existieren (neben einem FULL TABLE SCAN). Ein ``analyze table`` hilft dem Optimizer bessere Execution Plans zu ermitteln. Deshalb sollte man dies auch regelmäßig tun.
 
@@ -58,7 +87,7 @@ Häufig ist diese Analyse auch relativ schnell durch (hängt natürlich von der 
 Per ``show index myTable`` kann man auch die Effizienz der Indizes erfahren (in MySQL Workbench sieht an das über den *Table Inspector*). Eine Kardinalität von 0 deutet auf eine schlechte Effizienz hin ... vielleicht verschafft ein ``analyze table`` hier Abhilfe.
 
 ## optimize table
-Im Gegensatz zum ``analyze table`` greift ``optimize table`` in die Speicherorganisation der Datenbank ein. Die Datenbank ist während
+Im Gegensatz zum ``analyze table`` greift ``optimize table`` in die Speicherorganisation der Datenbank ein (die Fragmentierung wird reduziert).
 
 ## Selektivität
 Das Ziel des Optimizers ist es, möglichst schnell eine Reduktion der zu berücksichtigenden Datenmenge zu erreichen. Das schafft man, indem die WHERE-clauses ausgewertet werden mit den Indizes, die das erreichen.
