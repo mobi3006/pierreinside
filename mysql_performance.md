@@ -1,6 +1,8 @@
 # MySQL Performance
 * http://www.tecmint.com/mysql-mariadb-performance-tuning-and-optimization/
 
+MySQL Community Edition hat brauchbare Default Einstellungen, aber die Konfiguration muß auf jeden Fall an die Bedürfnisse angepaßt werden.
+
 ---
 
 # Analyse

@@ -2,6 +2,24 @@
 
 ---
 
+# Distributionen
+Es gibt u. a. folgende Distributionen
+
+* Community MySQL ... von Oracle
+  * bildet die Grundlage für die anderen Distributionen
+* MariaDB
+  * hat häufig ein paar dedizierte Performance-Optimierungen
+  * erstellt vom MySQL Gründer
+* Percona Server
+  * hat häufig ein paar dedizierte Performance-Optimierungen
+  * SlowQuery Log ist viel informativer
+* WebScaleSQL
+  * Fork von Facebook, Google, ...
+
+Diese Distributionenn sind zueinander kompatibel, so daß man eine andere Distribution installieren kann, die auf den Dateien der anderen arbeitet.
+
+---
+
 # Installation
 Unter Linux gibt es zwei Paketquellen:
 * RECOMMENDED: offizielle MySQL Pakete ... die Installation läuft über das *MySQL APT Repository* 
