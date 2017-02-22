@@ -25,6 +25,18 @@ Eine leichtgewichtige Lösung sind *Linux Containers* ... Docker ist eine Implem
 # Appetizer - what makes it sexy
 * https://codefresh.io/blog/using-docker-generate-ssl-certificates/
 
+Das schöne an Docker ist, daß ein Service (Applikation, Komponente) seine Dependencies bereits mitbringt, d. h. man ist nicht darauf angewiesen, daß auf dem auszuführenden System eine spezielle Java Version installiert ist ... weil der Service diese Java-Version einfach mitbringt. Das erhöht die Wahrscheinlichkeit, daß der Service tatsächlich auf dem Zielsystem in der Art und Weise läuft, in der er auch getestet wurde. Die Qualität für den Endanwender steigt.
+
+Zudem muß das Zielsystem nicht verändert werden ... was die wenigsten Anwender wollen, wenn sie eine ihnen unbekannte Software installieren. Vor allem, wenn man eine Software nur mal ausprobieren will, dann möchte man sein System nicht verschmutzen. Zwei unterschiedliche Container können unterschiedlicher Versionen einer Dependency verwenden (z. B. Java 7 oder Java 8, Apache 2.2 oder 2.4). 
+
+Hat man kein Java, Maven, Perl, Groovy, OpenSSL, ... auf einem System installiert, so kann man es über Docker-Container bereitstellen, ohne das Zielsystem zu verändern. Auf diese Weise kann man recht komplexe Toolings anbieten, die nach einem `git clone` einsatzfähig sind und keine Kompatibilitätsprobleme mit dem Zielsystem haben.
+
+Die Installation kommt i. a. out-of-the-box (sofern die Image-Entwickler gute Defaults vorgesehen haben), was den Einstieg extrem vereinfacht. Die Installation ist Bestandteil des Images, aus dem ein Container hervorgeht. Man muß i. a. keine Dokumentation lesen, um einen Service zu starten. Die Konfiguration erfolgt zumeist über Volumes, die vom Docker-Host in den Docker-Container gemountet werden.
+
+Die Docker-Engine abstrahiert außerdem vom Betriebssystem. Es spielt keine Rolle, ob der Container unter Windows 10, Ubunhtu, CentOS, MacOS, ... läuft. 
+
+> In der Praxis habe ich zumindest mit Windows (Docker Toolbox, Docker for Windows) anfangs Probleme gehabt, weil die Architektur (Virtuelles Image mit einem Linux Betriebssystem) recht komplex und fehleranfällig war. Mittlerweile ist das deutlich besser geworden.
+
 ---
 
 # Basics

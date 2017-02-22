@@ -100,6 +100,11 @@ MySQL bietet mehrere Storage Engines an, die teilweise hoistorisch gewachsen sin
 
 ## InnoDB
 * jede Tabelle landet in einer eigenen Datei, die einen Tablespace repräsentiert (zumindest bei der Einstellung `innodb_file_per_table=1`) - ein Aufteilen auf verschiedene Festplatten (schnell/langsam) mit jeweils eigenen Festplattencontrollern (Zugriffsparallelisiserung) ist dadurch möglich
+* Row-Locks
+* ACID Support
+
+## MyISAM
+* kennt nur Table-Locks keine Row-Locks ... schlechte Performance in Multi-Session-Szenarien
 
 ---
 

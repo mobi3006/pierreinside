@@ -1,5 +1,7 @@
 # MySQL Performance
 * http://www.tecmint.com/mysql-mariadb-performance-tuning-and-optimization/
+* http://www.speedemy.com/mysql-configuration-tuning-handbook/
+* http://speedemy.com/files/mysql/my.cnf
 
 MySQL Community Edition hat brauchbare Default Einstellungen, aber die Konfiguration muß auf jeden Fall an die Bedürfnisse angepaßt werden.
 
@@ -57,7 +59,7 @@ Sehr praktisch!!!
 * http://www.tecmint.com/mysql-mariadb-performance-tuning-and-optimization/2/
 * https://dev.mysql.com/doc/refman/5.7/en/innodb-buffer-pool-resize.html
 
-Der Schalter `innodb_buffer_pool_size` bestimmt wieviel RAM MySQL für Caching und Indizes verwenden darf. Bei einem MySQL dedicated Rechner sollte man 60-70% des verfügbaren RAM verwenden.
+Hierbei handelt es sich um den wichtigsten Konfigurationsparameter. Der Schalter `innodb_buffer_pool_size` bestimmt wieviel RAM MySQL für Caching und Indizes verwenden darf. Bei einem MySQL dedicated Rechner sollte man 70-80% des verfügbaren RAM verwenden.
 
 ### Query Cache Size
 Dieser Cache macht Sinn, wenn man immer wieder die gleichen Queries absetzt. Ist das nicht der Fall, dann macht es keinen Sinn. Ist der Wert zu hoch, dann hat das nachteilige Ausweirkungen auf die Performance, weil der Cache gelockt werden muß, um ihn zu aktualisieren, d. h. die Threads der anderen Queries werden auch blockiert. Ein Wert zwischen 64 und 256 MB sollte i. a. ausreichend sein.
