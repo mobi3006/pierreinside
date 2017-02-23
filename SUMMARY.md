@@ -79,6 +79,7 @@
        * [docker machine](docker_machine.md)
        * [Docker@Windows](docker_windows.md)
        * [Docker Host](docker_host.md)
+       * [Docker Scaling](docker_scaling.md)
    * [CoreOS](coreos.md)
    * Deployment
        * [Kubernetes](kubernetes.md)
@@ -111,5 +112,4 @@
    * [Handy](handy.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [Docker Scaling](docker_scaling.md)
 
