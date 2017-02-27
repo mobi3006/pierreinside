@@ -54,6 +54,9 @@ Sehr praktisch!!!
 ---
 
 # Tips
+## Dedicated DB Server
+Am besten verwendet man einen dedizierten DB-Server, der sich die Ressourcen nicht mit anderen Komponenten (z. B. Application-Server) teilen muß. Der Vorteil darin, daß das Tuning (über entsprechende Konfigurationsparameter) deutlich einfacher ist.
+
 ## Konfiguration
 ### InnoDB Buffer Pool
 * http://www.tecmint.com/mysql-mariadb-performance-tuning-and-optimization/2/
@@ -68,10 +71,13 @@ Dieser Cache macht Sinn, wenn man immer wieder die gleichen Queries absetzt. Ist
 Jede Connection (die beispielsweise über die Konfiguration des Application Server Connection Pool aufgebaut wird) benötigt - auch wenn sie nicht genutzt wird - Speicher auf dem MySQL Server.
 
 ### OS Swappiness
-Defaultmäßig fangen Betriebssysteme bei einer bestimmten RAM-Nutzung (Linux 60% - `sysctl vm.swappiness`) mit swappen an. Bei einer Datenbank. Hat man allerdings einen Dedicated MySQL Server und kann durch dessen Konfiguration den Hauptspeicherbedarf relativ genau bestimmen, dann sollte man den Wert reduzieren oder gar auf 0 setzen (`sysctl -w vm.swappiness=0`).
+Defaultmäßig fangen Betriebssysteme bei einer bestimmten RAM-Nutzung (Linux 60% - `sysctl vm.swappiness`) mit swappen an ... für einen Datenbankserver ist Swapping ganz schlecht - noch schlechter ist es, wenn fachfremde (Betriebssystem) darüber entscheidet welche Teile auf die Festplatte ausgelagert werden. Eine Datenbank ist - im besten Fall - ein hochoptimiertes System, das an der Leistungsgrenze läuft ... da kann man sich keine generischen Auslagerungsstrategien eines Betriebssystems leisten. 
+
+### DB Filesystem I/O
+Eine Datenbank sollte nach möglichkeit die meisten Sachen im Hauptspeicher machen und optimal die Festplatte einbinden (lesen/schreiben). Dafür gibt es entsprechende Konfigurationsparameter, die an die jeweilige Anwendung anzupassen sind - denn der DBA bzw. die Entwickler dieser Anwendnung wissen am besten wie sich die Anwendung verhält und welche Einstellungen dafür am besten geeignet sind. 
 
 ### Richtiges Filesystem verwenden
-MariaDB (ein MySQL Fork) empfiehlt XFS, Ext4 und Btrfs.
+Das richtige Filesystem ist von der verwendeten Storage Engine abhängig ... für MySQL mit InnoDB Storage Engine werden die Filesysteme XFS, Ext4 und Btrfs empfohlen.
 
 ## analyze table
 Die Ermittlung des optimalen Explain Plan hängt vom Inhalt der Tabellen ab. Das liegt daran, daß häufig - aufgrund von Indexen, die ähnlich sind - verschiedene Zugriffspfade existieren (neben einem FULL TABLE SCAN). Ein ``analyze table`` hilft dem Optimizer bessere Execution Plans zu ermitteln. Deshalb sollte man dies auch regelmäßig tun.

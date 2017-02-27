@@ -112,4 +112,7 @@
    * [Handy](handy.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
+* [Graylog](graylog.md)
+* [Monitoring](monitoring.md)
+* [Logging](logging.md)
 
