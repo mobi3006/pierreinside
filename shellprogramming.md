@@ -15,7 +15,8 @@ Später kam dann Provisioning im Docker-Umfeld hinzu und der Aufbau einer komple
 # Kritik
 Leider bin ich trotz dieser reichhaltigen Erfahrung noch immer kein Freund der Shellprogrammierung, weil
 
-* Shells sind untereinander nicht kompatibel (sh, bash, zsh) funktionieren im wesentlichen ähnlich, im Detail gibt es dann aber doch Unterschiede (z. B. if-clause, functions) ... Mit einem Shebang (#!/bin/bash) in den Scripten lässt sich das Problem nahezu umgehen, doch in beim Source (`source seten.sh`) hilf das nicht - hier kommt es auf die gewählte Shell des Ausführenden an
+* Shells sind untereinander nicht kompatibel (sh, bash, zsh) funktionieren im wesentlichen ähnlich, im Detail gibt es dann aber doch Unterschiede (z. B. if-clause, functions) ... Mit einem Shebang (#!/bin/bash) in den Scripten lässt sich das Problem nahezu umgehen, doch in beim Source (`source seten.sh`) hilft das nicht - hier kommt es auf die gewählte Shell des Ausführenden an
+* GNU Tools sind nicht plattformunabhängig ... wer `curl` unter Linux, MacOS, Cygwin nutzen will dreht durch (https://daniel.haxx.se/blog/tag/securetransport/)
 * Fehlersuche ist eine einzige Katastrophe ... trotz `set -x` fühle ich mich wie in den 80ern - `echo` ist mein einziger Freund 
 * Refactorings ... ich habe noch kein gutes Tool gefunden
 * automatisiertes Testen ... geht das?
@@ -38,11 +39,12 @@ In diesem Beitrag ([When to use Bash and when to use Perl/Python/Ruby?](http://s
 
 # Tips
 ## Functions
-Ein häufiger Tip ist `echo returnValue` zur Rückgabe von Parametern zu verwenden. Leider hat das den Nachteil, daß darin verwendete `echo`Ausgaben (zwecks Logging) als Returnwert interpretiert werden. In diesem Beispiel:
+### Logging in Functions
+Ein häufiger Tip ist `echo returnValue` zur Rückgabe von Parametern zu verwenden. Leider hat das den Nachteil, daß die darin verwendete ERSTE `echo`Ausgabe als Returnwert interpretiert wird. Dadurch ist Logging über `echo` in Funktionen nicht zu gebrauchen (viel zu fehleranfällig bzw. zu einschränkend). In diesem Beispiel:
 
 ```
 getSurnameByEcho() {
-   echo "getSurnameByEcho"
+   echo "getSurnameByEcho"    # dieser Wert wird der Rückgabwert
    echo "feldbusch"
 }
 nameByEcho=
@@ -80,6 +82,32 @@ surnameByDeclare=feldbusch
 ```
 
 und muß nicht auf `echo`-Logausgaben verzichten.
+
+### `_local` Variablen beeinflussen `${?}`
+```
+function myfunction() {
+  _foo=`exit 1`
+  if [ "${?}" == "1" ]; then
+    echo "this was expected"
+  else
+    echo "error"
+  fi
+
+  local _bar=`exit 1`
+  if [ "${?}" == "1" ]; then
+    echo "this was expected"
+  else
+    echo "error: local has destroyed the semantic"
+  fi
+}
+```
+
+Beim Aufruf von `echo "controller: $(myfunction)"` wird leider folgendes ausgegeben:
+
+```
+controller: this was expected
+error: local has destroyed the semantic
+```
 
 ## Know-How
 * http://wiki.bash-hackers.org/syntax/pe
