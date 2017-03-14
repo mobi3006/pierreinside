@@ -116,4 +116,5 @@
 * [Monitoring](monitoring.md)
 * [Logging](logging.md)
 * [Glassfish](glassfish.md)
+* [Heapdump Analysis](heapdump_analysis.md)
 
