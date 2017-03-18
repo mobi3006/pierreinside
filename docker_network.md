@@ -1,6 +1,10 @@
 # docker network
+* https://entwickler.de/online/development/docker-netzwerk-container-microservices-126443.html
+* http://blog.sequenceiq.com/blog/2014/08/12/docker-networking/
 * sehr guter Beitrag: http://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach?rq=1
+* http://www.linuxjournal.com/content/concerning-containers-connections-docker-networking
 
+## Getting Started
 Ein Container kann ein Netzwerk konfiguriert haben - muß aber nicht. Man kann auch nachträglich ein Netzwerk erzeugen (oder ein bestehendes verwenden) und einkonfigurieren.
 
 Beim Start eines Containers kann das zu verwendende Netzwerk per ``--network=blablubb`` angegeben werden:
@@ -27,6 +31,14 @@ br-37a31f7f9696: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 Auf dem Docker Host werden IpTables-Einträge für die Kommunikation mit den Containern angelegt - siehe `iptables -t nat -L`.
 
+## Docker Host Konfiguration
+Unter Ubuntu findet man die `/etc/default/docker`, in der wichtige Konfigurationsparameter für den Docker Daemon hinterlegt sind. Folgende Einstellungen sind netzwerktechnisch besonders interessant:
+
+```
+DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+DOCKER_NETWORK_OPTIONS=-ip=0.0.0.0
+```
+
 ## Netzwerktypen
 Docker bringt Ünterstützung für folgende Netzwerktypen ... jeder Netzwerktyp ist einem sog. *Diver* zugeordnet, hat einen Namen, eine ID :
 
@@ -47,7 +59,7 @@ Zudem existieren schon folgende Docker-Netzwerke (`docker network ls`):
 * none
 
 ### Netzwerkinterfaces
-Netzwerkkommunikation läuft IMMER über ein Netzwerkinterface - eine Übersicht über alle vorhanden Netzwerkinterfaces erhält man per `ifconfig`:
+Netzwerkkommunikation läuft IMMER über ein Netzwerkinterface - eine Übersicht über alle vorhanden Netzwerkinterfaces erhält man per `ifconfig`
 
 ```
 ╰─➤  ifconfig
@@ -85,12 +97,44 @@ lo        Link encap:Local Loopback
           TX packets:31 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1 
           RX bytes:2700 (2.7 KB)  TX bytes:2700 (2.7 KB)
+          
+veth998e684: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 3e:8b:61:ed:d4:64  txqueuelen 0  (Ethernet)
+        RX packets 26289  bytes 8082965 (7.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 18243  bytes 18891288 (18.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
+
+oder auch `ip addr`
+
+```
+╰─➤  ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:52:75:ff brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
+       valid_lft 63024sec preferred_lft 63024sec
+    inet6 fe80::4b4:89c5:8cf5:eeb5/64 scope link 
+       valid_lft forever preferred_lft forever
+3: br-4bd2f1095075: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 02:42:1f:1a:0d:32 brd ff:ff:ff:ff:ff:ff
+    inet 172.19.0.1/16 scope global br-4bd2f1095075
+       valid_lft forever preferred_lft forever
+...
+```
+
+Diese Netzwerkinterfaces sind i. a. größtenteils nicht physikalisch vorhanden, sondern es handelt sich um virtuelle Devices. Diese virtuellen Devices werden von Docker automatisch auf dem Docker Host angelegt und zudem IPTables Einträge gemacht, um das  Routing entsprechend abzubilden.
 
 All diese Interfaces lassen sich anpingen (z. B. `ping 172.18.0.1`).
 
 #### Docker Bridged Netzwerk `br-1bb4da4d6e7c` 
-... hat die IP-Adresse `172.18.0.1` auf Docker-Host Seite
+... hat die IP-Adresse `172.18.0.1` auf Docker-Host Seite.
 
 Der Netwerkkonfiguration des Docker-Container, der dieses Interface verwendet sieht folgendermaßen aus:
 
@@ -98,7 +142,7 @@ Der Netwerkkonfiguration des Docker-Container, der dieses Interface verwendet si
 ╰─➤  docker network inspect 1bb4da4d6e7c
 [
     {
-        "Name": "dockertisplatform_default",
+        "Name": "dockerplatform_default",
         "Id": "1bb4da4d6e7c51f9322f62931fceb1f0dab96618a4d380fa2e5a1204ec53c3ed",
         "Scope": "local",
         "Driver": "bridge",
@@ -136,7 +180,7 @@ Der Netwerkkonfiguration des Docker-Container, der dieses Interface verwendet si
 ]
 ```
 
-d. h. der Docker-Container (in diesem Fall sind es sogar zwei, die in diesem Subnetz `172.18.0.0` hängen) verwendet die Docker-Host IP-Adresse des Netzwerkinterfaces als Gateway (`172.18.0.1`). Dadurch ist die non-internal Kommunikation mit der Außenwelt über den Docker Host sichergestellt. Interne Netzwerkkommunikation erfolgt über die internen IP-Adressen ... verwendet man beispielsweise Docker-Compose, so lassen sich die Services über den Service-Name (`foo`) adressieren.
+d. h. der Docker-Container (in diesem Fall sind es sogar zwei, die in diesem Subnetz `172.18.0.0` hängen) verwendet die Docker-Host IP-Adresse des Netzwerkinterfaces als Gateway (`172.18.0.1`). Dadurch ist die non-internal Kommunikation mit der Außenwelt über den Docker Host sichergestellt. Interne Netzwerkkommunikation erfolgt über die internen IP-Adressen ... bei entsprechender Alias-Konfiguration (z. B. automatisch bei Verwendung von Docker-Compose) läßt sich der Container über einen logischen Names (`foo`) adressieren.
 
 Im Docker-Host ist das Netzwerk folgendermaßen ins Roouting eingebunden:
 
@@ -162,6 +206,11 @@ Bei einem Host-Netzwerk (`docker run --net=host`) verhält sich der Container ne
 Beim Bridge-Netzwerk erhalten beide Enden der Brücke eine eigene IP-Adresse, d. h. 
 
 * im Docker Host 
+
+### Iptables
+Diese Einstellung auf dem Docker Host regelt Kommunikation auf unterster Ebene. Docker legt hier slebständig eigene Einträge ein, die über abstraktere Konfigurationen (z. B. in `docker run` oder `docker-compose.yml`) beschrieben werden. Deshalkb muß man selten in diese Konfiguration schauen, wenn man aber Fehler beheben will, dann kommt man hier nicht herum.
+
+
 
 ## Docker-Network-Subsystem
 Einen Überblick über das Subsystem liefert
@@ -264,6 +313,6 @@ Die Auflösung von ``pierre2`` nach ``172.20.0.3`` macht in User-defined-Network
 ## Networking mit docker-compose
 * https://docs.docker.com/compose/networking/
 
-Docker-Compose erstellt beim Start sein eigenes Netzwerk, in dem die verschiedenen Container über deren Name erreichbar sind. Das ist auf jeden Fall schon mal komfortabler als in einem reinen Docker-Setup (dort könnte man das per ``docker run --link`` nachbilden). Die Container kommunizieren über dieses eigene Netzwerk und dementsprechend kommen sich die Container verschiedener Docker-Compose-Projekte bei den Ports auch nicht in die Quere. Außerdem muß ich auch keinen Port zum Docker-Host exponieren ... und damit kann das natürlich auch mit den Ports des Docker-Host nicht in Konflikt stehen.
+Docker-Compose erstellt beim Start sein eigenes Netzwerk, in dem die verschiedenen Container über deren Name erreichbar sind. Das ist auf jeden Fall schon mal komfortabler als in einem reinen Docker-Setup, in dem man das manuell konfigurieren muß (z. B. per ``docker run --link`` nachbilden). Die Container kommunizieren über dieses eigene Subnetzwerk. Da Docker-Compose kein HOST Netzwerk verwendet, sondern Bridge oder Overlay kommen sich die Container verschiedener Docker-Compose-Projekte bei den Ports auch nicht in die Quere. Ports müssen explizit an den Docker Host exponiert werden. Außerdem muß ich auch keinen Port zum Docker-Host exponieren ... und damit kann das natürlich auch mit den Ports des Docker-Host nicht in Konflikt stehen.
 
 Mit einem Overlay-Netzwerk kann man sogar über Maschinengrenzen hinweg transparent (für die ``docker-compose.yml``) kommunizieren. Das ist beispielsweise bei Docker-Swarm relevant. 

@@ -52,14 +52,16 @@
        * [MySQL](mysql.md)
            * [MySQL Performance](mysql_performance.md)
            * [Docker MySQL](docker_mysql.md)
+   * [Glassfish](glassfish.md)
    * [YAML](yaml.md)
    * [Zeichenkodierung](characterEncoding.md)
 * Testen
    * [Easymock](easymock.md)
    * [Mockito](mockito.md)
 * Performance & Scalability
-   * [Java Performance](java_performance.md)
-   * [Java Concurrency](java_concurrency.md)
+  * [Java Performance](java_performance.md)
+    * [Heapdump Analysis](heapdump_analysis.md)
+  * [Java Concurrency](java_concurrency.md)
 * Build und Deployment
    * [Maven](maven.md)
    * [Shellprogrammierung](shellprogramming.md)
@@ -87,6 +89,10 @@
        * [Cloud Deployment Provider](cloudDeployment_provider.md)
    * [Synology](synology.md)
    * [Zertifikate](certificates.md)
+* Operations
+  * [Logging](logging.md)
+    * [Graylog](graylog.md)
+  * [Monitoring](monitoring.md)
 * Git Ecosystem
    * [Git](git.md)
    * [GitHub](github.md)
@@ -110,11 +116,6 @@
    * [Swimming Pool](swimmingPool.md)
    * [Musik Streaming](musicstreaming.md)
    * [Handy](handy.md)
+   * [Spielekonsole](spielekonsole.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [Graylog](graylog.md)
-* [Monitoring](monitoring.md)
-* [Logging](logging.md)
-* [Glassfish](glassfish.md)
-* [Heapdump Analysis](heapdump_analysis.md)
-
