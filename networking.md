@@ -25,3 +25,13 @@ Die Software legt diese bei der Installation oder zur Laufzeit an, um die gewün
 
 Für jede dieser Arten erfolgt auf dem Host eine andere Konfiguration. Glücklicherweise macht das die Software i. a. auf Basis relativ abstrakter/komfortabler GUIs. Die darunterliegenden Internas muß man nur kennen, wenn es Probleme gibt ;-)
 
+----
+
+# Routing
+* http://www.techrepublic.com/article/understand-the-basics-of-linux-routing/
+
+Damit Nachrichten zwischen Devices transferiert werden können, müssen entsprechende Routing-Regeln existieren.
+
+Die Tools `route -N` bzw. `netstat -r` geben hier Auskunft. Grundsätzlich führt ein Netzwerkknoten eines Subnetzes für alle Zieladressen im gleichen Subnetz das Routing selbständig durch, Pakete für andere Netzwerke (z. B. für Internet-Knoten) werden an das Gateway weitergeleitet und vom entsprechend geroutet.
+
+(z. B. alle Ziel-IP-Adressen 192.168.1.x werden auf das Interface `eth0` geroutet)
