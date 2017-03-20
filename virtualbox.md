@@ -97,7 +97,18 @@ VBoxManage startvm "NAME_DER_VM"
 ---
 
 # Netzwerkkonfiguration
-Die Netzwerkkarten von Virtualbox haben unter Linux das Namensschema ``enp0sX`` (z. B. ``enp0s3``).
+* https://www.thomas-krenn.com/de/wiki/Netzwerkkonfiguration_in_VirtualBox#Host-only_networking
+
+Die Netzwerkkarten von Virtualbox haben unter Linux das Namensschema ``enp0sX`` (z. B. ``enp0s3``). Über entsprechende IPTables erfolgt das Routing auf die entsprechende Netzwerkkarte (`route`).
+
+| Netzwerktyp | Gast -> andere Gäste | Host -> Gast | Gast -> externes Netzwerk |
+| -- | -- | -- | -- |
+| Not attached | nein | nein | nein |
+| Network Address Translation (NAT) | nein | nein | JA |
+| Network Address Translation Service | JA | nein | JA |
+| Bridged networking | JA | JA | JA |
+| Internal networking | JA | nein | nein |
+| Host-only networking | JA | JA | nein |
 
 ## NAT
 * http://www.virtualbox.org/manual/ch09.html#changenat
@@ -154,6 +165,37 @@ VBoxManage setextradata "MY_VM_NAME" "VBoxInternal/Devices/pcnet/0/LUN#0/Config/
 ## Netzwerkbrücke aka Bridged-Mode
 Hier nutzt das Gastbetriebssystem die von VirtualBox emulierte Hardware - deshalb muss man auch die zu verwendende Hardware (Ethernet, WLAN) auswählen (und natürlich auch umstellen, wenn physisch auf ein anderes Interface gewechselt wird). Für das Gastbetriebssystem erscheint das Interface dann immer wie ein Ethernet-Anschluss, auch wenn es sich physisch um eine WLAN-Verbindung handelt.
 Das Gastbetriebssystem bekommt eine eigene IP-Adresse vom DHCP-Server, den auch das Hostsystem verwendet. Auf diese Weise verhält sich das Gastbetriebssystem wie jeder andere Rechner im Netzwerk. Das Gastbetriebssystem ist von anderen Rechnern im Netz über diese IP-Adresse erreichbar (bei NAT geht das nicht ohne weiteres - hier kann man Port-Forwarding konfigurieren).
+
+## Host-only
+* https://www.thomas-krenn.com/de/wiki/Netzwerkkonfiguration_in_VirtualBox#Host-only_networking
+
+
+In _VirtualBox - File - Preferences - Network - Host-Only Netwworks_ können verschiedene Host-Only-Netzwerke definiert werden:
+
+![VirtualBox Host-Only-Network](images/virtualBox_hostOnlyNetworks.png)
+
+Zu jedem Host-Only-Netzwerk wird das Subnetz und der DHCP-Server (vergibnt die IP-Adressen für die Images des Netzwerks) definiert
+
+![VirtaulBox - Host-Only-Adapter](images/virtualBox_hostOnlyNetwork_adapter.png)
+
+So verwendet man das Host-Only-Netzwerk in einem Image:
+
+![VirtualBox - Host-Only-Adapter - Usage by Image](images/virtualBox_hostOnlyNetwork_usageByImage.png)
+
+Jetzt können alle Images miteinander kommunizieren, die das gleiche Host-Only-Netzwerk verwenden. 
+
+> BTW: Host-Only-Netzwerke verwendet man häufig auch zusammen mit NAT-Netzwerken. Während man aus dem Gast über NAT ins Internet kommt, ermöglicht das Host-Only-Netzwerk eine Kommunikation vom Host in den Gast. Man spart sich somit das pflegeintensive Port-Forwarding - allerdings kommt man von außen (einem anderen Rechner) nicht an die Dienste innerlhalb des Images ... was bei Port-Forwarding geht. Im Linux-Image sieht das bei einem NAT und einem Host-Only-Netzwerk dann beispielsweise folgendermaßen aus:
+
+```
+╭─pfh@workbench ~/src  ‹master› 
+╰─➤  route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         10.0.2.2        0.0.0.0         UG    100    0        0 enp0s3
+10.0.2.0        *               255.255.255.0   U     100    0        0 enp0s3
+link-local      *               255.255.0.0     U     1000   0        0 enp0s8
+192.168.56.0    *               255.255.255.0   U     100    0        0 enp0s8
+```
 
 ---
 

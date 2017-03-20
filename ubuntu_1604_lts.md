@@ -11,6 +11,15 @@ Auf keinen Fall möchte ich wieder auf ein Windows-System wechseln und die viele
 1. Download des ISO-Abbilds von http://releases.ubuntu.com/16.04/
 2. ISO-Image (CD-ROM-Laufwerk) in ein neues VirtualBox-Image einbinden ... dann die Maschine starten.
 
+## Deutsche Tastatur
+* http://praxistipps.chip.de/ubuntu-auf-deutsch-umstellen_42440
+
+Das Thema hat mich fast zur Verzweiflung gebracht, weil ich in dieser Unity-Oberfläche nicht gefunden habe wie ich ein deutsches Tastatur-Layout einstelle. Der TextEntry-Dialog 
+
+![TextEntry](images/ubuntuUnityKeyboardLayout.png)
+
+war für mich nicht intuitiv bedienbar. Unter _Input sources to use_ hätte ich nicht die Umstellung des Layouts erwartet ... man muß hier das Pluszeichen drücken und dann das entsprechende Layout auswählen. Toll gemacht :-)
+
 ## System Upgrade
 Da das ISO-Artefakt schon ein paar Wochen alt ist, sind die installierten Pakete mittlerweile schon veraltet. Über 
 
