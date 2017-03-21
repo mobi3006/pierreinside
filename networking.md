@@ -34,4 +34,4 @@ Damit Nachrichten zwischen Devices transferiert werden können, müssen entsprec
 
 Die Tools `route -N` bzw. `netstat -r` geben hier Auskunft. Grundsätzlich führt ein Netzwerkknoten eines Subnetzes für alle Zieladressen im gleichen Subnetz das Routing selbständig durch, Pakete für andere Netzwerke (z. B. für Internet-Knoten) werden an das Gateway weitergeleitet und vom entsprechend geroutet.
 
-(z. B. alle Ziel-IP-Adressen 192.168.1.x werden auf das Interface `eth0` geroutet)
+![Networking with several networks](images/networkingInSeveralNetworks.png)
