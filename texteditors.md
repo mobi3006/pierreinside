@@ -37,6 +37,16 @@ Nun ist der Editor einsatzbereit und ich werde ein wenig damit arbeiten ... hier
 * Schriftgröße mit Ctrl-+ und Ctrl-- verändern ... in Präsentationen ist das ganz praktisch
 * Markdown Preview
 
+## Nützliche Pakete
+MUST-HAVE:
+* auto-reveal-in-sidebar
+* advanced-open-file
+  * Default input value: Project root
+  * Ctrl-l: zum schnellen hochnavigieren
+
+NICE-TO-HAVE:
+* eclipse-keybindings
+
 ## APM Paketmanager
 * installierte Pakete befinden sich in ``/home/pfh/.atom/packages``
 

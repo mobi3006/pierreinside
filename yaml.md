@@ -81,16 +81,16 @@ In diesem Beispiel sind ... enthalten
 
 ```yaml
 - pierre:
-  - name: Pierre Feld
-  - job: developer
-  - skills:
+  name: Pierre Feld
+  job: developer
+  skills:
     - java
     - databases
     - git
 - robin
-  - name: Robin Feld
-  - job: schoolboy
-  - skills:
+  name: Robin Feld
+  job: schoolboy
+  skills:
     - soccer
     - statistics
     - Clash of Clans

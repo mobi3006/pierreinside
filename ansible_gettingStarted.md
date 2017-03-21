@@ -62,6 +62,8 @@ Damit kann getestet werden, ob Ansible und die System-Konfiguration (ssh-keys, s
 **ACHTUNG:** sollte der ssh-agent nicht laufen und der Private-SSH-Key mit einer Passphrase geschützt sein, so wird interaktiv nach der Passphrase gefragt. Das widerspricht eigentlich der Ansible-Idee einer Vollautomatisierung ... der SSH-Agent löst dieses Problem.  
 
 ## Das erste Playbook (= Skript) ...
+Vor der Nutzung sollte man die [YAML-Syntax](yaml.md) verstanden haben!!!
+
 Die Skipte heißen bei Ansible Playbook. Das folgende Ansible-Playbook (``myplaybook.yml``)
 
 ```
