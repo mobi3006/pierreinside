@@ -21,9 +21,9 @@ Bricht das Provisioning nach 20 Minuten Laufzeit mit einem Fehler ab, dann bedeu
 ## AdHoc vs. Playbook
 * http://docs.ansible.com/ansible/intro_adhoc.html
 
-AdHoc-Kommandos werden per ``ansible``
+AdHoc-Kommandos werden per ``ansible`` (`--args` aka `-a`)
 
-     ansible all -a "/bin/echo hello"
+     ansible all --args "/bin/echo hello"
 
 abgeschickt und sind so komfortabel wie Shell-Kommandos ... nur eben mit der Mächtigkeit sehr viele Hosts mit der Abarbeitung des Kommandos zu beauftragen.
 
@@ -53,6 +53,75 @@ Wenn nicht explizit angegeben wurde, ob Ansible local oder remote verwenden soll
     localhost ansible_connection=local
     
 Das Scripting unterscheidet sich bei den Ausführungsformen nicht. Allerdings benötigt die Remote-Ausführung ein erweitertes Setup (ssh-Infrastrutur).
+
+> ACHTUNG: fürs Entwickeln der Skripte ist der Local-Mode sicherlich ganz brauchbar, aber integrativ sollte man dann tatsächlich auch im Remote-Mode testen 
+
+### Remote-Mode
+Über den Parameter `-vvvvvv` kann man die einzelnen Schritte erkennen, die Ansible für die Remote-Ausführung macht - hier am Beispiel `ansible ansible-target --args "/bin/echo hello" -vvvvvv`:
+
+```
+╭─pfh@workbench ~/.ssh  
+╰─➤  ansible ansible-target --args "/bin/echo hello" -vvvvvv
+Using /etc/ansible/ansible.cfg as config file
+Loaded callback minimal of type stdout, v2.0
+<ansible-target> ESTABLISH SSH CONNECTION FOR USER: admin
+<ansible-target> SSH: ansible.cfg set ssh_args: 
+      (-o)(ControlMaster=auto)
+      (-o)(ControlPersist=60s)
+<ansible-target> SSH: ansible_password/ansible_ssh_pass not set: 
+      (-o)(KbdInteractiveAuthentication=no)
+      (-o)(PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey)
+      (-o)(PasswordAuthentication=no)
+<ansible-target> SSH: ANSIBLE_REMOTE_USER/remote_user/ansible_user/user/-u set: (-o)(User=admin)
+<ansible-target> SSH: ANSIBLE_TIMEOUT/timeout set: (-o)(ConnectTimeout=10)
+<ansible-target> SSH: PlayContext set ssh_common_args: ()
+<ansible-target> SSH: PlayContext set ssh_extra_args: ()
+<ansible-target> SSH: found only ControlPersist; added ControlPath: 
+      (-o)(ControlPath=/home/pfh/.ansible/cp/ansible-ssh-%h-%p-%r)
+<ansible-target> SSH: EXEC ssh -C -vvv 
+      -o ControlMaster=auto 
+      -o ControlPersist=60s 
+      -o KbdInteractiveAuthentication=no 
+      -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey 
+      -o PasswordAuthentication=no 
+      -o User=admin 
+      -o ConnectTimeout=10 
+      -o ControlPath=/home/pfh/.ansible/cp/ansible-ssh-%h-%p-%r -tt ansible-target 
+      '( umask 22 && mkdir -p "$( echo $HOME/.ansible/tmp/ansible-tmp-1490084266.37-148070795341843 )" 
+      && echo "$( echo $HOME/.ansible/tmp/ansible-tmp-1490084266.37-148070795341843 )" )'
+<ansible-target> PUT /home/pfh/temp/tmpY_WJOP TO 
+     /home/admin/.ansible/tmp/ansible-tmp-1490084266.37-148070795341843/command
+<ansible-target> SSH: ansible.cfg set ssh_args: 
+      (-o)(ControlMaster=auto)
+      (-o)(ControlPersist=60s)
+<ansible-target> SSH: ansible_password/ansible_ssh_pass not set: 
+      (-o)(KbdInteractiveAuthentication=no)
+      (-o)(PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey)
+      (-o)(PasswordAuthentication=no)
+<ansible-target> SSH: ANSIBLE_REMOTE_USER/remote_user/ansible_user/user/-u set: (-o)(User=admin)
+<ansible-target> SSH: ANSIBLE_TIMEOUT/timeout set: (-o)(ConnectTimeout=10)
+<ansible-target> SSH: PlayContext set ssh_common_args: ()
+<ansible-target> SSH: PlayContext set sftp_extra_args: ()
+<ansible-target> SSH: found only ControlPersist; added ControlPath: 
+      (-o)(ControlPath=/home/pfh/.ansible/cp/ansible-ssh-%h-%p-%r)
+<ansible-target> SSH: EXEC sftp -b - -C -vvv 
+      -o ControlMaster=auto 
+      -o ControlPersist=60s 
+      -o KbdInteractiveAuthentication=no 
+      -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey 
+      -o PasswordAuthentication=no 
+      -o User=admin 
+      -o ConnectTimeout=10 
+      -o ControlPath=/home/pfh/.ansible/cp/ansible-ssh-%h-%p-%r '[ansible-target]'
+```
+
+Man sieht hier sehr schön, daß die Kommunikation folgendermaßen abläuft 
+
+* `ssh -c`, um ein Zielverzeichnis (`~/.ansibe/tmp/ansible-tmp-foo`( für das auszuführende Kommando anzulegen 
+* `sftp`, um das Kommando zum Target-Host zu transportieren
+  * kann man von SFTP auf SSH umkonfigurieren (Stichwort `scp_if_ssh=True`) 
+  * ACHTUNG: das Kommando-Verzeichnis wird i. a. am Ende wieder gelöscht (es sei denn man verwendet `export ANSIBLE_KEEP_REMOTE_FILES=1`)
+* ssh-Connection Sharing über `ControlPath` erfolgt
 
 ---
 
@@ -87,6 +156,56 @@ Diese Parameter sind insbes. für die Entwicklung von Ansible-Skripten durchaus 
 Über ``-v`` wird das LogLevel definiert ... je mehr v's desto geschwätziger:
 
     ansible-playbook myplaybook.yml -vvvv
+
+---
+
+# Konfiguration
+Die Konfiguration erfolgt in `ansible.cfg`. Hier werden verschiedene Locations herangezogen:
+
+* im aktuellen Verzeichnis
+* `/etc/ansible/ansible.cfg`
+
+## Wichtige Parameter
+### scp_if_ssh=True 
+In der Default-Einstellung wird SFTP verwendet, um das Ansible-Play vom Ansible-Controller zum Target-Host zu transportieren.
+
+### ANSIBLE_KEEP_REMOTE_FILES=1
+Im Ansible-Remote-Modus wird ein Python-Script (selbst im Fall eines einfachen `ansible ansible-target -a "/bin/echo hello"` ist dieses Script 90 Kilobyte groß) vom Ansible-Controller zum Target-Server transportiert und in `~/.ansible/tmp/ansible-tmp-foo/command` gespeichert. Bei der Ausführung wird eine Result in JSON-Form ausgegben (hier im Falle eines erfolgreichen `echo hello`)
+
+```
+{
+    "changed": true,
+    "end": "2017-03-21 09:48:19.398800",
+    "stdout": "hello",
+    "cmd": ["/bin/echo", "hello"],
+    "rc": 0,
+    "start": "2017-03-21 09:48:19.397007",
+    "stderr": "",
+    "delta": "0:00:00.001793",
+    "invocation": {
+        "module_args": {
+            "warn": true,
+            "executable": null,
+            "chdir": null,
+            "_raw_params": "/bin/echo hello",
+            "removes": null,
+            "creates": null,
+            "_uses_shell": false
+        }
+    },
+    "warnings": []
+}
+```
+
+das der Ansible-Controller erhält.
+
+Nach der Ausführung wird das Command-Skript per default gelöscht. Mit der Environment-Variable `export ANSIBLE_KEEP_REMOTE_FILES=1` kann das Löschen verhindert werden ... bei der Fehlersuche sehr hilfreich!!!
+
+Natürlich muß man seine Konsole nicht dauerhaft verändern - bei folgendem Aufruf wird die Command-datei nur für diesen einen Aufruf behalten:
+
+```
+ANSIBLE_KEEP_REMOTE_FILES=1 ansible ansible-target -a "/bin/echo hello"
+```
 
 ---
 
@@ -323,7 +442,8 @@ Besser ist, sich als normaler User zu verbinden und dann gezielt für einzelne K
 
 ## SSH-Agent starten und konfigurieren
 [siehe separate Seite](ssh.md)
-Um Ansible-Skripte komplett automatisiert (also nicht interaktiv) ausführen zu lassen, muß der SSH-Agent mit dem/den Private-Key(s) gefüttert werden, denn ansonsten muß der Benutzer die Passphrase interaktiv eingeben.
+
+Um Ansible-Skripte komplett automatisiert (also nicht interaktiv) ausführen zu lassen, muß der SSH-Agent mit dem/den Private-Key(s) gefüttert werden, denn ansonsten muß der Benutzer die Passphrase (wenn vorhanden - RECOMMENDED!!!) interaktiv eingeben.
 
 ## Verwende Roles
 * http://docs.ansible.com/ansible/playbooks_roles.html
@@ -409,7 +529,7 @@ Vielleicht helfen die Einstellungen ``pipelining = True`` und ``host_key_checkin
 
 ## Alternative Shellscripting?
 
-Ganz ohne Frage ... Shellscripting hat ein paar Vorteile:
+Ganz ohne Frage ... Shellscripting hat ein paar Vorteile (die Nachteile habe ich umfassend in einem [eigenen Abschnitt](shellprogramming.md) aufgelistet:
 
 * ganz dicht am manuellen Aufsetzen - klar Scripting bedeutet dann oftmals auch, daß eine gewisse Art von Konfigurierbarkeit in die Scripte eingebaut wird, um sie an bestimmte Umgebungen anzupassen. Verzichtet man aber auf die Konfigurierbarkeit, dann genügt es, die für eine manuelle Installation/Konfiguration eines System erforderlichen Befehle, in eine Shelldatei zu packen. Viola :-)
 * kein weiteres Layer zwischen den Befehlen und dem System ... ich bin mir aber nicht sicher, ob das wirklich ein Vorteil ist, denn Fehlersuche in Shellscripten ist wirklich alles andere als eine Freude ... insbes. aufgrund der fehlenden Idempotenz

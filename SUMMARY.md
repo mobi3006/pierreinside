@@ -25,6 +25,7 @@
    * [NoSQL](nosql.md)
    * [Hystrix](hystrix.md)
    * [Reactive Programming](reactiveProgramming.md)
+* [Networking](networking.md)
 * Programming
    * [JRebel](jrebel.md)
    * [Bean Validation](java_beanValidation.md)
@@ -119,5 +120,5 @@
    * [Spielekonsole](spielekonsole.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
-* [Networking](networking.md)
+* [Vagrant Box bauen](vagrant_buildBox.md)
 

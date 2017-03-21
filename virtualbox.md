@@ -99,7 +99,17 @@ VBoxManage startvm "NAME_DER_VM"
 # Netzwerkkonfiguration
 * https://www.thomas-krenn.com/de/wiki/Netzwerkkonfiguration_in_VirtualBox#Host-only_networking
 
-Die Netzwerkkarten von Virtualbox haben unter Linux das Namensschema ``enp0sX`` (z. B. ``enp0s3``). Über entsprechende IPTables erfolgt das Routing auf die entsprechende Netzwerkkarte (`route`).
+In VirtualBox erfolgt die Netzwerkkonfiguration auf mehreren Ebenen:
+
+* zentral über Image-Grenzen hinweg
+
+![VirtualBox - zentrale Netzwerkkonfiguration](images/virtualBox_networkConfiguration_central.png)
+
+* für jedes Image
+
+![VirtualBox - Netzwerkkonfiguration pro Image](images/virtualBox_networkConfiguration_perImage.png)
+
+Die Netzwerkkarten von Virtualbox haben unter Linux das Namensschema ``enp0sX`` (z. B. ``enp0s3``). Über entsprechende Routing-Tabellen erfolgt das Routing auf die entsprechende Netzwerkkarte (`route`).
 
 | Netzwerktyp | Gast -> andere Gäste | Host -> Gast | Gast -> externes Netzwerk |
 | -- | -- | -- | -- |
