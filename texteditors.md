@@ -40,12 +40,20 @@ Nun ist der Editor einsatzbereit und ich werde ein wenig damit arbeiten ... hier
 ## Nützliche Pakete
 MUST-HAVE:
 * auto-reveal-in-sidebar
+* opened-files
 * advanced-open-file
   * Default input value: Project root
   * Ctrl-l: zum schnellen hochnavigieren
+* GIT
+  * tree-view-git-status
+  * git-plus 
+  * git-diff
+    * mit _Show Icons in Editor Gutter_
 
 NICE-TO-HAVE:
 * eclipse-keybindings
+* platformio-ide-terminal
+* minimap
 
 ## APM Paketmanager
 * installierte Pakete befinden sich in ``/home/pfh/.atom/packages``
@@ -72,5 +80,5 @@ konnte das Problem gemindert werden. Doch eigentlich wollte ich durch zweeimalig
 # Visual Studio Code
 * [Homepage](https://code.visualstudio.com/?wt.mc_id=DX_841432&utm_source=vscom&utm_medium=ms%20web&utm_campaign=VSCOM%20Home)
 
-Aus einem Atom-Fork hervorgegangen ... 
+Aus einem Atom-Fork hervorgegangen ... als out-of-the-box Git-Client wirklich sehr beeindruckend.
 
