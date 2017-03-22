@@ -73,12 +73,41 @@ Leider war ein Umschalten zwischen den Tabs nicht per `Ctrl-F6` out-of-the-box m
   'ctrl-shift-f6': 'pane:show-previous-item'
 ```
 
-konnte das Problem gemindert werden. Doch eigentlich wollte ich durch zweeimaliges Drücken von `Ctrl-F6` zum ursprünglichen Tab zurückkehren ... der dafür zuständige Command `pane:show-next-recently-used-item` funktionierte aber nicht wie gewünscht.
+konnte das Problem gemindert werden. Doch eigentlich wollte ich durch zweimaliges Drücken von `Ctrl-F6` zum ursprünglichen Tab zurückkehren ... der dafür zuständige Command `pane:show-next-recently-used-item` funktionierte aber nicht wie gewünscht.
 
 ---
 
-# Visual Studio Code
+# Visual Studio Code (VSC)
 * [Homepage](https://code.visualstudio.com/?wt.mc_id=DX_841432&utm_source=vscom&utm_medium=ms%20web&utm_campaign=VSCOM%20Home)
 
-Aus einem Atom-Fork hervorgegangen ... als out-of-the-box Git-Client wirklich sehr beeindruckend.
+Aus einem Atom-Fork hervorgegangen ... die out-of-the-box Git-Integration ist schon mal sehr beeindruckend. Zudem bringt es noch weitere meiner favorisierten Features mit (auto-reveal-in-sidebar, Terminal, git-diff ... lokale Änderungen werden im Editor markiert), die bei Atom nachträglich installiert werden müssen. 
 
+## Konfiguration
+Im Gegensatz zu Atom hat VSC keine grafische Darstellung der Konfiguration (File - Preferences - Settings) ... stattdessen wird die Konfiguration als Textdatei angezeigt.
+
+Die Konfiguration kann auf verschiedenen Ebenen erfolgen:
+
+* userspezifisch: `~/.config/Code - Insiders/User/settings.json`
+* projektspezifisch (Projekt = Workspace): `${PROJECT_DIR}/.vscode/settings.json` 
+
+Man überschreibt dann immer die Default-Setting, die man nicht ändern kann ... eine gute Idee.
+
+## Meine Keybindings
+* Eclipse Keymap ... Plugin nachinstalliert
+* Terminal anzeigen/verstecken: Ctrl-^
+* `Ctrl-3` Kommandos anzeigen/ausführen
+* `Ctrl-r` switch folder/project
+  * bei der Auswahl Ctrl drücken => weiteres Fenster wird geöffnet
+* `Ctrl-e` Liste der geöffneten Files ... Navigation per Ctrl-(Shift)-e
+* `Ctrl-,` Settings anschauen
+* `Ctrl-.` Keybindings anschauen 
+
+## FAQ
+
+Frage 1: 
+
+Dateien werden manchmanl nicht in einem neuen Tab geöffnet, sondern ein bestehender Tab wird wiederverwendet (die darin angezeigte Datei wird ausgetauscht).
+
+Antwort 1:
+
+VSC kennt den sog. Preview-Modus - erkennbar an der kursiven Schrift auf dem Editor-Tab. In diesem Modus erfolgt per Default ein Austausch des Contents. Will man immer ein neues Tab geöffnet haben, so sollte man die Einstellung `"workbench.editor.enablePreview": false` verwenden.

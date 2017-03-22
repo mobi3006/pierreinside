@@ -27,6 +27,7 @@ Linux ist der Name des Kernels ... der Kernel bildet den Kern des Betriebssystem
 # Linux Services
 ## systemd
 * https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
+* http://fedoraproject.org/wiki/Packaging:Systemd#EnvironmentFiles_and_support_for_.2Fetc.2Fsysconfig_files
 
 Viele Linux-Distributionen sind vom ``SysV``-Initialisierungsprozess auf ``systemd`` umgestiegen (z. B. Ubuntu, Fedora, Suse). Ubuntu hatte zwischendurch ``Upstart`` verwendet.
 
@@ -92,6 +93,8 @@ sudo systemctl list-unit-files
     WantedBy=multi-user.target
 
 Wichtig ist, daß alle Umgebungsvariablen (z. B. ``JAVA_HOME``) hier gesetzt werden müssen, da ein Systemd-Service auf der grünen Wiese aufsetzt.
+
+Wenn Änderungen am Systemd-Skript vorgenommen werden, dann muß der Systemd-Daemon über diese Änderung informiert werden: `systemctl daemon-reload`
 
 Über ``systemctl list-dependencies myapp.service`` werden die Services aufgelistet, von denen der Service abhängig ist:
 
