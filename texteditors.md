@@ -102,6 +102,9 @@ Man überschreibt dann immer die Default-Setting, die man nicht ändern kann ...
 * `Ctrl-,` Settings anschauen
 * `Ctrl-.` Keybindings anschauen 
 
+## Plugins
+* Git benötigt auf dem Host-System das Tool `ssh-askpass`, um die Passphrase für das ssh-Zertifikat abzufragen
+
 ## FAQ
 
 Frage 1: 
