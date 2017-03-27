@@ -423,6 +423,11 @@ Hier musste ich die 3D-Beschleunigung in den VM-Setting aktivieren, weil ansonst
 
 ---
 
+# Video Capture
+Virtualbox bringt bereits Video Capturing mit, das man in einem laufenden Image jederzeit starten kann ... super praktisch. Das Aufzeichnungformat ist [WebM](https://de.wikipedia.org/wiki/WebM), das leider nicht von allen Browsern derzeit zuverlässig abgespielt werden kann (Stand Frühling 2017). Aber mit [Handbrake](https://handbrake.fr/) hat kann das leicht in MP4 transformiert werden.
+
+---
+
 # VirtualBox 4.x
 Mit 4.0.2 hat sich die Folderstruktur geändert ... eigentlich eine gute Sache, denn alle Dateien eines Images sind nun in EINEM Ordner vereint.
 

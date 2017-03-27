@@ -17,6 +17,7 @@ Man überschreibt dann immer die Default-Setting, die man nicht ändern kann ...
 * Eclipse Keymap ... Plugin nachinstalliert
 * Terminal anzeigen/verstecken: Ctrl-^
 * `Ctrl-3` Kommandos anzeigen/ausführen
+* `Ctrl-Shift-r` Suche nach Ressourcen
 * `Ctrl-r` switch folder/project
   * bei der Auswahl Ctrl drücken => weiteres Fenster wird geöffnet
 * `Ctrl-e` Liste der geöffneten Files ... Navigation per Ctrl-(Shift)-e
