@@ -18,6 +18,14 @@ Es gibt verschiedene Arten von EJBs:
 
 ## Context and Dependency Injection (CDI)
 * https://docs.jboss.org/cdi/spec/1.0/html/
+* https://antoniogoncalves.org/2011/04/07/injection-with-cdi-part-i/
+* https://antoniogoncalves.org/2011/04/07/injection-with-cdi-part-ii/
+* https://antoniogoncalves.org/2011/04/07/injection-with-cdi-part-iii/
+* http://docs.jboss.org/weld/reference/latest/en-US/html/part-4.html
+
+CDI-Injection ist Teil der JEE-Spezifikatin seit 1.6. EJB, CDI und JSF sind sehr gut miteinander integriert.
+
+CDI-Injection (`@Inject`) und EJB-Injection (`@EJB`) sind zwei unterschiedliche Ansätze. Alles, was mit EJB-Injection geht, sollte auch mit CDI-Injektion funktionieren ... CDI-Injektion ist weiter gefaßt, denn hiermit lassen sich alle Beans (nicht nur die EJB-seitigen) injezieren.
 
 Enterprise Beans werden bei entsprechender Kennzeichnung (`@EJB`) in andere Java-Klassen injeziert. Im JEE-Umfeld verwendet man hierzu die CDI-Spezifikation.
 
