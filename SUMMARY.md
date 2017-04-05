@@ -125,4 +125,5 @@
 * [Visual Studio Code](visualstudiocode.md)
 * [Authentifizierung](authentitication.md)
 * [EJB](ejb.md)
+* [Ansible Details](ansible_details.md)
 

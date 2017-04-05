@@ -65,6 +65,7 @@ sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
 sudo yum install docker-engine
 sudo service docker start
 sudo docker run hello-world
+```
 
 Wenn dann eine Erfolgsmeldung ala "*Hello from Docker.*" ... Voila geschafft.
 
@@ -79,7 +80,3 @@ Zudem sollte man den Docker-Daemon beim Systemstart hochfahren:
 ```
 chkconfig docker on
 ```
-
-
-
-
