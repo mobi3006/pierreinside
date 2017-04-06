@@ -536,3 +536,11 @@ Ich konnte den Bildschirm sogar über 3 Bildschirme ziehen ... hierzu hilft es v
 
 ![Multiple Screens on Windows](images/windows10_multipleScreens.png)
 
+**Frage 9:**
+Einige Programme (z. B. Atom, GitBook Editor) zeigen nur einen schwarzen Bildschirm in meinem Linux-Guest-System.
+
+**Antwort 9:**
+Es gibt zwei Lösungsmöglichkeiten:
+
+* Option 1 "zentral": in der VirtualBox-Display-Einstellung der VM die Option *Enable 3D Acceleration* rausnehmen. Achtung: bei einigen Windows-Managern oder Desktop-Environments (z. B. Gnome) wird das System dadurch schnarchlahm (siehe [meine Erfahrungen bei der Inbetriebnahme von Ubuntu 14 LTS](ubuntu_1410_lts.md)). 
+* Option 2 "pro Applikation": wenn die Einstellung *Enable 3D Acceleration* in der VM erforderlich ist, dann kann man bei vielen Programmen die Option `--disable-gpu` (z. B. VisualStudio Code) setzen.
