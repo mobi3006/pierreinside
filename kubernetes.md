@@ -75,6 +75,8 @@ Der deployte und exponierte Pod liefert einen Http-GET-Service, der per `minikub
 Die Minikube-VM (und damit auch das Kubernetes Cluster) wird per `minikube stop` runtergefahren.
 
 ### Minikube - Dashboard 
+* https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
 Per `minikube dashboard` wird eine Administrationskonsole im Browser aufgerufen.
 
 ### Minikube - ssh
