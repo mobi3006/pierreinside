@@ -118,6 +118,7 @@
    * [Musik Streaming](musicstreaming.md)
    * [Handy](handy.md)
    * [Spielekonsole](spielekonsole.md)
+   * [Hebe-Schiebefenster](hebe-schiebefenster.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
 * [Vagrant Box bauen](vagrant_buildBox.md)
