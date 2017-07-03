@@ -51,9 +51,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     } 
 ```
 
-Durch die ``@Stateless`` Annotation wird das Feature, JTA-Transaktionen nutzen zu können, freigeschaltet.
+Die Unit-of-Work der Transaktion wird in der JTA-Transaktion gehalten - deshalb kann der `EntityManager` bzw. `PersistenceContext` auch in ``@Stateless`` Beans wiederverwendet werden. Die Separierung parallel laufender Conversations erfolgt also über die JTA-Transaktion (die vermutlich über ThreadLocals abgebildet ist).
 
-Beim committen der Transaktion wird der Zustand des ``PersistenceContext`` persistiert und der ``PersistenceContext`` wird nicht mehr benötigt. Der PersistenceContext wird - solange die Transaktion noch nicht commited ist - an weitere transaktionale Aufrufe weitergegeben, so daß nachfolgende Services die Datenveränderungen vorhergehender Services sehen können ... sie befinden sich ja dann in der gleichen Transaktion.
+Beim committen der Transaktion wird der Zustand des ``PersistenceContext`` persistiert und der ``PersistenceContext`` wird nicht mehr benötigt.
  
 ## Container managed extended scoped EM
 Während der Transaction scoped Entity Manager der PersistenceContext an einen Service-Aufruf gebunden ist, erweitert der **Extended Scope** die Gültigkeit des PersistenceContext auf mehrere Aufrufe.
