@@ -95,4 +95,4 @@ Diese Seite bietet einen komfortablen Konfigurator mit sehr nützlichen Zusatzin
 # Unsere Konfiguration
 * Kunststoff Hebe-Schiebefenster zweiteilig (2 + 2m)
 * Vorbau-Rolladen (Kunststoff) mit Kurbel
-  * elektrisch? für den Fall, daß es die Schwiegermutter bedienen muß oder irgendwann mal komplett zeitgesteuert erfolgen soll 
+  * elektrisch
