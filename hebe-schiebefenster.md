@@ -46,7 +46,7 @@ Bei 9qm Glasfläche wird der Energiebedarf im Vergleich zu unseren fast 40 Jahre
 * bei U 0,6 Fenstern: 130 Euro/Jahr
 * bei U 1,1 Fenstern: 100 Euro/Jahr
 
-Bei einer Nutzungsdauer von 30 Jahren und steigenden Energiepreisen kann sich eine Mehrinvestition von 500 Euro lohnen. 
+Bei einer Nutzungsdauer von 30 Jahren und steigenden Energiepreisen kann sich eine Mehrinvestition in einigen Jahren amortisieren. 
 
 ### Warme Kante
 Hierbei handelt es sich um den sog. Randverbund. Ein herkömmlicher Randverbund ist aus Aluminuium und damit temperaturleitend. Wird er hingegen aus Kunststoff oder Edelstahl gefertig, so leitet es die Temperatur nicht ... beim U-Wert ergibt sich dadurch einen Unterschied von 0,1.
@@ -90,5 +90,9 @@ Bei einem Vorbau- und Aufbaurolladen sind Rahmenverbreiterungen notwendig.
 * elektrisch mit Funk (+ 500 Euro)
 
 # Fensterversand.com
-Diese Seite bietet einen komfortablen Konfigurator mit sehr nützlichen Zusatzinformationen. Und eine erste Hausnummer für den Preis erhält man zudem. 
+Diese Seite bietet einen komfortablen Konfigurator mit sehr nützlichen Zusatzinformationen. Und eine erste Hausnummer für den Preis erhält man zudem.
 
+# Unsere Konfiguration
+* Kunststoff Hebe-Schiebefenster zweiteilig (2 + 2m)
+* Vorbau-Rolladen (Kunststoff) mit Kurbel
+  * elektrisch? für den Fall, daß es die Schwiegermutter bedienen muß oder irgendwann mal komplett zeitgesteuert erfolgen soll 
