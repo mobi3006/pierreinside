@@ -9,7 +9,7 @@
 
 JPA kennt drei Formen von Entity Managern (EM):
 
-* Container Managed (CM) EM - benötigen JTA Transaktionen
+* Java-EE-Ansatz: Container Managed (CM) EM - basieren auf JTA Transaktionen (die es nicht im Java SE gibt)
   * transaction scoped CM EM
   * extended scoped CM EM
 * Application Managed (AM) EM
