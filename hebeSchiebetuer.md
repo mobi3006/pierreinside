@@ -77,7 +77,8 @@ Bei 9qm Glasfläche wird der Energiebedarf im Vergleich zu unseren fast 40 Jahre
 * bei U 0,6 Fenstern: 130 Euro/Jahr
 * bei U 1,1 Fenstern: 100 Euro/Jahr
 
-Bei einer Nutzungsdauer von 30 Jahren und steigenden Energiepreisen kann sich eine Neuinvestition (Austausch älterer Fenster durch neuere) in einigen Jahren amortisieren. Ob man nun aber U 1,1 oder U 0,6 verwendet spielt evtl. gar keine entscheidende Rolle. In obigem Beispiel beträgt die Differenz pro Jahr gerade mal 30 Euro ... angenommen der Unterschied im Preis beträgt 500 Euro, dann rechnet sich das erst nach 17 Jahren (Preissteigerungen und Zinserträge mal unberücksichtigt). 
+Bei einer Nutzungsdauer von 30 Jahren und steigenden Energiepreisen kann sich eine Neuinvestition (Austausch älterer Fenster durch neuere) in einigen Jahren amortisieren. 
+Ob man nun aber U 1,1 oder U 0,6 verwendet spielt evtl. gar keine entscheidende Rolle. In obigem Beispiel beträgt die Differenz pro Jahr gerade mal 30 Euro ... angenommen der Unterschied im Preis beträgt 500 Euro, dann rechnet sich das erst nach 17 Jahren (Preissteigerungen und Zinserträge mal unberücksichtigt). 
 
 ### Warme Kante
 Hierbei handelt es sich um den sog. Randverbund. Ein herkömmlicher Randverbund ist aus Aluminuium und damit temperaturleitend. Wird er hingegen aus Kunststoff oder Edelstahl gefertig, so leitet es die Temperatur nicht ... beim U-Wert ergibt sich dadurch einen Unterschied von 0,1.
@@ -87,7 +88,9 @@ Hierbei handelt es sich um den sog. Randverbund. Ein herkömmlicher Randverbund 
 > "Die sogenannte "warme Kante" bezeichnet den energetisch optimierten Randverbund bei Mehrscheiben-Isolierglas. Dabei wird der Abstandhalter zwischen den Glasscheiben aus Materialien mit geringer Wärmeleitfähigkeit ausgeführt. Dadurch werden auch an dieser Stelle gute Wärmedämmwerte erzeugt. Bei Holz- und Holz-Aluminiumfenstern erhöht die „warme Kante" zudem die Lebensdauer der Fenster, da die Tauwasserbildung ebenfalls zuverlässig reduziert wird. Die heutigen Anforderungen an die Wärmedämmung von Fenstern machen die „warme Kante" beim Glasaufbau geradezu zur Pflicht." (https://www.pax.de/pax-holzfenster/waermeschutz)
 
 ## Farbveränderung durch billige Glassscheiben
-> "Trotz optimaler Wärmedämmung soll ein maximaler Lichteinfall erreicht und Farbveränderungen gering gehalten werden. [...]Hier zeigt sich die Jahrzehnte lange Erfahrung der PaX-Technologie. Mit PaX-Energiespargläsern erhalten Sie maximales Tageslicht - und damit kostenlose Sonnenenergie -  und natürliche Farben. Lassen Sie sich beim PaX-Fachhändler in Ihrer Nähe ausgewählte Glasscheiben bei Tageslicht zeigen, um böse Überraschungen zu vermeiden. Billige Gläser erkennen Sie sofort an stark reduziertem Lichteinfall und deutlich verzerrten Farben." (https://www.pax.de/pax-holzfenster/waermeschutz)
+> "Trotz optimaler Wärmedämmung soll ein maximaler Lichteinfall erreicht und Farbveränderungen gering gehalten werden. [...] Hier zeigt sich die Jahrzehnte lange Erfahrung der PaX-Technologie. Mit PaX-Energiespargläsern erhalten Sie maximales Tageslicht - und damit kostenlose Sonnenenergie -  und natürliche Farben. Lassen Sie sich beim PaX-Fachhändler in Ihrer Nähe ausgewählte Glasscheiben bei Tageslicht zeigen, um böse Überraschungen zu vermeiden. Billige Gläser erkennen Sie sofort an stark reduziertem Lichteinfall und deutlich verzerrten Farben." (https://www.pax.de/pax-holzfenster/waermeschutz)
+
+Kommt die Farbveränderung von der Metallschicht, mit der die Scheiben überzogen sind?
 
 ## Kippfunktion
 ... nicht relevant für uns - wir lüften durch öffnen
