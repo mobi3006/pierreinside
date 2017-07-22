@@ -21,7 +21,7 @@ Freunde haben eine solche Tür und sind nicht besonders zufrieden ... die Kinder
 ## Anzahl der Teile
 für uns kommt nur eine zweiteilige Ausführung in Frage, da wir möglichst ungehinderten Blick in den Garten bevorzugen (keine Gitter-Romantik).
 
-## Material
+## Rahmenmaterial
 ... nach Preis aufsteigend (in Klammern habe ich mal "ab"-Preise angegeben ... nur um mal einen Eindruck der Verhältnisse zu bekommen): 
 
 * Kunststoff (ab 1900 Euro): 
@@ -29,8 +29,39 @@ für uns kommt nur eine zweiteilige Ausführung in Frage, da wir möglichst unge
 * Kunststoff-Aluminum (ab 3100 Euro)
 * Holz-Aluminium (ab 3600 Euro)
 
-### Farbe
-Hier gibt es unterschiedliche Dekore (von Bergkiefer bis Anthrazit) für innen und/oder außen
+### Kunststoff
+positiv:
+* günstig
+* gute Wärmedämmung
+* geringer Pflegeaufwand
+* verschiedene Dekore möglich (man kann sogar Alu-Aufsatzschalen verwenden: http://www.inoutic.de/fenster-und-fensterbaenke)
+* hohe Haltbarkeit von 20-40 Jahre (https://www.deutscher-bauzeiger.de/bautraeger/bauelemente/fenster/)
+
+negativ:
+* Schmutz setzt sich ab und kann zu Schlieren führen (i. a. bekommt man die mit Wasser/Spülmittel ab)
+* vergleichsweise breite Rahmen notwendig
+* chemischer Stoff
+
+### Holz
+positiv:
+* hohe Haltbarkeit von 20-40 Jahre (https://www.deutscher-bauzeiger.de/bautraeger/bauelemente/fenster/) ... ABER: regelmäßiges Lasieren/Streichen erforderlich (zumindest, wenn Holz im Außenbereich eingesetzt wird)
+* tragen zu einem guten Wohnklima bei
+* natürlicher nachwachsender Rohstoff
+
+negativ:
+* teurer als Kunststoff
+* hoher Pflegeaufwand (lasieren alle 2 Jahren, lackieren alle 5 Jahre - https://www.deutscher-bauzeiger.de/bautraeger/bauelemente/fenster/)
+
+### Metall
+positiv:
+* gute Statik ... geringere Rahmenbreiten möglich
+* hohe Haltbarkeit von über 60 Jahren (https://www.deutscher-bauzeiger.de/bautraeger/bauelemente/fenster/)
+
+negativ:
+* teurer als Kunststoff und Holz (ca. 30% gegenüber Kunststoff)
+* Metall leitet die Wärme/Kälte ... "Je gleicher der Wert zwischen den beiden U-Werten von Glasscheibe und Fensterrahmen ist, umso besser ist das aus bauphysikalischer Sicht." 
+  * aufgrund der Konstruktion des Rahmeninnenlebens mit einer Isolierschicht (z. B. Holzkern) wird der äußere Rahmen vom inneren Rahmen getrennt, so daß keine Kältebrücke im Fenster selbst ensteht
+* "Aluminiumfensterrahmen werden zum Schutz der Oberfläche einbrennlackiert. Beim Aluminiumfensterrahmen sind die Farbschichten sehr empfindlich, und daher muss bei der Montage darauf geachtet werden, dass die Schutzfolie nicht beschädigt wird, und auch der Lack unbeschädigt bleibt. Aus diesem Grund wird auf den Fensterrahmen von den Herstellern oft eine Schicht Abziehlack aufgebracht." (https://www.deutscher-bauzeiger.de/bautraeger/bauelemente/fenster/) 
 
 ## Energetische Unterschiede
 > "Eine optimale Wärmedämmung Ihres Fensters hängt von dem perfekten Zusammenspiel zwischen Profil, Dichtung und Verglasung ab. Nur so kann ein Wärmedämmwert erreicht werden, der dem von der EnEV 2009 geforderten Wert von Uw = 1,3 W/(m2K) bei Austausch eines Einzelfensters entspricht." (https://www.pax.de/pax-holzfenster/waermeschutz)
@@ -46,7 +77,7 @@ Bei 9qm Glasfläche wird der Energiebedarf im Vergleich zu unseren fast 40 Jahre
 * bei U 0,6 Fenstern: 130 Euro/Jahr
 * bei U 1,1 Fenstern: 100 Euro/Jahr
 
-Bei einer Nutzungsdauer von 30 Jahren und steigenden Energiepreisen kann sich eine Mehrinvestition in einigen Jahren amortisieren. 
+Bei einer Nutzungsdauer von 30 Jahren und steigenden Energiepreisen kann sich eine Neuinvestition (Austausch älterer Fenster durch neuere) in einigen Jahren amortisieren. Ob man nun aber U 1,1 oder U 0,6 verwendet spielt evtl. gar keine entscheidende Rolle. In obigem Beispiel beträgt die Differenz pro Jahr gerade mal 30 Euro ... angenommen der Unterschied im Preis beträgt 500 Euro, dann rechnet sich das erst nach 17 Jahren (Preissteigerungen und Zinserträge mal unberücksichtigt). 
 
 ### Warme Kante
 Hierbei handelt es sich um den sog. Randverbund. Ein herkömmlicher Randverbund ist aus Aluminuium und damit temperaturleitend. Wird er hingegen aus Kunststoff oder Edelstahl gefertig, so leitet es die Temperatur nicht ... beim U-Wert ergibt sich dadurch einen Unterschied von 0,1.
