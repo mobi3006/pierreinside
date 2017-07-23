@@ -65,16 +65,15 @@ Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde d
 
 **Was könnte gegen einen Einsatz der beiden Spieler im 2008er Jahrgang sprechen, wenn Leistung, Talent, Verhalten und die Gemeinschaft eindeutig für einen Einsatz sprechen?**
 
-> "Die Jugendleitung des ASV/DJK kann nicht jedes Jahr über Einzelfälle entscheiden."
+> "Die Jugendleitung kann nicht jedes Jahr über Einzelfälle entscheiden."
   
-* gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) haben die Trainer eine Schlüsselfunktion in der Förderung von Talenten. Sie arbeiten Woche für Woche mit den Kindern und können die Entwicklung und das vorhandene Potential am besten einschätzen
+* gemäß [DFB - Optimales System der Talentförderung](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) haben die Trainer eine Schlüsselfunktion in der Förderung von Talenten. Sie arbeiten Woche für Woche mit den Kindern und können die Entwicklung und das vorhandene Potential am besten einschätzen.
 
-  * ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt und die Arbeit macht, sollte auch entscheiden dürfen**
+  * ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt und hart arbeitet, sollte auch in diesem Bereich die Entscheidungen treffen dürfen**
 
     ![Schlüsselfunktion Trainer](/images/fussballFoerderung/DFB_Talentfoerderung_SchluesselfunktionTrainer.png)
     
 > "Es ist doch nicht fair, wenn ein 2009er einem 2008er den Platz im Team wegnimmt!"
 
-  * Ist es fair, wenn während der Saison 10 Spieler aus dem Pfaffengrund aufgenommen werden und die Anzahl der Trainer nicht erhöht wird? Letztlich müssen dann langjährige ASV/DJK-Spieler auf der Bank sitzen (D2-Jugend). Gleichzeitig werden qualifizierte und engagierte Trainer aus unersichtlichen Gründen nicht als Trainer für den ASSV/DJK eingesetzt (Max Köhler, Atze, ???) bzw. können nicht mehr eingesetzt werden, weil man ihnen schon vor Monaten gesagt hat, daß man ihre Arbeit nicht schätzt.
   * Ist es fair, wenn jüngere Spieler temporär in der höheren Jugend spielen und dort den Spielern die Plätze wegnehmen?
- 
+  * Ist es fair, wenn während der Saison 10 Spieler aus einem anderen Verein aufgenommen werden und die Anzahl der Trainer nicht erhöht wird? Letztlich müssen dann langjährige ASV/DJK-Spieler auf der Bank sitzen (D2-Jugend). Gleichzeitig werden qualifizierte und engagierte Trainer aus unersichtlichen Gründen nicht als Trainer eingesetzt bzw. können nicht mehr eingesetzt werden, weil man ihnen direkt oder indirekt gesagt hat, daß man ihre Arbeit nicht schätzt.
