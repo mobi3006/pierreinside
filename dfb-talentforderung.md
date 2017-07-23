@@ -23,7 +23,7 @@ Quelle: [Jugendordnung](http://www.badfv.de/files/Dokumente/1.01_%C3%9Cber_uns/J
 
 Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
 
-__SCREENSHOT__
+![BADFV - Einsatz jüngerer Spieler](/images/fussballFoerderung/BADFV_EinsatzJuengererSpieler.png)
 
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
 ** &#9658; alle Jugend-Mannschaften der Nachwuchsleistungszentren (NLZ) spielen seit Jahren eine Jugend höher, um durch Fordern zu Fördern**
