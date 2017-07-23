@@ -82,4 +82,4 @@ Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde d
   * Ist es fair, wenn jüngere Spieler temporär in der höheren Jugend spielen und dort den Spielern die Plätze wegnehmen?
   * Ist es fair, wenn während der Saison 10 Spieler aus einem anderen Verein aufgenommen werden und die Anzahl der Trainer nicht erhöht wird? Letztlich müssen dann langjährige ASV/DJK-Spieler auf der Bank sitzen (D2-Junioren). Gleichzeitig werden qualifizierte und engagierte Trainer aus unersichtlichen Gründen nicht als Trainer eingesetzt bzw. können nicht mehr eingesetzt werden, weil man ihnen direkt oder indirekt gesagt hat, daß man ihre Arbeit nicht schätzt.
   
-  ** &#9658; Fairness ist immer eine Abwägungssache - eine harte Grenze beim Altersaspekt wäre Willkür**
+  ** &#9658; Fairness ist immer eine Abwägungssache, die nicht mit harten Regeln entschieden werden kann - eine harte Grenze beim Altersaspekt wäre reine Willkür (übrigens: gäbe es denn überhaupt jemanden, der den Einsatz der beiden als unfair erachtet?)**
