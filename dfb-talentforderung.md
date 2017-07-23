@@ -66,4 +66,10 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 
   * ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt und die Arbeit macht, sollte auch entscheiden dürfen**
 
-![Schlüsselfunktion Trainer](/images/fussballFoerderung/DFB_Talentfoerderung_SchluesselfunktionTrainer.png)
+    ![Schlüsselfunktion Trainer](/images/fussballFoerderung/DFB_Talentfoerderung_SchluesselfunktionTrainer.png)
+    
+> "Es ist doch nicht fair, wenn ein 2009er einem 2008er den Platz im Team wegnimmt!"
+
+  * Ist es fair, wenn während der Saison 10 Spieler aus dem Pfaffengrund aufgenommen werden und die Anzahl der Trainer nicht erhöht wird? Letztlich müssen dann langjährige ASV/DJK-Spieler auf der Bank sitzen (D2-Jugend). Gleichzeitig werden qualifizierte und engagierte Trainer aus unersichtlichen Gründen nicht als Trainer für den ASSV/DJK eingesetzt (Max Köhler, Atze, ???) bzw. können nicht mehr eingesetzt werden, weil man ihnen schon vor Monaten gesagt hat, daß man ihre Arbeit nicht schätzt.
+  * Ist es fair, wenn jüngere Spieler temporär in der höheren Jugend spielen und dort den Spielern die Plätze wegnehmen?
+ 
