@@ -31,7 +31,7 @@ Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
 ## Ist Jonas förderungswürdig im Sinne des DFB?
 
 Jonas 
-* ist seit Jahren Leistungsträger in dieser Mannschaft - Belege:
+* ist seit Jahren Leistungsträger in dieser 2008er Mannschaft - Belege:
   * Torschützenkönig der letzten beiden Jahre
   * übernimmt Verantwortung als Elfmeterschütze
 * hat die physische Stärke, um sich in der E-Jugend durchzusetzen
