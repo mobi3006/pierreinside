@@ -47,7 +47,7 @@ Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badi
 
 Bei einem Verbleib in der F-Jugend würden die beiden Spieler 
 * im Training unterfordert - aufgrund fehlender Talentbreite im 2009er Jahrgang
-* in den Wettkampfspielen unterfordert - schon der 2008er Jahrgang findet im Heidelberger Kreis kaum noch Gegner, die auf Augenhöhe agieren ([Statistik der Saison 2016/2017:](https://asvdjk.wordpress.com/ergebnisse/f-jugend/), [Statistik der Saison 15/16](https://asvdjk.wordpress.com/ergebnisse/ergebnisarchiv/f-jugend-15_16/))
+* in den Wettkampfspielen unterfordert - schon der 2008er Jahrgang findet im Heidelberger Kreis kaum noch Gegner, die auf Augenhöhe agieren ([Statistik der Saison 2016/2017:](https://asvdjk.wordpress.com/ergebnisse/f-jugend/), [Statistik der Saison 15/16: 79 Siege - 20 Remis - 29 Niederlagen](https://asvdjk.wordpress.com/ergebnisse/ergebnisarchiv/f-jugend-15_16/))
 
 ** &#9658; Einsatz im 2009er Jahrgang würde Stagnation statt Förderung bedeuten**
 
