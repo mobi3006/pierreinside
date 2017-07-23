@@ -1,8 +1,8 @@
+# Einsatz jüngerer Kinder
 
+Alle Zitate dieses Artikels stammen - sofern nicht explizit anders ausgewiesen - aus folgender Quelle
 
-
-
-Quelle: [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf)
+ * [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf)
 
 Dieser Artikel widmet sich der Fragestellung _"Sollten jüngere Spieler in älteren Jahrgängen eingesetzt werden?"_ oder konkreter **_"Sollten 2009er mit 2008er Kindern spielen?"_**.
 
@@ -62,12 +62,6 @@ Breitensport hat die Aufgabe, die Gemeinschaft zu fördern und trägt somit eine
 Die F-Jugend ist im Kern seit vier Jahren zusammen - Milo und Jonas gehören seit Beginn dazu. In diesen Jahren hat sich ein wirkliches Team, eine eingeschworene Gemeinschaft gebildet. 
 
 Würde man nun die beiden Spieler aus der Gemeinsschaft rausreißen, würde das dem sozialen Gedanken des Breitensports widersprechen. Zudem hätte es negativen Einfluß auf die persönliche Entwicklung der Kinder und ihrer Motivation, Fußball zu spielen. Hier schließt sich der Kreis zum DFB-Auftrag, daß der ASV/DJK Talente fördern und nicht vergraulen soll. 
-
-## Beitrag der Väter
-Die Väter der beiden Spieler fördern diese Gemeinschaft seit Jahren mit Spielberichten und Videos zu Teamerfolgen. In erster Linie natürlich, um den Kindern eine Freude zu machen. Mittel- und langfristig kann sich daraus aber evtl. ein noch stärkeres Teamgefühl entwickeln, das die ungewöhnlich talentierte Mannschaft über die E-Jugend hinaus (wenn die Talentspäher größerer Vereine aktiv werden) zusammenbleibt und für viele Erfolge des ASV/DJK sorgt.
-
-Ein paar Beispiele:
-
 
 ---------------
 
