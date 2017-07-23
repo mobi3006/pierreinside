@@ -15,6 +15,6 @@ __SCREENSHOT__
 
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
 
-## Sind Milo und Jonas förderungswürdig im Sinne des DFB?
+## Ist Jonas förderungswürdig im Sinne des DFB?
 
 
