@@ -39,7 +39,7 @@ Jonas
   * in der E-Jugend eingesetzt haben (Jan, Frank)
   * zum Probetraining eingeladen haben (SV Waldhof Mannheim)
 
-** &#9658; Talent, physische und psychische Reife zeigen, daß der DFB Interesse an einer Förderung hätte**
+** &#9658; Talent, physische und psychische Reife bilden eine gute Grundlage, um förderungswürdig im Sinne des DFB zu sein**
 
 ## Alternative F-Jugend?
 Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das **Wettspiel das wichtigste Trainingsmittel**:
