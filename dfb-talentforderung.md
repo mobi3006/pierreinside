@@ -50,8 +50,8 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 
 ** &#9658; Einsatz im 2009er Jahrgang würde Stagnation statt Förderung bedeuten**
 
-## Fazit
-** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit gefordert**
 
 # Breitensport
 
+## Fazit
+** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist sowohl hinsichtlich des Leistungssports gemäß DFB Konzept angezeigt als auch hinsichtlich des Breitensport-Gedankens die richtige Entscheidung**
