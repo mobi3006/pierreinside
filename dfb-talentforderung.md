@@ -72,7 +72,7 @@ Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde d
   
 * gemäß [DFB - Optimales System der Talentförderung](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) haben die Trainer eine Schlüsselfunktion in der Förderung von Talenten. Sie arbeiten Woche für Woche mit den Kindern und können die Entwicklung und das vorhandene Potential am besten einschätzen.
 
-  * ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt und hart arbeitet, sollte auch in diesem Bereich die Entscheidungen treffen dürfen**
+  ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt und hart arbeitet, sollte auch in diesem Bereich die Entscheidungen treffen dürfen**
 
     ![Schlüsselfunktion Trainer](/images/fussballFoerderung/DFB_Talentfoerderung_SchluesselfunktionTrainer.png)
     
@@ -81,3 +81,5 @@ Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde d
   * Ist es fair, wenn Mädchen in Jungenmannschaften spielen, obwohl altersmäßig passende Mädchenmannschaften vorhanden sind?
   * Ist es fair, wenn jüngere Spieler temporär in der höheren Jugend spielen und dort den Spielern die Plätze wegnehmen?
   * Ist es fair, wenn während der Saison 10 Spieler aus einem anderen Verein aufgenommen werden und die Anzahl der Trainer nicht erhöht wird? Letztlich müssen dann langjährige ASV/DJK-Spieler auf der Bank sitzen (D2-Junioren). Gleichzeitig werden qualifizierte und engagierte Trainer aus unersichtlichen Gründen nicht als Trainer eingesetzt bzw. können nicht mehr eingesetzt werden, weil man ihnen direkt oder indirekt gesagt hat, daß man ihre Arbeit nicht schätzt.
+  
+  ** &#9658; Fairness ist immer eine Abwägungssache - eine harte Grenzen im Altersbereich wäre unangemessen**
