@@ -6,6 +6,9 @@ Quelle: [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badi
 
 # DFB Leitkonzepte
 
+![Individuell fördern und fordern](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie1.png)
+
+
 
 ## Umsetzung der Leitkonzepte durch den Badischen Fussballverband
 Quelle: [Jugendordnung](http://www.badfv.de/files/Dokumente/1.01_%C3%9Cber_uns/Jugendordnung_JO.pdf)
