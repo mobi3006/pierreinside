@@ -42,12 +42,12 @@ Jonas
 ** &#9658; Talent, physische und psychische Reife bilden eine gute Grundlage, um förderungswürdig im Sinne des DFB zu sein**
 
 ## Alternative F-Jugend?
-Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das **Wettspiel das wichtigste Trainingsmittel**:
+Gemäß [DFB - Optimales System der Talentförderung](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das **Wettspiel das wichtigste Trainingsmittel**:
 
 ![Wettspiel das wichtigste Trainingsmittel](/images/fussballFoerderung/DFB_Talentfoerderung_TrainingsmittelWettspiel.png)
 
 Bei einem Verbleib in der F-Jugend würden die beiden Spieler 
-* im Training unterfordert - aufgrund fehlender Talentbreite im 2009er Jahrgang
+* im Training unterfordert, denn dem 2009er Jahrgang fehlt es an Talentbreite
 * in den Wettkampfspielen unterfordert - schon der 2008er Jahrgang findet im Heidelberger Kreis kaum noch Gegner, die auf Augenhöhe agieren
   * [Statistik der Saison 2016/2017: 82 Siege - 17 Remis - 16 Niederlagen](https://asvdjk.wordpress.com/ergebnisse/f-jugend/)
   * [Statistik der Saison 15/16: 79 Siege - 20 Remis - 29 Niederlagen](https://asvdjk.wordpress.com/ergebnisse/ergebnisarchiv/f-jugend-15_16/)
