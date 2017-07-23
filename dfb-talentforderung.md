@@ -42,7 +42,7 @@ Jonas
 ## Alternative F-Jugend?
 Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das **Wettspiel das wichtigste Trainingsmittel**:
 
-![](/images/fussballFoerderung/DFB_Talentfoerderung_TrainingsmittelWettspiel.png)
+![Wettspiel das wichtigste Trainingsmittel](/images/fussballFoerderung/DFB_Talentfoerderung_TrainingsmittelWettspiel.png)
 
 Bei einem Verbleib in der F-Jugend würden die beiden Spieler 
 * im Training unterfordert - aufgrund fehlender Talentbreite im 2009er Jahrgang
