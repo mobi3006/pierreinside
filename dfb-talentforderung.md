@@ -66,6 +66,9 @@ Würde man nun die beiden Spieler aus der Gemeinsschaft rausreißen, würde das 
 ## Beitrag der Väter
 Die Väter der beiden Spieler fördern diese Gemeinschaft seit Jahren mit Spielberichten und Videos zu Teamerfolgen. In erster Linie natürlich, um den Kindern eine Freude zu machen. Mittel- und langfristig kann sich daraus aber evtl. ein noch stärkeres Teamgefühl entwickeln, das die ungewöhnlich talentierte Mannschaft über die E-Jugend hinaus (wenn die Talentspäher größerer Vereine aktiv werden) zusammenbleibt und für viele Erfolge des ASV/DJK sorgt.
 
+Ein paar Beispiele:
+
+
 ---------------
 
 **Was könnte gegen einen Einsatz der beiden Spieler im 2008er Jahrgang sprechen, wenn Leistung, Talent, Verhalten und die Gemeinschaft eindeutig für einen Einsatz sprechen?**
