@@ -37,7 +37,7 @@ Jonas
 * hat die physische Stärke, um sich in der E-Jugend durchzusetzen
 * ist auch anderen Trainern aufgefallen, die ihn 
   * in der E-Jugend eingesetzt haben (Jan, Frank)
-  * zum Probetraining einladen wollten (SV Waldhof Mannheim)
+  * zum Probetraining eingeladen haben (SV Waldhof Mannheim)
 * ist trainingsfleißig
 * zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
 
