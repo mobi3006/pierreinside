@@ -12,7 +12,7 @@ Dieser Artikel widmet sich der Fragestellung _"Sollten jüngere Spieler in älte
 # DFB Leitkonzepte
 
 1. "Die Förderung jedes einzelnen Kindes [...] muss absolute Priorität haben."
-2. "Zu häufig orientieren sich Trainer ausschlieplich [...] am kalendarischen Alter! Als Folge dieser falschen Einstellung [...] unterfordern monotone Übungen [..] die jungen Fußballer."
+2. "Zu häufig orientieren sich Trainer ausschließlich [...] am kalendarischen Alter! Als Folge dieser falschen Einstellung [...] unterfordern monotone Übungen [..] die jungen Fußballer."
 
   ![Individuell fördern und fordern](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie1.png)
 
