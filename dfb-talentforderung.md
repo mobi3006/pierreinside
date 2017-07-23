@@ -17,8 +17,14 @@ __SCREENSHOT__
 
 ## Ist Jonas förderungswürdig im Sinne des DFB?
 
-Jonas ist
-* seit Jahren Leistungsträger in dieser Mannschaft - Belege:
+Jonas 
+* ist seit Jahren Leistungsträger in dieser Mannschaft - Belege:
   * Torschützenkönig der letzten beiden Jahre
   * übernimmt Verantwortung als letzter Elfmeterschütze
+* hat die physische Stärke, um sich in der E-Jugend durchzusetzen
+* ist auch anderen Trainern aufgefallen, die
+  * ihn in der E-Jugend eingesetzt haben (Jan, Frank)
+  * zum Probetraining einladen wollten (SV Waldhof Mannheim)
+* ist trainingsfleißig
+* zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
 * 
