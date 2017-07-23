@@ -23,6 +23,7 @@ Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
 __SCREENSHOT__
 
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
+** &#9658; alle Jugend-Mannschaften der Nachwuchsleistungszentren spielen seit Jahren eine Jugend höher, um Anreize zu schaffen und durch fordern zu fördern**
 
 ## Ist Jonas förderungswürdig im Sinne des DFB?
 
@@ -58,4 +59,5 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 ---------------
 
 **Was könnte gegen einen Einsatz der beiden Spieler im 2008er Jahrgang sprechen, wenn Leistung, Talent, Verhalten und die Gemeinschaft eindeutig für einen Einsatz sprechen?**
+
 
