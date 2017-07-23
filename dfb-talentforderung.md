@@ -60,7 +60,7 @@ Der Breitensport hat die Aufgabe, Gemeinschaft und Integration zu fördern. Er l
 
 Die F-Jugend ist im Kern seit vier Jahren zusammen - Milo und Jonas gehören seit Beginn dazu. In diesen Jahren hat sich ein wirkliches Team, eine eingeschworene Gemeinschaft gebildet. 
 
-Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde das einerseits dem sozialen Gedanken des Breitensports widersprechen und hätte andererseits evtl. negativen Einfluß auf die persönliche Entwicklung der Kinder und ihrer Motivation, Fußball zu spielen. Hier schließt sich der Kreis zum DFB-Auftrag, daß die Vereine Talente fördern und nicht vergraulen sollen. 
+Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde das einerseits dem sozialen Gedanken des Breitensports widersprechen und hätte andererseits evtl. negativen Einfluß auf die persönliche Entwicklung der Kinder und ihrer Motivation, Fußball zu spielen. Hier schließt sich der Kreis zum DFB-Auftrag, daß Vereine Talente fördern und nicht vergraulen sollen. 
 
 ---------------
 
