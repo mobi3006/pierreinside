@@ -52,6 +52,7 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 ** &#9658; Einsatz im 2009er Jahrgang würde Stagnation statt Förderung bedeuten**
 
 # Breitensport
+Breitensport hat die Aufgabe, die Gemeinschaft zu fördern und trägt somit einen wichtigen Baustein zur gesellschaftlichen Entwicklung in Deutschland bei.
 
 # Fazit
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist hinsichtlich des Leistungssports (DFB Konzept) gefordert und hinsichtlich des Breitensport-Gedankens die folgerichtige Entscheidung**
