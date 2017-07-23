@@ -32,12 +32,12 @@ Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
 
 Jonas 
 * ist seit Jahren Leistungsträger in dieser 2008er Mannschaft (u. a. Torschützenkönig der letzten beiden Jahre)
+* ist trainingsfleißig
+* zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
 * hat die physische Stärke, um sich in der E-Jugend durchzusetzen
 * ist auch anderen Trainern aufgefallen, die ihn 
   * in der E-Jugend eingesetzt haben (Jan, Frank)
   * zum Probetraining eingeladen haben (SV Waldhof Mannheim)
-* ist trainingsfleißig
-* zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
 
 ** &#9658; Talent, physische und psychische Reife zeigen, daß der DFB Interesse an einer Förderung hätte**
 
