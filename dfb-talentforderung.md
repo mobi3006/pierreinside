@@ -56,7 +56,7 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 # Breitensport und Verantwortung des Vereins
 Breitensport hat die Aufgabe, die Gemeinschaft zu fördern und trägt somit einen wichtigen Baustein zur gesellschaftlichen Entwicklung in Deutschland bei. Als eingetragener Verein hat der ASV/DJK auch in diesem Bereich eine Verantwortung.
 
-Die F-Jugend ist im Kern seit vier Jahren zusammen - Milo und Jonas gehören seit Beginn zu dieser Gemeinschaft. In diesen Jahren hat sich ein wirkliches Team, eine eingeschworene Gemeinschaft gebildet. 
+Die F-Jugend ist im Kern seit vier Jahren zusammen - Milo und Jonas gehören seit Beginn dazu. In diesen Jahren hat sich ein wirkliches Team, eine eingeschworene Gemeinschaft gebildet. 
 
 Würde man nun die beiden Spieler aus der Gemeinsschaft rausreißen, würde das dem sozialen Gedanken des Breitensports widersprechen. Zudem hätte es negativen Einfluß auf die persönliche Entwicklung der Kinder und ihrer Motivation, Fußball zu spielen. Hier schließt sich der Kreis zum DFB-Auftrag, daß der ASV/DJK Talente fördern und nicht vergraulen soll. 
 
