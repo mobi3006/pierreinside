@@ -14,16 +14,16 @@ Dieser Artikel widmet sich der Fragestellung _"Sollten jüngere Spieler in älte
 1. "Die Förderung jedes einzelnen Kindes [...] muss absolute Priorität haben."
 2. "Zu häufig orientieren sich Trainer ausschlieplich [...] am kalendarischen Alter! Als Folge dieser falschen Einstellung [...] unterfordern monotone Übungen [..] die jungen Fußballer."
 
-![Individuell fördern und fordern](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie1.png)
+  ![Individuell fördern und fordern](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie1.png)
 
-![Unterforderung durch Orientierung am kalendarischen Alter](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie2.png)
+  ![Unterforderung durch Orientierung am kalendarischen Alter](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie2.png)
 
 ## Umsetzung der Leitkonzepte durch den Badischen Fussballverband
 Quelle: [Jugendordnung](http://www.badfv.de/files/Dokumente/1.01_%C3%9Cber_uns/Jugendordnung_JO.pdf)
 
 Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
 
-![BADFV - Einsatz jüngerer Spieler](/images/fussballFoerderung/BADFV_EinsatzJuengererSpieler.png)
+  ![BADFV - Einsatz jüngerer Spieler](/images/fussballFoerderung/BADFV_EinsatzJuengererSpieler.png)
 
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
 ** &#9658; alle Jugend-Mannschaften der Nachwuchsleistungszentren (NLZ) spielen seit Jahren eine Jugend höher, um durch Fordern zu Fördern**
@@ -36,7 +36,7 @@ Jonas
 * zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
 * hat die physische Stärke, um sich in der E-Jugend durchzusetzen
 * ist auch anderen Trainern aufgefallen, die ihn 
-  * in der E-Jugend eingesetzt haben (Jan, Frank)
+  * bereits in der E-Jugend eingesetzt haben (Jan, Frank)
   * zum Probetraining eingeladen haben (SV Waldhof Mannheim)
 
 ** &#9658; Talent, physische und psychische Reife bilden eine gute Grundlage, um förderungswürdig im Sinne des DFB zu sein**
