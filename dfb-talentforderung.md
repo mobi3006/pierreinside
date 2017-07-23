@@ -33,7 +33,7 @@ Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
 Jonas 
 * ist seit Jahren Leistungsträger in dieser Mannschaft - Belege:
   * Torschützenkönig der letzten beiden Jahre
-  * übernimmt Verantwortung als letzter Elfmeterschütze
+  * übernimmt Verantwortung als Elfmeterschütze
 * hat die physische Stärke, um sich in der E-Jugend durchzusetzen
 * ist auch anderen Trainern aufgefallen, die
   * ihn in der E-Jugend eingesetzt haben (Jan, Frank)
