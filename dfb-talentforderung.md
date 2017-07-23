@@ -6,9 +6,12 @@ Quelle: [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badi
 
 # DFB Leitkonzepte
 
+1. "Die Förderung jedes einzelnen Kindes [...] muss absolute Priorität haben."
+2. "Zu häufig orientieren sich Trainer ausschlieplich [...] am kalendarischen Alter! Als Folge dieser falschen Einstellung [...] unterfordern monotone Übungen [..] die jungen Fußballer."
+
 ![Individuell fördern und fordern](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie1.png)
 
-
+![Unterforderung durch Orientierung am kalendarischen Alter](/images/fussballFoerderung/DFB_Talentfoerderung_Leitlinie2.png)
 
 ## Umsetzung der Leitkonzepte durch den Badischen Fussballverband
 Quelle: [Jugendordnung](http://www.badfv.de/files/Dokumente/1.01_%C3%9Cber_uns/Jugendordnung_JO.pdf)
