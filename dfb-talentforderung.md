@@ -53,8 +53,8 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 
 # Breitensport
 
-## Fazit
-** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist sowohl hinsichtlich des Leistungssports gemäß DFB Konzept angezeigt als auch hinsichtlich des Breitensport-Gedankens die folgerichtige Entscheidung**
+# Fazit
+** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist hinsichtlich des Leistungssports (DFB Konzept) gefordert und hinsichtlich des Breitensport-Gedankens die folgerichtige Entscheidung**
 
 ---------------
 
