@@ -40,7 +40,7 @@ Jonas
 ** &#9658; Talent, physische und psychische Reife zeigen, daß der DFB Interesse an einer Förderung hätte**
 
 ## Alternative F-Jugend?
-Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das Wettspiel das wichtigste Trainingsmittel
+Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das **Wettspiel das wichtigste Trainingsmittel**:
 
 ![](/images/fussballFoerderung/DFB_Talentfoerderung_TrainingsmittelWettspiel.png)
 
