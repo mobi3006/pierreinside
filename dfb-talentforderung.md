@@ -6,6 +6,9 @@ Quelle: [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badi
 
 Dieser Artikel widmet sich der Fragestellung _"Sollten jüngere Spieler in älteren Jahrgängen eingesetzt werden?"_ oder konkreter **_"Sollten 2009er mit 2008er Kindern spielen?"_**.
 
+# Fazit - Begründung nachfolgend
+** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist hinsichtlich des Leistungssports (DFB Konzept) gefordert und hinsichtlich des Breitensport-Gedankens die folgerichtige Entscheidung.**
+
 # DFB Leitkonzepte
 
 1. "Die Förderung jedes einzelnen Kindes [...] muss absolute Priorität haben."
@@ -59,9 +62,6 @@ Breitensport hat die Aufgabe, die Gemeinschaft zu fördern und trägt somit eine
 Die F-Jugend ist im Kern seit vier Jahren zusammen - Milo und Jonas gehören seit Beginn dazu. In diesen Jahren hat sich ein wirkliches Team, eine eingeschworene Gemeinschaft gebildet. 
 
 Würde man nun die beiden Spieler aus der Gemeinsschaft rausreißen, würde das dem sozialen Gedanken des Breitensports widersprechen. Zudem hätte es negativen Einfluß auf die persönliche Entwicklung der Kinder und ihrer Motivation, Fußball zu spielen. Hier schließt sich der Kreis zum DFB-Auftrag, daß der ASV/DJK Talente fördern und nicht vergraulen soll. 
-
-# Fazit
-** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist hinsichtlich des Leistungssports (DFB Konzept) gefordert und hinsichtlich des Breitensport-Gedankens die folgerichtige Entscheidung**
 
 ---------------
 
