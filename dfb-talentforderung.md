@@ -4,6 +4,8 @@
 
 Quelle: [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf)
 
+Dieser Artikel widmet sich der Fragestellung _"Sollten jüngere Spieler in älteren Jahrgängen eingesetzt werden?"_ oder konkreter **_"Sollten 2009er mit 2008er Kindern spielen?"_**.
+
 # DFB Leitkonzepte
 
 1. "Die Förderung jedes einzelnen Kindes [...] muss absolute Priorität haben."
