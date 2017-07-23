@@ -66,3 +66,4 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 
   * ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt und die Arbeit macht, sollte auch entscheiden dürfen**
 
+![Schlüsselfunktion Trainer](/images/fussballFoerderung/DFB_Talentfoerderung_SchluesselfunktionTrainer.png)
