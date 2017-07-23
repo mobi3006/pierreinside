@@ -6,7 +6,7 @@ Quelle: [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badi
 
 # DFB Leitkonzepte
 
-** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erwünscht**
+** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit gefordert**
 
 ## Umsetzung der Leitkonzepte durch den Badischen Fussballverband
 Quelle: [Jugendordnung](http://www.badfv.de/files/Dokumente/1.01_%C3%9Cber_uns/Jugendordnung_JO.pdf)
