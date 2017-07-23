@@ -27,4 +27,7 @@ Jonas
   * zum Probetraining einladen wollten (SV Waldhof Mannheim)
 * ist trainingsfleißig
 * zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
-* 
+
+** &#9658; Talent, physische und psychische Reife zeigen, daß der DFB Interesse an einer Förderung hätte**
+
+
