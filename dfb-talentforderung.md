@@ -17,4 +17,8 @@ __SCREENSHOT__
 
 ## Ist Jonas förderungswürdig im Sinne des DFB?
 
-
+Jonas ist
+* seit Jahren Leistungsträger in dieser Mannschaft - Belege:
+  * Torschützenkönig der letzten beiden Jahre
+  * übernimmt Verantwortung als letzter Elfmeterschütze
+* 
