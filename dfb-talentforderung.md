@@ -38,9 +38,11 @@ Jonas
 ** &#9658; Talent, physische und psychische Reife zeigen, daß der DFB Interesse an einer Förderung hätte**
 
 ## Alternative F-Jugend?
-Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das Wettspiel 
+Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das Wettspiel das wichtigste Trainingsmittel
 
+![](/images/fussballFoerderung/DFB_Talentfoerderung_TrainingsmittelWettspiel.png)
 
+Bei einem Verbleib in der F-Jugend würden die beiden Spieler 
 
 ## Fazit
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit gefordert**
