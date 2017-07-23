@@ -26,6 +26,7 @@ Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
   ![BADFV - Einsatz jüngerer Spieler](/images/fussballFoerderung/BADFV_EinsatzJuengererSpieler.png)
 
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
+
 ** &#9658; alle Jugend-Mannschaften der Nachwuchsleistungszentren (NLZ) spielen seit Jahren eine Jugend höher, um durch Fordern zu Fördern**
 
 ## Ist Jonas förderungswürdig im Sinne des DFB?
@@ -40,6 +41,7 @@ Jonas
   * zum Probetraining eingeladen haben (SV Waldhof Mannheim)
 
 ** &#9658; Leistung, physische und psychische Reife sind seit Jahren kontinuierlich vorhanden** 
+
 ** &#9658; förderungswürdig im Sinne des DFB**
 
 ## Alternative F-Jugend?
