@@ -7,7 +7,7 @@ Alle Zitate dieses Artikels stammen - sofern nicht explizit anders ausgewiesen -
 Dieser Artikel widmet sich der Fragestellung _"Sollten jüngere Spieler in älteren Jahrgängen eingesetzt werden?"_ oder konkreter **_"Sollten 2009er mit 2008er Kindern spielen?"_**.
 
 # Fazit - Begründung nachfolgend
-** &#9658; Milo und Jonas sollten im E-Junioren-Bereich weiterspielen, weil einerseits der DFB genau solche Spieler gemäß DFB-Konzept gefördert sehen will (in dieser Altersstufe übernimmt der Heimatverein diese Aufgabe) und sich andererseits eine im Breitensport erstrebenswerte Gemeinschaft bereits gebildet hat, die zu erhalten ist.**
+** &#9658; Milo und Jonas sollten im E-Junioren-Bereich weiterspielen, weil der DFB genau solche Spieler gemäß DFB-Konzept gefördert sehen will - in dieser Altersstufe übernimmt der Heimatverein diese Aufgabe und nicht der DFB oder NLZs. Zudem sind sie Teil einer funktionierenden Gemeinschaft, deren Erhalt höchste Priorität für einen Breitensportverein haben sollte.**
 
 # DFB Leitkonzepte
 
