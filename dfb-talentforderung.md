@@ -43,6 +43,8 @@ Gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badi
 ![](/images/fussballFoerderung/DFB_Talentfoerderung_TrainingsmittelWettspiel.png)
 
 Bei einem Verbleib in der F-Jugend würden die beiden Spieler 
+* im Training unterfordert - aufgrund fehlender Talentbreite im 2009er Jahrgang
+* in den Wettkampfspielen unterfordert - schon der 2008er Jahrgang findet im Heidelberger Kreis kaum noch Gegner, die auf Augenhöhe agieren (Statistik der Saison 2016/2017: )
 
 ## Fazit
 ** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit gefordert**
