@@ -64,5 +64,5 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
   
 * gemäß [DFB - Optimales System der Talentförderung ... bereitgestellt vom Badischen Fussballverband](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) haben die Trainer eine Schlüsselfunktion in der Förderung von Talenten. Sie arbeiten Woche für Woche mit den Kindern und können die Entwicklung und das vorhandene Potential am besten einschätzen
 
-** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt, sollte auch entscheiden dürfen**
+  * ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt, sollte auch entscheiden dürfen**
 
