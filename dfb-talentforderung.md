@@ -11,7 +11,7 @@ Quelle: [Jugendordnung](http://www.badfv.de/files/Dokumente/1.01_%C3%9Cber_uns/J
 
 Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
 
-**=> ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
+**ERGO: ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
 
 # Individuelle Betrachtung im Kontext der DFB Leit
 
