@@ -79,7 +79,8 @@ Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde d
 > "Es ist doch nicht fair, wenn ein 2009er einem 2008er den Platz im Team wegnimmt!"
 
   * Ist es fair, wenn Mädchen in Jungenmannschaften spielen, obwohl altersmäßig passende Mädchenmannschaften vorhanden sind?
-  * Ist es fair, wenn jüngere Spieler temporär in der höheren Jugend spielen und dort den Spielern die Plätze wegnehmen?
-  * Ist es fair, wenn während der Saison 10 Spieler aus einem anderen Verein aufgenommen werden und die Anzahl der Trainer nicht erhöht wird? Letztlich müssen dann langjährige ASV/DJK-Spieler auf der Bank sitzen (D2-Junioren). Gleichzeitig werden qualifizierte und engagierte Trainer aus unersichtlichen Gründen nicht als Trainer eingesetzt bzw. können nicht mehr eingesetzt werden, weil man ihnen direkt oder indirekt gesagt hat, daß man ihre Arbeit nicht schätzt.
+  * Ist es fair, wenn jüngere Spieler temporär in der höheren Jugend spielen?
+  * Ist es fair, wenn schlechtere Spieler mit viel besseren Spielern zusammenspielen müssen?
+  * Ist es fair, wenn während der Saison 10 Spieler aus einem anderen Verein aufgenommen werden und die Anzahl der Trainer nicht erhöht wird?
   
   ** &#9658; Fairness ist immer eine Abwägungssache, die nicht mit harten Regeln entschieden werden kann - eine harte Grenze beim Altersaspekt wäre reine Willkür (übrigens: gäbe es denn überhaupt jemanden, der den Einsatz der beiden als unfair erachtet?)**
