@@ -68,4 +68,16 @@ Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde d
   
   ** &#9658; Fairness ist immer eine Abwägungssache, die nicht mit harten Regeln entschieden werden kann - eine harte Grenze beim Altersaspekt wäre reine Willkür (übrigens: gäbe es denn überhaupt jemanden, der den Einsatz der beiden als unfair erachtet?)**
   
-  
+---------------
+
+## Umsetzung der Leitkonzepte durch den Badischen Fussballverband
+Quelle: [Jugendordnung](http://www.badfv.de/files/Dokumente/1.01_%C3%9Cber_uns/Jugendordnung_JO.pdf)
+
+Der Badische Fussballverband folgt dem Leitkonzept 2 des DFB mit §10.5:
+
+  ![BADFV - Einsatz jüngerer Spieler](/images/fussballFoerderung/BADFV_EinsatzJuengererSpieler.png)
+
+** &#9658; ein Einsatz von Milo und Jonas in der E-Jugend ist explizit erlaubt**
+
+** &#9658; alle Jugend-Mannschaften der Nachwuchsleistungszentren (NLZ) spielen seit Jahren eine Jugend höher, um durch Fordern zu Fördern**
+
