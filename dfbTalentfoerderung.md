@@ -17,7 +17,7 @@ Jonas
 
 ** &#9658; Leistung, physische und psychische Reife sind seit Jahren kontinuierlich vorhanden** 
 
-** &#9658; förderungswürdig im Sinne des DFB**
+** &#9658; großes Talent, das gefördert werden sollte**
 
 # Alternative F-Jugend?
 Gemäß [DFB - Optimales System der Talentförderung](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das **Wettspiel das wichtigste Trainingsmittel**:
@@ -38,26 +38,13 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 * Eltern unterstützen die Mannschaft
   * Homepage
   * Videos
+* Team:
+  * F-Jugend ist im Kern seit vier Jahren (seit Bambini-Zeiten) zusammen - Milo und Jonas gehören seit Beginn dazu
+  * in diesen Jahren hat sich ein wirkliches Team, eine eingeschworene Gemeinschaft gebildet. 
+  * als Verein kann man sich glücklich schätzen, wenn die Kinder/Jugendlichen einen solchen Zusammenhalt haben
 
-# Breitensport als gesellschaftliche Verantwortung des Vereins
-Der Breitensport hat die Aufgabe, Gemeinschaft und Integration zu fördern. Er leistet damit einen wichtigen Beitrag zur gesellschaftlichen Entwicklung. Als eingetragener Verein hat der ASV/DJK auch in diesem Bereich eine Verantwortung.
-
-Die F-Jugend ist im Kern seit vier Jahren zusammen - Milo und Jonas gehören seit Beginn dazu. In diesen Jahren hat sich ein wirkliches Team, eine eingeschworene Gemeinschaft gebildet. 
-
-Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde das einerseits dem sozialen Charakter des Breitensports widersprechen und hätte andererseits evtl. negativen Einfluß auf die persönliche Entwicklung der Kinder und ihrer Motivation, Fußball zu spielen. Hier schließt sich der Kreis zum DFB-Auftrag, daß Vereine Talente fördern und nicht vergraulen sollen. 
-
----------------
-
-**Was könnte gegen einen Einsatz der beiden Spieler im 2008er Jahrgang sprechen, wenn Leistung, Talent, Verhalten und die Gemeinschaft eindeutig für einen Einsatz sprechen?**
-
-> "Die Jugendleitung kann nicht jedes Jahr über Einzelfälle entscheiden."
-  
-* gemäß [DFB - Optimales System der Talentförderung](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) haben die Trainer eine Schlüsselfunktion in der Förderung von Talenten. Sie arbeiten Woche für Woche mit den Kindern und können die Entwicklung und das vorhandene Potential am besten einschätzen.
-
-  ** &#9658; Trainer sollten über diese Ausnahmen entscheiden - wer Verantwortung trägt und hart arbeitet, sollte auch in diesem Bereich die Entscheidungen treffen dürfen**
-
-    ![Schlüsselfunktion Trainer](/images/fussballFoerderung/DFB_Talentfoerderung_SchluesselfunktionTrainer.png)
-    
+# Was könnte dagegen sprechen?
+   
 > "Es ist doch nicht fair, wenn ein 2009er einem 2008er den Platz im Team wegnimmt!"
 
   * Ist es fair, wenn Mädchen in Jungenmannschaften spielen, obwohl altersmäßig passende Mädchenmannschaften vorhanden sind?
