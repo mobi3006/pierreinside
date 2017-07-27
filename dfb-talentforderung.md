@@ -86,6 +86,7 @@ Würde man nun die beiden Spieler aus dieser Gemeinsschaft rausreißen, würde d
 
   * Ist es fair, wenn Mädchen in Jungenmannschaften spielen, obwohl altersmäßig passende Mädchenmannschaften vorhanden sind?
   * Ist es fair, wenn jüngere Spieler temporär in der höheren Jugend spielen?
+  * Ist es fair, wenn ältere Kinder den Platz einnehmen, die nur unregelmäßig ins Training gehen und bei Spieltagen nur sporadisch und unzuverlässig zur Verfügung stehen
   * Ist es fair, wenn schlechtere Spieler mit viel besseren Spielern zusammenspielen müssen?
   * Ist es fair, wenn während der Saison 10 Spieler aus einem anderen Verein aufgenommen werden und die Anzahl der Trainer nicht erhöht wird?
   
