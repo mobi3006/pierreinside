@@ -41,7 +41,7 @@ Jonas
 * ist trainingsfleißig
 * zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
 * hat die physische Stärke, um sich in der E-Jugend durchzusetzen
-* ist auch anderen Trainern aufgefallen, die ihn 
+* ist auch anderen Trainern positiv aufgefallen, die ihn 
   * bereits in der E-Jugend eingesetzt haben (Jan, Frank)
   * zum Probetraining eingeladen haben (SV Waldhof Mannheim)
   * beobachtet haben (SV Sandhausen)
