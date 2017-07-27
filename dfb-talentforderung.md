@@ -61,7 +61,7 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
   * [Statistik der Saison 16/17: 82 Siege - 17 Remis - 16 Niederlagen](https://asvdjk.wordpress.com/ergebnisse/f-jugend/)
   * [Statistik der Saison 15/16: 79 Siege - 20 Remis - 29 Niederlagen](https://asvdjk.wordpress.com/ergebnisse/ergebnisarchiv/f-jugend-15_16/)
 
-** &#9658; Einsatz im 2009er Jahrgang würde Stagnation statt Förderung bedeuten**
+** &#9658; Einsatz im 2009er Jahrgang würde Stagnation und Demotivation statt Förderung bedeuten**
 
 # Breitensport als gesellschaftliche Verantwortung des Vereins
 Der Breitensport hat die Aufgabe, Gemeinschaft und Integration zu fördern. Er leistet damit einen wichtigen Beitrag zur gesellschaftlichen Entwicklung. Als eingetragener Verein hat der ASV/DJK auch in diesem Bereich eine Verantwortung.
