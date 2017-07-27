@@ -63,6 +63,13 @@ Bei einem Verbleib in der F-Jugend würden die beiden Spieler
 
 ** &#9658; Einsatz im 2009er Jahrgang würde Stagnation und Demotivation statt Förderung bedeuten**
 
+## Was spricht noch für Jonas?
+* Eltern unterstützen ihn
+  * sind zu 95% bei den Spielen dabei
+* Eltern unterstützen die Mannschaft
+  * Homepage
+  * Videos
+
 # Breitensport als gesellschaftliche Verantwortung des Vereins
 Der Breitensport hat die Aufgabe, Gemeinschaft und Integration zu fördern. Er leistet damit einen wichtigen Beitrag zur gesellschaftlichen Entwicklung. Als eingetragener Verein hat der ASV/DJK auch in diesem Bereich eine Verantwortung.
 
