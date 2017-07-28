@@ -1,28 +1,23 @@
-# Warum sollte Jonas mit den 2008ern spielen
+# Warum sollte Jonas mit den 2008ern (E-Jugend) spielen
 
 Jonas 
 * ist seit Jahren Leistungsträger in dieser 2008er Mannschaft
 * brennt für den Fussball
-  * kein weiteres größeres Hobby
-  * IMMER Vorrang
-  * IMMER verfügbar
+  * Fussball hat IMMER Vorrang (kein weiteres zeitraubendes Hobby)
+  * IMMER im Training und auf Spieltagen/Turnieren (ob bei 35°C oder bei Dauerregen)
   * Teilnahme an Fussballcamps
-* ist trainingsfleißig
-* zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern
-* hat die physische Stärke, um sich in der E-Jugend durchzusetzen
-* ist auch anderen Trainern positiv aufgefallen, die ihn 
-  * bereits in der E-Jugend eingesetzt haben (Jan, Frank)
-  * zum Probetraining eingeladen haben (SV Waldhof Mannheim)
-  * beobachtet haben (SV Sandhausen)
+  * ist trainingsfleißig
+* zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern (Respekt, Empathie, aufmerksamer Zuhörer)
+* hat die physische Stärke, um sich gegenüber älteren Mitspielern durchzusetzen
+  * auf Spieltagen/Turnieren glaubte man uns nicht, daß er 2009er und nicht 2006er Jahrgang ist
+* hat die Unterstützung der Trainer Ralf, Frank, Marcel, die ihn seit Jahren kennen und seine Entwicklung mitgestaltet haben
+* ist auch anderen Trainern positiv aufgefallen, die ihn bereits wiederholt in der E-Jugend eingesetzt haben (Jan, Frank)
 
 ** &#9658; Leistung, physische und psychische Reife sind seit Jahren kontinuierlich vorhanden** 
 
 ** &#9658; großes Talent, das gefördert werden sollte**
 
 # Alternative F-Jugend?
-Gemäß [DFB - Optimales System der Talentförderung](http://www.badfv.de/files/Dokumente/2.06_Talente/Talente_DFB-Leitfaden_Optimales_System_der_Talentfoerderung.pdf) ist das **Wettspiel das wichtigste Trainingsmittel**:
-
-  ![Wettspiel das wichtigste Trainingsmittel](/images/fussballFoerderung/DFB_Talentfoerderung_TrainingsmittelWettspiel.png)
 
 Bei einem Verbleib in der F-Jugend würden die beiden Spieler 
 * im Training unterfordert, denn dem 2009/2010er Jahrgang fehlt es an Talentbreite
