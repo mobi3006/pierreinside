@@ -1,16 +1,18 @@
-# Warum sollte Jonas mit den 2008ern (E-Jugend) spielen
+# Warum sollte Jonas mit den 2008ern (E-Jugend) spielen?
 
 Jonas 
 * ist seit Jahren Leistungsträger in dieser 2008er Mannschaft
+* übernimmt Verantwortung - läßt auch bei Rückständen den Kopf nicht hängen, sondern treibt seine Mannschaft an
+* ist Drucksituationen gewachsen (z. B. sicherer Schütze für den entscheidenden Elfmeter) 
 * brennt für den Fussball
   * Fussball hat IMMER Vorrang (kein weiteres zeitraubendes Hobby)
   * IMMER im Training und auf Spieltagen/Turnieren (ob bei 35°C oder bei Dauerregen)
   * Teilnahme an Fussballcamps
   * ist trainingsfleißig
 * zeigt vorbildliches Verhalten gegenüber Teamkameraden und Trainern (Respekt, Empathie, aufmerksamer Zuhörer)
-* hat die physische Stärke, um sich gegenüber älteren Mitspielern durchzusetzen
-  * auf Spieltagen/Turnieren glaubte man uns nicht, daß er 2009er und nicht 2006er Jahrgang ist
-* hat die Unterstützung der Trainer Ralf, Frank, Marcel, die ihn seit Jahren kennen und seine Entwicklung mitgestaltet haben
+* hat die physische Stärke, um sich gegenüber älteren Mitspielern (2007/2008) durchzusetzen
+  * auf Spieltagen/Turnieren warf man uns vor, daß wir mit Jonas einen Spieler aus dem Jahrgang 2006 einsetzen
+* hat die Unterstützung (für einen Wechsel in die E-Jugend) seiner Trainer Ralf, Frank, Marcel, die ihn seit Jahren kennen und seine Entwicklung mitgestaltet haben
 * ist auch anderen Trainern positiv aufgefallen, die ihn bereits wiederholt in der E-Jugend eingesetzt haben (Jan, Frank)
 
 ** &#9658; Leistung, physische und psychische Reife sind seit Jahren kontinuierlich vorhanden** 
@@ -20,7 +22,7 @@ Jonas
 # Alternative F-Jugend?
 
 Bei einem Verbleib in der F-Jugend würden die beiden Spieler 
-* im Training unterfordert, denn dem 2009/2010er Jahrgang fehlt es an Talentbreite
+* im Training unterfordert - der 2009/2010er Jahrgang hat nicht die Talentbreite auf dem Niveau der 2008er
 * in den Wettkampfspielen unterfordert, denn schon der 2008er Jahrgang (in dem sie zu den Leistungsträgern gehören) findet im Heidelberger Kreis kaum noch Gegner, die auf Augenhöhe agieren
   * [Statistik der Saison 16/17: 82 Siege - 17 Remis - 16 Niederlagen](https://asvdjk.wordpress.com/ergebnisse/f-jugend/)
   * [Statistik der Saison 15/16: 79 Siege - 20 Remis - 29 Niederlagen](https://asvdjk.wordpress.com/ergebnisse/ergebnisarchiv/f-jugend-15_16/)
