@@ -10,20 +10,23 @@ Aus guten Grund wurden Lösungen wie Instana, New Relic, Dynatrace, ... geschaff
 
 Aus diesem Grund sind bezahlbare fertige (gut supportete) Lösungen eine gute Sache für bestimmte Firmen. Instana scheint diesen Markt im Auge zu haben. 
 
-# SaaS oder On-Premise
+# Features
+
+## SaaS oder On-Premise
 Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch als On-äPremise-Lösung an. 
 
 Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens.
 
-# Alerting
+## Alerting
 Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Noch besser als nachträglich Probleme erklären zu können ist allerdings, Problemsituationen zu erkennen BEVOR daraus tatsächlich Probleme werden.
 
 Instana bietet Alerting, um genau das zu erreichen. In gewisser Weise ist der Alerting Mechanismus auch selbstlernend (Frage: WIRKLICH?).
 
-# Features
-* Alerting
+## Service Discovery
+In einem volatilen Microservices Umfeld ist es essentiell, daß neue Services nicht erst aufwendig einkonfiguriert werden müssen. Statdessen leben die Services teilweise nur Minuten oder gar Sekunden.
 
+# Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
-* 
+
 
