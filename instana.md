@@ -51,6 +51,9 @@ Instana kommt mit einer Vielzahl komponentenspezifischer Sensoren
 Ein Beispiel:
 Bei ElasticSearch können einzelne Knoten gemonitored werden, aber auch ganze Cluster. 
 
+## Machine Learning
+> Understanding of Patterns of normal behavior by deep learning.
+
 ## Komponentenspezifisches Wissen
 Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann es den Nutzer beim Alerting, bei der Root-Cause-Analyse und beim Problem-Solving unterstützen. 
 
