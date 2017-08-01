@@ -69,4 +69,4 @@ Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann
 # User-Interface
 * physikalische Sicht auf Hosts, Container, Prozesse
 * logische Sicht auf Services
-* Traces - einzelne Messpunkte
+* Traces - einzelne Messpunkte, die bis in den Code (wird decompiliert) runtergehen
