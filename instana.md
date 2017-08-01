@@ -38,5 +38,5 @@ Instana kann den Weg eines Client-Requests an einen Service über andere Service
     * Betriebssystem
     * Java-VM
     * Appserver
+    * ElasticSearch
     * ...
-  * ElasticSearch
