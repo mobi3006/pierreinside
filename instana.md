@@ -34,4 +34,9 @@ Instana kann den Weg eines Client-Requests an einen Service über andere Service
 
 # Architektur
 * Instana Agent (Java-based), kann auch als Docker-Container laufen (es gibt aber auch eine native One-Line-Installation)
+  * Sensoren für (Abtastrate: 1 Sekunde)
+    * Betriebssystem
+    * Java-VM
+    * Appserver
+    * ...
   * ElasticSearch
