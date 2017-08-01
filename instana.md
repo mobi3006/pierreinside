@@ -47,6 +47,12 @@ Instana kommt mit einer Vielzahl komponentenspezifischer Sensoren
 
 , so daß immer die relevanten Metriken gezogen und dargestellt werden können. Zudem werden dadurch, daß Instana diese Technologien kennt, besonders auffällige Werte entdeckt. Das kann zu einem Alert führen.
 
+Ein Beispiel:
+Bei ElasticSearch können einzelne Knoten gemonitored werden, aber auch ganze Cluster. 
+
+## Komponentenspezifisches Wissen
+Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann es den Nutzer beim Alerting, bei der Root-Cause-Analyse und beim Problem-Solving unterstützen. 
+
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
