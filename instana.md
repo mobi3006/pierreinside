@@ -23,7 +23,7 @@ Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Noch b
 Instana bietet Alerting, um genau das zu erreichen. In gewisser Weise ist der Alerting Mechanismus auch selbstlernend (Frage: WIRKLICH?).
 
 ## Service Discovery
-In einem volatilen Microservices Umfeld ist es essentiell, daß neue Services nicht erst aufwendig einkonfiguriert werden müssen. Statdessen leben die Services teilweise nur Minuten oder gar Sekunden.
+In einem elastischen Microservices Umfeld ist es essentiell, daß neue Services nicht erst aufwendig einkonfiguriert werden müssen. Statdessen leben die Services teilweise nur Minuten oder gar Sekunden.
 
 # Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
