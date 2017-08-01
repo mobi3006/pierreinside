@@ -45,7 +45,7 @@ Instana kommt mit einer Vielzahl komponentenspezifischer Sensoren
 * unterstützte Sprachen: https://www.instana.com/supported-technologies/
 * unterstützte Technologien: https://www.instana.com/supported-technologies/
 
-, so daß immer die relevanten Metriken gezogen und dargestellt werden können.
+, so daß immer die relevanten Metriken gezogen und dargestellt werden können. Zudem werden dadurch, daß Instana diese Technologien kennt, besonders auffällige Werte entdeckt. Das kann zu einem Alert führen.
 
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
