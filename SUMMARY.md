@@ -63,6 +63,7 @@
   * [Java Performance](java_performance.md)
     * [Heapdump Analysis](heapdump_analysis.md)
   * [Java Concurrency](java_concurrency.md)
+  * [Instana](instana.md)
 * Build und Deployment
   * [Maven](maven.md)
   * [Shellprogrammierung](shellprogramming.md)
