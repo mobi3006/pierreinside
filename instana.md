@@ -31,6 +31,9 @@ Instana kann den Weg eines Client-Requests an einen Service über andere Service
 ## 1-Second-Granularity
 Die Abtastrate der Sensoren beträgt eine Sekunde, d. h. jede Sekunde werden die Metriken aller beteiligten Komponenten erfaßt und gespeichert.
 
+## Zero Configuration
+Instana kommt mit dem Anspruch intelligent genug zu sein, um Probleme ohne konfigurierte Grenzwerte zu erkennen.
+
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
