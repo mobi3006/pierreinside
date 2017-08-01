@@ -65,3 +65,8 @@ Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann
     * Appserver
     * ElasticSearch
     * ...
+    
+# User-Interface
+* physikalische Sicht auf Hosts, Container, Prozesse
+* logische Sicht auf Services
+* Traces - einzelne Messpunkte
