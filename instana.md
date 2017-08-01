@@ -71,3 +71,9 @@ Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann
 * physikalische Sicht auf Hosts, Container, Prozesse
 * logische Sicht auf Services
 * Traces - einzelne Messpunkte, die bis in den Code (wird decompiliert) runtergehen
+
+# FAQ
+
+Frage 1: Welchen Impact hat Instana auf die Performance der Anwendnung?
+
+Antwort 1: Java-Anwendungen werden instrumentiert - das dauert ein wenig, ansonsten hat Instana keine/kaum negativen Einfluss auf die Performance. https://youtu.be/wghFJGpF3Fw?t=1716
