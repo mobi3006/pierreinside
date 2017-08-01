@@ -58,7 +58,7 @@ Bei ElasticSearch können einzelne Knoten gemonitored werden, aber auch ganze Cl
 Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann es den Nutzer beim Alerting, bei der Root-Cause-Analyse und beim Problem-Solving unterstützen. 
 
 ## Open-Approach
-Instana plant die Sensorentwicklung offen zu gestalten, so daß man für nicht unterstützte Technologien auch eigene Sensoren schreiben kann
+Instana plant die Sensorentwicklung offen zu gestalten, so daß man für nicht unterstützte Technologien auch eigene Sensoren schreiben kann.
 
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
