@@ -33,5 +33,5 @@ Instana kann den Weg eines Client-Requests an einen Service über andere Service
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
 
 # Architektur
-* Instana Agent (Java-based)
+* Instana Agent (Java-based), kann auch als Docker-Container laufen (es gibt aber auch eine native One-Line-Installation)
   * ElasticSearch
