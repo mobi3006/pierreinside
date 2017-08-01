@@ -39,6 +39,14 @@ Service Discovery + Interaction Discovery + Zero Configuration &#9658; Maintenan
 ## 1-Second-Granularity
 Die Abtastrate der Sensoren beträgt eine Sekunde, d. h. jede Sekunde werden die Metriken aller beteiligten Komponenten erfaßt und gespeichert.
 
+## Komponentenspezifische Sensoren
+Instana kommt mit einer Vielzahl komponentenspezifischer Sensoren
+
+* unterstützte Sprachen: https://www.instana.com/supported-technologies/
+* unterstützte Technologien: https://www.instana.com/supported-technologies/
+
+, so daß immer die relevanten Metriken gezogen und dargestellt werden können.
+
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
