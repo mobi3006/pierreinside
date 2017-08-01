@@ -28,16 +28,16 @@ In einem elastischen Microservices Umfeld ist es essentiell, daß neue Services 
 ## Interaction Discovery
 Instana kann den Weg eines Client-Requests an einen Service über andere Services bis auf unterste Ebene tracen und nachverfolgen. Auf diese Weise lassen sich einersets ganz fein granulare Daten gewinnen (z. B. welche SQL-Query wurde gegen die Datenbank abgesetzt, wie lange hat das gedauert und wie hoch war die I/O-Rate in der Datenbank) und andererseits grobgranulare Informationen (z. B. wie häufig wurde ein Service aufgerufen?) ableiten. 
 
-## Maintenance-Free
-Service Discovery + Interaction Discovery 
-
-## 1-Second-Granularity
-Die Abtastrate der Sensoren beträgt eine Sekunde, d. h. jede Sekunde werden die Metriken aller beteiligten Komponenten erfaßt und gespeichert.
-
 ## Zero Configuration
 Instana kommt mit dem Anspruch intelligent genug zu sein, um Probleme ohne konfigurierte Grenzwerte zu erkennen.
 
 > Machine lerning algorithms to learn performance patterns.
+
+## Maintenance-Free
+Service Discovery + Interaction Discovery + Zero Configuration &#9658; Maintenance-Free
+
+## 1-Second-Granularity
+Die Abtastrate der Sensoren beträgt eine Sekunde, d. h. jede Sekunde werden die Metriken aller beteiligten Komponenten erfaßt und gespeichert.
 
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
