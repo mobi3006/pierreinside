@@ -34,6 +34,8 @@ Die Abtastrate der Sensoren beträgt eine Sekunde, d. h. jede Sekunde werden die
 ## Zero Configuration
 Instana kommt mit dem Anspruch intelligent genug zu sein, um Probleme ohne konfigurierte Grenzwerte zu erkennen.
 
+> Machine lerning algorithms to learn performance patterns.
+
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
