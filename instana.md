@@ -15,3 +15,8 @@ Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch a
 
 Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens.
 
+# Features
+* Tenants vs. Zones vs. Filtern vs. Taggen
+  * es gibt verschiedene Möglichkeiten, die Daten zu filtern
+* 
+
