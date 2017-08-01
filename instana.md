@@ -15,7 +15,14 @@ Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch a
 
 Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens.
 
+# Alerting
+Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Noch besser als nachträglich Probleme erklären zu können ist allerdings, Problemsituationen zu erkennen BEVOR daraus tatsächlich Probleme werden.
+
+Instana bietet Alerting, um genau das zu erreichen. In gewisser Weise ist der Alerting Mechanismus auch selbstlernend (WIRKLICH?).
+
 # Features
+* Alerting
+
 * Tenants vs. Zones vs. Filtern vs. Taggen
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
 * 
