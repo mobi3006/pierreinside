@@ -18,7 +18,7 @@ Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Def
 # Alerting
 Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Noch besser als nachträglich Probleme erklären zu können ist allerdings, Problemsituationen zu erkennen BEVOR daraus tatsächlich Probleme werden.
 
-Instana bietet Alerting, um genau das zu erreichen. In gewisser Weise ist der Alerting Mechanismus auch selbstlernend (WIRKLICH?).
+Instana bietet Alerting, um genau das zu erreichen. In gewisser Weise ist der Alerting Mechanismus auch selbstlernend (Frage: WIRKLICH?).
 
 # Features
 * Alerting
