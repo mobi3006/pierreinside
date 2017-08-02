@@ -31,4 +31,3 @@ Wenn die Transaktion committed wird, erfolgt spätestens (automatisch) ein `flus
 Bei `FlushModeType.AUTO` wird vor jeder Query ein Flush getriggert. Sollte das mal nicht reichen (oder man verwendet grundsätzlich `FlushModeType.COMMIT`), dann kann es Sinn machen, `em.flush()` manuell zu triggern. Insbesondere in Tests, die die Datenbank am Ende des Tests unverändert zurücklassen sollen (und deshalb ein `em.getTransaction().rollback()` triggern) ist das `em.flush()` ein guter Freund. 
 
 Tut man es hingegen im Produktivcode, dann sollte man das mit Bedacht machen. Letztlich überstimmt man - sofern `FlushModeType.AUTO` verwendet wird - die Entscheidung des EntityManagers, der auf Optimierung getrimmt ist ... vielleicht resultiert daraus eine schlechtere Performance.
-
