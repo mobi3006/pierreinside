@@ -29,6 +29,8 @@
 * Programming
   * [JRebel](jrebel.md)
   * [Bean Validation](java_beanValidation.md)
+  * [EJB](ejb.md)
+  * Dependency Injection
   * Webservices
     * [HTTP](http.md)
     * [REST](rest.md)
@@ -131,7 +133,6 @@
 * [Docker Ressources](docker_resources.md)
 * [Visual Studio Code](visualstudiocode.md)
 * [Authentifizierung](authentitication.md)
-* [EJB](ejb.md)
 * [Ansible Details](ansible_details.md)
 * [Swift](swift.md)
 
