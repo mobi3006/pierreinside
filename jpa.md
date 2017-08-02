@@ -13,7 +13,7 @@ Mit einem `em.clear()` könnte man theoretisch eine `EntityManager`-Instanz für
 
 Eine Transaktion kann nicht auf zwei unterschiedliche EntityManager-Instanzen aufgeteilt werden, da die Transaktionssteuerung Teil des EntityManagers ist (`em.getTransaction().begin()`).
 
-ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für das IsolationLevel relevante Locks setzen!!!
+ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für das IsolationLevel relevante Locks setzen!!! Insofern sollte man auch für lesende Zugriffe nicht einfach einen EntityManager wiederverwenden. **JEDE BUSINESS-TRANSAKTION verwendet seine EIGENE EntityManager-Instanz!!!**
 
 ## em.persist() vs em.merge
 * [StackOverflow](https://stackoverflow.com/questions/1069992/jpa-entitymanager-why-use-persist-over-merge)
