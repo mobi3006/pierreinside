@@ -47,6 +47,8 @@
     * [Spring Petclinic](spring_petclinic.md)
   * [Thymeleaf](thymeleaf.md)
   * Persistenz
+    * Transactions
+      * [Java TX](java_transactions.md)
     * [TX Handling](txHandling.md)
     * [JPA](jpa.md)
       * [Eclipse Link - JPA](jpa_eclipseLink.md)
