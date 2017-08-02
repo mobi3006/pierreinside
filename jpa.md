@@ -19,6 +19,7 @@ Das macht diesen Ansatz recht attraktiv, weil der Entwickler eines Services - so
 Beim Flush werden Änderungen an Entitäten in der Datenbank sichtbar. Der Sichtbarkeitsscope hängt vom Isolation-Level ab. Bei einem Isolationlevel "READ UNCOMMITED" sind die Änderungen beispielsweise schon für parallele Transaktionen sichtbar ... es könnte aber sein, daß diese dann eine temporäre Welt sehen, die SO nie existieren wird, weil am Ende ein Rollback gemacht wird.
 
 Wenn die Transaktion committed wird, erfolgt spätestens (automatisch) ein `flush`. Man kann konfigurieren, wann der EntityManager einen Flush auslösen soll:
+
 * FlushModeType.COMMIT: Flush-on-commit
 * FlushModeType.AUTO> Flush vor einer Query
 
