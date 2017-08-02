@@ -11,7 +11,7 @@ Das macht diesen Ansatz recht attraktiv, weil der Entwickler eines Services - so
 ### 1:1 Beziehung - EntityManager und Transaktion
 Mit einem `em.clear()` könnte man theoretisch eine `EntityManager`-Instanz für verschiedene Transaktionen wiederverwenden. Besser - weil so designed - ist die Erzeugung einer neuen `EnitytManager`-Instanz pro Transaktion.
 
-
+Eine Transaktion kann nicht auf zwei unterschiedliche EntityManager-Instanzen aufgeteilt werden, da die Transaktionssteuerung Teil des EntityManagers ist (`em.getTransaction().begin()`).
 
 ## em.persist() vs em.merge
 * [StackOverflow](https://stackoverflow.com/questions/1069992/jpa-entitymanager-why-use-persist-over-merge)
