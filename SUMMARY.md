@@ -49,6 +49,7 @@
   * Persistenz
     * Transactions
       * [Java TX](java_transactions.md)
+      * [JPA TX](jpa_txHandling.md)
     * [TX Handling](txHandling.md)
     * [JPA](jpa.md)
       * [Eclipse Link - JPA](jpa_eclipseLink.md)
