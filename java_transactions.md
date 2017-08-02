@@ -35,3 +35,7 @@ Das Isolation Level kann auf verschiendenen Ebenen eingestellt werden
 * Data Source
 * Datenbank Verbindung/Session
 
+# Transaktionen im JPA-Umfeld
+
+[siehe eigener Artikel](jpa_txHandling.md)
+
