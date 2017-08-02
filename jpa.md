@@ -42,4 +42,6 @@ Tut man es hingegen im Produktivcode, dann sollte man das mit Bedacht machen. Le
 ### em.close()
 Ein nicht geschlossener EntityManager verbraucht Resssourcen ... VERMEIDEN!!! 
 
-Ausserdem könnten darin noch Transaktionen laufen, die nicht per Rollback/Commit beendet wurden.
+Ausserdem könnten darin noch Transaktionen laufen, die nicht per Rollback/Commit beendet wurden. In diesem Fall könnte es sein, daß der EntityManager eine Datenbank-Connection aus dem limitierten (!!!) Connection-Pool verbrät (jede Connection verbraucht auf Datenbankseite relativ viele Ressourcen - deshalb ist die Connection-Pool-Größe passend zu wählen), die anderen 
+
+> "In EclipseLink by default a connection is only held for the duration of an active (dirty) transaction. i.e. from the first modification or lock, until the commit or rollback. For non-transactional queries a connection is acquired on demand and returned after the query execution. This allows for maximal usage of connection pooling. So, normally em.close() does nothing. You can configure this using the "eclipselink.jdbc.exclusive-connection.mode" persistence unit property. "Always" will hold a connection for the life of the EntityManager." (https://stackoverflow.com/questions/13707183/when-is-a-connection-returned-to-the-connection-pool-in-a-jpa-application)
