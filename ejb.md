@@ -5,7 +5,7 @@ Der JEE Standard war lange Zeit dominieren im Enterprise-Java-Umfeld. Doch Sprin
 
 ---
 
-# EJB 1.6
+# Enterprise Java Beans Spezifikation - Version 1.6
 * http://docs.oracle.com/javaee/6/tutorial/doc/
 
 Es gibt verschiedene Arten von EJBs:
