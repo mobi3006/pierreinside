@@ -29,7 +29,7 @@
 * Programming
   * [JRebel](jrebel.md)
   * [Bean Validation](java_beanValidation.md)
-  * [EJB](ejb.md)
+  * [Enterprise Java Beans Specification](ejb.md)
   * Dependency Injection
   * Webservices
     * [HTTP](http.md)
