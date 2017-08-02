@@ -3,7 +3,7 @@
 ---
 
 # JPA
-* [kumaranuj / SEHR GUTER ARTIKEL](http://www.kumaranuj.com/2013/06/jpa-2-entitymanagers-transactions-and.html)
+* [kumaranuj - SEHR GUTER ARTIKEL](http://www.kumaranuj.com/2013/06/jpa-2-entitymanagers-transactions-and.html)
 * http://piotrnowicki.com/2012/11/types-of-entitymanagers-application-managed-entitymanager/
 
 JPA kennt drei Formen von Entity Managern (EM):
