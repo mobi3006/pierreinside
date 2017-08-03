@@ -60,6 +60,9 @@ Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann
 ## Open-Approach
 Instana plant die Sensorentwicklung offen zu gestalten, so daß man für nicht unterstützte Technologien auch eigene Sensoren schreiben kann.
 
+## API
+Erkennt Instana wichtige Strukturen bzww. neuralgische Punkte in der Anwendung nicht selbständig, so lassen sich im Code Metainformationen über Annotationen hinterlegen.
+
 ## Misc
 * Tenants vs. Zones vs. Filtern vs. Taggen
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
