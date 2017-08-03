@@ -14,7 +14,7 @@ Aus diesem Grund sind bezahlbare fertige (gut supportete) Lösungen eine gute Sa
 # Features
 
 ## SaaS oder On-Premise
-Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch als On-äPremise-Lösung an. 
+Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch als On-Premise-Lösung an. 
 
 Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens.
 
