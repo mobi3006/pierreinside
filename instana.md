@@ -79,7 +79,7 @@ Erkennt Instana wichtige Strukturen bzww. neuralgische Punkte in der Anwendung n
   * schickt Messwerte ans Backend 
 * Backend
   * sammelt die Daten der Agents
-* UI
+* Web-User-Interface
 
 # User-Interface
 * physikalische Sicht auf Hosts, Container, Prozesse
