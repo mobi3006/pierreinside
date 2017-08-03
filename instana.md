@@ -68,14 +68,19 @@ Erkennt Instana wichtige Strukturen bzww. neuralgische Punkte in der Anwendung n
   * es gibt verschiedene Möglichkeiten, die Daten zu filtern
 
 # Architektur
-* Instana Agent (Java-based), kann auch als Docker-Container laufen (es gibt aber auch eine native One-Line-Installation)
-  * komponentenspezifische Sensoren für (Abtastrate: 1 Sekunde)
+* Agent (Java-based)
+  * native Installation auf gängigen Betriebssystemen - kann auch als Docker-Container laufen (für Getting-Started sehr interessant)
+  * enthält komponentenspezifische Sensoren für (Abtastrate: 1 Sekunde)
     * Betriebssystem
     * Java-VM
     * Appserver
     * ElasticSearch
     * ...
-    
+  * schickt Messwerte ans Backend 
+* Backend
+  * sammelt die Daten der Agents
+* UI
+
 # User-Interface
 * physikalische Sicht auf Hosts, Container, Prozesse
 * logische Sicht auf Services
