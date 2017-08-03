@@ -79,6 +79,7 @@ Erkennt Instana wichtige Strukturen bzww. neuralgische Punkte in der Anwendung n
   * schickt Messwerte ans Backend 
 * Backend
   * sammelt die Daten der Agents
+  * basierend auf Cassandra, Kafka, ElasticSearch ... scale-out possible with these technologies
 * Web-User-Interface
 
 # User-Interface
