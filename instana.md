@@ -16,7 +16,7 @@ Aus diesem Grund sind bezahlbare fertige (gut supportete) Lösungen eine gute Sa
 ## SaaS oder On-Premise
 Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch als On-Premise-Lösung an. 
 
-Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens.
+Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (z. B. bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens.
 
 ## Alerting
 Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Noch besser als nachträglich Probleme erklären zu können ist allerdings, Problemsituationen zu erkennen BEVOR daraus tatsächlich Probleme werden.
