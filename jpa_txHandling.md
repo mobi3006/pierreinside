@@ -17,6 +17,7 @@ JPA kennt folgende Transaction Management Typen:
 * RESOURCE LOCAL
   * hier übernimmt i. a. der JDBC-Datenbanktreiber das Transaktionmanagement
   * man ist damit beschränkt auf EINE transaktionale Ressource (i. a. die Datenbank-Connection)
+  * ein evtl. vorhandener Application-Server kümmern sich nicht um die Transaktionsinfrastruktur ... die Applikation ist selbst dafür verantworlich
 * JTA (= GLOBAL)
   * hier übernimmt der JEE Container das Transaktionmanagement
   * hier kann man mehrere transaktionale Ressourcen (Database Connection, JMS Connection, ...) an eine Transaktion binden, um so beispielsweise über das XA-Protokoll eine verteilte Transaktion abzubilden.
