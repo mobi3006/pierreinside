@@ -131,4 +131,4 @@ Bei der MySQL-Implementierung ist dieses Nutzungsszenario unkritisch.
 
 ABER: in manchen Fällen mag es nicht anders gehen, daß man transaktionales Verhalten über mehrere HTTP-Requests implementiert. 
 
-* https://vladmihalcea.com/2014/09/22/preventing-lost-updates-in-long-conversations/
+* Extended PersistenceContext: https://vladmihalcea.com/2014/09/22/preventing-lost-updates-in-long-conversations/
