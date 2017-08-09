@@ -22,14 +22,6 @@ JPA kennt folgende Transaction Management Typen:
   * hier übernimmt der JEE Container das Transaktionmanagement
   * hier kann man mehrere transaktionale Ressourcen (Database Connection, JMS Connection, ...) an eine Transaktion binden, um so beispielsweise über das XA-Protokoll eine verteilte Transaktion abzubilden.
 
-## Konzepte
-**PersistenceContext:**
-
-Der PersistenceContext verwaltet eine Menge von Entities (Unit of Work). Hier steckt die eigentliche Logik drin - nicht im Entity Manager. Wird eine Transaktion erzeugt, so wird ein neuer Persistence Context erzeugt und damit verbinden - wird die Transaction committed, dann wird der Persistence Context persistiert (= flush). Flushen ist in manchen Fällen (z. B. SQL-Queries, automatisierte Erzeugung von IDs, Logik in EntityCallbacks) aber zwischendurch notwendig ... bei `FlushModeType.AUTO` entscheidet der EntityManager wann geflushed werden sollte (bei `FlushModeType.COMMIT` wird immer erst beim Committen der Transaktion geflushed). 
-
-**Entity Manager:**
-Der EntityManager ist die Schnittstelle der Anwendung zur Datenbank. Hierüber werden Queries gebaut und abgesetzt. Alle gelesenen Entities landen im PersistenceContext und stehen von da an unter EntityManager Kontrolle, d. h. alle Änderungen daran werden bei Bedarf auf die Datenbank geflushed und evtl. später auch committed.
-
 ## Container managed transaction scoped EM
 Das ist die am häufigsten anzutreffende Form von Entity Managern. Diese EM sind stateless und dadurch threadsafe - jeder Methodenaufruf läuft in einer eigenen Transaktion und am Ende der Methode wird die Transaktion beendet (commit/rollback). Aber der (veränderte) Zustand der Entitäten muß natürlich irgendwo gespeichert werden ... er wird ja i. a. nicht sofort für alle sichtbar in die Datenbank geschrieben. Der Status liegt im ``PersistenceContext``, der an der JTA-Transaktion hängt (ACHTUNG: solche EntityManager benötigen JTA-Transactions!!!).
 
