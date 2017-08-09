@@ -102,6 +102,8 @@ Generell kennt JPA vier Isolation Levels:
 * `javax.sql.Connection.TRANSACTION_REPEATABLE_READ`: Dirty reads and non-repeatable reads are prevented; phantom reads can occur.
 * `javax.sql.Connection.TRANSACTION_SERIALIZABLE`: Dirty reads, non-repeatable reads, and phantom reads are prevented.
 
+Isolation Levels sind IMMER auf der Datenbank und nicht im EntityManager implementiert, da Datenbanken verschiedene Clients bedienen (z. B. auch SQL-Navigatoren).
+
 Allerdings implementieren viele Datenbanken weitere Isolation Levels (z. B. [Microsoft SQL Server: SNAPSHOT ISOLATION](http://www.databasejournal.com/features/mssql/snapshot-isolation-level-in-sql-server-what-why-and-how-part-1.html)) bzw. spezielle Interpretationen/Implementierungen (z. B. [MySQL mit Repeatable-Read Umsetzung über Snapshots und ohne READ-Lock](https://dev.mysql.com/doc/refman/5.7/en/innodb-consistent-read.html)).
 
 ## MySQL Repeatable-Read - non-locking reads
