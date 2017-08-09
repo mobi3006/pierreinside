@@ -15,7 +15,7 @@ JPA kennt drei Formen von Entity Managern (EM):
 JPA kennt folgende Transaction Management Typen:
 
 * RESOURCE LOCAL
-  * hier übernimmt i. a. der Datenbanktreiber das Transaktionmanagement
+  * hier übernimmt i. a. der JDBC-Datenbanktreiber das Transaktionmanagement
   * man ist damit beschränkt auf EINE transaktionale Ressource (i. a. die Datenbank-Connection)
 * JTA (= GLOBAL)
   * hier übernimmt der JEE Container das Transaktionmanagement
