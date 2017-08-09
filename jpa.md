@@ -9,7 +9,7 @@ Der PersistenceContext verwaltet eine Menge von Entities (Unit of Work). Hier st
 
 Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (https://dzone.com/articles/jpa-caching), d. h. eine Finder-Methode wird IMMER die exakt gleiche Instanz eines Entity zurückliefern. Auf diese Weise arbeiten alle Applikationskomponenten auf dem gleichen Objekt sofern sie den gleichen PersistenceContext verwenden.
 
-> ACHTUNG: EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
+> ACHTUNG: Bei JTA Transaction Management kann EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
 
 ## EntityManager
 Der EntityManager ist die Schnittstelle der Anwendung zur Datenbank. Hierüber werden Queries gebaut und abgesetzt. Alle gelesenen Entities landen im PersistenceContext und stehen von da an unter EntityManager Kontrolle, d. h. alle Änderungen daran werden bei Bedarf auf die Datenbank geflushed und evtl. später auch committed.
