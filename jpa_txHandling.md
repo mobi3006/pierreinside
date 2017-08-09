@@ -106,6 +106,7 @@ Allerdings implementieren viele Datenbanken weitere Isolation Levels (z. B. [Mic
 
 ## MySQL Repeatable-Read - non-locking reads
 * https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html
+* https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html
 
 MySQL verwendet eine spezielle Implementierung basierend auf Snapshots, um Repeatable-Read umzusetzen. Auf diese Weise wird vermieden, daß lesende Zugriffe zu Locks führen und damit schreibende Zugriffe blockieren. Das erhöht den Durchsatz dramatisch und reduziert die Anfälligkeit für Deadlocks - zudem wird das Programmiermodell einfacher, weil Deadlock-Szenarien seletener auftreten können. Folgendes ist somit kein Problem:
 
