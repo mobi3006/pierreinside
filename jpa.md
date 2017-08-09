@@ -21,6 +21,8 @@ Eine Transaktion kann nicht auf zwei unterschiedliche EntityManager-Instanzen au
 
 ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für das IsolationLevel relevante Locks setzen!!! Insofern sollte man auch für lesende Zugriffe nicht einfach einen EntityManager wiederverwenden. **JEDE BUSINESS-TRANSAKTION verwendet seine EIGENE EntityManager-Instanz!!!**
 
+* https://stackoverflow.com/questions/26327274/do-you-need-a-database-transaction-for-reading-data
+
 ### em.persist(entity) vs em.merge(entity)
 * [StackOverflow](https://stackoverflow.com/questions/1069992/jpa-entitymanager-why-use-persist-over-merge)
 
