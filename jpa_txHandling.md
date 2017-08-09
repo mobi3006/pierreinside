@@ -92,4 +92,14 @@ EntityManagerFactory emf =
 
 Hierfür wird allerdings eine Datei ``persistence.xml`` benötigt.
 
+# Isolation Level
+* https://vladmihalcea.com/2014/10/23/hibernate-application-level-repeatable-reads/
 
+Generell kennt JPA vier Isolation Levels:
+
+* read-committed: Dirty reads are prevented; non-repeatable reads and phantom reads can occur.
+* read-uncommitted: Dirty reads, non-repeatable reads and phantom reads can occur.
+* repeatable-read: Dirty reads and non-repeatable reads are prevented; phantom reads can occur.
+* serializable: Dirty reads, non-repeatable reads, and phantom reads are prevented.
+
+Allerdings implementieren viele Datenbanken weitere Isolation Levels (z. B. [Microsoft SQL Server: SNAPSHOT ISOLATION](http://www.databasejournal.com/features/mssql/snapshot-isolation-level-in-sql-server-what-why-and-how-part-1.html)) bzw. spezielle Interpretationen/Implementierungen (z. B. [MySQL mit Repeatable-Read Umsetzung über Snapshots und ohne READ-Lock](https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html)).
