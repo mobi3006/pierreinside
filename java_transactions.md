@@ -24,10 +24,12 @@ Mit dem Isolation-Level wird gesteuert wie parallel laufende Transaktionen abgea
 
 Beim großzugügsten Isolation-Level READ UNCOMMITTED erfolgen haben weder READ-Locks noch WRITE-Locks eine Relevanz. Ganz egal ob auf einem Entity ein solches Lock sitzt, lesende und schreibende Zugriffe sind immer erlaubt. Dadurch kann es passieren, daß eine Transaktion nicht-committete Änderungen einer Transaktion sehen kann. 
 
-Beim zwei-schärfsten Isolation-Level REPEATABLE READ sorgt 
+Beim zweitschärfsten Isolation-Level REPEATABLE READ sorgt 
 
 * ein READ-Lock durch Transaktion T1 dafür, daß eine andere Transaktion T2 kein WRITE-Lock mehr setzen kann haben ... T2 muß also warten bis T1 durch ein commit/rollback das READ-Lock verwirft. Damit wird ein Repeatable-Read in der Transaktion T1 sichergestellt. Egal wann innerhalb der Transaktion T1 ein Entity gelesen wird, es hat IMMER den gleichen Zustand.  
 * ein WRITE-Lock durch Transaktion T1 dafür, daß eine andere Transaktion T2 weder ein READ-Lock noch ein WRITE-Lock setzen kann. T2 muß warten bis T1 committed/rollbacked wurde ... erst danach kann es das Entity mit dem Lock lesen/schreiben. Dadurch wird sichergestellt, daß T2 keine uncommitteten Änderungen durch T1 lesen kann (was Dirty-Reads wären)
+
+> ACHTUNG: es kann sein, daß spezielle Datenbanken eine andere Implementierung wählen, um REPEATABLE_READ sicherzustellen, z. B. MySQL verwendet hier einen Snapshot-Ansatz statt eines READ-Locks ... das führt zu einem besseren Durchsatz und einem einfacheren Programmiermodell ([siehe eigener Artikel](jpa_txHandling.md)).
 
 ## Konfiguration
 Das Isolation Level kann auf verschiendenen Ebenen eingestellt werden
