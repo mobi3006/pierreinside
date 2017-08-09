@@ -18,6 +18,7 @@ Bei einer **Container-Managed-Transaktion** übernimmt diese Aufgabe der Applica
 
 # Isolation-Level
 * https://dzone.com/articles/beginners-guide-transaction
+* https://vladmihalcea.com/2014/01/05/a-beginners-guide-to-acid-and-database-transactions/
 
 Mit dem Isolation-Level wird gesteuert wie parallel laufende Transaktionen abgearbeitet werden. Auf der Datenbank werden hierzu READ-Locks und WRITE-Locks verwendet.
 
