@@ -104,7 +104,9 @@ Generell kennt JPA vier Isolation Levels:
 
 Isolation Levels sind IMMER auf der Datenbank und nicht im EntityManager implementiert, da Datenbanken verschiedene Clients bedienen (z. B. auch SQL-Navigatoren).
 
-Allerdings implementieren viele Datenbanken weitere Isolation Levels (z. B. [Microsoft SQL Server: SNAPSHOT ISOLATION](http://www.databasejournal.com/features/mssql/snapshot-isolation-level-in-sql-server-what-why-and-how-part-1.html)) bzw. spezielle Interpretationen/Implementierungen (z. B. [MySQL mit Repeatable-Read Umsetzung über Snapshots und ohne READ-Lock](https://dev.mysql.com/doc/refman/5.7/en/innodb-consistent-read.html)).
+Viele Datenbanken implementieren weitere Isolation Levels (z. B. [Microsoft SQL Server: SNAPSHOT ISOLATION](http://www.databasejournal.com/features/mssql/snapshot-isolation-level-in-sql-server-what-why-and-how-part-1.html)) bzw. spezielle Interpretationen/Implementierungen (z. B. [MySQL mit Repeatable-Read Umsetzung über Snapshots und ohne READ-Lock](https://dev.mysql.com/doc/refman/5.7/en/innodb-consistent-read.html)). 
+
+Der Grund besteht in einer besseren Performance oder der Vermeidung von Deadlock-Situationen bei weiterhin guter Konsistenz.
 
 ## MySQL Repeatable-Read - non-locking reads
 * https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html
