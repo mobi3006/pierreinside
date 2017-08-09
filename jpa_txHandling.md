@@ -125,3 +125,10 @@ Das Programmiermodell wird dadurch vereinfach:
 * wÜrden TX 1 und TX 2 innerhalb eines Threads abgearbeitet (z. B. mit einer REQUIRES_NEW Semantik), dann würde das in einer Standard-Reapeatable-Read-Implementierung zu einem Deadlock führen. Bei MySQL ist das problemlos möglich!!!
 
 Bei der MySQL-Implementierung ist dieses Nutzungsszenario unkritisch.
+
+# Lang Laufende Transaktionen
+... sollte man grundsätzlich versuchen zu vermeiden.
+
+ABER: in manchen Fällen mag es nicht anders gehen, daß man transaktionales Verhalten über mehrere HTTP-Requests implementiert. 
+
+* https://vladmihalcea.com/2014/09/22/preventing-lost-updates-in-long-conversations/
