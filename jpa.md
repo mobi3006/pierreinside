@@ -37,6 +37,15 @@ ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für 
 ## em.remove(entity)
 Diese Operation kennzeichnet das `entity` als zu löschendes.
 
+## em.clear()
+Bei dieser Aktion werden ALLE Entities aus dem Persistenz-Kontext detached. Für das Programmiermodell ist das eine sehr gefährliche Aktion, weil der Nutzer einer detachten Entity davon evtl. nicht mitbekommt und seine nachfolgenden Änderungen - in der Annahme, daß die Entity attached ist - nicht persistiert werden.
+
+```
+Person person = em.find(Person.class, 1L);
+callMethodThatClearsTheEntityManager(em);
+person.setName("Pierre");                 // <== wird nicht persistiert
+```
+
 ### em.flush()
 Beim Flush werden Änderungen an Entitäten in der Datenbank sichtbar. Der Sichtbarkeitsscope hängt vom Isolation-Level ab. Bei einem Isolationlevel "READ UNCOMMITED" sind die Änderungen beispielsweise schon für parallele Transaktionen sichtbar ... es könnte aber sein, daß diese dann eine temporäre Welt sehen, die SO nie existieren wird, weil am Ende ein Rollback gemacht wird.
 
