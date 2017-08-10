@@ -7,6 +7,10 @@ Ich dachte immer ich müßte hunderte von Bildern malen (ähnlich wie bei einem 
 Sprechende Figuren bekommt man durch Software wie [Anime Studio](https://www.youtube.com/watch?v=HxcVq9VDdss) ... und das scheint reicht einfach. 
 
 # Software
-* https://www.youtube.com/watch?v=HxcVq9VDdss
+* Anime Studio
+  * https://www.youtube.com/watch?v=HxcVq9VDdss
+* [Blender](https://www.blender.org)
+* Cinema 4D
+  * https://www.youtube.com/watch?v=jRKfumNPL1Y
 
  
