@@ -12,7 +12,7 @@ Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (L1 - h
 > ACHTUNG: Bei JTA Transaction Management kann EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
 
 ## Shared Cache - optional
-Neben dem PersistenceContext (= First-Level-Cache) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts geteilt werden. 
+Neben dem PersistenceContext (= First-Level-Cache) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts geteilt wird . 
 
 ### EclipseLink - Deaktivierung
 * https://wiki.eclipse.org/EclipseLink/FAQ/How_to_disable_the_shared_cache%3F
@@ -49,7 +49,10 @@ ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für 
 Diese Operation kennzeichnet das `entity` als zu löschendes.
 
 ## em.clear()
-Bei dieser Aktion werden ALLE Entities aus dem Persistenz-Kontext detached. Für das Programmiermodell ist das eine sehr gefährliche Aktion, weil der Nutzer einer detachten Entity davon evtl. nicht mitbekommt und seine nachfolgenden Änderungen - in der Annahme, daß die Entity attached ist - nicht persistiert werden.
+Bei dieser Aktion werden ALLE Entities aus dem Persistenz-Kontext detached. Für das Programmiermodell ist das eine sehr gefährliche Aktion, weil der Nutzer einer detachten Entity (vielleicht an einer ganz anderen Stelle im Aufrufstack) davon nichts mitbekommt. Somit 
+
+* werden nachfolgende Änderungen - in der Annahme, daß die Entity attached ist - nicht mehr persistiert
+* führen lesende Zugriffe auf nochnicht geladenen Lazy-Properties zu einer Exception
 
 ```
 Person person = em.find(Person.class, 1L);
