@@ -66,6 +66,12 @@ callMethodThatClearsTheEntityManager(em);
 person.getBankAccounts();                 // <== EXCEPTION
 ```
 
+EXTREM schwierig wird das Programmiermodell, wenn man den JPA-Shared-Cache (L2-Cache) verwendet, weil dann bei Finder-Methoden folgendes passiert (unter der Annahme, daß das Entity in der Transaktion geändert wurde):
+
+* die Datenbank liefert die ID des Entities
+* da das Entity aufgrund des `em.clear()` nicht mehr in L1-Cache (PersistenceContext) ist, wird der Shared-Cache genutzt, der evtl. eine alte Version des Entities enthält
+* bei einem nachfolgenden update auf dem Entity kommt es - im besten Fall zu einer `OptimisticLockException` ... im worst-case wird das Entity mit einem alten Wert überschrieben
+
 Aus Ressourcengründen macht es gelegentlich Sinn `em.clear()` aufzurufen, um die geladenen - und nicht mehr benötigten Entities - vom Heap zu werfen. Dann macht es meistens Sinn, vorher ein `em.flush()` aufzurufen, um die bereits gemachten Änderungen nicht zu verlieren. 
 
 EMPFEHLUNG: 
