@@ -52,12 +52,18 @@ Diese Operation kennzeichnet das `entity` als zu löschendes.
 Bei dieser Aktion werden ALLE Entities aus dem Persistenz-Kontext detached. Für das Programmiermodell ist das eine sehr gefährliche Aktion, weil der Nutzer einer detachten Entity (vielleicht an einer ganz anderen Stelle im Aufrufstack) davon nichts mitbekommt. Somit 
 
 * werden nachfolgende Änderungen - in der Annahme, daß die Entity attached ist - nicht mehr persistiert
+```
+Person person = em.find(Person.class, 1L);
+callMethodThatClearsTheEntityManager(em);
+person.setName("Pierre");                 // <== wird nicht persistiert
+```
+
 * führen lesende Zugriffe auf nochnicht geladenen Lazy-Properties zu einer Exception
 
 ```
 Person person = em.find(Person.class, 1L);
 callMethodThatClearsTheEntityManager(em);
-person.setName("Pierre");                 // <== wird nicht persistiert
+person.getBankAccounts();                 // <== EXCEPTION
 ```
 
 ### em.flush()
