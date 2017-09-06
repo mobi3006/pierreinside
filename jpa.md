@@ -11,6 +11,17 @@ Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (https:
 
 > ACHTUNG: Bei JTA Transaction Management kann EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
 
+## Shared Cache - optional
+Neben dem PersistenceContext als First-Level-Cache gibt es im Java-Layer noch einen Shared-Cache, der über verschiedene/alle PersistenceContexts geteilt werden. 
+
+### EclipseLink - Deaktivierung
+* https://wiki.eclipse.org/EclipseLink/FAQ/How_to_disable_the_shared_cache%3F
+
+Bei EclipseLink lässt sich der SharedCache folgendermaßen abschalten
+
+* Entity-spezifisch: `@Cacheable(false)`
+* applikationsspezifisch: `<shared-cache-mode>NONE</shared-cache-mode>`
+
 ## EntityManager
 Der EntityManager ist die Schnittstelle der Anwendung zur Datenbank. Hierüber werden Queries gebaut und abgesetzt. Alle gelesenen Entities landen im PersistenceContext und stehen von da an unter EntityManager Kontrolle, d. h. alle Änderungen daran werden bei Bedarf auf die Datenbank geflushed und evtl. später auch committed.
 
