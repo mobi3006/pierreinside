@@ -129,7 +129,9 @@ JPA ist ganz schön zu modellieren und versteckt das dahinterliegende relational
 * lazy-Loading
 * Change-Set-Persistence (man muß sich nicht selbst um die Unit-of-Work kümmern)
 
-Das ist grundsätzlich eine schöne Sache und es funktioniert auch gut mit geringen Datenmengen. 
+Das ist grundsätzlich eine schöne Sache und es funktioniert auch gut mit geringen Datenmengen, ohne daß man tiefes Wissen über O/R-Mapping haben muß ...
+
+> "The simplicity of the entrance into the world of O/R mapping however gives a wrong impression of the complexity of these frameworks. Working with more complex applications you soon realize that you should know the details of framework implementation to be able to use them in the best possible way." (http://www.developerfusion.com/article/84945/flush-and-clear-or-mapping-antipatterns/) 
 
 Schwierig wird es dann aber, wenn man auf riesigen Datenmengen 
 
