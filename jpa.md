@@ -123,12 +123,15 @@ Ausserdem könnten darin noch Transaktionen laufen, die nicht per Rollback/Commi
 # SQL Queries
 * [Heise Artikel von Thorben Janssen](https://www.heise.de/developer/artikel/Datenbankabfragen-mit-JPA-mehr-als-nur-em-find-und-JPQL-3787881.html)
 
-# Konzeptuelle Performance-Probleme
+# Konzeptuelle Probleme
 
 ## Lazy-Loading
 Sind Relationen (statisch) lazy modelliert, dann werden sie erst beim tatssächlichen Zugriff über die Anwendnung aufgelöst. Das sorgt dafür, daß eine weitere Query pro Relation läuft - bei einer Vielzahl von verknüpften und zugegriffenen Entities sorgt das für viele Queries ... ein eager-Loading wäre mit performanteren Queries möglich gewesen.
 
 Leider hat man in einer Anwendung evtl. mehere Useage-Szenarien und müßte/wollte das im Einzelfall entscheiden - geht aber nicht. 
+
+## Detached Entities
+... sehen nicht anders aus als attached entities. Das kompliziert das Programmiermodell, weil man im Applikationscode evtl. von einem attached Entity ausgeht, das aber zur Laufzeit detached ist.
 
 # Bewertung
 JPA ist ganz schön zu modellieren und versteckt das dahinterliegende relationale Modell. Für die Entwicklung der OO-Anwendungen ist das ganz nett ... zudem hat man ganz brauchbare Zusatzfeatures
