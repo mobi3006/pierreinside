@@ -131,7 +131,11 @@ Sind Relationen (statisch) lazy modelliert, dann werden sie erst beim tatssächl
 Leider hat man in einer Anwendung evtl. mehere Useage-Szenarien und müßte/wollte das im Einzelfall entscheiden - geht aber nicht. 
 
 ## Detached Entities
-... sehen nicht anders aus als attached entities. Das kompliziert das Programmiermodell, weil man im Applikationscode evtl. von einem attached Entity ausgeht, das aber zur Laufzeit detached ist.
+... sehen nicht anders aus als attached entities. Das kompliziert das Programmiermodell, weil man im Applikationscode evtl. von einem attached Entity ausgeht, das aber zur Laufzeit detached ist. Das hat u. a. folgende Auswirkungen
+
+* Änderungen werden nicht mehr persistiert
+* Entity-Instanzen werden nicht mehr geshared
+* navigation auf lazy-loaded entities führt zu einer Exception
 
 # Bewertung
 JPA ist ganz schön zu modellieren und versteckt das dahinterliegende relationale Modell. Für die Entwicklung der OO-Anwendungen ist das ganz nett ... zudem hat man ganz brauchbare Zusatzfeatures
