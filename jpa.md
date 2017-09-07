@@ -80,7 +80,9 @@ EXTREM schwierig wird das Programmiermodell, wenn man den JPA-Shared-Cache (L2-C
 Aus Ressourcengründen macht es gelegentlich Sinn `em.clear()` aufzurufen, um die geladenen - und nicht mehr benötigten Entities - vom Heap zu werfen. Dann macht es meistens Sinn, vorher ein `em.flush()` aufzurufen, um die bereits gemachten Änderungen nicht zu verlieren. 
 
 EMPFEHLUNG: 
-* versuche 
+* schärfe das Problemverständnis
+* versuche KLARE Regeln aufzustellen, in welchem Layer zu welchem Zweck `em.clear()` wie aufzurufen ist
+* muß es ein `em.clear()` sein oder genügt vielleicht ein weniger invasiver Eingriff (z. B. gezieltes detachen bestimmter Entities in einer Methode, die das Laden diese Entities ausgelöst hat)
 
 ### em.flush()
 Beim Flush werden Änderungen an Entitäten in die Datenbank geschrieben - hier kommen dann auch erst Datenbankcontraints ins Spiel. Ob die Änderungen nur für die laufende Transaktion oder auch parallel Transaktionen sichtbar sind, hängt vom Isolation-Level ab. Bei einem Isolationlevel "READ UNCOMMITED" sind die Änderungen beispielsweise schon für parallele Transaktionen sichtbar ... es könnte aber sein, daß diese dann eine temporäre Welt sehen, die SO nie existieren wird, weil am Ende ein Rollback gemacht wird.
