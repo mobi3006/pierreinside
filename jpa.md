@@ -105,7 +105,14 @@ Ausserdem könnten darin noch Transaktionen laufen, die nicht per Rollback/Commi
 * [Heise Artikel von Thorben Janssen](https://www.heise.de/developer/artikel/Datenbankabfragen-mit-JPA-mehr-als-nur-em-find-und-JPQL-3787881.html)
 
 # Bewertung
-JPA ist ganz schön zu modellieren und versteckt das dahinterliegende relationale Modell. Für die Entwicklung der Anwendungen ist das ganz nett ... lazy-Loading ist grundsätzlich auch eine schöne Sache. Es funktioniert auch gut mit geringen Datenmengen. Schwierig wird es dann aber, wenn man auf riesigen Datenmengen 
+JPA ist ganz schön zu modellieren und versteckt das dahinterliegende relationale Modell. Für die Entwicklung der OO-Anwendungen ist das ganz nett ... zudem hat man ganz brauchbare Zusatzfeatures
+
+* lazy-Loading
+* Change-Set-Persistence (man muß sich nicht selbst um die Unit-of-Work kümmern)
+
+Das ist grundsätzlich eine schöne Sache und es funktioniert auch gut mit geringen Datenmengen. 
+
+Schwierig wird es dann aber, wenn man auf riesigen Datenmengen 
 
 * noch performante Queries braucht
   * das Programmiermodell verleitet dazu auf riesigen Result-Sets rumzurüdeln wo es eigentlich ein schnelle Bulk-`UPDATE` tun würde - in einem Bruchteil der Zeit und ganz ohne geladene (fette) Entities (vielleicht nur mit IDs oder gar ganz ohne)
