@@ -30,7 +30,12 @@ Alle über den EntityManager geladenen Entitäten sind automatisch im Persistenz
 Das macht diesen Ansatz recht attraktiv, weil der Entwickler eines Services - sobald die Transaktion gestartet ist und der EntityManager aufgebaut ist - transparent in seiner objektorientierten Welt arbeiten kann. Die sog. Unit-of-Work (= Change-Set) wird automatisch gepflegt und beim Commit der Transaktion tatsächlich persistiert (evtl. auch schon früher ... durch ein Flush).
 
 ### 1:1 Beziehung - EntityManager und Transaktion
-Mit einem `em.clear()` könnte man theoretisch eine `EntityManager`-Instanz für verschiedene Transaktionen wiederverwenden. Besser - weil so designed - ist die Erzeugung einer neuen `EnitytManager`-Instanz pro Transaktion.
+Der EntityManager verwaltet Transaktionen (`EntityTransaction tx = em.getTransaction().begin()`,  `tx.commit()`, `tx.rollback()`) und ist somit eng von Natur aus schon eine 1:1 oder eine 1:n Verknüfpung.
+
+Mit einem `em.clear()` könnte man theoretisch eine `EntityManager`-Instanz für verschiedene Transaktionen wiederverwenden (mit großem Aufwand vielleicht sogar bei parallel laufenden Transaktionen). Besser - weil so designed - ist 
+
+* Erzeugung einer neuen `EnitytManager`-Instanz pro Transaktion
+* keine Reuse der EntityManager-Instanz für weitere Transaktionen
 
 Eine Transaktion kann nicht auf zwei unterschiedliche EntityManager-Instanzen aufgeteilt werden, da die Transaktionssteuerung Teil des EntityManagers ist (`em.getTransaction().begin()`).
 
