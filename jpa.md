@@ -11,8 +11,8 @@ Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (L1 - h
 
 > ACHTUNG: Bei JTA Transaction Management kann EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
 
-## Shared Cache - optional
-Neben dem PersistenceContext (= First-Level-Cache) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts geteilt wird . 
+## Shared Cache - optional aber Default
+Neben dem PersistenceContext (= First-Level-Cache) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts geteilt wird. 
 
 ### EclipseLink - Deaktivierung
 * https://wiki.eclipse.org/EclipseLink/FAQ/How_to_disable_the_shared_cache%3F
@@ -38,7 +38,7 @@ ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für 
 
 * https://stackoverflow.com/questions/26327274/do-you-need-a-database-transaction-for-reading-data
 
-### em.persist(entity) vs em.merge(entity)
+### em.persist(entity) vs. em.merge(entity)
 * [StackOverflow](https://stackoverflow.com/questions/1069992/jpa-entitymanager-why-use-persist-over-merge)
 
 `em.persist(person)` übernimmt das übergebene Person-Objekt in den Persistenz-Kontext. Nachfolgende Änderungen daran (`person.setName("obiwan")`) wandern direkt in den Persistenz-Kontext und beeinflussen die später in die Datenbank geschriebene Zeile.
@@ -103,3 +103,10 @@ Ausserdem könnten darin noch Transaktionen laufen, die nicht per Rollback/Commi
 
 # SQL Queries
 * [Heise Artikel von Thorben Janssen](https://www.heise.de/developer/artikel/Datenbankabfragen-mit-JPA-mehr-als-nur-em-find-und-JPQL-3787881.html)
+
+# Bewertung
+JPA ist ganz schön zu modellieren und versteckt das dahinterliegende relationale Modell. Für die Entwicklung der Anwendungen ist das ganz nett ... lazy-Loading ist grundsätzlich auch eine schöne Sache. Es funktioniert auch gut mit geringen Datenmengen. Schwierig wird es dann aber, wenn man auf riesigen Datenmengen 
+
+* noch performante Queries braucht
+  * das Programmiermodell verleitet dazu auf riesigen Result-Sets rumzurüdeln wo es eigentlich ein schnelle Bulk-`UPDATE` tun würde - in einem Bruchteil der Zeit und ganz ohne geladene (fette) Entities (vielleicht nur mit IDs oder gar ganz ohne)
+* Ressourcen reduzieren muß (`em.clear()` ist doch sehr gefährlich)
