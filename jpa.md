@@ -90,9 +90,9 @@ Wenn die Transaktion committed wird, erfolgt spätestens (automatisch) ein `flus
 * FlushModeType.COMMIT: Flush-on-commit
 * FlushModeType.AUTO: Flush vor einer Query
 
+#### Warum flusht der EntityManager bei einer Query (`FlushModeType.AUTO`)?
 > "JPA AUTO causes a flush to the database before a query is executed. **Simple operations like find don't require a flush since the library can handle the search, however queries would be much more complicated, and so if AUTO is set, it will flush it first.** If the mode is set to COMMIT, it will only flush the changes to the database upon a call to commit or flush. If COMMIT is set, and a query is run, it will not return results that have not been flushed." (https://stackoverflow.com/questions/24759664/what-is-the-difference-between-auto-commit-flushmodes)
 
-#### Warum flusht der EntityManager bei einer Query?
 Datenbankabfragen gehen auch beim Einsatz von JPA normalerweise über die Datenbank. Die Datenbank liefert aber zunächst mal nur IDs zurück und der EntityManager schaut dann in seinem PersistenceContext nach, ob diese Instanz bereits als Java-Objekt bereitgestellt wurde oder nicht.
 
 * Fall 1: Datenbank-Zeile (= Entity) wurde bereits zu einem Objekt
