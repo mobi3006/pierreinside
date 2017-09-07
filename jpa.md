@@ -1,5 +1,6 @@
 # JPA
 * Refcardz: https://dzone.com/refcardz/getting-started-with-jpa
+* [Flush and Clear Anti-Patterns](http://www.developerfusion.com/article/84945/flush-and-clear-or-mapping-antipatterns/)
 
 # Konzepte
 
