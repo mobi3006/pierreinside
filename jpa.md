@@ -55,6 +55,8 @@ ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für 
 Diese Operation kennzeichnet das `entity` als zu löschendes.
 
 ## em.clear()
+* [Flush and Clear Anti-Patterns](http://www.developerfusion.com/article/84945/flush-and-clear-or-mapping-antipatterns/)
+
 Bei dieser Aktion werden ALLE Entities aus dem Persistenz-Kontext detached. Für das Programmiermodell ist das eine sehr gefährliche Aktion, weil der Nutzer einer detachten Entity (vielleicht an einer ganz anderen Stelle im Aufrufstack) davon nichts mitbekommt. Somit 
 
 * werden nachfolgende Änderungen - in der Annahme, daß die Entity attached ist - nicht mehr persistiert
