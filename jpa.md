@@ -12,7 +12,7 @@ Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (L1 - h
 > ACHTUNG: Bei JTA Transaction Management kann EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
 
 ## Shared Cache - optional aber Default
-Neben dem PersistenceContext (= First-Level-Cache) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts geteilt wird. 
+Neben dem PersistenceContext (= First-Level-Cache - gebunden an EINE Transaktion) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts/Transaktionen geteilt wird. 
 
 ### EclipseLink - Deaktivierung
 * https://wiki.eclipse.org/EclipseLink/FAQ/How_to_disable_the_shared_cache%3F
