@@ -25,11 +25,9 @@ Bei EclipseLink lässt sich der SharedCache folgendermaßen abschalten
 ## EntityManager
 Der EntityManager ist die Schnittstelle der Anwendung zur Datenbank. Hierüber werden Queries gebaut und abgesetzt. Alle gelesenen Entities landen im PersistenceContext und stehen von da an unter EntityManager Kontrolle, d. h. alle Änderungen daran werden bei Bedarf auf die Datenbank geflushed und evtl. später auch committed.
 
-Alle über den EntityManager geladenen Entitäten sind automatisch im Persistenzkontext DIESER EntityManager-Instanz (aka managed by EntityManager aka attached to EntityManager - im Gegensatz zu detached Entitäten), d. h. Änderungen an diesen Objekten haben potentiell (sofern die dahinterliegende Transaktion auch committet wird) Einfluß auf die zu speichernden Daten. Der EntityManager ist die In-Memory Repräsentation der Änderungen (Change-Set), die der Client auf der Datenbank durchführen will. Der EntityManager schreibt die Änderungen aber nicht sofort auf die Datenbank, sondern erst wenn er es muß (z. B. beim Commit), wenn er explizit gefordert wird (`em.flush()`) oder wenn er es für nötig hält (z. B. bei Datenbank-Queries ... siehe Abschnitt *"Warum bei einer Query flushen?"*). Bei lesenden Zugriffen dient der Entity Manager als Cache - wird beispielsweise eine Query abgesetzt, die Entities liefern soll, dann liefert die Datenbank-Query zunächst mal die IDs der Entitäten ... je nachdem ob die Entitäten bereits im Persistenzkontext liegen oder nicht wird die Entität von der Datenbank gelesen oder aus dem Persistenzkontext. 
+Alle über den EntityManager geladenen Entitäten sind automatisch im Persistenzkontext DIESER EntityManager-Instanz (aka managed by EntityManager aka attached to EntityManager - im Gegensatz zu detached Entitäten), d. h. Änderungen an diesen Objekten haben potentiell (sofern die dahinterliegende Transaktion auch committet wird) Einfluß auf die zu speichernden Daten. Der EntityManager ist die In-Memory Repräsentation der Änderungen (Change-Set), die der Client auf der Datenbank durchführen will. Der EntityManager schreibt die Änderungen aber nicht sofort auf die Datenbank, sondern erst wenn er es muß (z. B. beim Commit), wenn er explizit gefordert wird (`em.flush()`) oder wenn er es für nötig hält (z. B. bei Datenbank-Queries ... siehe Abschnitt *"Warum flusht der EntityManager bei einer Query?"*). Bei lesenden Zugriffen dient der Entity Manager als Cache - wird beispielsweise eine Query abgesetzt, die Entities liefern soll, dann liefert die Datenbank-Query zunächst mal die IDs der Entitäten ... je nachdem ob die Entitäten bereits im Persistenzkontext liegen oder nicht wird die Entität von der Datenbank gelesen oder aus dem Persistenzkontext. 
 
 Das macht diesen Ansatz recht attraktiv, weil der Entwickler eines Services - sobald die Transaktion gestartet ist und der EntityManager aufgebaut ist - transparent in seiner objektorientierten Welt arbeiten kann. Die sog. Unit-of-Work (= Change-Set) wird automatisch gepflegt und beim Commit der Transaktion tatsächlich persistiert (evtl. auch schon früher ... durch ein Flush).
-
-### Warum bei einer Query flushen?
 
 ### 1:1 Beziehung - EntityManager und Transaktion
 Mit einem `em.clear()` könnte man theoretisch eine `EntityManager`-Instanz für verschiedene Transaktionen wiederverwenden. Besser - weil so designed - ist die Erzeugung einer neuen `EnitytManager`-Instanz pro Transaktion.
@@ -89,7 +87,17 @@ Wenn die Transaktion committed wird, erfolgt spätestens (automatisch) ein `flus
 
 > "JPA AUTO causes a flush to the database before a query is executed. **Simple operations like find don't require a flush since the library can handle the search, however queries would be much more complicated, and so if AUTO is set, it will flush it first.** If the mode is set to COMMIT, it will only flush the changes to the database upon a call to commit or flush. If COMMIT is set, and a query is run, it will not return results that have not been flushed." (https://stackoverflow.com/questions/24759664/what-is-the-difference-between-auto-commit-flushmodes)
 
-#### Sollte man manuell flushen?
+#### Warum flusht der EntityManager bei einer Query?
+Datenbankabfragen gehen auch beim Einsatz von JPA normalerweise über die Datenbank. Die Datenbank liefert aber zunächst mal nur IDs zurück und der EntityManager schaut dann in seinem PersistenceContext nach, ob diese Instanz bereits als Java-Objekt bereitgestellt wurde oder nicht.
+
+* Fall 1: Datenbank-Zeile (= Entity) wurde bereits zu einem Objekt
+  * in dem Fall muß ganau die gleiche Instanz des Objekts an den Aufrufer zurückgegeben werden (es erfolgt kein erneutes Lesen/Abgleichen der Daten!!!), weil eine Instanz einer Entity nur ein einziges mal in einem PersistenceContext existieren darf (das gilt nur dür attachte Entities - nicht für detached Entities).
+* Fall 2: Datenbank-Zeile (= Entity) wird zum ersten Mal über eine Query bereitgestellt
+  * in diesem Fall wird die Zeile in ein Objekt umgewandelt (evtl. nicht vollständig - Lazy-Loading), in den PersistenceContext eingehangen und an den Aufrufer zurückgeliefert.
+  
+#### Sollte man explizit im Anwendungscode flushen?
+Normalerweise sollte man dem EntityManager überlassen ... ABER
+
 > "In some cases anyway you want the SQL instructions to be executed immediately; generally when you need the result of some side effects, like an autogenerated key, or a database trigger. [...] What em.flush() does is to empty the internal SQL instructions cache, and execute it immediately to the database. [...] Apart from triggering side effects, another reason to use flush() is if you want to be able to read the effects of an operation in the database using JPQL/HQL (e.g. in a test). **JPA cannot use cached data when executing these queries, so only stuff that's actually in the DB will be read.**"
 
 Bei `FlushModeType.AUTO` wird vor jeder Query ein Flush getriggert. Sollte das mal nicht reichen (oder man verwendet grundsätzlich `FlushModeType.COMMIT`), dann kann es Sinn machen, `em.flush()` manuell zu triggern. Insbesondere in Tests, die die Datenbank am Ende des Tests unverändert zurücklassen sollen (und deshalb ein `em.getTransaction().rollback()` triggern) ist das `em.flush()` ein guter Freund. 
