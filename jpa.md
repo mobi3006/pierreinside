@@ -95,6 +95,8 @@ Datenbankabfragen gehen auch beim Einsatz von JPA normalerweise über die Datenb
 * Fall 2: Datenbank-Zeile (= Entity) wird zum ersten Mal über eine Query bereitgestellt
   * in diesem Fall wird die Zeile in ein Objekt umgewandelt (evtl. nicht vollständig - Lazy-Loading), in den PersistenceContext eingehangen und an den Aufrufer zurückgeliefert.
   
+Da die Datenbankabfragen über die Datenbank abgebildet werden (dafür ist die relationale Sichweise optimiert), müssen neu angelegte Entities auch in der Datenbank (evtl. noch nicht für andere - Isolation-Level!!!) sichtbar sein. Deshalb muß bei einer Query evtl. vorab ein flush gemacht werden, das vom EntityManager automatisch getriggert wird.
+  
 #### Sollte man explizit im Anwendungscode flushen?
 > Ich lasse hier Isolation-Level READ-UNCOMMITTED außer Acht ... bei diesem Ansatz kann es vielleicht mehr Sinn machen, explizit zu flushen (ich habe damit keine Erfahrungen)
 
