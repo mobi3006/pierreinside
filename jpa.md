@@ -17,6 +17,8 @@ Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (L1 - h
 
 Neben dem PersistenceContext (= First-Level-Cache - gebunden an EINE Transaktion) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts/Transaktionen auf Ebene der `EntityManagerFactory` geteilt wird.
 
+Da dieser Cache allerdings mehrere Transaktionen bedient kann es bei einem zwischenzeitlichen `em.flush(); em.clear()` zu der Situation kommen, daß der transaktionale Cache (der PErsistenceContext des EntityManagers) die Instanz nicht mehr enthält. Der 2nd-Level-Cache enthält aber KEINE Informationen aus der aktuellen - noch nicht committeten Transaktion. Er liefert dann veraltete Informationen. 
+
 ### EclipseLink - Deaktivierung
 * https://wiki.eclipse.org/EclipseLink/FAQ/How_to_disable_the_shared_cache%3F
 
