@@ -35,6 +35,9 @@ Alle über den EntityManager geladenen Entitäten sind automatisch im Persistenz
 
 Das macht diesen Ansatz recht attraktiv, weil der Entwickler eines Services - sobald die Transaktion gestartet ist und der EntityManager aufgebaut ist - transparent in seiner objektorientierten Welt arbeiten kann. Die sog. Unit-of-Work (= Change-Set) wird automatisch gepflegt und beim Commit der Transaktion tatsächlich persistiert (evtl. auch schon früher ... durch ein Flush).
 
+### EntityManager - nicht Thread-Safe
+EntityManagers sind nicht Thread-safe!!!
+
 ### 1:1 Beziehung - EntityManager und Transaktion
 Der EntityManager verwaltet Transaktionen (`EntityTransaction tx = em.getTransaction().begin()`,  `tx.commit()`, `tx.rollback()`) und ist somit eng von Natur aus schon eine 1:1 oder eine 1:n Verknüfpung.
 
