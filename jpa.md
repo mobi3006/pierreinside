@@ -14,6 +14,7 @@ Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (L1 - h
 
 ## Shared Cache - optional aber Default
 * https://abhirockzz.wordpress.com/2016/05/22/notes-on-jpa-l2-caching/
+* http://www.developer.com/java/using-second-level-caching-in-a-jpa-application.html
 
 Neben dem PersistenceContext (= First-Level-Cache - gebunden an EINE Transaktion) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts/Transaktionen auf Ebene der `EntityManagerFactory` geteilt wird.
 
