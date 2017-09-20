@@ -15,7 +15,7 @@ Verschiedene Authentifizierungsmechanismen:
 # Basic Authentication
 * Client schickt auf Verlangen des Servers die Credentials
 * Authentifizierung erfolgt auf Applikationsebene und nicht auf TCP-Ebene wie bei Certificate-Based-Authentication
-* Basic Authentication ist Teil der Servlet/Speyifikation und wird dementsprechend in der `web.xml` definiert:
+* Basic Authentication ist Teil der Servlet/Spezifikation und wird dementsprechend in der `web.xml` definiert:
 
 ```
 <security-constraint>
@@ -34,4 +34,5 @@ Verschiedene Authentifizierungsmechanismen:
 </login-config>
 ```
 
-
+## URL
+`https://Aladdin:OpenSesame@www.example.com/index.html`
