@@ -26,6 +26,7 @@
   * [NoSQL](nosql.md)
   * [Hystrix](hystrix.md)
   * [Reactive Programming](reactiveProgramming.md)
+  * AngularJS
 * [Networking](networking.md)
 * Programming
   * [JRebel](jrebel.md)
@@ -137,4 +138,5 @@
 * [Ansible Details](ansible_details.md)
 * [Swift](swift.md)
 * [Animationsfilme](animationsfilme.md)
+* [AngularJS](angularjs.md)
 
