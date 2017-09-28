@@ -32,7 +32,10 @@ Enterprise Beans werden bei entsprechender Kennzeichnung (`@EJB`) in andere Java
 ### Kennzeichnung von CDI-Beans/Projekten
 * http://in.relation.to/2009/12/05/why-is-beansxml-required-in-cdi/
 
-CDI benötigt keinerlei Kennzeichnung/Annotation in der zu exponierenden Klasse (wenn man sie dennoch zum Zwecke der Dokumentation kennzeichnen möchte, dann kann man `@Dependent` angeben). Allerdings muß das Projekt entweder als CDI-Beans-Provider gekennzeichnet sein (Deployment-Deskriptor `<MODULE>/src/main/resources/META-INF/beans.xml` muss existieren - kann aber leer sein) oder es muß für die Bean einen Producer geben (eine Methode in einer beliebigen Klasse mit der Annotation `javax.enterprise.inject.Produces`).
+CDI benötigt keinerlei Kennzeichnung/Annotation in der zu exponierenden Klasse (wenn man sie dennoch zum Zwecke der Dokumentation kennzeichnen möchte, dann kann man `@Dependent` angeben). Allerdings muß das Projekt entweder als CDI-Beans-Provider gekennzeichnet sein (entweder/oder):
+
+* Deployment-Deskriptor `<MODULE>/src/main/resources/META-INF/beans.xml` muss existieren - kann aber leer sein)
+* es muß für die Bean einen Producer geben (eine Methode in einer beliebigen Klasse mit der Annotation `javax.enterprise.inject.Produces`)
 
 
 
