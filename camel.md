@@ -2,6 +2,7 @@
 Bei Camel handelt es sich um eine API, um Systemintegration abzubilden.
 
 # Konzepte
+
 ## Endpoints
 Endpoints sind logische/adressierbare Namen, an denen eine Verarbeitungskette beginnt. Die Verarbeitungsschritte werden im sog. `RouteBuilder` definiert. Zur Laufzeit erfolgt die Verarbeitung dann in den sog. `Processor`s. 
 
@@ -9,3 +10,4 @@ Endpoints sind logische/adressierbare Namen, an denen eine Verarbeitungskette be
 Prozessoren bilden einzelne Verarbeitungsschritte ab.
 
 ## Exchange
+Camel verwendet eine `Exchange`-Instanz, um Objekkte zwischen Prozessoren auszutauschen.
