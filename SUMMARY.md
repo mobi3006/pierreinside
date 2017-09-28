@@ -28,11 +28,12 @@
   * [Reactive Programming](reactiveProgramming.md)
   * AngularJS
 * [Networking](networking.md)
+  * Dependency Injection
 * Programming
   * [JRebel](jrebel.md)
   * [Bean Validation](java_beanValidation.md)
   * [Enterprise Java Beans Specification](ejb.md)
-  * Dependency Injection
+  * [Dependency Injection](dependency-injection.md)
   * Webservices
     * [HTTP](http.md)
     * [REST](rest.md)
