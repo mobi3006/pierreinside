@@ -9,7 +9,11 @@ Hier gibt es abhängig vom Betriebssystem unterschiedliche Möglichkeiten. Auf a
 ## Ubuntu via Snap
 * http://linuxbsdos.com/2017/05/25/how-to-install-visual-studio-code-on-ubuntu-16-10-17-04/
 
-Snap ist ein Paketmanager, der von Canonical entwickelt wurde. Er benötigt den Daemon `spapd`, der unter Ubuntu per Default gestartet ist. 
+Snap ist ein Paketmanager, der von Canonical entwickelt wurde. Er benötigt den Daemon `spapd`, der unter Ubuntu per Default gestartet ist. Im Gegensatz zu anderen Paketarten (z. B. DEB Pakete) sind ALLE benötigten Ressourcen in einem Snap-Paket ... keine Probleme also mit Abhängigkeiten.
+
+```
+sudo snap install --classic vscode
+```
 
 # Konfiguration
 Im Gegensatz zu Atom hat VSC keine grafische Darstellung der Konfiguration (File - Preferences - Settings) ... stattdessen wird die Konfiguration als Textdatei angezeigt.
