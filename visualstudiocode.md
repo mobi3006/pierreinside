@@ -3,7 +3,15 @@
 
 Aus einem Atom-Fork hervorgegangen ... die out-of-the-box Git-Integration ist schon mal sehr beeindruckend. Zudem bringt es noch weitere meiner favorisierten Features mit (auto-reveal-in-sidebar, Terminal, git-diff ... lokale Änderungen werden im Editor markiert), die bei Atom nachträglich installiert werden müssen. 
 
-## Konfiguration
+# Installation
+Hier gibt es abhängig vom Betriebssystem unterschiedliche Möglichkeiten. Auf allen Plattformen funktioniert der Download der Binaries von der Visual Studio Code Homepage.
+
+## Ubuntu via Snap
+* http://linuxbsdos.com/2017/05/25/how-to-install-visual-studio-code-on-ubuntu-16-10-17-04/
+
+Snap ist ein Paketmanager, der von Canonical entwickelt wurde. Er benötigt den Daemon `spapd`, der unter Ubuntu per Default gestartet ist. 
+
+# Konfiguration
 Im Gegensatz zu Atom hat VSC keine grafische Darstellung der Konfiguration (File - Preferences - Settings) ... stattdessen wird die Konfiguration als Textdatei angezeigt.
 
 Die Konfiguration kann auf verschiedenen Ebenen erfolgen:
@@ -13,7 +21,7 @@ Die Konfiguration kann auf verschiedenen Ebenen erfolgen:
 
 Man überschreibt dann immer die Default-Setting, die man nicht ändern kann ... eine gute Idee.
 
-## Meine Keybindings
+# Meine Keybindings
 * Eclipse Keymap ... Plugin nachinstalliert
 * Terminal anzeigen/verstecken: Ctrl-^
 * `Ctrl-3` Kommandos anzeigen/ausführen
@@ -24,11 +32,11 @@ Man überschreibt dann immer die Default-Setting, die man nicht ändern kann ...
 * `Ctrl-,` Settings anschauen
 * `Ctrl-.` Keybindings anschauen 
 
-## Plugins
+# Plugins
 * Git benötigt auf dem Host-System das Tool `ssh-askpass`, um die Passphrase für das ssh-Zertifikat abzufragen
 
-## Gimmicks
-### VSC für Add-Hoc Editierungen
+# Gimmicks
+## VSC für Add-Hoc Editierungen
 Wenn man viel auf der Kommandozeile unterwegs ist, braucht man immer wieder einen Editor für Dateien, die irgendwo im Filesystem liegen und somit nicht in der IDE der Wahl integriert sind. Meistens werden dann textbasierte Editoren wie `vi` oder `emacs` verwendet, die überall verfügbar und schnell geladen sind.
 
 Mit 
@@ -63,7 +71,7 @@ Per `v test/pierre.txt:35` wird VSC direkt an der richtigen Stelle geöffnet.
 
 ... echtes Workbench Feeling :-)
 
-### VSC als Difftool
+## VSC als Difftool
 VCS unterstützt Parameter über die Command-Line 
 
 ```
@@ -74,7 +82,7 @@ code-insiders --diff file1.txt file2.txt
 
 > Kleine Einschränkung: im Vergleich zu `diff` startet dieses Difftool mit einer Verzögerung von 1-2 Sekunden (je nach Rechner) ... aus meiner Sicht ist das zu verschmerzen
 
-## FAQ
+# FAQ
 
 **Frage 1:** 
 
