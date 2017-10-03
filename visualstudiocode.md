@@ -4,7 +4,10 @@
 Aus einem Atom-Fork hervorgegangen ... die out-of-the-box Git-Integration ist schon mal sehr beeindruckend. Zudem bringt es noch weitere meiner favorisierten Features mit (auto-reveal-in-sidebar, Terminal, git-diff ... lokale Änderungen werden im Editor markiert), die bei Atom nachträglich installiert werden müssen. 
 
 # Installation
-Hier gibt es abhängig vom Betriebssystem unterschiedliche Möglichkeiten. Auf allen Plattformen funktioniert der Download der Binaries von der Visual Studio Code Homepage.
+Hier gibt es abhängig vom Betriebssystem unterschiedliche Möglichkeiten. 
+
+## Binaries
+Auf allen Plattformen funktioniert der Download der Binaries von der Visual Studio Code Homepage. Damit bekommt man immer den aktuellsten Snapshot/Release, aber man muss es auch selbst aktualisieren (im Gegensatz zu einem Paketmanager wie `apt-get` oder `snap` ... die dafür aber evtl. auch ein wenig hinterherhinken.
 
 ## Ubuntu via Snap
 * http://linuxbsdos.com/2017/05/25/how-to-install-visual-studio-code-on-ubuntu-16-10-17-04/
