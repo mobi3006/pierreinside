@@ -1,7 +1,7 @@
 # AngularJS
 Seit der Version 2.0 kann man auch in TypeScript programmieren, was den Einstieg für Java-Entwickler besonders angenehm macht.
 
-# Make it Running
+# Getting started ...
 
 ## Vorbedingungen
 * NodeJS
@@ -20,11 +20,19 @@ apt-get install nodejs
 ```
 
 ## AngularJS Installation
+Hier installiert man das AngularJS-CLI (Command-Line-Interface):
+
 ```
 sudo npm install -g @angular/cli
 ```
 
-## AngularJS Projekt `goals` anlegen
+## AngularJS Projekt `goals` anlegen und starten
 ```
 ng new goals
+ng serve --open
 ```
+
+Im Browser kann man dann die Webanwendung über http://localhost:4200 nutzen ... jede Änderung am Code wird automatisch compiliert und ist innerhalb weniger Augenblicke sichtbar in der Webanwendung, die automatisch ein Reload macht.
+
+# `ng` - CLI for AngularJS
+* https://github.com/angular/angular-cli/blob/master/README.md
