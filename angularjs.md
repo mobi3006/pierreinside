@@ -24,7 +24,7 @@ apt-get install nodejs
 sudo npm install -g @angular/cli
 ```
 
-## AngularJS Projekt anlegen
+## AngularJS Projekt `goals` anlegen
 ```
 ng new goals
 ```
