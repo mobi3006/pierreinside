@@ -14,9 +14,9 @@ Kubernetes ist ein Google-Projekt, mit dem sich Deployments auf Basis von Docker
 
 ## Konzepte
 **Pods:**
-* ist atomare Deployment-Einheit ... Dinge, die IMMER gemeinsam auf einer Maschine deployed werden.
+* ist atomare Deployment-Einheit ... Dinge, die IMMER gemeinsam auf einer Maschine (= Minion) deployed werden.
 * besteht aus einem Konglomerats von Docker-Containern, Data-Volumes, Networks, ...
-  * kann aber natürlich auch nur eine einziger Docker-Container sein
+  * kann aber natürlich auch nur ein einziger Docker-Container sein
 * ein Pod kann mehrere Labels haben, die dann verwendet werden, um Pods auszuwählen
 * Pods teilen sich Volumes
 * alle Container eines Pods können über ``localhost`` miteinander kommunizieren (vereinfacht die Konfiguration)
