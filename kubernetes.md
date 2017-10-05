@@ -36,7 +36,9 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * Kubernetes macht Healthchecks, um den aktuellen Zustand immer abzufragen und den gewünschten Zustand evtl. zu erreichen
 
 # Getting Started
-Grundsätzlich basiert Kubernetes auf der Idee, das Deployment über meherere Maschinen zu verteilen. [Minikube](https://github.com/kubernetes/minikube) ist ein Ansatz, um Kubernetes lokal auf einem einzigen Cluster-Knoten zu betreiben und damit erste Erfahrungen zu sammeln.
+Grundsätzlich basiert Kubernetes auf der Idee, das Deployment über mehrere Maschinen zu verteilen. [Minikube](https://github.com/kubernetes/minikube) ist ein Ansatz, um Kubernetes lokal auf einem einzigen Cluster-Knoten zu betreiben und damit erste Erfahrungen zu sammeln.
+
+Die manuelle Installation eines Kubernetes-Clusters ist nicht trivial (insbes. hinsichtlich der Netzwerkkonfiguration). Insofern ist Minikube ein guter Startpunkt. 
 
 ## Lokale Installation per Minikube/Virtualbox
 * https://github.com/kubernetes/minikube
