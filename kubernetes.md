@@ -31,7 +31,7 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 
 **Master-Node:**
 * ausgezeichneter Node, der als Master fungiert und folgende Dienste bereitstellt
-  * API-Server
+  * API-Server: hiermit kommuniziert das Tool `kubectl`, das der Administrator zur Steuerung verwendet
   * Scheduler: überwacht, daß die Spezifikation der Landschaft (z. B. Anzahl der Pods) eingehalten ist und startet/stoppt ggf. Pods
   * Controller für Background-Aufgaben
 
