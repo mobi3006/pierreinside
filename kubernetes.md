@@ -22,9 +22,15 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * alle Container eines Pods können über ``localhost`` miteinander kommunizieren (vereinfacht die Konfiguration)
 * sind volatil ... können wegfallen oder sich vermehren (getriggert durch den 
 
+**Minion:**
+*
+
 **Kubelet:**
 * Agent, der auf jedem Slave-Node im Kubernetes-Cluster läuft
-* ist der verlängerte Arm des Kubernetes-Masters (z. B. erhält den Auftrag einen neuen Pod zu starten)
+* hierüber wird der Kubernetes-Master auch über neue Nodes informiert (Node registriert sich beim Master)
+* ist der verlängerte Arm des Kubernetes-Masters, ein paar Beispiels
+  * erhält den Auftrag einen neuen Pod zu starten
+  * stellt Health-Check-Informationen des Nodes bereit
 
 **Service:**
 * hat eine statische Location (z. B. FQDN, IP-Addresse) - im Gegensatz zu Pods, die so volatil sind, daß sie ständig woanders sein können.
