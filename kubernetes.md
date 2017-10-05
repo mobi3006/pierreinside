@@ -10,7 +10,7 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * Kubernetes Controller
 * Kubernetes Node
 * Terraform
-* Google Compute Engine
+* Google Compute **Engine**
 
 # Konzepte
 **Pods:**
