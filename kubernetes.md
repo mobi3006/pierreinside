@@ -63,6 +63,8 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * neue Knoten werden nach dem Start von Kubelet automatisch in das Cluster als Ressource aufgenommen
 * über ein Overlay-Network (z. B. bei Docker) wird ein Netzwerk gespannt, das die Kommunikation der Cluster-Nodes ermöglicht 
 
+![Kubernetes Hauptkonzepte](/images/KubernetesMainConcepts.png)
+
 # Getting Started
 Grundsätzlich basiert Kubernetes auf der Idee, das Deployment über mehrere Maschinen zu verteilen. [Minikube](https://github.com/kubernetes/minikube) ist ein Ansatz, um Kubernetes lokal auf einem einzigen Cluster-Knoten zu betreiben und damit erste Erfahrungen zu sammeln.
 
