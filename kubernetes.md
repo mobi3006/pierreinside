@@ -4,7 +4,7 @@
 
 Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docker-Containern). Auf diese Weise lassen sich Deployments automatisieren, administrieren, horizontales skalieren, ausrollen (Rolling Deployments). Kubernetes besitzt ausserdem eine Selbstheilungsmöglichkeit - stirbt ein Pod, so bekommt Kubernetes das mit und startet einen neuen.
 
-## Infrastruktur
+# Infrastruktur
 * CoreOS mit Docker/Rocket 
 * flannel
 * Kubernetes Controller
@@ -12,7 +12,7 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * Terraform
 * Google Compute Engine
 
-## Konzepte
+# Konzepte
 **Pods:**
 * ist atomare Deployment-Einheit ... Dinge, die IMMER gemeinsam auf einer Maschine (= Minion) deployed werden.
 * besteht aus einem Konglomerats von Docker-Containern, Data-Volumes, Networks, ...
@@ -58,6 +58,10 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
   * aktueller Zustand: 1 Pod xyz läuft
   * Kubernetes Replication Controller started 2 weitere xyz Pods 
 * Kubernetes macht Healthchecks, um den aktuellen Zustand immer abzufragen und den gewünschten Zustand evtl. zu erreichen
+
+## Nice2Know
+* neue Knoten werden nach dem Start von Kubelet automatisch in das Cluster als Ressource aufgenommen
+* über ein Overlay-Network (z. B. bei Docker) wird ein Netzwerk gespannt, das die Kommunikation der Cluster-Nodes ermöglicht 
 
 # Getting Started
 Grundsätzlich basiert Kubernetes auf der Idee, das Deployment über mehrere Maschinen zu verteilen. [Minikube](https://github.com/kubernetes/minikube) ist ein Ansatz, um Kubernetes lokal auf einem einzigen Cluster-Knoten zu betreiben und damit erste Erfahrungen zu sammeln.
