@@ -23,7 +23,7 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * sind volatil ... können wegfallen oder sich vermehren (getriggert durch den 
 
 **Minion:**
-*
+* Minion ist die softwareseitige Komponente eines Nodes - der Node besteht aus der Hardware und der Software (= dem Minion)
 
 **Kubelet:**
 * Agent, der auf jedem Slave-Node im Kubernetes-Cluster läuft
