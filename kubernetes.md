@@ -2,31 +2,55 @@
 
 * Refcardz: https://dzone.com/refcardz/kubernetes-essentials
 
-Kubernetes ist ein Google-Projekt, mit dem sich Deployments auf Basis von Docker-Containern automatisieren, administrieren, skalieren läßt.
+Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docker-Containern). Auf diese Weise lassen sich Deployments automatisieren, administrieren, horizontales skalieren, ausrollen (Rolling Deployments). Kubernetes besitzt ausserdem eine Selbstheilungsmöglichkeit - stirbt ein Pod, so bekommt Kubernetes das mit und startet einen neuen.
 
-## Infrastruktur
+# Infrastruktur
 * CoreOS mit Docker/Rocket 
 * flannel
 * Kubernetes Controller
 * Kubernetes Node
 * Terraform
-* Google Compute Engine
+* Google Compute **Engine**
 
-## Konzepte
+# Konzepte
 **Pods:**
-* ist atomare Deployment-Einheit ... Dinge, die IMMER gemeinsam auf einer Maschine deployed werden.
+* ist atomare Deployment-Einheit ... Dinge, die IMMER gemeinsam auf einer Maschine (= Minion) deployed werden.
 * besteht aus einem Konglomerats von Docker-Containern, Data-Volumes, Networks, ...
-  * kann aber natürlich auch nur eine einziger Docker-Container sein
+  * kann aber natürlich auch nur ein einziger Docker-Container sein
 * ein Pod kann mehrere Labels haben, die dann verwendet werden, um Pods auszuwählen
 * Pods teilen sich Volumes
 * alle Container eines Pods können über ``localhost`` miteinander kommunizieren (vereinfacht die Konfiguration)
+* sind volatil ... können wegfallen oder sich vermehren (getriggert durch den 
+
+**Minion:**
+* Minion ist die softwareseitige Komponente eines Nodes - der Node besteht aus der Hardware und der Software (= dem Minion)
+
+**Node:**
+* Teilnehmer an einem Kubernetes Cluster
+* auf einem Node 
+
+**Master-Node:**
+* ausgezeichneter Node, der als Master fungiert und folgende Dienste bereitstellt
+  * API-Server: hiermit kommuniziert das Tool `kubectl`, das der Administrator zur Steuerung verwendet
+  * Scheduler: überwacht, daß die Spezifikation der Landschaft (z. B. Anzahl der Pods) eingehalten ist und startet/stoppt ggf. Pods
+  * Controller für Background-Aufgaben
 
 **Kubelet:**
+* Agent, der auf jedem Slave-Node im Kubernetes-Cluster läuft
+* hierüber wird der Kubernetes-Master auch über neue Nodes informiert (Node registriert sich beim Master)
+* ist der verlängerte Arm des Kubernetes-Masters, ein paar Beispiels
+  * erhält den Auftrag einen neuen Pod zu starten
+  * stellt Health-Check-Informationen des Nodes bereit
 
 **Service:**
 * hat eine statische Location (z. B. FQDN, IP-Addresse) - im Gegensatz zu Pods, die so volatil sind, daß sie ständig woanders sein können.
 * der Service ist eigentlich ein Service-Proxy, der dem Client diese Volatilität verbirgt und ihm eine beständige Kommunikationsadresse bietet
-  * verwendet hierzu die Pod Lables, um die passenden Ziele zu finden 
+  * verwendet hierzu die Pod Lables, um die passenden Ziele zu finden   
+
+**etcd:**
+* key/value Store
+* enthält die Konfiguration des Clusters 
+* jeder Knoten hat Zugriff
 
 **Reconciliation:**
 * man definiert einen gewünschten Zustand und Kubernetes sorgt dafür, daß der Zustand erreicht wird:
@@ -35,8 +59,16 @@ Kubernetes ist ein Google-Projekt, mit dem sich Deployments auf Basis von Docker
   * Kubernetes Replication Controller started 2 weitere xyz Pods 
 * Kubernetes macht Healthchecks, um den aktuellen Zustand immer abzufragen und den gewünschten Zustand evtl. zu erreichen
 
+## Nice2Know
+* neue Knoten werden nach dem Start von Kubelet automatisch in das Cluster als Ressource aufgenommen
+* über ein Overlay-Network (z. B. bei Docker) wird ein Netzwerk gespannt, das die Kommunikation der Cluster-Nodes ermöglicht 
+
+![Kubernetes Hauptkonzepte](/images/KubernetesMainConcepts.png)
+
 # Getting Started
-Grundsätzlich basiert Kubernetes auf der Idee, das Deployment über meherere Maschinen zu verteilen. [Minikube](https://github.com/kubernetes/minikube) ist ein Ansatz, um Kubernetes lokal auf einem einzigen Cluster-Knoten zu betreiben und damit erste Erfahrungen zu sammeln.
+Grundsätzlich basiert Kubernetes auf der Idee, das Deployment über mehrere Maschinen zu verteilen. [Minikube](https://github.com/kubernetes/minikube) ist ein Ansatz, um Kubernetes lokal auf einem einzigen Cluster-Knoten zu betreiben und damit erste Erfahrungen zu sammeln.
+
+Die manuelle Installation eines Kubernetes-Clusters ist nicht trivial (insbes. hinsichtlich der Netzwerkkonfiguration). Insofern ist Minikube ein guter Startpunkt. Auf vielen IaaS-Plattformen (z. B. AWS) existieren fertige Templates, die die Installation und Konfiguration zu einem Kinderspiel machen. Auch das ist ein guter Startpunkt.
 
 ## Lokale Installation per Minikube/Virtualbox
 * https://github.com/kubernetes/minikube
