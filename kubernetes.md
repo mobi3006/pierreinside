@@ -25,6 +25,16 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 **Minion:**
 * Minion ist die softwareseitige Komponente eines Nodes - der Node besteht aus der Hardware und der Software (= dem Minion)
 
+**Node:**
+* Teilnehmer an einem Kubernetes Cluster
+* auf einem Node 
+
+**Master-Node:**
+* ausgezeichneter Node, der als Master fungiert und folgende Dienste bereitstellt
+  * API-Server
+  * Scheduler: überwacht, daß die Spezifikation der Landschaft (z. B. Anzahl der Pods) eingehalten ist und startet/stoppt ggf. Pods
+  * Controller für Background-Aufgaben
+
 **Kubelet:**
 * Agent, der auf jedem Slave-Node im Kubernetes-Cluster läuft
 * hierüber wird der Kubernetes-Master auch über neue Nodes informiert (Node registriert sich beim Master)
@@ -35,7 +45,7 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 **Service:**
 * hat eine statische Location (z. B. FQDN, IP-Addresse) - im Gegensatz zu Pods, die so volatil sind, daß sie ständig woanders sein können.
 * der Service ist eigentlich ein Service-Proxy, der dem Client diese Volatilität verbirgt und ihm eine beständige Kommunikationsadresse bietet
-  * verwendet hierzu die Pod Lables, um die passenden Ziele zu finden 
+  * verwendet hierzu die Pod Lables, um die passenden Ziele zu finden   
 
 **Reconciliation:**
 * man definiert einen gewünschten Zustand und Kubernetes sorgt dafür, daß der Zustand erreicht wird:
