@@ -47,6 +47,10 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * der Service ist eigentlich ein Service-Proxy, der dem Client diese Volatilität verbirgt und ihm eine beständige Kommunikationsadresse bietet
   * verwendet hierzu die Pod Lables, um die passenden Ziele zu finden   
 
+**etcd:**
+* key/value Store
+* enthält die Konfiguration des Clusters 
+
 **Reconciliation:**
 * man definiert einen gewünschten Zustand und Kubernetes sorgt dafür, daß der Zustand erreicht wird:
   * gewünschter Zustand: 3 Pods xyz laufen
