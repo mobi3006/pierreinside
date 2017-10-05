@@ -50,6 +50,7 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 **etcd:**
 * key/value Store
 * enthält die Konfiguration des Clusters 
+* jeder Knoten hat Zugriff
 
 **Reconciliation:**
 * man definiert einen gewünschten Zustand und Kubernetes sorgt dafür, daß der Zustand erreicht wird:
