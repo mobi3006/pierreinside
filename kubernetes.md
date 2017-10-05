@@ -2,7 +2,7 @@
 
 * Refcardz: https://dzone.com/refcardz/kubernetes-essentials
 
-Kubernetes ist ein Google-Projekt, mit dem sich Deployments auf Basis von Docker-Containern automatisieren, administrieren, skalieren läßt.
+Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docker-Containern). Auf diese Weise lassen sich Deployments automatisieren, administrieren, skalieren, ausrollen (Rolling Deployments).
 
 ## Infrastruktur
 * CoreOS mit Docker/Rocket 
