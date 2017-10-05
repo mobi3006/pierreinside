@@ -2,7 +2,7 @@
 
 * Refcardz: https://dzone.com/refcardz/kubernetes-essentials
 
-Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docker-Containern). Auf diese Weise lassen sich Deployments automatisieren, administrieren, skalieren, ausrollen (Rolling Deployments).
+Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docker-Containern). Auf diese Weise lassen sich Deployments automatisieren, administrieren, horizontales skalieren, ausrollen (Rolling Deployments). Kubernetes besitzt ausserdem eine Selbstheilungsmöglichkeit - stirbt ein Pod, so bekommt Kubernetes das mit und startet einen neuen.
 
 ## Infrastruktur
 * CoreOS mit Docker/Rocket 
@@ -20,8 +20,11 @@ Kubernetes ist ein Google-Projekt zur Orchestrierung von Containern (z. B. Docke
 * ein Pod kann mehrere Labels haben, die dann verwendet werden, um Pods auszuwählen
 * Pods teilen sich Volumes
 * alle Container eines Pods können über ``localhost`` miteinander kommunizieren (vereinfacht die Konfiguration)
+* sind volatil ... können wegfallen oder sich vermehren (getriggert durch den 
 
 **Kubelet:**
+* Agent, der auf jedem Slave-Node im Kubernetes-Cluster läuft
+* ist der verlängerte Arm des Kubernetes-Masters (z. B. erhält den Auftrag einen neuen Pod zu starten)
 
 **Service:**
 * hat eine statische Location (z. B. FQDN, IP-Addresse) - im Gegensatz zu Pods, die so volatil sind, daß sie ständig woanders sein können.
