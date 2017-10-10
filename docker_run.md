@@ -48,7 +48,7 @@ docker run -e MYSQL_ROOT_PASSWORD=my-secret-pw
 ## Fehlersuche in Containern
 Die Fehlersuche hat mich anfangs vor ein ziemliches Problem gestellt und dazu bewogen, die Docker-Konzepte zunächst mal ansatzweise zu verstehen. Nichtsdestotrotz stand ich auch danach erst mal wie der Ochs vorm Berg.
 
-Weiterhin problematisch finde ich, daß in den meisten Images nicht mal die einfachsten Tools (z. B. ``less``) verfügbar sind ... von Analysewerkzeugen (z. B. ``netstat``, ``dig``) ganz zu schweigen. 
+Weiterhin problematisch finde ich, daß in den meisten Images nicht mal die einfachsten Tools (z. B. ``less``) verfügbar sind ... von Analysewerkzeugen (z. B. ``netstat``, ``dig``) ganz zu schweigen. Allerdings kann man dieses i. a. nachinstallieren.
 
 ### Logs anschauen
 Mit 
@@ -68,14 +68,22 @@ docker inspect silly_wozniak
 
 erhält man Informationen über den Container - das funktioniert auch mit nicht mehr laufenden Containern (siehe ``docker ps -a``).
 
-### Shellzugriff
+### Shellzugriff - Option A
 Ein Shellzugriff ist nur auf einen laufenden Container möglich (das gestaltet die Fehlersuche manchmal recht schwierig). Insofern macht das auch nur bei Service-Containern Sinn, die dauerhaft laufen und nicht nur ein Kommando ausführen.
 
 ```
 docker exec -it my-container bash
 ```
 
-### Konsolenzugriff
+Wenn der Container schon beim Starten abraucht, so ist es am einfachsten, den Container nur zu starten, ohne den Entrypoint auszuführen. Beispielsweise bei 
+
+```
+docker run -t -it panubo/vsftpd /bin/bash
+```
+
+und danach das Entrypoint-Script manuell zu starten (`vsftpd /etc/vsftpd_ssl.conf`). Auf diesse Weise kann man den Fehler dann vielleicht reproduzieren. Evtl. kann man das i. a. recht eingeschränkte Tooling im Container on-the-fly erweitern (siehe eigener Abschnitt).
+
+### Shellzugriff - Option B
 Mit 
 
 ```
@@ -85,6 +93,18 @@ docker attach silly_wozniak
 erhält man die Shell-Console auf dem Container (sofern der Container tatsächlich noch läuft). Sollte der Container nicht mehr laufen, so  kann man ihn evtl. mit ``docker start `` starten.
 
 >ACHTUNG: um einen Container zu verlassen, ohne ihn zu stoppen, muß man ``CTRL-p`` ``CTRL-q`` verwenden.
+
+### Tooling erweitern
+Das Tooling in einem Docker-Container ist i. a. sehr eingeschränkt, da die Images aus Performancegründen und Sicherheitsgründen möglichst schlank sein sollen. Bei der fehlersuche ist das natürlich nervig, wenn man nicht mal `netstat -taupen` machen kann, weil `netstat` nicht installiert ist.
+
+Mit dem geeigneten Package-Manager-Tooling des Images lassen sich dann allerdings die Tools nachinstallieren. Hierzu startet man entweder nur den Container mit einer Shell (`docker run -t -it panubo/vsftpd /bin/bash`) oder attached sich an einen laufenden Container. Danach installiert man die Tools, z. B. bei einem Ubuntu-Image per:
+
+```
+apt-get update
+apt-get install net-tools
+```
+
+Voila, jetzt klappt die Fehlersuche vielleicht besser.
 
 ### Logs anschauen
 ```
