@@ -27,5 +27,13 @@ das wird in der Konfiguration von Docker for Windows festgelegt - beides gleichz
 
 Hierbei handelt es sich um ein schlankes Windows Server 2016 Image (ohne grafische Benutzeroberfläche, 400 MB). Dieses Image wird auf Hyper-V deployed - ganz ähnlich zum linux-basierten MobyLinuxVM, das für Linux-Container verwendet wird.
 
+# Nutzung
+Mit Docker, Docker for Windows, Hyper-V und Microsoft-Nano-Server im Hintergrund können die üblichen Docker-Tools transparanet auch für Windows Container genutzt werden:
+
+```
+docker run --rm microsoft/dotnet-samples:dotnetapp-nanoserver 
+```
+
+
 
 
