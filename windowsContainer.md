@@ -8,3 +8,8 @@ Mit Docker for Windows kann man
   * [siehe eigener Abschnitt](docker_windows.md)
 
 das wird in der Konfiguration von Docker for Windows festgelegt - beides gleichzeitig geht leider nicht. 
+
+# Microsoft-Nano-Server 
+* http://www.searchdatacenter.de/definition/Microsoft-Nano-Server
+
+Hierbei handelt es sich um ein Windows Server Image (ohne grafische Benutzeroberfläche, 400 MB), das auf Hyper-V deployed wird - ganz ähnlich zum linux-basierten MobyLinuxVM, das für Linux-Container verwendet wird.
