@@ -2,7 +2,7 @@
 * Windows und Linux basierte Docker Container auf Windowsnutzen
   * [Teil 1](https://www.heise.de/developer/artikel/Windows-und-Linux-basierte-Docker-Container-auf-Windows-nutzen-Teil-1-von-2-3735148.html)
   * [Teil 2](https://www.heise.de/developer/artikel/Windows-und-Linux-basierte-Docker-Container-auf-Windows-nutzen-Teil-2-von-2-3747615.html)
-* 
+
 Windows bietet sog. Windows Server Container. Diese Container arbeiten alle auf dem gleichen Windows-Kernel ... ähnlich wie Linux-Container auf dem gleichen Linux-Kernel arbeiten.
 
 Auf diese Weise können dann beispielsweise auch .NET-Anwendungen oder Anwendnungen, die eine native Visual-C-Bibliothek benötigen, im Container laufen.
