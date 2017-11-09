@@ -14,7 +14,12 @@ Unter Windows gibt es zwei Ansätze:
    1. basiert auf Windows Hyper-V Virtrualisierungstechnologie, die erst ab Windows 10 Pro verfügbar ist
    2. ACHTUNG: aktiviert man Windows Hyper-V, dann funktioniert die VirtualBox Virtualisierungstechnologie nicht mehr (https://www.virtualbox.org/ticket/12350 ... keine Ahnung, ob das mit VirtualBox 5.1.x auch noch so ist)
 
-## Docker Toolbox
+## Docker for Windows
+* https://docs.docker.com/machine/drivers/hyper-v/
+
+>ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen geben!!!
+
+## Docker Toolbox - OUTDATED
 Bringt folgende Tools mit:
 
 * VirtualBox
@@ -59,11 +64,6 @@ The system cannot find the file specified..
 ```
 
 Leider kann sie meine Default-Konsole [babun](babun.md) nicht vollständig ersetzen. Mir fehlt hier einfach ein konsolenbasierte Paketmanager.
-
-## Docker for Windows
-* https://docs.docker.com/machine/drivers/hyper-v/
-
->ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen geben!!!
 
 ## Vergleich der beiden Ansätze
 Ich hatte mit der Docker Toolbox folgende Probleme:
