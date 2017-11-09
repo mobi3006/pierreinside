@@ -19,6 +19,8 @@ Unter Windows gibt es zwei Ansätze:
 
 >ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen geben!!!
 
+Docker for Windows benötigt Microsofts Hyper-V-Technologie, die ganz ähnlich zu Oracles VirtualBox Lösung ist (und leider nicht parallel zu dieser laufen kann). Auf dieser Hypervisor-Technology wird ein Linux-Image (`MobyLinuxVM`) erstellt und gestartet. In diesem Linux-Image läuft der Docker-Daemon und die Docker-Container. Der Docker-Client zum Absatzen von Kommandos (z. B. `docker ps`) läuft in einer beliebigen Terminal-Konsole (z. B. Powershell, Command Shell, Babun). Seine Kommandos werden auf das Moby-Image umgebogen. 
+
 ## Docker Toolbox - OUTDATED
 Bringt folgende Tools mit:
 
