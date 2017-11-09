@@ -1,4 +1,4 @@
-# Windows Container
+# Windows Server Container
 Windows bietet sog. Windows Server Container. Diese Container arbeiten alle auf dem gleichen Windows-Kernel ... ähnlich wie Linux-Container auf dem gleichen Linux-Kernel arbeiten.
 
 Auf diese Weise können dann beispielsweise auch .NET-Anwendungen oder Anwendnungen, die eine native Visual-C-Bibliothek benötigen, im Container laufen.
