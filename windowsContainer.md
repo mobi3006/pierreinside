@@ -3,6 +3,7 @@ Windows bietet sog. Windows Server Container. Diese Container arbeiten alle auf 
 
 Auf diese Weise können dann beispielsweise auch .NET-Anwendungen oder Anwendnungen, die eine native Visual-C-Bibliothek benötigen, im Container laufen.
 
+# Docker for Windows
 Mit Docker for Windows kann man 
 
 * enteder Windows Server Container betreiben
