@@ -7,4 +7,4 @@ Mit Docker for Windows kann man
 * oder Linux Container betreiben
   * [siehe eigener Abschnitt](docker_windows.md)
 
-das wird in der Konfiguration von Docker for Windows festgelegt - beides gleichzeitig geht nicht. 
+das wird in der Konfiguration von Docker for Windows festgelegt - beides gleichzeitig geht leider nicht. 
