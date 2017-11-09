@@ -27,7 +27,9 @@ Docker for Windows kann neben Linux-Containern auch Windows-Container betreiben 
 
 * [siehe eigener Abschnitt](windowsContainer.md)
 
-## Docker Toolbox - OUTDATED
+## Docker Toolbox
+> ACHTUNG: Die Docker-Toolbox ist nur dann zu empfehlen, wenn man Docker auf Windows Maschinen <  Windows 10 Version 1607 (alias Anniversary Update - August 2016) nutzen will, denn dort funktioniert Docker for Windows nicht. 
+
 Bringt folgende Tools mit:
 
 * VirtualBox
