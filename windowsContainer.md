@@ -13,3 +13,6 @@ das wird in der Konfiguration von Docker for Windows festgelegt - beides gleichz
 * http://www.searchdatacenter.de/definition/Microsoft-Nano-Server
 
 Hierbei handelt es sich um ein Windows Server Image (ohne grafische Benutzeroberfläche, 400 MB), das auf Hyper-V deployed wird - ganz ähnlich zum linux-basierten MobyLinuxVM, das für Linux-Container verwendet wird.
+
+![Windows-Container vs. Linux-Container](http://cdn.ttgtmedia.com/rms/editorial/Docker_Windows_Linux-580px-copyright.jpg)
+
