@@ -120,7 +120,7 @@ Entweder macht man ein `minikube ssh`, um auf die Konsole des Minikube-Images zu
 * https://github.com/kubernetes/minikube/blob/master/docs/reusing_the_docker_daemon.md
 
 ## Lokale Installation per LinuxKit
-* https://youtu.be/FEtVxwsCUBY?t=1246
+* [YouTuber Video - DockerCon 2017](https://youtu.be/FEtVxwsCUBY?t=1246)
 * [GitHub](https://github.com/linuxkit/linuxkit/tree/master/projects/kubernetes)
 
 # Google Cloud Engine
