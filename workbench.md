@@ -37,7 +37,7 @@ Mittlerweile gibt es mit [Packer von HashiCorp](https://www.packer.io/) und Mobi
 
 "Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image." (https://www.packer.io/intro/index.html)
 
-Ansible hätte somit auch noch sein Daseinsberechtigung ...
+[Ansible](ansible.md) hätte somit auch noch sein Daseinsberechtigung ...
 
 ---
 
