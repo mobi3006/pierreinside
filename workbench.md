@@ -35,6 +35,8 @@ Der Nachteil des Ansible Ansatzes besteht darin, daß es recht schwierig ist, da
 
 Mittlerweile gibt es mit [Packer von HashiCorp](https://www.packer.io/) und Mobi Tools, mit denen man Images für verschiedene Hypervisor-Technologien (lokal/remote) basteln kann. Auf diese Weise könnte ich dann sogar meine Workbench auf einer Cloud-Maschine bereitstellen ... nur eine Idee.
 
+"Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image." (https://www.packer.io/intro/index.html)
+
 ---
 
 # Ubuntu Desktop 14.10 LTS
