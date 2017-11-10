@@ -7,6 +7,7 @@ Aus der Kombination
   * [Homepage](https://mobyproject.org/)
   * [GitHub Repository](https://github.com/moby/moby#transitioning-to-moby)
   * eine Alternative ist [Packer von HashiCorp](https://www.packer.io/)
+  * das Moby-Projekt liefert auch die Grundlage für die Integration von Linux-Containers in Windows und MacOS (letzteres ist kein Linux-System, sondern ein BSD-System). In beiden Fällen wird ein Linux-Image benötigt, das die Runtime für die Docker-Container bereitstellt. Das von [Docker for Windows](docker_windows.md) genutzte Image heißt dementsprechend auch "MobyLinuxVM"
 * LinuxKit
 
 lassen sich Images für verschiedene Hypervisor-Ansätze (lokale wie Qemu und MacOS aber auch Images für Cloud anbieter) erzeugen, um auf diese Weise ganze Systeme Stage-übergreifend 
