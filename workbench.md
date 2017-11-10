@@ -16,10 +16,10 @@ Ich frage ich allerdings bereits am Anfang dieser Idee, ob ich denn dauerhaft di
 * http://digitalshore.io/set-up-a-local-linux-development-environment-with-vagrant/
 * ...
 
-## Umsetzung - ERFOLGLOS
+## Umsetzung Versuch 1 - Vollautomatisierung - ERFOLGLOS
 Meine ursprüngliche Idee war, ein Vagrant-Ansible-Setup unter einem Windows-Host zu fahren. Für Windows gibt es keinen Ansible-Support. Deshalb schied das typische *Ansible-Remote-Provisioning* (über ssh in das Guest-System hinein) aus. Mir blieb nur das *Ansible-Local-Provisioning*, bei dem Ansible auf dem Guest-System (Linux) installiert wird und dann der übliche ssh-execute-command verwendet wird ([Details siehe hier](ansible.md)). Leider hat das auch nicht funktioniert ... nach einigen Versuchen war ich frustriert und habe aufgegeben.
 
-# Kompromiss - Halbautomatisierung
+# Umsetzung Versuch 2 - Halbautomatisierung
 
 Nach dem gescheiterten Vagrant-Ansible-Setup habe ich mich entschieden zu folgender Vorgehensweise entschieden (ich hatte andere Prioritäten ... nämlich eine lauffähige neue Distribution, auf der ich neue Technologien in der Softwareentwicklung ausprobieren wollte):
 
@@ -29,6 +29,11 @@ Nach dem gescheiterten Vagrant-Ansible-Setup habe ich mich entschieden zu folgen
 * manuelle Nacharbeiten ... (in Zukunft immer weiter reduzieren)
 
 Das erste System, das ich auf diese Weise aufsetze ist [Ubuntu 16.04 LTS](ubuntu_1604_lts.md) ... in dem Link finden sich weitere Informationen.
+
+# Umsetzung Versuch 3 - Vollautomatisierung
+Der Nachteil des Ansible Ansatzes besteht darin, daß es recht schwierig ist, das Image per Vagrant vorzubereiten - letztlich bin ich daran damals auch gescheitert. 
+
+Mittlerweile gibt es mit [Packer von HashiCorp](https://www.packer.io/) und Mobi Tools, mit denen man Images für verschiedene Hypervisor-Technologien (lokal/remote) basteln kann. Auf diese Weise könnte ich dann sogar meine Workbench auf einer Cloud-Maschine bereitstellen ... nur eine Idee.
 
 ---
 
