@@ -9,4 +9,10 @@ Aus der Kombination
 
 lassen sich Images für verschiedene Hypervisor-Ansätze (lokale wie Qemu und MacOS aber auch Images für Cloud anbieter) erzeugen, um auf diese Weise ganze Systeme Stage-übergreifend 
 
-https://github.com/linuxkit/linuxkit/tree/master/projects
+# Subprojects
+* https://github.com/linuxkit/linuxkit/tree/master/projects
+
+Zum LinuxKit git es einige interessante Subprojekte:
+
+* Kubernetes
+* okernel - hiermit erhöht sich Security beim Betrieb von Containern indem der Speicherzugriff über Containergrenzen verhindert wird
