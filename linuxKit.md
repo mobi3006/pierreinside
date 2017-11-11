@@ -1,6 +1,8 @@
 # LinuxKit - Docker-based Linux-Distribution
 * GitHub Repository: https://github.com/linuxkit/linuxkit
 
+> "A toolkit for building secure, portable and lean operating systems for containers"
+
 Aus der Kombination 
 
 * Moby
