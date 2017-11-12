@@ -31,7 +31,7 @@ Aufgrund des Mesh-Supports ist der Repeater auch für einen zukünftigen Austaus
 Alternativ zu einem Fritz!WLAN Repeater 1750E könnte ich meine aktuelle 7390 gegen einen neuen DSL-Router austauschen und aus der 7390 einen AccessPoint machen.
 
 * 7590 und 7580:
-  * mit MU-MIMO höchste WLAN-Performance: 5GHz: 1.733 MBit/s + 2,4GHz: 800 MBit/s
+  * mit [MU-MIMO](https://avm.de/mu-mimo/) höchste WLAN-Performance: 5GHz: 1.733 MBit/s + 2,4GHz: 800 MBit/s
   * das "VDSL-Supervectoring 35b" mit bis zu 300 MBit/s DSL kann ich an meinem Wohnort nicht gebrauchen
 * 7490: 
   * ohne MU-MIMO - 5GHz: 1.300 + 2,4GHz: 450
