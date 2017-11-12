@@ -25,6 +25,11 @@ Der Modus *LAN-Brücke* funktioniert als AccessPoint und somit perfekt geeignte,
 
 Aufgrund des Mesh-Supports ist der Repeater auch für einen zukünftigen Austausch des langsam veralteten DSL-Routers 7390 vorbereitet.
 
+# Aktuelle Fritzbox - 2017
+* https://avm.de/produkte/avm-produktvergleich/fritzbox/alle-anschluesse/
+
+Alternativ zu einem Fritz!WLAN Repeater 1750E könnte ich meine aktuelle 7390 gegen einen neuen DSL-Router austauschen und aus der 7390 einen AccessPoint machen.
+
 # Powerline
 * [Produkte von Fritz](https://avm.de/produkte/fritzpowerline/)
 
