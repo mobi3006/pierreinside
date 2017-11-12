@@ -42,7 +42,7 @@ Alle o. a. Router sind in folgenden Punkten:
 * 2,4 + 5 GHz
 * Dual WLAN
 * 4 Gigabit LAN
-* 2 USB
+* 2 USB (3.0???)
 * Telefonanlage
 
 ## MU-MIMO vs. SU-MIMO
