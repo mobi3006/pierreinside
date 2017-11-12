@@ -6,6 +6,7 @@ Jahrelang hat dieser Router sehr gute Dienste geleistet, doch mittlerweile ist e
 
 * kein WLAN ac - Performance schlecht
   * das ist tasächlich ein Problem, da ich viele Videos auf meinem NAS habe, die nur ruckelnd daherkommen
+  * allerdings hat auch mein Haupt-Laptop nur eine schlechte WLAN-Performance, da nur eine Antenne verbaut ... wird aber bald mal ausgetauscht
 * kein Mesh-Support
 
 # Alte Fritzbox als AccessPoint
