@@ -30,10 +30,10 @@ Aufgrund des Mesh-Supports ist der Repeater auch für einen zukünftigen Austaus
 
 Alternativ zu einem Fritz!WLAN Repeater 1750E könnte ich meine aktuelle 7390 gegen einen neuen DSL-Router austauschen und aus der 7390 einen AccessPoint machen.
 
-* 7590 und 7580:
+* 7590 (270 Euro) und 7580 (245 Euro):
   * mit [MU-MIMO](https://avm.de/mu-mimo/) höchste WLAN-Performance: 5GHz: 1.733 MBit/s + 2,4GHz: 800 MBit/s
   * das "VDSL-Supervectoring 35b" mit bis zu 300 MBit/s DSL kann ich an meinem Wohnort nicht gebrauchen
-* 7490: 
+* 7490 (190 Euro): 
   * ohne MU-MIMO - 5GHz: 1.300 + 2,4GHz: 450
   
 Alle o. a. Router sind in folgenden Punkten:
@@ -46,6 +46,8 @@ Alle o. a. Router sind in folgenden Punkten:
 * Telefonanlage
 
 ## MU-MIMO vs. SU-MIMO
+MIMO = Multiple Input Multiple Output
+
 Statements von AVM: (https://avm.de/mu-mimo/)
 * "Ein Router mit SU-MIMO versorgt die Netzwerkgeräte nacheinander mit Daten. Daher ist die im gesamten WLAN erreichbare Geschwindigkeit beim Einsatz mehrerer Geräte geringer."
 * "Durch die gleichzeitige Übertragung mehrerer Datenströme per MU-MIMO lassen sich freibleibende Streams parallel für andere Geräte nutzen. Die WLAN-Kapazität wird besser ausgeschöpft und es entstehen weniger Verzögerungen. [...] Viele aktuelle WLAN-Geräte wie Smartphones, Tablets, PC-WLAN-Adapter etc. unterstützen bereits die neue MU-MIMO-Technologie. [...] Sind Notebook oder PC nicht MU-MIMO-fähig, bringt der FRITZ!WLAN Stick AC 430 MU-MIMO sie auf Touren."
