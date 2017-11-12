@@ -35,6 +35,15 @@ Alternativ zu einem Fritz!WLAN Repeater 1750E könnte ich meine aktuelle 7390 ge
   * das "VDSL-Supervectoring 35b" mit bis zu 300 MBit/s DSL kann ich an meinem Wohnort nicht gebrauchen
 * 7490: 
   * ohne MU-MIMO - 5GHz: 1.300 + 2,4GHz: 450
+  
+Alle o. a. Router sind in folgenden Punkten:
+
+* WLAN AC+N
+* 2,4 + 5 GHz
+* Dual WLAN
+* 4 Gigabit LAN
+* 2 USB
+* Telefonanlage
 
 # Powerline
 * [Produkte von Fritz](https://avm.de/produkte/fritzpowerline/)
