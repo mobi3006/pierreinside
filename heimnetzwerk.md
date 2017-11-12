@@ -5,6 +5,7 @@ Zuhause habe ich leider keine durchgehende kabelgebundenes Netzwerk - bei Renovi
 Jahrelang hat dieser Router sehr gute Dienste geleistet, doch mittlerweile ist er schon ein wenig in die Jahre gekommen (Stand 2017). Folgende Punkte sind nicht mehr up-to-date:
 
 * kein WLAN ac - Performance schlecht
+  * das ist tasächlich ein Problem, da ich viele Videos auf meinem NAS habe, die nur ruckelnd daherkommen
 * kein Mesh-Support
 
 # Alte Fritzbox als AccessPoint
