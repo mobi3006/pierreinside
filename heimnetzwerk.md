@@ -48,7 +48,7 @@ Alle o. a. Router sind in folgenden Punkten:
 ## MU-MIMO vs. SU-MIMO
 Statements von AVM: (https://avm.de/mu-mimo/)
 * "Ein Router mit SU-MIMO versorgt die Netzwerkgeräte nacheinander mit Daten. Daher ist die im gesamten WLAN erreichbare Geschwindigkeit beim Einsatz mehrerer Geräte geringer."
-* "Durch die gleichzeitige Übertragung mehrerer Datenströme per MU-MIMO lassen sich freibleibende Streams parallel für andere Geräte nutzen. Die WLAN-Kapazität wird besser ausgeschöpft und es entstehen weniger Verzögerungen. [...] Viele aktuelle WLAN-Geräte wie Smartphones, Tablets, PC-WLAN-Adapter etc. unterstützen bereits die neue MU-MIMO-Technologie."
+* "Durch die gleichzeitige Übertragung mehrerer Datenströme per MU-MIMO lassen sich freibleibende Streams parallel für andere Geräte nutzen. Die WLAN-Kapazität wird besser ausgeschöpft und es entstehen weniger Verzögerungen. [...] Viele aktuelle WLAN-Geräte wie Smartphones, Tablets, PC-WLAN-Adapter etc. unterstützen bereits die neue MU-MIMO-Technologie. [...] Sind Notebook oder PC nicht MU-MIMO-fähig, bringt der FRITZ!WLAN Stick AC 430 MU-MIMO sie auf Touren."
 
 # Powerline
 * [Produkte von Fritz](https://avm.de/produkte/fritzpowerline/)
