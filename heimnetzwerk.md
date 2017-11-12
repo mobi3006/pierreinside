@@ -14,4 +14,6 @@ Den Repeater 1750E kann man in verschiedenen Modi betreiben:
 
 
 # Powerline
+* [Produkte von Fritz](https://avm.de/produkte/fritzpowerline/)
+
 Von Powerline halte ich nicht viel. Ich hatte es selbst bisher noch nicht im Einsatz, aber alle Bekannten berichten von Problemen ... instabil und langsam. 
