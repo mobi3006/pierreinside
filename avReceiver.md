@@ -5,6 +5,8 @@ Zunächst mal muss ich auch gar kein 5.1 mit superduper Sound haben. Ich will nu
 
 * https://www.amazon.de/deleyCON-HDMI-Switch-Verteiler-Automatisch-Schwarz-2-3-Port/dp/B008D5DH7C/ref=sr_1_8?ie=UTF8&qid=1511039839&sr=8-8&keywords=hdmi-weiche#Ask
 
+Eine automatische Erkennung des Signals wäre natürlich gut, weil das die Komplexität reduziert (die Kinder sollen die Playstation selbständig die bedienen können).
+
 # AV-Verstärker vs. Stereo/Hifi-Verstärker
 Um Ton aus den Boxen zu bekommen benötigt man einen Verstärker. Für Musik verwendet man am besten einen Stero-Verstärker. Ein AV-Verstärker, der in einem AV-Receiver verbaut ist,  kann das natürlich auch, aber dafür noch viele viel mehr:
 
