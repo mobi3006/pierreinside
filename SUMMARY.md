@@ -64,7 +64,6 @@
   * [Glassfish](glassfish.md)
   * [YAML](yaml.md)
   * [AngularJS](angularjs.md)
-  * [AngularJS](angularjs.md)
   * [Camel](camel.md)
   * [Zeichenkodierung](characterEncoding.md)
 * Testen
@@ -138,6 +137,7 @@
   * [Hebe-Schiebefenster](hebe-schiebefenster.md)
   * [DFB Talentförderung](dfb-talentforderung.md)
   * [ProJonas](projonas.md)
+  * [AV Receiver](avReceiver.md)
 * [Englisch](englisch.md)
 * [Glossar](GLOSSARY.md)
 * [Visual Studio Code](visualStudioCode.md)
