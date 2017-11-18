@@ -8,7 +8,7 @@ Um Ton aus den Boxen zu bekommen benötigt man einen Verstärker. Für Musik ver
 * Netzwerk-Streaming (Kabel/Wifi)
 
 ## 5.1 AV-Receiver mit zwei Lautsprechern
->"viele AV Receiver sind für Stereo der pure MÜLL, wenn Du einen Analogen Stereoverstärker hattest wird der AV im Stereobetrieb sehr wahrscheinlich eher deutlich schlechter abschneiden.. Allerdings kommt es natürlich auf den AV an, es gibt welche die sind durchaus auch für den Stereobetrieb einigermassen zu gebrauchen (jetzt werden mich alle HIFI Leute gleich töten...)." ([Link](https://www.apfeltalk.de/community/threads/7-1-receiver-gekauft-voellig-daemlich-da-im-nur-stereo-betrieb.425473/)).
+> "viele AV Receiver sind für Stereo der pure MÜLL, wenn Du einen Analogen Stereoverstärker hattest wird der AV im Stereobetrieb sehr wahrscheinlich eher deutlich schlechter abschneiden.. Allerdings kommt es natürlich auf den AV an, es gibt welche die sind durchaus auch für den Stereobetrieb einigermassen zu gebrauchen (jetzt werden mich alle HIFI Leute gleich töten...)." ([Link](https://www.apfeltalk.de/community/threads/7-1-receiver-gekauft-voellig-daemlich-da-im-nur-stereo-betrieb.425473/)).
 
 # Anforderungen
 * 5.1 Support
