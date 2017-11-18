@@ -14,3 +14,19 @@ Nachdem ich nun meinen Hobbyraum mit einem Beamer ausgestattet habe, überlege i
 * optional: MHL Schnitstelle - nicht sicher ob ich sowas brauche
 * optional WIFI
 * optional DLNA
+
+# Geräte
+
+## Yamaha-RX-V-Produktreihe
+* http://usa.yamaha.com/products/audio-visual/av-receivers-amps/rx/?mode=series
+
+Die Produktreihen unterscheiden sich recht gut in den Features und werden über Jahre hinweg gepflegt, so daß es beispielsweise die Modelle 771, 775, 777, 779, 781, 783 gibt.
+
+* RX-V-379
+* RX-V-479
+* RX-V-579
+* RX-V-679
+
+## Yamaha RX-V479
+
+## Yamaha RX-V475
