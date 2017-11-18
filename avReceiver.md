@@ -10,6 +10,15 @@ Um Ton aus den Boxen zu bekommen benötigt man einen Verstärker. Für Musik ver
 ## 5.1 AV-Receiver mit zwei Lautsprechern
 > "viele AV Receiver sind für Stereo der pure MÜLL, wenn Du einen Analogen Stereoverstärker hattest wird der AV im Stereobetrieb sehr wahrscheinlich eher deutlich schlechter abschneiden.. Allerdings kommt es natürlich auf den AV an, es gibt welche die sind durchaus auch für den Stereobetrieb einigermassen zu gebrauchen (jetzt werden mich alle HIFI Leute gleich töten...)." ([Link](https://www.apfeltalk.de/community/threads/7-1-receiver-gekauft-voellig-daemlich-da-im-nur-stereo-betrieb.425473/)).
 
+Es scheint aber zumindest zu gehen ... wie gut iegt dann im Ohr des Betrachters:
+
+> "Hallo,
+wie hier schon von einigen erwähnt, mixt der AVR das 5.1 oder 7.1 auf 2.1 herunter. Das Virtuelle Surround klingt aber meiner Meinung nach nicht ansatzweise räumlich, kann es auch gar nicht. 
+Gute Stereo Boxen klingen sicherlich toll, aber die können nun mal trotzdem nicht eine Explosion hinter dem Zuschauer ausgeben. Das hört man bei 2.1 nun mal generell von vorne, wo die Boxen stehen. Und damit geht dann viel Atmosphäre verloren.
+Für Musik passt Stereo sehr gut, aber schon bei Spielen ist Surround klar besser, bei Filmen sowieso.
+Wenn du hinten keinen Platz hast, dann geht's natürlich nicht anders, aber falls du kleinere Boxen unterbringen kannst, ist das besser als gar nichts. Vom Klang her kann man auf den Surround Kanälen notfalls Abstriche machen, weil Dialoge von den vorderen Boxen kommen und die auch einen wichtigen Teil für den Surround Sound tragen. Daher reichen hinten notfalls auch kleinere Würfel, aber verzichten würde ich darauf nur im Notfall.
+M.f.G."
+
 # Anforderungen
 * 5.1 Support
 * mind. 4 HDMI-Eingänge >= 1.4 besser noch 2.0 (für 4k)
