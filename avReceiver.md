@@ -31,7 +31,9 @@ Die RX-V-Produktreihen unterscheiden sich recht gut in den Features und werden Ã
 * RX-V-4
   * 5.1 Kanal
   * 4K Ultra HD Pass-through
-  * RX-V-479, RX-V-481, RX-V-483 (2017)
+  * RX-V-479 - gibt es 2017 nicht mehr neu zu kaufen
+  * RX-V-481 - gibt es 2017 noch neu zu kaufen
+  * RX-V-483 (2017)
 * RX-V-579
   * 7.2 Kanal
 * RX-V-679
