@@ -41,6 +41,7 @@ Die RX-V-Produktreihen unterscheiden sich recht gut in den Features und werden Ã
   * 5.1 Kanal
   * 4K Ultra HD Pass-through
   * RX-V-479 - gibt es 2017 nicht mehr neu zu kaufen
+    > "Erfreulich ist, dass im Straight Modus das Umschalten zwischen Stereo und 5.1 Surround nahtlos funktioniert. So liefert z.B. mein Apple TV je nach Tonspur des Videos 5.1 oder Stereo. Der Receiver schaltet stets automatisch und ohne Probleme um."
   * RX-V-481 - gibt es 2017 noch neu zu kaufen
   * RX-V-483 (2017)
 * RX-V-579
