@@ -30,7 +30,7 @@ Die RX-V-Produktreihen unterscheiden sich recht gut in den Features und werden Ã
 * RX-V-479, RX-V-481, RX-V-483 (2017)
   * 5.1 Kanal
 * RX-V-579
-  * 
+  * 7.2 Kanal
 * RX-V-679
 
 ## Yamaha RX-V479
