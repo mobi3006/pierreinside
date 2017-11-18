@@ -1,6 +1,12 @@
 # AV Receiver
 Nachdem ich nun meinen Hobbyraum mit einem Beamer ausgestattet habe, überlege ich nun auch einen AV-Receiver und evtl. ein Lautsprechersystem zu installieren.
 
+# AV-Receiver vs. Stereo-Verstärker
+Um Ton aus den Boxen zu bekommen benötigt man einen Verstärker. Für Musik verwendet man am besten einen Stero-Verstärker. Ein AV-Receiver kann das natürlich auch, aber dafür noch viele viel mehr:
+
+* Video-Signale von verschiedenen Quellen ausgeben
+* Netzwerk-Streaming (Kabel/Wifi)
+
 # Anforderungen
 * 5.1 Support
 * mind. 4 HDMI-Eingänge >= 1.4 besser noch 2.0 (für 4k)
