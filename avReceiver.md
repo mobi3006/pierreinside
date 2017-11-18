@@ -10,6 +10,7 @@ Nachdem ich nun meinen Hobbyraum mit einem Beamer ausgestattet habe, überlege i
     * Spiele-Konsole
     * Fire-TV
     * Chromecast
+    * Blu-Ray
 * Bluetooth 4.1 (für Streaming)
 * optional: MHL Schnitstelle - nicht sicher ob ich sowas brauche
 * optional WIFI
