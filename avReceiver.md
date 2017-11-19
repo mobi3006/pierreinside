@@ -42,6 +42,13 @@ M.f.G."
 * optional WIFI
 * optional DLNA
 
+## 4k Passthrough - was ist das?
+* [guter Forenbeitrag](http://www.hifi-forum.de/viewthread-94-12978.html)
+
+Aktiver 4k Support durch den AV-Receiver benötigt HDMI 2.x. Allerdings beherrschen viele ältere AV-Receiver bereits den Passthrough Modus, bei dem das Endgerät die 4k Signale vollständig liefern muß. Das funktioniert soweit wohl ganz gut.
+
+Wenn nun allerdings der neue Kopierschutz HDCP 2.2 kommt, dann muß, den gibts nur in Verbindung mit HDMI 2.0
+
 # Geräte
 
 ## Yamaha-Produktreihen
