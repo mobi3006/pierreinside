@@ -54,6 +54,9 @@ Wenn nun allerdings der neue Kopierschutz HDCP 2.2 kommt, dann muß, den gibts n
 
 HDCP 2.2 gibt es allerdings erst seit Ende 2015 in den Geräten. Mittlerweile gibt es auch Geräte, die HD-Ultra
 
+## Ausgangsleistung
+* [gute Erklärung zum Zusammenhang zwischen Ausgangsleistung Verstärker und Leistung der Boxen[(http://www.hifi-forum.de/viewthread-42-48.html)
+
 # Geräte
 
 ## Pioneer VSX-330-K
