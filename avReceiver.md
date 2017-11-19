@@ -59,6 +59,8 @@ HDCP 2.2 gibt es allerdings erst seit Ende 2015 in den Geräten. Mittlerweile gi
 ## Pioneer VSX-330-K
 * Neupreis (2017): 220 Euro
 
+* HDMI mit HDCP 2.2
+
 ## Yamaha-Produktreihen
 * http://usa.yamaha.com/products/audio-visual/av-receivers-amps/rx/?mode=series
 
