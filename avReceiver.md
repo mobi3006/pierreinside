@@ -52,7 +52,7 @@ Wenn nun allerdings der neue Kopierschutz HDCP 2.2 kommt, dann muß, den gibts n
 
 > "Ist ein Film mit HDCP 2.2 verschlüsselt, wird er abgespielt werden können, wenn alle Geräte innerhalb der Wiedergabekette (also Player, Receiver und Projektor) die HDMI 2.0-Spezifikationen erfüllen und den neuen Kopierschutz (HDCP 2.2) unterstützen." ([Forenbeitrag](http://www.hifi-forum.de/viewthread-94-12978.html))
 
-
+HDCP 2.2 gibt es allerdings erst seit Ende 2015 in den Geräten.
 
 # Geräte
 
