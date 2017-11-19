@@ -1,7 +1,18 @@
 # AV Receiver
 Nachdem ich nun meinen Hobbyraum mit einem Beamer ausgestattet habe, überlege ich nun auch einen AV-Receiver und evtl. ein Lautsprechersystem zu installieren.
 
-Zunächst mal muss ich auch gar kein 5.1 mit superduper Sound haben. Ich will nur nicht ständig das Kabel vom Beamer auf die verschiendenen Eingangsquellen umstecken müssen. Deshalb wäre vielleicht auch eine HDMI-Weiche eine kostengünstige Lösung - 15 Euro statt 200-300 Euro:
+Und für das Geld gibt es auch kein brauchbares 5.1 System
+
+Besorge dir einen gebrauchten AVR und fange mit 2.0 Regallautsprechen an die du erweitern kannst.
+
+# Alterantiven
+Zunächst mal muss ich auch gar kein 5.1 mit superduper Sound haben. Ich will nur nicht ständig das Kabel vom Beamer auf die verschiendenen Eingangsquellen umstecken müssen. 
+
+## AV-Receiver im 2.0 Betrieb
+* warum sollte ich dann aber jetzt schon in einen Receiver investieren, wenn ich ihn noch gar nicht benötige - wäre es vielleicht sinnvoller dann irgendwann ein abgestimmtes System zu kaufen statt dann wieder festzustellen, daß der Receiver doch nicht so gut paßt oder in den letzten Jahren weitere Features entwirckelt wurden, auf die man ungerne verzichten möchte. 
+ 
+## HDMI-Weiche
+Deshalb wäre vielleicht auch eine HDMI-Weiche eine kostengünstige Lösung - 15 Euro statt 200-300 Euro:
 
 * https://www.amazon.de/deleyCON-HDMI-Switch-Verteiler-Automatisch-Schwarz-2-3-Port/dp/B008D5DH7C/ref=sr_1_8?ie=UTF8&qid=1511039839&sr=8-8&keywords=hdmi-weiche#Ask
 
