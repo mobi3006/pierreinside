@@ -41,7 +41,7 @@ M.f.G."
 * optional: MHL Schnitstelle - nicht sicher ob ich sowas brauche
 * optional WIFI
 * optional DLNA
-* optional HDCP 2.2
+* optional HDCP 2.2 - seit 2015
 
 ## 4k Passthrough - 4k Light über HDMI 1.4
 * [guter Forenbeitrag](http://www.hifi-forum.de/viewthread-94-12978.html)
