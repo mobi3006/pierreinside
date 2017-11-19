@@ -59,6 +59,18 @@ HDCP 2.2 gibt es allerdings erst seit Ende 2015 in den GerÃ¤ten. Mittlerweile gi
 ## Pioneer VSX-330-K
 * Neupreis (2017): 220 Euro
 * HDMI mit HDCP 2.2
+* KEIN Bluetooth
+
+## Onkyo TX-SR252
+* Neupreis (2017): 220 Euro
+* HDMI mit HDCP 2.2
+* KEIN Bluetooth
+* "nur" 100 Watt Ausgangsleistung
+
+# Pioneer VSX-531-B
+* Neupreis (2017): 260 Euro
+* HDMI mit HDCP 2.2
+* Bluetooth
 
 ## Yamaha-Produktreihen
 * http://usa.yamaha.com/products/audio-visual/av-receivers-amps/rx/?mode=series
@@ -75,6 +87,7 @@ Die RX-V-Produktreihen unterscheiden sich recht gut in den Features und werden Ã
   * 4K Ultra HD Pass-through
   * RX-V-475
     * gebraucht ab 100 Euro
+    * kein Bluetooth
   * RX-V-479 - gibt es 2017 nicht mehr neu zu kaufen
     > "Erfreulich ist, dass im Straight Modus das Umschalten zwischen Stereo und 5.1 Surround nahtlos funktioniert. So liefert z.B. mein Apple TV je nach Tonspur des Videos 5.1 oder Stereo. Der Receiver schaltet stets automatisch und ohne Probleme um."
   * RX-V-481 - gibt es 2017 noch neu zu kaufen
