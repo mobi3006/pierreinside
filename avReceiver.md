@@ -42,12 +42,10 @@ M.f.G."
 * optional WIFI
 * optional DLNA
 
-## 4k Passthrough - was ist das?
+## 4k Passthrough - 4k Light über HDMI 1.4
 * [guter Forenbeitrag](http://www.hifi-forum.de/viewthread-94-12978.html)
 
-Aktiver 4k Support durch den AV-Receiver benötigt HDMI 2.x. Viele ältere AV-Receiver haben nur HDMI 1.4 ([2.0 wurde erst 2013 eingeführt](https://de.wikipedia.org/wiki/High_Definition_Multimedia_Interface)) Allerdings beherrschen viele ältere AV-Receiver bereits den Passthrough Modus, bei dem das Endgerät die 4k Signale vollständig liefern muß. Das funktioniert soweit wohl ganz gut.
-
-Allerdings muß man hinsichtlich Farbe bei einer HDMI 1.4 Verbindung Einschränkungen hinnehmen, denn die Bandbreite wird beim Passthrough
+Aktiver 4k Support durch den AV-Receiver benötigt HDMI 2.x. Viele ältere AV-Receiver haben nur HDMI 1.4 ([2.0 wurde erst 2013 eingeführt](https://de.wikipedia.org/wiki/High_Definition_Multimedia_Interface)) Allerdings beherrschen viele ältere AV-Receiver bereits den Passthrough Modus, bei dem das Endgerät die 4k Signale vollständig liefert und sogar bis 60Hz möglich sind. Allerdings muß man hinsichtlich Farbe bei einer HDMI 1.4 Verbindung Einschränkungen hinnehmen ("mit einer Farbunterabtastung 4:2:0 und 8 Bit" statt 10 Bit).
 
 Wenn nun allerdings der neue Kopierschutz HDCP 2.2 kommt, dann muß, den gibts nur in Verbindung mit HDMI 2.0
 
