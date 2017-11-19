@@ -95,6 +95,7 @@ Die RX-V-Produktreihen unterscheiden sich recht gut in den Features und werden Ã
     > "Erfreulich ist, dass im Straight Modus das Umschalten zwischen Stereo und 5.1 Surround nahtlos funktioniert. So liefert z.B. mein Apple TV je nach Tonspur des Videos 5.1 oder Stereo. Der Receiver schaltet stets automatisch und ohne Probleme um."
     * Bluetooth
     * HDMI 2.0 4K Ultra HD mit 60p und HDCP2.2
+    * gebraucht ab 200 Euro
   * RX-V-481 - gibt es 2017 noch neu zu kaufen (380 Euro)
   * RX-V-483 (2017)
 * RX-V-579
