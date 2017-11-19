@@ -49,6 +49,8 @@ Aktiver 4k Support durch den AV-Receiver benötigt HDMI 2.x. Viele ältere AV-Re
 
 Wenn nun allerdings der neue Kopierschutz HDCP 2.2 kommt, dann muß, den gibts nur in Verbindung mit HDMI 2.0
 
+> "Ist ein Film mit HDCP 2.2 verschlüsselt, wird er abgespielt werden können, wenn alle Geräte innerhalb der Wiedergabekette (also Player, Receiver und Projektor) die HDMI 2.0-Spezifikationen erfüllen und den neuen Kopierschutz (HDCP 2.2) unterstützen." ([Forenbeitrag](http://www.hifi-forum.de/viewthread-94-12978.html))
+
 # Geräte
 
 ## Yamaha-Produktreihen
