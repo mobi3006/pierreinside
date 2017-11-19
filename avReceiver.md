@@ -52,9 +52,12 @@ Wenn nun allerdings der neue Kopierschutz HDCP 2.2 kommt, dann muß, den gibts n
 
 > "Ist ein Film mit HDCP 2.2 verschlüsselt, wird er abgespielt werden können, wenn alle Geräte innerhalb der Wiedergabekette (also Player, Receiver und Projektor) die HDMI 2.0-Spezifikationen erfüllen und den neuen Kopierschutz (HDCP 2.2) unterstützen." ([Forenbeitrag](http://www.hifi-forum.de/viewthread-94-12978.html))
 
-HDCP 2.2 gibt es allerdings erst seit Ende 2015 in den Geräten.
+HDCP 2.2 gibt es allerdings erst seit Ende 2015 in den Geräten. Mittlerweile gibt es auch Geräte, die HD-Ultra
 
 # Geräte
+
+## Pioneer VSX-330-K
+* Neupreis (2017): 220 Euro
 
 ## Yamaha-Produktreihen
 * http://usa.yamaha.com/products/audio-visual/av-receivers-amps/rx/?mode=series
