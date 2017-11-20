@@ -1,10 +1,6 @@
 # AV Receiver
 Nachdem ich nun meinen Hobbyraum mit einem Beamer ausgestattet habe, überlege ich nun auch einen AV-Receiver und evtl. ein Lautsprechersystem zu installieren.
 
-Und für das Geld gibt es auch kein brauchbares 5.1 System
-
-Besorge dir einen gebrauchten AVR und fange mit 2.0 Regallautsprechen an die du erweitern kannst.
-
 # Alterantiven
 Zunächst mal muss ich auch gar kein 5.1 mit superduper Sound haben. Ich will nur nicht ständig das Kabel vom Beamer auf die verschiendenen Eingangsquellen umstecken müssen. 
 
