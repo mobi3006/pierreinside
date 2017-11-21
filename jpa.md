@@ -7,7 +7,7 @@
 ## Object-Relational-Mapping
 * Schema-Definition für JPA 2.1: http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd
 
-Das Mapping von Objekten auf ein relationales Datenbankschema erfolgt über das sog. OR-Mapping. Das kann
+Das Mapping von Objekten auf ein relationales Datenbankschema (und in die Gegenrichtung) benötigt das sog. OR-Mapping. Das kann
 
 * entweder: über eine Datei (z. B. `orm.xml`)
 * oder: über Annotationen in den JPA-Entities 
