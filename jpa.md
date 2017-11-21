@@ -5,8 +5,6 @@
 # Konzepte
 
 ## Object-Relational-Mapping
-* ORM-Mapping http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_4.xsd
-* http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/schema.htm
 
 Das Mapping von Objekten auf ein relationales Datenbankschema erfolgt über das sog. OR-Mapping. Das kann
 
@@ -16,6 +14,12 @@ Das Mapping von Objekten auf ein relationales Datenbankschema erfolgt über das 
 erfolgen. 
 
 Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben - hier beispielsweise die Sprache für 
+
+### Provider-spezifische Erweiterungen
+* ORM-Mapping (von EclipseLink) http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_4.xsd
+* http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/schema.htm
+
+Einige JPA-Implementierungen bieten providerspezifische Erweiterungen des OR-Mappings an. Beispielsweise EclipseLink (selbst die Referenzimplementierung bietet solche Erweiterungen!!!).
 
 ## PersistenceContext (Unit-of-Work)
 
