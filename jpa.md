@@ -4,6 +4,19 @@
 
 # Konzepte
 
+## Object-Relational-Mapping
+* ORM-Mapping http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_4.xsd
+* http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/schema.htm
+
+Das Mapping von Objekten auf ein relationales Datenbankschema erfolgt über das sog. OR-Mapping. Das kann
+
+* entweder: über eine Datei (z. B. `orm.xml`)
+* oder: über Annotationen in den JPA-Entities 
+
+erfolgen. 
+
+Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben - hier beispielsweise die Sprache für 
+
 ## PersistenceContext (Unit-of-Work)
 
 Der PersistenceContext verwaltet eine Menge von Entities (Unit of Work). Hier steckt die eigentliche Logik drin - nicht im Entity Manager. Wird eine Transaktion erzeugt, so wird ein neuer Persistence Context erzeugt und damit verbinden - wird die Transaction committed, dann wird der Persistence Context persistiert (= flush). Flushen ist in manchen Fällen (z. B. SQL-Queries, automatisierte Erzeugung von IDs, Logik in EntityCallbacks) aber zwischendurch notwendig ... bei `FlushModeType.AUTO` entscheidet der EntityManager wann geflushed werden sollte (bei `FlushModeType.COMMIT` wird immer erst beim Committen der Transaktion geflushed).
