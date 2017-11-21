@@ -22,6 +22,11 @@ Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben.
 
 Einige JPA-Implementierungen bieten providerspezifische Erweiterungen des OR-Mappings an. Beispielsweise EclipseLink (selbst die Referenzimplementierung bietet solche Erweiterungen!!!).
 
+### AttributeConverter
+* https://jaxenter.de/konvertierungen-jpa-attribute-converters-17197
+
+In JPA 2.1 wurde die sog. [`AttributeConverter`](http://grepcode.com/file/repo1.maven.org/maven2/org.eclipse.persistence/javax.persistence/2.1.0/javax/persistence/AttributeConverter.java#AttributeConverter) eingeführt.
+
 ## PersistenceContext (Unit-of-Work)
 
 Der PersistenceContext verwaltet eine Menge von Entities (Unit of Work). Hier steckt die eigentliche Logik drin - nicht im Entity Manager. Wird eine Transaktion erzeugt, so wird ein neuer Persistence Context erzeugt und damit verbinden - wird die Transaction committed, dann wird der Persistence Context persistiert (= flush). Flushen ist in manchen Fällen (z. B. SQL-Queries, automatisierte Erzeugung von IDs, Logik in EntityCallbacks) aber zwischendurch notwendig ... bei `FlushModeType.AUTO` entscheidet der EntityManager wann geflushed werden sollte (bei `FlushModeType.COMMIT` wird immer erst beim Committen der Transaktion geflushed).
