@@ -14,7 +14,7 @@ Das Mapping von Objekten auf ein relationales Datenbankschema erfolgt über das 
 
 erfolgen. 
 
-Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben - hier beispielsweise die Sprache für 
+Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben.
 
 ### Provider-spezifische Erweiterungen
 * ORM-Mapping (von EclipseLink) http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_4.xsd
