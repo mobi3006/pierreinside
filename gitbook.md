@@ -38,6 +38,8 @@ Die Toolchain besteht aus:
   * verwendet Git zur lokalen Speicherung
   * verwendet GitHub zur remote Speicherung
   * ermöglicht die lokale Erstellung von HTML-Seiten, die man auf jeden beliebigen Webserver schieben kann 
+* anstatt des GitBookEditors kann man jeden beliebigen Editor (ich stehe auf Visual Studio Code) verwenden. Git bekommt man entweder im Editor integriert oder man verwendet die üblichen Git-Tools
+  * mittlerweile bin ich zu diesem Ansatz übergegangen, weil der GitBookEditor aus meiner Sicht schlechter geworden ist und ich so mehr Kontrolle darüber habe, wann commits gemacht werden (der GitBookEditor hat scheinbar bei jedem Speichern ein Commit gemacht).
 * GitHub (https://github.com)
   * hier kann der per GitBookEditor erstellte Content zentral abgelegt werden 
   * die Markdown-Seiten werden hier auch schon in HTML gerendert
@@ -153,7 +155,11 @@ darauf zugreifen kann.
 
 ---
 
-# Option 3: Deployment auf Self-Hosted-Webserver
+# Option 3: Getting started via Standard-Tools (non-GitBook)
+
+---
+
+# Option 4: Deployment auf Self-Hosted-Webserver
 ## Statische Seiten generieren
 Per GitBook-CLI
 

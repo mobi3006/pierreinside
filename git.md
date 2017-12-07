@@ -157,6 +157,31 @@ Git-Repository-Server erlauben i. a. einen Zugriff per
 
 ---
 
+# Konzeptuelle Überraschungen
+
+## Leere Verzeichnisse
+Legt man ein Verzeichnis an (`mkdir folderA`), so erkennt git das nicht als Änderung (`git status`). Man kann dieses leere Verzeichnis auch nicht ins CommitObject hängen ... `git add folderA` zeigt keine Wirkung. Erst nachdem mindestens eine Datei in das Verzeichnis gelegt wird (`touch folderA/meineDatei.txt`) zeigt git eine Änderung an.
+
+Möchte man also "leere" Verzeichnisse unter Versionskontrolle stellen (ich hatte schon mal den Fall, daß das Sinn gemacht hat), so sollte man eine "versteckte" Datei reinlegen, an der man auch erkennt, daß sie diesem Zweck dient: 
+
+```
+echo "Diese datei existiert nur, um das Verzeichnis unter Versionskontrolle zu stellen" > ./folderA/.keep
+```
+
+## Historie bei Refactorings beibehalten
+Im Gegensatz zu SVN hat Git keine Metadaten auf jeder einzelnen Datei. Stattdessen versucht Git durch Analyse des Commit-Objekts heuristisch rauszufinden, wenn eine Datei umbenannt oder verschoben wurde. Wenn das CommitObjekt folgende Änderungen enthält
+
+```
+.../folderA/meineDatei.txt
+.../folderB/meineDatei.txt
+```
+
+dann wird das bei einem `git diff` VOR DEM COMMIT als Löschung und Neuanlage dargestellt. Schaut man sich nach dem Commit aber die Historie an, dann ist sie erhalten geblieben, weil diese Änderung als Verschieben interpretiert wird. ACHTUNG: das geschieht ausschließlich durch Analyse der Commit-Objekte ... keine Sicherheit, ob das auch alle Git-Clients machen oder es noch in Zukunft funktioniert.
+
+ Diese Vorgehen hat allerdings den Vorteil, daß man solche Refactorings in einem normalen File-Browser oder über Betriebssystemkommandos (`mv folderA/meineDatei.txt folderB/meineDatei.txt`) durchführen kann. Man muß hier kein spezielles 
+
+---
+
 # Befehle
 * https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf
 

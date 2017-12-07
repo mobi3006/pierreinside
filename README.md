@@ -10,7 +10,7 @@ Zudem hilft mir das Aufschreiben der wichtigsten Konzepte und ihrer Zusammenhän
 
 Mittlerweile versuche ich auch, meine Artefakte in der Cloud bereitzustellen. Ich möchte meine Infrastruktur zuhause nicht freigeben, möchte aber dennoch von überall Zugriff auf meine Projekte haben. Außerdem lerne ich dadurch das Tooling der Cloud kennen ... als Softwareentwickler vielleicht nicht die schlechteste Idee. Natürlich gibt es auch ein paar nicht-öffentliche Artefakte, die ich zuhause auf meinem Synology hoste (z. B. Git-Repository).
 
-Ich verbringe gerne viel Yeit mit meinen drei Kindern. Mit den beiden Jungs bin ich oft auf bei den Fußballspielen des ASV/DJK Eppelheim, arbeite dort als Jugendtrainer und rasender Reporter ([Jugend-Homepage - http://asvdjk.wordpress.com](http://asvdjk.wordpress.com)). 
+Ich verbringe gerne viel Zeit mit meinen drei Kindern und meiner Frau. Mit den beiden Jungs bin ich oft bei den Fußballspielen des ASV/DJK Eppelheim. Dort engagiere ich mich außerdem als Jugendtrainer und rasender Reporter ([Jugend-Homepage - http://asvdjk.wordpress.com](http://asvdjk.wordpress.com)). 
 
 ![Me, myself and I](images/pierre.jpg)
 

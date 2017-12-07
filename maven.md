@@ -4,6 +4,28 @@
 
 **TODO ... REWORK NEEDED ...**
 
+* https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies
+
+Maven kennt verschiedene Artefakt-Typen (`:
+
+* `jar`, wenn die Dependency ein `*.jar` Artefakt bereitstellt (am häufigsten verwendet)
+* `test-jar`, wenn die Dependency ein `foo-test.jar` Artefakt bereitgestellt
+  * auf diese Weise können Module beispielsweise Mock-Implementierungen ihrer Services oder auch Spring-Kontext anbieten, die von den nutzenden Modulen eingebunden werden können
+* `foo-sources.jar`, wenn ein Modul die Sourcen per `maven-source-plugin` bereitstellt (bei Open-Source-Projekten gehört das zum guten Stil) 
+* 
+
+und verschiedene Scopes (`<scope>`) , mit denen Dependencies annotiert werden:
+
+* `compile` - default Scope
+  * das Artefakt landet später auch im Assembly, weil es auch zur Laufzeit benötigt wird
+* `provided`
+  * das Artefakt landet nicht im Assembly, weil es die Laufzeitumgebung (Application-Server, JDK, ...) oder die anderen Module mitbringen, z. B. `servlet-api`
+  * in Tests muß man es dann aber selbst bereitstellen
+* `runtime`
+* `test`
+* `import` - nur bei einer Dependency auf ein `pom`
+
+
 * http://www.sonatype.com/books/maven-book/reference/
 
 Build-Tool der Apache Foundation - Apache preist maven als Projektmanagement-Tool an, weil es auch Reports erzeugen kann und die Kommunikation der Entwickler unterstützt. Es ist also mehr als ant, mehr als nur ein Build-Tool.
