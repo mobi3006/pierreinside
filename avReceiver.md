@@ -14,7 +14,9 @@ Warum sollte ich dann aber jetzt schon in einen Receiver investieren, wenn ich i
 
 Deshalb wäre vielleicht auch ein HDMI-Switch eine kostengünstige Lösung - 15 Euro statt 200-300 Euro:
 
-* https://www.amazon.de/deleyCON-HDMI-Switch-Verteiler-Automatisch-Schwarz-2-3-Port/dp/B008D5DH7C/ref=sr_1_8?ie=UTF8&qid=1511039839&sr=8-8&keywords=hdmi-weiche#Ask
+* [DeleyCON 3-Port](https://www.amazon.de/deleyCON-HDMI-Switch-Verteiler-Automatisch-Schwarz-2-3-Port/dp/B008D5DH7C/ref=sr_1_8?ie=UTF8&qid=1511039839&sr=8-8&keywords=hdmi-weiche#Ask)
+  * den habe ich bestellt aber große Probleme gehabt ... mit FireTV Stick hat es funktioniert - mit einer PS4 nicht, so wie hier beschrieben: http://community.eu.playstation.com/t5/PS4/HDMI-Switcher/td-p/22118085/page/2
+  * viele User schwören auf die [Switches von Ligawo](http://community.eu.playstation.com/t5/PS4/HDMI-Switcher/td-p/22118085/page/2)
 
 Eine automatische Erkennung des Signals wäre natürlich gut, weil das die Komplexität reduziert (die Kinder sollen die Playstation selbständig die bedienen können).
 
