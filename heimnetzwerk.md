@@ -13,6 +13,7 @@ Jahrelang hat dieser Router sehr gute Dienste geleistet, doch mittlerweile ist e
 Ich habe im zweiten Stock eine alte Fritzbox als AccessPoint eingerichtet. Das funktioniert prinzipiell, aber die alte Box kann halt keine aktuellen WLAN-Standards und kommt somit auf eine schlechte Performance. Das liegt sicherlich auch daran, daß das 2,4 GHz Netz von vielen meiner Nachbarn genutzt wird und die Box nicht automatisch zwiscchen den Kanälen umschalten kann. Selbst ein Raum vom AccessPoint entfernt habe ich weiter habe ich manchmal inakzeptable Geschwindigkeit.
 
 # Fritz!WLAN Repeater 1750E als AccessPoint (aka LAN Brücke)
+* [WLAN-Grundlagen](http://www.tomshardware.de/grundlagen-wissen-wlan-repeater-wireless-range-extender,testberichte-241852.html)
 * [Fritz-Dokumentation](https://avm.de/service/fritzwlan/fritzwlan-repeater-1750e/wissensdatenbank/publication/show/903_FRITZ-WLAN-Repeater-per-LAN-mit-Router-z-B-FRITZ-Box-verbinden/)
 
 Den Repeater 1750E kann man in verschiedenen Modi betreiben:
@@ -21,9 +22,18 @@ Den Repeater 1750E kann man in verschiedenen Modi betreiben:
 * [LAN Brücke](https://avm.de/service/fritzwlan/fritzwlan-repeater-1750e/wissensdatenbank/publication/show/903_FRITZ-WLAN-Repeater-per-LAN-mit-Router-z-B-FRITZ-Box-verbinden/)
 * [Mesh](https://avm.de/service/fritzos-690/faqs/welche-fritz-produkte-unterstuetzen-wlan-mesh/)
 
-Der Modus *LAN-Brücke* funktioniert als AccessPoint und somit perfekt geeignte, um mein WLAN im zweiten Stock aufzuspannen. Außerdem unterstützt dieser Repeater 2,4 GHz und 5 GHz und Übertragungsraten bis zu 1300 MBit/s. Im Vergleich zu meinen [150 MBit/s meiner Fritzbox 7390](https://avm.de/service/fritzbox/fritzbox-7390/wissensdatenbank/publication/show/514_WLAN-Verbindungen-langsam-geringe-Datenrate/) ein Traum.
+## LAN-Brücke
+In diesem Modus ist das Gerät per LAN mit dem Switch/Router verbunden und bietet für Clients einen WLAN-Access (-Point) an. Der 1750 arbeitet in diesem Modus sehr gut ... ich erreiche bis zu 400 MBit/s in meinem lokalen Netzwerk. Und das bei einem AC1300 Client (= Laptop), der im 5 GHz Bereich brutto maximal 867 MBit/s schaffen kann - **Hut ab**. Im Vergleich zu meinen [150 MBit/s meiner Fritzbox 7390](https://avm.de/service/fritzbox/fritzbox-7390/wissensdatenbank/publication/show/514_WLAN-Verbindungen-langsam-geringe-Datenrate/) ein Traum.
+Damit bin ich sehr zufrieden.
+
+Somit ist er super geeignet um mein WLAN im zweiten Stock aufzuspannen. Außerdem unterstützt dieser Repeater 2,4 GHz und 5 GHz ... insbes. die 5 GHz machen auf einem Geschoss ohne Betonwände durchaus Sinn.
 
 Aufgrund des Mesh-Supports ist der Repeater auch für einen zukünftigen Austausch des langsam veralteten DSL-Routers 7390 vorbereitet.
+
+## WLAN-Brücke
+In diesem Modus kommuniziert der 1750 über WLAN mit dem Switch/Router - die WLAN-Bandbreite wird dadurch natürlich halbiert, weil die Antennen des 1750 gleichzeitig empfangen und senden.
+
+Leider war die Performance im Zusammenspiel mit meiner betagten Fritzbox 7390 (unterstützt nur WLAN-n, kein WLAN-ac) extrem enttäuschend. Mehr als 1-3 MBit/s habe ich trotz Fritzboxabstand von 3m nicht rausholen können ... und instabil war es durch eine Betondecke und eine Wand außerdem.  
 
 # Aktuelle Fritzbox - 2017
 * https://avm.de/produkte/avm-produktvergleich/fritzbox/alle-anschluesse/
