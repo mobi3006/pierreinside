@@ -12,7 +12,7 @@ Sehr gute Quellen:
 
 ---
 
-# Motivation - Linus Torvalds
+## Motivation - Linus Torvalds
 
 * [https:\/\/www.youtube.com\/watch?v=idLyobOhtO4](https://www.youtube.com/watch?v=idLyobOhtO4)
 
@@ -23,7 +23,7 @@ Linus Torvalds hat Git für seine Arbeit am Linux-Kernel entwickelt, weil es kei
 * jeder Kernel-Entwickler kann Arbeiten, ohne andere zu beeinflussen ... erst wenn die Arbeit DONE ist, kann entschieden werden, ob die Änderungen übernommen werden.
 * möglichst hohe Freiheitsgrade in der Arbeitsorganisation für jeden einzelnen Entwickler
 
-## Git in typischen Softwareprojekten ...
+### Git in typischen Softwareprojekten ...
 
 Diese _Integration Manager_-Modell  Arbeitsweise paßt zu den wenigstens Standard-Entwicklern. Dennoch können auch Standard-Entwickler von diesem Ansatz profitieren.
 
@@ -37,19 +37,18 @@ Ich habe jehrelang mit Subversion und maven gearbeitet. Dabei bin ich nach einig
 
 ---
 
-# Idee
+## Idee
 
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-4.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml)
 * Git Workflows: 
   * [https:\/\/git-scm.com\/about\/distributed](https://git-scm.com/about/distributed)
   * [https:\/\/www.atlassian.com\/git\/tutorials\/comparing-workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
 
-
 Bei Git handelt es sich um ein Versionssystem, das ohne dedizierten zentralen Server auskommt. Stattdessen gibt es viele mehr oder weniger gleichberechtigte vollwertige Repositories \(mit allen Versionen der verwalteten Ressourcen\), die bei Bedarf synchronisiert werden.
 
 Jeder Entwickler wird für "sein" Repository zum Administrator, auf dem er Branches und Tags erstellt.
 
-## Verteiltes Modell
+### Verteiltes Modell
 
 Git erfordert - im Gegensatz zu Subversion - kein zentrales Repository. ABER: man kann Git so nutzen \(Shared-Repository-Modell\) und das wird auch getan \(z. B. [GitHub](http://github.com)\).
 
@@ -57,7 +56,7 @@ Während man bei Subversion allerdings zentral am Server Branches\/Tags erzeugt 
 
 ![Git Workflow](images/GitWorkflow.png)
 
-## Workflows
+### Workflows
 
 Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflows \(man kann sich ausser den folgenden sicher noch andere überlegen\):
 
@@ -69,13 +68,13 @@ Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflo
 * Integration Manager Modell
 
 
-### Peer-to-Peer-Ansatz
+#### Peer-to-Peer-Ansatz
 
 Bei diesem Ansatz tauscht jeder Entwickler mit jedem Entwickler per Git-Pull oder Git-Push die Sourcen aus. Dieser Ansatz skaliert nicht besonders gut.
 
 Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe \(ab 3-4 Leute\) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher einen Shared-Repository-Ansatz zu fahren.
 
-### Shared-Repository-Ansatz - SVN-like
+#### Shared-Repository-Ansatz - SVN-like
 
 * [https:\/\/www.atlassian.com\/git\/tutorials\/comparing-workflows\/centralized-workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow)
 
@@ -85,17 +84,17 @@ Jeder Entwickler clont das zentrale GIT-Repository ... im neuen lokalen Reposito
 
 Lokal kann der Entwickler Branches und Tags erstellen und bei Bedarf sogar weitere Clones von seinem eigenen lokalen Repository machen.
 
-#### Shared-Repository-Ansatz + Feature-Branches
+##### Shared-Repository-Ansatz + Feature-Branches
 
 * [https:\/\/www.atlassian.com\/git\/tutorials\/comparing-workflows\/feature-branch-workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
 
-### Integration Manager Modell
+#### Integration Manager Modell
 
 Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei einen ausgezeichneten Integration Manager, der die Änderungen der anderen Entwickler integriert. Der Integration Manager führt das sog. _Blessed Repository_ \(nur er hat dort Schreibrechte - kann darauf `git push` machen\). Jeder Entwickler erstellt einen Fork des Blessed Repository und gibt dem Integration Manager Leserechte auf diesem Fork-Repository. Der Integration Manager integriert die Änderungen der Entwickler in sein Arbeitsrepository und pusht sie ins Blessed Repository.
 
 ---
 
-# Basis-Konzepte
+## Basis-Konzepte
 
 Linux Torvalds sagte in einer [Präsentation](2) mal, daß Git Content-based ist und Subversion File-based. Ich habe es noch nicht so ganz verstanden, aber als Beispiel führte er folgendes an:
 
@@ -150,28 +149,31 @@ Hat man eine nicht commitete Änderung an einer Ressource, die bereits unter Ver
 Hat man eine nicht commitete Änderung an einer Ressource, die nocht nicht unter Version-Control steht, in
 
 **Zugriffsprotokoll:**
-Git-Repository-Server erlauben i. a. einen Zugriff per 
+Git-Repository-Server erlauben i. a. einen Zugriff per
+
 * HTTPS
 * SSH
   * hiermit ist auch passwortlose Authentifizierung per [SSH-Key über den SSH-Mechanismus](ssh.md) möglich 
 
 ---
 
-# Konzeptuelle Überraschungen
+## Konzeptuelle Überraschungen
 
-## Leere Verzeichnisse
+### Leere Verzeichnisse
+
 Legt man ein Verzeichnis an (`mkdir folderA`), so erkennt git das nicht als Änderung (`git status`). Man kann dieses leere Verzeichnis auch nicht ins CommitObject hängen ... `git add folderA` zeigt keine Wirkung. Erst nachdem mindestens eine Datei in das Verzeichnis gelegt wird (`touch folderA/meineDatei.txt`) zeigt git eine Änderung an.
 
 Möchte man also "leere" Verzeichnisse unter Versionskontrolle stellen (ich hatte schon mal den Fall, daß das Sinn gemacht hat), so sollte man eine "versteckte" Datei reinlegen, an der man auch erkennt, daß sie diesem Zweck dient: 
 
-```
+```bash
 echo "Diese datei existiert nur, um das Verzeichnis unter Versionskontrolle zu stellen" > ./folderA/.keep
 ```
 
-## Historie bei Refactorings beibehalten
+### Historie bei Refactorings beibehalten
+
 Im Gegensatz zu SVN hat Git keine Metadaten auf jeder einzelnen Datei. Stattdessen versucht Git durch Analyse des Commit-Objekts heuristisch rauszufinden, wenn eine Datei umbenannt oder verschoben wurde. Wenn das CommitObjekt folgende Änderungen enthält
 
-```
+```properties
 .../folderA/meineDatei.txt
 .../folderB/meineDatei.txt
 ```
@@ -182,12 +184,13 @@ dann wird das bei einem `git diff` VOR DEM COMMIT als Löschung und Neuanlage da
 
 ---
 
-# Befehle
+## Befehle
+
 * https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf
 
 Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit bin ich beruflich ein Subversion-Nutzer\).
 
-## Arbeiten am Repository
+### Arbeiten am Repository
 
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-1.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-1.shtml)
 
@@ -207,7 +210,7 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
     * Remote-Repository lokal clonen - `myDir` kann optional weggelassen werden
     * dadurch entstehen Remote-Head-CommitObjects auf das Original-Repository, die den Namen `origin/[HEAD_NAME]` haben
 
-## Arbeiten am Index
+### Arbeiten am Index
 
 * `git status`: welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
 
@@ -256,7 +259,7 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
   * `git reset HEAD myfile.txt`
 
 
-## Lokale Änderungen
+### Lokale Änderungen
 
 * Ressourcen ignorieren: das kann man per User oder per Repository machen oder lokal \(für ein Repository\)
   * per Repository: eine Datei mit dem Namen `.gitignore` anlegen und dort die Dateien aufführen \(reguläre Ausdrücke sind meines Wissens erlaubt\)
@@ -306,7 +309,7 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
   * `git rm myfile.txt`
 
 
-## Arbeiten mit Branches
+### Arbeiten mit Branches
 
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-2.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-2.shtml)
 * [https:\/\/git-scm.com\/book\/de\/v1\/Git-Grundlagen-Mit-externen-Repositorys-arbeiten](https://git-scm.com/book/de/v1/Git-Grundlagen-Mit-externen-Repositorys-arbeiten)
@@ -352,7 +355,7 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
   * zum master Branch wechseln - dadurch wird HEAD auf das letzte CommitObject im Master-Branch gesetzt
 
 
-## Mergen von Branches
+### Mergen von Branches
 
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-3.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-3.shtml)
 
@@ -362,13 +365,13 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 
 Beim Mergen können Konflikte entstehen ... das wird in der Ausgabe angezeigt und dann findet man in den automatisch gemergten Dateien Kennzeichen (``<<<<<``), die beide Versionen darstellen. Diese Dateien bearbeitet man nach und committed dann.
 
-## Taggen von Branches
+### Taggen von Branches
 
 * `git tag -a 1.0.0 -m "tag for version 1.0.0"`
   * aktuell konfigurierten Branch mit der Bezeichnung 1.0.0 taggen
 
 
-## Commit-Historie
+### Commit-Historie
 
 * `git log`
 
@@ -391,7 +394,7 @@ Beim Mergen können Konflikte entstehen ... das wird in der Ausgabe angezeigt un
   * zeige alle CommitObjects
 
 
-## Arbeiten mit Remote-Repository
+### Arbeiten mit Remote-Repository
 
 * `git clone ssh://user@server/absolutePath/to/repository`
 
@@ -442,7 +445,7 @@ Beim Mergen können Konflikte entstehen ... das wird in der Ausgabe angezeigt un
 
 ---
 
-# Konfiguration
+## Konfiguration
 * https://git-scm.com/docs/gitattributes
 
 Man unterscheidet die Konfiguration auf verschiedenen Ebenen
@@ -451,7 +454,7 @@ Man unterscheidet die Konfiguration auf verschiedenen Ebenen
 * `--global`: userspezifisch ... für alle Repositories \(liegt in `~/.gitconfig`\)
 * `--local`: Repository-spezifisch \(liegt in `$REPOSITORY_HOME/.git/config`\)
 
-## Benutzerspezifische Konfiguration
+### Benutzerspezifische Konfiguration
 Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei `~/.gitconfig` machen. 
 
 Hierin können weitere benutzerspezifische Konfigurationen referenziert werden:
@@ -484,7 +487,7 @@ Dadurch wird die Datei `~/.gitconfig` um die Properties erweitert. Hier sollte m
 
 aufnehmen, damit LineEndings immer als LF \(Linux-like\) im Repository landen und nicht Windows-like als CRLF \(näheres siehe [http:\/\/help.github.com\/line-endings\/](http://help.github.com/line-endings/)\). Dies sollten ALLE Git-Nutzer tun, denn auch Linux\/Unix-User könnten von anderen Quellen \(z. B. ein Source File kommt per Mail von einem Windows-User\) eingeschleust werden.
 
-## Repositoryspezifische Konfiguration
+### Repositoryspezifische Konfiguration
 Jedes Git-Repository hat ein Verzeichnis .git \(im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat\). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
 
 * config
@@ -499,12 +502,12 @@ git config user.email your@email.com
 
 durchführen ... BEACHTE: ``--global`` fehlt hier!!!
 
-## Line-Endings
+### Line-Endings
 * https://help.github.com/articles/dealing-with-line-endings/
 
 In heterogenen Umngebungen mit Windows-, Linux-, MacOS-Nutzern muß man sich mit dem Thema auseinandersetzen.
 
-## Alias
+### Alias
 Manche Befehlskombinationen möchte man immer wieder verwenden und schnell im Zugriff haben. Hierzu kann man - ähnlich wie in der Shell - entsprechende Aliase in der ``~/.gitconfig`` definieren. Hat man beispielsweise diese definiert:
 
 ```
@@ -516,21 +519,21 @@ dann lässt sich die pseudografische History-Darstellung per ``git hist`` auf de
 
 ---
 
-# Tooling
+## Tooling
 Für die Arbeit mit Git benötigt man einen Git Client. Auch wenn ich versuche, viele Dinge über die Command-Line zu tun, so mache ich einige Dinge doch lieber über eine GUI (z. B. in der History navigieren und Vergleiche machen).
 
-## Command-Line
+### Command-Line
 
-## GitHub Desktop
+### GitHub Desktop
 Der [GitHub Desktop](https://desktop.github.com/) hat mir wirklich Spaß gemacht als ich mit [GitBook](gitbook.md) begonnen habe.
 
-## Git-GUI
+### Git-GUI
 schien mir auch ganz brauchbar
 
 ---
 
-# Typische Use-Cases
-## Neues lokales Repository aufsetzen
+## Typische Use-Cases
+### Neues lokales Repository aufsetzen
 Im folgenden gehe ich davon aus, dass der Benutzer bereits Dateien angelegt hat \(in ~\/mySources\), aber noch nicht unter Git-Versionskontrolle gestellt hat. Dann:
 
 ```
@@ -540,7 +543,7 @@ git add .
 git commit -m "inital commit"
 ```
 
-## Zentrales Repository aufsetzen
+### Zentrales Repository aufsetzen
 
 Ich gehe davon aus, daß ein Entwickler mal mit dem Projekt begonnen hat und die Sourcen zunächst lokal liegen hat. Diese Sourcen will er dann in ein zentales Repository stellen, um sie mit anderen zu teilen. Es wird empfohlen, das zentrale Repository nur als sog. _Bare Repository_ anzulegen, d. h. der zentrale Server hat keine eigene Working-Copy, sondern hält nur die Repository-Information \(mehr wäre vermutlich auch Platzverschwendung\). Das vereinfacht die Sache, denn ansonsten würde die Working-Copy nicht automatisch upgedated und das würde nur zu Verwirrung führen \(kann ich aus eigener Erfahrung bestätigen\).
 
@@ -553,7 +556,7 @@ Ich gehe davon aus, daß ein Entwickler mal mit dem Projekt begonnen hat und die
   ```
 
 
-### Variante 1
+#### Variante 1
 
 Lokale Sourcen archivieren und zentrales Repository neu clonen
 
@@ -561,7 +564,7 @@ Lokale Sourcen archivieren und zentrales Repository neu clonen
 git clone ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY
 ```
 
-### Variante 2
+#### Variante 2
 
 ```
 cd ~/existingGitRepsoitoy
@@ -576,16 +579,16 @@ git remote add origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY
     merge = refs/heads/master
 ```
 
-### Variante 3 - EMPFOHLEN
+#### Variante 3 - EMPFOHLEN
 
     cd ~/existingGitRepsoitoy
     git remote add --track master origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY``
 
-## Zentraler-Repository-Ansatz mit GitHub
+### Zentraler-Repository-Ansatz mit GitHub
 
 Die Arbeit mit GitHub könnte folgendermaßen aussehen \(in der Kombination von GitHub Desktop Tool und GitHub Webapplikation wird dieser Workflow sehr gut durch Tooling unterstützt ... aber man kann auch Standard-Tools verwenden\).
 
-### Schritte 1a - GitHub Repository aus lokalen Ressourcen initial erstellen
+#### Schritte 1a - GitHub Repository aus lokalen Ressourcen initial erstellen
 
 ```
 Achtung: ich verwende hier GitHub Desktop, der die Sache sehr einfach macht
@@ -599,16 +602,16 @@ Achtung: ich verwende hier GitHub Desktop, der die Sache sehr einfach macht
   * jetzt sollten die Änderungen auch über die GitHub-Webapplikation zu sehen sein
 
 
-### Schritt 1b - GitHub Remote-Repository clonen
+#### Schritt 1b - GitHub Remote-Repository clonen
 
-### Schritt 2 - Änderungen lokal committen und ins Remote-Repository pushen\/syncen
+#### Schritt 2 - Änderungen lokal committen und ins Remote-Repository pushen\/syncen
 
 Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
 
 * entweder arbeitet man direkt auf DEM master-Branch, so daß durch das syncen lokal committeter Änderungen automatisch der master-Branch geändert wird
 * oder man erstellt parallel zum master-Branch weitere Branches und verwendet Pull-Requests, um die Branches in den master-Branch zu mergen
 
-### Schritt 2b - Branch erstellen, committen, syncen und mit Pull-Requests in den master-Branch mergen
+#### Schritt 2b - Branch erstellen, committen, syncen und mit Pull-Requests in den master-Branch mergen
 
 ```
 Achtung: ich verwende hier GitHub Desktop, der die Sache sehr einfach macht
@@ -629,7 +632,7 @@ Achtung: ich verwende hier GitHub Desktop, der die Sache sehr einfach macht
   * per Pull-Request die Änderungen am Branch in den master-Branch mergen
 
 
-## Zentraler-Repository-Ansatz mit Synology-Git
+### Zentraler-Repository-Ansatz mit Synology-Git
 
 [siehe Abschnitt Synology](synology.md)
 
@@ -640,7 +643,7 @@ Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schne
 * im folgenden ein Bare-Repository auf der Synology-Diskstation anzulegen \(siehe unten\)
 * zwischen Git-Client und Git-Bare-Repository zu kommunizieren \(u. a. `git clone`, `git push`\)
 
-### Bare-Repository auf Diskstation anlegen
+#### Bare-Repository auf Diskstation anlegen
 
 Als User `root` \(ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet\) per ssh auf die Diskstation wechseln:
 
@@ -666,7 +669,7 @@ ein sog. _Bare-Repository_ anlegen.
 
 **ACHTUNG:** natürlich muß man die Location \(A\) und den Owner bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend\/schreibend zugreifen kann.
 
-### Diskstation Repository clonen
+#### Diskstation Repository clonen
 
 Auf dem Client wird das Repository lokal geclont \(Achtung: es handelt sich hier um eine ssh-URL - nicht um https\):
 
@@ -676,7 +679,7 @@ git clone ssh://myuser@diskstation/volume1/homes/myuser/git-repos/myrepo.git
 
 **ACHTUNG:** Für den Support von https-Urls muß noch WebDAV auf der Synology-Diskstation installiert und konfiguriert werden - aber ssh-Verbindungen sind viel besser, da eine passwortfreie Authentifizierung möglich ist.
 
-### Passwortfreie ssh-Verbindung konfigurieren
+#### Passwortfreie ssh-Verbindung konfigurieren
 
 Voraussetzung ist die korrekte Konfiguration des ssh-Connects für den zu verwendenden User - siehe hier
 Nach der Konfiguration von ssh über die Synology-Adminoberfläche ist es nur dem User `root` möglich, eine ssh-Verbindung aufzubauen. Jeder andere User
@@ -710,17 +713,17 @@ abgeändert werden.
 
 ---
 
-# Performance
+## Performance
 
 Für die Performance wird GIT ja immer angepriesen und das war auch eine der Zielvorgaben des "Erfinders" Linus Torvalds.
 
 Ich machte allerdings zunächst mal ganz andere Erfahrungen. Mein 3 GB großes neu aufgesetztes Repository \(ca. 3000 Dateien - kaum Versionen\) war bei der Statusüberprüfung per `git status` sehr langsam. Zugegebenermaßen habe ich viele binäre Dateien drin und es hätte gut sein können, daß GIT darauf nicht optimiert ist und dementsprechend keine gute Wahl für meinen Use-Case ist. Deshalb ging ich dem Problem auf den Grund.
 
-## PROBLEM 1
+### PROBLEM 1
 
 Performance war stark schwanken: mal 1 Sekunde und dann wieder 3 Minuten \(im gleichen Setup\)
 
-## LÖSUNG 1
+### LÖSUNG 1
 
 Ich verwendete zwei unterschiedliche Systeme, um auf das gleiche Repository zuzugreifen \(von Windows per cygwin und von Suse-Linux über einen Shared Folder meiner VM\). Des Rätsels Lösung war der ständige Neuaufbau des Caches \(`.git/index`\) - erkennbar nur am neuen Zeitstempel der Datei, denn inhaltlich waren die Dateien identisch \(ich habe die Ergebnisse von `git ls-files --stage > index.txt` miteinander verglichen\). Ich vermute aufgrund unterschiedlicher Git-Clients werden die Verwaltungsinformationen neu aufgebaut. Ich habe Clients der Versionen 1.6.0.2 bzw. 1.7.3.3 verwendet, vielleicht lag es auch an den verschiedenen Plattformen \(cygwin vs. Suse\). Der Wert `core.repositoryformatversion` in `.git/config` war bei beiden Clients allerdings 0.Der Aufbau der Metadaten dauert eben seine Zeit, allerdings ist das normalerweise nur sehr selten erforderlich.
 
@@ -732,19 +735,19 @@ git ls-files --stage
 
 Es zeigt sich, daß hier alle Dateien mit Zugriffsrechten und Fingerprint aufgelistet sind.
 
-## PROBLEM 2
+### PROBLEM 2
 
 Manchmal wurde die Datei `.git/index` erneuert, obwohl immer wieder mit dem gleichen Client ein `git status` ausgeführt wurde
 
-## Lösung 2
+### Lösung 2
 
 Noch keine Lösung gefunden - ist aber nur unter meiner Suse-VirtualBox-VM passiert.
 
-## PROBLEM 3
+### PROBLEM 3
 
 Ich verwendete neben dem Windows XP-Verzeichnis und dem Shared Folder im Suse-Image noch einen USB-Stick Auf dem USB-Stick wurden immer alle Dateien als verändert angezeigt.
 
-## LÖSUNG 3
+### LÖSUNG 3
 
 Das lag an veränderten Berechtigungen \(bei einem `git diff file1.txt` gekam ich die Meldung `old mode 100755 new mode 100644`\). Und das stimmte auch ... ich hatte das Repository per `cp -a ...` von der Festplatte \(NTFS formatiert\) auf den USB-Stick \(FAT32\) kopiert und dabei ändert sich die Berechtigung von 755 auf 644. Durch Änderung der Repository-Konfiguration \(`.git/config`\) `core.filemode = false` konnte ich das Problem beseitigen.
 
@@ -765,14 +768,14 @@ Die SharedFolder \(oder evtl. sogar das gesamte VirtualBox-Filesystem\) ist sehr
 
 ---
 
-# Tips
+## Tips
 
 * vorm Mergen sollte man alle lokalen Änderungen commiten oder rollbacken
 * vorm Checkout eines Heads sollte man alle lokalen Änderungen commiten oder rollbacken
 
 ---
 
-# Fragen und Probleme
+## Fragen und Probleme
 
 **Frage 1:** Das clonen übers Netzwerk dauert sehr lange. Woran liegt das?
 
@@ -827,4 +830,3 @@ or MSysGitPath setting error ... der Nutzung
 ```
 
 **Antwort 6:** Angeblich braucht man MSysGit, wenn man an Git hacken will ... für die normale Nutzung scheinbar nicht. Hä? Ah, eine Weile später fällts mir auf ... ich habe nur TortoiseGit installiert, Git selbst hatte ich nicht installiert - das brauche ich aber auch.
-

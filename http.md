@@ -11,12 +11,8 @@ Das neuere Protokoll ist soll den Anforderungen heutiger Webapplikationen gerech
 ## Urlencode
 [siehe anderer Abschnitt](characterEncoding.md)
 
----
-
 # Inputdaten
 * https://stackoverflow.com/questions/14551194/how-are-parameters-sent-in-an-http-post-request
-
----
 
 # Authentication
 Es gibt verschiedenen Formen der Authentifizierung innerhalb des HTTP-Protokolls:
@@ -53,7 +49,45 @@ Bei der Verwendung von HTML-over-HTTP können die Credentials in eine HTML-Form 
       <input type="submit" value="Login">
     </form>
 
----
+# URL-rewriting, Redirecting und Forwarding
+Anwendungen sind manchmal gezwungen, den Request eines Clients (Browser) auf eine andere Location umzuleiten. Dazu kann 
+
+* serverseitiges Forwarding 
+* clientseitiges Redirect
+  * Forwarding funktioniert nur innerhalb einer Webanwendung - will man einen harten Kontextwechsel (andere Origin, andere Webanwendung), dann muß man ein Redirect machen, bei dem dann auch die üblichen HTTP-Mechanismen (Cookies, Servlet-Filter, ...) berücksichtigt werden
+
+verwendet werden. 
+
+Bei einem Redirect stecken in der Antwort auf die ursprüngliche Anfrage (z. B. http://myserver:4711/app1/page1) zwei Hinweise:
+
+* HTTP-Status-Code 30x - Seite verschoben
+* Location - neues Ziel (z. B. http://myserver:4711/app2/page2 oder http://yourserver:3006/app1/page1)
+
+Der Client macht bei diesem Szenario anschließend ein HTTP-Request an die angegebene Location, es ist also in jedem Fall ein erneuter Roundtrip erforderlich.
+
+Beim URL-Rewriting handelt es sich weniger um einen applikationsspezifischen Aspekt, sondern mehr um Infrastrutur-Use-Cases, bei denen häufig eine Art Backward-Kompatibilität erreicht werden soll (z. B. Applikationsname geändert, URL-Struktur verändert, weitere statische Request-Parameter erforderlich). Deshalb kümmern sich darum auch i. a. nicht die Applikationen, sondern Server-Komponenten (z. B. Application-Server, HTTP-Server wie Apache-Http oder NGINX).
+
+Größere Veränderungen an der Infrastruktur (anderer Domainname) werden aber i. a. nicht über URL-Rewriting/Redirects abgebildet, sondern über Internet-basierte Anpassungen (z. B. DNS-Einträge).
+
+# Verschlüsselung
+Verwendet man nur `http` als Protokoll, dann sind die Daten (Payload im HTTP-Request ... z. B. bei einem HTTP-POST-Reqquest) auf ihrem Weg durchs Internet für alle beteiligten Server (und damit auch für die Admins) im Klartext sichtbar.
+
+Für sensible oder gar geheime Daten verwendet man deshalb das `https` Protokoll, bei dem der Payload mit einem symmetrischen Schlüssel (ausgehandelt im Diffie-Hellman-Negotiation-Verfahren ... sicher obwohl über einen unsicheren Kanal ausgehandelt) verschlüsselt wird.
+
+# HTTP-Strict-Transport-Security (aka HSTS)
+* https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+
+Bei einer Webapplikation kann der User im Browser selbständig entscheiden, welches Protokoll verwendet wird. Der Server kann zwar auf unsicheres `http` mit einem Redirect antworten, doch ist es dann vielleicht schon zu spät, weil der initiale Request bereits sensible Daten unsicher verschickt hat.
+
+Die Strict-Transport-Security adressiert genau dieses Problem. Der Browser verhindert hierbei bereits, daß bei bestimmten Domains überhaupt ein unsicherer `http`-Request zur Anwendung kommen kann - bereits clientseitig.
+
+Für einige Domains (z. B. www.google.de) bringen die Browser bereits eine entsprechende Konfiguration mit, so daß eine Request http://www.google.de im Client umgebaut wird zu https://www.google.de.
+
+Für Domains, die in den Browsern nicht HSTS-Domains konfiguriert sind, kann das zur Laufzeit mit einem HTTP-Header in der HTTP-Response (z. B. `HTTPS: Strict-Transport-Security: max-age=31536000`) ergänzt werden. Dann ist maximal der erste Zugriff auf die Domain unsicher möglich - danach hat der Browser die Domain als HSTS-Domain eingetragen und biegt unsichere HTTP-Requests entsprechend um. 
+
+> ABER ACHTUNG: die `max-age` sorgt dafür, daß der Browser das auch tatsächlich solange durchzieht ... eine Umkonfiguration kann schwierig/aufwendig werden. Beim Testen also mit kleinen `max-age` beginnen.
+
+Voraussetzung für HSTS ist allerdings, daß das Server-Zertifikat auch vom Browser als trusted anerkannt wird.
 
 # Tunnel-over-HTTP
 HTTP bietet mit den Request-Body basierten Methoden (POST, PUT) die Möglichkeit beliebige Protokolle in den Nutzdaten zu verwenden. Da die meisten Unternehmens-Firewalls das HTTP-Protokoll als grundsätzlich gut bewerten (evtl. auf bestimmte Ports eingeschränkt), ist es attraktiv, HTTP nur als Transferprotokoll für ein beliebiges anderes Protokoll zu verwenden.
@@ -69,16 +103,12 @@ SOAP ist eines dieser Protokolle, die HTTP als Tunnel verwenden.
 ## Videostreaming
 [DASH](https://de.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP) (**D**ynamic **A**daptive **S**treaming over **H**TTP) verwendet HTTP, um Videos über HTTP zu streamen. Dazu wird die Datei in einzelne Segmente aufgeteilt, die jeweils einen kurzen Abschnitt des Original-Videos darstellen. 
 
---- 
-
 # HTML-over-HTTP
 Das ist einer der wichtigsten Anwendungsfälle. Ein Browser fragt eine Ressource per HTTP-GET ab und bekommt HTML zur Antwort, das er rendern muß.
 
 Eine HTML-Seite selbst referenziert allerdings weitere Ressourcen (CSS, JavaScript, Bilder, ...), die der Browser dann auch noch benötigt. Entweder fragt er sie explizit an (HTTP/1) oder bekommt sie vom Server bereits gepusht (HTTP/2).
 
 Caching spielt in diesem Zusammenhang eine wichtige Rolle.
-
----
 
 # Latenz
 Die Latenz spielt zwar für einen einzigen Request keine besonders große Rolle ... wenn aber für eine einzige HTML-Seite hunderte von Requests gefahren werden, kann es zum Problem werden ... 
@@ -114,16 +144,12 @@ Hierdurch soll die Signallaufzeit durch Erhöhung der  Geografische Nähe reduzi
 ### Option 1: URL-Rewriting
 Der Origin entscheidet aufgrund der geografischen Informationen (z. B. über IP-Adresse) im Request, welcher CDN-Knoten der beste ist und paßt die URLs der verlinkten Ressourcen entsprechend an, so daß diese vom nächstgelegenen Knoten nachgeladen werden.
 
----
-
 # Tooling
 ## UI
 ### Postman
 
 * https://github.com/postmanlabs/postman-app-support/wiki
 * [Chrome-Plugin](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
-
----
 
 # HTTP/2
 Webapplikationen sind im Jahre 2015 die Standardtechnologie für Software. Der alte HTTP 1.1 Standard wurde den Anforderungen insbes. hinsichtlich Performance nicht mehr gerecht. Die [Latenz](https://en.wikipedia.org/wiki/Latency_(engineering) ist hier ein wichtiger Faktor, der die Responsiveness einer Seite deutlich einschränken kann.  
@@ -144,8 +170,6 @@ Aufgrund der Vielzahl unterschiedlicher Informationstypen (CSS, JavaScript, Bild
 
 ## Server-Push für Ressourcen
 Ein Server kennt die Anwendung, die bereitgestellt wird, und kennt somit auch die Menge der Ressourcen, die der Client benötigen wird. Aus diesem Grund kann die Latenz (wie lange dauert es bis der Benutzer die Seite nutzen kann) reduziert werden, indem der der Server die notwendigen Ressourcen pusht.
-
----
 
 # Server-Push-Technologien
 Das typische Request-Response-Verfahren (Pull-Verfahren) bei HTTP wird den hetigen Anforderungen an Responsiveness nicht mehr gerecht. Statdessen benötigen wir ein Push-Verfahren wie es auch im Mode-View-Controller-Pattern vorgeschlagen wird. Der Server weiß wann sich neue Informationen für einen/mehrere Clients ergeben haben und liefert die Informationen gezielt weiter. Das erhöht sicherlich den serverseitigen Aufwand (auch den Entwicklungsaufwand), aber der Server wird auch andererseits in manchen Use-Cases (z. B. Chat-Webapplikation) entlastet, weil er keine nutzlosen Pull-Anfragen beantworten muß.
