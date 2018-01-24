@@ -76,6 +76,8 @@
   * [Instana](instana.md)
 * Build und Deployment
   * [Maven](maven.md)
+  * [Bamboo](bamboo.md)
+  * [Jenkins](jenkins.md)
   * [Shellprogrammierung](shellprogramming.md)
   * [Konfiguration Management](configurationManagement.md)
   * [Vagrant](vagrant.md)
@@ -113,7 +115,7 @@
   * [GitHub](github.md)
   * [GitHub Pages](githubPages.md)
   * [GitBook](gitbook.md)
-  * [Bitbucket](bitbucket.md)
+  * [Bitbucket/Stash](bitbucket.md)
 * Publishing
   * [Markdown](markdown.md)
   * [Static Site Generators](staticSiteGenerators.md)
