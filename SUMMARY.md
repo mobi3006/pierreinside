@@ -117,6 +117,7 @@
   * [GitBook](gitbook.md)
   * [Bitbucket/Stash](bitbucket.md)
 * Publishing
+  * [WordPress](wordpress.md)
   * [Markdown](markdown.md)
   * [Static Site Generators](staticSiteGenerators.md)
     * [Hugo](hugo.md)

@@ -1,4 +1,5 @@
 # Docker
+
 * https://dzone.com/refcardz/getting-started-with-docker-1
 * https://dzone.com/refcardz/java-containerization
 
@@ -22,7 +23,8 @@ Eine leichtgewichtige Lösung sind *Linux Containers* ... Docker ist eine Implem
 
 ---
 
-# Appetizer - what makes it sexy
+## Appetizer - what makes it sexy
+
 * https://codefresh.io/blog/using-docker-generate-ssl-certificates/
 
 Das schöne an Docker ist, daß ein Service (Applikation, Komponente) seine Dependencies bereits mitbringt, d. h. man ist nicht darauf angewiesen, daß auf dem auszuführenden System eine spezielle Java Version installiert ist ... weil der Service diese Java-Version einfach mitbringt. Das erhöht die Wahrscheinlichkeit, daß der Service tatsächlich auf dem Zielsystem in der Art und Weise läuft, in der er auch getestet wurde. Die Qualität für den Endanwender steigt.
@@ -39,7 +41,7 @@ Die Docker-Engine abstrahiert außerdem vom Betriebssystem. Es spielt keine Roll
 
 ---
 
-# Basics
+## Basics
 
 Docker basiert auf Linux Containers. Linux Containers sind - wie der Name vermuten lässt - im Kernel (= Linux) verankert. Es ermöglicht den Aufbau virtueller Systemlanschaften in einem Linux-System ... beispielsweise sogar in einem Linux-Virtualisierunsgimage. Weitere Linux-Systeme (= Container) laufen im Linux-Wirt werden über Prozesse abgebildet. Diese Linux Container basieren zwingend auf dem gleichen Kernel ... man kann also einen Container nicht mit einem anderen Kernel laufen lassen.
 
@@ -52,7 +54,7 @@ Docker stellt komfortable Tools bereit, um
 
 Docker ist aber nur eine von vielen Möglichkeiten, Linux Containers zu nutzen. Auf dieser Seite geht es aber ausschließlich um Docker.
 
-## Begrifflichkeiten
+### Begrifflichkeiten
 
 * **Linux Image**: Definition einer Umgebung in Form des Dockerfile (vergleichbar dem Vagrantfile bei Vagrant)
 * **Linux Container**: laufendes Linux Image
@@ -60,7 +62,8 @@ Docker ist aber nur eine von vielen Möglichkeiten, Linux Containers zu nutzen. 
     * Bereitstellung von Docker-Images (public, private)
     * automatische Image-Rebuilds wenn sich die im Image verbauten Quellen ändern (GitHub)
 
-## Docker Hub
+### Docker Hub
+
 * https://hub.docker.com/
 
 Dies ist ein DockerImage-Repository. Am besten legt man sich hier mal einen Account an.
@@ -69,8 +72,10 @@ DockerHub stellt auch Officzielle Images von Herstellern/Communities bereit (den
 
 ---
 
-# Grundsätzliches
-## Container-ID vs. Container-NAME
+## Grundsätzliches
+
+### Container-ID vs. Container-NAME
+
 Container haben eine ID und einen NAME ... in dieser Art:
 
 * CONTAINER ID: 7c1c034d0b4a
@@ -86,7 +91,8 @@ Dann bekommt der Container eine ID und diesen Namen "my-container". Gibt man kei
 
 >ACHTUNG: sollte man mit benannten Containern arbeiten, dann werden nachfolgende ``docker run --name my-container`` dazu führen, daß KEIN neuer Container erstellt wird, sondern der alte einfach gestart wird!!! Möchte man dann einen neuen Container erzeugen, dann muß der alte zunächst gelöscht werden (``docker rm my-container``).
 
-## Alle Container verfügbar
+### Alle Container verfügbar
+
 Docker speichert alle jemals erstellten Container ... d. h. auch auf die nicht mehr laufenden Container hat man noch Zugriff. Über
 
 ```
@@ -95,7 +101,8 @@ docker ps -a
 
 wird die Liste ALLER Container angezeigt (im Gegensatz dazu liefert ``docker ps`` nur die laufenden Container). 
 
-## Container-Zwischenstände
+### Container-Zwischenstände
+
 Docker Re-Builds sind so schnell, weil die Zwischenzustände archiviert werden. Ändert sich am Dockerfile gar nichts, dann muß auch gar nichts geändert werden. Durch den Aufbau des ``Dockerfiles`` kann man den Build einerseit langsamer machen und sogar falsch.
 
 Ein Beispiel:
@@ -113,26 +120,28 @@ Deshalb sollte man es so schreiben:
 RUN apt-get update && apt-get install -y perl
 ```
 
-## RUN vs. CMD vs. ENTRYPOINT
+### RUN vs. CMD vs. ENTRYPOINT
+
 > "The ENTRYPOINT specifies a command that will always be executed when the container starts. The CMD specifies arguments that will be fed to the ENTRYPOINT." ([von hier](http://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile))
 
-## Docker Host Filesystem
+### Docker Host Filesystem
+
 Die Docker-Container verwenden das Filesystem des Docker-Host. Unter ``/var/lib/docker`` des Docker-Hosts findet man allerlei Dateien.
 
 ---
 
-# Docker-Container Hooks
+## Docker-Container Hooks
+
 Häufig will man ein Image wiederverwenden, muß aber Anpassungen vornehmen, damit der Container auch in der gewünschten Weise funktioniert. Docker sieht hier verschiedene Ansätze für Hooks vor. Der Entwickler des Image entscheided darüber welche Hooks er anbietet ... in der Dokumentation sollte das eigentlich stehen ... zur Not muß man sich den Code (``Dockerfile``, ``ENTRYPOINT``, ``CMD``, ...) anschauen, um es rauszufinden.
 
-## Umgebungsvariablen
+### Umgebungsvariablen
 
-## Volumes
-
-## 
+### Volumes
 
 ---
 
-# Befehle
+## Befehle
+
 Eine Auflistung aller Befehle erhält man per ``docker`` - per ``docker run --help`` bekommt man alle Parameter erklärt.
 
 Hier jetzt nur ein paar Befehle:
@@ -166,17 +175,19 @@ Hier jetzt nur ein paar Befehle:
 
 ---
 
-# Docker und Vagrant
+## Docker und Vagrant
+
 Benutzt man Docker innerhalb eines Vagrant-Images, so gibt es ein paar Besonderheiten.
 
-## Port-Forwarding
+### Port-Forwarding
 
-Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen werden, damit man vom Host auf die Ports zugreifen kann. Leider unterstützt Vagrant kein on-the-fly Port-Forwarding (zumindest habe ich noch nichts gefunden). Deshalb sollte man in diesem Fall aus Docker-Images immer mit einem festen Port (-p 5000:8080) und nicht mit einem zufälligen (-P)  weiterleiten. So kann man in Vagrant ein paar Ports per Default forwarden und die Docker-Image-Ports dann bei Bedarf auf diese Ports weiterleiten.  
+Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen werden, damit man vom Host auf die Ports zugreifen kann. Leider unterstützt Vagrant kein on-the-fly Port-Forwarding (zumindest habe ich noch nichts gefunden). Deshalb sollte man in diesem Fall aus Docker-Images immer mit einem festen Port (-p 5000:8080) und nicht mit einem zufälligen (-P)  weiterleiten. So kann man in Vagrant ein paar Ports per Default forwarden und die Docker-Image-Ports dann bei Bedarf auf diese Ports weiterleiten.
 
---- 
+---
 
-# Docker Hub
-Docker HUb ist DAS Docker-Image-Repository. 
+## Docker Hub
+
+Docker Hub ist DAS Docker-Image-Repository. 
 
 Für GitHub User hat es den Charme, daß Builds über einen Hook automatisch gestartet werden, d. h. 
 
@@ -185,18 +196,19 @@ Für GitHub User hat es den Charme, daß Builds über einen Hook automatisch ges
 
 ---
 
-# Fazit
+## Fazit
+
 Ich bin ziemlich begeistert von Docker.
 
 Als größtes Problem, über das ich bisher gestolpert bin, empfand ich die Probleme mit den Permissions beim Zugriff auf Volumes. Das hat sowohl unter Windows als auch unter Linux nicht funktioniert ... vielleicht fehlt mir aber auch noch das notwendige Know-How - [siehe hier](docker_mysql.md).
 
 ---
 
-# FAQ
+## FAQ
 
 **Frage 1:** Ich nutze Docker auf einem Ubuntu 16.04 LTS VirtualBox-Image. Leider habe ich keinen Internetzugriff aus dem Container heraus - innerhalb des VirtualBox-Images funktioniert alles wunderbar:
 
-```
+```bash
 pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm ubuntu apt-get update
 0% [Connecting to archive.ubuntu.com]
 ```
@@ -204,7 +216,7 @@ pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --r
 **Antwort 1a:** 
 Ich hatte in meinem Virtual-Box-Linux-System den DNS von VirtualBox angegeben:
 
-```
+```bash
 pfh@workbench ~/% cat /etc/resolv.conf 
 nameserver 127.0.1.1
 ```
@@ -214,9 +226,10 @@ Nachdem ich den auf den Unternehmens-DNS umgestellt hatte, war alles ok.
 **Antwort 1b:**
 Hänge ich ``--net=host`` an den Befehl, dann funktioniert es auch mit dem VirtualBox-DNS (``nameserver 127.0.1.1``).:
 
-```
+```bash
 pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --rm --net=host ubuntu apt-get update
 ```
+
 **Antwort 1c:**
 Vielleicht kann man da auch was in ``/etc/default/docker`` konfigurieren ...
 

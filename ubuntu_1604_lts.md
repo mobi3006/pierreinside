@@ -25,14 +25,7 @@ war für mich nicht intuitiv bedienbar. Unter _Input sources to use_ hätte ich 
 
 ### System Upgrade
 
-Da das ISO-Artefakt schon ein paar Wochen alt ist, sind die installierten Pakete mittlerweile schon veraltet. Über 
-
-```bash
-sudo apt-get install
-sudo apt-get upgrade
-```
-
-wird es auf dem aktuellen Stand gebracht.
+Da das ISO-Artefakt schon ein paar Wochen alt ist, sind die installierten Pakete mittlerweile schon veraltet. Über `sudo apt-get install && sudo apt-get upgrade` wird es auf dem aktuellen Stand gebracht.
 
 ### Installation der Gasterweiterungen
 
@@ -160,7 +153,6 @@ export DERBY_HOME=/usr/lib/jvm/java/db
 
 Dadurch erreiche ich, daß ich ALLEIN durch Umsetzen des Links ``/usr/lib/jvm/java`` die Version umschalten kann. Das verpacke ich noch in ein schönes Script ... voila.
 
-
 ### Installation ansible
 
 Ich werde versuchen, die Installation und Konfiguration dieses Images zumindest teilweise scripten (das ist mein Einstieg in die Ansible-Welt) ... keine Ahnung, ob ich die Disziplin aufbringen werde, mein gesamtes Setup dauerhaft zu scripten.
@@ -190,6 +182,21 @@ Meine Erklärungen fallen hier recht kurz aus, weil der Code die Dokumentation i
   * dieser Installer kann auch Java 7 installieren ... nach der Installation läßt sich per ``sudo update-java-alternatives -s java-8-oracle`` bzw. ``sudo update-java-alternatives -s java-7-oracle`` zwischen den beiden Versionen umschalten.
 * Docker 
   * https://docs.docker.com/engine/installation/linux/ubuntulinux/
+
+---
+
+## Pflege des Systems
+
+### Upgrade Docker
+
+* https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
+
+Ich bin obiger Installationsanleitung gefolgt, um Docker von 17.05 auf 17.12 upzugraden. Hierzu deinstallierte ich zunächst die alte Version (`sudo apt-get remove docker docker-engine docker.io`) und installierte anschließend - nach Integration der richtigen Repositories - die neue. Ging problemlos.
+
+### Upgrade awesome
+
+* https://askubuntu.com/questions/879480/how-to-install-the-latest-awesome-window-manager
+
 
 ---
 
@@ -239,6 +246,12 @@ Will man den Swap-Space loswerden, dann kann man beispielsweise ``sudo swapoff -
 
 ---
 
-**Frage 5:** Ich bekomme bei `apt-get update` ein `The following signatures were invalid: KEYEXPIRED`.
+**Frage 5:** Ich bekomme bei `sudo apt-get update` ein `The following signatures were invalid: KEYEXPIRED`.
 
 **Antwort 5:** Ein PGP-Key für ein Package-Repository ist abgelaufen und muß erneuert werden. Zunächst per `apt-key list | grep expired` die entsprechenden Keys identifizieren (z. B. `pub   1024D/5072E1F5 2003-02-03 [expired: 2017-02-16]`) und dann per `apt-key adv --keyserver keys.gnupg.net --recv-keys 5072E1F5` oder - wenn eine Firewall den Port 11371 blockiert - `apt-key adv --keyserver hkp://keys.gnupg.net:80 --recv-keys 5072E1F5`.
+
+---
+
+**Frage 6:** Ich bekomme bei `sudo apt-get update` eine Fehlermeldung `could not open file /var/lib/apt/lists/partial/security.ubuntu.com_ubuntu_dists_xenial-security_main_dep11_icons-64x64.tar.gz - open (13: Permission denied)` - was kann ich tun?
+
+**Antwort 6:** Es wurden schon Pakete teilweise runtergeladen, die können gelöscht werden - siehe https://askubuntu.com/questions/917603/sudo-apt-get-update-failing-could-not-open-list-file-due-to-permission-deni

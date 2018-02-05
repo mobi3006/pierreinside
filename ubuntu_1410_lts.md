@@ -8,11 +8,11 @@ Auch wenn ich bisher als KDE-User unterwegs war entschied ich mich gegen KUbuntu
 
 ---
 
-# Basis-Installation und -Konfiguration
+## Basis-Installation und -Konfiguration
 
 Download von http://releases.ubuntu.com/14.04/, dann als ISO-Image (CD-ROM-Laufwerk) in ein neues VirtualBox-Image einbinden ... dann die Maschine starten.
 
-## Installation 1 - Serverinstallation - IN MEINEM FALL: FALSCH
+### Installation 1 - Serverinstallation - IN MEINEM FALL: FALSCH
 
 **ACHTUNG:** es gibt ISOs für Server und Desktop - die unterscheiden sich u. a. darin welche Softwarepakete standardmässig installiert werden. Ich hatte aus Versehen den Server bei der Installation eingebunden und landete beim Reboot in der Konsole ... Statt einer aufwendigen manuellen nachinstalliererei habe ich mich dann für eine Neuinstallation entschieden :-)
 
@@ -35,7 +35,7 @@ Mir kommt das ein bissl komisch vor und frage einen Ubuntu-Haudegen ... der mein
 
 **Tatsächlich habe ich das Server-Image in meine VirtualBox eingebunden ... ich Depp :-(**
 
-## Installation 2 - Desktop-Installation - RICHTIG :-)
+### Installation 2 - Desktop-Installation - RICHTIG :-)
 
 Bei der Desktop Variante wird zwischen i386 (32 Bit) und AMD/EM64T (64 Bit) unterschieden ... also: die richtige Auswahl treffen!!! Mich hatte AMD zunächst verwirrt, weil ich ein Intel Core i7 habe und mit EM64T nichts anfangen konnte. Aber http://de.wikipedia.org/wiki/EM64T zeigt schnell, daß mein i7 auf der EM64T-Architektur basiert ... muss das immer so kompliziert sein :-(
 
@@ -49,7 +49,7 @@ Wieder das gleiche ... diesmal schaue ich mir das Log-File ein bissl genauer an 
 
 Zu wenig Host Memory ... ich starte mein Windows mal durch ... das hilft.
 
-## System Upgrade
+### System Upgrade
 
 Da das ISO-Artefakt schon ein paar Wochen alt ist, sind die installierten Pakete mittlerweile schon veraltet. Über 
 
@@ -58,11 +58,11 @@ Da das ISO-Artefakt schon ein paar Wochen alt ist, sind die installierten Pakete
 
 wird es auf dem aktuellen Stand gebracht.
 
-## Installation der Gasterweiterungen
+### Installation der Gasterweiterungen
 
 Nach dem erfolgreichen Reboot (diesmal in die grafische Oberfläche) ist die Auflösung so klein, daß ich kaum was erkennen kann. Ich binde die VirtuialBox-Gasterweiterungen über das VirtualBox Menü ein und automatisch wird die CD eingebunden und das Skript zum Installieren der Gasterweiterungen startet. Nach der Installation werde ich noch auf die unvollständige Sprachunterstützung hingewiesen. Ich hätte das Update-Skript direkt per Maus starten können, doch leider ist meine Internetverbindung (Authenifizierung am Proxy) noch nicht fertig eingerichtet. Nach einem Reboot habe ich auch endlich eine ordentliche Auflösung :-)
 
-## root User
+### root User
 
 Hmmm, daß ich das Root-Passwort nicht kenne und nur per sudo bash auf eine Root-Shell komme ... irgendwie gefällt mir das nicht. Ist aber Ubuntu-typisch ... ich kann mich noch dunkel erinnern ...
 
@@ -73,17 +73,17 @@ Ich ändere das per
 
 ab und vergebe ein neues Root-Passwort.
 
-## Netzwerkverbindung
+### Netzwerkverbindung
 
 Auch Ubuntu verfügt über etwas YAST-ähnliches ... so ist der Netzwerkproxy schnell konfiguriert :-) Die Credentials für die Authentifizierung am Proxy kann ich hier nicht hinterlegen ... später werde ich wieder Cntlm verwenden.
 
-## Sprachunterstützung
+### Sprachunterstützung
 
 Die Installation der Sprachunterstützung war ja nach der Installation der VirtualBox Gasterweiterungen gescheitert. Jetzt kann ich das - auch wieder komfortabel über eine grafische Oberfläche - für Deutsch für verschiedene Softwarepakete (u. a. Gnome, LibreOffice, Firefox) nachholen :-)
 
 Die Internetverbindung scheint auch ohne Proxy-Authentifizierung zu klappen (vermutlich stehen die Server auf der Whitelist).
 
-## Gnome-Oberfläche schnarchlahm
+### Gnome-Oberfläche schnarchlahm
 
 ... schnell ist der Schuldige ausgemacht: der compiz-Prozess verbrät eine ganze CPU zu 70-100% und da ich gerade nicht am Stromnetz hänge ist das noch auffälliger.
 
@@ -93,21 +93,18 @@ Die 3D-Beschleunigung des Images (über die VirtualBox-GUI) muß eingeschaltet w
 
 ---
 
-# Software Installation
+## Software Installation
 
-## Tools zur Paketinstallation
+### Tools zur Paketinstallation
+
 * ``apt-get install``: diese Konsolen-Variante ist natürlich sehr effizient, doch muss man schon sehr genau wissen wie das Paket heisst, das man installieren möchte
 * Software-Center: dieses grafische Tool lässt sich per software-center von der Konsole starten (wenn man nicht die Unity-Oberfläche verwendet, in die es integriert ist)
 
-## awesome Fenstermanager
+### awesome Fenstermanager
 
-Einfach per
+Einfach per `sudo apt-get install awesome awesome-extra` installiert, ausgeloggt vom Gnome Desktop, awesome als Fenstermanager beim Einloggen auswählen und Freude am schlanken awesome haben :-)
 
-    apt-get install awesome awesome-extra
-
-installiert, ausgeloggt vom Gnome Desktop, awesome als Fenstermanager beim Einloggen auswählen und Freude am schlanken awesome haben :-)
-
-## Oracle-Java-Installation
+### Oracle-Java-Installation
 
 * http://www.linux-community.de/Archiv/Tipp-der-Woche/Oracle-Java-unter-Ubuntu-Debian-und-LinuxMint-installieren
 
@@ -138,7 +135,7 @@ dann habe ich genau das erreicht, was auch meine manuellen Lösung hatte ... ich
 
 Ich machs so wie bisher ... vielleicht erkenne ich irgendwann die Vorteile.
 
-## Eclipse IDE Spring Source Tool Suite (STS)
+### Eclipse IDE Spring Source Tool Suite (STS)
 
 Ich hatte immer mal wieder mitbekommen, daß es Probleme mit Ubuntu und Eclipse gab. Vor der weiteren Konfiguration meiner Entwicklungsumgebung wollte ich das mal prüfen.
 
@@ -164,7 +161,7 @@ Ich installiere auch mal die STS basierend auf Eclipse 3.8.2. Es startet auch ni
 
 schon irgendwie frustrierend ...
 
-## PgUp und PgDn fürs Autovervollständigen über die History
+### PgUp und PgDn fürs Autovervollständigen über die History
 
 Dieses sehr praktische Feature war out-of-the-box nicht vorhanden. Aber wozu gibts denn Google (http://superuser.com/questions/600430/linux-page-up-key-to-browse-through-history) ...einfach
 
@@ -173,7 +170,7 @@ Dieses sehr praktische Feature war out-of-the-box nicht vorhanden. Aber wozu gib
 
 in die ``~/.inputrc`` packen.
 
-## VPN
+### VPN
 
 Ich verwende eine Bridged-Netzwerkverbindung. Die Netzwerkverbindung muss stehen, damit ich darauf aufsetzend den VPN-Tunnel starten kann.
 
@@ -191,7 +188,7 @@ Nach Initiierung der VPN-Verbidnung muss man die Credentials eingeben (in meinem
 
 ACHTUNG: verwendet man eine Two-Factor-Authentifizierung (z. B. Passwort + YubiKey), dann sollte man in den Einstellungen *Credentials - Always Ask* verwenden, sonst wird der 
 
-### Historie: seit Dezember 2014 geht es ohne Probleme
+#### Historie: seit Dezember 2014 geht es ohne Probleme
 
 Unter einem frühen Ubuntu 14.04 schlug der Import meiner OpenVPN-Einstellungen kommentarlos mit einem Segmentation-Fault fehl ... Herr Google liefert einen Bug in Ubuntu 14.04:
 
@@ -199,7 +196,7 @@ Unter einem frühen Ubuntu 14.04 schlug der Import meiner OpenVPN-Einstellungen 
 
 Ein Workaround (http://askubuntu.com/questions/450493/openvpn-cant-import-configurations-on-new-14-04-installation) und auch die manuelle Konfiguration schlagen leider fehl.
 
-## LVM-Manager 
+### LVM-Manager
 
 Hier fehlte mir ein grafisches Tool. Hier (http://wiki.ubuntuusers.de/Logical_Volume_Manager) fand ich:
 
@@ -212,7 +209,7 @@ Ich habe schon ein paar mal mein VirtualBox-Image vergrössern müssen (mit Virt
 * unter ubuntu-vg (VolumeGroup) ein neues Logical Volume anlegen (Create logical Volume)
 * die neue Partition (z. B. ``/dev/sda3``) unter *Storage Devices* anklicken, rechte Maustaste und *Extend Volume Group ubuntu-vg*.
 
-## Lombok-Eclipse-Extension
+### Lombok-Eclipse-Extension
 
 Die normales Lombok-Implementierung (leider verwenden wir das) führte zu sehr hohem Speicherverbrauch und hoher CPU-Auslastung ... im Prinzip war Eclipse so nicht nutzbar, es gab immer wieder folgende Fehlermeldungen (ohne Lombok keine Probleme) .. und das mit ``-Xmx1500m``:
 
@@ -223,13 +220,13 @@ Ich habe rausgefunden, daß das ein gängiges Problem ist und es von Lombok eine
 
 Dennoch kommt mein Loboked-Eclipse dann nicht mehr mit 20-30 Projekten zurecht. Es wird deutlich flüssiger, wenn ich mich auf einige wenige beschänke (aber insgesamt wird mein Eclipse dadurch deutlich schneller - auch mein SVN-Plugin ist schneller). 
 
-## Gnome-Keyring
+### Gnome-Keyring
 
 Dieser Passwort-Speicher ist automatisch dabei und auch eingeschaltet. Er speichert alle Passwörter, die man nach der Anmeldung am System noch so braucht (z. B. svn-Passwort).
 
 Der Keyring ist auch mit einem Passwort geschützt, das allerdings nicht automatisch mit dem Linux-User-Login-Passwort synchronisiert ist. Ändert man das Linux-Passwort des Users, so macht es evtl. Sinn, das Keyring-Passwort auch gleich zu ändern. Hierzu startet man ``seahorse`` von der Kommandozeile und drückt auf *Passwords - Login* die rechte Maustaste und dann *Change Password*.
 
-## Postfix Mailserver
+### Postfix Mailserver
 
 * http://wiki.ubuntuusers.de/Postfix
 
@@ -266,7 +263,7 @@ Die Mails befinden sich dann in der Datei ``/home/i000921/mbox`` ... und können
 
 Das ging wirklich sehr einfach :-)
 
-## Apache 2.x
+### Apache 2.x
 
 Gute Links:
 
@@ -289,7 +286,7 @@ Mein Vorgehen:
 
 ---
 
-# Fazit
+## Fazit
 
 Die Installation und Konfiguration war nahezu problemlos und hat 4-6 Stunden gedauert (inkl. vollständiger Entwicklungsumgebung). Auf den ersten Blick bin ich mit Ubuntu sehr zurfieden ... zumal es ja doch einige Konfigurationswizards mitbringt und man nicht immer nur in Konfigurationsfiles rumhantieren muss (als Linuxer ist aber auch das kein Problem ... solange die Daten nicht redundant über das System verstreut sind).
 
