@@ -34,6 +34,10 @@ Hier ist auch von Problemen die Rede, die angeblich gelöst sind:
 
 * https://github.com/awesomeWM/awesome/issues/255
 
+Mit dem Wechsel auf die 4.x Version von awesome ([siehe hier](ubuntu_1604_lts.md)) konnte ich das Problem beseitigen.
+
+Ich habe nur noch gelegentlich das Problem, daß Popup-Fenster während des Tippens den Fokus verlieren und ich dann in den Editor schreibe. Das ist unangenehm, passiert aber nicht ständdig - mal sehen ob ich den Trigger noch finde.
+
 ### Problem 4: awesome ... geöffnete Fenster
 
 Bei manchen Aktionen (Diff auf Files) wird ein weiteres Fenster geöffnet. Unter awesome hat man hier keine Fensterelemente zum Schließen. Mit Ctrl-F4 bekommt man es zu.
@@ -55,3 +59,15 @@ Als jahrelanger Eclipse-Nutzer (davor viele andere IDEs wie NetBeans, VisualCafe
 * Projekt, z. B. ein Git Repository
 * Module - ähnlich zu einem Eclipse-Projekt
 * Einstellungen werden in einer projektspezifischen Verzeichnis `.idea` gespeichert (ähnlich wie in Eclipse `.settings`)
+
+## Fazit
+
+Ich bin recht schnell mit der neuen IDE zurechtgekommen ... mein fehlendes Wissen über die Shortcuts bremsen mich derzeit noch aus. Trotz eingestellter Eclipse-Keymap sind nur die rudimentären Shortcuts gleich ... bei Refactorings hört es dann aber auf (vermutlich ist das Mapping der Funktionalität nicht so gut).
+
+Die Warterei auf die IDE (durch lange Build-Zyklen) hat scheinbar ein Ende und ich komme nun mehr zum Arbeiten.
+
+Folgende Dinge finde ich besonders hilfreich:
+
+* Debugging-Informationen ... bei Eclipse mußte ich immer in den Views navigieren, um die Wertebelegung von Variablen zu sehen oder ein *Evaluate Expression* ausführen. Bei IDEA werden die Werte über den Editor gelegt:
+
+ ![Debug Informationen](images/idea_debugInformations.png)

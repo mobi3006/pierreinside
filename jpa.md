@@ -1,10 +1,12 @@
 # JPA
+
 * Refcardz: https://dzone.com/refcardz/getting-started-with-jpa
 * [Flush and Clear Anti-Patterns](http://www.developerfusion.com/article/84945/flush-and-clear-or-mapping-antipatterns/)
 
-# Konzepte
+## Konzepte
 
-## Object-Relational-Mapping
+### Object-Relational-Mapping
+
 * Schema-Definition für JPA 2.1: http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd
 
 Das Mapping von Objekten auf ein relationales Datenbankschema (und in die Gegenrichtung) benötigt das sog. OR-Mapping. Das kann
@@ -16,18 +18,20 @@ erfolgen.
 
 Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben.
 
-### Provider-spezifische Erweiterungen
+#### Provider-spezifische Erweiterungen
+
 * ORM-Mapping (von EclipseLink) http://www.eclipse.org/eclipselink/xsds/eclipselink_orm_2_4.xsd
 * http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/schema.htm
 
 Einige JPA-Implementierungen bieten providerspezifische Erweiterungen des OR-Mappings an. Beispielsweise EclipseLink (selbst die Referenzimplementierung bietet solche Erweiterungen!!!).
 
-### AttributeConverter
+#### AttributeConverter
+
 * https://jaxenter.de/konvertierungen-jpa-attribute-converters-17197
 
 In JPA 2.1 wurde die sog. [`AttributeConverter`](http://grepcode.com/file/repo1.maven.org/maven2/org.eclipse.persistence/javax.persistence/2.1.0/javax/persistence/AttributeConverter.java#AttributeConverter) eingeführt.
 
-## PersistenceContext (Unit-of-Work)
+### PersistenceContext (Unit-of-Work)
 
 Der PersistenceContext verwaltet eine Menge von Entities (Unit of Work). Hier steckt die eigentliche Logik drin - nicht im Entity Manager. Wird eine Transaktion erzeugt, so wird ein neuer Persistence Context erzeugt und damit verbinden - wird die Transaction committed, dann wird der Persistence Context persistiert (= flush). Flushen ist in manchen Fällen (z. B. SQL-Queries, automatisierte Erzeugung von IDs, Logik in EntityCallbacks) aber zwischendurch notwendig ... bei `FlushModeType.AUTO` entscheidet der EntityManager wann geflushed werden sollte (bei `FlushModeType.COMMIT` wird immer erst beim Committen der Transaktion geflushed).
 
@@ -35,7 +39,8 @@ Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (L1 - h
 
 > ACHTUNG: Bei JTA Transaction Management kann EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
 
-## Shared Cache - optional aber Default
+### Shared Cache - optional aber Default
+
 * https://abhirockzz.wordpress.com/2016/05/22/notes-on-jpa-l2-caching/
 * http://www.developer.com/java/using-second-level-caching-in-a-jpa-application.html
 
@@ -43,7 +48,8 @@ Neben dem PersistenceContext (= First-Level-Cache - gebunden an EINE Transaktion
 
 Da dieser Cache allerdings mehrere Transaktionen bedient kann es bei einem zwischenzeitlichen `em.flush(); em.clear()` zu der Situation kommen, daß der transaktionale Cache (der PErsistenceContext des EntityManagers) die Instanz nicht mehr enthält. Der 2nd-Level-Cache enthält aber KEINE Informationen aus der aktuellen - noch nicht committeten Transaktion. Er liefert dann veraltete Informationen. 
 
-### EclipseLink - Deaktivierung
+#### EclipseLink - Deaktivierung
+
 * https://wiki.eclipse.org/EclipseLink/FAQ/How_to_disable_the_shared_cache%3F
 
 Bei EclipseLink lässt sich der SharedCache folgendermaßen abschalten
@@ -51,17 +57,20 @@ Bei EclipseLink lässt sich der SharedCache folgendermaßen abschalten
 * Entity-spezifisch: `@Cacheable(false)`
 * applikationsspezifisch: `<shared-cache-mode>NONE</shared-cache-mode>`
 
-## EntityManager
+### EntityManager
+
 Der EntityManager (mit der `Hibernate Session` gleichzusetzen) ist die Schnittstelle der Anwendung zur Datenbank. Hierüber werden Queries gebaut und abgesetzt. Alle gelesenen Entities landen im PersistenceContext und stehen von da an unter EntityManager Kontrolle, d. h. alle Änderungen daran werden bei Bedarf auf die Datenbank geflushed und evtl. später auch committed.
 
 Alle über den EntityManager geladenen Entitäten sind automatisch im Persistenzkontext DIESER EntityManager-Instanz (aka managed by EntityManager aka attached to EntityManager - im Gegensatz zu detached Entitäten), d. h. Änderungen an diesen Objekten haben potentiell (sofern die dahinterliegende Transaktion auch committet wird) Einfluß auf die zu speichernden Daten. Der EntityManager ist die In-Memory Repräsentation der Änderungen (Change-Set), die der Client auf der Datenbank durchführen will. Der EntityManager schreibt die Änderungen aber nicht sofort auf die Datenbank, sondern erst wenn er es muß (z. B. beim Commit), wenn er explizit gefordert wird (`em.flush()`) oder wenn er es für nötig hält (z. B. bei Datenbank-Queries ... siehe Abschnitt *"Warum flusht der EntityManager bei einer Query?"*). Bei lesenden Zugriffen dient der Entity Manager als Cache - wird beispielsweise eine Query abgesetzt, die Entities liefern soll, dann liefert die Datenbank-Query zunächst mal die IDs der Entitäten ... je nachdem ob die Entitäten bereits im Persistenzkontext liegen oder nicht wird die Entität von der Datenbank gelesen oder aus dem Persistenzkontext. 
 
 Das macht diesen Ansatz recht attraktiv, weil der Entwickler eines Services - sobald die Transaktion gestartet ist und der EntityManager aufgebaut ist - transparent in seiner objektorientierten Welt arbeiten kann. Die sog. Unit-of-Work (= Change-Set) wird automatisch gepflegt und beim Commit der Transaktion tatsächlich persistiert (evtl. auch schon früher ... durch ein Flush).
 
-### EntityManager - nicht Thread-Safe
+#### EntityManager - nicht Thread-Safe
+
 EntityManagers sind nicht Thread-safe!!!
 
-### 1:1 Beziehung - EntityManager und Transaktion
+#### 1:1 Beziehung - EntityManager und Transaktion
+
 Der EntityManager verwaltet Transaktionen (`EntityTransaction tx = em.getTransaction().begin()`,  `tx.commit()`, `tx.rollback()`) und ist somit eng von Natur aus schon eine 1:1 oder eine 1:n Verknüfpung.
 
 Mit einem `em.clear()` könnte man theoretisch eine `EntityManager`-Instanz für verschiedene Transaktionen wiederverwenden (mit großem Aufwand vielleicht sogar bei parallel laufenden Transaktionen). Besser - weil so designed - ist 
@@ -75,23 +84,27 @@ ACHTUNG: auch lesende Zugriffe sollten in einer Transaktion laufen, da sie für 
 
 * https://stackoverflow.com/questions/26327274/do-you-need-a-database-transaction-for-reading-data
 
-### em.persist(entity) vs. em.merge(entity)
+#### em.persist(entity) vs. em.merge(entity)
+
 * [StackOverflow](https://stackoverflow.com/questions/1069992/jpa-entitymanager-why-use-persist-over-merge)
 
 `em.persist(person)` übernimmt das übergebene Person-Objekt in den Persistenz-Kontext. Nachfolgende Änderungen daran (`person.setName("obiwan")`) wandern direkt in den Persistenz-Kontext und beeinflussen die später in die Datenbank geschriebene Zeile.
 
 `em.merge(person)` hingegen sorgt dafür, daß eine Kopie von `person` angelegt wird und DIESE Kopie in den Persistenzkontext übernommen wird. Nachfolgende Änderungen an `person` haben KEINEN Einfluß auf die später in die Datenbank geschriebene Zeile.
 
-## em.remove(entity)
+### em.remove(entity)
+
 Diese Operation kennzeichnet das `entity` als zu löschendes.
 
-## em.clear()
+### em.clear()
+
 * [Flush and Clear Anti-Patterns](http://www.developerfusion.com/article/84945/flush-and-clear-or-mapping-antipatterns/)
 
 Bei dieser Aktion werden ALLE Entities aus dem Persistenz-Kontext detached. Für das Programmiermodell ist das eine sehr gefährliche Aktion, weil der Nutzer einer detachten Entity (vielleicht an einer ganz anderen Stelle im Aufrufstack) davon nichts mitbekommt. Somit 
 
 * werden nachfolgende Änderungen - in der Annahme, daß die Entity attached ist - nicht mehr persistiert
-```
+
+```java
 Person person = em.find(Person.class, 1L);
 callMethodThatClearsTheEntityManager(em);
 person.setName("Pierre");                 // <== wird nicht persistiert
@@ -99,7 +112,7 @@ person.setName("Pierre");                 // <== wird nicht persistiert
 
 * führen lesende Zugriffe auf noch nicht geladenen Lazy-Properties zu einer Exception
 
-```
+```java
 Person person = em.find(Person.class, 1L);
 callMethodThatClearsTheEntityManager(em);
 person.getBankAccounts();                 // <== EXCEPTION
@@ -113,12 +126,14 @@ EXTREM schwierig wird das Programmiermodell, wenn man den JPA-Shared-Cache (L2-C
 
 Aus Ressourcengründen macht es gelegentlich Sinn `em.clear()` aufzurufen, um die geladenen - und nicht mehr benötigten Entities - vom Heap zu werfen. Dann macht es meistens Sinn, vorher ein `em.flush()` aufzurufen, um die bereits gemachten Änderungen nicht zu verlieren. 
 
-EMPFEHLUNG: 
+EMPFEHLUNG:
+
 * schärfe das Problemverständnis
 * versuche KLARE Regeln aufzustellen, in welchem Layer zu welchem Zweck `em.clear()` wie aufzurufen ist
 * muß es ein `em.clear()` sein oder genügt vielleicht ein weniger invasiver Eingriff (z. B. gezieltes detachen bestimmter Entities in einer Methode, die das Laden diese Entities ausgelöst hat)
 
-### em.flush()
+#### em.flush()
+
 Beim Flush werden Änderungen an Entitäten in die Datenbank geschrieben - hier kommen dann auch erst Datenbankcontraints ins Spiel. Ob die Änderungen nur für die laufende Transaktion oder auch parallel Transaktionen sichtbar sind, hängt vom Isolation-Level ab. Bei einem Isolationlevel "READ UNCOMMITED" sind die Änderungen beispielsweise schon für parallele Transaktionen sichtbar ... es könnte aber sein, daß diese dann eine temporäre Welt sehen, die SO nie existieren wird, weil am Ende ein Rollback gemacht wird.
 
 Wenn die Transaktion committed wird, erfolgt spätestens (automatisch) ein `flush`. Man kann konfigurieren, wann der EntityManager einen Flush auslösen soll:
@@ -126,7 +141,8 @@ Wenn die Transaktion committed wird, erfolgt spätestens (automatisch) ein `flus
 * FlushModeType.COMMIT: Flush-only-on-commit
 * FlushModeType.AUTO: Flush-decision-by-EntityManager
 
-#### Warum flusht der EntityManager bei einer Query (`FlushModeType.AUTO`)?
+##### Warum flusht der EntityManager bei einer Query (`FlushModeType.AUTO`)?
+
 > "JPA AUTO causes a flush to the database before a query is executed. **Simple operations like find don't require a flush since the library can handle the search, however queries would be much more complicated, and so if AUTO is set, it will flush it first.** If the mode is set to COMMIT, it will only flush the changes to the database upon a call to commit or flush. If COMMIT is set, and a query is run, it will not return results that have not been flushed." (https://stackoverflow.com/questions/24759664/what-is-the-difference-between-auto-commit-flushmodes)
 
 Datenbankabfragen gehen auch beim Einsatz von JPA normalerweise über die Datenbank. Die Datenbank liefert aber zunächst mal nur IDs zurück und der EntityManager schaut dann in seinem PersistenceContext nach, ob diese Instanz bereits als Java-Objekt bereitgestellt wurde oder nicht.
@@ -135,10 +151,11 @@ Datenbankabfragen gehen auch beim Einsatz von JPA normalerweise über die Datenb
   * in dem Fall muß ganau die gleiche Instanz des Objekts an den Aufrufer zurückgegeben werden (es erfolgt kein erneutes Lesen/Abgleichen der Daten!!!), weil eine Instanz einer Entity nur ein einziges mal in einem PersistenceContext existieren darf (das gilt nur dür attachte Entities - nicht für detached Entities).
 * Fall 2: Datenbank-Zeile (= Entity) wird zum ersten Mal über eine Query bereitgestellt
   * in diesem Fall wird die Zeile in ein Objekt umgewandelt (evtl. nicht vollständig - Lazy-Loading), in den PersistenceContext eingehangen und an den Aufrufer zurückgeliefert.
-  
+
 Da die Datenbankabfragen über die Datenbank abgebildet werden (dafür ist die relationale Sichweise optimiert), müssen neu angelegte Entities auch in der Datenbank (evtl. noch nicht für andere - Isolation-Level!!!) sichtbar sein. Deshalb muß bei einer Query evtl. vorab ein flush gemacht werden, das vom EntityManager automatisch getriggert wird.
-  
-#### Sollte man explizit im Anwendungscode flushen?
+
+##### Sollte man explizit im Anwendungscode flushen?
+
 > Ich lasse hier Isolation-Level READ-UNCOMMITTED außer Acht ... bei diesem Ansatz kann es vielleicht mehr Sinn machen, explizit zu flushen (ich habe damit keine Erfahrungen)
 
 Normalerweise sollte man dem EntityManager überlassen ... ABER ...
@@ -149,31 +166,60 @@ Bei `FlushModeType.AUTO` wird vor jeder Query ein Flush getriggert. Sollte das m
 
 Tut man es hingegen im Produktivcode, dann sollte man das mit Bedacht machen. Letztlich überstimmt man - sofern `FlushModeType.AUTO` verwendet wird - die Entscheidung des EntityManagers, der auf Optimierung getrimmt ist ... vielleicht resultiert daraus eine schlechtere Performance.
 
-### em.close()
+#### em.close()
+
 Ein nicht geschlossener EntityManager verbraucht Resssourcen ... VERMEIDEN!!! 
 
 Ausserdem könnten darin noch Transaktionen laufen, die nicht per Rollback/Commit beendet wurden. In diesem Fall könnte es sein, daß der EntityManager eine Datenbank-Connection aus dem limitierten (!!!) Connection-Pool verbrät (jede Connection verbraucht auf Datenbankseite relativ viele Ressourcen - deshalb ist die Connection-Pool-Größe passend zu wählen), die anderen 
 
 > "In EclipseLink by default a connection is only held for the duration of an active (dirty) transaction. i.e. from the first modification or lock, until the commit or rollback. For non-transactional queries a connection is acquired on demand and returned after the query execution. This allows for maximal usage of connection pooling. So, normally em.close() does nothing. You can configure this using the "eclipselink.jdbc.exclusive-connection.mode" persistence unit property. "Always" will hold a connection for the life of the EntityManager." (https://stackoverflow.com/questions/13707183/when-is-a-connection-returned-to-the-connection-pool-in-a-jpa-application)
 
-# SQL Queries
+## SQL Queries
+
 * [Heise Artikel von Thorben Janssen](https://www.heise.de/developer/artikel/Datenbankabfragen-mit-JPA-mehr-als-nur-em-find-und-JPQL-3787881.html)
 
-# Konzeptuelle Probleme
+Der EntityManager ist DIE Schnittstelle zur Datenbank. Er bietet somit auch den Einstiegspunkt für Queries.
 
-## Lazy-Loading
+### Rudimentäre Abfragen: EntityManager
+
+Der EntityManager selbst bietet einfache Finder-Methoden (`em.find(4711)`).
+
+### Java Persistence Query Language - JPQL
+
+Für komplexere Abfragen bietet der EntityManager den Einstiegspunkt zur JPQL (`em.createQuery()`), die allerdings leider auch nicht den vollständigen SQL-Sprachumfang abbildet.
+
+### Criteria API
+
+Für komplexere Abfragen bietet der EntityManager den Einstiegspunkt (`em.getCriteriaBuilder()`) zu dieser API, die allerdings leider auch nicht den vollständigen SQL-Sprachumfang abbildet.
+
+### Native SQL Abfragen
+
+Was sich mit den anderen Ansätzen nicht umsetzen läßt erfordert eine native SQL-Query, zu der auch wieder der EntityManager den Einstiegspunkt (`em.createNativeQuery()` bzw. `em.createNamedQuery()`) liefert.
+
+Da diese Abfragen am Persistenz-Provider (der die Modellierung der Entities kennt) vorbeigeschleust werden, müssen hier beispielsweise der Attribute explizit benannt werden, über die der Join beispielsweise geht (`JOIN address a ON person.addressId = a.id`). Das ist hinsichtlich Refactorings natürlich nicht so angenehm.
+
+### StoredProcedure Query
+
+Verwendet man in der Datenbank als StoredProcedure hinterlegte Abfragen, so bietet der EntityManager den passenden Einstiegspunkt (`em.createStoredProcedureQuery()`).
+
+## Konzeptuelle Probleme
+
+### Lazy-Loading
+
 Sind Relationen (statisch) lazy modelliert, dann werden sie erst beim tatssächlichen Zugriff über die Anwendnung aufgelöst. Das sorgt dafür, daß eine weitere Query pro Relation läuft - bei einer Vielzahl von verknüpften und zugegriffenen Entities sorgt das für viele Queries ... ein eager-Loading wäre mit performanteren Queries möglich gewesen.
 
 Leider hat man in einer Anwendung evtl. mehere Useage-Szenarien und müßte/wollte das im Einzelfall entscheiden - geht aber nicht. 
 
-## Detached Entities
+### Detached Entities
+
 ... sehen nicht anders aus als attached entities. Das kompliziert das Programmiermodell, weil man im Applikationscode evtl. von einem attached Entity ausgeht, das aber zur Laufzeit detached ist. Das hat u. a. folgende Auswirkungen
 
 * Änderungen werden nicht mehr persistiert
 * Entity-Instanzen werden nicht mehr geshared
 * navigation auf lazy-loaded entities führt zu einer Exception
 
-# Bewertung
+## Bewertung
+
 JPA ist ganz schön zu modellieren und versteckt das dahinterliegende relationale Modell. Für die Entwicklung der OO-Anwendungen ist das ganz nett ... zudem hat man ganz brauchbare Zusatzfeatures
 
 * lazy-Loading
