@@ -63,7 +63,7 @@
       * [Docker MySQL](docker_mysql.md)
   * [Glassfish](glassfish.md)
   * [YAML](yaml.md)
-  * [AngularJS](angularjs.md)
+  * [Angular](angular.md)
   * [Camel](camel.md)
   * [Zeichenkodierung](characterEncoding.md)
 * Testen

@@ -12,11 +12,13 @@
 Das Mapping von Objekten auf ein relationales Datenbankschema (und in die Gegenrichtung) benötigt das sog. OR-Mapping. Das kann
 
 * entweder: über eine Datei (z. B. `orm.xml`)
-* oder: über Annotationen in den JPA-Entities 
+* oder: über Annotationen in den JPA-Entities
 
-erfolgen. 
+erfolgen.
 
-Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben.
+Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben und wird in `orm.xml` verwendet ... die Annotationen implementieren genau diese Sprache.
+
+Die JPA-Spezifikation definiert gemeinsame Features, die alle JPA-konformen implementieren müssen. Zudem haben die einzelnen JPA-Provider (z. B. EclipseLink, Hibernate) Erweiterungen definiert. Natürlich wäre es erstrebenswert JPA-konform zu bleiben, aber aus meiner Sicht ist es in den meisten Fällen in Ordnung auch providerspezifische Erweiterungen zu nutzen - i. d. R. wird man den JPA-Provider nicht austauschen. Sollte das dennoch mal erfolgen, dann wird man beim anderen Provider ähnliche Lösungen finden und muss den Code migrieren oder überlegt sich DANN eine providerunabhängige Lösung.
 
 #### Provider-spezifische Erweiterungen
 
@@ -25,37 +27,62 @@ Die Spezifikation der "Sprache" ist in XML-Schema-Dateien angegeben.
 
 Einige JPA-Implementierungen bieten providerspezifische Erweiterungen des OR-Mappings an. Beispielsweise EclipseLink (selbst die Referenzimplementierung bietet solche Erweiterungen!!!).
 
+Hierzu gehören beispielsweise
+
+* `@org.eclipse.persistence.annotations.AdditionalCriteria` (EclipseLink) bzw. `@org.hibernate.annotations.Filter` (Hibernate)
+  * hier wird ein JPQL-Query-String verwendet (evtl. mit Platzhaltern, die in `EntityManager` gesetzt werden müssen BEVOR auf die Datenbank zugegriffen wird)
+  * hierüber läßt sich beispielsweise zentral MultiTenancy (User eines Tenants dürfen nicht auf Daten anderer Tenants zugreifen) abbilden
+  * Beispiel: `@AdditionalCriteria("this.tenant = :tenant")`
+    * der `tenant` wird in der `EntityManagerFactory` oder `EntityManager` gesetzt:
+      ```java
+      Map properties = new HashMap();
+      properties.put("tenant", "ACME");
+      EntityManager em = factory.createEntityManager(properties);
+      ```
+* `@org.eclipse.persistence.annotations.Customizer(MyDescriptorCustomizer.class)` (EclipseLink) bzw. `@...` (Hibernate)
+  * [siehe Doku](https://wiki.eclipse.org/EclipseLink/UserGuide/JPA/Advanced_JPA_Development/Customizers)
+  * dieser Ansatz ist noch mächtiger, da er nicht auf einen JPQL-String beschränkt ist, sondern komplette Java-Code-Logik in der `DescriptorCustomizer`-Klasse implementiert werden kann.
+  * hierüber bietet EclipseLink beispielsweise out-of-the-box-Support für History-Tabellen an: `@Customizer(org.acme.persistence.HistoryCustomizer.class)` ([siehe Doku](http://wiki.eclipse.org/EclipseLink/Examples/JPA/History)
+  * hierüber lönnen
+* aus der Kombination von `@AdditionalCriteria` und `@Customizer` (EclipseLink) können Soft-Deletes abgebildet werden ([siehe Doku](https://wiki.eclipse.org/EclipseLink/Examples/JPA/SoftDelete))
+
 #### AttributeConverter
 
 * https://jaxenter.de/konvertierungen-jpa-attribute-converters-17197
 
 In JPA 2.1 wurde die sog. [`AttributeConverter`](http://grepcode.com/file/repo1.maven.org/maven2/org.eclipse.persistence/javax.persistence/2.1.0/javax/persistence/AttributeConverter.java#AttributeConverter) eingeführt.
 
-### PersistenceContext (Unit-of-Work)
+### PersistenceContext (Unit-of-Work) - L1 Cache
 
 Der PersistenceContext verwaltet eine Menge von Entities (Unit of Work). Hier steckt die eigentliche Logik drin - nicht im Entity Manager. Wird eine Transaktion erzeugt, so wird ein neuer Persistence Context erzeugt und damit verbinden - wird die Transaction committed, dann wird der Persistence Context persistiert (= flush). Flushen ist in manchen Fällen (z. B. SQL-Queries, automatisierte Erzeugung von IDs, Logik in EntityCallbacks) aber zwischendurch notwendig ... bei `FlushModeType.AUTO` entscheidet der EntityManager wann geflushed werden sollte (bei `FlushModeType.COMMIT` wird immer erst beim Committen der Transaktion geflushed).
 
-Beim lesenden Zugriff dient der PersistenceContext als First Level Cache (L1 - https://dzone.com/articles/jpa-caching), d. h. eine Finder-Methode wird IMMER die exakt gleiche Instanz eines Entity zurückliefern. Auf diese Weise arbeiten alle Applikationskomponenten auf dem gleichen Objekt sofern sie den gleichen PersistenceContext verwenden.
+Beim lesenden Zugriff dient der PersistenceContext als First Level Cache ([L1](https://dzone.com/articles/jpa-caching)), d. h. eine Finder-Methode wird IMMER die exakt gleiche Instanz eines Entity zurückliefern. Auf diese Weise arbeiten alle Applikationskomponenten auf dem gleichen Objekt sofern sie den gleichen PersistenceContext verwenden.
 
 > ACHTUNG: Bei JTA Transaction Management kann EINE PersistenceContext-Instanz kann von MEHREREN EntityManager-Instanzen geshared werden (aka PersistenceContext Propagation) ... es handelt sich hier nicht zwangsläufig um eine 1:1 Beziehung (die aber prinzipiell auch möglich ist)
 
-### Shared Cache - optional aber Default
+### Shared Cache - L2 Cache - optional aber Default
 
 * https://abhirockzz.wordpress.com/2016/05/22/notes-on-jpa-l2-caching/
 * http://www.developer.com/java/using-second-level-caching-in-a-jpa-application.html
 
 Neben dem PersistenceContext (= First-Level-Cache - gebunden an EINE Transaktion) gibt es im Java-Layer noch einen Shared-Cache (Second-Level-Cache - L2), der über verschiedene/alle PersistenceContexts/Transaktionen auf Ebene der `EntityManagerFactory` geteilt wird.
 
-Da dieser Cache allerdings mehrere Transaktionen bedient kann es bei einem zwischenzeitlichen `em.flush(); em.clear()` zu der Situation kommen, daß der transaktionale Cache (der PErsistenceContext des EntityManagers) die Instanz nicht mehr enthält. Der 2nd-Level-Cache enthält aber KEINE Informationen aus der aktuellen - noch nicht committeten Transaktion. Er liefert dann veraltete Informationen. 
+Da dieser Cache allerdings mehrere Transaktionen bedient kann es bei einem zwischenzeitlichen `em.flush(); em.clear()` zu der Situation kommen, daß der transaktionale Cache (der PErsistenceContext des EntityManagers) die Instanz nicht mehr enthält. Der 2nd-Level-Cache enthält aber KEINE Informationen aus der aktuellen - noch nicht committeten Transaktion. Er liefert dann veraltete Informationen - insofern ist dieser Cache mit Bedacht einzusetzen.
 
-#### EclipseLink - Deaktivierung
+#### Deaktivierung
 
 * https://wiki.eclipse.org/EclipseLink/FAQ/How_to_disable_the_shared_cache%3F
 
-Bei EclipseLink lässt sich der SharedCache folgendermaßen abschalten
+JPA-Spezifikationskonform:
 
-* Entity-spezifisch: `@Cacheable(false)`
-* applikationsspezifisch: `<shared-cache-mode>NONE</shared-cache-mode>`
+* auf Entity-Ebene:
+  * `@Cacheable(false)`
+  * `@Cache`
+* auf Applikationsebene: `<shared-cache-mode>NONE</shared-cache-mode>`
+
+EclipseLink-spezifisch:
+
+* auf Applikationsebene (`persistence.xml`): `<property name="eclipselink.cache.shared.default" value="false"/>`
 
 ### EntityManager
 
@@ -188,9 +215,68 @@ Der EntityManager selbst bietet einfache Finder-Methoden (`em.find(4711)`).
 
 Für komplexere Abfragen bietet der EntityManager den Einstiegspunkt zur JPQL (`em.createQuery()`), die allerdings leider auch nicht den vollständigen SQL-Sprachumfang abbildet.
 
+Hier verwendet man das Objektmodell statt des relationalen Datenmodells (`PersonEntity` ist eine Java-Klasse annotiert mit `@Entity`)
+
+```sql
+SELECT p
+FROM PersonEntity p
+WHERE p.name = 'Pierre'
+```
+
+Dadurch bleibt man auf der Objektebene und abbildungsspezifische Details auf Ebene der relationalen Datenbank (z. B. `PersonEntity` wird in der Tabelle `homo_sapiens` abgebildet) bleibt vor dem Entwickler verborgen. Sollte es hier mal zu Refactorings kommen, dann sind die Queries - in der Theorie - nicht betroffen. Der Entwickler kann in seinem Objektmodell denken.
+
+> Das klingt in der Theorie ganz attraktiv - in der Praxis funktioniert es aber häufig nicht bzw. sorgt für eine Denkweise, die zu Performanceproblemen führt (niemand wird Bulk-Changes über Änderungen auf den Java-Objekten abbilden ... `UPDATE ... WHERE` ist hier das Maß der Dinge).
+
 ### Criteria API
 
 Für komplexere Abfragen bietet der EntityManager den Einstiegspunkt (`em.getCriteriaBuilder()`) zu dieser API, die allerdings leider auch nicht den vollständigen SQL-Sprachumfang abbildet.
+
+Während JPQL stringbasiert ist und leicht zu Fehlern führt, ist die Criteria-API ein geführter Ansatz. Geführt wird über die Criteria-API, die dem Entwickler die Erstellung syntaktisch korrekter SQL-Statements vereinfachen soll
+
+> Ich mag diese API nicht besonders ... sie basiert zwar bereits auf einem Fluent-API-Design, doch intuitiv finde ich den Ansatz nicht. Hängt aber vielleicht auch davon ab wie häufig man es einsetzt, irgendwann gewöhnt man sich sicherlich daran ;-)
+
+Folgende JPQL-Query
+
+```sql
+SELECT p
+FROM PersonEntity p
+WHERE p.name = 'Pierre'
+```
+
+sieht in Criteria-API folgendermaßen aus:
+
+```java
+CriteriaBuilder builder = em.getCriteriaBuilder();
+CriteriaQuery<PersonEntity> queryDefinition = builder.createQuery(PersonEntity.class);
+Root<PersonEntity> p = queryDefinition.from(PersonEntity.class);
+queryDefinition.select(p)
+  .where(builder.equal(p.get("name"), "Pierre"));
+TypedQuery<Person> query = em.createQuery(queryDefinition);
+List<PersonEntity> allPierres = query.getResultList();
+```
+
+Wenn man es gewohnt ist mit nativem SQL zu arbeiten, dann ist der JPQL-Ansatz sicherlich eingänglicher. Dennoch hat die Criteria-API ihre Berechtigung, wenn es um die dynamische Zusammenstellung von Queries geht (vorausgesetzt das ist ein Use-Case). Mit der Criteria-API ist das vielleicht leichter (typsicherer) umsetzbar als mit String-Konkatenation.
+
+#### Konzept: Query Roots
+
+Query Roots bilden den `FROM` Teil der Query ab:
+
+```java
+CriteriaBuilder builder = em.getCriteriaBuilder();
+CriteriaQuery<PersonEntity> queryDefinition = builder.createQuery(PersonEntity.class);
+Root<PersonEntity> p = queryDefinition.from(PersonEntity.class);
+Root<JobEntity> j = queryDefinition.from(JobEntity.class);
+queryDefinition
+  .select(p)
+  .distinct(true)
+  .where(builder.equal(p.get("job"), j));
+TypedQuery<Person> query = em.createQuery(queryDefinition);
+List<PersonEntity> allPierres = query.getResultList();
+```
+
+#### Konzept: Path Expressions
+
+Mit Path Expressions lassen sich implizite Joins abbilden (in JPQL würde man dazu die Punktnotation `p.job.company.address` verwenden): `.where(builder.equal(p.get("job").get("company").get("address")))`. Dieses "Navigieren" ist natürlich im Vergleich zu native SQL sehr komfortable.
 
 ### Native SQL Abfragen
 

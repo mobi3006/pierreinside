@@ -11,12 +11,13 @@ gestartet werden. Ein Start als Betriebssystem-Service wird auch unterstützt.
 
 ---
 
-# Getting Started
+## Getting Started
+
 * [YouTube Video](https://www.youtube.com/watch?v=p8AdyMlpmPk)
 
 Über Spring Initializr kann man sich sehr schnell ein Maven/Gradle Projekt mit verschiedenen Spring (Boot, Cloud, ...) und nicht-Spring Technologien (ElasticSearch, JavaMail, ...)  zusammenstellen lassen (letztlich geht es beispielsweise im die pom.xml und ein paar weitere Getting Started Ressourcen). Es werden auch verschiedene Sprachen unterstützt (2015: sind es Java und Groovy).
 
-## Spring Initializr => erstellt Maven pom.xml
+### Spring Initializr => erstellt Maven pom.xml
 
 * [Initializr Webapplikation](https://start.spring.io/)
 
@@ -46,21 +47,35 @@ gestartet werden. Ein Start als Betriebssystem-Service wird auch unterstützt.
 
 * Beispiel-Konfiguration
 
-## Build der Applikation
-Das Kommando
-    
-    mvn package
+### Erstellung eine Projekts per Script
 
-erzeugt ein **Fat-Jar** (compilierte Klassen des Projekts + abhängige Libs), das ohne weiteres startbar ist.
+Statt einer UI kann man das ganze auch per CLI ein Spring-Boot-Projekt erstellen:
 
-## Start der Applikation
+```bash
+curl "https://start.spring.io/starter.tgz"
+ -d bootVersion=1.5.9.RELEASE
+ -d dependencies=actuator,cloud-eureka
+ -d language=java
+ -d type=maven-project
+ -d baseDir=MyProject
+ -d groupId=com.asimio.cloud
+ -d artifactId=my-artifact
+ -d version=0-SNAPSHOT
+ | tar -xzvf -
+```
+
+### Build der Applikation
+
+Das Kommando `mvn package` erzeugt ein **Fat-Jar** (compilierte Klassen des Projekts + abhängige Libs), das ohne weiteres startbar ist.
+
+### Start der Applikation
 
 Der Start der Applikation erfolgt über (ODER-Optionen)
 
 1. Start aus der IDE
-    * Debugging ist dann sehr leicht möglich 
-2. ``mvn spring-boot:run`` 
-    * Remote-Debugging  
+    * Debugging ist dann sehr leicht möglich
+2. ``mvn spring-boot:run``
+    * Remote-Debugging
 3. ``java -jar my-application.jar``
 
 > **Empfehlung:** ich präferiere die ersten beiden, weil dadurch der Warm-Restart-Mechnismus verwendet werden kann.
@@ -69,12 +84,9 @@ Voila ... sehr schlank. Wir sind nun innerhalb weniger Minuten zu einer komforta
 
 **ACHTUNG:** Unter Windows kann ein Doppelclick auf das jar/war-Artefakt dazu führen, daß die Anwendung automatisch als Dienst installiert wird.
 
-## Eclipse-Integration der Applikation
-Über
+### Eclipse-Integration der Applikation
 
-    mvn eclipse:eclipse
-
-werden die Eclipse Artefakte ``.project`` und ``.classpath`` erzeugt. Danach kann das Projekt in Eclipse importiert werden. 
+Über `mvn eclipse:eclipse` werden die Eclipse Artefakte ``.project`` und ``.classpath`` erzeugt. Danach kann das Projekt in Eclipse importiert werden. 
 
 **ACHTUNG:** standardmäßig waren die Dateien ``application.properties`` und ``application.yml`` vom Build ausgeschlossen. Das sollte man ändern!!! Ansonsten  wandern diese Dateien (auch nach Änderungen) nie in den Runtime-Classpath der Applikation und somit funktioniert die Anwendung nicht richtig.
 
@@ -82,7 +94,8 @@ werden die Eclipse Artefakte ``.project`` und ``.classpath`` erzeugt. Danach kan
 
 ---
 
-# Build Tool Support
+## Build Tool Support
+
 Spring Boot unterstützt die beiden Build-Tools
 
 * maven
@@ -92,7 +105,7 @@ durch Dependency-Management, Code-Generierung (z. B. pom.xml).
 
 Andere Build-Tools (z. B. ant) können auch verwendet werden, doch wird es nicht von Spring unterstützt, d. h. der Einsatz ist weniger komfortabel.
 
-## Maven: Starter POMs
+### Maven: Starter POMs
 
 * [Offizielle Dokumentation ... Using Starter-POMs](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter-poms)
 
@@ -112,7 +125,7 @@ Das sorgt für zwei Dinge:
 
 Auf diese Weise kommt man schon mal sehr schnell sehr weit.
 
-## Maven: Artefakt Typen jar vs. self-executable jar
+### Maven: Artefakt Typen jar vs. self-executable jar
 
 Per Default (d. h. wenn das Default Parent-Pom verwendet wird) werden zwei Typen von jar-Artefakten erstellt:
 
@@ -121,28 +134,21 @@ Per Default (d. h. wenn das Default Parent-Pom verwendet wird) werden zwei Typen
   * Laufzeitumgebung (z. B. Servlet-Container)
 * normales JAR des Moduls, um in anderen Assemblies verwendet zu werden
 
-## Maven: Artefakt-Typ: jar vs. war
+### Maven: Artefakt-Typ: jar vs. war
 
 * How-To: https://spring.io/guides/gs/convert-jar-to-war/
 
-Will man eine Spring-Boot Anwendung dennoch in einem externen Application-Server deployen, so benötigt man ein War-Artefakt. Für diesen Anwendungsfall verwendet man 
+Will man eine Spring-Boot Anwendung dennoch in einem externen Application-Server deployen, so benötigt man ein War-Artefakt. Für diesen Anwendungsfall verwendet man `<packaging>war</packaging>` im ``pom.xml``.
 
-    <packaging>war</packaging>
-    
-im ``pom.xml``.
+Hat man nun ein War-Artefakt erzeugt, so kann man aber dennoch den Executable-Deployment-Ansatz nutzen: `java -jar mySpringBootApp.war`.
 
-Hat man nun ein War-Artefakt erzeugt, so kann man aber dennoch den Executable-Deployment-Ansatz nutzen:
-
-    java -jar mySpringBootApp.war
-
-
-## Maven: Version einer Dependency ändern
+### Maven: Version einer Dependency ändern
 
 * [How-To customize Dependency Versions](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-customize-dependency-versions)
 
 Spring pflegt zueinander passende Versionen ausgewählter Bibliotheken, d. h. verwendet man Spring-Boot 1.3.6, so sind in [spring-boot-dependencies](http://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/1.3.6.RELEASE/spring-boot-dependencies-1.3.6.RELEASE.pom) automatisch viele Versionen festgelegt:
 
-```
+```xml
 <spring.version>4.2.7.RELEASE</spring.version>
 <hibernate.version>4.3.11.Final</hibernate.version>
 <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
@@ -151,19 +157,20 @@ Spring pflegt zueinander passende Versionen ausgewählter Bibliotheken, d. h. ve
 
 Im eigenen ``pom.xml`` kann man die Version folgendermaßen ändern ... Spring kann dann natürlich die Kompatibilität nicht mehr garantieren:
 
-```
+```xml
 <thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
 ```
 
-## pom.xml: Interessante Properties
+### pom.xml: Interessante Properties
 
 ```xml
 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 <java.version>1.8</java.version>
-``` 
+```
 
-## Remote-Debugging
-Über 
+### Remote-Debugging
+
+Über
 
 ```xml
 <build>
@@ -189,27 +196,29 @@ wird das Remote-Debugging der Applikation ermöglich, wenn sie über maven gesta
 Startet man hingegen das executable jar-Artefakt (erstellt durch ``mvn install``), dann kann dort das Debugging wie üblich per Java-Parameter beim Programmstart
 
 ```bash
-java 
-  -jar myapp.jar 
-  -Xdebug 
+java
+  -jar myapp.jar
+  -Xdebug
   -Xrunjdwp:transport=dt_socket
-    ,address=8000,server=y,suspend=n`` 
+    ,address=8000,server=y,suspend=n``
 ```
 
 konfiguriert werden.
 
 ---
 
-# Programming
+## Programming
+
 [siehe eigener Abschnitt
 Spring-Boot verwendet - [Spring-typisch ... siehe auch Spring-Core](springCore.md)
 
 ---
 
-# Integrationtesting
+## Integrationtesting
+
 [siehe eigener Abschnitt](springBoot_testing.md)
 
-## Remote Debugging ermöglichen
+### Remote Debugging ermöglichen
 
 Um ein Remote-Debugging (z. B. über eine IDE) der Spring-Boot-Applikation zu ermöglichen, muß die Applikation folgendermaßen gestartet werden:
 
@@ -224,13 +233,15 @@ Ist die Applikation gestartet, wird in der IDE ein Remote-Debug-Prozess gestarte
 
 ---
 
-# HotSwapping
+## HotSwapping
+
 * Developer Tools: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-hotswapping
 
 Spring Boot bringt eine Warm-Restart-Funktionalität (siehe unten) mit. Hierzu müssen die Develeoper Tools aktiviert werden. Startet man die Anwendung aus der IDE, so führen Änderungen in der IDE automatisch zu einem Warm-Restart der Anwendung ... ein JRebel-Light (dafür aber kostenlos).
 
-## Developer Tools (aka ``devtools``)
+### Developer Tools (aka ``devtools``)
+
 Über die Dependency
 
 ```xml
@@ -245,9 +256,9 @@ Spring Boot bringt eine Warm-Restart-Funktionalität (siehe unten) mit. Hierzu m
 
 erfolgt die Integration der Developer Tools. Dann sollte man noch folgende Konfiguration in der ``application.properties`` setzen:
 
-* ``spring.devtools.livereload.enabled=true`` 
+* ``spring.devtools.livereload.enabled=true``
 
-### Cold-Start vs. Warm-Restart vs. Reload 
+#### Cold-Start vs. Warm-Restart vs. Reload
 
 * Cold-Start:
   * gesamte Anwendung wird neu gestartet
@@ -264,13 +275,13 @@ erfolgt die Integration der Developer Tools. Dann sollte man noch folgende Konfi
   * [JRebel Ansatz](http://zeroturnaround.com/software/jrebel/)
   * [Spring-Loaded Ansatz](https://github.com/spring-projects/spring-loaded)
 
-### Feature: Automatic Warm Restart
+#### Feature: Automatic Warm Restart
 
 Die Developer Tools aktivieren per Default das Automatic Restart Feature. Sobald sich eine Ressource auf dem Filesystem ändert (z. B. durch eine Änderung in der IDE und der daraus folgenden Class-Generierung) erfolgt ein Warm-Restart (Erklärung siehe oben).
 
 **ACHTUNG:** es muß sichergestellt werden, daß das von der IDE erzeugte Class-File auch tatsächlich im Classpath der gestarteten Anwendung landet. Ist die Anwendung in der IDE gestartet, dann geschieht das automatisch. Läuft die Anwendung über maven (``mvn spring-boot:run``), dann kommt es darauf an wohin die IDE die class-Datei compiliert. Läuft die Anwendung über das Executable-Jar (``java -jar myapp.jar``), dann kann es nicht funktionieren, weil die Klassen aus dem Jar-Artefakt gezogen werden.
 
-### Feature: Reload Templates
+#### Feature: Reload Templates
 
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-reload-thymeleaf-template-content
 
@@ -278,59 +289,67 @@ In einer Produktionsumgebung ist das Caching von Templates eine sehr sinnvolle V
 
 Über die ``application.properties`` kann das Caching ausgeschaltet werden:
 
+```properties
     spring.velocity.cache = false
-    
-### Konfiguration
+```
+
+#### Konfiguration
 
 Die Konfiguration der ``devtools`` erfolgt Spring-Boot-like in der ``application.properties``. Da es sich aber schon um spezielle Entwickler-abhängige Einstellungen handelt, kann der Entwickler die Einstellungen per ``~/.spring-boot-devtools.properties`` dauerhaft übersteuern (siehe http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html#using-boot-devtools-globalsettings).
 
 ---
 
-# Cloud-Deployment
+## Cloud-Deployment
+
 * http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#cloud-deployment
 
 Spring Boot Applikationen mit ihrem Executable-Jar-Ansatz (mit inkludierten Third-Party-Apps) sind relativ leicht auf beliebten PaaS-Providern deploybar.
 
-## CloudFoundry
+### CloudFoundry
+
 CloudFoundry ist - genauso wie Spring - ein Produkt von [Pivotal](http://pivotal.io/). Insofern ist es fast zwangsläufig, daß Spring Boot Applikationen komfortabel auf der CloudFoundry-Plattform deployed werden können.
 
-Nach der Erstellung der Spring Boot Applikation per Maven 
+Nach der Erstellung der Spring Boot Applikation per Maven `mvn clean package` wird die Anwendnung per (das CLI ``cf`` muß vorher natürlich installiert werden)
 
-    mvn clean package
-    
-wird die Anwendnung per (das CLI ``cf`` muß vorher natürlich installiert werden)
-
+```bash
     cf login -u myuser -p mypassword
     cf push myapp -p target/myapp.jar
+```
 
 Danach ist die Anwendung über http://myapp.cfapps.io erreichbar.
 
-## Heroku
+### Heroku
+
 Der Heroku-Cloud-Deployment ist nur unwesentlich aufwendiger als das CloudFoundry-Deployment.
 
 ---
 
-# Production-Ready Features
+## Production-Ready Features
+
 [siehe eigener Abschnitt](springBoot_productionReady.md)
 
 ---
 
-# Fazit
+## Fazit
+
 Spring zeigt mit seinen neuen Projekten (Boot, Config, ...), daß es sich innovativ weiterentwickelt und echte Mehrwerte für die Nutzer schafft. Der Einstieg in die Java-Welt wird generell (und insbesondere mit Blick auf Microservices) extrem vereinfacht. Verteilte Systeme - wie ich sie vor 20 Jahren im Studium theoretisch kennengelernt habe - werden nun auch für kleine Unternehmen/Startups realisierbar. Und dazu muß man nicht 3 Monate auf Schulung gehen ...
 
 Seit 2010 hat sich in den Bereichen Microservices, Cloud-Deployment, DevOps, Continous Delivery so viel getan, daß die Softwareentwicklung auf einem neuen Level angekommen ist.
 
 Spring trifft den Nerv der Zeit ... Hut ab :-)
 
-## Kritikpunkte
+### Kritikpunkte
+
 Auch wenn der Einstieg sehr leicht fällt ... ums Lesen von Dokumentation kommt man nicht rum ;-)
-### Magie
+
+#### Magie
+
 > "The Spring Boot auto-configuration tries its best to ‘do the right thing’, but sometimes things fail and it can be hard to tell why." (siehe [Spring Boot Dokumentation](http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#howto-troubleshoot-auto-configuration))
 
 Spring hat schon recht viel Magic eingebaut. Beispielsweise kann Code compilierbar sein, aber durch eine fehlende Abhängigkeit verhält er sich zur Laufzeit einfach nicht wie erwartet, weil eben die zur Laufzeit ausgewertete Abhängigkeit fehlt. 
 
 Es hat etwas von Pluggable-Extensions, wenn ich zur Applikation die Bibliothek ``spring-boot-starter-actuator-1.3.5.RELEASE.jar`` hinzufüge und dadurch weitere REST-Endpunkte vorhanden sind. Sehr komfortabel ... aber erst mal gewöhnungsbedürftig.
 
-### Überblick über Unterprojekte
-Zudem kann ist die Zuordnung einer Funktionalität zu einem Spring-Projekt nicht immer einfach. Dementsprechend fällt die Auswahl der richtigen Dependencies recht schwer. 
+#### Überblick über Unterprojekte
 
+Zudem kann ist die Zuordnung einer Funktionalität zu einem Spring-Projekt nicht immer einfach. Dementsprechend fällt die Auswahl der richtigen Dependencies recht schwer.

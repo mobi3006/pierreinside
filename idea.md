@@ -54,6 +54,8 @@ Diese Einstellung muß man in der Project-Ansicht als Autoscroll einstellen ... 
 
 Als jahrelanger Eclipse-Nutzer (davor viele andere IDEs wie NetBeans, VisualCafe, JBuilder, Emacs, ...) findet man sich relativ schnell zurecht. Sicherlich sind einige Details anders abgebildet (z. B. der Build Prozess intern vs. maven) und man muß sich an einige Sachen gewöhnen (kein sofortiges Compilieren), aber zumindest kommt man recht schnell in einen Arbeitsmodus, auf dem sich aufbauen läßt.
 
+Der Unterschiede ist nicht extrem aber viele kleine Dinge funktionieren einfach smoother.
+
 ## Konzepte
 
 * Projekt, z. B. ein Git Repository

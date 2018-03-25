@@ -1,15 +1,19 @@
 # AV Receiver
+
 Nachdem ich nun meinen Hobbyraum mit einem Beamer ausgestattet habe, überlege ich nun auch einen AV-Receiver und evtl. ein Lautsprechersystem zu installieren.
 
-# Alterantiven
-Zunächst mal muss ich auch gar kein 5.1 mit superduper Sound haben. Ich will nur nicht ständig das Kabel vom Beamer auf die verschiendenen Eingangsquellen umstecken müssen. 
+## Alternativen
 
-## AV-Receiver im 2.0 Betrieb
+Zunächst mal muss ich auch gar kein 5.1 mit superduper Sound haben. Ich will nur nicht ständig das Kabel vom Beamer auf die verschiendenen Eingangsquellen umstecken müssen.
+
+### AV-Receiver im 2.0 Betrieb
+
 Kaufe einen AV-Receiver und verwende die alten Frontlautsprecher der Hifi-Anlage weiter (ohne Subwoofer - als 2.0 System).
- 
+
 Warum sollte ich dann aber jetzt schon in einen Receiver investieren, wenn ich ihn noch gar nicht benötige - wäre es vielleicht sinnvoller dann irgendwann ein abgestimmtes System zu kaufen statt dann wieder festzustellen, daß der Receiver doch nicht so gut paßt oder in den letzten Jahren weitere Features entwirckelt wurden, auf die man ungerne verzichten möchte. 
- 
-## HDMI-Switch
+
+### HDMI-Switch
+
 * http://www.hdmi-splitter.info/
 
 Deshalb wäre vielleicht auch ein HDMI-Switch eine kostengünstige Lösung - 15 Euro statt 200-300 Euro:
@@ -22,13 +26,17 @@ Eine automatische Erkennung des Signals wäre natürlich gut, weil das die Kompl
 
 Irgendwann wird es sicherlich ein AV-Verstärker werden, doch dann sollte ich auch in ein ordentliches 5.1 System investieren. Dazu bin ich derzeit noch nicht bereit, da die Kinder den Raum auch zum Fussballspielen nutzen ... da ist die Gefahr große, daß sie die Lautsprecher abschiessen. In ein paar Jahren werden sie dann sicher nicht mehr Fussballspielen, sondern eher die Parties feiern - dann werden sie sich über einen AV-Receiver mit 5.1 sicher noch mehr freuen.
 
-# AV-Verstärker vs. Stereo/Hifi-Verstärker
+> Diese Lösung hat mit meiner PS4 nicht funktioniert ... die Audio/Videosignale von Laptop und Fire-TV-Stick wurden zuverlässig durchgeschleust. Bei der PS4 habe ich es ein einziges mal hinbekommen, danach nicht mehr. Hatte dann keine Lust mehr auf Fehlersuche und habe den Onkyo TX-SR608 von einem Kollegen für 90 Euro gekauft.
+
+## AV-Verstärker vs. Stereo/Hifi-Verstärker
+
 Um Ton aus den Boxen zu bekommen benötigt man einen Verstärker. Für Musik verwendet man am besten einen Stero-Verstärker. Ein AV-Verstärker, der in einem AV-Receiver verbaut ist,  kann das natürlich auch, aber dafür noch viele viel mehr:
 
 * Video-Signale von verschiedenen Quellen ausgeben
 * Netzwerk-Streaming (Kabel/Wifi)
 
-## 5.1 AV-Receiver mit zwei Lautsprechern
+### 5.1 AV-Receiver mit zwei Lautsprechern
+
 > "viele AV Receiver sind für Stereo der pure MÜLL, wenn Du einen Analogen Stereoverstärker hattest wird der AV im Stereobetrieb sehr wahrscheinlich eher deutlich schlechter abschneiden.. Allerdings kommt es natürlich auf den AV an, es gibt welche die sind durchaus auch für den Stereobetrieb einigermassen zu gebrauchen (jetzt werden mich alle HIFI Leute gleich töten...)." ([Link](https://www.apfeltalk.de/community/threads/7-1-receiver-gekauft-voellig-daemlich-da-im-nur-stereo-betrieb.425473/)).
 
 Es scheint aber zumindest zu gehen ... wie gut iegt dann im Ohr des Betrachters:
@@ -40,7 +48,8 @@ Für Musik passt Stereo sehr gut, aber schon bei Spielen ist Surround klar besse
 Wenn du hinten keinen Platz hast, dann geht's natürlich nicht anders, aber falls du kleinere Boxen unterbringen kannst, ist das besser als gar nichts. Vom Klang her kann man auf den Surround Kanälen notfalls Abstriche machen, weil Dialoge von den vorderen Boxen kommen und die auch einen wichtigen Teil für den Surround Sound tragen. Daher reichen hinten notfalls auch kleinere Würfel, aber verzichten würde ich darauf nur im Notfall.
 M.f.G."
 
-# Anforderungen
+## Anforderungen
+
 * 5.1 Support
 * mind. 4 HDMI-Eingänge >= 1.4 besser noch 2.0 (für 4k)
   * 4k Urltra HD Passthrough
@@ -56,7 +65,8 @@ M.f.G."
 * optional DLNA
 * optional HDCP 2.2 - seit 2015
 
-## 4k Passthrough - 4k Light über HDMI 1.4
+### 4k Passthrough - 4k Light über HDMI 1.4
+
 * [guter Forenbeitrag](http://www.hifi-forum.de/viewthread-94-12978.html)
 
 Aktiver 4k Support durch den AV-Receiver benötigt HDMI 2.x. Viele ältere AV-Receiver haben nur HDMI 1.4 ([2.0 wurde erst 2013 eingeführt](https://de.wikipedia.org/wiki/High_Definition_Multimedia_Interface)) Allerdings beherrschen viele ältere AV-Receiver bereits den Passthrough Modus, bei dem das Endgerät die 4k Signale vollständig liefert und sogar bis 60Hz möglich sind. Allerdings muß man hinsichtlich Farbe bei einer HDMI 1.4 Verbindung Einschränkungen hinnehmen ("mit einer Farbunterabtastung 4:2:0 und 8 Bit" statt 10 Bit).
@@ -67,28 +77,40 @@ Wenn nun allerdings der neue Kopierschutz HDCP 2.2 kommt, dann muß, den gibts n
 
 HDCP 2.2 gibt es allerdings erst seit Ende 2015 in den Geräten. Mittlerweile gibt es auch Geräte, die HD-Ultra
 
-## Ausgangsleistung
+### Ausgangsleistung
+
 * [gute Erklärung zum Zusammenhang zwischen Ausgangsleistung Verstärker und Leistung der Boxen[(http://www.hifi-forum.de/viewthread-42-48.html)
 
-# Geräte
+## Geräte
 
-## Pioneer VSX-330-K
+### Pioneer VSX-330-K
+
 * Neupreis (2017): 220 Euro
 * HDMI mit HDCP 2.2
 * KEIN Bluetooth
 
-## Onkyo TX-SR252
+### Onkyo TX-SR252
+
 * Neupreis (2017): 220 Euro
 * HDMI mit HDCP 2.2
 * KEIN Bluetooth
 * "nur" 100 Watt Ausgangsleistung
 
-# Pioneer VSX-531-B
+### Onkyo TX-SR608
+
+Diesen AV-Receiver hat ein Kollege ausgemustert und ich konnte ihn vorab testen (2.0 Setup mit meinen alten Lautsprechern ... 5.1 kann noch warten, aber auch das würde der Receiver unterstützen). Für 90 Euro war das ein guter Einstiegspreis.
+
+* KEIN Bluetooth ... schade, aber einen Bluetooth-Adapter gibts schon für 15 Euro - derzeit verwende ich Chromecast Audio Streaming (hatte ich noch zuhause ungenutzt rumliegen)
+* KEIN Netzwerkanschluss - brauche ich aber auch nicht
+
+## Pioneer VSX-531-B
+
 * Neupreis (2017): 260 Euro
 * HDMI mit HDCP 2.2
 * Bluetooth
 
-## Yamaha-Produktreihen
+### Yamaha-Produktreihen
+
 * http://usa.yamaha.com/products/audio-visual/av-receivers-amps/rx/?mode=series
 
 Es gibt verschiedene Serien
@@ -119,6 +141,12 @@ Die RX-V-Produktreihen unterscheiden sich recht gut in den Features und werden �
 * RX-V-679
   * 7.2 Kanal
 
-## Yamaha RX-V479
+### Yamaha RX-V479
 
-## Yamaha RX-V475
+### Yamaha RX-V475
+
+## FAQ
+
+*Frage 1:* Ich bekomme immer wieder einen elektrischen Schlag, wenn ich den Receiver manuell bedienen will.
+
+*Antwort 1:* Wenn es kein dauerhaftes Kribbeln ist, dann handelt es sich vermutlich um eine statische Aufladung. Ich habe Teppichboden in meinem Kinozimmer und wenn man dann noch Schuhe mit Gummisohlen trägt, dann kann das schon mal passieren. Hier sind ein paar Tips: https://de.wikihow.com/Statische-Elektrizit%C3%A4t-entladen

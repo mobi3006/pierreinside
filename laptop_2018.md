@@ -37,7 +37,7 @@ Den Rezensionen muß ich allerdings recht geben ... das Gerät könnte ruhig noc
 
 * kostengünstig
 * hochwertiges Design
-* optional: 
+* optional:
   * TouchScreen
   * 4k Display
 * HDD zusätzlich

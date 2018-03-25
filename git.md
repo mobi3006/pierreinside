@@ -4,6 +4,7 @@ Sehr gute Quellen:
 
 * SUPER: [https://git-scm.com\/book\/de\/v1](https://git-scm.com/book/de/v1)
 * Refcardz: [https://dzone.com\/refcardz\/getting-started-git](https://dzone.com/refcardz/getting-started-git)
+* Interaktives Tutorial: https://learngitbranching.js.org/
 * [http://www.eecs.harvard.edu\/~cduan\/technical\/git\/](http://www.eecs.harvard.edu/~cduan/technical/git/)
 * [http://book.git-scm.com\/](http://book.git-scm.com/)
 * https://git-scm.com/book/en/v2
