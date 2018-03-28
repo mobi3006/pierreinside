@@ -2,7 +2,8 @@
 
 ---
 
-# Integrationtesting
+## Integrationtesting
+
 * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html
 * https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/
 
@@ -17,20 +18,21 @@ Eine typische Testklasse für eine Webapplikation sieht so aus:
 public class MyApplicationTest {
 
     @Autowired
-    private MyService service; 
+    private MyService service;
     
     @Test
     public void testServiceCall() {
         service.method();
     }
-    
 }
 ```
 
-## @RunWith(SpringJUnit4ClassRunner.class)
+### @RunWith(SpringJUnit4ClassRunner.class)
+
 Dieser JUnit-Testrunner sollte grundsätzlich bei Spring-basierten Komponenten verwendet werden. Er stellt die Grundvoraussetzung dar - sonst darf man sich nicht wundern, wenn spring-spezifische Aspekte (z. B. der Aufbau des ApplicationContext aus xml-Dateien ``@ContextConfiguration(locations = { "classpath:mymodule-context.xml" })``) nicht funktionieren.
 
-## @SpringApplicationConfiguration
+### @SpringApplicationConfiguration
+
 Diese Annotation wird eingesetzt, um die zu testenden Applikation zu initialisieren. Deshalb darf die SpringBoot-Main-Class nicht fehlen. Zudem werden evtl. noch ein paar Initializer für die Testumgebung aufgeführt (z. B. zur Initialisierung von Mocks).
 
 Hier kann man auch Spring-Initialisierung über Spring-Kontexte in XML-Form anstoßen:
@@ -41,46 +43,50 @@ Hier kann man auch Spring-Initialisierung über Spring-Kontexte in XML-Form anst
         locations = { "classpath:test-context.xml" })
 ```
 
-## @IntegrationTest
+### @IntegrationTest
 
-## @WebIntegrationTest
+### @WebIntegrationTest
+
 Handelt es sich um einen ``@IntegrationTest``, der auch eine ``@WebAppConfiguration`` benötigt, dann sollte man vermutlich ``@WebIntegrationTest`` verwenden. In einem WebIntegrationTest wird ein Applicationserver (Servlet-Container - per Default Toncat) gestartet
 
-### Applikationskonfiguration
+#### Applikationskonfiguration
+
 Die Applikationskonfiguration wird aus der ``application.properties`` gezogen, kann aber über 
 
-```
+```java
 @WebIntegrationTest({"server.port=0", "management.port=0"})
 ```
 
 für jeden Test übersteuert werden.
 
-#### Freien Port suchen
+##### Freien Port suchen
+
 Es macht Sinn, einen freien (!!!) Port für zu startenden Applicationserver zu suchen:
 
-```
+```java
 @WebIntegrationTest({"server.port=0", "management.port=0"})
 ```
 
-und diesen Port dann per 
+und diesen Port dann per
 
 ```java
 @Value("${local.server.port}")
 int port;
 ```
 
-zu injezieren. 
+zu injezieren.
 
+### Rest-Tests
 
-## Rest-Tests
 Das Testen von Rest-Schnittstellen läuft über ``TestRestTemplate``.
 
-### Vorsicht vor Test-Fakes
+#### Vorsicht vor Test-Fakes
+
 Da die Rest-Services ganz normale Java-Beans sind, läuft man Gefahr die Beans über Java-Aufrufe zu testen. Hierbei wird allerdings nicht die Funktionalität getestet, die ein RICHTIGER Applikationsclient verwendet. Beispielsweise wird das Marshalling/Unmarshalling nicht durchlaufen.
 
 Diese Abkürzungen fangen am Anfang vielleicht gar nicht auf, doch spätestens, wenn beispielsweise auf ``HttpServletRequest`` im Rest-Service zugegriffen werden soll ... eine solche Instanz dann aber gar nicht existiert.
 
-### Option 1: TestRestTemplate
+#### Option 1: TestRestTemplate
 
 **Basic-Authentication:**
 
@@ -88,7 +94,7 @@ Diese Abkürzungen fangen am Anfang vielleicht gar nicht auf, doch spätestens, 
 
 **MessageConverters:**
 
-```
+```java
 restTemplate = new RestTemplate();
 List<HttpMessageConverter<?>> list = new ArrayList<HttpMessageConverter<?>>();
 list.add(new MappingJacksonHttpMessageConverter());
@@ -120,7 +126,8 @@ String answer =
         String.class);
 ```
 
-### Option 2: MockMvc
+#### Option 2: MockMvc
 
-### Option 3...n:
+#### Option 3...n:
+
 Irgendweinen anderen Http-Client verwenden.

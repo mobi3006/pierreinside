@@ -46,11 +46,11 @@ Um mit Zertifikaten rumzuspielen bietet sich das Docker-Image von [NGINX](https:
 * ``openssl rsa -des3 -in keyfilename -out newkeyfilename``
   * Passphrase ändern
 * ``openssl s_client -connect localhost:443 -prexit``
-  * Handshake der SSL Verbidnung anschauen
+  * Handshake/Debugging der SSL Verbidnung anschauen
 
 ---
 
-## Keytool
+## Java Keytool
 
 Keytool ist ein Java-Tool, das die im Java-Umfeld üblichen binären JKS-Zertifikatsspeicher (**J**ava**K**ey**S**tore) lesen und schreiben kann.
 
@@ -63,6 +63,19 @@ Leider kann das Keytool von Oracle keine Zertifikate in das OpenSSL-Format expor
 * ``keytool -list -keystore ./cacerts.jks -storepass changeit -v``
 * ``keytool -import -trustcacerts -alias TestCA -file ca.pem -keystore cacerts.jks``
   * trusted einer weiteren CA
+
+## Java Keystore/Truststores
+
+* https://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/ReadDebug.html
+
+Die Standard JDK Bibliotheken für den Aufbau von HTTP-Verbindungen berücksichtigen die typischen System-Properties zur Konfiguration von Keystore und Truststore:
+
+* `javax.net.ssl.keyStore`
+* `javax.net.ssl.keyStorePassword`
+* `javax.net.ssl.trustStore`
+* `javax.net.ssl.trustStorePassword`
+* `javax.net.ssl.trustStoreType`
+* `javax.net.debug`
 
 ---
 

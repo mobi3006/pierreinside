@@ -1,4 +1,5 @@
 # Spring Cloud
+
 * http://projects.spring.io/spring-cloud/
 
 Spring Cloud besteht aus verschiedenen Unterprojekten:
@@ -10,6 +11,3 @@ Spring Cloud besteht aus verschiedenen Unterprojekten:
 * Circuit Breaker
 * Load Balancing
 * ...
-
-
-
