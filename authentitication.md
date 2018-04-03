@@ -1,7 +1,9 @@
 # Authentifizierung
+
 * https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm
 
 Verschiedene Authentifizierungsmechanismen:
+
 * Basic-Authentication
   * Username + Base64 enkodiertes Passwort
 * Form-Based-Authentication
@@ -12,12 +14,13 @@ Verschiedene Authentifizierungsmechanismen:
 
 ---
 
-# Basic Authentication
+## Basic Authentication
+
 * Client schickt auf Verlangen des Servers die Credentials
 * Authentifizierung erfolgt auf Applikationsebene und nicht auf TCP-Ebene wie bei Certificate-Based-Authentication
 * Basic Authentication ist Teil der Servlet/Spezifikation und wird dementsprechend in der `web.xml` definiert:
 
-```
+```xml
 <security-constraint>
     <web-resource-collection>
         <web-resource-name>all-content</web-resource-name>
@@ -34,5 +37,6 @@ Verschiedene Authentifizierungsmechanismen:
 </login-config>
 ```
 
-## URL
+### URL
+
 `https://Aladdin:OpenSesame@www.example.com/index.html`

@@ -3,15 +3,36 @@
 * [Buch - ElasticSearch - The Definitive Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
   * die interessantesten Kapitel waren die, die als optional gekennzeichnet waren ... hier steckten die Internas drin
 
-ElasticSearch ist wesentlicher Bestandteil des sog. ELK-Stacks, zu dem sich dann noch Logstash und Kibana gesellen. Die zugrundelegende Technologie besteht aus dem guten alten Lucene, dessen Fähigkeiten mit ElasticSearch leichter zugänglich und vor allem verteilt werden. Die Dokumente bestehen bei ElasticSearch aus JSON-Dokumenten ... Lucene indiziert ganz viele verschiedene Dokumententypen.
+ElasticSearch ist wesentlicher Bestandteil des sog. ELK-Stacks, zu dem sich dann noch Logstash und Kibana gesellen. Die zugrundelegende Technologie besteht aus dem guten alten Lucene, dessen Fähigkeiten mit ElasticSearch leichter zugänglich und vor allem verteilt und besser skaliert werden. Die Dokumente bestehen bei ElasticSearch aus JSON-Dokumenten ... Lucene kann aber grundsätzlich viele verschiedene Dokumententypen indizieren.
 
 ## Historie
 
 Lucene wurde 2001 ins Leben gerufen und wurde hauptsächlich zur Indizierung/Suche auf Texten verwendet. Texte werden hierbei zunächst mal in Tokens zerlegt, um darauf dann nach (Teil-) Strings (teilweise fuzzy) suchen zu können. In Softwareprojekten wird Lucene in Form von ElasticSearch i. a. nicht mit Prosatexten gefüttert, sondern mit noch deutlich einfacheren JSON/XML Dokumenten. Wir vereinfachen es Lucene also schon mal deutlich, können damit aber auch gezielter semantisch suchen (Semantik = einzelne Felder) ... dadurch wird die Suche nochmals deutlich effizienter.
 
+## Getting Started
+
+Wie heutzutage üblich startet man am besten mit Docker und Docker-Compose. Mit der [hier angegebenen](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/docker.html) `docker-compose.yml` startet man im Handumdrehen zum ersten ElasticSearch Cluster.
+
+>ACHTUNG: mittlerweile werden die Docker-Images von ElasticSearch nicht mehr bei Dockerhub gehostet, sondern bei [elastic.io](https://www.docker.elastic.co/#).
+
+Nach dem Start bietet Elasticsearch zwei Kommunikationsports:
+
+* 9200: HTTP-Protokoll ... nutzbar per `curl`, Postman, ...
+* 9300: Elasticsearch-Protokoll ... nutzbar per Java-Libraries, ...
+
+### ElasticSearch 5 vs. 6 vs. 7 - Document Type
+
+Bis zur Version 5 verwendete man *Index* plus *Document Type* als höchstes Kategorisierungsmittel, so daß eine URL `GET /person/address/1` den Index (`person`) und den Document Type (`address`) enthielt.
+
+In Version 6 wurde der Document Type deprecated (man verwendet den Standard Document Type `_doc`: `GET /person/_doc/1`) und in Version 7 wird er komplett entfernt.
+
+> Hintergrund: viele Nutzer haben die Konzepte Index und Document Type falsch verstanden und den Index als Datenbank und Document Type als Tabelle interpretiert. Allerdings speichert Lucene alle Daten eines Index unabhängig vom Document Type im gleichen Lucene Index, d. h. im gleichen Datencontainer. Durch diese Fehlinterpretation sind unterschiedliche Document Types EINES Index im gleichen Datencontainer gelandet, owbohl diese Dokumente NICHT strukturähnlich sind (`address` vs. `hobbies`). Dadurch entstand ein hohes Maß an Fragmentierung, was zu Ineffizienz führte.
+
 ## Konzepte
 
 ElasticSearch ist konzipiert, um auf Commodity-Hardware beste Leistung zu liefern. Da Commodity-Hardware allerdings auch schneller mal schlapp macht, sind Fehler im Konzept vorgesehen. Genauso verhält es sich mit der Performance - die schlechtere Leistung von Commodity-Hardware wird versucht durch konzeptionelle Parallelisierung auszugleichen, die glücklicherweise mit dem Konzept zur Ausfallsicherheit (=> Replica-Shards) Hand in Hand geht.
+
+![Zusammenhänge](images/ElasticSearchKonzepte.png)
 
 * ElasticSearch speichert JSON-Dokumente - zur Optimierung der (Volltext-) Suche erfolgt danach eine Indizierung der Dokumente
 * wesentlicher Bestandteil ist die Verteilung der Speicherung über Knoten/Rechner, um so Ausfallsicherheit und höhere Performance (Parallelisierung von Queries) zu erreichen
@@ -23,16 +44,22 @@ ElasticSearch ist konzipiert, um auf Commodity-Hardware beste Leistung zu liefer
     * ein ElasticSearch-Index basiert auf einem oder mehreren Lucene-Index (= Shard)
 * ES bietet eine komplette REST-Schnittstelle, über die auch die Administration (z. B. Mappings definieren) erfolgen kann
 
+### Node Discovery
+
+Jeder Knoten weiß zu welchem Cluster er gehört, beim Start des Knoten schließt er sich dem Cluster an (z. B. Multicast-Anfragen) und wird ab dem Zeitpunkt in die Verarbeitung von Dokumenten und Anfragen einbezogen.
+
 ### Index-Settings
 
 * Name
-* Anzahl der Shards
-* Anzahl der Replicas pro Shard
+* Anzahl der Primary-Shards
+* Anzahl der Replicas pro Primary-Shard
 * Analyzer
+* Tokenizer
 
-### Primary-Shard-Selektion
+### Shard-Selektion
 
 * [Buch - ElasticSearch - The Definitive Guide - Kapitel Routing a Document to a Shard](https://www.elastic.co/guide/en/elasticsearch/guide/current/routing-value.html)
+* Elastic Search hat eine automatische Leadership-Election, so daß beim Ausfall eines Knotens mit Primary-Shards automatisch neue Primary-Shard-Knoten ausgewählt werden - die Primary Shards eines Index können also jederzeit woanders liegen ... dem Client ist das egal, denn er richtet seine Anfragen an einen beliebigen Knoten (normalerweise im Round-Robin-Verfahren)
 
 ### Indizierung
 
@@ -90,9 +117,11 @@ Sollte es dennoch mal zu Datenverlust kommen (alle Teile eines Shards sind nicht
 
 * [Buch - ElasticSearch - The Definitive Guide - Kapitel Distributed Document Store]https://www.elastic.co/guide/en/elasticsearch/guide/current/distributed-docs.html
 
-Primary-Shards werden auf die Replica-Shards synchronisiert. Hierbei entsteht natürlich entsprechender Traffic, der über schnellstmögliche Kanäle laufen muß. Ein WRITE-Request ist erst abgeschlossen, wenn die Daten auch auf die geforderten Replicas erfolgreich gespeichert (!!!) wurden (Replikationsstrategie `replication = sync`). Diese Replikationsstrategie ist konfigurierbar (z. B. `async`), aber natürlich auf Kosten eines möglichen Datenverlusts.
+Primary-Shards werden auf die Replica-Shards synchronisiert. Hierbei entsteht natürlich entsprechender Traffic, der über schnellstmögliche Kanäle laufen muß. Ein WRITE-Request ist erst abgeschlossen, wenn die Daten auch auf die geforderten Replicas erfolgreich gespeichert (!!!) wurden (Replikationsstrategie `replication = sync`) ... es müssen nicht alle sein (hierfür gibt es eine klare Formel). Diese Replikationsstrategie ist konfigurierbar (z. B. `async`), aber natürlich auf Kosten eines möglichen Datenverlusts.
 
 ElasticSearch betreibt *Document-Based Replication*, d. h. es werden komplette Dokumente repliziert ... nicht nur Änderungen oder gar das Update-Statement.
+
+> FRAGEN: wird die Indizierung auf Shard durchgeführt oder wird das Indizierungsergebnis des Primary Shards auf den Replica Shards wiederverwendet (kann es da zu Abweichungen führen???)
 
 Ein typisches Problem bei Synchronisierung sind die unterschiedlichen "Laufzeiten" von Replikationen, d. h. ein Dokument in Version 10 kann vor dem gleichen Dokument in Version 8 auf dem Replica-Shard verarbeitet/gespeichert werden. Die Versionierung der Dokumente wird verwendet, um solche Probleme zu entdecken und aufzulösen z. B. (das nachfolgene Update in Version 8 wird ignoriert).
 
@@ -111,92 +140,47 @@ Aufgrund dieses Konzepts werden in Abhängigkeit von `from`/`size` sehr viele Da
 
 Für das fazinierende/beliebte Endless-Scrolling, bei dem `from` immer weiter nach hinten geschoben wird, wäre dieser Ansatz extrem teuer. Deshalb gibt es hierfür die sog. [Scroll-Optimierung](https://www.elastic.co/guide/en/elasticsearch/guide/current/scroll.html). Hierbei muss man auf Sortierung verzichten und die Aktualität der Daten leidet auch, aber die endlose Bereitstellung der Dokumente ist extrem kostengünstig.
 
-## Getting Started
+### Index-Design
 
-Wie heutzutage üblich startet man am besten mit Docker und Docker-Compose. Mit der [hier angegebenen](https://www.elastic.co/guide/en/elasticsearch/reference/6.1/docker.html) `docker-compose.yml` startet man im Handumdrehen zum ersten ElasticSearch Cluster.
+In EINEM Index sollten nur strukturähnliche Dokumente gespeichert werden, die auch ähnlich abgefragt werden, da das Mapping, Tokenizer und Analyzer auf dieser Ebene definiert werden. Es kann viele Indizes zur gleichen Dokumentenstruktur geben - die Entscheidung hängt hauptsächlich davon ab, welche Suchen man performant abbilden möchte. Ändern sich die Anforderungen an die Suche, so kann es sinnvoll sein, einen neuen Index aufzubauen bzw. den alten Index zu migrieren.
 
->ACHTUNG: mittlerweile werden die Docker-Images von ElasticSearch nicht mehr bei Dockerhub gehostet, sondern bei [elastic.io](https://www.docker.elastic.co/#).
+Eine Parallelisierung ist auf Ebene der Segmente (innerhalb eines Lucene Index) möglich - jedes Segment kann parallel mit einer Suche beauftragt werden. Insofern spielt die Anzahl der Shards nicht eine untergeordnete Rolle für die Parallelisierungsfähigkeit von Suchanfragen.
 
-Nach dem Start bietet Elasticsearch zwei Kommunikationsports:
+> Mein Eindruck ist, daß die Suchanfragen NOCH viel früher relevant sind als bei einer relationalen Datenbank, in der man strukturgleiche/semantikgleiche Daten in die gleiche Tabelle packt und sich dann erst nachgelagert über eine Optimierung (per Indizes oder Sharding) Gedanken macht.
 
-* 9200: HTTP-Protokoll ... nutzbar per `curl`, Postman, ...
-* 9300: Elasticsearch-Protokoll ... nutzbar per Java-Libraries, ...
+Über Index-Templates können per Namensschema die gleichen Mappings, Tokenizer, Analyzer definiert werden.
 
-## Abfragen
+Ziele beim Index-Design:
 
-Für Queries gibt es zwei Ansätze
+* Index sollte nicht zu groß werden
+* Parallelisierung von Anfragen sollte unterstützt werden
 
-* Search Lite: `GET /website/blog/_search?q=author_name:Pierre`
-  * Verwendung von Query-Parametern
-  * geeignet für ad-hoc Queries
-* Request Body Search API:
-  * HTTP-GET mit JSON-Request-Body
+Mit einem Alias können
 
-    * ACHTUNG: es ist umstritten, ob das guter Design-Ansatz ist (und ob es überhaupt ein valider HTTP-Request ist ... im RFC 7231 ist es nicht verboten ... es ist aber auch nicht definiert, was passieren soll) - einige Tools (z. B. Postman) unterstützen diesen Ansatz nicht. ElasticSearch akzeptiert allerdings auch POST-Requests auf der `_search` Ressource (mit der gleichen Syntax)
+* kann ein größerer Index virtuell aufgebaut werden
+* kann ein kleinerer (Filterung) Index virtuell aufgebaut werden bzw. ein kann verwendet werden
 
-Bei Queries bekommt man eine Gesamtergebnis-Zusammenfassung mit
+### Dokument Design
 
-* Anzahl der Treffer
-* den Score des Dokuments mit dem höchsten Score
-
-und zu den ersten gefundenen Dokumenten die folgenden Informationen:
-
-* Index
-* Typ
-* ID
-* Score (= Relevanz)
-* Dokument im Original
-
-ES sortiert die Ergebnisse per default nach Relevanz.
-
-### Filter vs. Query
-
-Filter sind vor Queries zu bevorzugen, da Caching möglich ist. Filter können bei der Suche nach exakten Werten (keine Fuzziness - z. B. ist das Baujahr zwischen 1950 und 1955?) verwendet werden, bei Queries ist immer eine Fuzziness möglich, so daß eine gewisse Relevanz ins Spiel kommt ... das Suchergebnis hat in diesem Fall einen `_score`.
-
-### Beispiele
-
-* `GET _count`
-  * zählt die Anzahl aller Dokumente und liefert auch die Anzahl der Shards
-* `GET /website/blog/_search`
-  * listet die ersten 10 Einträge des Index `website` vom Typ `blog` auf
-* `GET /website/blog/_search?q=author_name:Pierre`
-* `GET /website/blog/_count`
-  * zählt die Anzahl der Dokumente des Index `website` vom Typ `blog`
-* `GET /website/`
-  * liefert Informationen zum Index (z. B. Mapping, Aliases)
-* `GET /website/_mapping`
-
-ElasticSearch bietet allerdings auch eine JSON-DSL für die Suche an, die empfohlen wird.
-
-## Tooling
-
-### Kibana
-
-Hat man einen ELK-Stack aufgebaut, dann ist Kibana natürlich das naheliegendste Tool, um mit ElasticSearch zu arbeiten. Kibana zeigt bei Bedarf für die Queries auch `curl` output an ... ganz praktisch, wenn man das Kommando auch in Skripten verwenden will.
-
-Kibana ist ein reines Query-Tool - man administriert ElasticSearch damit nicht.
-
-### Marvel - ElasticSearch-Plugin
-
-### Postman
-
-Postman ist kein spezielles ElasticSearch-Tool, aber es kann ganz wunderbar HTTP-REST-Interfaces bedienen ... wie sie ElasticSearch über Port 9200 auch bietet.
-
-> ACHTUNG: in vielen ElasticSearch Query-Beispielen sind HTTP-GET Requests mit einem JSON-Request-Body angegeben (`GET /_count { "query": { "match_all": {} } }`) - bei meinem Postman (Version 5.5.0) konnte ich an ein GET keinen Body hängen. Stattdessen mußte ich daraus einen HTTP-POST machen und dort den Body angeben. Angeblich ist es aber lauf HTTP-Spezifikation nicht verboten einen Body mit einem GET zu verwenden.
-
-## Detailbetrachtung
+* De-Normalisierung (Redundanzen einbauen)
+  * bringt häufig Speed beim lesenden Zugriff, weil weniger Dokumente (dafür aber größere) durchsucht werden müssen
+  * bei Updates bringt es aber deutliche Nachteile, weil die Änderung einer Information (z. B. Addresse eines Unternehmens) ein Löschen/Neuanlage sehr vieler Dokumente (z. B. Angestellte eines Unternehmens) zur Folge haben kann.
+* Parent-Child-Beziehungen (Redundanzen vermeiden)
+  * reduzierter Speicherplatz + weniger Aufwand bei Updates auf Kosten von Suchperformance
 
 ### Analogien zu relationalen Datenbanken
 
-* Relationale DB  => Datenbank  => Tabelle  => Zeile    => Spalte
-* ElasticSearch   => Index      => Typ      => Dokument => Feld
+* Relationale DB  => Datenbank  => Tabelle      => Zeile    => Spalte
+* ElasticSearch   => Index      => Dokument Typ => Dokument => Feld
+
+ACHTUNG: Dokument Typ gibt es ab ES 7 nicht mehr (in ES 6 deprecated)
 
 ### Dokument-Metadaten
 
 Jedes Dokument hat folgende Daten
 
 * ES-Index (zu dem es gehört)
-* Typ
+* Typ - ACHTUNG: in ES 7 nicht mehr!!!
 * Identifier - entweder vom Speichernden (`PUT /website/blog/4711 { "title": ... }`) oder von ES (`POST /website/blog/ { "title": ... }`) vergeben
 * Version
 
@@ -231,6 +215,73 @@ Im einfachsten Fall sind alle Daten nach denen man suchen möchte in EINEM Dokum
 Man möchte auf einem Blog nach Autor und Bloginhalt suchen. In diesem Fall hat man vermutlich Indizes für Autoren und für Blogs. Würde man alles in EIN Dokument bzw. einen Index packen, dann hätte man Redundanzen, die sich bei Änderungen (z. B. Autor zieht um) negativ bemerkbar machen.
 
 Durch die Abbildung von normalisierten Indizes spart man zwar Speicherplatz und aufwendige Update Prozeduren aber spart bei der Suche Queries ein, die ansonsten seriall ablaufen müßten - klarer Fall für einen Trade-off. Die Alternative sind Application-Side-Joins.
+
+## Abfragen
+
+Für Queries gibt es zwei Ansätze
+
+* Search Lite: `GET /website/_doc/_search?q=author_name:Pierre`
+  * Verwendung von Query-Parametern
+  * geeignet für ad-hoc Queries
+* Request Body Search API:
+  * HTTP-GET mit JSON-Request-Body
+
+    * ACHTUNG: es ist umstritten, ob das guter Design-Ansatz ist (und ob es überhaupt ein valider HTTP-Request ist ... im RFC 7231 ist es nicht verboten ... es ist aber auch nicht definiert, was passieren soll) - einige Tools (z. B. Postman) unterstützen diesen Ansatz nicht. ElasticSearch akzeptiert allerdings auch POST-Requests auf der `_search` Ressource (mit der gleichen Syntax)
+
+Bei Queries bekommt man eine Gesamtergebnis-Zusammenfassung mit
+
+* Anzahl der Treffer
+* den Score des Dokuments mit dem höchsten Score
+
+und zu den ersten gefundenen Dokumenten die folgenden Informationen:
+
+* Index
+* Typ - ACHTUNG: ab ES 7 nicht mehr
+* ID
+* Score (= Relevanz)
+* Dokument im Original
+
+ES sortiert die Ergebnisse per default nach Relevanz.
+
+### Filter vs. Query
+
+Filter sind vor Queries zu bevorzugen, da Caching möglich ist. Filter können bei der Suche nach exakten Werten (keine Fuzziness - z. B. ist das Baujahr zwischen 1950 und 1955?) verwendet werden, bei Queries ist immer eine Fuzziness möglich, so daß eine gewisse Relevanz/Score ins Spiel kommt ... das Suchergebnis hat in diesem Fall einen `_score`.
+
+### Query vs. Term
+
+* bei einer Query durchläuft die Suchquery Analyzer, so daß Fuzzy-Search ("spielt" => "spielen") noch möglich ist und zu einem Score des Suchergebnis führt
+* bei einem Term wird die Suchquery so genommen wie sie ist und angewendet ... es gibt nur Treffer oder nicht - deshalb gibt es auch keinen Score
+
+### Beispiele
+
+* `GET _count`
+  * zählt die Anzahl aller Dokumente und liefert auch die Anzahl der Shards
+* `GET /website/_doc/_search`
+  * listet die ersten 10 Einträge des Index `website` vom Typ `blog` auf
+* `GET /website/_doc/_search?q=author_name:Pierre`
+* `GET /website/_doc/_count`
+  * zählt die Anzahl der Dokumente des Index `website` vom Typ `blog`
+* `GET /website/`
+  * liefert Informationen zum Index (z. B. Mapping, Aliases)
+* `GET /website/_mapping`
+
+ElasticSearch bietet allerdings auch eine JSON-DSL für die Suche an, die empfohlen wird.
+
+## Tooling
+
+### Kibana
+
+Hat man einen ELK-Stack aufgebaut, dann ist Kibana natürlich das naheliegendste Tool, um mit ElasticSearch zu arbeiten. Kibana zeigt bei Bedarf für die Queries auch `curl` output an ... ganz praktisch, wenn man das Kommando auch in Skripten verwenden will.
+
+Kibana ist ein reines Query-Tool - man administriert ElasticSearch damit nicht.
+
+### Marvel - ElasticSearch-Plugin
+
+### Postman
+
+Postman ist kein spezielles ElasticSearch-Tool, aber es kann ganz wunderbar HTTP-REST-Interfaces bedienen ... wie sie ElasticSearch über Port 9200 auch bietet.
+
+> ACHTUNG: in vielen ElasticSearch Query-Beispielen sind HTTP-GET Requests mit einem JSON-Request-Body angegeben (`GET /_count { "query": { "match_all": {} } }`) - bei meinem Postman (Version 5.5.0) konnte ich an ein GET keinen Body hängen. Stattdessen mußte ich daraus einen HTTP-POST machen und dort den Body angeben. Angeblich ist es aber lauf HTTP-Spezifikation nicht verboten einen Body mit einem GET zu verwenden.
 
 ## Bewertung
 
