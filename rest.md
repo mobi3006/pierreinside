@@ -1,4 +1,5 @@
 # REST
+
 * Refcardz: https://dzone.com/refcardz/rest-foundations-restful
 * http://www.restapitutorial.com/resources.html
 * http://blog.philipphauer.de/restful-api-design-best-practices/
@@ -10,10 +11,12 @@ REST ist kein Standard, sondern ein Architekturstil basierend auf Standards wie 
 
 ---
 
-# REST vs. SOAP
+## REST vs. SOAP
+
 * http://www.xfront.com/REST.ppt
 
-## REST lebt HTTP
+### REST lebt HTTP
+
 REST verwendet das HTTP-Protokoll mit seinen Methoden GET, POST, PUT, DELETE ... die verwendete Methode hat in REST eine Bedeutung. Der Payload (beim PUT, POST) wird in den HTTP-Body gepackt ... in einem beliebigen Format (XML, JSON, YAML, Freitext, ...).
 
 Dadurch kann REST allerdings auch weitere Vorteile des HTTP-Protokolls besser nutzen als SOAP:
@@ -23,7 +26,7 @@ Dadurch kann REST allerdings auch weitere Vorteile des HTTP-Protokolls besser nu
 * Interoperabilität ... es ist kein Custom-SOAP-Protokoll erforderlich
 * Authentication im HTTP-Header (funktioniert aber auch bei SOAP)
 
-## SOAP nutzt HTTP als Tunnel
+### SOAP nutzt HTTP als Tunnel
 
 SOAP verwendet das HTTP-Protokoll hingegen nur zum Transport. Im HTTP-Body ist das eigentliche XML-basierte SOAP-Protokoll (``<soap:envelope>``) erweitert um Custom-Namespaces versteckt:
 
@@ -38,84 +41,89 @@ Deshalb spielt für SOAP auch ausschließlich die HTTP-POST-Methode eine Rolle. 
 
 **Hintergrund:** SOAP kam auf als CORBA und Java-RMI für die Kommunikation zwischen Systemen genutzt wurden. CORBA basierte auf dem IIOP-Protokoll, das von Firmen-Firewalls i. a. blockiert wurde. SOAP setzte deshalb auf HTTP, um dieses Problem zu lösen. 
 
-## SOAP-MessageDispatcher-Ansatz
+### SOAP-MessageDispatcher-Ansatz
 
 SOAP ermöglicht (es gibt auch andere Vorgehensweisen) die Verwendung eines zentralen MessageDispatchers, so daß alle Nachrichten zur gleichen URL geschickt werden. Der MessageDispatcher interpretiert die im HTTP-Body enthaltenen Nachricht und routet sie weiter. 
 
-### Nachteil 1: Security
+#### Nachteil 1: Security
+
 Für Systemadministatoren könnte dies die Administration erschweren. Bei REST könnte der Admin Zugriffe auf bestimmte Ressourcen mit einer einfachen Regel im Proxy-Server unterbinden, weil alle relevanten Informationen über die HTTP-Methode und die URL abgebildet sind. Bei SOAP hingegen muß das nicht standardisierte Nutzdatenprotokoll analysisert werden ... das ist um einiges aufwendiger und erfordert erhöhten Wartungsaufwand.
 
-### Nachteil 2: Caching
+#### Nachteil 2: Caching
 
 Ist nicht möglich ... sofern man im Proxy nicht irgendwelche applikationsspezifische Logik nachbauen will (das kann niemand wollen).
 
-## Fazit
+### Fazit
+
 In geschlossenen Umgebungen, über die man gemeinsam bestimmen kann, funktioniert SOAP. In offenen Umgebungen ohne zentrale Entscheider hat sich REST bewährt, weil es das einfachere standardisiertere Protokoll ist und somit Interoperabilität besser unterstützt.
 
---- 
+---
 
-# Wichtige HTTP-Header
+## Wichtige HTTP-Header
+
 * https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
 
-## Request-Fields
+### Request-Fields
+
 * https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Request_fields
 
-### Authorization
+#### Authorization
+
 Anmeldung am Server
 
     Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
-### Accept
+#### Accept
+
 Kennzeichnet in welchem Style die Antwort akzeptiert wird
 
     Accept: text/plain
     Accept: application/xml
     Accept: application/json
     ...
-    
-Hierüber kann der Client entscheiden, in welchem Format die Ressource vom Server geliefert werden soll (XML, Json, ...). Ein Server muß natürlich nicht alle Formate unterstützen ... das hängt von der Schnittstelle ab. 
 
-### Accept-Language
+Hierüber kann der Client entscheiden, in welchem Format die Ressource vom Server geliefert werden soll (XML, Json, ...). Ein Server muß natürlich nicht alle Formate unterstützen ... das hängt von der Schnittstelle ab.
+
+#### Accept-Language
+
 Hiermit kann der Client seine gewünschte Sprache mitteilen ... das ist evtl. in einer Consumer-Schnittstelle relevant (z. B. die Antwort enthält menschenlesbare Informationen oder es wird vom Server eine eMail verschickt). 
 
-### Content-Type
+#### Content-Type
+
 Der Server Kennzeichnet hiermit in welchem Format die Antwort versendet wird
 
     application/xml
     application/json
     ...
-    
+
 Bei einem HTTP-POST oder -PUT kann der Client aber auch das Format des Request-Body kennzeichnen.
-    
-### Cache-Control
+
+#### Cache-Control
 
 * https://en.wikipedia.org/wiki/Web_cache#Cache_control
 
-
     Cache-Control: no-cache
-    
-### ETags
+
+#### ETags
 
 * https://en.wikipedia.org/wiki/HTTP_ETag
 * https://tools.ietf.org/html/rfc7232#section-2.3
 
+#### User-Agent
 
-### User-Agent
+Kennzeichnet den Client
 
-Kennzeichnet den Client 
-
-    User-Agent: Mozilla/5.0 
-    (X11; Linux x86_64; rv:12.0) 
+    User-Agent: Mozilla/5.0
+    (X11; Linux x86_64; rv:12.0)
     Gecko/20100101 Firefox/21.0
 
-## Response-Fields
+### Response-Fields
+
 * https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Response_fields
-
-
 
 ---
 
-# Idee Traversierbarkeit
+## Idee Traversierbarkeit
 
 Bei REST besteht die Idee, daß ein Client sich ohne weiteres Wissen von einer Ressource zur nächsten Ressource hangeln kann, weil eine Ressource wiederum andere Ressourcen referenziert (über einen HTTP-GET-Request).
 
@@ -123,11 +131,13 @@ Bei SOAP wäre das nicht möglich, weil immer ein HTTP-POST mit SOAP-Envelope er
 
 ---
 
-# REST API Empfehlungen
+## REST API Empfehlungen
+
+* [Zalando Guideline](http://zalando.github.io/restful-api-guidelines/)
 
 ---
 
-# Java-REST Frameworks
+## Java-REST Frameworks
 
 In der Java-Welt gibt es u. a. folgende Ansätze, um RESTful Webservices zu implementieren:
 

@@ -24,7 +24,7 @@ Linus Torvalds hat Git für seine Arbeit am Linux-Kernel entwickelt, weil es kei
 * jeder Kernel-Entwickler kann Arbeiten, ohne andere zu beeinflussen ... erst wenn die Arbeit DONE ist, kann entschieden werden, ob die Änderungen übernommen werden.
 * möglichst hohe Freiheitsgrade in der Arbeitsorganisation für jeden einzelnen Entwickler
 
-### Git in typischen Softwareprojekten ...
+### Git in typischen Softwareprojekten
 
 Diese _Integration Manager_-Modell  Arbeitsweise paßt zu den wenigstens Standard-Entwicklern. Dennoch können auch Standard-Entwickler von diesem Ansatz profitieren.
 
@@ -67,7 +67,6 @@ Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflo
   * Feature-Branches
 
 * Integration Manager Modell
-
 
 #### Peer-to-Peer-Ansatz
 
@@ -200,6 +199,7 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
   * Option 1: `git init`
 
     * die Ressourcen im aktuellen Verzeichnis bilden das Repository, das im Verzeichnis `.git` abgelegt ist
+    * möchte man dieses Repository auch remote nutzen (z. B. bei GitHub), so muß zunächst ein Remote-Target angegeben werden (`git remote add origin git@github.com:mobi3006/de.cachaca.learn.oauth2.git`) und dann kann das Repository auf remote synchronisiert werden (`git push --set-upstream origin master`).
 
   * Option 2: `git clone ../gitTest`
 
@@ -246,8 +246,6 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
         # On branch master
         # Your branch is ahead of 'origin/master' by 1 commit.
     ```
-
-
 
 * Ressourcen zum Index hinzufügen \(in Vorbereitung eines Commits\):
   * `git add myfile.txt`
