@@ -264,14 +264,14 @@ erfolgt die Integration der Developer Tools. Dann sollte man noch folgende Konfi
   * gesamte Anwendung wird neu gestartet
   * diesen Ansatz verfolgen Application-Server i. d. R. out-of-the-box
   * dauert lang (je nach Anwendung mehrere Minuten)
-* Warm-Restart: in Sping-Boot integrierter Ansatz (Developer Tools)
+* Warm-Restart: in Spring-Boot integrierter Ansatz (Developer Tools)
   * funktioniert mit zwei Classloadern. Einer ist für die unveränderbaren Third-Party-Ressourcen zuständig, einer für die veränderlichen eigenen Ressourcen.
   * funktioniert auch mit Remote-Deployments (http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools-remote)
   * geht deutlich schneller
-* Reload: 
+* Reload:
   * hierbei wird die Anwendung nicht neu gestartet, sondern die Änderungen werden nachgeladen
   * geht am schnellsten (i. d. R. sofort bis wenige Sekunden) und funktioniert (aus eigener Erfahrung) ganz wunderbar!!!
-  * Java-Bytecode HotSwapping: Moderne IDEs unterstützen alle Hot-Swapping von Byte-Code sofern die Klassen/Methoden-Signatur nicht geändert wird, d. h. bei Änderungen im Methoden-Body. Das funktioniert bei Spring-Boot somit 
+  * Java-Bytecode HotSwapping: Moderne IDEs unterstützen alle Hot-Swapping von Byte-Code sofern die Klassen/Methoden-Signatur nicht geändert wird, d. h. bei Änderungen im Methoden-Body. Das funktioniert bei Spring-Boot somit
   * [JRebel Ansatz](http://zeroturnaround.com/software/jrebel/)
   * [Spring-Loaded Ansatz](https://github.com/spring-projects/spring-loaded)
 

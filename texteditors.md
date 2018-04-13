@@ -78,4 +78,4 @@ konnte das Problem gemindert werden. Doch eigentlich wollte ich durch zweimalige
 ---
 
 # Visual Studio Code (VSC)
-[ausgelagert in eigenen Bereich](visualstudiocode.md) 
+[ausgelagert in eigenen Bereich](visualStudioCode.md) 

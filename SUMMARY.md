@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-  * Animationsfilme
 * [Workbench](workbench.md)
   * [VirtualBox](virtualbox.md)
   * Linux
@@ -18,22 +17,29 @@
     * [Terminal Multiplexer](terminalMultiplexer.md)
     * [Linux Tools](linux_tools.md)
   * [awesome](awesome.md)
-  * [Texteditors](texteditors.md)
+  * Entwicklungsumgebungen
+    * [Texteditors](texteditors.md)
+    * [Visual Studio Code](visualStudioCode.md)
+    * [IntelliJ - IDEA](idea.md)
 * Softwareentwicklungsprozess
   * [Schätzungen](estimations.md)
 * [Architektur](architecture.md)
   * [Microservices](microservices.md)
   * [NoSQL](nosql.md)
+    * [ElasticSearch](elasticSearch.md)
   * [Hystrix](hystrix.md)
   * [Reactive Programming](reactiveProgramming.md)
   * AngularJS
 * [Networking](networking.md)
   * Dependency Injection
 * Programming
+  * Java Core/EE
+    * [Java 8](java8.md)
+    * [Java Annotationen](java_annotations.md)
+    * [Bean Validation](java_beanValidation.md)
+    * [Enterprise Java Beans Specification](ejb.md)
+    * [Dependency Injection](dependencyInjection.md)
   * [JRebel](jrebel.md)
-  * [Bean Validation](java_beanValidation.md)
-  * [Enterprise Java Beans Specification](ejb.md)
-  * [Dependency Injection](dependency-injection.md)
   * Webservices
     * [HTTP](http.md)
     * [REST](rest.md)
@@ -50,14 +56,17 @@
     * [Spring MVC](springMvc.md)
     * [Spring Data](springData.md)
     * [Spring Petclinic](spring_petclinic.md)
-  * [Thymeleaf](thymeleaf.md)
+  * [NodeJS](nodejs.md)
+  * UI-Technologie
+    * [Thymeleaf](thymeleaf.md)
+    * [ionic](ionic.md)
   * Persistenz
     * Transactions
       * [Java TX](java_transactions.md)
       * [JPA TX](jpa_txHandling.md)
     * [TX Handling](txHandling.md)
     * [JPA](jpa.md)
-      * [Eclipse Link - JPA](jpa_eclipseLink.md)
+      * [Eclipse Link](eclipseLink.md)
     * [MySQL](mysql.md)
       * [MySQL Performance](mysql_performance.md)
       * [Docker MySQL](docker_mysql.md)
@@ -66,14 +75,23 @@
   * [Angular](angular.md)
   * [Camel](camel.md)
   * [Zeichenkodierung](characterEncoding.md)
+  * [Kinder lernen Programmieren](kinder_programmieren.md)
 * Testen
   * [Easymock](easymock.md)
   * [Mockito](mockito.md)
 * Performance & Scalability
   * [Java Performance](java_performance.md)
-    * [Heapdump Analysis](heapdump_analysis.md)
+    * [Heapdump Analysis](heapdumpAnalysis.md)
   * [Java Concurrency](java_concurrency.md)
   * [Instana](instana.md)
+* Sicherheit
+  * [Authentifizierung](authentitication.md)
+    * [OpenID Connect](openIDconnect.md)
+  * Authorisierung
+    * [OAuth](oauth.md)
+  * [Zertifikate](certificates.md)
+  * [Kali Linux](kaliLinux.md)
+  * [VPN](vpn.md)
 * Build und Deployment
   * [Maven](maven.md)
   * [Bamboo](bamboo.md)
@@ -88,28 +106,30 @@
     * [Ansible Details](ansible_details.md)
   * [Saltstack](saltstack.md)
   * [LinuxKit](linuxKit.md)
-  * [Docker](docker.md)
-    * [Docker Getting Started](docker_gettingStarted.md)
-    * [Docker Build](docker_build.md)
-    * Docker run
-      * [docker run](docker_run.md)
-      * [docker network](docker_network.md)
-    * [Docker Compose](docker_compose.md)
-    * [docker machine](docker_machine.md)
-    * [Docker@Windows](docker_windows.md)
-    * [Docker Host](docker_host.md)
-    * [Docker Scaling](docker_scaling.md)
-    * [Docker Ressources](docker_resources.md)
-    * [windowsContainer](windowsContainer.md)
-  * [CoreOS](coreos.md)
-  * [Kubernetes](kubernetes.md)
-  * [Cloud Deployment Provider](cloudDeployment_provider.md)
-  * [Container Infrastruktur](containerInfrastructure.md)
-  * [Zertifikate](certificates.md)
+  * Container
+    * [Docker](docker.md)
+      * [Docker Getting Started](docker_gettingStarted.md)
+      * [Docker Build](docker_build.md)
+      * Docker run
+        * [docker run](docker_run.md)
+        * [docker network](docker_network.md)
+      * [Docker Compose](docker_compose.md)
+      * [docker machine](docker_machine.md)
+      * [Docker@Windows](docker_windows.md)
+      * [Docker Host](docker_host.md)
+      * [Docker Scaling](docker_scaling.md)
+      * [Docker Ressources](docker_resources.md)
+      * [windowsContainer](windowsContainer.md)
+    * [Cloud Deployment Provider](cloudDeployment_provider.md)
+    * [Docker Orchestrierung](docker_orchestration.md)
+      * [CoreOS](coreos.md)
+      * [Kubernetes](kubernetes.md)
 * Operations
   * [Logging](logging.md)
     * [Graylog](graylog.md)
   * [Monitoring](monitoring.md)
+* Rechtliches
+  * [Software-Lizenzen](license.md)
 * Git Ecosystem
   * [Git](git.md)
   * [GitHub](github.md)
@@ -124,26 +144,31 @@
     * [Jekyll](jekyll.md)
   * [Tiddly Wiki](tiddlyWiki.md)
   * [Leanpub](leanpub.md)
-* Sicherheit
-  * [Kali Linux](kaliLinux.md)
+  * [Animationsfilme](animationsfilme.md)
+* Storage
+  * [Synology](synology.md)
 * [Hausautomatisierung](homeAutomation.md)
   * [Raspberry Pi](raspberrypi.md)
   * [Heimnetzwerk](heimnetzwerk.md)
-  * [Projekt Sportstracker](projekt_sportstracker.md)
-* [Misc](misc.md)
+* Misc
   * [iPad Pro](ipadPro.md)
-  * [Synology](synology.md)
-  * [Swimming Pool](swimmingPool.md)
-  * [Musik Streaming](musicstreaming.md)
-  * [Handy](handy.md)
-  * [Spielekonsole](spielekonsole.md)
-  * [Hebe-Schiebefenster](hebe-schiebefenster.md)
-  * [DFB Talentförderung](dfb-talentforderung.md)
-  * [ProJonas](projonas.md)
+  * [Projekt Sportstracker](projekt_sportstracker.md)
+  * [Handy]
+    * [2016](handy_2016.md)
+    * [2018](handy_2018.md)
+  * Laptop
+    * [2018](laptop_2018.md)
+  * Monitor
+    * [4k](monitor_4k.md)
+  * Fahrrad
+    * [Jonas 2018](mountainbike_2018.md)
+  * [Spielekonsole]
+    * [2017](spielekonsole_2017.md)
+      * [Playstation 4](playstation.md)
   * [AV Receiver](avReceiver.md)
+  * [Musik Streaming](musicStreaming.md)
+  * [Sky](sky.md)
+  * [Hebe-Schiebetür](hebeSchiebetuer.md)
+  * [Swimming Pool](swimmingPool.md)
+  * [DFB Talentförderung](dfb_talentförderung.md)
 * [Englisch](englisch.md)
-* [Glossar](GLOSSARY.md)
-* [Visual Studio Code](visualStudioCode.md)
-* [Authentifizierung](authentitication.md)
-* [Swift](swift.md)
-

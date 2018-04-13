@@ -1,4 +1,5 @@
-# Docker Clustering
+# Docker Orchestrierung
+
 Hier geht es um die Orchestrierung von Docker Clustern ...
 
 Cluster werden aufgebaut, um
@@ -12,24 +13,27 @@ Glücklicherweise gibt es bereits Lösungen für dieses Problem. Das schöne ist
 
 ---
 
-# Rancher
+## Rancher
+
 * http://rancher.com/
 
 Rancher ist den Docker-Tooling am nächsten. Für die Beschreibung der Deployment-Landschaft wird `docker-compose.yml` in Kombination mit `rancher-compose.yml`. 
 
 Rancher beherrscht auch Windows Container.
 
-## Getting Started
+### Getting Started
+
 Deploy Rancher auf Virtualbox via ``docker-machine``
 
-```
+```bash
 docker-machine create \
    -d virtualbox
    --virtualbox-boot2docker-url https://release.rancher.com/os/latest/rancheros.iso \
    rancher-demo
 ```
 
-## Scheduler
+### Scheduler
+
 Rancher bietet mit Cattle seinen eigenen Scheduler ... allerdings ist der bei weitem nicht so performant wie die Platzhirsche
 
 * [Kubernetes](kubernetes.md)
@@ -38,7 +42,8 @@ Rancher bietet mit Cattle seinen eigenen Scheduler ... allerdings ist der bei we
 
 Rancher kann diese Scheduler aber integrieren.
 
-## Tiefe der Rancher Dockerisierung
+### Tiefe der Rancher Dockerisierung
+
 Selbst typische Betriebssystem-Features (``ntp``, ``syslog``, ``udev``, ...) bildet Rancher in Docker-Containern ab. Man unterscheidet
 
 * system-docker
@@ -46,12 +51,14 @@ Selbst typische Betriebssystem-Features (``ntp``, ``syslog``, ``udev``, ...) bil
 * user-docker
   * hier laufen die typischen Docker-Container einer Anwendung
 
-## Alleinstellungsmerkmal: Machine Driver
+### Alleinstellungsmerkmal: Machine Driver
+
 Rancher bietet mit den Maschine Drivers eine integration verschiedener Cloud-Anbieter, so daß sich ein Hybrid-Deployment aus Maschinen in Private-Cloud (derzeit: vSphere, OpenStack, RackSpace) und Public-Cloud (derzeit: Amazon EC2, Azure, DigitalOcean, Packet) realisieren läßt.
 
 Man kann auch custom Maschine Driver integrieren.
 
-## Bewertung
+### Bewertung
+
 Rancher ist ein idealer Einstieg in das Docker-Clustering, da es einerseits nah an Docker-Tooling ist (der Einsteiger findet sich schnell zurecht) und anderseits Komponenten aus weitaus professionelleren Lösungen (z. B. Scheduler) integrieren kann. 
 
 > "Rancher bringt zentrale Vorteile im Hinblick auf Verfügbarkeit und Skalierbarkeit relevanter Services mit sich und erlaubt kurze Deployment-Zyklen. Für den Aufbau einer leistungsfähigen Microservice-Umgebung geht es im ersten Schritt darum, die Bestandsapplikationen in Docker zu überführen und sich mit dessen Handhabung vertraut zu machen. Rancher bietet sich als Einstieg an, um die Voraussetzungen für Microservices und Container zu schaffen." (Michael Vogeler, Jan Wiescher - iX 2/2017)
@@ -60,12 +67,14 @@ Rancher unterstützt bis Version 1.3 kein Autoscaling. In Version 1.4 sind rudim
 
 ---
 
-# Kubernetes
+## Kubernetes
+
 [siehe eigener Abschnitt](kubernetes)
 
 ---
 
-# DC/OS
+## DC/OS
+
 Hierbei handelt es sich um ein Paket aus verschiedenen Einzeltools
 
 * Apache Mesos

@@ -1,4 +1,5 @@
 # Spring Data
+
 * Refcardz: https://dzone.com/refcardz/core-spring-data
 
 Spring Data ermöglicht die Persistenz von POJOs in Repositories untschiedlicher Couleur:
@@ -12,37 +13,41 @@ Spring Data ermöglicht die Persistenz von POJOs in Repositories untschiedlicher
   * [Solr](http://projects.spring.io/spring-data-solr)
   * ...
 
-# 10000 feet view
+## 10000 feet view
 
-```
+```java
 @Entity
 public class Person {
-   
+
    private @Id @GeneratedValue String id;
    private String firstName;
    private String lastName;
-   
+
    public Person(String firstName, String lastName) {
       this.firstName = firstName;
       this.lastName = lastName;
    }
 }
 
-public interface PersonRepository 
-   extends CrudRepository<Employee, String> {}
+---
+
+public interface PersonRepository
+   extends CrudRepository<Person, String> {}
 }
 ```
-Das ist alles, was man benötigt, um eine Person dann per 
+
+Das ist alles, was man benötigt, um eine Person dann per
 
 ```
 bla
 ```
+
 in einer relationalen Datenbank (über das Modul ``spring-data-jpa``) zu persistieren.
 
 So einfach kann Softwareentwicklung im 21. Jahrhundert sein.
 
-# Spring Data Elasticsearch
+## Spring Data Elasticsearch
 
-# Anwendungsbeispiele
-## Caching
+## Anwendungsbeispiele
 
+### Caching

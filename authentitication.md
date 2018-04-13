@@ -1,6 +1,7 @@
 # Authentifizierung
 
 * https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm
+* https://dzone.com/articles/my-security-notes
 
 Verschiedene Authentifizierungsmechanismen:
 
@@ -11,6 +12,7 @@ Verschiedene Authentifizierungsmechanismen:
 * Digest-Authentication
   * Username + Digest (als Ersatz für das Passwort)
 * Certificate-Based-Authentication
+* [OpenID Connect - Authentication-as-a-Service](oauth.md)
 
 ---
 

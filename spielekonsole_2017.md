@@ -7,6 +7,8 @@
 Bei uns wird vermutlich hautpsächlich Fifa gespielt, aber vielleicht kommt Papa ja vielleicht auch auf den Geschmack.
 
 # Playstation 4
+
+* [siehe auch eigener Abschnitt](playstation.md)
 * https://de.wikipedia.org/wiki/PlayStation_4#Die_Konsole
 
 Mittlerweile gibt es 3 verschiedene Major-Versionen der Playstation 4 (jede Major-Version hat dann wiederum verschiedene Revisionen): 

@@ -61,7 +61,8 @@ OAuth 2 versucht die Komplexität aus den Clients rauszuhalten und in die Server
 
 * ist der ursprüngliche Initiator des OAuth-Flows - er beauftragt den Client mit der Durchführung einer bestimmten Aktion gegen die Protected Resource
   * "ursprüngliche Initiator" heißt, daß der menschliche Benutzer am Anfang, die Übertragung der Authorisierung auf den Client triggert - der Client kann später allerdings jederzeit selbständig einen Zugriff auf die Protected Resource triggern bzw. einen Refresh Token beim Authorzation Server anfordern
-* nach erfolgreicher Identifikation (per Authentifizierung am Authorization Server) und Auswahl des entsprechenden Scopes (wird vom Client angefordert) erstellt der Authorization Server ein Authorization Objekt (je nach Authorization Grant Type: Authorization Code oder Access Token) und transportiert es über HTTP-Redirect zum Client
+* nach erfolgreicher Identifikation (per Authentifizierung am Authorization Server) muß der Resource Owner den entsprechenden Consents/Scopes autorisierenerstellt der Authorization Server ein Authorization Objekt (je nach Authorization Grant Type: Authorization Code oder Access Token) und transportiert es über HTTP-Redirect zum Client
+  * die Protected Resource hat den Consent/Scope definiert - evtl. wurde der notwendige Consent/Scope beim ersten abgewiesenen Zugriff des Clients auf die Protected Resources über die Error Response zum Client transportiert
 
 ### Client
 
@@ -92,9 +93,9 @@ OAuth 2 versucht die Komplexität aus den Clients rauszuhalten und in die Server
 * optional (je nach Authorization Grant Type)
 * ist ein Authorization Object
 * darf nur einmalig verwendet werden
-* hiermit kann der Client zu jedem beliegigen Zeitpunkt einen Access Code vom Authorization Server beziehen
+* hiermit kann der Client zu jedem beliebigen Zeitpunkt EINMALIG einen Access Code vom Authorization Server beziehen
 * ist nicht das endgültige Authorization Object, sondern nur eine Zwischenlösung
-  * Hintergrund: der Authorization Code kommt vom Resource Owner (per HTTP-redirect transportiert), der evtl. ein Angreifer ist und den Authorization Code korrumpiert hat
+  * Hintergrund: der Authorization Code kommt vom Resource Owner (per HTTP-redirect transportiert), der evtl. ein Angreifer ist bzw. einen unsicheren Rechner hat - der Authorization Code könnte korrumpiert sein
 
 #### Access Token
 
@@ -135,14 +136,14 @@ Letztlich gibt es eine Vielzahl verschiedener Grant Types - welchen soll man nun
 
 #### Implicit Grant Type
 
-* dieser Flow kommt zum Einsatz, wenn Resource Owner und Client auf EINEM System betrieben werden und nicht physikalisch getrennt sind (z. B. JavaScript-Fat-Client-Anwendung, die auf die Protected Resource zugreift)
+* dieser Flow kommt zum Einsatz, wenn Resource Owner und Client auf EINEM System im Front-Channel betrieben werden und nicht physikalisch getrennt sind (z. B. JavaScript-Fat-Client-Anwendung, die auf die Protected Resource zugreift)
 * logischerweise kommt hierbei kein Authorization Code zum Einsatz - es werden ausschließlich Access Tokens verwendet, denn die Motivation für den Authorization Codes ist ja gerade eine eine Hürde zwischen dem Nutzer (der evtl. gar nicht der wahre Resource Owner ist) und dem Client aufzubauen. Wenn beides eins ist, macht diese Hürde keinen Sinn mehr.
   * Access Codes werden direkt nach Authentifizierung und Authorisierung durch den Resource Owner ausgestellt ... der Client muß keine Umwandlung (und somit auch keine Authentifizierung am Authorization Server durchführen)
 * es werden keine Refresh Tokens verwendet, weil in diesem Szenario davon auszugehen ist, daß die Resource Owner jederzeit erreichbar ist (er bedient ja den Client interaktiv), um einen neuen Access Token per interaktiver Re-Authorisierung auszustellen
 
 #### Client Credential Grant Type
 
-* dieser Flow kommt zum Einsatz, wenn der Resource Owner nicht interaktiv integriert werden kann, weil sich beispielsweise Microservices im Backend einer komplexen Landschaft gegenseitig aufrufen
+* dieser Flow kommt zum Einsatz, wenn der Resource Owner nicht interaktiv integriert werden kann, weil sich beispielsweise Microservices im Backend einer komplexen Landschaft gegenseitig aufrufen. Es gibt in diesem Szenario keinen Front-Channel, sondern nur den Back-Channel. Die Clients arbeiten in diesem Fall auf eigene Rechnung).
 * logischerweise kommt hierbei kein Authorization Code zum Einsatz - es werden ausschließlich Access Tokens verwendet, denn die Motivation für den Authorization Codes ist ja gerade eine eine Hürde zwischen dem Nutzer (der evtl. gar nicht der wahre Resource Owner ist) und dem Client aufzubauen. Wenn beides eins ist, macht diese Hürde keinen Sinn mehr.
 * es werden keine Refresh Tokens verwendet, weil der Client in diesem Szenario jederzeit selbständig einen neuen Access Token ausstellen lassen kann
 
@@ -169,7 +170,7 @@ Kommunikation des Clients mit Authorization Server und Protected Resource.
 ### Was ist OAuth 2
 
 * User-to-System-Authorization-Delegation
-* alle beteiligten Stakeholder sprechen über HTTP miteinander (auch der Resource Owner ... über den Browser) - da Geheimnisse ausgetauscht werden ist HTTPS erforderlich (oder nur empfohlen?)
+* alle beteiligten Stakeholder sprechen über HTTP miteinander (auch der Resource Owner ... über den Browser) - da Geheimnisse ausgetauscht werden wird HTTPS empfohlen
   * HTTP-Redirects wird verwendet, um die Stakeholder über den Resource Owner zu verbinden und die Daten (Scope, State, Authorization Code, Tokens, ...) auszutauschen
 * Protokoll (wie interagieren die Stakeholder, um ein Access Token zu erhalten?) und Framework (es gibt verschiedene Use-Cases in Form von Grant Types und innerhalb der Grant Types gibt es noch weitere Freiheitsgrade) - daraus resultiert eine entsprechende Komplexität und Fallstricke (Do's and Don'ts), d. h. entscheidet man sich für OAuth2, dann hat man damit eine prinzipielle Richtung vorgegeben, aber noch nicht alle Details festgelegt
   * Beispiel: das Format und der Inhalt der Access Tokens ist nicht spezifiziert - es kann sich um einen einfachen String handelt, es kann aber auch ein SAML- oder JWT-Token (o. ä.) sein
@@ -179,6 +180,7 @@ Kommunikation des Clients mit Authorization Server und Protected Resource.
 
 * User-to-User-Authorization-Delegation
 * kein Authentication Protokoll, obwohl Authentifizierung im Protokoll eine wichtiges Rolle spielt (Resource Owner am Authorization Server UND Client am Authorization Server) ... [OpenID Connect](openIDconnect.md) verwendet OAuth 2, um ein Authentication Protocol zu formen
+  > "Much of the confusion comes from the fact that OAuth 2.0 is commonly used inside of authentication protocols, and that OAuth 2.0 embeds several authentication events inside of a regular OAuth 2.0 process." ([Buch OAuth2 in Action](https://livebook.manning.com/#!/book/oauth-2-in-action/chapter-13/))
 * OAuth 2 definiert nicht das Token Format (im Gegensatz zu anderen Security Protocols wie SAML, Kerberos WS-*)
 * Nutzung außerhalb von HTTP ist nicht vorgesehen
 * kryptografische Verfahren sind nicht vorgegeben
@@ -207,7 +209,7 @@ Hierduch werden drei Services gestartet (ACHTUNG: in diesem Demo-Szenario wird k
 * Authorization-Server: http://localhost:9001
 * Protected Resource: http://localhost:9002
 
-Eine OAuth2 Transaktion läuft folgendermaßen ab:
+Eine OAuth2 Authorization Code Grant Type Flow läuft folgendermaßen ab:
 
 1. Resource Owner beauftragt den Client in seinem Sinne die Protected Resource zu verwenden
 2. Client beauftragt den Authorization Server damit mit dem Resource Owner eine Authorisierung durchzuführen
@@ -222,6 +224,10 @@ Eine OAuth2 Transaktion läuft folgendermaßen ab:
 5. Client zeigt den Access Token vor, um auf die Protected Resource zugreifen zu können
 6. Protected Resource prüft die Gültigkeit des Tokens und überprüft, ob der Scope ausreichend ist, um den Zugriff zu erlauben
    * evtl. wird die Protected Resource den Authorization Server kontaktieren, um die Gültigkeit des Tokens zu prüfen und den Scope zu ermitteln (sofern diese Information nicht im Token inkludiert ist)
+
+Siehe [RFC 6749](https://tools.ietf.org/html/rfc6749)
+
+![OAuth2 Authorization Code Grant Type Flow](images/rfc6749_controlFlow_authorizationCodeGrantType.png)
 
 ### Tokenerstellung
 
@@ -250,3 +256,14 @@ Es gibt drei verschiedene Client-Typen, die unterschiedlich gut mit dem OAuth2 A
     * Implicit: NICHT empfohlen
 
 In den Beispielen zum [Buch OAuth2 in Action](https://github.com/oauthinaction) sind Codebeispiele für alle Client-Arten zu finden.
+
+## Spring OAuth2 Support
+
+Spring stellt schon einige Packages im Zusammenhang mit OAuth2 zur Verfügung:
+
+* org.springframework.security.oauth2.client
+  * OAuth2RestTemplate
+* org.springframework.boot.autoconfigure.security.oauth2.client
+  * EnableOAuth2Sso
+
+Über entsprechende Properties in der `application.properties` (oder `application.yaml`) wie beispielsweise `security.oauth2.client.client-id` werden die Instanzen konfiguriert.
