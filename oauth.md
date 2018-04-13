@@ -267,3 +267,56 @@ Spring stellt schon einige Packages im Zusammenhang mit OAuth2 zur Verfügung:
   * EnableOAuth2Sso
 
 Über entsprechende Properties in der `application.properties` (oder `application.yaml`) wie beispielsweise `security.oauth2.client.client-id` werden die Instanzen konfiguriert.
+
+## OSS Projekte mit OAuth2 Support
+
+### anilallewar/microservices-basics-spring-boot
+
+* https://github.com/anilallewar/microservices-basics-spring-boot
+
+Blueprint für eine Microservice Anwendung basierend auf
+
+* Spring Boot 1.5.3.RELEASE
+* Spring Cloud Config
+* Zuul Api-gateway
+* Auth-server
+* Loadbalancer (Ribbon)
+* Angular
+* Gradle (aber es wird ein Wrapper mitgeliefert, so daß eine lokale Gradle-Installation nicht notwendig ist)
+
+Make it running:
+
+```bash
+git clone git@github.com:anilallewar/microservices-basics-spring-boot.git
+cd microservices-basics-spring-boot
+./build-all-projects.sh
+./docker-image-all-projects.sh
+cd docker-orchestration/docker-compose
+docker-compose up -d
+```
+
+Nach einiger Zeit sind dann die Services verfügbar.
+
+> ACHTUNG: es werden keine Ports explizit zum Docker-Host gemappt, damit keine Konflikte wegen belegter Ports entstehen ... deshalb muß man die Ports der UIs per `docker ps` rausfinden und zwar bei jedem Neustart:
+
+```bash
+╭─pfh@workbench ~/src/spring-projects/microservices-basics-spring-boot  ‹master*›
+╰─➤  docker ps
+CONTAINER ID        IMAGE                                         COMMAND                  PORTS                     NAMES
+02f9b1e03a5e        anilallewar/basic-user-webservice:0.0.1       "/bin/bash -c /app/r…"   0.0.0.0:32790->8080/tcp   docker-compose_userwebservice_1
+a986e6afe32a        anilallewar/basic-api-gateway:0.0.1           "/bin/bash -c /app/r…"   0.0.0.0:8765->8765/tcp    docker-compose_apigateway_1
+c4f350f62ea7        anilallewar/basic-web-portal:0.0.1            "/bin/bash -c /app/r…"   0.0.0.0:32789->8080/tcp   docker-compose_webportal_1
+9ed2246d03aa        anilallewar/basic-auth-server:0.0.1           "/bin/bash -c /app/r…"   0.0.0.0:32793->8899/tcp   docker-compose_authserver_1
+36b7f8b8c02a        anilallewar/basic-comments-webservice:0.0.1   "/bin/bash -c /app/r…"   0.0.0.0:32791->8080/tcp   docker-compose_commentswebservice_1
+a8630eb52acc        anilallewar/basic-task-webservice:0.0.1       "/bin/bash -c /app/r…"   0.0.0.0:32792->8080/tcp   docker-compose_taskwebservice_1
+d623ccf9869d        anilallewar/basic-webservice-registry:0.0.1   "/bin/bash -c /app/r…"   0.0.0.0:8761->8761/tcp    docker-compose_eurekaregistry_1
+40e4d5c9257e        anilallewar/basic-zipkin-server:0.0.1         "/bin/bash -c /app/r…"   0.0.0.0:9411->9411/tcp    docker-compose_zipkinserver_1
+7ebffb965314        anilallewar/basic-config-server:0.0.1         "/bin/bash -c /app/r…"   0.0.0.0:32788->8888/tcp   docker-compose_configserver_1
+6069e9724730        mysql:latest                                  "docker-entrypoint.s…"   0.0.0.0:32787->3306/tcp   docker-compose_mysqldb_1
+```
+
+In diesem Fall würde man die Services hierüber finden:
+
+* Web-Portal: http://localhost:32789
+
+Leider hat das Login zu einem Error geführt.

@@ -187,16 +187,27 @@ Meine Erklärungen fallen hier recht kurz aus, weil der Code die Dokumentation i
 
 ## Pflege des Systems
 
-### Upgrade Docker
+### Upgrade Docker 17.05 => 17.12-ce
 
 * https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 
 Ich bin obiger Installationsanleitung gefolgt, um Docker von 17.05 auf 17.12 upzugraden. Hierzu deinstallierte ich zunächst die alte Version (`sudo apt-get remove docker docker-engine docker.io`) und installierte anschließend - nach Integration der richtigen Repositories - die neue. Ging problemlos.
 
+### Upgrade Docker 17.12-ce => 18.03-ce
+
+* https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
+
+* `sudo apt-get update`
+* über `apt-cache madison docker-ce` die verfügbaren Versionen anzeigen
+* die gewünschte Version per `sudo apt-get install docker-ce=18.03.0~ce-0~ubuntu` installieren
+
+### Upgrade Docker-Compose
+
+[siehe Docker-Compose Abschnitt](docker_compose.md)
+
 ### Upgrade awesome
 
 * https://askubuntu.com/questions/879480/how-to-install-the-latest-awesome-window-manager
-
 
 ---
 

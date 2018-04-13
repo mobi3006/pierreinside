@@ -19,7 +19,7 @@ public class MyApplicationTest {
 
     @Autowired
     private MyService service;
-    
+
     @Test
     public void testServiceCall() {
         service.method();

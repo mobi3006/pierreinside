@@ -176,9 +176,11 @@ Aus meiner Sicht hat das - zumindest solange man sich noch in einer Development-
 
 ### Maven builds Docker Image
 
-Maven Plugin verwedenden, um beim Bau des Assembly-Artefakts der Anwendnung ein entsprechendes Docker Image zu bauen.
+Maven Plugins (z. B. com.spotify#docker-maven-plugin) helfen beim Bau eines Docker-Images für ein Assembly-Artefakts.
 
-Bisher konnte ich mich mit dem Ansatz noch nicht anfreunden, weil zum Zeitpunkt des Builds des Anwendnungs-Artefakts das Skripting der Docker-Infrastruktur (``Dockerfile``, ``docker-entrypoint.sh``) noch nicht fertig sind. Die Wahrscheinlichkeit ist hoch, daß die erzeugten Docker Images nutzlos sind.
+Bisher konnte ich mich mit dem Ansatz zum Entwicklungszeitpunkt noch nicht anfreunden, weil zum Zeitpunkt des Builds des Anwendnungs-Artefakts das Skripting der Docker-Infrastruktur (``Dockerfile``, ``docker-entrypoint.sh``) evtl. noch nicht fertig sind. Die Wahrscheinlichkeit ist hoch, daß die erzeugten Docker Images nutzlos sind. Stattdessen könnte man - ähnlich wie bei einem Application-Server - das Docker-Images als PaaS betreiben, d. h. man contributed das zu deployende Artefakt über ein Volume in den Container und startet es. Im Stile eines Open-Containers.
+
+Wenn es dann allerdings ins Releasing einer Anwendung geht, dann macht dieser natürlich Sinn, denn hier möchten man die Docker-Images abschließen - niemand soll die zu startende Anwendung ändern können. Das Artefakt soll FEST mit dem Image verbacken sein.
 
 ### Entscheidung
 

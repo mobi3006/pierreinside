@@ -162,7 +162,7 @@
     * [4k](monitor_4k.md)
   * Fahrrad
     * [Jonas 2018](mountainbike_2018.md)
-  * [Spielekonsole]
+  * Spielekonsole
     * [2017](spielekonsole_2017.md)
       * [Playstation 4](playstation.md)
   * [AV Receiver](avReceiver.md)

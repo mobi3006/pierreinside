@@ -7,18 +7,21 @@ Das 24 Zoll Specialized Rad mit einem sehr kleinen Rahmen (32 cm Rahmenhöhe) is
 ## Anforderungen
 
 * 26 Zoll
-* Körpergröße 150 cm ... die Empfehlungen gehen auseinander: 34 bis 38 cm ... auf 45 cm Rad sieht es aber nicht zu groß aus ...
+* Körpergröße 150 cm - Rahmenhöhe:
   * Bulls verbaut: 41, 46, 51, 56 cm
   * CUBE verbaut: 36, 41, 43, 46 cm
   * Haibike verbaut: 35, 40, 45, 50 cm
   * wichtiges Kriterium: Knie sollte in unterer Pedalposition fast durchgestreckt sein
   * mit Füßen gerade so den Boden berühren
-* Schaltung mit Drehgriffen
+  * ACHTUNG:
+    * die Empfehlungen der Hersteller gehen auseinander: 34 bis 38 cm ... auf einem 45 cm Rad sieht es aber nicht zu groß aus ...
+    * Frog empfiehl die Beininnenlänge zu verwenden ... dementsprechend hätte mein Sohn mit 65cm Beininnenlänge ein Frog 63 oder 68 nehmen sollen ... für ein Frog 73 war er eigentlich schon zu groß ... das Frog 78 passt perfekt.
+      * es lohnt sich wirklich bei einem lokalen Händler eine Probefahrt zu machen!!!
 * KEINE Scheibenbremse
   * Kinder gehen nicht sehr sorgfältig mit den Rädern um und dadurch können die Scheiben leicht verbiegen ... kein Spaß, wenn die Scheibe dann schleift
   * lieber das Geld in eine bessere Schaltung bzw. V-Brake investieren
 * KEIN Fully ... um die gefederte Vorderradgabel kommt man mittlerweile wohl nicht rum
-* Nabendynamo mit Licht
+* Nabendynamo mit Licht (Kabel sollten im Rahmen verlaufen)
 
 ## Bulls Sharptail 1 neon green
 
