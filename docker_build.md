@@ -128,17 +128,17 @@ docker run image:latest
 
 erfolgt dann automatisch ein Download der neuesten Version.
 
-### GitHub - DockerHub
+### CI: GitHub - DockerHub
 
 DockerHub bietet schon eine einfache CI-Chain für GitHub-Docker-Repositories. Hierzu muß man im DockerHub das GitHub-Repository verlinken und einen Automated Build konfigurieren.
 
-Travis bietet sicherlich noch mehr Funktionalität - DockerHub ist aber ein guter Einstieg in die Welte der Docker-CI. 
+Travis bietet sicherlich noch mehr Funktionalität - DockerHub ist aber ein guter Einstieg in die Welte der Docker-CI.
 
 ### GitHub - Travis - DockerHub
 
 Diese Toolchain bildet CI für Docker-Images komfortabel ab. Im GitHub-Projekt wird eine `.travis.yml` im Root Verzeichnis erwartet. Diese Datei kündigt an, daß es sich um einen Docker-Service handelt und was beim Build geschehen soll (hier am Beispiel meines Forks von `groovy/docker-groovy` - https://github.com/mobi3006/docker-groovy):
 
-```
+```yml
 language: bash
 services: docker
 ...
@@ -166,7 +166,7 @@ Als ich mit Docker meine erste Landschaft (``docker-compose``) aufgebaut habe, s
 * Entrypoint Script (``docker-entrypoint.sh``)
 * containerContributions
 
-Das Image enthielt nicht das Artefakt der zu startenden Anwendnung. Stattdessen wurde das Artefakt (durch ein ``prepare-deployment.sh`` Skript) in ``containerContributions``  abgelegt und das Entrypoint Skript zog sich die zu installierende Anwendung aus ``containerContributions``.
+Das Image enthielt NICHT das Artefakt der zu startenden Anwendnung. Stattdessen wurde das Artefakt (durch ein ``prepare-deployment.sh`` Skript) in ``containerContributions``  abgelegt und das Entrypoint Skript zog sich die zu installierende Anwendung aus ``containerContributions``.
 
 Aus meiner Sicht hat das - zumindest solange man sich noch in einer Development-Phaase befindet folgende Vorteile:
 

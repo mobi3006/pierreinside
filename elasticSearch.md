@@ -109,7 +109,7 @@ Hierzu ist naürlich schon mehr Kontextwissen erforderlich (deutsche Grammatik �
 
 Ein Primary Shard kann beliebig viele Replica-Shards haben (kann auch beliebig geändert werden), die logischerweise auf separaten Knoten liegen sollten. Ändert man die Anzahl der Replica-Shards zur Laufzeit, so stellt das System den gewünschten Zustand im Laufe der Zeit selbst her. Sinkt die die Anzahl der aktiven Replica-Shards unter einen bestimmten Wert (hierfür gibt es eine entsprechende Formel in Abhängigkeit der definierten Replica-Shards - Stichwort *Quorum*), so erlaubt ElasticSearch keine Updates mehr. Das ist ein Schutzmechanismus, um Datenverlust zu verhindern.
 
-ElasticSearch hat noch weitere Health-Metriken, die zu einer Abschaltung der Update-Fähigkeit führen. Beispielsweise sollte das Filesystem noch genpügend Festplattenspeicher haben ... ansonsten droht Abschaltung.
+ElasticSearch hat noch weitere Health-Metriken, die zu einer Abschaltung der Update-Fähigkeit führen. Beispielsweise sollte das Filesystem noch genügend Festplattenspeicher haben ... ansonsten droht Abschaltung.
 
 Sollte es dennoch mal zu Datenverlust kommen (alle Teile eines Shards sind nicht mehr verfügbar), so arbeitet ElasticSearch fehlertolerant weiter (kennzeichnet es aber in den Query-Results) ... Zeit für ein Restore des Backups.
 

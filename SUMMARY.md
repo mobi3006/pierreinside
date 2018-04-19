@@ -147,13 +147,15 @@
   * [Animationsfilme](animationsfilme.md)
 * Storage
   * [Synology](synology.md)
+* Collaboration
+  * [Microsoft Teams](microsoft_teams.md)
 * [Hausautomatisierung](homeAutomation.md)
   * [Raspberry Pi](raspberrypi.md)
   * [Heimnetzwerk](heimnetzwerk.md)
 * Misc
   * [iPad Pro](ipadPro.md)
   * [Projekt Sportstracker](projekt_sportstracker.md)
-  * [Handy]
+  * Handy
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
   * Laptop
@@ -171,4 +173,5 @@
   * [Hebe-Schiebetür](hebeSchiebetuer.md)
   * [Swimming Pool](swimmingPool.md)
   * [DFB Talentförderung](dfb_talentförderung.md)
+  * [Google Impact Challenge](googleImpactChallengeDeutschland.md)
 * [Englisch](englisch.md)

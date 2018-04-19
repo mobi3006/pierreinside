@@ -2,7 +2,8 @@
 
 ---
 
-# Distributionen
+## Distributionen
+
 Es gibt u. a. folgende Distributionen
 
 * Community MySQL ... von Oracle
@@ -20,16 +21,20 @@ Diese Distributionenn sind zueinander kompatibel, so daß man eine andere Distri
 
 ---
 
-# Installation
+## Installation
+
 Unter Linux gibt es zwei Paketquellen:
+
 * RECOMMENDED: offizielle MySQL Pakete ... die Installation läuft über das *MySQL APT Repository* 
 * Pakete des Distributionsanbieters
 
-## MySQL APT Repository
+### MySQL APT Repository
+
 * http://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/
 * http://dev.mysql.com/downloads/repo/apt/
 
 Enthält:
+
 * verschiedene MySQL Server Versionen
 * MySQL Workbench
 * MySQL Utilities
@@ -37,13 +42,15 @@ Enthält:
 * MySQL Router
 
 Schritt für Schritt:
+
 * download des *MySQL APT Repository* von hier: http://dev.mysql.com/downloads/repo/apt/
   * hierzu muss man sich bei Oracle registrieren 
 * *MySQL APT Repository* installieren: ``sudo dpkg -i mysql-apt-config_0.8.0-1_all.deb``
   * ACHTUNG: damit wird das System (die Repo-Konfiguration des Linux-Systems) nur so konfiguriert, daß man die offiziellen MySQL Pakete installieren kann
 * ``sudo apt-get update``, um die MySQL Repository Informationen upzudaten
 
-## User einrichten
+### User einrichten
+
 Bei der Einrcihtung eines Users gibt man den Usernamen und den Host an, mit dem man zugreifen möchte. Verwendet man
 
 ```
@@ -62,12 +69,14 @@ Das hat aber scheinbar nichts mir der Bindung des Kommunikationsports an das Net
 
 ---
 
-# Konfiguration
+## Konfiguration
+
 Erfolgt über ``/etc/mysql/my.cnf``, die aber wiederum weitere ``*.cnf`` Dateien in ``/etc/mysql/conf.d/`` berücksichtigt und miteinander abmischt ... die Dateien in ``/etc/mysql/conf.d/`` überschreiben die Werte in ``/etc/mysql/my.cnf``.
 
 ---
 
-# MySQL Workbench
+## MySQL Workbench
+
 * https://www.youtube.com/watch?v=X_umYKqKaF0
 
 MySQL stellt mit der Workbench auch Tooling für Developer bereit, um
@@ -76,45 +85,52 @@ MySQL stellt mit der Workbench auch Tooling für Developer bereit, um
 * Datenbankabfragen auszuführen
 * Performanceanalysen durchzuführen
 
-## Installation
+### Installation
+
 * http://dev.mysql.com/doc/workbench/en/wb-installing-linux.html
 
 Man sollte nach Möglichkeit die Pakete von MySQL selbst verwenden (aka ``mysql-workbench-community``) anstatt die - teilweise veralteten - Pakete des Distributionsanbieters (aka ``mysql-workbench``).
 
 DESHALB:
+
 * das MySQL APT Repository installieren, um die offiziellen Pakete zu bekommen
   * siehe Installation von MySQL (weiter oben)
 * ``sudo apt-get install mysql-workbench-community``
 * MySQL Workbench starten: ``mysql-workbench``
 
-## Performance Analyse
+### Performance Analyse
+
 siehe eigene Seite
 
 ---
 
-# Storage Engine
+## Storage Engine
+
 MySQL bietet mehrere Storage Engines an, die teilweise hoistorisch gewachsen sind - teilweise aber auch unterschiedliche Einsatzbereiche haben:
 
 * InnoDB: transaktional
 * MyISAM: nicht transaktional
 
-## InnoDB
+### InnoDB
+
 * jede Tabelle landet in einer eigenen Datei, die einen Tablespace repräsentiert (zumindest bei der Einstellung `innodb_file_per_table=1`) - ein Aufteilen auf verschiedene Festplatten (schnell/langsam) mit jeweils eigenen Festplattencontrollern (Zugriffsparallelisiserung) ist dadurch möglich
 * Row-Locks
 * ACID Support
 
-## MyISAM
+### MyISAM
+
 * kennt nur Table-Locks keine Row-Locks ... schlechte Performance in Multi-Session-Szenarien
 
 ---
 
-# Information Schema
-MySQL hält neben dem *Performance Schema* (siehe unten) auch das sog. *Information Schema*. In diesem findet man beispielsweise die Größe der Datenbank und die Anzahl der Zeilen. 
+## Information Schema
+
+MySQL hält neben dem *Performance Schema* (siehe unten) auch das sog. *Information Schema*. In diesem findet man beispielsweise die Größe der Datenbank und die Anzahl der Zeilen.
 
 > ACHTUNG: es handelt sich hier nur um ungefähre Angaben ... insbes. bei der Zeilenanzahl wird man das schnell feststellen. Diese Daten verändern sich auch, wenn man ein ``ANALYZE TABLE`` durchführt (und das sollte man auch tatsächlich tun bevor man verlässliche Angaben haben will!!!).
 
 ```
-SELECT 
+SELECT
 	TABLE_NAME, 
     table_rows, 
     round(((data_length) / 1024 / 1024),2) "Data Length in MB" , 
@@ -125,13 +141,15 @@ WHERE table_schema = "mydatabase" and
 	  round(((data_length + index_length) / 1024 / 1024),2) > 10
 ```
 
-> ACHTUNG: 
+> ACHTUNG:
+>
 > * man sollte vor der Nutzung des Information Schema ein Analyze Tables machen, ansonsten sind die Werte nicht aktuell
 > * `table_rows` kann man nicht gebrauchen ... es handelt sich um einen hochgerechneten Wert (aus der `data_length` und einem durchschnittlichen Datensatz
 
 ---
 
-## MySQL Enterprise Manager
+### MySQL Enterprise Manager
+
 * https://www.mysql.com/products/enterprise/monitor.html
 * Youtube Video: https://www.youtube.com/watch?v=e5HhC0XiioY
 
@@ -139,41 +157,48 @@ Da MySQL mittlerweile zu Oracle gehört, sieht der MySQL Enterprise Manager fast
 
 Mit diesem Tool sind gezielte Realtime-Analysen möglich, um die Hotspots auf der Datenbank zu finden (Explain-Plans, Index-Nutzung, IO auf Filesystem und Netzwerk).
 
-## MySQL Workbench
+### MySQL Workbench
+
 * https://www.mysql.de/products/workbench/performance/
 
 ---
 
-# Optimierung
+## Optimierung
+
 * http://dev.mysql.com/doc/refman/5.7/en/mysqlcheck.html
 
 Die SQL-Engine benötigt Informationen über die Datenbelegung der Tabellen, um den besten Execution Plan berechnen zu können. Das liegt daran, daß je nach Belegung unterschiedliche Indexzugriffe optimal sind.
 
 Bei Oracle verwendet man den sog. *Gather Stats Job* ... bei MySQL verwendet man ``mysqlcheck`` mit ``--analyze`` und ``--optimize`` Option:
 
-```
+```bash
 mysqlcheck --analyze --databases mydatabase --user root -p
 ```
 
 ---
 
-# MySQL-Server im Docker Container
+## MySQL-Server im Docker Container
+
 Vermutlich wird man die Datenbank-Dateien auf den Docker-Host legen wollen, um den MySQL-Container wegwerfen und neu deployen zu können, ohne die Daten zu verlieren.
 
-Hier läuft man allerdings schnell in Permission-Probleme, weil die User-Ids auf dem Docker-Host nicht mit den User-Ids im Docker-Container übereinstimmen und man somit auf dem Docker-Host nur als ``root`` volle Rechte auf die Dateien hat (um beispielsweise die Datenbank-Dateien zu löschen).  
+Hier läuft man allerdings schnell in Permission-Probleme, weil die User-Ids auf dem Docker-Host nicht mit den User-Ids im Docker-Container übereinstimmen und man somit auf dem Docker-Host nur als ``root`` volle Rechte auf die Dateien hat (um beispielsweise die Datenbank-Dateien zu löschen).
 
-## Backup und Restore
+### Backup und Restore
+
 * http://depressiverobot.com/2015/02/19/mysql-dump-docker.html
 
 ---
 
-# MySQL-Tooling im Docker Container
+## MySQL-Tooling im Docker Container
+
 Nicht jeder hat die MySQL Tools auf seinem Rechner installiert. Was liegt da näher als einen MySQL-Container zu starten und die Tools daraus zu nutzen.
-## Zugriff über MySQL Client aus Docker Container
+
+### Zugriff über MySQL Client aus Docker Container
+
 Das Tool `mysql` ist ein CLI zum Zugrifdf auf MySQL Datenbanken:
 
-```
-pfh@workbench ~ % docker run mysql:5.7 \ 
+```bash
+pfh@workbench ~ % docker run mysql:5.7 \
    mysql \
       --protocol=TCP \
       --host="10.90.61.109" \
@@ -194,7 +219,8 @@ siehe auch http://dev.mysql.com/doc/refman/5.7/en/problems-connecting.html
 
 ---
 
-# FAQ
+## FAQ
+
 * https://dev.mysql.com/doc/refman/5.6/en/problems-connecting.html
 
 **Frage 1:** Ich habe einen MySQL Server im Docker-Container laufen - gestartet per ``docker run --name piedb -e MYSQL_ROOT_PASSWORD=Test1234 -d -P mysql:5.7``. Der Server startet auch korrekt 

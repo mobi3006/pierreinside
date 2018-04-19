@@ -125,9 +125,9 @@ Authentifizierung kann über folgende OAuth2-Grant-Types erfolgen:
 
 * [... to be certified OpenID Provider or certified Relying Party](http://openid.net/certification/)
 
-## OpenID Providers
+## OpenID im echten Leben
 
-### Google
+### Google als OpenID Provider
 
 * [Google OpenID Provider in Action ... sehr schön mit Beispiel-Requests](https://developers.google.com/identity/protocols/OpenIDConnect)
 * [Google OAuth Playground](https://developers.google.com/oauthplayground)
@@ -149,3 +149,36 @@ hinterlegt werden.
 * Todist
 * Google via Google's OpenID Provider
 * Facebook via Facebook Connect (Facebook nutzt nicht OpenID Connect, sondern [Facebook Connect](https://developers.facebook.com/docs/facebook-login))
+
+### Microsoft 365
+
+* http://microsoft365.com/
+
+> ACHTUNG: Microsoft 365 basiert auf [OneDrive for Business](https://onedrive.live.com/about/de-DE/business/) ... ist nicht zu verwechseln mit [OneDrive](https://onedrive.live.com/about/de-de/), das für Privatanwender konzipiert ist.
+
+#### Microsoft OpenID Connect Provider
+
+* [Microsoft-Dokumentation](https://docs.microsoft.com/de-de/azure/active-directory/develop/active-directory-protocols-openid-connect-code)
+* Entwicklerinfos zur Nutzung des Micosoft OpenID Connect Providers: https://developer.microsoft.com/de-de/graph
+
+Die Login Page des Microsoft OpenID Connect Providers befindet sich unter https://login.microsoftonline.com. Die OAuth2-Login-Seite erlaubt die Selektion verschiedener Accounts.
+
+> Ein Account wird repräsentiert über einen Identifikator - hier ist Email, Phone und Skype-ID zulässig
+
+Nach erfolgreicher Authentifizierung mit dem gewählten Account wird mir angezeigt für welches Unternehmen ich mich eingeloggt habe und werde dann auf Grundlage der `redirect_uri` zu der ursprünglichen Seite gemäß OpenID Connect redirected.
+
+#### Landing Page
+
+Die Landing Page (von dort aus kann man in alle Microsoft Anwendungen springen) befindet sich auf https://www.office.com. Der Zugriff ist geschützt, d. h. man sieht die Applicationen erst nach erfolgreicher Anmeldung ... der Anmeldelink (https://www.office.com/login) redirected auf den Microsoft OpenID Connect Provider (https://login.microsoftonline.com) mit den entsprechenden OpenID Connect URL Parametern (u. a. `response_type=code+id_token`). Nach erfolgreicher Anmeldung gelangt man auf die Landing Page.
+
+#### Deep Links zum Einstieg
+
+Verwendet man spezielle Links der Anwendungen (Outlook: https://outlook.office365.com, Office: https://office.live.com, Teams: https://teams.microsoft.com, Sharepoint: https://trinso-my.sharepoint.com) für den ersten Einstieg, so verhält sich die Anwendung wie beim Zugriff auf die Landing Page ... Redirect zum Microsoft OpenID Connect Provider.
+
+#### Wechsel zwischen Apps
+
+Beim Wechsel zwischen Apps gibt es Unterschiede im Verhalten:
+
+* bleibt man innerhalb einer Security-Domain, z. B. beim Wechsel von Word (https://office.live.com/start/Word.aspx?auth=2) nach Excel (https://office.live.com/start/Excel.aspx?auth=2&nf=1) bleibt der Client (office.live.com) gleich und aufgrund des gemeinsamen Session-Handlings im Backend kann auf ein Redirect über den Microsoft OpenID Connect Provider verzichtet werden - das Backend erkennt den User als bereits identifiziert
+* wechselt man die Security-Domain hingegen zum ersten Mal (!!!), z. B. beim Wechsel von Word (https://office.live.com/start/Word.aspx?auth=2) nach OneDrive  (https://trinso-my.sharepoint.com/), dann erfolgt hingegeben ein Redirect über den Microsoft OpenID Connect Provider aus (der allerdings aufgrunds des impliziten Single-Sign-On Konzepts geleich wieder zu einem Redirect führt ... die Seite flackert und es dauert recht lang)
+  * wenn man sich in einer Security-Domain bereits authentifiziert hat (über den Microsoft OpenID Connect Provider Redirect-Mechanismus), dann existiert im Backend eine Session und über den Cookie-Mechanismus kann die auch immer wieder identifiziert werden, so daß die Redirects stetig abnehmen - Microsoft 365 lässt sich dann flüssiger bedienen.

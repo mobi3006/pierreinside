@@ -1,7 +1,5 @@
 # Spring Boot Testing
 
----
-
 ## Integrationtesting
 
 * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html
@@ -119,9 +117,9 @@ String requestInJsonFormat =
     "{\"question\":\"What is your name?\"}";
 HttpEntity<String> requestEntity = 
     new HttpEntity<String>(requestInJsonFormat, headers);
-String answer = 
+String answer =
     restTemplate.postForObject(
-        "http://localhost/orakel", 
+        "http://localhost/orakel",
         requestEntity,
         String.class);
 ```
