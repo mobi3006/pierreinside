@@ -49,7 +49,13 @@ und das bedeutet ganz konkret
 
 ### Castle-Approach
 
-Eins der wesentlichen Probleme in den OAuth-Szenarien ist, daß viele Stakeholder beteiligt sind, die allesamt (abgesehen von der Protected Resource) Angreifer sein könnten. Deshalb wird versucht, implizite Trustbeziehungen zu vermeiden und stattdessen Vertrauen nur auf Grundlage nachweisbarer Identifizierung (durch Authentifizierung) zu gewähren. Zudem wird versucht, mehrere Hürden aufzubauen, so daß ein Durchbrechen EINER Hürde nicht zu einem erfolgreichen Angriff führt ([Defense-in-Depth-Prinzip aka Castle-Approach](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)).
+Eins der wesentlichen Probleme in den OAuth-Szenarien ist, daß viele Stakeholder beteiligt sind, die allesamt (abgesehen von der Protected Resource) Angreifer sein könnten. Deshalb wird versucht, implizite Trustbeziehungen (blindes Vertrauen) zu vermeiden und stattdessen Vertrauen nur auf Grundlage vorweisbarer "Geheimnisse" zu gewähren (z. B. [CSRF-Token](https://de.wikipedia.org/wiki/Cross-Site-Request-Forgery)). Vertrauen ist gut, Kontrolle ist besser.
+
+Zudem wird immer versucht, mehrere Hürden (vergleichbar mehrere Mauern) aufzubauen, so daß ein Durchbrechen EINER Hürde nicht zu einem erfolgreichen Angriff führt ([Defense-in-Depth-Prinzip aka Castle-Approach](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)).
+
+> Beispiel: einen CSRF-Angriff kann man dadurch erschweren, daß man neben dem Cookie für Server-Session noch einen URL-Parameter "CSRF-Token" mitgibt. Dieser Token wurde bei der Session-Erzeugung (z. B. beim Login) erzeugt und in der serverseitigen Session gespeichert. Kommt nun ein Request mit dem Session-Cookie, dann reicht das noch nicht aus, um die Session wirklich zu nutzen. Stattdessen muß der Requester noch einen CSRF-Token (im [OpenID Connect Protokoll den State-Token](openIDconnect.md)) mitliefern, mit dem der Requester nachweisen, kann, daß er den ursprünglichen Login auch tatsächlich gemacht hat.
+
+In diesem Beispiel reicht also ein "Geheimnis" (Cookie) nicht aus, es muß noch ein anderes geliefert werden.
 
 ### Einfache Clients
 
@@ -95,7 +101,7 @@ OAuth 2 versucht die Komplexität aus den Clients rauszuhalten und in die Server
 * darf nur einmalig verwendet werden
 * hiermit kann der Client zu jedem beliebigen Zeitpunkt EINMALIG einen Access Code vom Authorization Server beziehen
 * ist nicht das endgültige Authorization Object, sondern nur eine Zwischenlösung
-  * Hintergrund: der Authorization Code kommt vom Resource Owner (per HTTP-redirect transportiert), der evtl. ein Angreifer ist bzw. einen unsicheren Rechner hat - der Authorization Code könnte korrumpiert sein
+  * Hintergrund: der Authorization Code kommt vom Resource Owner (per HTTP-Redirect transportiert), der evtl. ein Angreifer ist bzw. einen unsicheren Rechner hat - der Authorization Code könnte korrumpiert sein
 
 #### Access Token
 

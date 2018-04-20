@@ -1,5 +1,7 @@
 # OpenID Connect
 
+* [Core Protocol](http://openid.net/specs/openid-connect-core-1_0.html)
+
 ## OAuth 2 vs. OpenID Connect
 
 OpenID Connect = OAuth2 + OpenID Provider
@@ -60,14 +62,43 @@ Provider eines Service möchten evtl. kein eigenes User-Management betreiben, um
 ### ID Token
 
 * Identity Token
-* ID Token wird nach der Identifizierung per Authentifizierung (des menschlichen Benutzers) durch den OpenID Provider (= Identity Provider) in Form eines JSON Web Tokens (JWT) an die Relying Party (die den OpenID Provider im Sinne eines Authentication-as-a-Service genutzt hat) übergeben. Die Relying Party nutzt den ID Token evtl. um eine Session zu erzeugen, aber danach nicht mehr (ist eher ein Wegwerfprodukt mit kurzer Laufzeit - wird auch )
+* ID Token wird nach der Identifizierung per Authentifizierung (des menschlichen Benutzers) durch den OpenID Provider (= Identity Provider) in Form eines JSON Web Tokens (JWT) an die Relying Party (die den OpenID Provider im Sinne eines Authentication-as-a-Service genutzt hat) übergeben. Die Relying Party nutzt den ID Token evtl. um eine Session für den authentifizierten User zu erzeugen, aber danach nicht mehr (ist eher ein Wegwerfprodukt mit kurzer Laufzeit - wird auch )
 * ID Token enthält u. a. folgende Informationen:
   * Issuer
   * Gültigkeitsdauer
   * Subject (Identity)
   * Audience - intendierte Nutzer des Tokens
-  * Nonce
-  * Claims
+  * Nonce - siehe unten
+  * Claims = kategorisierte Informationen zur Identifizierung (z. B. über den User oder die Authentifizierung). Der Umfang wird durch den `scope` Paremeter definiert ... beim `scope=openid profile` sieht der JWT folgendermaßen aus (`profile` sorgt für den Abschnitt `userinfo`):
+
+    ```json
+    {
+    "response_type": "code id_token",
+    "client_id": "my_client",
+    "redirect_uri": "https://www.cachaca.de/cb",
+    "scope": "openid profile",
+    "state": "38469z24uhzg23",
+    "id_token":
+      {
+        "claims":
+          {
+            "auth_time": null,
+          },
+      },
+    "userinfo":
+      {
+        "claims":
+          {
+            "name": Pierre,
+            "nickname": {"optional": true},
+            "email": foo@bar.com,
+            "verified": null,
+            "picture": {"optional": true}
+          }
+      }
+    }
+    ```
+
 * signiert
 * verläßt aus Sicherheitsgründen niemals die Relying Party (abgesehen vom OpenID Provider kennt den ID Token niemand)
 * normalerweise kürzere Laufzeit als ein Access Token
@@ -77,17 +108,76 @@ Provider eines Service möchten evtl. kein eigenes User-Management betreiben, um
 * der OpenID Provider stellt diesen Endpunkt zur Verfügung, um Claims abzufragen
 * der Endpunkt ist eine Protected Resource im Sinne von OAuth2, d. h. beim Zugriff ist ein Access Token erforderlich
 
+### Scope
+
+* [Scope vs. Claim](https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/)
+
+Der `scope` bei der Authentifizierungsanfrage definiert den Inhalt des ID Tokens. Der ID-Token enthält minimal den Abschnitt `id_token` mit ein paar Claims.
+
+ABER auch:
+
+> "OpenID Connect Clients use scope values, as defined in Section 3.3 of OAuth 2.0 [RFC6749], to specify what access privileges are being requested for Access Tokens. The scopes associated with Access Tokens determine what resources will be available when they are used to access OAuth 2.0 protected endpoints. Protected Resource endpoints MAY perform different actions and return different information based on the scope values and other parameters used when requesting the presented Access Token." ([OpenID Connect Spezifikation - Scopes and Claims](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims))
+
 ### Claim
 
-* http://openid.net/specs/openid-connect-core-1_0.html#Claims
+* [OpenID Connect Spezifikation - Scopes and Claims](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
+* [OpenID Connect Spezifikation - Claims](http://openid.net/specs/openid-connect-core-1_0.html#Claims)
+* [Scope vs. Claim](https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/)
 
-Informationen über die Identity
+Beschreibt Informationen über die Identity. Bei `scope=profile` in der Authentifizierungsanfrage liefert den Abschnitt `userinfo` im JWT Token mit einigen Claims:
+
+```json
+"userinfo":
+  {
+    "claims":
+      {
+        "user_id": null,
+        "name": {"optional": true},
+        "nickname": {"optional": true},
+        "profile": {"optional": true},
+        "picture": {"optional": true},
+        "website": {"optional": true},
+        "gender":  {"optional": true},
+        "birthday":  {"optional": true},
+        "locale":  {"optional": true},
+        "zoneinfo":  {"optional": true},
+        "updated_time": {"optional": true}
+      }
+  }
+```
+
+Ein User kann evtl. mitbestimmen welche Informationen an eine Relying Party weitergegeben werden:
+
+> "In some cases, the End-User will be given the option to have the OpenID Provider decline to provide some or all information requested by RPs. To minimize the amount of information that the End-User is being asked to disclose, an RP can elect to only request a subset of the information available from the UserInfo Endpoint." ([OpenID Connect Spezifikation - Scopes and Claims](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims))
 
 ### Relying Party (RP)
 
 Client, der dem ID Token vertraut
 
-### Ablauf einer Authentifizierung/Authorisierung
+### State Token
+
+* https://developers.google.com/identity/protocols/OpenIDConnect#server-flow
+* [Cross-Site-Request-Forgery](https://de.wikipedia.org/wiki/Cross-Site-Request-Forgery)
+* [State vs. Nonce](https://stackoverflow.com/questions/46844285/difference-between-oauth-2-0-state-and-openid-nonce-parameter-why-state-cou)
+
+Dieser Token ist eine Information, die die Relying Party erstellt und an den OpenID Connect Provider per HTTP-Redirect austauscht. Die Information ist somit nur direkt Beteiligten und dem User (über den Redirect) bekannt. Ein unbeteiligter Dritter erhält die Information nicht, da auch [Query-Strings über HTTPS verschlüsselt sind](http://blog.httpwatch.com/2009/02/20/how-secure-are-query-strings-over-https/). Allerdings landen diese Informationen unverschlüsselt in den Logs des OpenID Providers (dem man allerdings vertraut) und in der Historie des User-Browsers (Redirect!!!) ... insofern ist dieser State Token kein richtiges Geheimnis.
+
+Nach erfolgreicher Anmeldung an einem Server (z. B. OpenID Connect Provider oder auch Relying Party) wird i. a. eine Session auf dem Server erzeugt und der Client erhält ein Cookie. Wenn der Client diesen Cookie im Request vorzeigt und die Session serverseitig noch valide ist, muß keine erneute Authentifizierung erfolgen. Ein Angreifer könnte nun einen Request gegen den Server auslösen (z. B. JavaScript App, andere Webseite, eMail-Link) und dieser Request würde im Security-Kontext des Client (des Users) laufen.
+
+Der State Token dient der Verhinderung eines solchen Angriffs ... der Angreifer kann nicht so einfach an den State Token kommen (der Token darf nicht im Cookie stecken, sondern muß als URL-Parameter transportiert werden). Ganz unmöglich ist das nicht, denn er wurde ja zumindest mal in den Browser des Users transportiert, aber es erhöht zumindest mal die Schwierigkeit. Somit weist der State nach, daß der Session-Cookie nicht mißbraucht wird, sondern tatsächlich von dem genutzt wird, der die Authentifizierung initiiert hat.
+
+### Nonce
+
+* [State vs. Nonce](https://stackoverflow.com/questions/46844285/difference-between-oauth-2-0-state-and-openid-nonce-parameter-why-state-cou)
+
+Die Nonce wird bei der Authentifizierungsanfrage der Relying Party erzeugt (z. B. eine GUID) und landet bei der Tokenerzeugung im ID Token. Die Relying Party prüft nach der Tokenerzeugung, ob das ID Token auch die notwendige Nonce enthält und sie somit den erzeugten Tokens trauen kann.
+
+Nonce ist ähnlich zu einem State Token, doch ist es eine Absicherung zwischen anderen Beteiligten:
+
+* das State-Token baut Vertrauen zwischen Relying Party und User auf. Es erschwert, daß der Aufrufer der Relying Party (der potentielle User ... der aber gar nicht der echte User ist), das Authentifizierungsvertrauen in Form des Session Cookies mißbraucht.
+* die Nonce baut Vertrauen zwischen Relying Party und OpenID Connect Provider auf. Hiermit wird sichergestellt, daß die ursprüngliche Authentiizierungsanfrage (der Relying Party über den User-Browser zum OpenID Connect Provider) und die zeitlich nachfolgende (in einem neuen Request) Tokenanfrage auch tatsächlich vom gleichen OpenID Connect Provider bearbeitet werden. Damit wird 
+
+## Ablauf einer Authentifizierung/Authorisierung
 
 * http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowSteps
 
@@ -121,26 +211,42 @@ Authentifizierung kann über folgende OAuth2-Grant-Types erfolgen:
 * [Hybrid Flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth)
   * basierend auf [OAuth 2.0 Multiple Response Type Encoding Practices](http://openid.net/specs/oauth-v2-multiple-response-types-1_0.html)
 
-## OpenID Certification
+## Getting Started
 
-* [... to be certified OpenID Provider or certified Relying Party](http://openid.net/certification/)
+* [sehr pragmatische Einführung von Google](https://developers.google.com/identity/protocols/OpenIDConnect)
 
-## OpenID im echten Leben
+Da OpenID Connect sehr beliebt ist, findet man bei vielen Cloud-Unternehmen (u. a. Microsoft, Google) Umsetzungen verschiedener Flows und auch sehr gute Dokumentationen.
 
 ### Google als OpenID Provider
 
 * [Google OpenID Provider in Action ... sehr schön mit Beispiel-Requests](https://developers.google.com/identity/protocols/OpenIDConnect)
-* [Google OAuth Playground](https://developers.google.com/oauthplayground)
+* [Google OAuth Playground - sehr gut](https://developers.google.com/oauthplayground)
 * [OpenID Connect certified](http://openid.net/certification/)
 
-Bevor ein Client den OpenID Provider von Google nutzen kann, muß bei Google eine Client Konfiguration angelegt werden, in der
+#### Nutzung als Software-Anbieter
+
+Jede Anwendung (= Client = Relying Party), die ein Login mit den Google-Credentials erlauben will, muß bei Google eine Client Konfiguration anlegen, in der
 
 * Credentials (clientID/username/password)
 * Redirect-URL
 * Branding (für die Login-Page)
   * natürlich muß die OAuth2 Login Page Vertrauen erwecken (schließlich soll der User hier seine Credentials preisgeben) - hier sollte also der OpenID Provider klar erkennbar sein (ordentliche URL, Server Zertifikat, ...)
 
-hinterlegt werden.
+abgelegt sind.
+
+#### Nutzung als User
+
+* [Verwaltung der zugelassenen Anwendungen](https://security.google.com/settings/security/permissions)
+
+Sobald eine Anwendung die Authentifizierung/Authorisierung vom User im OpenID Connect Stil erfragt, der User sich mit seinen Google Credentials authentifiziert und die Anwendung mit der gewünschten Berechtigung (im Screenshot "View your calenders") autorisiert
+
+![Authorisierung durch den Benutzer](images/openIdConnect_google_requestAuthorization.png)
+
+wird ein entsprechendes Authorisierungs-Profil für diese Anwendung im OpenID Connect Provider von Google angelegt. Diese Profile lassen sich [unter Google - My Account - Sign-In and Security](https://security.google.com/settings/security/permissions) verwalten (einsehen und löschen) pflegen - man kann eine Berchtigung also jederzeit wieder entfernen.
+
+![OpenIDConnect bei Google.png](images/openIdConnect_google.png)
+
+Der [Google-Playground](https://developers.google.com/oauthplayground) bietet ein nettes Tool, um der Playground-Webapplikation "Google OAuth 2.0 Playground" Zugriff auf die Google APIs (Calendar, eMail, ...) auszuprobieren.
 
 #### Protected Resource - Todoist
 
@@ -182,3 +288,7 @@ Beim Wechsel zwischen Apps gibt es Unterschiede im Verhalten:
 * bleibt man innerhalb einer Security-Domain, z. B. beim Wechsel von Word (https://office.live.com/start/Word.aspx?auth=2) nach Excel (https://office.live.com/start/Excel.aspx?auth=2&nf=1) bleibt der Client (office.live.com) gleich und aufgrund des gemeinsamen Session-Handlings im Backend kann auf ein Redirect über den Microsoft OpenID Connect Provider verzichtet werden - das Backend erkennt den User als bereits identifiziert
 * wechselt man die Security-Domain hingegen zum ersten Mal (!!!), z. B. beim Wechsel von Word (https://office.live.com/start/Word.aspx?auth=2) nach OneDrive  (https://trinso-my.sharepoint.com/), dann erfolgt hingegeben ein Redirect über den Microsoft OpenID Connect Provider aus (der allerdings aufgrunds des impliziten Single-Sign-On Konzepts geleich wieder zu einem Redirect führt ... die Seite flackert und es dauert recht lang)
   * wenn man sich in einer Security-Domain bereits authentifiziert hat (über den Microsoft OpenID Connect Provider Redirect-Mechanismus), dann existiert im Backend eine Session und über den Cookie-Mechanismus kann die auch immer wieder identifiziert werden, so daß die Redirects stetig abnehmen - Microsoft 365 lässt sich dann flüssiger bedienen.
+
+## OpenID Certification
+
+* [... to be certified OpenID Provider or certified Relying Party](http://openid.net/certification/)
