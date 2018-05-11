@@ -45,6 +45,15 @@ und das bedeutet ganz konkret
   * Start 2012
 * 1.0 = Protocol ... 2.0 = Framework
 
+## Alternativen
+
+Die Alternativen
+
+* [SAML](saml.md)
+* Kerberos
+
+basieren alle auf ganz ähnlichen Prinzipien wie OAuth.
+
 ## Prinzipien
 
 ### Castle-Approach

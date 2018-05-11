@@ -2,7 +2,7 @@
 
 * Doku: http://docs.spring.io/spring-framework/docs/4.1.2.RELEASE/spring-framework-reference/html/mvc.html#mvc
 
-Spring MVC ist Request-Driven, d. h. ein Controller erhält Http-Requests (GET, POST), die er verarbeitet und zu guter Letzt eine Antwort in Form eines Views (= UI) sendet. 
+Spring MVC ist Request-Driven, d. h. ein Controller erhält Http-Requests (GET, POST), die er verarbeitet und zu guter Letzt eine Antwort in Form eines Views (= UI) sendet.
 
 * http://docs.spring.io/spring-framework/docs/4.1.2.RELEASE/spring-framework-reference/html/mvc.html#mvc
 
@@ -97,7 +97,7 @@ Spring MVC kommt mit der in Spring Boot üblichen AutoConiguration (``org.spring
 * ``src/main/resources/messages_de.properties``
 * ...
 
-anlegen. Gemeinsam mit dem LocaleResolver (s. o.) wird zur Laufzeit der richtige Wert ausgelesen. 
+anlegen. Gemeinsam mit dem LocaleResolver (s. o.) wird zur Laufzeit der richtige Wert ausgelesen.
 
 Sollen die Dateien in einem anderen Verzeichnis liegen, sollen es mehrere sein oder sollen sie einen anderen Namen haben, dann müssen die ``application.properties`` angepaßt werden:
 
@@ -135,7 +135,7 @@ return "redirect:http://www.cachaca.de";
 
 ### Configuration
 
-Wie üblich verwendet Spring einen annotationsbasierten Ansatz. Die Annotationen werden bei Anwendungsstart gescannt und dadurch die Applikation initialisiert. Handelt es sich um eine Spring Boot Applikation mit ``@EnableAutoConfiguration`` so sollte alles automatisch initialisiert werden. Ansonsten muß 
+Wie üblich verwendet Spring einen annotationsbasierten Ansatz. Die Annotationen werden bei Anwendungsstart gescannt und dadurch die Applikation initialisiert. Handelt es sich um eine Spring Boot Applikation mit ``@EnableAutoConfiguration`` so sollte alles automatisch initialisiert werden. Ansonsten muß
 
 ```xml
 <context:component-scan base-package="de.cachaca.myapp"/>
@@ -153,7 +153,7 @@ Ein Controller ist zudem für den Web-Flow zuständig und liefert deshalb den zu
 
 Einige der in diesem Kontext verwendeten Annotationen (z. B. ``@RequestMapping``) kommen auch beim [``@RestController`` zur Anwendung](springMvcRest.md).
 
-> ACHTUNG: im Gegensatz zu JSF ist Spring MVC ein Controller-First-Ansatz (ähnlich wie JSP). JSF ist ein View-First-Ansatz.
+> ACHTUNG: im Gegensatz zu JSF ist Spring MVC ein Controller-First-Ansatz (ähnlich wie JSP). JSF ist ein View-First-Ansatz, d. h. der Einstiegspunkt der View.
 
 #### @RequestMapping
 
@@ -177,7 +177,7 @@ Solche Request-Mappings können relativ komplex werden, wenn beispielsweise ``@P
     {version:\\d\\.\\d\\.\\d}
     {extension:\\.[a-z]+}")
 public void handle(
-    @PathVariable String version, 
+    @PathVariable String version,
     @PathVariable String extension) {
     // ...
 }
@@ -222,7 +222,7 @@ public class WebPatientRegistrationController {
 
   @RequestMapping(path = "/register", method = RequestMethod.POST)
   public String register(String username, String emailaddress
-          BindingResult bindingResult, Model model) { 
+          BindingResult bindingResult, Model model) {
     return "redirect:/registerVerify";
   }
 }
@@ -286,8 +286,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public Validator getValidator() {
-        LocalValidatorFactoryBean factory = 
-            new LocalValidatorFactoryBean();
+        LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
         factory.setValidationMessageSource(messageSource);
         return factory;
     }
@@ -347,3 +346,20 @@ Mit dieser Annotation wird das Ergebnis einer Controller-Methode an den HTTP-Res
 ```java
 public @ResponseBody User getUser(String username) {}
 ```
+
+## Spring (Boot) Security
+
+* [Web-Applikationen absichern - Tutorial von spring.io](https://spring.io/guides/gs/securing-web/)
+* [Spring-Boot-Security - basierend auf Spring Security](https://docs.spring.io/spring-boot/docs/2.0.1.RELEASE/reference/htmlsingle/#boot-features-security)
+* [Spring-Security](https://projects.spring.io/spring-security/)
+
+Zur Absicherung der HTTP-Schnittstellen stellt Spring bereits eine Auto-Configuration bereit, sofern man die Abhängigkeit
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+in der `pom.xml` eingetragen hat. Die Auto-Konfiguration sichert ALLE Http-Endpunkte per Default über HTTP-Basic-Authentication ab (hier zeigt der Browser ein Popup) - über einen `WebSecurityConfigurerAdapter` läßt sich die Konfiguration entsprechend anpassen, so daß einige Endpunkte auch public sind (keiner Authentifizierung bedürfen) oder beispielsweise auch Form-Authentication (mit entsprechendem Layout) ermöglicht wird.

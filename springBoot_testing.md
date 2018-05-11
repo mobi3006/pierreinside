@@ -1,18 +1,37 @@
 # Spring Boot Testing
 
-## Integrationtesting
+* [Spring Boot Dokumentation](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html)
+* [Spring Core Integration Testing Dokumentation](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html)
 
-* http://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html
-* https://www.jayway.com/2014/07/04/integration-testing-a-spring-boot-application/
+Spring Boot bietet sehr viel Komfort beim Anwendungstest. Man muß nur die richtige Annotation (injezierbare Services aufgeführt)
+
+* @SpringBootTest
+  * `@Autowired private TestRestTemplate restTemplate;`
+* @WebMvcTest
+  * `@Autowired private MockMvc mvc;`
+* @WebFluxTest
+* @RestClientTest
+  * `@Autowired private MockRestServiceServer server;`
+* @DataJpaTest
+* @JdbcTest
+* @DataMongoTest
+* ...
+
+und schon kann man sich ganz zentrale Services per `@Autowired` injecten als Mocks lassen. Deren Verhalten muß man allerdings häufig im Test über eine Fluent-API konfigurieren (denn man will ja unterschiedliche Szenarien testen).
+
+## Integrationtesting
 
 Eine typische Testklasse für eine Webapplikation sieht so aus:
 
 ```java
 @RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(
+    classes = MySpringBootApplication.class,                        // Startup-Klasse (mit main-Methode)
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @SpringApplicationConfiguration(
         classes = MyApplication.class,
         locations = { "classpath:META-INF/test-context.xml" })
-@WebIntegrationTest("server.port:0")
+@ActiveProfiles("test")                 // load application-test.yml
 public class MyApplicationTest {
 
     @Autowired
@@ -49,7 +68,7 @@ Handelt es sich um einen ``@IntegrationTest``, der auch eine ``@WebAppConfigurat
 
 #### Applikationskonfiguration
 
-Die Applikationskonfiguration wird aus der ``application.properties`` gezogen, kann aber über 
+Die Applikationskonfiguration wird aus der ``application.properties`` gezogen, kann aber über
 
 ```java
 @WebIntegrationTest({"server.port=0", "management.port=0"})

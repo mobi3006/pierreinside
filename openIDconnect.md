@@ -18,18 +18,11 @@ Im [Buch Auth2 in Action](https://livebook.manning.com/#!/book/oauth-2-in-action
 
 Über das ID Token ist der User authentifiziert und über den AccessCode wird er für weitere Protected Resources (neben dem Identity Provider) authorisiert.
 
-Die Zusammenhänge zwischen Authentifizierung und Authorisierung wirken ein wenig durcheinander. Letztlich bietet OpenID Connect Authentifizierung über OAuth2-Authorisierung, doch für die Authorisierung selbst wird eine Authentifizierung (der Resource Owner am Identity Provider) benötigt. Vielleicht kann man die OpenID Connect Authentifizierung als Meta-Authentifizierung bezeichnen, bei der konkrete Authentifizierungen (1. Resource Owners am Identity Provider + 2. Client am Authorization Server) an Drittsysteme (RelyingParty/Client) weitergegeben/delegiert werden kann. Auf diese Weise werden Grenzen zwischen Security Domains überwunden:
+Die Zusammenhänge zwischen Authentifizierung und Authorisierung wirken ein wenig durcheinander. Letztlich bildet OpenID Connect ein Authentifizierungsprotokoll über OAuth2-Authorisierung ab. OAuth2 wird zur Authorisierung des Zugriffs auf den geschützten ID Token verwendet. Die in OAuth2 verwendete Authentifizierung des Resource Owners wird dadurch zu einem Authentifizierungsprotokoll. Vielleicht kann man die OpenID Connect Authentifizierung als Meta-Authentifizierung bezeichnen, bei der konkrete Authentifizierungen (1. Resource Owners am Identity Provider + 2. Client am Authorization Server) an Drittsysteme (RelyingParty/Client) weitergegeben/delegiert werden kann. Auf diese Weise werden Grenzen zwischen Security Domains überwunden:
 
 > "the resource owner authenticates to the authorization server’s authorization endpoint, the client authenticates to the authorization server at the token endpoint, and there may be others depending on the setup. We’re building authentication on top of authorization, and the authorization protocol itself relies on authentication, isn’t that a bit overcomplicated? [...] It may seem an odd setup, but notice that this setup can leverage the fact that the user is authenticating at the authorization server, but at no point are the end user’s original credentials communicated to the client application (our RP) through the OAuth 2.0 protocol. By limiting the information that each party needs, the transaction can be made much more secure and less prone to failure, and it can function across security domains. The user authenticates directly to a single party, as does the client, and neither needs to impersonate the other." ([Buch Auth2 in Action](https://livebook.manning.com/#!/book/oauth-2-in-action/chapter-13/32))
 
 Die Stakeholder des OAuth2 Protokolls haben im OpenID Connect Kontext andere Bezeichnungen, weil es sich um einer Spezialisierung handelt. Dennoch ist es wichtig, die Abbildung der Stakeholder auf das OAuth2 Protokoll immer im Bliock zu haben, um die gegenseitigen Trustbeziehungen zu erkennen und das Überschreiten der Security Domain Boundary zu erkennen - was den Mehrwert des OpenID Connect Ansatzes ausmacht. Verliert man dieses Wissen aus dem Blick, so können sich - sofern man einen Authorization Server bzw. OpenID Provider implementiert - fatale Fehler einschleichen, die das System als Ganzes kompromittieren!!!
-
-### ID Token vs. Access Token
-
-Braucht es denn wirklich zwei Tokens, die letztlich häufig zum gleichen Zeitpunkt und von der gleichen Komponente (die sowohl IdentityProvider als auch Authorization Server repräsentiert) erstellt wird? Genügt hier nicht der AccessToken, der ja auch Informationen über den User enthält?
-
-* auch wenn der AccessToken User Informationen trägt, so sagt er nichts darüber aus, ob tatsächlich in der laufenden Transaktion eine Identifikation des Users stattgefunden hat. Der Token kann sehr alt oder gar gestohlen (ausgestellt für einen anderen Client), so daß einen Identifizierung zusätzlichen Schutz bietet.
-* da OAuth2 nichts über das Format des Access Tokens aussagt, könnte man alles in den Access Token packen, doch dadurch würde man der Protected Resource Informationen (Nutzer des Access Tokens) über die Identity offenbaren, was in manchen Szenarien vielleicht nicht gewünscht ist. Durch die Trennung kann die Identity-Information komplett beim Client verbleiben ... für die Protected Resource sollte das keine Rolle spielen - Hauptsache der User ist authorisiert
 
 ### OpenID vs. OpenID Connect
 
@@ -102,6 +95,13 @@ Provider eines Service möchten evtl. kein eigenes User-Management betreiben, um
 * signiert
 * verläßt aus Sicherheitsgründen niemals die Relying Party (abgesehen vom OpenID Provider kennt den ID Token niemand)
 * normalerweise kürzere Laufzeit als ein Access Token
+
+### ID Token vs. Access Token
+
+Braucht es denn wirklich zwei Tokens (ID Token aus OpenID Connect, Access Token aus OAuth2), die letztlich häufig zum gleichen Zeitpunkt und von der gleichen Komponente (die sowohl IdentityProvider als auch Authorization Server repräsentiert) erstellt wird? Genügt hier nicht der AccessToken, der ja auch Informationen über den User enthält?
+
+* auch wenn der AccessToken User Informationen trägt, so sagt er nichts darüber aus, ob tatsächlich in der laufenden Transaktion eine Identifikation des Users stattgefunden hat. Der Token kann sehr alt oder gar gestohlen (ausgestellt für einen anderen Client), so daß einen Identifizierung zusätzlichen Schutz bietet.
+* da OAuth2 nichts über das Format des Access Tokens aussagt, könnte man alles in den Access Token packen, doch dadurch würde man der Protected Resource Informationen (Nutzer des Access Tokens) über die Identity offenbaren, was in manchen Szenarien vielleicht nicht gewünscht ist. Durch die Trennung kann die Identity-Information komplett beim Client verbleiben ... für die Protected Resource sollte das keine Rolle spielen - Hauptsache der User ist authorisiert
 
 ### UserInfo Endpunkt
 
@@ -217,7 +217,13 @@ Authentifizierung kann über folgende OAuth2-Grant-Types erfolgen:
 
 Da OpenID Connect sehr beliebt ist, findet man bei vielen Cloud-Unternehmen (u. a. Microsoft, Google) Umsetzungen verschiedener Flows und auch sehr gute Dokumentationen.
 
-### Google als OpenID Provider
+Web-Applikationen machen von diesen OpenID Connect Providern regen Gebrauch. Das inhärente Single-Sign-On ist neben der Eigenschaft Reuse-Existing-Credentials ein extrem komfortables Feature (einmal bei GitHub angemeldet und mit diesem Login 20 Web-Applikationen ohne erneute Anmeldung nutzen).
+
+### GitHub als OpenID Connect Provider
+
+* https://github.com/login/oauth/authorize
+
+### Google als OpenID Connect Provider
 
 * [Google OpenID Provider in Action ... sehr schön mit Beispiel-Requests](https://developers.google.com/identity/protocols/OpenIDConnect)
 * [Google OAuth Playground - sehr gut](https://developers.google.com/oauthplayground)
@@ -258,7 +264,7 @@ Der [Google-Playground](https://developers.google.com/oauthplayground) bietet ei
 
 ### Microsoft 365
 
-* http://microsoft365.com/
+* http://www.office.com
 
 > ACHTUNG: Microsoft 365 basiert auf [OneDrive for Business](https://onedrive.live.com/about/de-DE/business/) ... ist nicht zu verwechseln mit [OneDrive](https://onedrive.live.com/about/de-de/), das für Privatanwender konzipiert ist.
 
@@ -288,6 +294,33 @@ Beim Wechsel zwischen Apps gibt es Unterschiede im Verhalten:
 * bleibt man innerhalb einer Security-Domain, z. B. beim Wechsel von Word (https://office.live.com/start/Word.aspx?auth=2) nach Excel (https://office.live.com/start/Excel.aspx?auth=2&nf=1) bleibt der Client (office.live.com) gleich und aufgrund des gemeinsamen Session-Handlings im Backend kann auf ein Redirect über den Microsoft OpenID Connect Provider verzichtet werden - das Backend erkennt den User als bereits identifiziert
 * wechselt man die Security-Domain hingegen zum ersten Mal (!!!), z. B. beim Wechsel von Word (https://office.live.com/start/Word.aspx?auth=2) nach OneDrive  (https://trinso-my.sharepoint.com/), dann erfolgt hingegeben ein Redirect über den Microsoft OpenID Connect Provider aus (der allerdings aufgrunds des impliziten Single-Sign-On Konzepts geleich wieder zu einem Redirect führt ... die Seite flackert und es dauert recht lang)
   * wenn man sich in einer Security-Domain bereits authentifiziert hat (über den Microsoft OpenID Connect Provider Redirect-Mechanismus), dann existiert im Backend eine Session und über den Cookie-Mechanismus kann die auch immer wieder identifiziert werden, so daß die Redirects stetig abnehmen - Microsoft 365 lässt sich dann flüssiger bedienen.
+
+#### Change Password
+
+Der Account wird in der Webapplikation https://portal.office.com/account/ verwaltet. Hier wird u. a.
+
+* das Profil gepflegt
+* das Passwort geändert
+  * das Passwort wird allerdings wiederum in einer anderen Webapplikation (https://account.activedirectory.windowsazure.com) gepflegt ... die Einbindung erfolgt OpenID Connect typisch über den OpenID Connect Provider (https://login.microsoftonline.com/common/oauth2/authorize?client_id=...).
+* die Berechtigungen (auf andere Clients = Webanwendungen) gepflegt
+
+#### Logout
+
+Beim Logout wird die API https://www.office.com/logout aufgerufen, die aber wie alle APIs über OpenID Connect geschützt ist:
+
+* https://login.microsoftonline.com/common/oauth2/logout?post_logout_redirect_uri=https%3a%2f%2fwww.office.com%2f%3fref%3dlogout
+
+Letztlich werden hiermit vermutlich ALLE laufenden Sessions der einzelnen beteiligten Clients (Office, OneDrive) und im IAM gelöscht.
+
+#### Fazit
+
+Das Office 365 Paket von Microsoft besteht aus einer Vielzahl an Webapplikationen und APIs, die miteinander über den OpenID Connect Mechanismus Single-Sign-On verbunden sind, so daß es dem Benutzer kaum auffällt, daß die Web-Anwendungen ständig gewechselt werden.
+
+## Spring Security
+
+Spring (-Boot) ist im Java-Ökosystem DIE Platform/Framework zur Entwicklung von Microservices und hat auch ensprechende Konzepte für OpenID Connect bzw. OAuth2.
+
+[siehe eigener Abschnitt](springSecurity.md)
 
 ## OpenID Certification
 

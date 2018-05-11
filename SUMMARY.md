@@ -60,6 +60,7 @@
   * UI-Technologie
     * [Thymeleaf](thymeleaf.md)
     * [ionic](ionic.md)
+    * [Web Fonts](webfonts.md)
   * Persistenz
     * Transactions
       * [Java TX](java_transactions.md)
@@ -89,6 +90,8 @@
     * [OpenID Connect](openIDconnect.md)
   * Authorisierung
     * [OAuth](oauth.md)
+    * [SAML](saml.md)
+  * [Spring Security][springSecurity.md]
   * [Zertifikate](certificates.md)
   * [Kali Linux](kaliLinux.md)
   * [VPN](vpn.md)

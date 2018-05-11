@@ -12,7 +12,6 @@ Maven kennt verschiedene Artefakt-Typen (`:
 * `test-jar`, wenn die Dependency ein `foo-test.jar` Artefakt bereitgestellt
   * auf diese Weise können Module beispielsweise Mock-Implementierungen ihrer Services oder auch Spring-Kontext anbieten, die von den nutzenden Modulen eingebunden werden können
 * `foo-sources.jar`, wenn ein Modul die Sourcen per `maven-source-plugin` bereitstellt (bei Open-Source-Projekten gehört das zum guten Stil) 
-* 
 
 und verschiedene Scopes (`<scope>`) , mit denen Dependencies annotiert werden:
 

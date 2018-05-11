@@ -33,7 +33,7 @@ gestartet werden. Ein Start als Betriebssystem-Service wird auch unterstützt.
 
 ```java
 @SpringBootApplication
-public class MyApplication 
+public class MyApplication
   extends SpringBootServletInitializer {
 
   public static void main(String[] args) {
@@ -244,7 +244,7 @@ Spring Boot bringt eine Warm-Restart-Funktionalität (siehe unten) mit. Hierzu m
   <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-devtools</artifactId>
-    <optional>true</optional>
+    <optional>true</optional>                     <!-- Best-Practice -->
   </dependency>
 </dependencies>
 ```
@@ -252,6 +252,8 @@ Spring Boot bringt eine Warm-Restart-Funktionalität (siehe unten) mit. Hierzu m
 erfolgt die Integration der Developer Tools. Dann sollte man noch folgende Konfiguration in der ``application.properties`` setzen:
 
 * ``spring.devtools.livereload.enabled=true``
+
+In Eclipse ziehen diese Änderungen sofort nach der Speicherung, da hier ein Auto-Compile erfolgt. In [IDEA](idea.md) muß man explizit eine *Build Project* anstoßen.
 
 #### Cold-Start vs. Warm-Restart vs. Reload
 

@@ -1,4 +1,5 @@
 # Thymeleaf
+
 Ich hatte bisher mit Velocity-Templating und JSPs gearbeitet. Im Zuge der Nutzung von Spring MVC/Boot haben wir Thymeleaf für ein HTML-Frontend genutzt und damit auch Email-Templates umgesetzt.
 
 [Spring MVC](springMvc.md) ist grundsätzlich unabhängig von der View-Technologie. Es sieht aber explizit die Nutzung von Thymeleaf für diese Aufgabe vor, was man schon daran sieht, daß Spring in den Parent-Poms als Dependency enthalten ist.
@@ -7,19 +8,22 @@ Ich hatte bisher mit Velocity-Templating und JSPs gearbeitet. Im Zuge der Nutzun
 
 ---
 
-# Spring-Petclinic mit Thymeleaf
+## Spring-Petclinic mit Thymeleaf
+
 * https://github.com/thymeleaf/thymeleafexamples-petclinic
 
 Hier findet man Best-Practices für die Thymeleaf-Nutzung.
 
 ---
 
-# Version 2 vs. 3
+## Version 2 vs. 3
+
 * http://www.thymeleaf.org/doc/articles/thymeleaf3migration.html
 
 ---
 
-# Getting Started
+## Getting Started
+
 Dieses Template
 
 ```html
@@ -29,12 +33,12 @@ Dieses Template
     <title>My first Thymeleaf Template</title>
   </head>
   <body>
-    <p th:text="#{home.welcome}">Welcome to my App</p>
+    <p th:text="#{home.welcome}">Welcome to my App - this is the Natural Templating Approach</p>
   </body>
 </html>
 ```
 
-sorgt für die Ausgabe 
+sorgt für die Ausgabe
 
 ```html
 <!DOCTYPE html>
@@ -61,48 +65,60 @@ Wird diese Datei einfach so im Browser angezeigt, dann wird daraus (sie *Natural
     <title>My first Thymeleaf Template</title>
   </head>
   <body>
-    <p>Welcome to my App</p>
+    <p>Welcome to my App - this is the Natural Templating Approach</p>
   </body>
 </html>
 ```
 
 > Am Anfang hatte ich nicht genau hingeschaut und ``th:text`` für ein Table-Header Element gehalten. Hier gehört das aber zum Namespace http://www.thymeleaf.org und wird dementsprechend von der Thymeleaf-Template-Engine interpretiert.
 
-Hier die Thymeleaf-DSL:
-* http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#attribute-precedence
+Hier die Thymeleaf-Spring-Standard-DSL (= Dialekt):
 
+* http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#attribute-precedence
 
 ---
 
-# Thymeleaf als UI Technologie
+## Thymeleaf als UI Technologie
+
 * DSL-Sprachelemente: http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html
 * Ein praktisches Beispiel: http://spr.com/part-2-adding-views-using-thymeleaf-and-jsp-if-you-want/
 
-## JSP-Alternative
-JSP ist ein Generator für HTML ... Thymeleaf ist ein Generator für HTML. 
+### JSP-Alternative
+
+JSP ist ein Generator für HTML ... Thymeleaf ist ein Generator für HTML.
 
 Thymeleaf wird im [Getting Started ... Serving Web Content with Spring MVC](http://spring.io/guides/gs/serving-web-content/) von Spring als View-Technologie vorgestellt. [SpringRoo](http://projects.spring.io/spring-roo/) verwendet Thymeleaf beispielsweise als Default-UI-Technologie.
 
-### JSF-Alternative?
+#### JSF-Alternative?
+
 JSF definiert einen Lifecycle und ist insofern deutlich komplexer. Zudem hat JSF einen View-First-Ansatz ... im Gegensatz zum Controller-First-Ansatz von JSP/Thymeleaf.
 
-## Thymeleaf-DSL = Dialekt
+### Thymeleaf-DSL = Dialekt
+
 Thymeleaf arbeitet mit dem Konzept *Dialekt*. Ein Dialekt ist die DSL, die vom Thymeleaf ViewResolver interpretiert wird, um aus den Templates (in den die Dialekte verwendet werden) fertige Artefakte (z. B. HTML-Seiten) zu machen. Thymeleaf bringt folgende Dialekte mit:
 
 * ``org.thymeleaf.spring4.dialect.SpringStandardDialect``
 * ``org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect``
 * ``nz.net.ultraq.thymeleaf.LayoutDialect``
 
-Siehe *Getting Started ...* für ein Beispiel.
+Dialekte werden über Namespace-Definitionen im `<html>`-Element eingebunden (z. B. `<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">`) - es können mehrere genutzt werden.
 
-### SpringStandardDialect
+Über entsprechende Abhängigkeiten im `pom.xml` kann man weitere Dialekte verfügbar machen.
+
+#### SpringStandardDialect
+
 Dieser Dialekt ermöglicht eine möglichst nahtlose Integration der Thymeleaf-View-Technologie mit einem Spring-Backend. Auf diese Weise wird es möglich, in Thymeleaf-Templates Spring-Komponenten über Spring Expression Language einzubetten, um so
 
 * Daten bereitzustellen
 * Berechnungen/Formatierungen durchzuführen
 * Spring-Controller mit der Verarbeitung HTTP-Requests (POST/GET) zu beauftragen (``th:action``, ``th:object``)
 
-## Natural Templating Ansatz
+#### Spring Security Dialekt
+
+* https://github.com/thymeleaf/thymeleaf-extras-springsecurity
+
+### Natural Templating Ansatz
+
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#its-still-a-prototype
 
 Verwendet man JSF als UI-Technologie, so können die JSF-Seiten (haben beispielsweise die Dateiendung ``*.xhtml``) im Browser ohne die dahinterliegende Applikation nicht vernünftig dargestellt werden, weil die Platzhalter nicht ersetzt sind.
@@ -117,14 +133,16 @@ Hierzu werden sog. Prototypen verwendet:
 
 In diesem Beispiel ist *Willkommen zuhause* ein Prototype (= Mock), der zur Laufzeit durch den Thymeleaf-Templating-Mechanismus ersetzt wird (der tatsächliche Wert kommt aus ``#{home.welcome}``).
 
-### Dynamische Tabellen
+#### Dynamische Tabellen
+
 Manchmal kommt es vor, daß man ohne Laufzeitumgebung gar keine Informationen bekäme. Bei dynamisch generierten Tabellen ist das beispielsweise der Fall. Hier kann man dann eine/mehrere Zeilen per ``th:remove="all"`` als Prototyp kennzeichnen. Diese Zeile(n) werden zur Laufzeit nicht dargestellt.
 
-### Links über ``href``
+#### Links über ``href``
+
 Bei ``href`` zeigt der Natural Templating Ansatz seine Stärke:
 
-```xml
-<a href="details.html" 
+```html
+<a href="details.html"
    th:href="@{http://localhost:8080/gtvg/order/details(orderId=${o.id})}">view</a>
 ```
 
@@ -132,8 +150,9 @@ Dieser Link ist auch ohne Runtime-Engine - allein durch Öffnen der Seite im Bro
 
 Der produktive Code ist somit gleichzeitig ein Mock.
 
-### ... vs. Inlining
-Man kann statt der ``th:foo`` Attribute die Expression-Language auch inline verwenden. In Ausnahmefällen ist das auch tatsächlich erforderlich (wenn das Template kein XML-Format ist) ... siehe unten Plaintext-Emails. 
+#### ... vs. Inlining
+
+Man kann statt der ``th:foo`` Attribute die Expression-Language auch inline verwenden. In Ausnahmefällen ist das auch tatsächlich erforderlich (wenn das Template kein XML-Format ist) ... siehe unten Plaintext-Emails.
 
 Statt
 
@@ -155,25 +174,28 @@ kann mit Inlining das geschrieben werden:
 
 **Achtung:** In Thymeleaf 3 braucht man ``th:inline="text"`` nicht mehr ... es wird sogar empfohlen, es wegzulassen
 
-## Expression Language
+### Expression Language
+
 * http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#standard-expression-syntax
 
 > **ACHTUNG:** es werden verschiedene Symbole verwendet ... je nach Content: ``#{}``, ``${}``, ``*{}``, ``@{}``
 
-Über die Expression Language 
+Über die Expression Language
+
 * erfolgt die Verknüpfung von statischem Content (aka *Templates*) und dynamischen Daten. Hier beispielsweise der Zugriff auf eine Spring-Bean:
 
 ```xml
 <p th:text="${user.name}">Welcome home</p>
-```    
+```
 
-* erfolgt Internationalisierung - Einbettung von Message-Properties via 
+* erfolgt Internationalisierung - Einbettung von Message-Properties via
 
 ```xml
 <p th:text="#{home.welcome}">Welcome home</p>
 ```
 
-### Bewertung
+#### Bewertung
+
 Ich empfand die Expression Language als gewöhnungsbedürftig. Das ist syntaktisch falsch
 
 ```html
@@ -190,7 +212,7 @@ Stattdessen schreibt man
 </div>
 ```
 
-kann aber auch das schreiben: 
+kann aber auch das schreiben:
 
 ```html
 <div th:text="|#{label.pin}: ${pin}|" th:remove="tag">
@@ -198,20 +220,22 @@ kann aber auch das schreiben:
 </div>
 ```
 
-## Spring MVC + Thymeleaf
+### Spring MVC + Thymeleaf
+
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 * [Komplexeres Beispiel](https://github.com/thymeleaf/thymeleafexamples-stsm)
 
-### Konfiguration
+#### Konfiguration
+
 Thymeleaf bringt eine Auto-Konfiguration mit, die in einer Spring Boot Applikation auch automatisch gezogen wird. Man findet diese Auto-Konfiguration in der Klasse [``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration``](https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/thymeleaf/ThymeleafAutoConfiguration.java).
 
-Thymeleaf verwendet den Standard Spring Boot Mechanismus, d. h. man findet die Konfigurationsparameter in [``ThymeleafProperties``](https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/thymeleaf/ThymeleafProperties.java). Darin zeigt sich beispielsweise 
+Thymeleaf verwendet den Standard Spring Boot Mechanismus, d. h. man findet die Konfigurationsparameter in [``ThymeleafProperties``](https://github.com/spring-projects/spring-boot/blob/v1.3.6.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/thymeleaf/ThymeleafProperties.java). Darin zeigt sich beispielsweise
 
 ```java
 @ConfigurationProperties("spring.thymeleaf")
 public class ThymeleafProperties {
-	public static final String DEFAULT_PREFIX = "classpath:/templates/";
-	private String prefix = DEFAULT_PREFIX;
+   public static final String DEFAULT_PREFIX = "classpath:/templates/";
+   private String prefix = DEFAULT_PREFIX;
 }
 ```
 
@@ -226,7 +250,7 @@ Größere Anpassungen von Thymeleaf können über Spring-Annotationen erfolgen (
 @EnableConfigurationProperties(ThymeleafProperties.class)
 @ConditionalOnClass(SpringTemplateEngine.class)
 @AutoConfigureAfter(WebMvcAutoConfiguration.class)
-public class ThymeleafConfiguration 
+public class ThymeleafConfiguration
   extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -234,7 +258,7 @@ public class ThymeleafConfiguration
     @Autowired
     ThymeleafProperties properties;
 
-    public void setApplicationContext(ApplicationContext applicationContext) {
+    public void setApplicationContext(ApplicationContext applicatihonContext) {
         this.applicationContext = applicationContext;
     }
 
@@ -252,7 +276,7 @@ public class ThymeleafConfiguration
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
-    }    
+    }
 }
 ```
 
@@ -260,17 +284,20 @@ Hier ist ein Weg über XML-Dateien beschrieben:
 
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html#spring-mvc-configuration
 
-Hat man eine Spring Boot Applikation, so ist Thymleaf über ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.java`` bereits auto-konfiguriert. Will man dann seine eigene ``ThymeleafConfiguration`` (siehe oben) einschieben, so muß man die Auto-Konfiguration folgendermaßen rauskonfigurieren:
+Hat man eine Spring Boot Applikation, so ist Thymleaf über ``org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration.java`` bereits auto-konfiguriert (sofern die Abhängigkeit zu `spring-boot-starter-thymeleaf` in der `pom.xml` definiert wurde). Will man dann seine eigene ``ThymeleafConfiguration`` (siehe oben) einschieben, so muß man die Auto-Konfiguration folgendermaßen rauskonfigurieren:
 
 ```java
 @SpringBootApplication(
   exclude={
     org.springframework.boot.autoconfigure
       .thymeleaf.ThymeleafAutoConfiguration.class})
-public class MyApplication { // ...}
+public class MyApplication {
+  // ...
+}
 ```
 
-### i18n - Internationalisierung
+#### i18n - Internationalisierung
+
 Per Default verwendet Thymeleaf in einer Spring-Boot Anwendnung den ``org.thymeleaf.spring4.messageresolver.SpringMessageResolver``, um den Key ``title.homepage`` 
 
 ```html
@@ -279,38 +306,39 @@ Per Default verwendet Thymeleaf in einer Spring-Boot Anwendnung den ``org.thymel
 
 zu internationalisieren.
 
-Der Thymeleaf-``SpringMessageResolver`` verwendet den Spring-``MessageSource``-Ansatz, d. h. defaultmässig wird eine Datei ``messages.properties`` auf dem Classpath gesucht. Will man das Umkonfigurieren, dann hilft ein Blick in ``MessageSourceAutoConfiguration``. 
+Der Thymeleaf-``SpringMessageResolver`` verwendet den Spring-``MessageSource``-Ansatz, d. h. defaultmässig wird eine Datei ``messages.properties`` auf dem Classpath gesucht. Will man das Umkonfigurieren, dann hilft ein Blick in ``MessageSourceAutoConfiguration``.
 
 ---
 
-# Localized Templates
+## Localized Templates
+
 Häufig haben Seiten einen hohen statischen Anteil und nur einen geringen dynamischen, der dann häufig auch sprachunabhängig ist. Insofern würde es Sinn machen, für jede Sprache eine eigene Datei zu verwenden - anstatt die Datei aus übersetzbaren Message-Properties zusammenzusetzen.
 
 * https://github.com/thymeleaf/thymeleaf/issues/497
 
-Bis Thymeleaf  
-
 ---
 
-# Erweiterbarkeit
+## Erweiterbarkeit
+
 * http://www.thymeleaf.org/doc/articles/sayhelloextendingthymeleaf5minutes.html
 * http://www.thymeleaf.org/doc/articles/sayhelloagainextendingthymeleafevenmore5minutes.html
 
 Thymeleaf kann um eigene Dialekte erweitert werden, um so eine eigene DSL zu schaffen.
 
-# Spring Boot Integration
+## Spring Boot Integration
+
 * http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html
 
 Thymeleaf wird in [Spring Boot](springBoot.md) direkt supported (Bestandteil der Starter-Pakete). Es ist leicht möglich - ähnlich wie in JSF - Werte über Beans bereitzustellen, um so beispielsweise den Content einer HTML-Seite dynamisch zusammenzubauen.
 
-## Thymeleaf 3 - Spring Boot 1.3
-Hiermit gibts Probleme:
+### Thymeleaf 3 - Spring Boot
 
-* https://github.com/spring-projects/spring-boot/issues/4393
+* Caching abschalten (damit Änderungen an den Templates auch ohne Neustart der Applikation gezogen werden): `spring.thymeleaf.cache=false`
 
 ---
 
-# Plain-Text-Emails
+## Plain-Text-Emails
+
 > DISCLAIMER: Thymeleaf hat sich - [laut eigener Aussage in den FAQ](http://www.thymeleaf.org/faq.html#compare-other-engines) - auf XML/HTML-Content spezialisiert.
 
 > HINWEIS: in der Version 3.x wird aber auch explizit nicht-XML-Inhalt unterstützt ... beispielsweise Plain-Text-Emails.
@@ -319,7 +347,8 @@ Bei GitHub findet man dieses Beispiel:
 
 * https://github.com/thymeleaf/thymeleafexamples-springmail
 
-## ... mit Thymeleaf 2
+### ... mit Thymeleaf 2
+
 Thymeleaf 2 ist stark auf die Verwendung von XML/HTML zugeschnitten ist. Bei Plain-Text gibt es aber keine Elemente, an die sich die Thymeleaf-DSL andocken kann. Stattdessen kann [*Text inlining*](http://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#text-inlining) verwendet werden, um zu ersetzende Elemente zu referenzieren. Dieser Ansatz läuft dem *Natural Templating* zuwider, weil die Platzhalter eben nicht durch Prototypen ersetzt sind. Deshalb sollte *Inlining* nur im äußersten Notfall eingesetzt werden.
 
 Das Inlining muß aber engekündigt werden ... aber auch die Ankündigung muß an einem Element hängen, z. B. an ``<html>``. Damit dieses notwendige Element nicht sichtbar wird (wir wollen ja kein ``<html>`` in den Nutzdaten haben), können wir uns eines ``th:remove="tag"`` bedienen, das eigentlich für den Natural-Templating-Ansatz (siehe oben) vorhanden ist. Irgendwie schon sehr tricky ...
@@ -338,10 +367,10 @@ bei diesem Code
 ```java
 Context ctx = new Context(Locale.US);
 ctx.setVariable("name", "Pierre");
-templateEngine.process("emailplain", ctx);    
+templateEngine.process("emailplain", ctx);
 ```
 
-ersetzt durch ``Pierre``, so daß dieses Endergebnis zu erwarten ist: 
+ersetzt durch ``Pierre``, so daß dieses Endergebnis zu erwarten ist:
 
     Hello Pierre,
     cheers.

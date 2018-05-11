@@ -62,6 +62,14 @@ Der Unterschiede ist nicht extrem aber viele kleine Dinge funktionieren einfach 
 * Module - ähnlich zu einem Eclipse-Projekt
 * Einstellungen werden in einer projektspezifischen Verzeichnis `.idea` gespeichert (ähnlich wie in Eclipse `.settings`)
 
+## Maven
+
+Mit der versteckten m2e Integration von Maven in Eclipse bin ich nie so richtig warm geworden.
+
+Bei IntelliJ ist die Integration explizit über  "Maven Projects" ... das ist mir zumindest schon mal lieber - man hat das eher im Griff, wenn der Maven Build (am besten bei einem Projekt- oder Branchwechsel) und wann der IDEA Build genutzt wird.
+
+Es werden Umgebungsvariablen wie beispielsweise ${MAVEN_OPTS} berücksichtigt ... auf diese Weise kann man Konfigurationen des Maven-CLI auch in der IDE wiederverwenden (war bei Eclipse übrigens genauso ... wenn nicht sogar noch maven-näher, da dort auch `~/.mavenrc` berücksichtigt wurde, was bei IntelliJ nicht der Fall ist).
+
 ## Fazit
 
 Ich bin recht schnell mit der neuen IDE zurechtgekommen ... mein fehlendes Wissen über die Shortcuts bremsen mich derzeit noch aus. Trotz eingestellter Eclipse-Keymap sind nur die rudimentären Shortcuts gleich ... bei Refactorings hört es dann aber auf (vermutlich ist das Mapping der Funktionalität nicht so gut).

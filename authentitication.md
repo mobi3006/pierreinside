@@ -7,8 +7,10 @@ Verschiedene Authentifizierungsmechanismen:
 
 * Basic-Authentication
   * Username + Base64 enkodiertes Passwort
+  * bei Web-Applikationen werden die Credentials über ein Popup eingegeben (Nachteil: Layout kann nicht customized werden ... wirkt vielleicht nicht besonders vertrauenerweckend) - im Gegensatz zu Form-Based-Authentication
 * Form-Based-Authentication
   * Username + plain-text Passwort
+  * die Credentials werden beispielsweise über eine HTML-Form (Layout kann customized werden) mit einem HTTP-POST versendet
 * Digest-Authentication
   * Username + Digest (als Ersatz für das Passwort)
 * Certificate-Based-Authentication

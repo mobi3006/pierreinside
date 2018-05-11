@@ -2,18 +2,21 @@
 
 ---
 
-# Externalize Configuration
+## Externalize Configuration
+
 * Spring Boot Dokumentation: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
 * Spring Boot Howto: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-properties-and-configuration.html
 
 Die im WAR/JAR verbackene ``application.properties`` muß in verschiedenen Deployment-Umgebungen entsprechend angepaßt werden.
 
-## Übersteuern mit Aufrufparametern
-```
+### Übersteuern mit Aufrufparametern
+
+```bash
 java -jar myapp.jar --de.cachaca.myapp.host=www.cachaca.de
 ```
 
-## Übersteuern mit externer ``application.properties``
+### Übersteuern mit externer ``application.properties``
+
 Bei folgender Organisation
 
 ```
@@ -33,7 +36,7 @@ target/
 
 Die Properties werden in der Reihenfolge #1, #2, #3 gezogen, d. h. die Properties haben zur Laufzeit folgende Werte:
 
-```
+```properties
 myprop1=C
 myprop2=E
 myprop3=F
@@ -41,7 +44,8 @@ myprop3=F
 
 ---
 
-# Spring Boot as a Service
+## Spring Boot as a Service
+
 * http://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html
 * http://file.allitebooks.com/20151028/Spring%20Boot%20Cookbook.pdf
 
@@ -67,7 +71,7 @@ Will man das Startskript nicht so seltsam vermischt haben[^1], [so muß man es b
 
 Unter CentOS und Ubuntu funktioniert das Default-Launch-Sktipt bei der Einbindung als systemd-Service. Bei anderen Distributionen hingegen muß evtl. ein eigenes Launch-Skript geschrieben werden[^2]. Entweder bindet man es bereits im ``spring-boot-maven-plugin`` über ``embeddedLaunchScript`` (und evtl. ``embeddedLaunchScriptProperties``) ein oder man konfiguriert es in der systemd-Service Datei (liegt unter ``/etc/systemd/system/myapp.service``). Dort wird das Launcher-Script referenziert und die Variable ``JARFILE`` gesetzt:
 
-```
+```properties
 [Service]
 Environment="JARFILE=/opt/myapp.war"
 ExecStart=/opt/myapp-launcher.sh
@@ -77,12 +81,13 @@ ExecStart=/opt/myapp-launcher.sh
 
 Will man die JRE-Einstellungen der Anwendung konfigurieren, so sollte man eine ``conf``-Datei verwenden (http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-script-customization-conf-file), die neben das war/jar-Artefakt gelegt wird. Alternativ könnte man das Launch-Skript anpassen.
 
-## Linux: systemd
+### Linux: systemd
+
 * http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-systemd-service
 
 Systemd benötigt eine Service-Datei in ``/etc/systemd/system/myapp.service`` mit den Permissions 0644:
 
-```
+```properties
 [Unit]
 Description=MyApp
 After=syslog.target
@@ -101,55 +106,62 @@ In diesem Beispiel gehe ich davon aus, daß die Anwendnung in ``/opt/myapp.jar``
 
 Danach muß der systemd seine Konfiguration neu einlesen
 
-```
+```bash
 sudo systemctl daemon-reload
 ```
 
 und dann kann der Service gestartet werden:
 
-```
+```bash
 sudo systemctl start myapp.service
 ```
 
-## Linux: init.d
+### Linux: init.d
+
 * http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/deployment-install.html#deployment-initd-service
 
-## OS/X: launchd
+### OS/X: launchd
+
 ... hab ich keine Ahnung
 
-## Windows Dienst
+### Windows Dienst
+
 Ein Doppelclick auf der Spring-Boot-jar/war-Artefakt reicht für die Installation als Dienst ... also ACHTUNG!!!
 
 ---
 
-# Actuator
+## Actuator
 
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready
 * [Endpunkte](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html)
 
 Die sog. Production-Ready Features werden über die Dependency
 
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-      </dependency>
-    </dependencies>
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+  </dependency>
+</dependencies>
+```
 
 aktiviert. Dadurch werden einige nützliche Webservice-[Endpunkte](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) exponiert.
 
 Optional kann der ``/docs`` Endpunkt (http://IP_ADDRESS:PORT/docs) aktiviet werden:
 
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-actuator-docs</artifactId>
-      </dependency>
-    </dependencies>
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-actuator-docs</artifactId>
+  </dependency>
+</dependencies>
+```
 
 ---
 
-# Custom application info
+## Custom application info
 
 * http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-application-info
 
@@ -159,7 +171,7 @@ Features:
 
 ---
 
-# Startup-Banner
+## Startup-Banner
 
 * http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-spring-application.html
 
@@ -173,5 +185,3 @@ Solche Banner macht niemand selber ... http://patorjk.com/software/taag (die Fon
      | |_) | |  __/ |  | | |  __/
      | .__/|_|\___|_|  |_|  \___|
      |_|                         
-
-

@@ -35,6 +35,8 @@ Eine mit ``@Component public class MyConfiguration`` oder ``@Service public clas
 
 ### @Profile
 
+* [Spring Boot - Properties and Configuration - Dokumentation](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-properties-and-configuration.html)
+
 Über
 
 ```java
@@ -44,11 +46,17 @@ public class MyService{ ... }
 
 wird die Integration der Klasse in die Initialisierung der Anwendung (durch Spring) davon abhängig gemacht, ob ein bestimmtes Profil in ``application.properties``
 
-    spring.profiles.active=swagger
+```properties
+spring.profiles.active=swagger
+```
 
 gesetzt wurde.
 
 > Handelt es sich hierbei nicht nur um einen Spezialfall von ``@Conditional``?
+
+Mithilfe von Profilen lassen sich [umgebungsabhängige Konfigurationen](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-properties-and-configuration.html#howto-change-configuration-depending-on-the-environment) abbilden, so daß unterschiedliche `application.properties`-Sektionen verwendet werden. Beim Start der Anwendung wird das zu verwendende Profil in Abhängigkeit der Umgebung bzw. des Use-Cases (z. B. `production`, `docker`, `mock`) gesetzt.
+
+Auf diese Weise lassen sich Konfigurationsfamilien umsetzen ... man kann hier EINE `application.properties` verwenden oder aber auch verschiedene (`application-%{PROFIL}.properties`).
 
 ---
 
@@ -72,7 +80,7 @@ Hybrid-Ansätze sind problemlos möglich, so daß beispielsweise ein ``@Autowire
 
 ### Injection Varianten
 
-Ich präferiere grundsätzlich voll-valide Objekte, d. h. Mandatory-Properties MÜSSEN nach Erzeugung der Instanz (über den vorgesehenen Konstruktor) einsatzbereit sein. Ein Client muß nicht erst noch fünf Setter aufrufen müssen. Das erhöht auch die Semantik.
+Ich präferiere grundsätzlich voll-valide Objekte, d. h. Mandatory-Properties MÜSSEN nach Erzeugung der Instanz (über den vorgesehenen Konstruktor) einsatzbereit sein. Ein Client muß nicht erst noch fünf Setter aufrufen müssen. Das erhöht auch die Semantik, Sicherheit und rediuziert die Fehlerrate.
 
 **Insofern präferiere ich Constructor-Injection.**
 
