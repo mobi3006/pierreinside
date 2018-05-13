@@ -1,15 +1,17 @@
 # Swimming Pool
-Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000 Liter) ... das sollte mal reichen, um erste Erfahrungen zu sammeln (und zu testen, ob es den Kindern und uns überhaupt Spaß macht oder wir doch lieber ins Schwimmbad gehen). 
 
----
+Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000 Liter) ... das sollte mal reichen, um erste Erfahrungen zu sammeln (und zu testen, ob es den Kindern und uns überhaupt Spaß macht oder wir doch lieber ins Schwimmbad gehen).
 
-# Pflege
+## Pflege
+
 Links:
+
 * sehr gute umfassende Brochüre: http://www.hornbach.de/cms/media/de/projektbereich/wellness_1/pool_1/poolwasser_pflegen/Broschuere_Pool_fachgerecht_pflegen.pdf
 * http://www.hornbach.de/cms/de/de/projekte/wellness_zuhause/pool_bauen/poolwasser_pflegen/poolwasser_pflegen.html
 
-## Motivation
-Die Poolpflege ist sehr wichtig, um nicht durch Keime und Bakterien krank zu werden. Je höher die Temperaturen desto wichtiger ist die 
+### Motivation
+
+Die Poolpflege ist sehr wichtig, um nicht durch Keime und Bakterien krank zu werden. Je höher die Temperaturen desto wichtiger ist die
 
 * regelmäßige Poolkontrolle
 * Filterung
@@ -17,58 +19,67 @@ Die Poolpflege ist sehr wichtig, um nicht durch Keime und Bakterien krank zu wer
 
 um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
 
-## Gegner
+### Gegner
+
 * Keime und Bakterien
 * Kalk
 * Algen, da sie der Nährboden für Bakterien sind
-* Schnaken - man entdeckt sie immer wieder: Schnakenlarven 
+* Schnaken - man entdeckt sie immer wieder: Schnakenlarven
 
-## Tools
+### Tools
+
 * Chemikalien:
   * pH-plus oder pH-Minus
     * Wasserpflegemittel wirken nur dann optimal, wenn der pH-Wert richtig eingestellt ist.
   * Chlor
     * Schockchlorierung (zumeist Granulat)
     * Dauerchlorierung (zumeist Tabletten)
+    * evtl. kann auch ein Chlorgenerator eingesetzt werden, der aus Salz Chlor generiert
   * Algicid
   * Metall- und Kalkstabilisator
 * Pumpe, um Dreck rauszuwaschen
 * Skimmer
 * Kescher
 * Sauger
+  * per Wasser - hier schließt man einen Wasserschlauch an, das Wasser wirbelt den Dreck vom Boden auf und ein Netz fängt ihn auf
+  * per Pumpe - hier wird ein langer Schlauch an den Ausgang vom Skimmer angeschlossen, die andere Seite vom Schlauch kommt an eine Bodenbürste, so daß der Dreck in die Pumpe gesaugt und dort gefiltert wird
 * Becken-Bürste, um den Boden und Rand abzubürsten und dadurch den Wirkungsgrad der Chemikalien zu erhöhen
 * Abdeckplane (Algen brauchen Licht zum Wachsen)
 
-## Vorgehensweise
+### Vorgehensweise
+
 Meine gesammelten Tipps aus verschiedenen Quellen:
-* regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
-  * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
-  * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
-* bei grünlichem Wasser Algicid reingeben und Pumpe länger laufen lassen
-* bei bräunlichem Wasser ... und Pumpe länger laufen lassen
-* bei milchigem Wasser ... und Pumpe länger laufen lassen
-* Skimmer verwenden, um groben Schmutz VOR der Pumpe rauszufiltern
-* bei Nichtnutzung die Plane drüberziehen:
-  * Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)  
-  * Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
-* Poolsauger nutzen
-  * wir haben den: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
-* Filterreinigung:
-  * Kartusche: regelmäßig entnehmen und abspritzen 
-  * Sand und Filter Balls: Rückspülen und Nachspülen sobald der Druck in den gelben Bereich wechselt (siehe Manometer), um den Dreck aus dem Sand zu waschen und abzulassen
-* Wintereinlagerung:
-  * Pool gründlich waschen (Putzmittel für Pools) und dann ausgiebig trocknen
+
 * Poolaufbau:
   * auswaschen
+* Poolnutzung
+  * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
+    * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
+    * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
+  * bei grünlichem Wasser Algicid reingeben und Pumpe länger laufen lassen
+  * bei bräunlichem Wasser ... und Pumpe länger laufen lassen
+  * bei milchigem Wasser ... und Pumpe länger laufen lassen
+  * Skimmer verwenden, um groben Schmutz VOR der Pumpe rauszufiltern
+  * bei Nichtnutzung die Plane drüberziehen:
+    * Wasser heizt dadurch schneller auf (wir haben es innerhalb von 2 Tagen von 20° auf 30° geschafft)  
+    * Algenwachstum braucht Licht ... weniger Licht = weniger Algenwachstum
+  * Poolsauger nutzen
+    * wir haben den: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
+  * Filterreinigung:
+    * Kartusche: regelmäßig entnehmen und abspritzen
+    * Sand und Filter Balls: Rückspülen und Nachspülen sobald der Druck in den gelben Bereich wechselt (siehe Manometer), um den Dreck aus dem Sand zu waschen und abzulassen
+* Wintereinlagerung:
+  * Pool gründlich waschen (Putzmittel für Pools) und dann ausgiebig trocknen
 
----
+## Pumpe
 
-# Pumpe
 Die Pumpe hat folgende Aufgaben:
+
 * Dreck rausfiltern (über Kartusche, Sand oder Filter Balls)
 * Chemieverteilung im Pool
 
-## Steinbach Poolpumpe Speedclean Comfort 50
+### Steinbach Poolpumpe Speedclean Comfort 50
+
 Der [beiliegende Kartuschenfilter](https://www.amazon.de/Intex-28604GS-Kartuschenfilteranlage-2270GS-2-271/dp/B005FLOAZU/ref=sr_1_1?s=garden&ie=UTF8&qid=1472487778&sr=1-1&keywords=intex+filterpumpe) machte keinen besonders guten Eindruck, denn die Pumpleistung war an sich schon nicht groß und zudem wurde häufig Luft gezogen, so daß eine manuelle Entlüftung (geht schnell - Pumpe aus, Schraube aufdrehen, warten bis Wasser rausläuft, Schraube zudrehen, Pumpe an) erforderlich war, um zumindest diese schlechte Filterung zu bekommen.
 
 Nachdem wir aus dem Urlaub zurückkamen war das Wasser - trotz minimaler Pflege durch unseren Aushilfspoolmeister - grün. Ende August wollten wir natürlich nicht nochmal das Wasser wechseln.
@@ -79,8 +90,9 @@ Die Alternative im Baumarkt war die [Steinbach Speedclean Eco 30](https://www.am
 
 Achtung: die Pumpe kommt ohne Schläuche für den Poolanschluß und den Ablaß daher!!!
 
-### Aufbau und Inbetriebnahme
-Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen (und die Comfort 50 ist ein 7-Wege-Ventil-Gerät), zweitens war die [Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben](http://www.steinbach.at/images_mam?ID=7585da68858@steinbach&rand=694abddbd449d2a3e16df6a4eade52ca&force=true&download=true&omitPreview=true) (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich 
+#### Aufbau und Inbetriebnahme
+
+Der Aufbau gestaltete sich aufwendiger als erwartet. Erstens hatte ich noch keine Erfahrungen mit Sandfilterpumpen (und die Comfort 50 ist ein 7-Wege-Ventil-Gerät), zweitens war die [Bedienungsaufbauanleitung schlecht und drittens war sie noch für eine ältere Version der Comfort 50 geschrieben](http://www.steinbach.at/images_mam?ID=7585da68858@steinbach&rand=694abddbd449d2a3e16df6a4eade52ca&force=true&download=true&omitPreview=true) (zwar nur leichte Änderungen, aber es wurden zwei Teile nicht mehr benötigt). Nach ein paar verzweifelten Eigenversuchen entschied ich mich
 
 * für ein Youtube Video vom Hersteller: https://www.youtube.com/watch?v=IXwv5fyoC0g
 * diese hervorragende PDF-Anleitung: http://www.king-of-sports.de/res/steinbach_sandfilteranlage-speed-comfort_gebrauchsanleitung.pdf
@@ -93,17 +105,16 @@ So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich
 * in den Stellungen 5 - 7 sollte man die Pumpe nicht einschalten
 * Während des Betriebs nicht den Modus wechseln (z. B. 1 auf 2)
 
-### Wie oft soll sie laufen?
+#### Wie oft soll sie laufen?
+
 Steinbach gibt hierzu [folgende Empfehlung](http://www.steinbach.at/info/detail.php?viewID=16344):
 
-```
 * Bis zu einer Wassertemperatur von ca. 20 °C: 
   * Das Wasser soll mindestens 2 x täglich umgewälzt werden.
 * Bis zu einer Wassertemperatur von ca. 24 °C: 
   * Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 2 Stunden
 * Ab einer Wassertemperatur von ca. 24 °C: 
   * Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 4 Stunden
-```
 
 Pro Umwälzung braucht die Comfort 50 eine gute Stunde ... also 2 Stunden für 2 Umwälzungen. Obige Empfehlungen ergeben also folgende Laufzeiten:
 
@@ -113,7 +124,8 @@ Pro Umwälzung braucht die Comfort 50 eine gute Stunde ... also 2 Stunden für 2
 
 Gut, daß ich mich für die leistungsfähiger Pumpe entschieden habe.
 
-### Filter Balls
+#### Filter Balls
+
 * https://www.amazon.de/Steinbach-Filter-Balls-handels%C3%BCblichen-Sandfilteranlagen/dp/B01BVF66EG/ref=sr_1_1?s=garden&ie=UTF8&qid=1472486586&sr=1-1&keywords=filter+balls
 
 Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteile:
@@ -125,28 +137,35 @@ Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteile:
 
 Soweit die Theorie ... mal sehen wie es in der Praxis aussieht
 
-### Startwerte
-Der Druck lag zu Beginn bei 0,5 bar. 
+#### Startwerte
 
-### Bewertung
-Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). 
+Der Druck lag zu Beginn bei 0,5 bar ... wenn er in den gelben Bereich steigt, dann ist eine Rückspülung erforderlich
+
+#### Bewertung
+
+Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe).
 
 Ersatzteile scheinen kein Problem zu sein - [siehe hier](http://www.steinbach.at/info/detail.php?viewID=16344).
 
-## Tipps
+### Tipps
+
 * während des Pumpenbetriebs sollte man aus Sicherheitsgründen nicht baden
-* Druck am Manometer beobachten ... sobald im gelben Bereich: Rückspülen und Nachspülen, um den Dreck aus dem Filter zu waschen 
+* Druck am Manometer beobachten ... sobald im gelben Bereich: Rückspülen und Nachspülen, um den Dreck aus dem Filter zu waschen
 
----
+## Tools
 
-# Tools
+* Treppe
+  * im Baumarkt wollten die für eine Plastiktreppe fast 100 Euro - das war ich nicht bereit zu investieren. Stattdessen habe ich mir eine Treppe aus Wasserkisten (Kabelbinder) slebst gebaut:
+    ![Treppe](images/swimmingpool_treppe.jpg)
 * Poolsauger und -kescher: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
   * das Absaugen klappt erstaunlich gut :-)
 
----
+## Bewertung
 
-# Bewertung
-Es hat sich gelohnt ... der Garten ist nun zwar zu etwas anderem kaum noch zu gebrauchen (3,7m Durchmesser), aber er wird genutzt. Von den Kindern, den Eltern und den Großeltern. Das Schwimmbad wird zwar nicht ersetzt, aber wenn man mal nicht die Zeit/Muße fürs Schwimmbad hat oder das Wetter nur durchwachsen ist (wie im Sommer 2016 häufiger), dann ist der Pool perfekt. Im nächsten Jahr wird er wieder aufgebaut und sicherlich wird die ein oder andere Optimierung vorgenommen 
+Es hat sich gelohnt ... der Garten ist nun zwar zu etwas anderem kaum noch zu gebrauchen (3,7m Durchmesser), aber er wird genutzt. Von den Kindern, den Eltern und den Großeltern. Das Schwimmbad wird zwar nicht ersetzt, aber wenn man mal nicht die Zeit/Muße fürs Schwimmbad hat oder das Wetter nur durchwachsen ist (wie im Sommer 2016 häufiger), dann ist der Pool perfekt. Im nächsten Jahr wird er wieder aufgebaut und sicherlich wird die ein oder andere Optimierung vorgenommen
 
+## Swimming-Pool 2.0
 
-
+* der Pool könnte tiefer sein
+* statt der blauen Außenwand wäre eine Rattan-Optik ganz angenehm, das würde sich weniger auffällig in den Garten einfügen
+  * in den Boden eingelassen wäre natürlich optimal ... aber da würde man dann sicher eher ein richtiges Schwimmbecken bauen
