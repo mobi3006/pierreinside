@@ -155,8 +155,10 @@ Ersatzteile scheinen kein Problem zu sein - [siehe hier](http://www.steinbach.at
 ## Tools
 
 * Treppe
-  * im Baumarkt wollten die für eine Plastiktreppe fast 100 Euro - das war ich nicht bereit zu investieren. Stattdessen habe ich mir eine Treppe aus Wasserkisten (Kabelbinder) slebst gebaut:
+  * im Baumarkt wollten die für eine Plastiktreppe fast 100 Euro - das war ich nicht bereit zu investieren. Stattdessen habe ich mir eine Treppe aus Wasserkisten (Kabelbinder) selbst gebaut:
+
     ![Treppe](images/swimmingpool_treppe.jpg)
+
 * Poolsauger und -kescher: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
   * das Absaugen klappt erstaunlich gut :-)
 
