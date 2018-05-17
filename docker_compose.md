@@ -88,6 +88,8 @@ Die ``docker-compose.yml`` liefert hier den entsprechenden Kontext und muß sich
   * forwarding Log-Ansicht von allen Services (bzw. Machines)
 * ``docker-compose build web``
   * Image des Service ``web`` neu bauen
+* `docker-compose run --rm myService ping localhost`
+  * Service in einem neuen Container starten und ein einziges Kommand absetzen - danach wird der Container gestoppt und gelöscht
 
 ## Reihenfolge
 
