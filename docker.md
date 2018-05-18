@@ -187,9 +187,9 @@ Das Docker-Port-Forwarding muss für das Vagrant-Port-Forwarding nachgezogen wer
 
 ## Docker Hub
 
-Docker Hub ist DAS Docker-Image-Repository. 
+Docker Hub ist DAS Docker-Image-Repository.
 
-Für GitHub User hat es den Charme, daß Builds über einen Hook automatisch gestartet werden, d. h. 
+Für GitHub User hat es den Charme, daß Builds über einen Hook automatisch gestartet werden, d. h.
 
 * Docker Hub und GitHub hier vernetzen: https://docs.docker.com/docker-hub/github/
 * im Docker-Projekt auf GitHub einchecken und direkt ein Docker-Image bauen lassen, das für jeden verfügbar ist
@@ -198,7 +198,7 @@ Für GitHub User hat es den Charme, daß Builds über einen Hook automatisch ges
 
 ## Fazit
 
-Ich bin ziemlich begeistert von Docker.
+Ich bin sehr begeistert von Docker (zumindest mal aus Sicht eines Softwareentwicklers).
 
 Als größtes Problem, über das ich bisher gestolpert bin, empfand ich die Probleme mit den Permissions beim Zugriff auf Volumes. Das hat sowohl unter Windows als auch unter Linux nicht funktioniert ... vielleicht fehlt mir aber auch noch das notwendige Know-How - [siehe hier](docker_mysql.md).
 
@@ -213,11 +213,11 @@ pfh@workbench ~/src/docker-glassfish/3_1_2_2 (git)-[master] % docker run -it --r
 0% [Connecting to archive.ubuntu.com]
 ```
 
-**Antwort 1a:** 
+**Antwort 1a:**
 Ich hatte in meinem Virtual-Box-Linux-System den DNS von VirtualBox angegeben:
 
 ```bash
-pfh@workbench ~/% cat /etc/resolv.conf 
+pfh@workbench ~/% cat /etc/resolv.conf
 nameserver 127.0.1.1
 ```
 

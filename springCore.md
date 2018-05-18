@@ -17,7 +17,7 @@ Ist diese Eigenschaft gesetzt, dann sucht der Spring-Loader selbst nach Spring-B
 * ``@Repository``
 * ``@Controller``
 
-Zusammen mit ``@Autowire`` ergibt sich dadurch kaum noch expliziter Konfigurationsaufwand.
+Zusammen mit ``@Autowired`` ergibt sich dadurch kaum noch expliziter Konfigurationsaufwand.
 
 ### @ImportResource
 

@@ -1,4 +1,5 @@
 # Synology Diskstation DS112+
+
 Auslöser für diesen Kauf war mein zickender Drucker-Server von Edimax. Der meinte irgendwann nur noch komische Zeichen drucken zu wollen und ich investierte viele Stunden - doch leider ohne Erfolg. Der Drucker war noch bestens in Ordnung und deshalb wollte ich nicht einfach einen neuen mit WLAN-Anschluss kaufen ...
 
 Irgendwann stieß ich auf die Synology-Serie, die gleich einige meiner aktuellen und jahrelangen Probleme zu lösen schien:
@@ -17,18 +18,15 @@ Es versprach
 
 Das musste die eierlegende Wollmilchsau sein ... aber das versprechen ja viele.
 
----
+## Hardware-Konfiguration
 
-# Hardware-Konfiguration
 Ich entschied mich gegen ein RAID, weil ich das Geld lieber in eine externe USB-Platte stecke, die dann tatsächlich ein Backup ermöglicht (und nicht nur eine Spiegelung). Ich benötige keine 99,9996 % Ausfallsicherheit. Wenn die Platte mal abraucht und ich einen oder zwei Tage nicht auf meine Daten zugreifen kann ... KEIN PROBLEM - solange ich noch ein ordentliches Backup habe
 
 Verbaut ist eine Western Digital WD30EFRX 3TB aus der Red-Serie (für Server-Betrieb)
 
 Gesamtkosten: 350 Euro
 
----
-
-# Web-Applikationen
+## Web-Applikationen
 
 Synology bietet die zentrale Diskstation-Verwaltung über ein Webfrontend an, so daß man per Browser Zugriff erhält (https://diskstation:5001/webman). Zudem bieten einzelne Pakete weitere Web-Applikationen an, z. B.
 
@@ -41,19 +39,17 @@ Auf diese Weise können sich Benutzer auf das konzentrieren, was sie tatsächlic
 
 **ACHTUNG:** an diesen Oberflächen kann man sich mit ALLEN Usern anmelden (also beispielsweise auch mit einem normalen User-Account an der Administrationsoberfläche) ... die Feature sind dann aber evtl. eingeschränkt.
 
----
+## Admin-Oberfläche
 
-# Admin-Oberfläche
 Die Admin-Oberfläche wird ihrem Namen nur gerecht, wenn man sich mit dem Administrations-User anmeldet.
-## Monitoring
+
+### Monitoring
 
 Über *Control Panel - Notification* kann man über den Status des Diskstation im allgemeinen oder einzelne Aktionen per Mail oder Smartphone-Notification informiert werden.
 
 Das ist sehr praktisch, um beispielsweise über fehlgeschlagene Backups, zu hohe Temperaturen, Fehler auf der Platte, ... informiert zu werden.
 
----
-
-# Netzwerk-Performance
+## Netzwerk-Performance
 
 Wahnsinn ... nahezu volle Nutzung meiner Gigabit-Netzwerk-Bandbreite. Mit einem schnellen Netzwerk-Controller auf der Gegenseite (Laptop mit SSD) schaffte ich 100 MByte/s.
 
@@ -73,9 +69,8 @@ Reichts das aus, um die Diskstation für alle Use-Cases als File-Server zu verwe
   * Video mit 3-5 MB/s: ... hier wird es eng ... derzeit gehts grad noch so
     * ACHTUNG: dafür kann die Diskstation nichts ... das Problem sind die billigen WLAN-Adapter meiner Endgeräte (selbst mein 1100 Euro teures Asus N56VZ hat eine langsame Atheros-Karte drin ... tja, Asus: an der falschen Stelle 10 Euro gespart)
 
----
+## Backup
 
-# Backup
 ## Was vorher geschah ...
 
 Backup und Dateiorganisation war schon seit Jahren ein Thema ... bisher hatte ich noch keine zufriedenstellende Lösung gefunden.
@@ -90,14 +85,15 @@ Ich zog auch eine zentrale Speicherung meiner Daten bei der NSA ... ähm, in der
 
 Das Thema bereitete mir immer Kopfzerbrechen, aber ich hatte keine Lust und Zeit ...
 
-## Synology TimeBackup
+### Synology TimeBackup
+
 ... und dann kam Synology DS112+ mit TimeBackup ... und die Erde erstrahlte. Ungelogen ... dieses Teil lässt mich jetzt - nach Jahren des schlechten Gewissens - besser schlafen. Und schon allein aus diesem Grund hat sich die Investition gelohnt.
 
 Da das NAS als zentraler Fileserver fungiert (weil es auch entsprechend schnell ist), benötige ich nur ein Backup des NAS und nicht aller Clients. Die Dezentralisierung war bei meinen bisherigen Backup-Lösungen immer Hauptproblem.
 
 Im Synology-Control-Center musste ich nur die USB-Festplatte anschliessen, das TimeBackup-Package installieren, das TimeBackup konfigurieren (z. B. Hourly mit  Smart Recycle) und los gehts. Die USB-Platte kann während der Konfiguration des TimeBackups automatisch (auf Nachfrage!!!) mit ext3 oder ext4 formatiert werden (die einzigen unterstützten Filesysteme). Fertig.
 
-### Smart Recycle
+#### Smart Recycle
 
 Macht man Hourly Backups, dann enstehen 24 Backups am Tag, 168 Backups pro Woche, ... Das ist natürlich eine ganze Menge. Diese Backups sind natürlich optimiert (unveränderte Dateien werden nicht mehrfach gespeichert und nehmen Platz weg), aber dennoch sind es extrem viele und man würde vielleicht auch selbst den überblick verlieren (wenn man ein Restore durchführen will).
 
@@ -108,7 +104,7 @@ Deshalb gibt es die Smart Recycle Option, die nach einem Algorithmus einige Back
 
 Auf diese Weise behält man noch einen guten Überblick - ich finde den Ansatz sehr gelungen.
 
-### Backup-Strategie
+#### Backup-Strategie
 
 Jetzt werden die Home-Shares dreimal täglich gesichert und die Foto-Sammlung einmal wöchentlich. Durch SMB-Mount von ``\\diskstation\usbshare1`` kann ich
 leicht einen Blick auf das Backup werfen: keine Binär-Backups, sondern ich kann in den Ordnern problemlos navigieren und einzelne Dateien oder ganze Verzeichnisbäume aktualisieren. Ich kann aber auch die Webapplikation starten und mich in die Zeitmaschine setzen, um den aktuellen Stand zu jedem Backup-Zeitpunkt zu erhalten.
@@ -117,22 +113,35 @@ Und das beste: wenn sich nichts ändert, wird auch kein (bzw. nur geringer) Plat
 
 Ein kleiner Nachteil für reine Windows-User könnte darin bestehen, daß TimeBackup nur auf ext3 oder ext4 Filesysteme schreibt. Man kann dann also nicht so einfach die USB-Platte abstöpseln und an eine Windows-Kiste hängen, da Windows diese Dateisysteme nicht lesen kann. Normalerweise ist das kein klassischer Use-Case, weil man ja über SMB-Mount (``\\diskstation\usbshare1`` bzw. ``\\diskstation\usbshare2``) oder die FileStation-Webapp auf die Festplatte auch als Windows-User zugreifen kann.
 
-### Notification
+#### Notification
 
 Ich habe es so eingerichtet, daß ich per Mail über Backups informiert werde - so weiss ich zumindest, daß sie noch stattfinden und ob sie erfolgreich waren.
 
----
+### Hyper Backup
 
-# Print-Server
+* [motivierender Beitrag](https://www.tutonaut.de/anleitung-verschluesseltes-cloud-backup-mit-synology-hyper-backup-erstellen/)
+
+Hyper Backup ist ein Paket der Synology und erlaubt die verschlüsselte Sicherung der Daten in die Cloud (ich hoffe, daß mein Upload das auch irgendwann zuläßt).
+
+Interessante Cloud Storage Anbieter (Preis für 1 TB/Monat):
+
+* Strato HiDrive: 7,50 Euro
+  * unschlagbar günstig
+  * Server-Standort Deutschland
+* Google Drive: 10 Euro
+* Dropbox: 10 Euro
+* OneDrive: 10 Euro
+
+## Print-Server
+
 Die Diskstation kann als Printserver für per USB angeschlossene Drucker fungieren - so macht man einen Nicht-Netzwerkdrucker im zu einem Netzwerkdrucker.
 
 Ein Client, der den Netzwerkdrucker verwenden will, muss den Druckertreiber lokal installiert haben - der Drucker bekommt dann nur das erzeugte Dokument in der jeweiligen Druckersprache zugeschickt. Nachdem man den Treiber auf dem Laptop/PC installiert hat (unter Windows reicht dazu ein kurzes Verbinden des Druckers mit dem Laptop/PC ... später kann man evvtl. noch bessere Druckertreiber installieren), verbindet den Drucker per USB mit der Diskstation und startet den Synology Assistant (ein Programm, das man unter www. synology.com runterladen kann). Dort fügt man einen Drucker hinzu, was zur Folge hat, daß man lokal auf dem Laptop/PC einen Druckeranschluss zum Synology-Print-Server erstellt bekommt.
 
 Der Print-Server arbeitet sehr zuverlässig und stabil :-)
 
----
+## Videoüberwachung
 
-# Videoüberwachung
 Synology bietet auch eine Videoüberwachung an. Das wollte ich mal ausprobieren (eine Lizenz für eine Kamera ist bereits in jeder Diskstation enthalten - weitere Lizenzen kosten 50 Euro pro Kamera) und kaufte eine Outdoor-Kamera, die mit einer 720p Auflösung schon ganz gute Bilder macht, aber andererseits auch noch bezahlbar ist. Deshalb ist es die Foscam FI9804w für 120 Euro geworden. Diese Kamera steht auf der Synology-Kompatibilitätsliste nicht drauf (wohl aber andere Foscam Modelle), kann aber dennoch verwendet werden, wenn man sie als FI9805W anmeldet.
 
 Interessante ist, daß die Synology-Diskstation folgende Services bietet:
@@ -141,7 +150,7 @@ Interessante ist, daß die Synology-Diskstation folgende Services bietet:
 * Bewegungsentdeckung - insbesondere in Zusammenhang mit einer Speicherung der Daten macht das Sinn, um dann nur die relevanten Stellen aufzunehmen
 * Bereitstellung der Daten über ein Webinterface oder die Tablet/Handy-optimierte App "DS Cam"
 
-## Kamera: Foscam FI9804W
+### Kamera: Foscam FI9804W
 
 Ich habe mich für diese Kamera entschieden, weil
 
@@ -150,7 +159,7 @@ Ich habe mich für diese Kamera entschieden, weil
 * mit 120 Euro gerade noch am Rande meiner Schmerzgrenze
 * Synology scheint sie zu unterstützen (habe ich in einem Forum gelesen), obwohl sie nicht in der offiziellen Liste stand (man muss sie nur als FI9805W in der Synology-Surveillance-Station anmelden) ... viele andere Foscam-Modell werden offiziell unterstützt
 
-### Inbetriebnahme
+#### Inbetriebnahme
 
 Die mitgelieferte Software bitte einfach nicht verwenden ... bei mir hat sie unter Windows 7 64-Bit überhaupt nicht funktioniert. Weder IPCam Search Tool noch das Management Tool.
 
@@ -198,18 +207,14 @@ Ich war fasziniert von der Bewegungserkennung. Immer wenn eine Bewegung festgest
 
 Über die Surveillance-Station oder die DS Cam lassen sich das Echtzeit-Bild (steht immer zur Verfügung ... nicht nur bei Bewegung) und die Aufnahmen ansehen.
 
----
+## ssh-Server
 
-# ssh-Server
 In der Admin-Konsole muß über *Terminal - enable SSH Service* der SSH-Server einkonfiguriert sein.
 
-Anschließend sollte ein Verbindungsaufbau über den User ``root`` möglich sein:
+Anschließend sollte ein Verbindungsaufbau über den User ``root`` per `ssh root@diskstation` möglich sein.
 
-    ssh root@diskstation
-    
---- 
+## Git-Support
 
-# Git-Support
 * http://blog.osdev.org/git/2014/02/13/using-git-on-a-synology-nas.html
 
 Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern (evtl. legt man auch einen User ``gituser`` an) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist, läuft und funktioniert. Der ssh-Server wird benötigt, um
@@ -217,29 +222,23 @@ Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schne
 * im folgenden ein Bare-Repository auf der Synology-Diskstation anzulegen (siehe unten)
 * zwischen Git-Client und Git-Bare-Repository zu kommunizieren (u. a. ``git clone``, ``git push``)
 
-**ACHTUNG:** ein Stolperstein des Git-Server-Pakets war der Bug (?), daß die Default-Shell meiner Git-Enabled-User auf ``/var/packages/Git/target/bin/git-shell`` gesetzt war (siehe ``/etc/passwd``). Beim Anmeldeversuch über ssh
-
-    ssh pfh@diskstation
-    
-bekam ich die Fehlermeldung (http://gresch.io/2016/01/fatal-interactive-git-shell-is-not-enabled-on-synology/)
+**ACHTUNG:** ein Stolperstein des Git-Server-Pakets war der Bug (?), daß die Default-Shell meiner Git-Enabled-User auf ``/var/packages/Git/target/bin/git-shell`` gesetzt war (siehe ``/etc/passwd``). Beim Anmeldeversuch über `ssh pfh@diskstation` bekam ich die Fehlermeldung (http://gresch.io/2016/01/fatal-interactive-git-shell-is-not-enabled-on-synology/)
 
     fatal: Interactive git shell is not enabled.
     hint: ~/git-shell-commands should exist and have read and execute access.
 
-Das muß per vi-Editor (``vi /etc/passwd``) in 
+Das muß per vi-Editor (``vi /etc/passwd``) in
 
     DiskStation> cat /etc/passwd
     pfh:x:1027:100::/var/services/homes/pfh:/bin/sh
 
 abgeändert werden. Nun ist der ssh-Connect mit diesen non-Root-Usern auch wieder möglich.
 
-## Zentraler-Repository-Ansatz mit Synology-
-### Bare-Repository auf Diskstation anlegen
-Als User ``root`` (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet) per ssh auf die Diskstation wechseln:
+### Zentraler-Repository-Ansatz mit Synology
 
-    ssh root@diskstation
-    
-und dort per
+#### Bare-Repository auf Diskstation anlegen
+
+Als User ``root`` (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet) per ssh auf die Diskstation wechseln `ssh root@diskstation` und dort per
 
     cd /volume1/myuser/                # (A)
     mkdir git-repos
@@ -250,12 +249,13 @@ und dort per
     git update-server-info
     cd ../..
     chown -R myuser:users myrepo.git   # (B)
-    
+
 ein sog. *Bare-Repository* anlegen.
 
 **ACHTUNG:** natürlich muß man die Location (A) und den Owner bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend/schreibend zugreifen kann.
 
-### Diskstation Repository clonen
+#### Diskstation Repository clonen
+
 Auf dem Client wird das Repository lokal geclont (Achtung: es handelt sich hier um eine ssh-URL - nicht um https): 
 
     git clone ssh://myuser@diskstation/volume1/homes/myuser/git-repos/myrepo.git
@@ -263,5 +263,3 @@ Auf dem Client wird das Repository lokal geclont (Achtung: es handelt sich hier 
 **ACHTUNG:** Für den Support von https-Urls muß noch WebDAV auf der Synology-Diskstation installiert und konfiguriert werden - aber ssh-Verbindungen sind viel besser, da eine passwortfreie Authentifizierung möglich ist.
 
 ### Passwortfreie ssh-Verbindung konfigurieren
-
-

@@ -1,40 +1,41 @@
 # Docker MySQL
+
 * Offizielles Image auf DockerHub: https://hub.docker.com/_/mysql/
 
 Für MySQL gibt es etliche Docker Images ...
 
----
+## Offizielles Docker Image
 
-# Offizielles Docker Image
+### Persistenz auf Docker-Host
 
-## Persistenz auf Docker-Host
 Ich habe das per (``docker-compose.yml``)
 
-```
+```yml
 volumes:
    - ./containerPersistence/mysql:/var/lib/mysql
 ```
 
 geschafft und kann somit den Container wegwerfen, ohne die Daten aus der Datenbank zu verlieren. 
 
-### Permissions
+#### Permissions
+
 * https://denibertovic.com/posts/handling-permissions-with-docker-volumes/
 
 ABER ... der Owner der Dateien ist zunächst mal vom Image/Container festgelegt. Es scheint so als sei das fest auf die User-ID 999 eingestellt ... zumindest findet man in der ``/etc/passwd`` im Docker-Container folgenden Eintrag:
 
-```
+```properties
 mysql:x:999:999::/home/mysql:/bin/sh
 ```
 
 und das ``docker-entrypoint.sh`` Skript aus dem MySQL Docker Image scheint den Owner der Dateien im sog. DATADIR auf genau diesen User ``mysql`` zu setzen:
 
-```
+```bash
 # allow the container to be started with `--user`
 if [ "$1" = 'mysqld' -a -z "$wantHelp" -a "$(id -u)" = '0' ]; then
-	DATADIR="$(_datadir "$@")"
-	mkdir -p "$DATADIR"
-	chown -R mysql:mysql "$DATADIR"
-	exec gosu mysql "$BASH_SOURCE" "$@"
+   DATADIR="$(_datadir "$@")"
+   mkdir -p "$DATADIR"
+   chown -R mysql:mysql "$DATADIR"
+   exec gosu mysql "$BASH_SOURCE" "$@"
 fi
 ```
 
@@ -42,13 +43,11 @@ Sollte diese ID auf dem Docker-Host vergeben sein, dann bekommt man dessen Usern
 
 In der Doku zum Image findet man diesen lapidaren Hinweis:
 
-```
-The downside is that the user needs to make sure that the directory exists, and that e.g. directory permissions and other security mechanisms on the host system are set up correctly.
-```
+> "The downside is that the user needs to make sure that the directory exists, and that e.g. directory permissions and other security mechanisms on the host system are set up correctly."
 
 Dieses Problem wird ausgiebig diskutiert und mittlerweile verwende ich diesen Ansatzbisher habe ich noch keine zufriedenstellende Lösunge gefunden. Folgendes funktioniert schon mal (wobei die Variable UID explizit exportiert werden muß):
 
-```
+```yml
 services:
    mysql:
       image: mysql:5.7
@@ -57,7 +56,7 @@ services:
 
 hat aber deutliche Seiteneffekte, denn dann ist der Owner innerhalb des Docker-Containers der User mit dieser UID ... und die existiert eben i. a. nicht:
 
-```
+```bash
 I have no name!@mysql:/var/lib/mysql$ ls -al
 total 188496
 drwxrwxr-x  6 1000 1000     4096 Sep 26 15:11 .

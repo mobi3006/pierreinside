@@ -6,7 +6,11 @@ Aus einem Atom-Fork hervorgegangen ... die out-of-the-box Git-Integration ist sc
 
 ## Installation
 
-Hier gibt es abhängig vom Betriebssystem unterschiedliche Möglichkeiten. 
+Hier gibt es abhängig vom Betriebssystem unterschiedliche Möglichkeiten.
+
+### Tarball
+
+Damit habe ich die besten Erfahrungen gesammelt.
 
 ### Binaries
 
@@ -112,3 +116,7 @@ code-insiders --diff file1.txt file2.txt
 **Frage 3:** Mein Config-Verzeichnis von VSC (`~/.config/Code - Insiders`) ist mit über 3 GB extrem groß. Was verbraucht soviel Platz?
 
 **Antowrt 3:** Das Verzeichnis `~/.config/Code - Insiders/User/workspaceStorage` enthielt sehr viele Workspaces und insgesamt knapp 3GB. Viele Workspaces waren sehr alt und nicht mehr genutzt. Ich habe sie gelöscht (bis auf einen) und danach hatte das Config-Verzeichnis nur noch eine Größe von 0,3 GB.
+
+**Frage 4:** Beim Wechsel von 1.22 auf 1.23 waren plötzlich meine Shortcuts weg???
+
+**Antowrt 4:** Die Version 1.23 verwendet für die Konfigurationsdateien nicht mehr das Verzeichnis `~/.config/Code - Insiders/` sondern `~/.config/Code/` und deshalb wurden meine Shortcuts nicht mehr gefunden. Am besten setzt man einen symbolischen Link, um die MOMPLETTE alte Konfigurationen beizubehalten.

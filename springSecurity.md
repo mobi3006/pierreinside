@@ -216,11 +216,19 @@ security:
 
 ### OpenID Connect Provider mit Spring
 
-Hierbei handelt es sich um den Server-Part von OpenID Connect, der die Endpunkte `authorize` und `token` bereitstellt. Spring stellt hier im spring-security-oauth Projekt auch schon Infrastruktur zur Verfügung, so daß man für die Implementierung des eigenen OpenID Connect Providers nur noch wenig implementieren muß. Stattdessen kann man einen Großteil über programmatische Konfiguration (Fluent-APIs) erledigen.
+Spring selbst hat für OpenID Connect Provider Implementierungen noch keine out-of-the-box Lösung (im Gegensatz zum OpenID Connect Client). Da Spring aber OAuth2 Support anbietet ist der Weg zum OpenID Connect Provider nicht mehr sehr weit ... die Konfiguration/Bereitstellung der Endpunkte erfolgt über `@EnableAuthorizationServer` und programmatische Konfiguration (Fluent-APIs). Damit erhält man zumindest schon mal die Endpunkte `authorize` und `token`.
+
+Dann fehlt "nur" noch der `id_token`, den man in eine Spring-Security-Implementierung als `OAuth2AccessToken.additionalInformation` einhängen kann (dort sucht ein Spring-Security OpenID Connect Client den Token).
 
 ### OpenID Connect Provider ohne Spring
 
-* [IMplementierung basierend auf Authlete](https://medium.com/@darutk/spring-oauth-2-0-openid-connect-3341a6ed1f92)
+* [MITREid Connect - Implementierung basierend auf Spring Security](https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server)
+  * sehr gute Quelle, wenn man seinen eigenen OpenID Connect Provider auf Spring-Security-Basis implementieren will
+  * "MITREid Connect is a reference implementation of the OpenID Connect protocol server and client" ([Link](https://github.com/mitreid-connect/OpenID-Connect-Java-Spring-Server/wiki))
+* [Connect2id Server - basierend auf Java-Projekt "Nimbus OAuth OpenID Connect" (Open-Source)](https://connect2id.com/)
+  * [Source Code](https://connect2id.com/products/nimbus-oauth-openid-connect-sdk)
+* [Java-Implementierung basierend auf Authlete](https://medium.com/@darutk/spring-oauth-2-0-openid-connect-3341a6ed1f92)
+* [Clouway - non-Spring Java-Implementation](https://github.com/clouway/oauth2-server)
 
 ## spring-security-test-web-security
 

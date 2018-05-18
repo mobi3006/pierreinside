@@ -112,6 +112,7 @@
   * Container
     * [Docker](docker.md)
       * [Docker Getting Started](docker_gettingStarted.md)
+      * [Debugging Docker](docker_debug.md)
       * [Docker Build](docker_build.md)
       * Docker run
         * [docker run](docker_run.md)
