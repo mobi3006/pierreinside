@@ -62,7 +62,7 @@ Eins der wesentlichen Probleme in den OAuth-Szenarien ist, daß viele Stakeholde
 
 Zudem wird immer versucht, mehrere Hürden (vergleichbar mehrere Mauern) aufzubauen, so daß ein Durchbrechen EINER Hürde nicht zu einem erfolgreichen Angriff führt ([Defense-in-Depth-Prinzip aka Castle-Approach](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)).
 
-> Beispiel: einen CSRF-Angriff kann man dadurch erschweren, daß man neben dem Cookie für Server-Session noch einen URL-Parameter "CSRF-Token" mitgibt. Dieser Token wurde bei der Session-Erzeugung (z. B. beim Login) erzeugt und in der serverseitigen Session gespeichert. Kommt nun ein Request mit dem Session-Cookie, dann reicht das noch nicht aus, um die Session wirklich zu nutzen. Stattdessen muß der Requester noch einen CSRF-Token (im [OpenID Connect Protokoll den State-Token](openIDconnect.md)) mitliefern, mit dem der Requester nachweisen, kann, daß er den ursprünglichen Login auch tatsächlich gemacht hat.
+> Beispiel: einen CSRF-Angriff kann man dadurch erschweren, daß man neben dem Cookie für Server-Session noch einen URL-Parameter "CSRF-Token" mitgibt. Dieser Token wurde bei der Session-Erzeugung (z. B. beim Login) erzeugt und in der serverseitigen Session gespeichert. Kommt nun ein Request mit dem Session-Cookie, dann reicht das noch nicht aus, um die Session wirklich zu nutzen. Stattdessen muß der Requester noch einen CSRF-Token (im [OpenID Connect Protokoll den State-Token](openIdConnect.md)) mitliefern, mit dem der Requester nachweisen, kann, daß er den ursprünglichen Login auch tatsächlich gemacht hat.
 
 In diesem Beispiel reicht also ein "Geheimnis" (Cookie) nicht aus, es muß noch ein anderes geliefert werden.
 
@@ -107,7 +107,7 @@ OAuth 2 versucht die Komplexität aus den Clients rauszuhalten und in die Server
 
 * optional (je nach Authorization Grant Type)
 * ist ein Authorization Object
-* darf nur einmalig verwendet werden
+* darf nur einmalig verwendet werden (da er in der Front-Channel-Kommunikation eingesetzt wird?)
 * hiermit kann der Client zu jedem beliebigen Zeitpunkt EINMALIG einen Access Code vom Authorization Server beziehen
 * ist nicht das endgültige Authorization Object, sondern nur eine Zwischenlösung
   * Hintergrund: der Authorization Code kommt vom Resource Owner (per HTTP-Redirect transportiert), der evtl. ein Angreifer ist bzw. einen unsicheren Rechner hat - der Authorization Code könnte korrumpiert sein
@@ -118,7 +118,8 @@ OAuth 2 versucht die Komplexität aus den Clients rauszuhalten und in die Server
 * ist ein Authorization Object
 * repräsentiert die erteilte Zugriffsberechtigung, die dem Client vom Authorization Server im Auftrag des Resource Owners erteilt wurde
   * da es sich um eine Zeichenkette ohne Blanks handelt, ist die Interpretation der erteilten Berechtigungen nicht möglich - das wissen nur Authorization Server und Protected Resource
-* darf mehrfach verwendet werden - hat aber eine beschränkte Laufzeit
+* darf mehrfach verwendet werden (da er in der Back-Channel-Kommunikation eingesetzt wird?)
+* beschränkte Laufzeit
 * ist die Laufzeit abgelaufen, dann muß ein Refresh erfolgen - hierzu muß wendet sich der Client mit einem Refresh-Token (das ihn für die Erneuerung des Access Tokens berechtigt) an den Authorization Server
 * Typ des Access Tokens ist nicht Teil der OAuth Spezifikation - folgende Token Typen kommen zum Einsatz
   * [Bearer Token](https://tools.ietf.org/html/rfc6750)
@@ -194,7 +195,7 @@ Kommunikation des Clients mit Authorization Server und Protected Resource.
 ### Was ist OAuth 2 NICHT
 
 * User-to-User-Authorization-Delegation
-* kein Authentication Protokoll, obwohl Authentifizierung im Protokoll eine wichtiges Rolle spielt (Resource Owner am Authorization Server UND Client am Authorization Server) ... [OpenID Connect](openIDconnect.md) verwendet OAuth 2, um ein Authentication Protocol zu formen
+* kein Authentication Protokoll, obwohl Authentifizierung im Protokoll eine wichtiges Rolle spielt (Resource Owner am Authorization Server UND Client am Authorization Server) ... [OpenID Connect](openIdConnect.md) verwendet OAuth 2, um ein Authentication Protocol zu formen
   > "Much of the confusion comes from the fact that OAuth 2.0 is commonly used inside of authentication protocols, and that OAuth 2.0 embeds several authentication events inside of a regular OAuth 2.0 process." ([Buch OAuth2 in Action](https://livebook.manning.com/#!/book/oauth-2-in-action/chapter-13/))
 * OAuth 2 definiert nicht das Token Format (im Gegensatz zu anderen Security Protocols wie SAML, Kerberos WS-*)
 * Nutzung außerhalb von HTTP ist nicht vorgesehen

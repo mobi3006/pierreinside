@@ -8,7 +8,7 @@ Die Spezifikation von Build und Deployment erfolgt in Form der Travis-DSL. Hierz
 
 ## Travis Integration von GitHub Projekten
 
-Man kann sich bei Travis mit seinen GitHub-Credentials einloggen und kann dort einen Travis-Job für eins seiner GitHub-Projekte definieren (die GitHub Projekte werden im Travis angezeigt ... [OpenId Connect like](openIDconnect.md)).
+Man kann sich bei Travis mit seinen GitHub-Credentials einloggen und kann dort einen Travis-Job für eins seiner GitHub-Projekte definieren (die GitHub Projekte werden im Travis angezeigt ... [OpenId Connect like](openIdConnect.md)).
 
 ### Docker-Image Build
 

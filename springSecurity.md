@@ -38,7 +38,7 @@ Eine Anpassung der Security erfolgt über einen `WebSecurityConfigurerAdapter` (
 * einige Schnittstellen public zu machen, sinnvolle Ressourcen könnten sein
   * JavaScript Dateien
   * CSS Dateien
-  * Login-Seite ... sofern das nicht über einen zentralen Identity-Provider (z. B. [OpenID Connect](openIDconnect.md)) abgebildet ist
+  * Login-Seite ... sofern das nicht über einen zentralen Identity-Provider (z. B. [OpenID Connect](openIdConnect.md)) abgebildet ist
 * statt Basic-Auth ein Form-Based-Authentication zu implementieren
 * ...
 
@@ -48,7 +48,7 @@ Der angemeldete User ist dann über `SecurityContextHolder.getContext().getAuthe
 
 Spring bietet bereits Projekte, um Identity-Provider wie
 
-* Google ([OpenID Connect certified](openIDConnect.md))
+* Google ([OpenID Connect certified](openIdConnect.md))
 * Facebook
 * LinkedIn
 * GitHUb
@@ -113,12 +113,12 @@ Tonr Übersicht:
 ### OpenID Connect Client (aka Spring OAuth 2.0 Login)
 
 > "OAuth 2.0 Login is implemented by using the Authorization Code Grant, as specified in the OAuth 2.0 Authorization Framework and OpenID Connect Core 1.0." ([Spring Doku](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#jc-oauth2login))
-
+>
 > ACHTUNG:
 > * Spring unterscheidet hier stark zwischen dem Client (`spring-security-oauth2-client` - ist in der Artefakt-Gruppe `org.springframework.security` zuhause) und den Basis-Libs bzw. dem Server (ist in der Artefakt-Gruppe `org.springframework.security.oauth` zuhause)
 > * das Artefakt `spring-security-openid` ist für *OpenID* und NICHT für *OpenID Connect* gedacht - *OpenID Connect* wird von `spring-security-oauth2-client` (Artefakt innerhalb `spring-security`) und ``spring-security-oauth2` (separates Git-Repository) abgedeckt. Verwirrung pur.
 > * Spring nennt das *OpenID Connect Login* einfach mal *OAuth 2.0 Login*
->   * Spring OAuth 2.0 Login ist mehr als OpenID Connect, denn es werden auch nicht OpenID Connect zertifizierte Identity Provider (z. B. Facebook unterstützt) - aber genauso OpenID Connect zertifizierte (z. B. Google).
+>   * Spring OAuth 2.0 Login ist mehr als OpenID Connect, denn es werden auch nicht OpenID Connect zertifizierte Identity Provider (z. B. Facebook, GitHub unterstützt) - aber genauso OpenID Connect zertifizierte (z. B. Google).
 > * verwendet man die Spring-Komponenten, dann beschreitet man einen bereits vorgedachten/funktionierenden Weg, den man "nur noch" konfugurieren und an den richtigen Stellen anpassen muß. Letztlich basieren die Implementierungen aber auf den HTTP-Standardtechnologien und können auch selbst implementiert werden (über HttpRequest-Filter) ... vielleicht ist es besser anfangs den beschwerlichen Weg zu nehmen, um die Vorteile eines Frameworks (wie hier Spring Security) besser erkennen zu können.
 
 * Spring Doku
@@ -129,7 +129,7 @@ Tonr Übersicht:
     * BTW: nur Gradle unterstützt (aber wenigstens wird ein Gradle-Wrapper bereitgestellt) - kein Maven
 * [Baeldung - OpenID Connect Relying Party gegen Google OpenID Provider](http://www.baeldung.com/spring-security-openid-connect)
 * [mein Abschnitt über OAuth](oauth.md)
-* [mein Abschnitt über OpenID Connect](openIDConnect.md)
+* [mein Abschnitt über OpenID Connect](openIdConnect.md)
 
 Das Versprechen von Spring:
 
@@ -199,19 +199,32 @@ Leider war mir schon gar nicht klar wie der Endpunkt `/login` in diese Anwendung
 
 #### Runtime Konfiguration
 
-Spring bringt schon die passenden Konfigurationsparameter (für die `application.yml`) - für die IdentityProvider Google, GitHub, Facebook ist nur die `clientId` und das `clientSecret` erforderlich ([siehe Sample Code](https://github.com/spring-projects/spring-security/tree/5.0.4.RELEASE/samples/boot/oauth2login)).
+Spring bringt schon die passenden Konfigurationsparameter (für die `application.yml`) für die IdentityProvider Google (OpenID Connect zertifiziert), GitHub (kein OpenID Connect - aber OAuth2 basiert), Facebook (kein OpenID Connect) ist nur die `clientId` und das `clientSecret` erforderlich ([siehe Sample Code](https://github.com/spring-projects/spring-security/tree/5.0.4.RELEASE/samples/boot/oauth2login)).
+
+> [hier findet man die Konfiguration für Google](https://github.com/spring-projects/spring-security/blob/526e0fdd4fde023a7fa77dff70f4424e10b7dcba/config/src/main/java/org/springframework/security/config/annotation/web/builders/HttpSecurity.java#L959)
+
+> Spring nennt die OAuth2 basierte Authentifizierung "OAuth2 Login" und nicht "OpenID Connect", da auch non-"OpenID Connect" Identity Provider wie Facebook und GitHub unterstützt werden!!!
+
+Will man andere IdentityProvider anbinden, so müssen entsprechende `provider` konfiguriert werden:
 
 ```yml
 security:
   oauth2:
     client:
-      clientId: 4711
-      clientSecret: 0815
-      userAuthorizationUri: https://www.cachaca.de/dialog/oauth
-      accessTokenUri: https://www.cachaca.de/oauth/access_token
-    resource:
-        userInfoUri: https://graph.facebook.com/me
-      ...
+      registration:
+        github:
+          clientId: 4711
+          clientSecret: 0815
+        my-iam:
+          clientId: 4711
+          clientSecret: 0815
+          scope: openid
+      provider:
+        my-iam:
+          authorization-uri: http://foo/oauth/authorize
+          token-uri: http://foo/oauth/token
+          jwk-set-uri: http://foo/oauth/jwk
+          user-info-uri: http://foo/oauth/userinfo
 ```
 
 ### OpenID Connect Provider mit Spring

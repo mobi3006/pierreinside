@@ -1,7 +1,9 @@
 # Heimnetzwerk
+
 Zuhause habe ich leider keine durchgehende kabelgebundenes Netzwerk - bei Renovierungen achte ich allerdings darauf, das nachzuholen (gleich mit 10GBit Kabel - Cat 7 FSTP). Im Erdgeschoss kommt der DSL-Anschluss an und von dort habe ich Kabel in den zweiten Stock (über ein hohles Geländer) ... das ist schon mal sehr gut und mehr als ich mir hätte wünschen können in meinem 80er Jahre Haus.
 
-# DSL Router 7390
+## DSL Router 7390
+
 Jahrelang hat dieser Router sehr gute Dienste geleistet, doch mittlerweile ist er schon ein wenig in die Jahre gekommen (Stand 2017). Folgende Punkte sind nicht mehr up-to-date:
 
 * kein WLAN ac - Performance schlecht
@@ -9,10 +11,12 @@ Jahrelang hat dieser Router sehr gute Dienste geleistet, doch mittlerweile ist e
   * allerdings hat auch mein Haupt-Laptop nur eine schlechte WLAN-Performance, da nur eine Antenne verbaut ... wird aber bald mal ausgetauscht
 * kein Mesh-Support
 
-# Alte Fritzbox als AccessPoint
+## Alte Fritzbox als AccessPoint
+
 Ich habe im zweiten Stock eine alte Fritzbox als AccessPoint eingerichtet. Das funktioniert prinzipiell, aber die alte Box kann halt keine aktuellen WLAN-Standards und kommt somit auf eine schlechte Performance. Das liegt sicherlich auch daran, daß das 2,4 GHz Netz von vielen meiner Nachbarn genutzt wird und die Box nicht automatisch zwiscchen den Kanälen umschalten kann. Selbst ein Raum vom AccessPoint entfernt habe ich weiter habe ich manchmal inakzeptable Geschwindigkeit.
 
-# Fritz!WLAN Repeater 1750E als AccessPoint (aka LAN Brücke)
+## Fritz!WLAN Repeater 1750E als AccessPoint (aka LAN Brücke)
+
 * [WLAN-Grundlagen](http://www.tomshardware.de/grundlagen-wissen-wlan-repeater-wireless-range-extender,testberichte-241852.html)
 * [Fritz-Dokumentation](https://avm.de/service/fritzwlan/fritzwlan-repeater-1750e/wissensdatenbank/publication/show/903_FRITZ-WLAN-Repeater-per-LAN-mit-Router-z-B-FRITZ-Box-verbinden/)
 
@@ -22,7 +26,8 @@ Den Repeater 1750E kann man in verschiedenen Modi betreiben:
 * [LAN Brücke](https://avm.de/service/fritzwlan/fritzwlan-repeater-1750e/wissensdatenbank/publication/show/903_FRITZ-WLAN-Repeater-per-LAN-mit-Router-z-B-FRITZ-Box-verbinden/)
 * [Mesh](https://avm.de/service/fritzos-690/faqs/welche-fritz-produkte-unterstuetzen-wlan-mesh/)
 
-## LAN-Brücke
+### LAN-Brücke
+
 In diesem Modus ist das Gerät per LAN mit dem Switch/Router verbunden und bietet für Clients einen WLAN-Access (-Point) an. Der 1750 arbeitet in diesem Modus sehr gut ... ich erreiche bis zu 400 MBit/s in meinem lokalen Netzwerk. Und das bei einem AC1300 Client (= Laptop), der im 5 GHz Bereich brutto maximal 867 MBit/s schaffen kann - **Hut ab**. Im Vergleich zu meinen [150 MBit/s meiner Fritzbox 7390](https://avm.de/service/fritzbox/fritzbox-7390/wissensdatenbank/publication/show/514_WLAN-Verbindungen-langsam-geringe-Datenrate/) ein Traum.
 Damit bin ich sehr zufrieden.
 
@@ -30,12 +35,14 @@ Somit ist er super geeignet um mein WLAN im zweiten Stock aufzuspannen. Außerde
 
 Aufgrund des Mesh-Supports ist der Repeater auch für einen zukünftigen Austausch des langsam veralteten DSL-Routers 7390 vorbereitet.
 
-## WLAN-Brücke
+### WLAN-Brücke
+
 In diesem Modus kommuniziert der 1750 über WLAN mit dem Switch/Router - die WLAN-Bandbreite wird dadurch natürlich halbiert, weil die Antennen des 1750 gleichzeitig empfangen und senden.
 
 Leider war die Performance im Zusammenspiel mit meiner betagten Fritzbox 7390 (unterstützt nur WLAN-n, kein WLAN-ac) extrem enttäuschend. Mehr als 1-3 MBit/s habe ich trotz Fritzboxabstand von 3m nicht rausholen können ... und instabil war es durch eine Betondecke und eine Wand außerdem.  
 
-# Aktuelle Fritzbox - 2017
+## Aktuelle Fritzbox - 2017
+
 * https://avm.de/produkte/avm-produktvergleich/fritzbox/alle-anschluesse/
 
 Alternativ zu einem Fritz!WLAN Repeater 1750E könnte ich meine aktuelle 7390 gegen einen neuen DSL-Router austauschen und aus der 7390 einen AccessPoint machen.
@@ -44,7 +51,7 @@ Alternativ zu einem Fritz!WLAN Repeater 1750E könnte ich meine aktuelle 7390 ge
   * derzeit (11/2017) berichten viele User von WLAN/DSL-Verbindungsabbrüchen :-(
   * mit [MU-MIMO](https://avm.de/mu-mimo/) höchste WLAN-Performance: 5GHz: 1.733 MBit/s + 2,4GHz: 800 MBit/s
   * das "VDSL-Supervectoring 35b" mit bis zu 300 MBit/s DSL kann ich an meinem Wohnort nicht gebrauchen
-* 7490 (190 Euro): 
+* 7490 (190 Euro):
   * ohne MU-MIMO - 5GHz: 1.300 + 2,4GHz: 450
   
 Alle o. a. Router sind in folgenden Punkten:
@@ -57,14 +64,39 @@ Alle o. a. Router sind in folgenden Punkten:
 * Telefonanlage
 * Glasfaseranschluß
 
-## MU-MIMO vs. SU-MIMO
+### MU-MIMO vs. SU-MIMO
+
 MIMO = Multiple Input Multiple Output
 
-Statements von AVM: (https://avm.de/mu-mimo/)
+Statements von [AVM](https://avm.de/mu-mimo/)
+
 * "Ein Router mit SU-MIMO versorgt die Netzwerkgeräte nacheinander mit Daten. Daher ist die im gesamten WLAN erreichbare Geschwindigkeit beim Einsatz mehrerer Geräte geringer."
 * "Durch die gleichzeitige Übertragung mehrerer Datenströme per MU-MIMO lassen sich freibleibende Streams parallel für andere Geräte nutzen. Die WLAN-Kapazität wird besser ausgeschöpft und es entstehen weniger Verzögerungen. [...] Viele aktuelle WLAN-Geräte wie Smartphones, Tablets, PC-WLAN-Adapter etc. unterstützen bereits die neue MU-MIMO-Technologie. [...] Sind Notebook oder PC nicht MU-MIMO-fähig, bringt der FRITZ!WLAN Stick AC 430 MU-MIMO sie auf Touren."
 
-# Powerline
+## Umstellung DSL 16 auf VDSL 100
+
+Im Juni 2018 war es dann endlich soweit .... schnelles DSL auch für uns - bei der letzten Beauftragung eines Upgrades war noch kein Port frei, doch 1und1 hielt Wort und prüfte 4 Monate nach Verlängerung meines Vertrages erneut die Upgrademöglichkeit (Applaus 1und1 :-).
+
+Die Umstellung schien anfangs problemlos zu laufen - der Zeitpunkt wurde eingehalten und die volle Bandbreite war auch an meiner Fritzbox 7390 verfügbar ([Chip-Speedtest](http://speedtest.chip.de).
+
+Nach der Umstellung hatte ich allerdings immer wieder sporadisch Verbindungsabbrüche. 30 mal in zwei Tagen - während Streamings teilweise im 8-Minuten-Takt. Nach 1-2 Minuten ist die Verbindung wieder automatisch aufgebaut (Fritzbox synchronisiert sich selbständig) ... Streaming macht so jedenfalls keinen Spaß. An dieser Statistik aus der Fritzbox sieht man die gehäuften Synchronisationen nach der Umstallung des DSL am Mittwoch/Donnerstag:
+
+![Störungen](images/1und1_vdsl_umstellung_stoerungen.png)
+
+Anfangs schob ich es auf eine Kalibrierung ("Training" tauchte im Log auf), doch ich googelte und fand auch andere, die diese Probleme nach einer Umstellung über einen längeren Zeitraum hatten.
+
+Einige mögliche Probleme:
+
+* 7390 mit FritzOS 6 ist doch nicht geeignet für VDSL 100, obwohl AVM sie für geeignet hält
+* in der Fritzbox ist "dauerhafte Verbindung" NICHT ausgewählt - BEI MIR NICHT DER FALL
+* es ist kein Problem des DSL, sondern des WLAN - BEI MIR NICHT DER FALL
+* Störsicherheit in der Fritzbox umkonfigurieren - von (derzeit) maximaler Performance in Richtung höhere Stabilität. Derzeit liegt die Störabstandsmarge bei 6-10db (angeblich grenzwertig), ist in den letzten Tagen aber besser geworden
+  * ich habe nun in einen mittleren Bereich gewechselt ... mal sehen, ob das die Stabilität positiv beeinflußt
+* Leitung vom Hausanschluß zur TAE-Dose, an dem der DSL-Splitter hängt, ist minderwertig
+* Fehlkonfiguration (Vermittlungsstelle, DSL-Provider)
+
+## Powerline
+
 * [Produkte von Fritz](https://avm.de/produkte/fritzpowerline/)
 
-Von Powerline halte ich nicht viel. Ich hatte es selbst bisher noch nicht im Einsatz, aber alle Bekannten berichten von Problemen ... instabil und langsam. 
+Von Powerline halte ich nicht viel. Ich hatte es selbst bisher noch nicht im Einsatz, aber alle Bekannten berichten von Problemen ... instabil und langsam.

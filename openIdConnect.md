@@ -2,6 +2,27 @@
 
 * [Core Protocol](http://openid.net/specs/openid-connect-core-1_0.html)
 
+OpenID Connect ist ein Protokoll zur Umsetzung von Authentication-as-a-Service. Da es letztlich darum geht, eine Identitätsfeststellung durchzuführen wird es auch als Identity Federation bezeichnet (ein Service wird mit der Feststellung der Identität beauftragt). Das basiert letztlich darauf, daß ein User (Mensch/Maschine) ein Geheimnis benutzt, das ausschließlich er kennt: Password, Secret Key, Token, Fingerabdruck, Iris, ...
+
+Dieser Ansatz hat sehr viele Vorteile:
+
+* Benutzer
+  * es wird ein einziges Credential verwendet, um sich an vielen Services anzumelden (keine lästigen eMail-Verifications). Das erhöht den Komfort für den Benutzer und sorgt zusätzlich für mehr Sicherheit (ich dachte eigentlich immer, daß sich das ausschließt ... eine Win-Win-Situation) verhindert, daß Benutzer die gleichen Credentials auf unterschiedlichen Services verwenden, Credentials aufschreiben, unsichere Credentials verwenden, ...
+  * Single-Sign-On (zumindest bei OpenID Connect ist das inhärent vorhanden)
+* Applikationsentwickler
+  * Usermanagement und - und Identity kann wiederverwendet werden
+* Service-Anbieter
+  * Benutzer sind eher bereit, sich zu identifizieren (anzumelden), um geschützte Dienste zu nutzen
+  * bekommen dadurch mehr Engagement (z. B. Inhalte)
+* Sicherheit
+  * Anwendugsentwickler müssen sich nicht mehr kümmern und ein Identity Provider wird die sichere Lösung anbieten können
+
+Man darf dabei aber nicht vergessen, daß ein einziges Credential auch den Nachteile hat:
+
+* ist dieses Credential geknackt, dann stehen die Türen zu vielen Services (Daten) offen - widerspricht das nicht eigentlich dem Sicherheitsansatz, viele Hürden aufzubauen
+* die Nachverfolgbarkeit wird erhöht - werden unterschiedliche Credentials von einem Benutzer verwendet, dann ist es schwieriger festzustellen, daß es sich dabei um den gleichen Nutzer handelt
+  * durch die erhöhte Integration der Dienste kann es für den Benutzer unüberschaubar werden, welche Spuren er hinterläßt (plötzlich wird auf Facebook meine tägliche Fahrradstrecke gepostet, die ich über Komoot geplant habe)
+
 ## OAuth 2 vs. OpenID Connect
 
 OpenID Connect = OAuth2 + OpenID Provider
@@ -219,15 +240,12 @@ Da OpenID Connect sehr beliebt ist, findet man bei vielen Cloud-Unternehmen (u. 
 
 Web-Applikationen machen von diesen OpenID Connect Providern regen Gebrauch. Das inhärente Single-Sign-On ist neben der Eigenschaft Reuse-Existing-Credentials ein extrem komfortables Feature (einmal bei GitHub angemeldet und mit diesem Login 20 Web-Applikationen ohne erneute Anmeldung nutzen).
 
-### GitHub als OpenID Connect Provider
-
-* https://github.com/login/oauth/authorize
-
 ### Google als OpenID Connect Provider
 
 * [Google OpenID Provider in Action ... sehr schön mit Beispiel-Requests](https://developers.google.com/identity/protocols/OpenIDConnect)
 * [Google OAuth Playground - sehr gut](https://developers.google.com/oauthplayground)
-* [OpenID Connect certified](http://openid.net/certification/)
+
+[Google ist OpenID Connect certified](http://openid.net/certification/) und somit bietet sich der Dienst besonders an, um OpenID Connect in Action zu sehen.
 
 #### Nutzung als Software-Anbieter
 
@@ -248,7 +266,7 @@ Sobald eine Anwendung die Authentifizierung/Authorisierung vom User im OpenID Co
 
 ![Authorisierung durch den Benutzer](images/openIdConnect_google_requestAuthorization.png)
 
-wird ein entsprechendes Authorisierungs-Profil für diese Anwendung im OpenID Connect Provider von Google angelegt. Diese Profile lassen sich [unter Google - My Account - Sign-In and Security](https://security.google.com/settings/security/permissions) verwalten (einsehen und löschen) pflegen - man kann eine Berchtigung also jederzeit wieder entfernen.
+wird ein entsprechendes Authorisierungs-Profil für diese Anwendung im OpenID Connect Provider von Google angelegt. Diese Profile lassen sich [unter Google - My Account - Sign-In and Security](https://security.google.com/settings/security/permissions) verwalten (einsehen und löschen) pflegen - man kann eine Berchtigung also jederzeit wieder entfernen. Es geht hier also nicht nur um die Authentifizierung, die an Google delegiert wird, sondern auch um die Authorisierung, d. h. der User gewährt einem Service (= Relying Party im Sinne von OpenID Connect) das Recht für bstimmte Aktionen in seinem Sinne (z. B. eMails lesen, Kalender Einträge pflegen).
 
 ![OpenIDConnect bei Google.png](images/openIdConnect_google.png)
 
@@ -272,6 +290,8 @@ Der [Google-Playground](https://developers.google.com/oauthplayground) bietet ei
 
 * [Microsoft-Dokumentation](https://docs.microsoft.com/de-de/azure/active-directory/develop/active-directory-protocols-openid-connect-code)
 * Entwicklerinfos zur Nutzung des Micosoft OpenID Connect Providers: https://developer.microsoft.com/de-de/graph
+
+> Ich bin mir nicht sicher, ob Microsoft 365 OpenID Connect basiert ist, das Protokoll sieht aber zumindest sehr ähnlich aus und Microsoft hat auch einige [OpenID Connect zertifizierte Identity Provider](http://openid.net/certification/).
 
 Die Login Page des Microsoft OpenID Connect Providers befindet sich unter https://login.microsoftonline.com. Die OAuth2-Login-Seite erlaubt die Selektion verschiedener Accounts.
 
@@ -316,7 +336,13 @@ Letztlich werden hiermit vermutlich ALLE laufenden Sessions der einzelnen beteil
 
 Das Office 365 Paket von Microsoft besteht aus einer Vielzahl an Webapplikationen und APIs, die miteinander über den OpenID Connect Mechanismus Single-Sign-On verbunden sind, so daß es dem Benutzer kaum auffällt, daß die Web-Anwendungen ständig gewechselt werden.
 
-## Spring Security
+### GitHub
+
+* https://github.com/login/oauth/authorize
+
+GitHub bietet KEIN OpenID Connect an, aber ein ähnliches Protokoll auf OAuth2-Basis.
+
+## Implementierung mit Spring Security
 
 Spring (-Boot) ist im Java-Ökosystem DIE Platform/Framework zur Entwicklung von Microservices und hat auch ensprechende Konzepte für OpenID Connect bzw. OAuth2.
 

@@ -87,11 +87,12 @@
   * [Instana](instana.md)
 * Sicherheit
   * [Authentifizierung](authentitication.md)
-    * [OpenID Connect](openIDconnect.md)
+    * [OpenID Connect](openIdConnect.md)
+    * [Web-Authentication API](webauthn.md)
   * Authorisierung
     * [OAuth](oauth.md)
     * [SAML](saml.md)
-  * [Spring Security][springSecurity.md]
+  * [Spring Security](springSecurity.md)
   * [Zertifikate](certificates.md)
   * [Kali Linux](kaliLinux.md)
   * [VPN](vpn.md)
