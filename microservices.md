@@ -92,7 +92,27 @@ Spielt das für kleine Unternehmen eine Rolle? Solche Unternehmen werden vermutl
 
 Ein paar Stichworte:
 
-* jeder Microservice hat seinen eigenen Build
+* jeder Microservice hat
+  * seinen eigenen Build (z. B. Jenkins/Travis Datei im Source-Code)
+  * seine eigene Persistenz (lose Kopplung)
+  * sein eigenes Team
+  * seinen eigenen Technologiestack
+    * klar, als unternehmen muß man auch darauf achten, daß man die Services staffen kann - deshalb wird man hier nicht komplett frei sein
+  * sein eingenes Operations-Team (das sich um alles kümmert ... Technologieauswahl)
+  * sein eigenes Tooling
+    * hier können sich Synergien ergeben, wenn man den Technologiestack ähnlich hält
 * stateless - nur so erreicht man elastische Lösungen, die skalieren können
 * Data-caching in jedem Microservice als zentrales Architekturelement. Würde man immer alle Daten aus den Origin-Data-Sources ziehen, dann wäre die Anwendnung zu langsam.
   * update-Strategy notwendig
+
+### API-Gateway
+
+* [microservices.io](http://microservices.io/patterns/apigateway.html)
+
+Für jeden Client-Typ wird eine eigene API bereitgestellt, da ein mobiler Client sicher weniger/andere Daten benötigt als eine Desktop-Anwendung. Und hinsichtlich Desktop-Anwendungen gibt es auch noch mal unterschieden zwischen verschiedenen Usergruppen (Poweruser brauchen eine andere UI als Gelegenheitsnutzer). In diesem Zusammenhang wird der Ansatz Backend-for-Frontend gerne genannt.
+
+### Microservices mit Spring und Netflix
+
+* [Microservices à la Netflix](https://www.innoq.com/de/articles/2016/12/microservices-a-la-netflix/)
+
+Netflix ist zu einem großen Player in Sachen vieler relevanter Cloud-Eigenschaften (Elastizität, Resilience, Performance, ...) geworden. Viele Patterns und Implementierungen sind in OpenSource-Libraries geflossen und haben auch den Weg nach Spring gefunden. Dadurch sind sie wirklich sehr einfach und schnell integriert ... ein paar Annotation und schwupp funktionieren die eigenen Services à la Netflix.

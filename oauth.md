@@ -116,28 +116,42 @@ OAuth 2 versucht die Komplexität aus den Clients rauszuhalten und in die Server
 
 * mandatory
 * ist ein Authorization Object
-* repräsentiert die erteilte Zugriffsberechtigung, die dem Client vom Authorization Server im Auftrag des Resource Owners erteilt wurde
+* repräsentiert die erteilte Zugriffsberechtigung, die dem Client im Auftrag des Resource Owners vom Authorization Server erteilt wurde
   * da es sich um eine Zeichenkette ohne Blanks handelt, ist die Interpretation der erteilten Berechtigungen nicht möglich - das wissen nur Authorization Server und Protected Resource
 * darf mehrfach verwendet werden (da er in der Back-Channel-Kommunikation eingesetzt wird?)
 * beschränkte Laufzeit
-* ist die Laufzeit abgelaufen, dann muß ein Refresh erfolgen - hierzu muß wendet sich der Client mit einem Refresh-Token (das ihn für die Erneuerung des Access Tokens berechtigt) an den Authorization Server
+* ist die Laufzeit abgelaufen, dann muß ein Refresh erfolgen:
+  * entweder über ein Re-Login des Users
+  * oder über ein Refresh-Token (das ihn für die Erneuerung des Access Tokens berechtigt) an den Authorization Server
+* Client kann mit dem Access Token i. a. nichts anfangen (kann es häufig nicht mal interpretieren) ... er leitet es nur an die Protected Resource weiter (treduziert die Client-Komplexität) - nur Authorization Server und Protected Resource haben mit dem Inhalt was zu tun
 * Typ des Access Tokens ist nicht Teil der OAuth Spezifikation - folgende Token Typen kommen zum Einsatz
-  * [Bearer Token](https://tools.ietf.org/html/rfc6750)
-    * jeder, der ihn hat, kann ihn nutzen, um Zugriff auf die Protected Resource zu erhalten
+  * [Bearer Token](https://tools.ietf.org/html/rfc6750) ... er enthält interpretierbare Informationen über die Authorisierung des Requests
+    * will man der Protected Resource die Interpretation des AccessTokens ersparen (vielleicht auch weil es sicherer ist), dann kann man sich überlegen, dem Authorisierungsserver einen Introspection Endpoint zu spendieren
+  * ID ... in diesem Fall muß die Protected Resource die ID über den [Introspection Endpoint des Authorization Servers](https://www.oauth.com/oauth2-servers/token-introspection-endpoint/) in eine Information umwandeln, um die Zugriffskontrolle prüfen zu können. Im Gegensatz zum Bearer Token muß hier also noch eine Kommunikation mit dem Authorisierungsserver stattfinden ... dafür lassen sich aber auch Revocations leicht implementieren
+* der Scope ist Teil des Access Tokens
 
-### OAuth Refresh Token
+### Refresh Token
 
-* optional
-  * beim Authorization Code Grant Type wird er genutzt
-  * beim Implicit Grant Type wird er NICHT genutzt
-* wird zwischen Client und Authorization Server ausgetauscht, um - ohne Interaktion mit dem Resource Owner - einen neuen Access Token auszustellen (kann einen geringeren Scope haben als der initiale Access Token)
+Der Refresh Token ist interessant, wenn man AccessToken-Revocation oder eine AccessToken-Scope-Veränderung abbilden will. In diesem Fall macht man die Laufzeit des AccessTokens klein und die des RefreshTokens lang (oder unendlich). Der Client wird dadurch gezwungen, den AccessToken regelmäßig über den Authorization Server zu erneuern. Der Authorization Server kann dann entscheiden
+
+* Zugriff nicht widerrufen: User muß nicht eingreifen
+* Zugriff mittlerweile widerrufen: Client erhält für den Refresh Token keinen Access Token mehr und der User muß erneut explizit eine Authorisierung delegieren
+
+* grundsätzlich optional
+  * beim Authorization Code Grant Type kann er genutzt werden
+  * beim Implicit Grant Type wird er auf keinen Fall genutzt genutzt (macht keinen Sinn, da ein AccessToken jederzeit selbständig vom Client erzeugt werden kann)
 * bei der Ausstellung eines Access Tokens erhält der Client auch gleichzeitig einen Refresh Token, mit dem ein neuer Access Token angefordert werden kann
-* wenn der Zugriff auf die Resource fehlschlägt, dann könnte es daran liegen, daß der Access Token nicht mehr gültig ist und erneuert per Refresh Token werden muß
+  * Dienste wie Google liefern einen Refresh Token ausschließlich nach dem allerersten AuthorizationCode-Request (mit zusätzlichen Request-Parametern kann man einen Refresh-Token in der Response erzwingen - `access_type=offline`), weil davon ausgegangen wird, daß der Refresh-Token vom Client gespeichert wird. Die Authorisierung kann man über https://myaccount.google.com/permissions widerrufen
+* wenn der Zugriff auf die Resource fehlschlägt, dann könnte es daran liegen, daß der Access Token nicht mehr gültig ist und per Refresh Token erneuert werden muß
+* i. a. sehr lange Laufzeit bzw. unendlich gültig bzw. bis er explizit widerrufen wird
 
 ### Scope
 
 * Repräsentation von Berechtigungen auf die Protected Resource
-* Ausprägung von Scopes liegt ganz im Verantwortungsbereich der konkreten Protected Resource
+* Ausprägung/Granularität von Scopes liegt ganz im Verantwortungsbereich der konkreten Protected Resource
+  * im Authorization Code Grant Flow fragt ein Client, der auf eine Protected Resource zugreifen möchte, den menschlichen Resource Owner, ob er dem Client eine Reihe von Berechtigungen erteilen möchte ... diese Berechtigungen werden dem menschlichen Resource Owner präsentiert:
+
+![Authorisierung durch den Resource Owner](images/openIdConnect_google_requestAuthorization.png)
 
 ### Authorization Grant
 
@@ -275,12 +289,17 @@ In den Beispielen zum [Buch OAuth2 in Action](https://github.com/oauthinaction) 
 
 ## Spring OAuth2 Support
 
+* [gute Einführung](http://stytex.de/blog/2016/02/01/spring-cloud-security-with-oauth2/)
+* [räumt mit einigen Mißverständnissen auf - viele Wege führen nach Rom](https://spring.io/guides/tutorials/spring-boot-oauth2/)
+* [Spring OAuth 2.0 Login](https://developer.okta.com/blog/2017/12/18/spring-security-5-oidc)
+
 Spring stellt schon einige Packages im Zusammenhang mit OAuth2 zur Verfügung:
 
 * org.springframework.security.oauth2.client
   * OAuth2RestTemplate
 * org.springframework.boot.autoconfigure.security.oauth2.client
-  * EnableOAuth2Sso
+  * `@EnableOAuth2Sso` - hiermit kann man sehr komfortabel einen Authorization Code Grant Flow abbilden. Es handelt sich hierbei um eine convenience Annotation, die ein paar Abkürzungen nutzt. Man kann das ganze auch manuell mit ein paar anderen Annotationen und Konfigurationen aufsetzen.
+    * BTW: die Konfiguration ist bei Nutzung von `@EnableOAuth2Sso` auch in einem anderen Namespace (`security.oauth2.client` statt `spring.security.oauth2.client`) etwas anders ... mich verwirrt die Spring-Strategie
 
 Über entsprechende Properties in der `application.properties` (oder `application.yaml`) wie beispielsweise `security.oauth2.client.client-id` werden die Instanzen konfiguriert.
 

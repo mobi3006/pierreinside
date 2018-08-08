@@ -178,9 +178,9 @@ Meine Erklärungen fallen hier recht kurz aus, weil der Code die Dokumentation i
 * Oracle-Java-Installation
   * http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
   * es gibt kein offizielles Ubuntu-Paket des Oracle-Java. Stattdessen habe ich mich entschieden ein **P**ersonal**P**ackage**A**rchive zu verwenden, weil das - gegenüber der Installation eines Tar-Balls - den Vorteil vom Idempotenz bei Verwendung von Ansible und automatischer Updates hat. Der PPA-Anbieter ist Launchpad hinter dem die Firma Canonical steht. Außerdem komme ich so um die leidige Alternatives Konfiguration rum. 
-  * das PPA ``ppa:webupd8team/java`` umfaßt nur einen interaktiven Installer, der das Original Oracle JDK als tar.gz vom Oracle-Server runterlädt und installiert. Es es somit auch möglich, das tar.gz selbst vom Oracle-Server zu laden und lokal unter ``/var/cache/oracle-jdk8-installer`` abzulegen ... dann wird es nicht mehr innerhalb des Installers vom Server runtergeladen. Es ist aus lizenzrechtlichen Gründen nicht erlaubt, ein Paket anzubieten, das das JDK bereits enthält!!! 
+  * das PPA ``ppa:webupd8team/java`` umfaßt nur einen interaktiven Installer, der das Original Oracle JDK als tar.gz vom Oracle-Server runterlädt und installiert. Es es somit auch möglich, das tar.gz selbst vom Oracle-Server zu laden und lokal unter ``/var/cache/oracle-jdk8-installer`` abzulegen ... dann wird es nicht mehr innerhalb des Installers vom Server runtergeladen. Es ist aus lizenzrechtlichen Gründen nicht erlaubt, ein Paket anzubieten, das das JDK bereits enthält!!!
   * dieser Installer kann auch Java 7 installieren ... nach der Installation läßt sich per ``sudo update-java-alternatives -s java-8-oracle`` bzw. ``sudo update-java-alternatives -s java-7-oracle`` zwischen den beiden Versionen umschalten.
-* Docker 
+* Docker
   * https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
 ---
@@ -193,13 +193,27 @@ Meine Erklärungen fallen hier recht kurz aus, weil der Code die Dokumentation i
 
 Ich bin obiger Installationsanleitung gefolgt, um Docker von 17.05 auf 17.12 upzugraden. Hierzu deinstallierte ich zunächst die alte Version (`sudo apt-get remove docker docker-engine docker.io`) und installierte anschließend - nach Integration der richtigen Repositories - die neue. Ging problemlos.
 
-### Upgrade Docker 17.12-ce => 18.03-ce
+### Upgrade Docker 17.12-ce => 18.03.0-ce
 
 * https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 
 * `sudo apt-get update`
 * über `apt-cache madison docker-ce` die verfügbaren Versionen anzeigen
 * die gewünschte Version per `sudo apt-get install docker-ce=18.03.0~ce-0~ubuntu` installieren
+
+### Upgrade Docker 18.03.0-ce => 18.03.1-ce
+
+* `sudo apt-get update`
+* über `apt-cache madison docker-ce` die verfügbaren Versionen anzeigen
+* die gewünschte Version per `sudo apt-get install docker-ce=18.03.0~ce-1~ubuntu` installieren, doch das schlägt fehl: `E: dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem.`
+  * nach Ausführung von `sudo dpkg --configure -a` funktioniert die obige Installation wie erwartet
+
+### Upgrade Docker 18.03.1-ce => 18.06.0-ce
+
+* `sudo apt-get update`
+* über `apt-cache madison docker-ce` die verfügbaren Versionen anzeigen
+* die gewünschte Version per `sudo apt-get install docker-ce=18.06.0~ce~3-0~ubuntu` installieren, doch das schlägt fehl: `E: dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem.`
+  * nach Ausführung von `sudo dpkg --configure -a` funktioniert die obige Installation wie erwartet
 
 ### Upgrade Docker-Compose
 
@@ -266,3 +280,12 @@ Will man den Swap-Space loswerden, dann kann man beispielsweise ``sudo swapoff -
 **Frage 6:** Ich bekomme bei `sudo apt-get update` eine Fehlermeldung `could not open file /var/lib/apt/lists/partial/security.ubuntu.com_ubuntu_dists_xenial-security_main_dep11_icons-64x64.tar.gz - open (13: Permission denied)` - was kann ich tun?
 
 **Antwort 6:** Es wurden schon Pakete teilweise runtergeladen, die können gelöscht werden - siehe https://askubuntu.com/questions/917603/sudo-apt-get-update-failing-could-not-open-list-file-due-to-permission-deni
+
+---
+
+**Frage 7:** Ich habe kaum noch Platz in meinem Filesystem - wie schaffe ich Platz
+**Antwort 7:** Klar, eigenes Zeug zu löschen ist immer ein bisschen gefährlich (braucht man es wirklich nicht mehr):
+
+* Zipfiles und Downloads löschen
+* nicht mehr benötigte Packages (weil updated) können gelöscht werden: `sudo apt-get autoremove`
+* Paketcache löschen: `sudo apt-get clean`

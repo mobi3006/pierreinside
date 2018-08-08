@@ -264,7 +264,7 @@ abgelegt sind.
 
 Sobald eine Anwendung die Authentifizierung/Authorisierung vom User im OpenID Connect Stil erfragt, der User sich mit seinen Google Credentials authentifiziert und die Anwendung mit der gewünschten Berechtigung (im Screenshot "View your calenders") autorisiert
 
-![Authorisierung durch den Benutzer](images/openIdConnect_google_requestAuthorization.png)
+![Authorisierung durch den Resource Owner](images/openIdConnect_google_requestAuthorization.png)
 
 wird ein entsprechendes Authorisierungs-Profil für diese Anwendung im OpenID Connect Provider von Google angelegt. Diese Profile lassen sich [unter Google - My Account - Sign-In and Security](https://security.google.com/settings/security/permissions) verwalten (einsehen und löschen) pflegen - man kann eine Berchtigung also jederzeit wieder entfernen. Es geht hier also nicht nur um die Authentifizierung, die an Google delegiert wird, sondern auch um die Authorisierung, d. h. der User gewährt einem Service (= Relying Party im Sinne von OpenID Connect) das Recht für bstimmte Aktionen in seinem Sinne (z. B. eMails lesen, Kalender Einträge pflegen).
 

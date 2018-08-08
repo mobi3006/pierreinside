@@ -13,9 +13,55 @@
 * slow down
 * complain
 * satisfaction
-* dissatisfaction
+  * satisfied - happy - pleased
+  * dissatisfaction
 * run into trouble
 * aware
 * deal with
 * take into account
 * concern
+* obstacle
+* trust
+* confidence
+* order
+* subsequent - follow
+* violate
+* avoid - prohibit
+* valuable
+* needless - waste
+* ensure - force - enforce
+* appreciate
+  * schätzen, begrüßen
+* enhance - grow
+* vote - poll
+* happy - satisfied
+* confident
+* estimate - evaluate - rate - assess
+* condition - constraint - precondition - requirement
+* assume - assumption
+* tend
+* admit
+* confirm - confirmation
+* approve - approval
+* lenient -patient
+* disturb
+* annoying
+* weird - strange - scary
+* draft
+* announce - publish - provide
+* affect
+* promise
+* propose - proposal
+* guarantee
+* guess
+* trouble
+* increase - decrease
+* continue
+* suggest
+* recommend
+* separation - separate
+* distribute
+* deploy
+* suggest
+* instruct
+* nevertheless
