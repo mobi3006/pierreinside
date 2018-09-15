@@ -50,3 +50,7 @@ Häufig basieren Docker-Container auf Umgebungsvariablen, um eine Integration in
 ```bash
 docker run -e MYSQL_ROOT_PASSWORD=my-secret-pw
 ```
+
+## Entrypoint override
+
+`docker run -it --entrypoint "/bin/ls" ubuntu:14.04 -al /mnt`

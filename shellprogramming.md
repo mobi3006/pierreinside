@@ -1,9 +1,11 @@
 # Shellprogrammierung
+
 * ShellCheck: https://linuxundich.de/gnu-linux/shellcheck-hilft-beim-schreiben-handwerklich-sauberer-shell-skripte/
 
 ---
 
-# Motivation
+## Motivation
+
 Ich nutze Linux als Enticklungsumgebung und bin deshalb halbwegs vertraut mit den GNU-Tools, die ich immer wieder auf der Command-Line direkt nutze. Irgendwann waren mir die Kommandos aber zu lang, um sie immer wieder einzutippen. Das war mein Einstieg in die Shellprogrmmierung ...
 
 Lange Zeit habe ich Shellscripting dann nur für mein persönliches Tooling benutzt. Irgendwann nutzte ich es dann aber auch im professionellen Umfeld, um Provisioning eines Linux-Images aus Vagrant heraus zu triggern. Hier haben wir dann irgendwann auf Ansible gewechselt, was aus meiner Sicht die richtige Entscheidung war.
@@ -12,7 +14,8 @@ Später kam dann Provisioning im Docker-Umfeld hinzu und der Aufbau einer komple
 
 ---
 
-# Kritik
+## Kritik
+
 Leider bin ich trotz dieser reichhaltigen Erfahrung noch immer kein Freund der Shellprogrammierung, weil
 
 * Shells sind untereinander nicht kompatibel (sh, bash, zsh) funktionieren im wesentlichen ähnlich, im Detail gibt es dann aber doch Unterschiede (z. B. if-clause, functions) ... Mit einem Shebang (#!/bin/bash) in den Scripten lässt sich das Problem nahezu umgehen, doch in beim Source (`source seten.sh`) hilft das nicht - hier kommt es auf die gewählte Shell des Ausführenden an
@@ -25,9 +28,9 @@ Leider bin ich trotz dieser reichhaltigen Erfahrung noch immer kein Freund der S
 
 Hier habe ich auch eine "schöne" Auflistung der Schwächen gefunden: http://mywiki.wooledge.org/BashWeaknesses 
 
-Das sollte man wenigstens beherzigen: 
+Das sollte man wenigstens beherzigen:
 
-  * http://www.davidpashley.com/articles/writing-robust-shell-scripts/
+* http://www.davidpashley.com/articles/writing-robust-shell-scripts/
 
 Trotz all dieser Nachteile habe ich noch keine gute Alternative gefunden, wenn es um typische Dateioperationen (`cp`, `mv`, `ln`, `find`, `grep`, ...) geht. Für Contentbasierte Operationen (z. B. Suchen in XML-Files) ist es sicher nicht geeignet ... hier würde ich Perl, Python, Groovy, ... verwenden - das ist klar.
 
@@ -37,12 +40,15 @@ In diesem Beitrag ([When to use Bash and when to use Perl/Python/Ruby?](http://s
 
 ---
 
-# Tips
-## Functions
-### Logging in Functions
+## Tips
+
+### Functions
+
+#### Logging in Functions
+
 Ein häufiger Tip ist `echo returnValue` zur Rückgabe von Parametern zu verwenden. Leider hat das den Nachteil, daß die darin verwendete ERSTE `echo`Ausgabe als Returnwert interpretiert wird. Dadurch ist Logging über `echo` in Funktionen nicht zu gebrauchen (viel zu fehleranfällig bzw. zu einschränkend). In diesem Beispiel:
 
-```
+```bash
 getSurnameByEcho() {
    echo "getSurnameByEcho"    # dieser Wert wird der Rückgabwert
    echo "feldbusch"
@@ -52,9 +58,9 @@ surnameByEcho=$(getSurnameByEcho nameByEcho)
 echo "surnameByEcho=${surnameByEcho}"
 ```
 
-wird 
+wird
 
-```
+```bash
 surnameByEcho=getSurnameByEcho
 feldbusch
 ```
@@ -63,7 +69,7 @@ ausgegeben - DAS WILL MAN NICHT.
 
 Deshalb sollte man es eher auf diese Weise machen:
 
-```
+```bash
 getSurnameByDeclare() {
    declare -n returnValue=${1}
    echo "getSurnameByDeclare"
@@ -76,15 +82,16 @@ echo "surnameByDeclare=${nameByDeclare}"
 
 Hier hat man das gewünschte Ergebnis
 
-```
+```bash
 getSurnameByDeclare
 surnameByDeclare=feldbusch
 ```
 
 und muß nicht auf `echo`-Logausgaben verzichten.
 
-### `_local` Variablen beeinflussen `${?}`
-```
+#### `_local` Variablen beeinflussen `${?}`
+
+```bash
 function myfunction() {
   _foo=`exit 1`
   if [ "${?}" == "1" ]; then
@@ -109,17 +116,20 @@ controller: this was expected
 error: local has destroyed the semantic
 ```
 
-## Know-How
+### Know-How
+
 * http://wiki.bash-hackers.org/syntax/pe
 
-## Fail-Fast
+### Fail-Fast
+
 * http://www.davidpashley.com/articles/writing-robust-shell-scripts/
 
 Shellskripte brechen in der Default-Konfiguration der Shells nicht ab, wenn ein Kommando fehlschlägt. Der daraus resultierende Exit-Code <> 1 wird einfach ignoriert. Das ist insbesondere bei komplexeren Skripten ein Problem, weil man am Ende nicht weiß, ob tatsächlich alles geklappt hat.
 
 Deshalb sollte man die Option
 
-## Shellcheck
+### Shellcheck
+
 * https://www.shellcheck.net/
 
 Dieses Tool sollte man gelegentlich über die Skripte laufen lassen, um die Qualität zu prüfen.

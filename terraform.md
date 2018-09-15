@@ -2,11 +2,13 @@
 
 * [Homepage by HashiCorp](https://www.terraform.io/)
 
-Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Deployments abzubilden. Terraform ist KEIN Konfigurationsmanagement-Tool ... Terraform baut die Infrastruktur auf und überläßt die Konfiguration darauf spezialisierten Tools ([Ansible](ansible.md), Chef, Puppet, ...).
+Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Deployments abzubilden. Terraform ist KEIN Konfigurationsmanagement-Tool, es baut die Infrastruktur auf (z. B. virtuelle Maschien) und delegiert die Konfiguration an entsprechende Konfiguration-Management Tools ([Ansible](ansible.md), Chef, Puppet, ...).
+
+> BTW: Terraform verwendet sehr ähnliche Konzepte wie bei [Nomad](nomad.md) ... auch ein HashiCorp Produkt.
 
 ## Konzept
 
-Man beschreibt einen Zielzustand und Terraform berechnet daraus einen Execution Plan für verschiedene Deploy-Platformen - die Beschreibung ist unabhängig von der Platform (geringer/kein Vendor-Lockin), der Execution Plan ist platform-spezifisch. Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans.
+Man beschreibt einen Zielzustand und Terraform berechnet daraus einen Execution Plan für verschiedene Deploy-Platformen - die Beschreibung ist unabhängig von der Ziel-Platform (geringer/kein Vendor-Lockin), der Execution Plan ist platform-spezifisch. Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans.
 
 ## Terraform vs. Vagrant
 
@@ -16,7 +18,7 @@ ABER: ganz grundsätzlich falsch ist es nicht, daß die beiden Tools ähnlich si
 
 ## Installation
 
-Terraform besteht aus einem einzigen Binary (so einfach kann das sein ;-)
+Terraform besteht nur aus einem einzigen Binary, das für verschiedene Plattformen angeboten wird - toll ... so einfach kann das sein :-)
 
 ## Getting Started
 
@@ -40,7 +42,7 @@ resource "aws_instance" "example" {
 wird mit
 
 ```bash
-terraform init
+terraform init      # hierdurch wird ein Verzeichnis .terraform im aktuellen Verzeichnis angelegt
 terraform apply     # erzeugt den Execution Plan
 ```
 

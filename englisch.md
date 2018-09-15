@@ -65,3 +65,5 @@
 * suggest
 * instruct
 * nevertheless
+* observant
+* competition

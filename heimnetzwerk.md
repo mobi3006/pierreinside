@@ -15,6 +15,8 @@ Jahrelang hat dieser Router sehr gute Dienste geleistet, doch mittlerweile ist e
 
 Ich habe im zweiten Stock eine alte Fritzbox als AccessPoint eingerichtet. Das funktioniert prinzipiell, aber die alte Box kann halt keine aktuellen WLAN-Standards und kommt somit auf eine schlechte Performance. Das liegt sicherlich auch daran, daß das 2,4 GHz Netz von vielen meiner Nachbarn genutzt wird und die Box nicht automatisch zwiscchen den Kanälen umschalten kann. Selbst ein Raum vom AccessPoint entfernt habe ich weiter habe ich manchmal inakzeptable Geschwindigkeit.
 
+> ACHTUNG: bei der Konfiguration muß man aufpassen ... am besten die alte Fritzbox zuerst auf Werkseinstellungen resetten. Am besten, indem man einen Rechner direkt per LAN mit der Box verbindet und die Notfall-IP-Adresse `http://169.254.1.1` verwendet, um auf die WEB UI zu kommen und die Werkeinstellungen einzuspielen und per "Internet - Zugangsadaten - Internetanbieter - weitere Internetanbieter - vorhandener Zugang über WAN/WLAN" als AccessPoint konfigurieren. Hierbei einen DHCP Server starten, die Vergabe der IP-Adressen übernimmt der Router!!! DENNOCH habe ich mir mein Netzwerk schon 2 mal mit diesem Vorgehen zerschossen ... hat mich immer wieder ein paar Stunden Arbeit gekostet.
+
 ## Fritz!WLAN Repeater 1750E als AccessPoint (aka LAN Brücke)
 
 * [WLAN-Grundlagen](http://www.tomshardware.de/grundlagen-wissen-wlan-repeater-wireless-range-extender,testberichte-241852.html)
@@ -40,6 +42,18 @@ Aufgrund des Mesh-Supports ist der Repeater auch für einen zukünftigen Austaus
 In diesem Modus kommuniziert der 1750 über WLAN mit dem Switch/Router - die WLAN-Bandbreite wird dadurch natürlich halbiert, weil die Antennen des 1750 gleichzeitig empfangen und senden.
 
 Leider war die Performance im Zusammenspiel mit meiner betagten Fritzbox 7390 (unterstützt nur WLAN-n, kein WLAN-ac) extrem enttäuschend. Mehr als 1-3 MBit/s habe ich trotz Fritzboxabstand von 3m nicht rausholen können ... und instabil war es durch eine Betondecke und eine Wand außerdem.  
+
+## Fritz!WLAN Repeater 1750E als Mesh-Knoten
+
+Ein Mesh Netzwerk verbindet verschiedene WLANs (von Router, AccessPoint, Repeater) zu einem virtuellen WLAN, das nach außen wie ein einziges WLAN aussieht. Die WLAN-Mesh-Knoten sollten die gleiche SSID und WLAN-Netzwerkschlüssel verwenden, denn nur so ist das sog. WLAN Roaming möglich.
+
+> WLAN-Roaming: hierbei wird das Endgerät immer mit dem besten physischen WLAN verbunden, ohne, daß der Benutzer davon etwas merkt. Zu Testzwecken kann man den WLANs auch eigene SSIDs geben, um sie unterscheidbar zu machen und die einzelnen WLANs zu testen - das sollte man aber im im produktiven Einsatz so konfigurieren, denn sonst verliert man die WLAN-Roaming-Eigenschaft.
+
+In der Fritzbox kann man über "Heimnetz - Mesh" sehen, welche Endgeräte über welchen Mesh-Knoten angebunden sind. Bei mir zuhause hat der Wechsel des WLAN-Knotens (Fritzbox 7590 und zwei 1750E Repeater) sehr gut geklappt. Mit der Fritz!WLAN App fürs Handy kann man das bei der Hausbegehung sehr schön beobachten.
+
+### Problem - 1750E per LAN-Brücke am Switch
+
+Bei dieser Konfiguration hatte ich das Problem, daß plötzlich das LAN bei allen am Switch angeschlossenen Geräten nicht mehr zuverlässig funktioniert hat. Mal funktionierte es, mal nicht ... im Minutentakt. Scheinbar wurden die Netzwerkverbindungen am Switch (Edimax ES-5800g) immer wieder zurückgesetzt ... erkennbar an den LEDs am Switch (wenn alle Connections funktionieren, dann leuchten die LEDs an den angeschlossenen Ports dauerhaft ... beim Reset leuchten plötzlich mal ALLE LEDs und dann connecten sie sich wieder einzeln).
 
 ## Aktuelle Fritzbox - 2017
 
@@ -94,6 +108,8 @@ Einige mögliche Probleme:
   * ich habe nun in einen mittleren Bereich gewechselt ... mal sehen, ob das die Stabilität positiv beeinflußt
 * Leitung vom Hausanschluß zur TAE-Dose, an dem der DSL-Splitter hängt, ist minderwertig
 * Fehlkonfiguration (Vermittlungsstelle, DSL-Provider)
+
+Nach dem 10. Anruf bei der 1und1 Hotline ohne irgendwelche Verbesserungen habe ich auf eine neue Fritzbox gedrängt. Mit der 7590 waren die Probleme dann ganz schnell weg ... immerhin habe ich die Box von 1und1 für 160 Euro (als Ersatz für meine 7390) statt 230 Euro (im Handel) bekommen. Auf die Idee hätte der SUpport aber auch mal von selbst kommen können.
 
 ## Powerline
 

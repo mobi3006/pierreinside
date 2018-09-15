@@ -13,7 +13,13 @@ REST ist kein Standard, sondern ein Architekturstil basierend auf Standards wie 
 
 ## REST vs. SOAP
 
-* http://www.xfront.com/REST.ppt
+* [externer Vergleich](http://www.xfront.com/REST.ppt)
+
+Das SOAP-Ecosystem ist über die Jahre sehr stark gewachsen und hat viele Erweiterungen im Bereich Security, Validierung, XML-Tooling hervorgebracht. Einige dieser Tools können bei der Verwendung von XML als Payload von REST wiederverwendet werden. Allerdings werden REST-Services häufig auf mit JSON als Payload-Format verwendet und dann braucht es neue Tools für
+
+* Serialisierung/Deserialisierung
+* Schnittstellen-Spezifikation und Validierung
+* ...
 
 ### REST lebt HTTP
 
@@ -30,12 +36,14 @@ Dadurch kann REST allerdings auch weitere Vorteile des HTTP-Protokolls besser nu
 
 SOAP verwendet das HTTP-Protokoll hingegen nur zum Transport. Im HTTP-Body ist das eigentliche XML-basierte SOAP-Protokoll (``<soap:envelope>``) erweitert um Custom-Namespaces versteckt:
 
-    <?xml version="1.0"?>
-    <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-        <soap:Body>
-              <p:getListOfKids xmlns:p="http://www.cachaca.de"/>
-        </soap:Body>
-    </soap:Envelope>
+```xml
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+            <p:getListOfKids xmlns:p="http://www.cachaca.de"/>
+    </soap:Body>
+</soap:Envelope>
+```
 
 Deshalb spielt für SOAP auch ausschließlich die HTTP-POST-Methode eine Rolle. Das eigentliche semantische Protokoll wird über HTTP getunnelt und kommt so auch durch die meisten Firmen-Firewalls.
 
