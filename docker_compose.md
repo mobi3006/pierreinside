@@ -8,12 +8,6 @@ Aber selbst wenn man keine komplexen Landschaften aufbauen muß, ist ``docker-co
 
 ---
 
-## Links
-
-* https://docs.docker.com/compose/gettingstarted/
-
----
-
 ## Installation
 
 Unter [Ubuntu 16.04 LTS](ubuntu_1604_lts.md) konnte ich mit ``apt-get`` zwar ``docker-compose`` installieren, bekam aber nur eine sehr alte Version (1.5.2). Neuere Packages habe ich nicht gefunden. Die meisten aktuellen Tutorials (auch die von Docker selber) verwenden mittlerweile allerdings die Version 2 im der Docker-Copmpose-DSL ... ``docker-compose.yml``:
@@ -93,9 +87,12 @@ Die ``docker-compose.yml`` liefert hier den entsprechenden Kontext und muß sich
 
 ## Reihenfolge
 
-Über `links` lassen sich in Docker-Compose Abhängigkeiten definieren. Das ist sehr praktisch, wenn man die Abhängigkeiten vor dem Benutzer verbergen will (statt `docker-compose up service1 dep-service-a dep-service-b` nur `docker-compose up service1`). Allerdings werden die Container nur gestartet, es ist zu keinem Zeitpunkt klar, ob der darin befindliche Service auch tatsächlich benutzbar ist oder sich noch in der Startphase befindet.
+* [Docker-Compose - Getting Started](https://docs.docker.com/compose/gettingstarted/)
+* [Docker-Compose - Control Startup Order](https://docs.docker.com/compose/startup-order/)
 
-In den Provisioning-Skripten der Container ist es aber gelegentlich notwendig auf die anderen Service zuzugreifen. Hierfür hat Docker keine Lösung und damit haben sie vielleicht auch Recht, denn Services müssen in einer Microservice-Architektur immer damit rechnen, daß andere Services nicht mehr verfügbar sind (Stichwort Resilience). Hierüber sollten man also in jedem Fall mal nachdenken!!!
+Links sind ein Mittel, um Abhängigkeiten zwischen Containern zu beschreiben. Das ist sehr praktisch, wenn man die Abhängigkeiten vor dem Benutzer verbergen will (statt `docker-compose up service1 dep-service-a dep-service-b` nur `docker-compose up service1`). Allerdings werden die Container nur gestartet, es ist zu keinem Zeitpunkt klar, ob der darin befindliche Service auch tatsächlich benutzbar ist oder sich noch in der Startphase befindet.
+
+> ABER ACHTUNG: Docker Compose sorgt nur dafür, daß die linked Containers gestartet werden ... es KANN NICHT garantiert werden, daß der Service dann tatsächlich auch schon nutzbar ist. In diesem Fall könnte man mit Tools wie [`wait-for-it`](https://github.com/vishnubob/wait-for-it)/[`dockerize`](https://github.com/vishnubob/wait-for-it)/[`wait-for`](https://github.com/Eficode/wait-for) arbeiten. Diese stellen aber nur einen Workaround dar, denn eigentlich muß man in Microservice-Produktivszenarien immer damit rechnen, daß Services nicht mehr verfügbar sind und Resilience Patterns implementieren.
 
 Es gibt allerdings Lösungen durch andere OSS-Projekte:
 

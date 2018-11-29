@@ -53,3 +53,15 @@ zum Deployment ... anschließend ist die Maschine auf AWS nutzbar. Mit `terrafor
 * [Supported Provisioning-Ansätze](https://www.terraform.io/docs/provisioners/index.html)
 
 Verwendet man bereits provisioned Images (z. B. mit [Packer](packer.md)), dann ist man evtl. nicht mehr auf Provisioning-Tools angewiesen.
+
+## State
+
+Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem oder remote (z. B. S3) abgelegt werden kann. Dieser State bestimmt die zu triggernden Aktionen bei einem `terraform apply`. Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann es zu Fehlermeldungen wie diesen führen, wenn die Aktionen durchgeführt werden:
+
+```
+keys already exist under service/petclinic/; delete them before managing this prefix with Terraform
+```
+
+Das liegt daran, daß Terraform eine Resource anlegen will, die im Backend (z. B. Consul) aber schon vorhanden ist. Über den State hätte Terraform gewußt, daß die Resource schon existiert und hätte die Aktion gar nicht erst ausführen wollen. 
+
+> ERGO: Terraform liest nicht den aktuellen State vom Backend, sondern aus der `tfstate` Datei - vielleicht ist das so eine Art optimistisches Locking?

@@ -44,6 +44,34 @@ apt-get install maven
 
 Die von meinen Docker Services bereitgestellten Ports mußten dann noch über die AWS-Management-UI als Inbound Rules der Security Group eingetragen werden.
 
+## Konzepte
+
+### Availability Zones
+
+Amazon muß natürlich auch selbst mal Wartungsarbeiten durchführen und damit Infrastruktur vom Netz nehmen. Amazon empfiehlt die Verwendung von drei sog. Availability Zones und garantiert, daß IMMER mind. eine verfügbar ist. Bei der Verteilung der Microservices auf die verschiedenen Zones sollte man also darauf achten, daß in jeder Zone mind. ein Knoten jedes Services deployed ist.
+
+Der Elastic Load Balancer (ELB) sorgt dafür, daß die Requests aus dem Internet in die tatsächlich verfügbare Availability Zones delegiert werden.
+
+### Elastic Load Balancer (ELB)
+
+* [siehe in separater Seite](proxy.md)
+
+* [AWS - ELB](https://aws.amazon.com/de/elasticloadbalancing/)
+
+Amazon bietet folgende Arten von Loadbalancers:
+
+* Application Load Balancer
+  * arbeitet auf HTTP/HTTPS-Ebene (Layer 7)
+  * unterstützt die Terminierung der SSL-Verbindung
+  * unterstützt Sticky-Sessions über Cookies, die vom Load-Balancer generiert werden
+    * im elastischen Umfeld will man aber eigentlich auf Stickiness verzichten
+  * Routingoptionen
+    * host-basiert
+      * es könnte sein, daß mehrere Domains auf einen Loadbalancer geroutet werden (über DNS), dann kann der ELB über den Hostnamen ein entsprechendes Routing anbieten
+    * pfad-basiert
+* Network Load Balancer
+  * arbeitet auf 
+
 ## FAQ
 
 *Frage 1:* Ich habe ein Key-Pair generiert bekommen mit PuTTY aber keinen Zugriff hin - was mache ich falsch?

@@ -91,7 +91,7 @@ Das Thema bereitete mir immer Kopfzerbrechen, aber ich hatte keine Lust und Zeit
 
 Da das NAS als zentraler Fileserver fungiert (weil es auch entsprechend schnell ist), benötige ich nur ein Backup des NAS und nicht aller Clients. Die Dezentralisierung war bei meinen bisherigen Backup-Lösungen immer Hauptproblem.
 
-Im Synology-Control-Center musste ich nur die USB-Festplatte anschliessen, das TimeBackup-Package installieren, das TimeBackup konfigurieren (z. B. Hourly mit  Smart Recycle) und los gehts. Die USB-Platte kann während der Konfiguration des TimeBackups automatisch (auf Nachfrage!!!) mit ext3 oder ext4 formatiert werden (die einzigen unterstützten Filesysteme). Fertig.
+Im Synology-Control-Center musste ich nur die USB-Festplatte anschliessen, das TimeBackup-Package installieren und konfigurieren (z. B. Hourly mit  Smart Recycle) und schon gings gehts. Die USB-Platte kann während der Konfiguration des TimeBackups automatisch (auf Nachfrage!!!) mit ext3 oder ext4 formatiert werden (die einzigen unterstützten Filesysteme). Fertig.
 
 #### Smart Recycle
 
@@ -106,8 +106,25 @@ Auf diese Weise behält man noch einen guten Überblick - ich finde den Ansatz s
 
 #### Backup-Strategie
 
-Jetzt werden die Home-Shares dreimal täglich gesichert und die Foto-Sammlung einmal wöchentlich. Durch SMB-Mount von ``\\diskstation\usbshare1`` kann ich
-leicht einen Blick auf das Backup werfen: keine Binär-Backups, sondern ich kann in den Ordnern problemlos navigieren und einzelne Dateien oder ganze Verzeichnisbäume aktualisieren. Ich kann aber auch die Webapplikation starten und mich in die Zeitmaschine setzen, um den aktuellen Stand zu jedem Backup-Zeitpunkt zu erhalten.
+Jetzt werden die Home-Shares dreimal täglich gesichert und die Foto-Sammlung einmal wöchentlich. Durch SMB-Mount von ``\\diskstation\usbshare1`` kann ich leicht einen Blick auf das Backup werfen. So sieht die Struktur von der Backup "Task 4" vom 21. Oktober 2018 um 23:00 Uhr aus:
+
+```
+\\diskstation\usbshare1\
+   Diskstation_001144556677\
+      task_4\
+         20181021-2300\
+            photo\
+               2016\
+                  ...
+               2017\
+                  ...
+               2018\
+                  ...
+            svn\
+               ...
+```
+
+Keine Binär-Backups (wie bei Bacula - zu dem ich nie richtiges Vertrauen aufgebaut habe), sondern ich kann in den Ordnern problemlos navigieren und einzelne Dateien oder ganze Verzeichnisbäume wiederherstellen. Ich kann aber auch die Webapplikation starten und mich in die Zeitmaschine setzen, um den aktuellen Stand zu jedem Backup-Zeitpunkt zu erhalten.
 
 Und das beste: wenn sich nichts ändert, wird auch kein (bzw. nur geringer) Platz benötigt :-) Nun habe ich zentrale Datenhaltung, Backup und Versionierung. WOW :-)
 
@@ -128,9 +145,58 @@ Interessante Cloud Storage Anbieter (Preis für 1 TB/Monat):
 * Strato HiDrive: 7,50 Euro
   * unschlagbar günstig
   * Server-Standort Deutschland
-* Google Drive: 10 Euro
+* Google Drive (mittlerweile umbenannt zu Google One): 10 Euro
 * Dropbox: 10 Euro
 * OneDrive: 10 Euro
+
+## Foto/Video Synchronisierung von iOS
+
+[siehe andere Seite](ipadPro.md)
+
+## Foto/Video Alben anschauen
+
+Mit DS Photo liefert Synology die beste Lösung, die ich bisher kennengelernt habe. Von jedem Endgerät habe ich bisher flüssig Fotos anschauen können ... und die billigen Android-Handys verfügen ja nicht unbedingt über die besten WLAN Chips. Für Videos fehlen allerdings manchmal die richtigen Codecs ... das muß ich mir nochmal genauer ansehen.
+
+Häufig sitzen wir mit unseren Kindern vor dem Fernseher und haben bei der Betrachtung der alten Bilder und Videos viel Spaß. Allein dafür lohnt sich die Synology.
+
+Die Bilder/Videos müssen zunächst mal in die Photo Station kommen, um dort indiziert und für die Wiedergabe auf unterschiedlichen Endgeräten optimiert zu werden ... das kann u. U. schon mal ein paar Tage dauern :-(
+
+Der Upload auf die Photo Station kann folgendermaßen erfolgen:
+
+* den Photo Station Uploader (Windows, MacOS) verwenden ... EMPFOHLEN, denn hier wird die Rechenleistung des Computers verwendet, um die Bilder zu optimieren - ansonsten muß das die Synology tun, die evtl. mehrere Tage damit beschäftig ist
+* auf ein Netzwerkshare kopieren
+
+Der Zugriff auf die Bilder ist - nach erfolgreicher Indizierung (ACHTUNG: kann dauern) - per
+
+* File-Share
+* Web-Applikation (Photo Station, File Station)
+* über Apps wie DS Photo
+
+möglich.
+
+### Synology App DS Photo
+
+* [DS Photo Anmeldung an Photo Station](https://www.synology.com/de-de/knowledgebase/Mobile/help/DSphoto)
+
+Diese App ist verfügbar für die meisten mobilen Platformen (Android, iOS, Amazon Fire). Nach dem Start muß man sich mit einem User anmelden, der über Leseberechtigungen auf die Bilder verfügt.
+
+iOS speichert Fotos seit der Version 11 im HEIC Format (bester Qualität bei minimalem Platz), das von der Synology (Version 6.0) allerdings noch immer nicht verarbeitet werden kann. Somit sind die Fotos nicht über DS Photo zu sehen. Bleibt zunächst mal nur die Konvertierung nach JPG (z. B. per XnView mit dem HEIF Plugin) - in iOS kann man den Download so konfigurieren, daß eine automatische Konvertierung von Bildern und Videos (Codecs) stattfindet, wenn man auf ein Windows Rechner runterlädt ([siehe hier](ipadPro.md]).
+
+### Multimedia Dateien kategorisieren
+
+Ich habe so viele Bilder und Videos (mehrere Zehntausend), daß ich gerne eine "Best of" Sammlung erstellen möchte. Allerdings möchte ich hierzu keine Kopien erstellen oder Links anlegen müssen. Ich möchte auch keine applikationsspezifische Lösung (z. B. eine parallele Multimedia-Datenbank), sondern ich möchte diese Information in die Foto- bzw- Videocontainer packen. Eine applikationsspezifische Lösung scheidet aus meiner Sicht aus - zu groß ist der Aufwand, um dann bei einer Abkündigung der Anwendung alles zu verlieren.
+
+Bei jpeg-Fotos stehen verschiedene Metatag-Formate zur Verfügung, so daß sich eine Kategorisierung hierüber abbilden läßt. Verwendet man die DS Photo App (ACHTUNG: der angemeldete User muß Schreibberechtigung haben) oder auch Synology PhotoStation Web-Frontend, so kann über "Information - Allgemeines Tag" ein Tag vergeben werden, das in den IPTC und XMP Metadaten landet. Diese können beispielsweise in
+
+* DS Photo über die Suche
+* Synology PhotoStation über die Suche
+  * hierüber lassen sich dann sog. SmartAlben erstellen (Suche durchführen und Ergebnis per "Save as Smart Album" sichern), die über DS Photo App abrufbar sind - das ist sehr gut!!!
+* XnView über die Suche
+* Fotogalerie (Windows) als Filter
+
+abgefragt werden. Bei Bildern gibt es verschiedene Lösungen (IPTC, XMP, ...) ... aber das ist vielleicht auch noch vom Bildformat abhängig.
+
+Bei Videos gestaltet sich die Sache schwieriger, denn hier sind Metadaten noch nicht standardisiert (zugegeben: bei Bildern gibt es verschiedene Lösungen - bei Videos aber scheinbar gar keine).
 
 ## Print-Server
 

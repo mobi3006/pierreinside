@@ -148,6 +148,22 @@ Die sog. Production-Ready Features werden über die Dependency
 
 aktiviert. Dadurch werden einige nützliche Webservice-[Endpunkte](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html) exponiert.
 
+Wenn man den Management-Port konfiguriert
+
+```yaml
+management:
+  server:
+    port: 8081
+    ssl:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: info,health,metrics
+```
+
+dann sind die Actuator-Endpunkte nicht mehr über die normale Web-UI der Anwendung erreichbar, sondern nur noch über den Management-Port. Dies ist sehr praktisch, denn den Health-Status möchte man gerne in den Monitoring-Tools einer Landschaft abrufen. Dort will man aber evtl keine Truststore-Konfiguration vornehmen und man möchte ohne Login zugreifen können.
+
 Optional kann der ``/docs`` Endpunkt (http://IP_ADDRESS:PORT/docs) aktiviet werden:
 
 ```xml

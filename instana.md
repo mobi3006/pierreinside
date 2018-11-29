@@ -25,9 +25,13 @@ Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch a
 
 Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (z. B. bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens bzw. einen Nachweis aus Compliance Sicht zu erbringen.
 
-### Issue, Incident und Alerting
+### Change, Issue, Incident
 
-Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Noch besser als nachträglich Probleme erklären zu können ist allerdings, Problemsituationen zu erkennen BEVOR daraus tatsächlich Probleme werden.
+Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Die geringstmögliche Beaobachtung ist ein Change - hierzu muß vergleicht Instana die Veränderungen am System (z. B. Service gestartet/gestoppt). Instana sammelt die Systemdaten kontinuierlich und benötigt eine kritische Menge an Daten, um einen Überblick über den "normalen" Verlauf zu bekommen und Abweichungen davon festzustellen. Diese Abweichungen werden als Issue bewertet. Nach bestimmten Regeln (system-based oder custom-based) wird aus einem Issue ein Incident.
+
+Change, Issue und Incident haben alle einen Startzeitpunkt und einen Endzeitpunkt.
+
+Noch besser als nachträglich Probleme erklären zu können ist allerdings, Problemsituationen als Issue zu erkennen BEVOR daraus Incidents werden bzw. für den Benutzer tatsächlich wahrnehmbare Probleme werden.
 
 Instana mißt verschiedene Indikatoren (Durchsatz, Latenz, Fehlerrate, Ausnutzung) und bietet ab einem bestimmten Threshold automatisches Incidenting (Auffälligkeiten) und Alerting (Probleme). In gewisser Weise ist der Alerting Mechanismus auch selbstlernend (Frage: WIRKLICH?). Für eine Root-Cause Analyse läßt sich in einer Zeitmaschine reisen (Time-Shift).
 
@@ -38,6 +42,10 @@ Instana ist elastic-Microservice-aware, d. h. gestoppte Knoten stellen noch nich
 Beispiel:
 
 Bei meinem allerersten Versuch, Instana zu nutzen, wurde mein Host rot gekennzeichnet in der Instana-UI und mit dem Alert "Low Disk Space" gekennzeichnet. Ein `df -h` auf meinem lokalen System offenbarte, daß Instana bescheid wußte. GENIAL.
+
+### Alerting
+
+Ausgehend von Changes, Issues und Incidents können Alerts getriggert und an verschiedene Kanäle (sog. Alerting Integrations ... eMail, PagerDuty, Office365, Webhook) definiert werden, so daß man bei extrem kritischen Situationen Benachrichtigungen an externe System verschickt.
 
 ### Service Discovery and Drill-Down
 
@@ -72,10 +80,11 @@ Die Abtastrate der Sensoren beträgt eine Sekunde, d. h. jede Sekunde werden die
 
 Instana kommt mit einer Vielzahl komponentenspezifischer Sensoren
 
+* Betriebssystem
 * unterstützte Sprachen: https://www.instana.com/supported-technologies/
 * unterstützte Technologien: https://www.instana.com/supported-technologies/
 
-, so daß immer die relevanten Metriken gezogen und dargestellt werden können. Das geht sogar soweit, daß zu ein ElasticSearch Knoten Metriken auf folgenden Ebenen im direkten Zugriff sind:
+so daß immer die relevanten Metriken gezogen und dargestellt werden können. Das geht sogar soweit, daß zu ein ElasticSearch Knoten Metriken auf folgenden Ebenen im direkten Zugriff sind:
 
 * Lucene Index
 * ElastciSearch Shard
@@ -118,6 +127,8 @@ Sollte Instana wichtige Strukturen/Zusammenhänge in der Anwendung nicht selbst�
 ```java
 @Span(type = Span.Type.INTERMEDIATE, value = "myService#execute")
 ```
+
+Hier 
 
 ### API
 

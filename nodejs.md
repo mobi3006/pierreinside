@@ -21,4 +21,9 @@ Danach sollte `nodejs --version` eine 7er Version ausgeben.
 
 ## Motivation
 
-NodeJS ist JavaScript for the Server - hiermit lassen sich Serveranwendungen und Command-Line-Tools mit JavaScript erstellen.
+NodeJS ist JavaScript for the Server - hiermit lassen sich Serveranwendungen und Command-Line-Tools mit JavaScript erstellen. Ein Command-Line Tool für meine Docker-basierte Entwicklungsumgebung sollte der erste Anwendungsfall sein.
+
+## Aufbau einer Node Anwendung
+
+* `package.json`
+  * Build-Descriptor - ähnlich `pom.xml` bei Java-Maven-Anwendungen

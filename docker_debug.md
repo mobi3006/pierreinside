@@ -76,7 +76,7 @@ Wenn ein Docker Container schon beim Start stirbt, dann ist die Fehlersuche schw
 
 ### Shellzugriff durch Einschränkung der Initialisierungsroutine
 
-Wenn der Container schon beim Starten abraucht, so kann am Entrypoint des Images liegen, der für die Initialisierung des Containers zuständig ist. Hier wird ein Container des Images panubo/vsftpd gestartet, ohne den Entrypoint des Images auszuführen:
+Wenn der Container schon beim Starten abraucht, so kann am Entrypoint des Images liegen, der für die Initialisierung des Containers zuständig ist. Hier wird ein Container des Images `panubo/vsftpd` gestartet, ohne den Entrypoint des Images auszuführen:
 
 ```bash
 docker run -t -it panubo/vsftpd /bin/bash

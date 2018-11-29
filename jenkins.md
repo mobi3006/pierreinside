@@ -91,3 +91,23 @@ Nicht alle Tools werden über Plugins integriert. Tools wie
 * ...
 
 werden über "Jenkins - Global Tool Configuration" konfiguriert.
+
+## Shared Libraries
+
+* [Jenkins Doku](https://jenkins.io/doc/book/pipeline/shared-libraries/)
+
+Jenkinsfiles werden aufgrund des Ansatzes einen Service als Single-Source-of-Responsibility zu betrachten, der alle Aspekte seines Lifecycles selbst managed, in das Microservice Repository gepackt. Wenn die Pipelines dann allerdings komplexer werden, dann kann die Pflege (Bugfixing, Extensions) aufwendig werden, wenn die `Jenkinsfile` der Services i. a. sehr ähnlich aussehen.
+
+In diesem Fall kann man Groovy Shared Libraries verwenden, um die Pflege zu zentralisieren. Das `Jenkinsfile` sieht dann so aus:
+
+```bash
+#!/usr/bin/env groovy
+
+@Library('my-jenkins-library') _
+
+microservice-pipeline('docker')
+```
+
+Über Parameter können verschiedene Ausprägungen adressiert werden.
+
+In der Jenkins-Server Konfiguration muß die `my-jenkins-library` unter `Manage Jenkins - Configure System - Global Pipeline Libraries` eingebunden werden. Hier gibt man beispielsweise ein Git-Repository an.

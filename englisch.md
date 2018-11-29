@@ -1,5 +1,6 @@
 # Englisch
 
+* encounter
 * challenge
 * problem
 * elasticity
@@ -67,3 +68,10 @@
 * nevertheless
 * observant
 * competition
+* permit
+* negotiate
+* touchy
+* apologize
+* apply
+* consider
+* sacrifice

@@ -83,7 +83,7 @@ Container haben eine ID und einen NAME ... in dieser Art:
 
 Für menschliche Nutzer ist der NAME leichter zu verwenden als die ID ... beides identifiziert den Conatiner auf dem System aber eindeutig. Beim Start eines Images kann man dem zu erstellenden Container einen Namen geben:
 
-``` 
+```bash
 docker run --name my-container
 ```
 
@@ -95,7 +95,7 @@ Dann bekommt der Container eine ID und diesen Namen "my-container". Gibt man kei
 
 Docker speichert alle jemals erstellten Container ... d. h. auch auf die nicht mehr laufenden Container hat man noch Zugriff. Über
 
-```
+```bash
 docker ps -a
 ```
 
@@ -107,7 +107,7 @@ Docker Re-Builds sind so schnell, weil die Zwischenzustände archiviert werden. 
 
 Ein Beispiel:
 
-```
+```bash
 RUN apt-get update
 RUN apt-get install -y perl
 ```
@@ -116,13 +116,28 @@ So sollte man es nicht machen, weil das erste RUN einen Zwischenzustand A erzeug
 
 Deshalb sollte man es so schreiben:
 
-```
+```bash
 RUN apt-get update && apt-get install -y perl
 ```
 
 ### RUN vs. CMD vs. ENTRYPOINT
 
+* [ENTRYPOINT und CMD - 1](https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/)
+* [ENTRYPOINT und CMD - 2](https://medium.com/the-code-review/how-to-use-entrypoint-with-docker-and-docker-compose-1c2062aa17a2)
+
 > "The ENTRYPOINT specifies a command that will always be executed when the container starts. The CMD specifies arguments that will be fed to the ENTRYPOINT." ([von hier](http://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile))
+
+Startet man also einen Container ohne expliziten Entrypoint, dann wird der im Image definierte Entrypoint- (`--entrypoint`) oder CMD-Kommando (als Parameter) automatisch ausgeführt. Ist keins von beiden definiert, so wird es zu einer Fehlermeldung `Error response from daemon: No command specified` kommen. ABER:
+
+"Many of the Linux distro base images that you find on the Docker Hub will use a shell like /bin/sh or /bin/bash as the the CMD executable." ([von hier](https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/))
+
+Man kann aber auch beides definieren ... hä? Wann verwendet man was und warum?
+
+* Folgende Statements kommen alle von [dieser exzellenten Quelle](https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/):
+* "Given how much easier it is to override the CMD, the recommendation is use CMD in your Dockerfile when you want the user of your image to have the flexibility to run whichever executable they choose when starting the container."
+* "In contrast, ENTRYPOINT should be used in scenarios where you want the container to behave exclusively as if it were the executable it's wrapping. That is, when you don't want or expect the user to override the executable you've specified."
+* "Of course you can achieve this same thing with CMD, but the use of ENTRYPOINT sends a strong message that this container is only intended to run this one command."
+* "Combining ENTRYPOINT and CMD allows you to specify the default executable for your image while also providing default arguments to that executable which may be overridden by the user."
 
 ### Docker Host Filesystem
 
@@ -137,6 +152,11 @@ Häufig will man ein Image wiederverwenden, muß aber Anpassungen vornehmen, dam
 ### Umgebungsvariablen
 
 ### Volumes
+
+### Entrypoint
+
+* [Docker - Control startup order](https://docs.docker.com/compose/startup-order/)
+
 
 ---
 

@@ -6,12 +6,12 @@
 
 Zertifikates bzw. ihre Teile (Public-Key, Private-Key) können in folgenden Formaten gespeichert werden:
 
-* PEM: Base64-encoded 
+* PEM: Base64-encoded
 * DER: binäres Format
 * PKCS12: binäres Format
   * enthält i. d. R. Public- UND Private-Key (**VORSICHT!!!**)
  
-```
+```bash
 35 pfh@workbench % cat client.key
 -----BEGIN RSA PRIVATE KEY-----
 Proc-Type: 4,ENCRYPTED
@@ -48,6 +48,20 @@ Um mit Zertifikaten rumzuspielen bietet sich das Docker-Image von [NGINX](https:
 * ``openssl s_client -connect localhost:443 -prexit``
   * Handshake/Debugging der SSL Verbidnung anschauen
 
+### Aufbau einer eigenen CA
+
+* [Getting Started](https://www.phildev.net/ssl/opensslconf.html)
+* https://github.com/openssl/openssl/blob/master/apps/openssl.cnf
+* [OpenSSL Cookbook](https://www.feistyduck.com/library/openssl-cookbook/online/ch-openssl.html)
+
+Mit `openssl` lassen sich leicht mit Zertifikate oder CSRs (Certificate Sign Requests) anlegen. Will man das ein wenig automatisieren, so bietet es sich an eine gemeinsame Konfigurationsdatei [`ca.conf` nach diesem Schema](https://github.com/openssl/openssl/blob/master/apps/openssl.cnf) anzulegen (Linux Systeme mit installierten `openssl` bieten eine Default-Konfiguration unter `/etc/ssl/openssl.cnf`) und bei den Requests zu referenzieren:
+
+```bash
+openssl req -new -out my.csr -key my.key -config ca.conf
+```
+
+Die Syntax dieser Datei ist nicht besonders intuitiv, da manche Values (in dieser Key/Value-Datei) Sections referenzieren. Deshalb empfehle die Lektüre "Getting Started" (siehe oben).
+
 ---
 
 ## Java Keytool
@@ -76,6 +90,17 @@ Die Standard JDK Bibliotheken für den Aufbau von HTTP-Verbindungen berücksicht
 * `javax.net.ssl.trustStorePassword`
 * `javax.net.ssl.trustStoreType`
 * `javax.net.debug`
+
+### OpenJDK Besonderheit
+
+Open JDK verwendet standardmäßig die Key-/Truststore-Konfiguration des Betriebssystems. Das vereinfach die Konfiguration für manche Szenarien. Durch
+
+```bash
+cp my-truststore.crt /usr/local/share/ca-certificates/
+update-ca-certificates
+```
+
+wird der angegebene Truststore in die gesamte Java-Kommunikation eingebunden. In Docker-Umgebungen ist das sehr praktisch, da man so auf die explizite anwendungsspezifische Konfiguration über `javax.net.ssl.truststore` verzichten kann.
 
 ---
 
