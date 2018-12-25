@@ -93,7 +93,7 @@ Die Standard JDK Bibliotheken für den Aufbau von HTTP-Verbindungen berücksicht
 
 ### OpenJDK Besonderheit
 
-Open JDK verwendet standardmäßig die Key-/Truststore-Konfiguration des Betriebssystems. Das vereinfach die Konfiguration für manche Szenarien. Durch
+Open JDK verwendet standardmäßig die Truststore-Konfiguration des Betriebssystems. Das vereinfach die Konfiguration für manche Szenarien. Durch
 
 ```bash
 cp my-truststore.crt /usr/local/share/ca-certificates/

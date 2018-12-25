@@ -54,6 +54,8 @@ Für den Start eines Services auf einer Nomad Client Maschine (= Nomad Worker) s
 * Java
 * ...
 
+Hierbei kümmert sich Nomad (definiert im Nomad-Job) auch um die Ressourcenzuweisung (z. B. Memory).
+
 ## Jobs
 
 ### Beschreibung

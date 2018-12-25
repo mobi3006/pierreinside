@@ -346,6 +346,59 @@ BUILD ERROR The plugin 'org.apache.maven.plugins:maven-resources-plugin' does no
 
 Ich hatte scheinbar einfach nicht das erforderliche Plugin. Doch eigentlich hätte ich eine Reihe von Standard-PlugIns bei der Installation von Maven 2 von maven.apache.org erwartet, doch meine Installation hat nicht einmal ein plugin Verzeichnis. Entweder sind tatsächlich keinerlei PlugIns installatiert oder ich habe einen Fehler in der Konfiguration.
 
+### Release Plugin
+
+* [Maven Doku](https://maven.apache.org/guides/mini/guide-releasing.html)
+
+> in dem Beispiel gehe ich davon aus, daß der aktuelle Entwicklungsstrang mit der Version `1.0.6-SNAPSHOT` zu einem Release `1.0.6` werden soll und die neue Entwicklungslinie die Version `1.1.0-SNAPSHOT` erhalten soll
+
+Wenn man ein Release seiner Komponente bauen will, dann sind zwei Phasen notwendig:
+
+* `release:prepare`
+* `release:perform`
+
+#### release:prepare
+
+* [Maven Doku](http://maven.apache.org/maven-release/maven-release-plugin/examples/prepare-release.html)
+
+> Maven hält die Information über das zu bauende Artefakt IM Source-Code selber. Das ist bei einem Release ein wenig störend, weil der Source-Code erst angepaßt werden muß.
+
+Am Ende dieses Schrittes ist das Source-Repository vorbereitet, so daß entsprechende Tags existieren und die Entwicklungslinie bereits weiterlaufen kann. Artefakte sind noch nicht ins Repository hochgeladen!!!
+
+* man möchte natürlich ein Artefakt mit der gewünschten Versionsnummer bauen. Deshalb muss die `<version>1.0.6-SNAPSHOT</version>` in der `pom.xml` nach dem Checkout (vom Build-Server) mit der gewünschten Release-Version `1.0.6` ausgetauscht werden
+* danach erfolgt der Build (mit Tests) zur Prüfung, ob der potentielle Tag überhaupt Sinn macht
+* nach erfolgreichem Build wird dieser Stand getagged und gepushed
+  * man weiß dann (zumindest wenn man KEINE Snapshot-Artefakte in seinen Dependencies hat), daß dieser Stand zukünftig immer baubar ist
+  
+   Diese Änderungen werden ins Source-Repository commitet und gepusht
+* im Source-Respository erhält dieser Stand auch ein Tag mit dem Namen `1.0.6`, so daß man per `git checkout 1.0.6` leicht auf diesen Stand wechseln kann (das wird dann auch im `mvn release:perform` genutzt)
+* zudem muß die Version für den Source-Strang hoch gezogen werden (in diesem Fall evtl. auf `1.1.0-SNAPSHOT`)
+* für das nachfolgende `release:perform` wird eine `release.properties` erzeugt, so daß der Aufruf parameterlos erfolgen kann
+  * diese Datei wird übrigens auch für ein `release:rollback`
+  * diese Datei wird gelöscht per `release:clean`
+
+Das Kommando sieht dann folgendermaßen aus:
+
+```bash
+mvn release:prepare \
+    -DdevelopmentVersion=1.1.0-SNAPSHOT \
+    -DreleaseVersion=1.0.6 \
+    -Dtag=1.0.6
+```
+
+#### release:perform
+
+* [Maven Doku](http://maven.apache.org/maven-release/maven-release-plugin/examples/perform-release.html)
+
+Am Ende dieses Schrittes sind die Artefakte für das Release gebaut (z. B. `my-service-1.0.6.jar`) und ins Artefakt-Repository (z. B. Nexus) hochgeladen. Sie stehen für die Auslieferung bereit.
+
+```bash
+mvn release:perform
+```
+
+> Alternativ: `mvn org.apache.maven.plugins:maven-release-plugin:2.5.3:perform`
+
+
 ### Maven und Eclipse
 
 Verwendet man maven und Eclipse als Entwicklungsumgebung, so ist es eher unüblich die `.classpath` und `.project` Dateien im Versionierungstool zu halten, denn diese Dateien sind redundant zum Maven Project Object Model (POM) - sie können daraus generiert werden. Hat man das entsprechende maven-Plugin installiert, so werden die Dateien einfach per `maven eclipse` (bei maven 1.x) erzeugt.

@@ -25,7 +25,7 @@ Diese Distributionenn sind zueinander kompatibel, so daß man eine andere Distri
 
 Unter Linux gibt es zwei Paketquellen:
 
-* RECOMMENDED: offizielle MySQL Pakete ... die Installation läuft über das *MySQL APT Repository* 
+* RECOMMENDED: offizielle MySQL Pakete ... die Installation läuft über das *MySQL APT Repository* (siehe unten)
 * Pakete des Distributionsanbieters
 
 ### MySQL APT Repository
@@ -44,14 +44,15 @@ Enthält:
 Schritt für Schritt:
 
 * download des *MySQL APT Repository* von hier: http://dev.mysql.com/downloads/repo/apt/
-  * hierzu muss man sich bei Oracle registrieren 
+  * hierzu muss man sich bei Oracle registrieren
 * *MySQL APT Repository* installieren: ``sudo dpkg -i mysql-apt-config_0.8.0-1_all.deb``
   * ACHTUNG: damit wird das System (die Repo-Konfiguration des Linux-Systems) nur so konfiguriert, daß man die offiziellen MySQL Pakete installieren kann
 * ``sudo apt-get update``, um die MySQL Repository Informationen upzudaten
+* danach kann man dann weitere Pakete wie z. B. den MySQL Server oder die MySQL Workbench per `apt-get` installieren
 
 ### User einrichten
 
-Bei der Einrcihtung eines Users gibt man den Usernamen und den Host an, mit dem man zugreifen möchte. Verwendet man
+Bei der Einrichtung eines Users gibt man den Usernamen und den Host an, mit dem man zugreifen möchte. Verwendet man
 
 ```
 pfh@localhost
@@ -93,8 +94,7 @@ Man sollte nach Möglichkeit die Pakete von MySQL selbst verwenden (aka ``mysql-
 
 DESHALB:
 
-* das MySQL APT Repository installieren, um die offiziellen Pakete zu bekommen
-  * siehe Installation von MySQL (weiter oben)
+* das MySQL APT Repository installieren, um die offiziellen Pakete zu bekommen (siehe oben)
 * ``sudo apt-get install mysql-workbench-community``
 * MySQL Workbench starten: ``mysql-workbench``
 

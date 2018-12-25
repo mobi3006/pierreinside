@@ -18,11 +18,15 @@ Es versprach
 
 Das musste die eierlegende Wollmilchsau sein ... aber das versprechen ja viele.
 
+## Alternativen
+
+Anfangs dachte ich gar nicht über Alternativen nach, da ein Kollege mir die Synology als Eierlegende Wollmilchsau empfahl und ich von den Features auch selbst begeistert war. Nach dem Desaster bei der Abschaffung von Time-Backup in der Version 6.1 (Jahr 2018) war ich doch sehr enttäuscht von Synology und schaute mich nach Alternativen zu meinem 6 Jahre alten Gerät um (DS112+).
+
 ## Hardware-Konfiguration
 
 Ich entschied mich gegen ein RAID, weil ich das Geld lieber in eine externe USB-Platte stecke, die dann tatsächlich ein Backup ermöglicht (und nicht nur eine Spiegelung). Ich benötige keine 99,9996 % Ausfallsicherheit. Wenn die Platte mal abraucht und ich einen oder zwei Tage nicht auf meine Daten zugreifen kann ... KEIN PROBLEM - solange ich noch ein ordentliches Backup habe
 
-Verbaut ist eine Western Digital WD30EFRX 3TB aus der Red-Serie (für Server-Betrieb)
+Verbaut ist eine Western Digital WD30EFRX 3TB aus der Red-Serie (für Server-Betrieb).
 
 Gesamtkosten: 350 Euro
 
@@ -85,13 +89,25 @@ Ich zog auch eine zentrale Speicherung meiner Daten bei der NSA ... ähm, in der
 
 Das Thema bereitete mir immer Kopfzerbrechen, aber ich hatte keine Lust und Zeit ...
 
-### Synology TimeBackup
+### Synology TimeBackup - nur bis DSM 6.0
 
 ... und dann kam Synology DS112+ mit TimeBackup ... und die Erde erstrahlte. Ungelogen ... dieses Teil lässt mich jetzt - nach Jahren des schlechten Gewissens - besser schlafen. Und schon allein aus diesem Grund hat sich die Investition gelohnt.
 
 Da das NAS als zentraler Fileserver fungiert (weil es auch entsprechend schnell ist), benötige ich nur ein Backup des NAS und nicht aller Clients. Die Dezentralisierung war bei meinen bisherigen Backup-Lösungen immer Hauptproblem.
 
 Im Synology-Control-Center musste ich nur die USB-Festplatte anschliessen, das TimeBackup-Package installieren und konfigurieren (z. B. Hourly mit  Smart Recycle) und schon gings gehts. Die USB-Platte kann während der Konfiguration des TimeBackups automatisch (auf Nachfrage!!!) mit ext3 oder ext4 formatiert werden (die einzigen unterstützten Filesysteme). Fertig.
+
+Ich habe noch eine zweite externe USB-Festplatte, die ich an einem anderen Ort (Bank-Safe oder Freunde) lagere, um bei Brand eine Sicherung zu haben. Da ein Time Backup inkrementell ist und mit vielen Links auf die alten Backups arbeitet, war mir nicht klar, ob ich einfach die andere externe Festplatte anstöpseln kann und dann die zwei Backup-Tasks (derzeit zwei, weil sie in unterschiedlichen Intervallen laufen - mehrfach am Tag vs. einmal pro Woche) wie "Basalt im Synology Forum:
+
+"For the normal backup, I use 2 external USB disks with the same name (usbshare1). I swap them every week (using eject function of DSM), but the (single) backup task is not aware of that and just does its job." ([Synology Forum](https://forum.synology.com/enu/viewtopic.php?t=61847))
+
+"allyn" antwortete daraufhin:
+
+"That trick doesn't work unfortunately. I tried this and this is what I found: Time Backup saves disk space by making hard links to the previous backup for unchanged files. This is how it can make new backups using virtually no disk space. Time Backup keeps a list of available backups (on the internal disk). After a disk swap, it can't find the most recent backup (since it was on the other disk) and instead of just using the most recent one available on the current disk, it makes a completely new copy of all of your data. This fills up the disk way too fast because you get a complete new copy after every disk swap. If it would only use the most recent copy available it would work fine. That would be the one change I would make to Time Backup if I had a chance." ([Synology Forum](https://forum.synology.com/enu/viewtopic.php?t=61847))
+
+"allyn" macht es mit komplett getrennten Backup-Tasks, für `usbshare1` und `usbshare2` werden unterschiedliche Backup-Tasks verwendet.
+
+Bei mir funktioniert "allyn"s Ansatz nicht, da ich bereits zwei Backup Tasks habe und keine dritte definieren kann. Ich erhalte die Meldung "the number of tasks exceeds system limitation". Da Synology mit der Version 6.1 (ich habe derzeit noch 6.0 - das Update steht seit Wochen aus) kein TimeBackup mehr unterstützt, habe ich mich in Hyper Backup eingearbeitet.
 
 #### Smart Recycle
 
@@ -138,7 +154,7 @@ Ich habe es so eingerichtet, daß ich per Mail über Backups informiert werde - 
 
 * [motivierender Beitrag](https://www.tutonaut.de/anleitung-verschluesseltes-cloud-backup-mit-synology-hyper-backup-erstellen/)
 
-Hyper Backup ist ein Paket der Synology und erlaubt die verschlüsselte Sicherung der Daten in die Cloud (ich hoffe, daß mein Upload das auch irgendwann zuläßt).
+Hyper Backup unterstützt nicht nur Backups auf lokale Festplatten bzw. externe USB-Festplatten, sondern auch verschlüsselte Backups in die Cloud. Meine DS112+ wird noch unterstützt ... ich habe das Paket auch schon erfolgreich auf meiner DSM 6.0 Version installiert.
 
 Interessante Cloud Storage Anbieter (Preis für 1 TB/Monat):
 
@@ -148,6 +164,45 @@ Interessante Cloud Storage Anbieter (Preis für 1 TB/Monat):
 * Google Drive (mittlerweile umbenannt zu Google One): 10 Euro
 * Dropbox: 10 Euro
 * OneDrive: 10 Euro
+* Remote Synology NAS
+  * so könnte ich beispielsweise eine alte Synology zu meinem Eltern stellen und auf Cloud-Backups verzichten
+
+Leider habe ich das gelesen:
+
+"it simply has NOT the ability to make filebased, smartrecyled backup) ... i will NEVER backup me files in a propritary database" ([Synology Forum](https://forum.synology.com/enu/viewtopic.php?t=119519))
+
+... und das war genau mein Problem mit Bacula - ich möchte sichergehen können, daß ich meine Daten auch restoren kann, wenn die Restore-Software nicht funktioniert oder evtl. nicht mehr gewartet wird. Ich möchte die Platte anstöpseln und direkt meine Daten per Windows Explorer copy/paste restaurieren können.
+
+Synology schreibt dazu in der Dokumentation zu Hyper Backup:
+
+"Sie können auf macOS-Computern mit dem AFP-Protokoll via macOS Finder und auf Windows-Computern mit dem SMB-Protokoll über den Windows Explorer auf Sicherungen zugreifen, ohne dass Sie sich auf der DSM-Benutzeroberfläche anmelden müssen."
+
+Hierzu benötigt man den Hyper Backup Explorer ... eine Software für Windows und MacOS, um in den Hyper Backup Sicherungsdatenbanken zu stöbern.
+
+#### Erste Erfahrungen
+
+Das erste Backup auf Basis von Hyper Backup auf eine lokale USB Platte (externe USB 3.0) Platte war extrem langsam. 10-20 MB/s Übertragungsrate (8 Stunden für 300 GB) über eine USB 3.0 Verbindung sind unterirdisch. Für meinen Anwendungsfall (Vierteljährliche Backups, die extern gelagert werden) ist das kein No-Go.
+
+Erfreulich war hingegen, daß die Dateien Backups scheinbar ohne Spezialsoftware (wie Hyper Backup Explorer) im Windows Explorer lesbar waren. Ich konnte zumindest meine externe USB-Platte über `\\diskstation\usbshare2` (also schon über Synology) in Windows einhängen und auf die Dateien zugreifen - könnte natürlich weiterhin sein, daß Synology hier transparent eingreift und das ganze für mich nur so darstellt. Kommt auf ein Versuch an, die Platte ohne beteiligtes Synology einfach in einem Linux Rechner (Windows funktioniert nicht, weil ich `ext4` als Filesystem verwende).
+
+### USB Copy
+
+Nachdem Synology mein geliebtes Time Backup in 6.1 nicht mehr unterstützt, mußte ich mir eine neue Backup Strategie suchen.
+
+Hyper Backup ist wohl der angedachte Ersatz für Time Backup, doch möchte ich mich nicht auf ein proprietäres Format verlassen. Zumindest nicht VOLLSTÄNDIG. Deshalb ist meine Idee:
+
+* Hyper Backup für die tägliche Sicherung
+* USB Copy für die Quartalssicherung
+
+USB Copy erzeugt kein Proprietäres Format, sondern ein hierarchisches Abbild der Dateien. Sollte also mal was mit Hyper Backup nicht klappen, dann möchte ich auf das USB Copy zugreifen können ... zur Not verliere ich halt ein paar Monate, aber das wäre zu verkraften.
+
+> Beim Wechsel von DSM 6.0 auf 6.2 hätte ich vorher gerne mal ein USB Copy Backup auf meine zweite externe USB Platte gemacht, doch USB Copy stand in 6.0 nicht als Paket zur Verfügung.
+
+Nach der Installation von DSM 6.2 gleich die erste Enttäuschung. USB Copy ist als Paket verfügbar, doch die Funktionalität ist lächerlich. Ich kann nicht mehrere Ordner zum Mirroring selektieren und wenn ich zwei Copy Jobs mache, dann bekomme ich die Fehlermeldung "The USB/SD folder is usbshare2 is already used for an existing copy". Im Synology Forum lese ich, daß das kein Bug, sondern ein nicht vorhandenes Feature ist. Die wollen mich wohl verarschen??? So ist USB Copy nicht zu gebrauchen ... zumindest nicht für meinen Use-Case. Toll, Time Backup abgeschafft aber keine passende Alternative geschaffen :-(
+
+Hier läßt sich die ganze Misere nachlesen: [https://forum.synology.com/enu/viewtopic.php?t=129488](https://forum.synology.com/enu/viewtopic.php?t=129488)
+
+> Fazit aus diesem Thread: "This feature works just fine on QNAP [...] I really wish that I stayed with QNAP"
 
 ## Foto/Video Synchronisierung von iOS
 
