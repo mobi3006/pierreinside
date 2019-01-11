@@ -3,6 +3,8 @@
 * [Refcardz maven 2](https://dzone.com/refcardz/apache-maven-2)
 * [Maven Buch](http://www.sonatype.com/books/maven-book/reference/)
 
+---
+
 ## Artefakt Typen
 
 * [Importing Dependencies](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies)
@@ -195,6 +197,8 @@ Man kann zentral die Dependencies konfigurieren und aus anderen Modulen referenz
 
 * [Doku](https://maven.apache.org/plugins/maven-assembly-plugin/examples/sharing-descriptors.html)
 
+---
+
 ## PlugIn-Installation
 
 Es genügt, das maven-Repository (http://repo1.maven.org/maven2) in der pom.xml zu definieren und dann die gewünschten Goals eines PlugIns zu verwenden. Ein Beispiel von der Kommandozeile (der automatische Download und Installation bei Verwendung von Plugins im pom-File funktioniert genauso gut):
@@ -205,9 +209,13 @@ Hierdurch wird das dependency-Plugin für maven2 (http://maven.apache.org/plugin
 
 Für PlugIns wird das gleiche Updateverfahren wie für als Dependency definierte Artefakte. Es wird immer geprüft, ob auf dem Remote-Repository ein neueres PlugIn verfügbar ist. Wenn das der Fall ist, dann wird es runtergeladen und verwendet. Auf diese Weise arbeitet man immer mit den neuesten PlugIns - was natürlich besondere Anforderungen an die BAckward-Compatibility der PlugIns stellt.
 
+---
+
 ## Profile
 
 Profile werden verwendet, um das Verhalten von maven für verschiedene Nutzungsszenarien (z. B. ohne Tests) und Situationen (z. B. wenn JDK 1.4 verwendet wird, dann gelten andere Konfigurationen) innerhalb eines Profils kann man dann beispielsweise Properties setzen, Plugins konfigurieren,
+
+---
 
 ## Lebenszyklus
 
@@ -251,6 +259,8 @@ Durch maven-Plugins können die einzelnen Schritte der Phasen erweitert/angepass
 Man kann natürlich auch noch einfach PlugIn-Goals aufrufen: z. B. `mvn dependency:resolve` oder `mvn eclipse:eclipse`. Jede beliebige Software, die maven zum Build verwendet lässt sich per `mvn install` bauen, testen und local installieren.
 
 Hier ist das ganz schön dargestellt: http://www.sonatype.com/books/maven-book/reference/installation-sect-common-interface.html
+
+---
 
 ## Transitive Abhängigkeiten
 
@@ -300,6 +310,8 @@ Maven 2 kann hier prinzipiell nichts dafür ... in diese Versionsproblematik kom
 Im professionellen Umfeld macht man i. d. R. einen Bogen um GPL, LGPL oder ähnliche Lizenzen, weil es im worst-case zur Folge hat, daß man seinen eigenen Code veröffentlichen muss. Das kann das Geschäftsmodell ganz schön durcheinanderbringen.
 Durch die transitive Abhängigkeitsauflösung, zieht man sich automatisch weitere Bibliotheken rein, die man nicht explizit referenziert hat. Wenn sich darunter vielleicht eine unangenehme Lizenz befindet (und vielleicht war die Lizenz von Version 1.3 noch unkritisch aber plötzlich in Version 1.3.1 bedenklich), dann kanns schnell gefährlich werden. Deshalb ist die ständige (automatisierte) Prüfung der Lizenzen absolut erforderlich.
 
+---
+
 ## Aufbau eines Repositories
 
 Remote- und Local-Repository haben folgenden Aufbau:
@@ -311,6 +323,8 @@ groupid/
     metadata....xml
     maven-metadata.xml
 ```
+
+---
 
 ## Archetypen
 
@@ -335,6 +349,8 @@ java -cp target/de.cachaca.learn.maven2.simple-1.0-SNAPSHOT.jar de.cachaca.learn
 ```
 
 kann man die erzeugte HelloWorld-Klasse bauen und starten.
+
+---
 
 ## Maven Plugins
 
@@ -398,12 +414,13 @@ mvn release:perform
 
 > Alternativ: `mvn org.apache.maven.plugins:maven-release-plugin:2.5.3:perform`
 
-
 ### Maven und Eclipse
 
 Verwendet man maven und Eclipse als Entwicklungsumgebung, so ist es eher unüblich die `.classpath` und `.project` Dateien im Versionierungstool zu halten, denn diese Dateien sind redundant zum Maven Project Object Model (POM) - sie können daraus generiert werden. Hat man das entsprechende maven-Plugin installiert, so werden die Dateien einfach per `maven eclipse` (bei maven 1.x) erzeugt.
 
 Das mvn-Shell-Skript sieht zunächst mal gut aus und scheint auch die cygwin Inkompatibilitäten hinsichtlich der Windows-Pfade zu berücksichtigen (interessant, dass cygwin solch breite Unterstützung erfährt). Um diese Fehlerquelle gänzlich auszuschalten, probiere ich es einfach mal unter einer DOS-Shell aus. Doch "glücklicherweise" mit dem gleichen Ergebnis. Bleibt mir also nur das Forschen nach den PlugIns.
+
+---
 
 ## Remote-SNAPSHOT-Abhängigkeiten ... DONT DO THIS
 
@@ -433,6 +450,8 @@ Ziel des Continous Integration ist ein Fail-Fast zu erreichen. Aus meiner Sicht 
 Continous Integration dient dem Gesamtprodukt und ist ein gutes Feedback, das man berücksichtigen sollte. ABER: es darf nicht dazu führen, daß die Entwickler in ihrer Geschwindigkeit ausgebremst werden. Und genau dazu führt die Verwendung von Remot-Snapshot-Abhängigkeiten. Und diese Aussage gilt auch, wenn es 30 Minuten dauert, um den gesamten Source-Tree durchzubauen. Das muss man nur ganz selten machen. Danach erfolgen Builds nur noch sehr selektiv und auch nur dann wenn man mit anderen zusammenarbeitet. Arbeitet man allein, kann man alles lokal machen. In den Offline-Mode kann man oftmals nicht gehen, weil manchmal doch stable-Versions gebraucht werden (weil man ein Goal aufruft, das weitere Plugins benötigt oder weil sich am pom-File was geändert hat). Hat man den eigenen Meilenstein erreicht, committet man - hierauf sollte man mit Hinblick auf den Continous Integration Gedanken nicht allzu lange Warten (eher im Stunden/Tage-Bereich als im Tage/Wochen-Bereich). Hierzu sollte man mit den aktuellen Sourcen synchronisieren und wird dann ein "svn update" machen (was dann wiederum einen lokalen Build vieler Module nach sich zieht).
 Ant vs. Maven
 siehe hier: http://www.sonatype.com/books/maven-book/reference/installation-sect-compare-ant-maven.html
+
+---
 
 ## Maven ist langsam
 
@@ -481,3 +500,31 @@ Hat man eine Änderung in Modul A vorgenommen, dann will man i. a. nur Modul A u
 ```bash
 mvn install -pl modules/moduleA -am
 ```
+
+---
+
+## Maven Artifact Repository
+
+Nexus ist ein Beispiel für ein Maven Artifact Repository. Bei der Ausführung von Maven werden Dependencies, Plugins, ... von Maven Artifact Repositories geladen.
+
+Maven selbst benötigt ein Java JDK, das unter `JAVA_HOME` liegen muß.
+
+### SSL-Zugriff auf Maven Repository - Oracle JDK
+
+Für den Zugriff per `https` auf ein custom Maven Repository (konfiguriert in `~/.m2/settings.xml`) muß ein Truststore konfiguriert werden (`my-truststore.jks` und `trustStorePassword` müssen natürlich angepaßt werden):
+
+```bash
+export MAVEN_OPTS="-Djavax.net.ssl.trustStore=my-truststore.jks -Djavax.net.ssl.trustStorePassword=initinit"
+```
+
+### SSL-Zugriff auf Maven Repository - Open JDK
+
+Bei Open JDK benötigt man keine Anpassung der `MAVEN_OPTS` mehr, um den Truststore zu konfigurieren. Stattdessen berücksichtigt Open JDK die Truststores, die im Betriebssystem hinterlegt sind.
+
+So kommen die Truststores ins Betriebssystem (hier [Ubuntu 18.04](ubuntu_1804_lts.md)):
+
+* Zertifikat in `/usr/local/share/ca-certificates` pem-encoded mit der Endung `.crt` ablegen
+* `sudo update-ca-certificates`
+  * liest von `/usr/local/share/ca-certificates` und erzeugt `/etc/ssl/certs/java/cacerts`
+
+Open JDK referenziert `/etc/ssl/certs/java/cacerts` in `$JAVA_HOME/jre/lib/security/cacerts` als symbolischen Link und integriert damit die Betriebssystem-Zertifikate, die unter `/usr/local/share/ca-certificates` liegen (ok ... durch Generierung von Dateien).
