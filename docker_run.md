@@ -8,12 +8,16 @@ Container, die als dauerhafter Service laufen sollen (ich nenne sie **Service-Co
 
 >ACHTUNG: es gibt auch den Befehl ``docker start my-container``, der einen beendeten Container startet (``docker stop my-container`` stoppt einen laufenden Container).
 
+---
+
 ## Images zum Rumspielen
 
 Zum Rumspielen genügen sehr kleine Images wie
 
 * hello-world
 * busybox (< 5MB)
+
+---
 
 ## Ausführungsmodi eines Containers
 
@@ -43,6 +47,8 @@ sudo docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sle
 
 Verläßt man einen laufenden Container mit ``Ctrl-C``, so erhält er ein ``SIGKILL`` Event, so daß der Container noch sauber runterfahren kann. Will man den Container stattdessen im Hintergrund weiterlaufen lassen, so sollte man ``Ctrl-p`` ``Ctrl-q`` verwenden, um die Console zu verlassen.
 
+---
+
 ## Umgebungsvariablen setzen
 
 Häufig basieren Docker-Container auf Umgebungsvariablen, um eine Integration in die jeweilige Infrastruktur zu ermöglichen. Solche Umgebungsvraiablen können per ``-e`` gesetzt werden:
@@ -51,6 +57,32 @@ Häufig basieren Docker-Container auf Umgebungsvariablen, um eine Integration in
 docker run -e MYSQL_ROOT_PASSWORD=my-secret-pw
 ```
 
+---
+
 ## Entrypoint override
 
 `docker run -it --entrypoint "/bin/ls" ubuntu:14.04 -al /mnt`
+
+---
+
+## Docker in Docker
+
+Ich wollte meinen [Jenkins](jenkins.md) als Docker Container laufen lassen und gleichzeitig Docker Agents verwenden. Hierzu muß aus einem Docker Container ein anderer Docker Container gestartet werden. Ob das überhaupt funktioniert habe ich folgendermaßen geprüft:
+
+```bash
+# start Alpine container
+docker run --rm --name alp -it -v /var/run/docker.sock:/var/run/docker.sock maven:3-alpine sh
+
+# enter Docker Container console
+docker exec -it alp sh
+
+# install Docker
+echo http://dl-6.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
+apk update
+apk add docker
+
+# test starting Docker containers
+docker run hello-world
+```
+
+Viola - cool :-)

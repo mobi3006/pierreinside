@@ -2,6 +2,8 @@
 
 Im Januar 2019 habe ich mich zu einem Upgrade von [Ubuntu 16.04 LTS](ubuntu_1604_lts.md) auf diese Version entschlossen.
 
+---
+
 ## Upgrade
 
 Zunächst habe ich mein Virtualbox mal auf den neuesten Stand gebracht (5.2.22) Virtualbox Guest Extensions wieder installiert. Danach erfolgte der Ubuntu Upgrade (mit `apt` statt mit `apt-get`):
@@ -19,3 +21,15 @@ Das hat hat ganz gut funktioniert. Abgesehen von
 - beim Start meines Virtual Box Images erhalte ich die Warnung `failed to connect to lvmetad` - ein Problem, das scheinbar viele mit dem 18.04 haben
 
 Danach habe ich die Virtualbox Guest Extensions nochmal installiert, weil ich einen neuen Kernel bei dem Upgrade bekommen habe.
+
+### Langsame IO Performance
+
+- [Improving Linux System Performance with I/O Scheduler Tuning](https://blog.codeship.com/linux-io-scheduler-tuning/)
+
+Mein MySQL-Docker Container mit einem 10 MB großen Dump war bisher immer schnell eingespielt (beim Hochfahren der MySQL Instanz). Nach dem Upgrade dauerte es ewig (60 Sekunden) ... der I/O Scheduler (`/sys/block/sda/queue/scheduler`) scheint große Unterschiede zu machen:
+
+- `cfq`: 60 Sekunden
+- `deadline`: ???
+- `noob`: 15-20 Sekunden
+
+---

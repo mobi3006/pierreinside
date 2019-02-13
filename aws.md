@@ -1,5 +1,14 @@
 # Amazon Web Services
 
+Amazon war der Vorreiter des heutigen _Cloud Computings_ (ca. im Jahre 2005). Heutzutage führt fast kein Weg daran vorbei (es gibt viele Cloud-Anbieter). Der Vorteil ist besteht in
+
+* schnelle (dyniamische) Bereitstellung von Hardware
+* exzellente Komponenten und Tooling, um den gesamten Softwareentwicklungszyklus zu unterstützen
+
+Während man früher nur als Großunternehmen relevante Software bereitstellen konnte, ist das heute bereits Ein-Mann-Startups möglich.
+
+---
+
 ## Getting Started
 
 * [AWS Account anlegen](https://aws.amazon.com)
@@ -44,15 +53,76 @@ apt-get install maven
 
 Die von meinen Docker Services bereitgestellten Ports mußten dann noch über die AWS-Management-UI als Inbound Rules der Security Group eingetragen werden.
 
+### AWS CLI
+
+* [Tutorial: Using the AWS CLI to Deploy an Amazon EC2 Development Environment](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-tutorial.html)
+* [Install `awscli` auf Ubuntu 18.04 LTS - verschiedene Varianten](https://linuxhint.com/install_aws_cli_ubuntu/)
+
+Ich habe die Command-Line Tools von AWS über `pip` (Python Paket Manager) installiert wie [hier beschrieben](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html):
+
+> Ich hatte den `pip` schon installiert - [so hätte ich ihn installieren können](https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html)
+
+```bash
+pip install awscli --upgrade --user
+```
+
+So bin ich an die aktuelle Version 1.16.96 gekommen (über diesen Weg werden auch Updates installiert).
+
+> Die Option `--user` sorgte dafür, daß die Installation nur in meinem Home-Verzeichnis erfolgte (`~/.local/bin/aws`). Ich habe dieses Python Script in meinen `$PATH` gelegt, so daß ich es von überall aufrufen kann.
+
+Über meinen Ubuntu Package-Manager (auf Ubuntu 18.04 LTS)
+
+```bash
+sudo apt-get update
+sudo apt-get install awscli
+```
+
+habe ich nur eine awscli-1.14.xxx bekommen.
+
+Anschließend muß man die Credentials `~/.aws/credentials` noch einbinden (die Kommandos hängen davon ab, ob man die Python Installation verwendet hat oder die Package-Installation - [siehe Dokumentation](https://linuxhint.com/install_aws_cli_ubuntu/)):
+
+```bash
+python -m awscli configure
+```
+
+Hier wird man interaktiv nach den Crentials (AWS Access Key ID, AWS Secret Access Key, Default region). Aus den Angaben werden die Dateien `~/.aws/credentials` und `~/.aws/config` erzeugt.
+
+Anschließend sollte man Zugriff haben und folgenden Befehl ausführen können:
+
+```bash
+aws iam get-user --user-name your_username@example.com
+```
+
+> Will man verschiedene Konfigurationen verwenden, [dann kann man sog. Profile nutzen](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+
+---
+
 ## Konzepte
+
+### Oranisationsebenen
+
+- [Konzept Regionen und Availability Zones](https://docs.aws.amazon.com/de_de/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
+
+- alle Regionen sind unabhängig voneinander
+- Region (z. B. us-east-1, us-east-2, us-west-1, eu-west-1)
+  - jede Region ist ein unterschiedlicher geografischer Bereich
+  - in jeder region gibt es wiederum mehrere physisch isolierte Standorte (Availability Zones)
 
 ### Availability Zones
 
-Amazon muß natürlich auch selbst mal Wartungsarbeiten durchführen und damit Infrastruktur vom Netz nehmen. Amazon empfiehlt die Verwendung von drei sog. Availability Zones und garantiert, daß IMMER mind. eine verfügbar ist. Bei der Verteilung der Microservices auf die verschiedenen Zones sollte man also darauf achten, daß in jeder Zone mind. ein Knoten jedes Services deployed ist.
+Amazon muß natürlich auch selbst mal Wartungsarbeiten durchführen (oder hat auch mal ungeplante Ausfälle, z. B. durch Brand) und damit Infrastruktur vom Netz nehmen. Amazon empfiehlt die Verwendung von drei sog. Availability Zones und garantiert, daß IMMER mind. eine verfügbar ist. Bei der Verteilung der Microservices auf die verschiedenen Zones sollte man also **darauf achten, daß in jeder Zone mind. ein Knoten jedes Services deployed ist**.
 
-Der Elastic Load Balancer (ELB) sorgt dafür, daß die Requests aus dem Internet in die tatsächlich verfügbare Availability Zones delegiert werden.
+Der Elastic Load Balancer (ELB), der häufig der einzige öffentliche Zugangspunkt für Requests ist, sorgt dafür, daß die Requests aus dem Internet in die tatsächlich verfügbare Availability Zones delegiert werden.
 
-### Elastic Load Balancer (ELB)
+---
+
+## S3
+
+Dieser Dient bietet einen File-Server in Form von sog. S3-Buckets. Der Names des Buckets muß global eindeutig sein.
+
+---
+
+## Elastic Load Balancer (ELB)
 
 * [siehe in separater Seite](proxy.md)
 
@@ -70,7 +140,8 @@ Amazon bietet folgende Arten von Loadbalancers:
       * es könnte sein, daß mehrere Domains auf einen Loadbalancer geroutet werden (über DNS), dann kann der ELB über den Hostnamen ein entsprechendes Routing anbieten
     * pfad-basiert
 * Network Load Balancer
-  * arbeitet auf 
+
+---
 
 ## FAQ
 

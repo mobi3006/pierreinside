@@ -44,11 +44,24 @@ Enthält:
 Schritt für Schritt:
 
 * download des *MySQL APT Repository* von hier: http://dev.mysql.com/downloads/repo/apt/
-  * hierzu muss man sich bei Oracle registrieren
-* *MySQL APT Repository* installieren: ``sudo dpkg -i mysql-apt-config_0.8.0-1_all.deb``
+  * hierzu muss man NICHT sich bei Oracle registrieren ... einfach _No thanks, just start my download_ auswählen, dann gehts auch ohne Registrierung
+* *MySQL APT Repository* installieren: ``sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb``
   * ACHTUNG: damit wird das System (die Repo-Konfiguration des Linux-Systems) nur so konfiguriert, daß man die offiziellen MySQL Pakete installieren kann
 * ``sudo apt-get update``, um die MySQL Repository Informationen upzudaten
-* danach kann man dann weitere Pakete wie z. B. den MySQL Server oder die MySQL Workbench per `apt-get` installieren
+* danach kann man dann weitere Pakete wie z. B. den MySQL Server oder die MySQL Workbench per `apt-get install mysql-workbench-community` installieren
+
+Nach meinemm Upgrade von Ubuntu 16.04 LTS auf 18.04 LTS war dann plötzlich meine MySQL Workbench weg. Nach `sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb` wollte ich es per `sudo apt-get update && sudo apt-get install mysql-workbench-community` installieren, doch das schlug hiermit fehl:
+
+```
+The following packages have unmet dependencies:
+ mysql-workbench-community : Depends: libcurl3 (>= 7.16.2) but it is not going to be installed
+                             Depends: libjasper1 but it is not installable
+                             Depends: libnetcdf11 (>= 4.0.1) but it is not installable
+                             Depends: libpng12-0 (>= 1.2.13-4) but it is not installable
+                             Depends: libxerces-c3.1 but it is not installable
+```
+
+Zeit für mich auf das Tool meiner Kollegen _[DBeaver](https://dbeaver.io/) umzusteigen. Diese elenden Dependencies ... Docker ist echt eine geniale Erfindung (auch wenn es mir in dem Fall in keiner Weise hilft).
 
 ### User einrichten
 

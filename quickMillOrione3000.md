@@ -5,7 +5,7 @@
 
 Jahrelang hatten wir einen AEG Ca Famosa Vollautomaten im Einsatz. Die hat anfangs auch sehr gut gearbeitet, doch nach zwei bis drei Jahren zickte sie immer häufiger. Immer wieder mußte ich Fehler suchen und beheben ... das Ding aufzuschrauben stellte mich anfangs schon vor einige Probleme (dem Internet sei Dank). Irgendwann hatte ich aber keine Lust mehr und suchte nach einer ganz einfachen Kaffeemaschine ohne Schnick-Schnack, der dann doch irgendwann ausfällt und Probleme bereitet.
 
-Meine Wahl fiel auf die Quick Mill Orione 3000.
+Meine Wahl fiel auf die Quick Mill Orione 3000. Zusammen mit der Mühle Apollo im Jahr 2009 für 820 Euro erstanden.
 
 ## Puristisch
 
