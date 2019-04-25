@@ -83,9 +83,58 @@ Das hat aber scheinbar nichts mir der Bindung des Kommunikationsports an das Net
 
 ---
 
-## Konfiguration
+## Konfiguration und Administration
 
 Erfolgt über ``/etc/mysql/my.cnf``, die aber wiederum weitere ``*.cnf`` Dateien in ``/etc/mysql/conf.d/`` berücksichtigt und miteinander abmischt ... die Dateien in ``/etc/mysql/conf.d/`` überschreiben die Werte in ``/etc/mysql/my.cnf``.
+
+### User und Datenbanken anlegen
+
+* [MySQL Passwort-Generator](https://www.browserling.com/tools/mysql-password)
+
+Ich bin ein großer Fan von CLI's, weil ich dann meine Befehle immer wieder über die Command-History wiederfinden kann und außerdem mit Kollegen austauschen kann. Das ist dann oftmals schon der erste Schritt zur Automatisierung von Aufgaben. Hierzu benötigt man das `mysql`-CLI-Tool. Am einfachsten man startet einen Docker-Container (z. B. `docker run -it mysql:5.7 sh`) - alternativ kann man natürlich einen MySQL-Client installieren.
+
+Beachte, daß an einer Stelle Backticks benutzt werden müssen, wenn der Datenbankname Bindestriche enthält!!!
+
+```bash
+mysql -u root -h db.cachaca.de -p
+... interaktive Passwortabfrage ...
+create database `pierre-database`
+GRANT ALL PRIVILEGES ON `pierre-database`.* TO 'pierre'@'%' IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF;';
+```
+
+Anschließend sollten die Grants `show grants 'pierre';` so aussehen:
+
+```
++-------------------------------------------------------------------------------------------------------+
+| Grants for pierre@%                                                                                   |
++-------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'pierre'@'%' IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF' |
+| GRANT ALL PRIVILEGES ON `pierre`.* TO 'pierre'@'%'                                                  |
++-------------------------------------------------------------------------------------------------------+
+```
+
+und ich sollte mich mit dem User `pierre/1234` (Passwort ist `1234`) anmelden können und per
+
+```
+use pierre;
+create table haus (id VARCHAR(32)) DEFAULT CHARSET=utf8;
+```
+
+die Tabelle `pierre.haus` anlegen können.
+
+> In dem Beispiel führe ich das Anlegen der Datenbank in dem `mysql` Terminal aus - das ist also von der Bash-History nicht abgedeckt. In diesem Fall ist das beabsichtigt, da hier auch Passwörter erforderlich sind, die ich **NICHT** in der History haben möchte.
+
+Nach diesen Schritten kann sich der User `my-user` an der Datenbank `pierre-database` des Datenbankservers `db.cachaca.de` von allen Rechnern aus anmelden (für das hashed Passwort habe ich [MySQL Passwort-Generator](https://www.browserling.com/tools/mysql-password) verwendet) und hat dabei alle Berchtigungen (`ALL PRIVILEGES` = `SELECT` + `INSERT` + ... [siehe Dokumentation](https://dev.mysql.com/doc/refman/5.7/en/grant.html)).
+
+Ich hatte mal Probleme mit der `REVOKE` Syntax ... das `shwo grants for pierre` Kommando hat mir dann geholfen, den richtigen Befehl mit den richtigen Hochkomma und Backticks zu finden. Einfach in
+
+    GRANT ALL PRIVILEGES ON `pierre`.* TO 'pierre'@'%'
+
+das `GRANT` durch `REVOKE` und `TO`durch `FROM` austauschen:
+
+    REVOKE ALL PRIVILEGES ON `pierre`.* FROM 'pierre'@'%'
+
+Voila ;-)
 
 ---
 
@@ -114,6 +163,14 @@ DESHALB:
 ### Performance Analyse
 
 siehe eigene Seite
+
+---
+
+## dbeaver
+
+Nach einem Upgrade meiner Linux-Distribution hat die MySQL-Workbench nicht mehr funktioniert und ich habe dem [dbeaver](https://dbeaver.io/) eine Chance gegeben, da meine Kollegen begeistert sind.
+
+... ich mag ihn auch
 
 ---
 
@@ -169,6 +226,8 @@ WHERE table_schema = "mydatabase" and
 Da MySQL mittlerweile zu Oracle gehört, sieht der MySQL Enterprise Manager fast genauso aus wie der Oracle Enterprise Manager. Vom Oracle Enterprise Manager war ich sehr begeistert ... wir haben damit viele Bottlenecks entdeckt und konnte diese oft schon mit kleinen Änderungen (z. B. Index anlegen) beheben.
 
 Mit diesem Tool sind gezielte Realtime-Analysen möglich, um die Hotspots auf der Datenbank zu finden (Explain-Plans, Index-Nutzung, IO auf Filesystem und Netzwerk).
+
+... mittlerweile bin ich großer von von [Instana](instana.md) - Realtime Live Database Analyse und noch mehr :-)
 
 ### MySQL Workbench
 

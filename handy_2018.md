@@ -44,5 +44,6 @@ Letztlich habe ich mir das Gerät als refurbished für 469 Euro gekauft. Das Han
 
 ## HTC U11 Life
 
+* Android One - immer auf dem neuesten Stand
 * soll eine brauchbare Kamera haben
 * ca. 300 Euro

@@ -1,34 +1,75 @@
 # Docker@Windows
 
-https://docs.docker.com/toolbox/toolbox_install_windows/
+Docker Machine ermöglich die Nutzung von Docker für Windows-Nutzer. Docker hat keinen nativen Windows-Support, sondern verwendet Virtualisierungslösungen wie VirtualBox oder der Microsoft-Pendant Hyper-V, um eine Linux-VM zu erzeugen, in der dann die Docker Tools (``docker``, ``docker-compose``, ...) nativ laufen. Insofern is Docker-for-Windows-for_Linux-Containers eigentlich eine Mogelpackung (das gleiche gilt für Docker-for-Mac).
 
-Docker Machine ermöglich die Nutzung von Docker für Windows-Nutzer. Docker hat keinen nativen Windows-Support, sondern verwendet Virtualisierungslösungen wie VirtualBox oder der Microsoft-Pendant Hyper-V, um eine Linux-VM zu erzeugen, in der dann die Docker Tools (``docker``, ``docker-compose``, ...) nativ laufen.
+---
 
---- 
+## Ansätze
 
-# Ansätze
 Unter Windows gibt es zwei Ansätze:
 
-1. Docker Toolbox
-2. Docker for Windows
-   1. basiert auf Windows Hyper-V Virtrualisierungstechnologie, die erst ab Windows 10 Pro verfügbar ist
+1. Docker for Windows
+   1. basiert auf Windows Hyper-V Virtualisierungstechnologie, die erst ab Windows 10 Pro verfügbar ist
    2. ACHTUNG: aktiviert man Windows Hyper-V, dann funktioniert die VirtualBox Virtualisierungstechnologie nicht mehr (https://www.virtualbox.org/ticket/12350 ... keine Ahnung, ob das mit VirtualBox 5.1.x auch noch so ist)
+2. Docker Toolbox - WENN MÖGLICH NICHT MEHR VERWENDEN!!!
 
-## Docker for Windows
+---
+
+## Docker for Windows aka Docker Desktop
+
 * https://docs.docker.com/machine/drivers/hyper-v/
 
->ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen geben!!!
+>ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen Hypervisor geben!!!
+
+Bei diesem Ansatz muß man berücksichtigen, daß man im Hintergrund eine Linux-VM laufen hat. Diese Tatsache ist meistens transparent und nicht wichtig - will man allerdings die nicht seltenen Probleme verstehen, dann **MUSS man daran denken!!!**
+
+### MobyVM - Restart über Docker Desktop
+
+In manchen Fällen muß man ein Restart der VM triggern, weil sich irgendetwas verklemmt hat.
+
+### MobyVM - Factory Reset über Docker Desktop
+
+Der Factory Reset setzt die Einstellungen der Moby VM auf die Werkeinstellungen zurück, d. h. folgende Dinge sind beispielsweise verloren
+
+* MobyVM Content
+  * Docker Images im lokalen Repository
+* Memory Settings
+* VM Size und Location
+* Shared Drives
+
+### Moby VM im Hyper-V-Manager
+
+Der Hyper-V-Manager wird über "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Hyper-V Manager" gestartet (alternativ im Startmenü "Hyper-V" eingeben).
+
+Dort kann man
+
+* die VM restarten - besser über den Docker Desktop machen
+* einen Checkpoint erstellen ... **DIESE OPTION IST LEIDER DISABLED FÜR DIE Moby-VM**
 
 ### Linux-Container
-Docker for Windows benötigt Microsofts Hyper-V-Technologie, die ganz ähnlich zu Oracles VirtualBox Lösung ist (und leider nicht parallel zu dieser laufen kann). Auf dieser Hypervisor-Technology wird ein Linux-Image (`MobyLinuxVM`) erstellt und gestartet. In diesem Linux-Image läuft der Docker-Daemon und die Docker-Container. Der Docker-Client zum Absatzen von Kommandos (z. B. `docker ps`) läuft in einer beliebigen Terminal-Konsole (z. B. Powershell, Command Shell, Babun). Seine Kommandos werden auf das Moby-Image umgebogen.
+
+Docker for Windows benötigt Microsofts Hyper-V-Technologie, die ganz ähnlich zu Oracles VirtualBox Lösung ist (und leider nicht parallel zu dieser laufen kann). Auf dieser Hypervisor-Technology wird ein Linux-Image (sog. `MobyLinuxVM`) erstellt und gestartet. In diesem Linux-Image läuft der Docker-Daemon und die Docker-Container. Der Docker-Client zum Absetzen von Kommandos (z. B. `docker ps`) läuft in einer beliebigen Terminal-Konsole (z. B. Powershell, Command Shell, Babun). Seine Kommandos werden auf das Moby-Image umgebogen (ganz ähnlich wie man unter Linux seine Kommandos auf einen anderen Docker-Host per `export DOCKER_HOST=...` umbiegen kann - [siehe hier](docker_host.md)).
+
+Bei der Installation von Docker-for-Windows wird bei Bedarf Hyper-V auf dem System eingeschaltet (hier werden eine Reihe von Services gestartet) und dann die `MobyLinuxVM` erstellt und gestartet. Sobald man die Docker-Einstellungen verändert, muß die `MobyLinuxVM` restarted werden. Wenn man Docker auf Werkseinstellungen zurücksetzt wird die Moby-VM gelöscht und neu erstellt - alles was auf dem Image lief (Docker Container, Persistenz über Container-Volumes) ist dann natürlich weg.
+
+Der Windows Hyper-V-Manager (zu Starten über `virtmgmt.msc`) sieht folgendermaßen aus:
+
+![Windows Hyper-V-Manager](images/windows-hypervManager.png)
+
+> ACHTUNG: Nested-Virtualization
+> Hat man ein Windows-Image auf vSphere laufen und will darin Docker betreiben, dann benötigt muß man am Windows-Image die sog. Nested-Virtualization einkonfigurieren, sonst kann man die MobiLinuxVM nicht starten.
 
 ### Windows-Server-Container
-Docker for Windows kann neben Linux-Containern auch Windows-Container betreiben - aber auch hier gilt - ENTWEDER ODER!!!
+
+Docker for Windows kann neben Linux-Containern auch Windows-Container betreiben - aber auch hier gilt - ENTWEDER ODER!!! Das kann man jederzeit umschalten, aber man muß sich dür das eine oder andere entscheiden!!!
 
 * [siehe eigener Abschnitt](windowsContainer.md)
 
-## Docker Toolbox
-> ACHTUNG: Die Docker-Toolbox ist nur dann zu empfehlen, wenn man Docker auf Windows Maschinen <  Windows 10 Version 1607 (alias Anniversary Update - August 2016) nutzen will, denn dort funktioniert Docker for Windows nicht. 
+---
+
+## Docker Toolbox - OUTDATED
+
+> ACHTUNG: Die Docker-Toolbox ist nur dann zu empfehlen, wenn man Docker auf Windows Maschinen <  Windows 10 Version 1607 (alias Anniversary Update - August 2016) nutzen will, denn dort funktioniert Docker for Windows nicht.
 
 Bringt folgende Tools mit:
 
@@ -37,11 +78,11 @@ Bringt folgende Tools mit:
 * docker-machine
 * docker-compose
 * Docker Quickstart Terminal
-  * vorkonfgurierte Shell basierend auf MinGW 
+  * vorkonfgurierte Shell basierend auf MinGW
 
 Beim Start des Docker Quickstart Terminal wird - sofern noch nicht vorhanden (also beim ersten Start beispielsweise) - automatisch ein VirtualBox Image namens *default* erzeugt und gestartet. Zudem werden ssh-Keys erzeugt und eingebunden (für spätere ``docker-machine ssh default``) - sehr ähnlich zu [Vagrant](vagrant.md). Dieses Image basiert auf der [Boot2docker](https://github.com/boot2docker/boot2docker) Distribution, die mit 40 MB und einer Bootzeit von unter 5 Sekunden recht leichtgewichtig ist ... diese Bootzeit wurde im Praxiseinsatz deutlich überschritten.
 
-Anschließend prüft man 
+Anschließend prüft man
 
 ```
 docker run hello-world
@@ -62,12 +103,13 @@ kann man sich auf die Console des Images verbinden..
 Mal sehen wie transparent die Windows-Docker-Integration über das VirtualBox-Image ist.
 
 ### Docker Quickstart Terminal
+
 Diese vorkondigurierte Console (basierend auf MinGW) kommt mit der Docker Toolbox mit.
 
 > ACHTUNG: es war mir spontan nicht möglich eine nicht-vorkonfigurierte Console (z. B. babun) zu verwenden ... folgendes Problem:
 > ```
 { ~ } » docker run hello-world
-C:\Program Files\Docker Toolbox\docker.exe: 
+C:\Program Files\Docker Toolbox\docker.exe:
 An error occurred trying to connect:
 Post http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/containers/create: open //./pipe/docker_engine: 
 The system cannot find the file specified..
@@ -86,9 +128,10 @@ Ich hatte mit der Docker Toolbox folgende Probleme:
 
 **KLARER GEWINNER:** Docker for Windows
 
---- 
+---
 
-# Babun/Cygwin
+## Babun/Cygwin
+
 Die Nutzung von alternativen Shells scheint sowohl mit Docker Toolbox als auch mit Docker for Windows nicht ganz einfach ... und wirkt ziemlich abschreckend und wenig vertrauenerweckend.
 
 Glücklicherweise muß ich Docker nicht unter Windows nutzen, aber meine Windows-Kollegen müssen natürlich auch Docker nutzen können, wenn es mal ein zentraler Aspekt der Anwendungsarchitektur werden soll. Aber es kann ja nicht sein, daß ein Developer-Betriebssystem (naja, ist Windows tatsächlich ein?) entscheidet, ob eine Architektur eingeführt werden kann.
@@ -97,8 +140,9 @@ Unter Babun ist das ``docker`` Kommando interessanterweise nur eine ``function``
 
 ---
 
-# FAQ
-**Frage 1:** Unter Windows mit der Docker Toolbox (!!! ... unter Linux problemlos) hat die relative Adressierung in einer Volume-Definition von ``docker-composse.yml`` nicht funktioniert. Das Verzeichnis wurde einfach nicht eingebunden und ich konnte somit auch nicht auf die darin befindlichen Dateien zugreifen. 
+## FAQ
+
+**Frage 1:** Unter Windows mit der Docker Toolbox (!!! ... unter Linux problemlos) hat die relative Adressierung in einer Volume-Definition von ``docker-composse.yml`` nicht funktioniert. Das Verzeichnis wurde einfach nicht eingebunden und ich konnte somit auch nicht auf die darin befindlichen Dateien zugreifen.
 
 ```
 volumes:

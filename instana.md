@@ -9,6 +9,13 @@ Bei diesem Tool handelt es sich um ein Application Performance Monitoring (APM) 
 
 Bei Instana ist Auto-Detection von neuen Hosts (physikalische Sicht), Services, internen Applikationsstrukturen Strukturen (APIs) und deren Beziehungen zueinander das Guiding Light. Insbesondere in elastischen Cloud-Deployments ist das eine sehr wichtige Eigenschaft. Instana versucht, die Semantik der Anwendungen zu verstehen, um nicht nur Daten, sondern tatsächlich Informationen und automatisches Alerting zu liefern. Bei diesem Ziel ist jede (hart geforderte) manuelle Intervention (zur expliziten Abbildung dieser Strukturen) aufgrund des elastischen/agilen Umfeld nicht akzeptabel, weil es zum Scheitern verurteilt ist. Maintenance-Free. Hierzu enthält Instana viel Wissen über Technologien (z. B. JPA), denn das wird bei der Interpretation der Daten benötigt. Auf diese Weise werden die verschiedenen Layer der Applikation erkannt. Damit ist ein Drill-Down vom Web-Service-Request bis runter zu den dadurch ausgelösten Datanbank-Zugriffen möglich. Tatsächliche Bottlenecks können so nicht nur entdeckt, sondern eine evtl. Lösung zeichnet sich im besten Fall schon ab (z. B. wenn 2000 Datenbank-Calls abgesetzt werden, dann werden scheinbar Datenbankzugriffe in einer Loop-Schleife gemacht ... das skaliert natürlich nicht und muß durch Bulk-Queries ersetzt werden). Datenströme (logische Sicht) werden inkl. der Auslastung dargestellt und ermöglichen somit eine gezielte Analyse der Bottlenecks. Asynchrone Kommunikation durch das System kann dem initiierenden Request zugeordnet werden, so daß letztlich der gesamte Kommunikationsweg untersucht werden kann - und das im Live-System.
 
+Die Root-Cause-Analyse soll von Instana vereinfacht werden - deshalb:
+
+* Incidents, werden austomatisch erkannt
+* dive deep ... überall kann man leicht filtern (Filterwerte werden i. a. automatisch bereitgestellt)
+  * wenn die automatischen Filter nicht ausreichen, dann kann man auch eine Filtersprache verwenden (e. g. `entity.selfType:java`)
+* Depp Links werden unterstützt (z. B. in Alert-Notifications), so daß der Kontext sofort ersichtlich ist und zwischen Beteiligten ausgetauscht werden kann
+
 ## Alternativen
 
 Mit Ansätzen wie der [Zeitreihen-Datenbankk Prometheus](https://prometheus.io/) lassen sich auch eigene Lösungen stricken, die allerdings zunächst (vielleicht auch dauerhaft) einen hohen zeitlichen Invest erfordern. Letztlich ist man als Betreiber einer Anwendung aber nicht mit den reinen Daten zufrieden, sondern der Nutzen steht und fällt mit der Möglichkeit, aus diesen Unmengen an Daten tatsächlich Informationen zu gewinnen. Nur dadurch lassen sich Probleme/Bottlenecks in der Anwendung aufdecken und gewinnbringende Verbesserungen umsetzen.
@@ -17,7 +24,7 @@ Aus guten Grund wurden Lösungen wie Instana, New Relic, Dynatrace, ... geschaff
 
 Aus diesem Grund sind bezahlbare fertige (gut supportete) Lösungen eine gute Sache für bestimmte Firmen. Instana scheint diesen Markt im Auge zu haben.
 
-## Features
+## Konzepte und Features
 
 ### SaaS oder On-Premise
 
@@ -25,11 +32,48 @@ Instana bietet seinen Dienst als Software-as-a-Service (präferiert) aber auch a
 
 Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Default versucht Instana keine sensiblen Daten zu loggen (z. B. bei SQL-Queries werden keine gebundenen Parameter mitgeloggt), aber letztlich ist es eine Frage des Vertrauens bzw. einen Nachweis aus Compliance Sicht zu erbringen.
 
+### Application Perspective
+
+Application Perspective ist eine gefilterte Ansicht für selektierte Services - Definition durch den Benutzer (Subset aus Services, Endpoints). Alle Requests, die über irrelevante (d. h. applikationsfremde) Services/Endpoints getriggert werden, werden ignoriert. Bei der Definition einer Application Perspective kann man einfach einen oder mehrere Services selektieren und dann alle Downstream-Services automatisch selektieren lassen.
+
+### Services und Endpoints
+
+* Services und Endpoints automatically discovered
+  * endpoints define the API of a service
+    * automatically discovered types:
+      * BATCH
+      * DATABASE
+      * HTTP
+      * MESSAGING
+      * RPC
+  * services: collection of endpoints
+    * kann verteilt sein ... davon abstrahiert Instana
+
+### Traces
+
+Traces sind real-time informationen über die Aktivitäten, die die Services ausführen.
+
+### Infrastrcuture Map
+
+* unmonitored Hosts
+  * haben keine Instana-Agents installiert
+    * monitored Agents öffnen Verbindungen zu diesen unmonitored Hosts
+
 ### Change, Issue, Incident
 
 Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Die geringstmögliche Beaobachtung ist ein Change - hierzu muß vergleicht Instana die Veränderungen am System (z. B. Service gestartet/gestoppt). Instana sammelt die Systemdaten kontinuierlich und benötigt eine kritische Menge an Daten, um einen Überblick über den "normalen" Verlauf zu bekommen und Abweichungen davon festzustellen. Diese Abweichungen werden als Issue bewertet. Nach bestimmten Regeln (system-based oder custom-based) wird aus einem Issue ein Incident.
 
 Change, Issue und Incident haben alle einen Startzeitpunkt und einen Endzeitpunkt.
+
+* Change:
+  * start/stop eines Servers/Services
+  * trigger ein Deplyoment
+  * Konfigurationsänderung
+* Issue:
+  * unhealthy Entity (Service Latency Degradation, hohe Fehlerraten, Filesystem voll)
+* Incident:
+  * Issue auf einem Edge System (ein System, das direkte Verbindung zu einem Client hat)
+  * Dynamic Graph
 
 Noch besser als nachträglich Probleme erklären zu können ist allerdings, Problemsituationen als Issue zu erkennen BEVOR daraus Incidents werden bzw. für den Benutzer tatsächlich wahrnehmbare Probleme werden.
 
@@ -46,6 +90,10 @@ Bei meinem allerersten Versuch, Instana zu nutzen, wurde mein Host rot gekennzei
 ### Alerting
 
 Ausgehend von Changes, Issues und Incidents können Alerts getriggert und an verschiedene Kanäle (sog. Alerting Integrations ... eMail, PagerDuty, Office365, Webhook) definiert werden, so daß man bei extrem kritischen Situationen Benachrichtigungen an externe System verschickt.
+
+Empfehlung: "Don't waste time creating and maintaining health rules" - das macht Instana automatisch (technologieabhängig)
+
+Instana unterstützt Deep-Links, um bei Notifications direkt in den Scope einzutauchen.
 
 ### Service Discovery and Drill-Down
 
@@ -127,8 +175,6 @@ Sollte Instana wichtige Strukturen/Zusammenhänge in der Anwendung nicht selbst�
 ```java
 @Span(type = Span.Type.INTERMEDIATE, value = "myService#execute")
 ```
-
-Hier 
 
 ### API
 

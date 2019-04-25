@@ -1,3 +1,4 @@
+
 # Terraform
 
 * [Homepage by HashiCorp](https://www.terraform.io/)
@@ -89,7 +90,7 @@ terraform apply                             # erzeugt den Execution Plan
 
 ausgeführt. Dabei werden alle `*.tf` und `*.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration). Anschließend ist die Maschine auf AWS nutzbar.
 
-Eine Best-Practice ist die Aufteilung des Codes auf mehrere Dateien
+Eine Best-Practice ist die Aufteilung des Codes auf mehrere Dateien mit diesem Namensschema:
 
 * `vars.tf`
 * `outputs.tf`
@@ -128,25 +129,57 @@ Die Definition des Providers (`provider "aws"`) ist notwendig, weil die Ressourc
 
 ---
 
+## Provider
+
+Provider ist das eigentliche Salz in der Suppe. Ein Provider bietet dem Nutzer die Möglichkeiten Services (oder allgemeiner Ressourcen) in `HCL`-Sprache zu definieren und bei Asuführung des Terraform-Skripts (`terraform apply`) anzulegen/konfigurieren.
+
+Die großen Cloud Anbieten
+
+* [AWS](https://www.terraform.io/docs/providers/aws/index.html)
+* [Google]()
+
+stellen IHRE Provider zur Verfügung.
+
+Daneben gibt es allgemeine Infrastruktur Provider:
+
+* [Nomad](https://www.terraform.io/docs/providers/nomad/index.html)
+* [Consul](https://www.terraform.io/docs/providers/consul/index.html)
+* [Terraform Enterprise](https://www.terraform.io/docs/providers/tfe/index.html)
+
+
+Zudem gibt es Provider (z. B. [MySQL](https://www.terraform.io/docs/providers/mysql/index.html), die Ihre Services mit denen andere kombinieren (z. B. eine MySQL-Datenbank auf einem AWS-MySQL-Cluster anlegen).
+
+
+
+---
+
 ## Provisioning
 
 * [Supported Provisioning-Ansätze](https://www.terraform.io/docs/provisioners/index.html)
 
-Verwendet man bereits vorkonfigurierte Images (z. B. mit [Packer](packer.md)), dann ist man evtl. nicht mehr auf Konfiguration Management Tools (wie Ansible, Puppet, Chef, ...) angewiesen.
+Verwendet man bereits vorkonfigurierte Images (z. B. mit [Packer](packer.md)), dann ist man evtl. nicht mehr auf Konfiguration Management Tools (wie Ansible, Puppet, Chef, ...) angewiesen. Hat man sich allerdings gegen diesen sehr statischen Ansatz entschieden, so kann man über die Provisioners entsprechende Veränderungen am System über Skripte triggern. Hierbei stehen typische Configuration-Management-Tools (z. B. Chef, Salt)
 
 ---
 
 ## State
 
-Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem oder remote (z. B. S3) abgelegt werden kann. Dieser State bestimmt die zu triggernden Aktionen bei einem `terraform apply`. Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann es zu Fehlermeldungen wie diesen führen, wenn die Aktionen durchgeführt werden:
+Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3) abgelegt werden kann. Dieser State bestimmt die zu triggernden Aktionen bei einem `terraform apply`, indem ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht wird. Per Default wir der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
+
+> ACHTUNG: sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken.
+
+Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann es zu Fehlermeldungen wie diesen führen, wenn die Aktionen durchgeführt werden:
 
 ```
 keys already exist under service/petclinic/; delete them before managing this prefix with Terraform
 ```
 
-Das liegt daran, daß Terraform eine Resource anlegen will, die im Backend (z. B. Consul) aber schon vorhanden ist. Über den State hätte Terraform gewußt, daß die Resource schon existiert und hätte die Aktion gar nicht erst ausführen wollen.
+Das liegt daran, daß Terraform eine Resource anlegen will, die aber schon vorhanden ist. Über den State hätte Terraform gewußt, daß die Resource schon existiert und hätte die Aktion gar nicht erst ausführen wollen.
 
-> ERGO: Terraform liest nicht den aktuellen State vom Backend, sondern aus der `tfstate` Datei - vielleicht ist das so eine Art optimistisches Locking?
+> ERGO: Terraform liest den aktuellen State nicht aus der deployten Landschaft (wäre recht aufwendig und fehlerträchtig), sondern aus der State-Datei. Das hat zudem zur Konsequenz, daß Änderungen, die nicht in der zentralen State-Datei erfolgt sind (z. B. manuelle Änderungen, Änderungen über andere Wege als Terraform) nicht berücksichtigt werden können. Diese Änderungen werden dann überschrieben!!!
+
+### Workspaces
+
+Über Workspaces lassen sich State-Files separieren, um so beispielsweise unterschiedliche Landschaften (Live-Environment, Test-Environment, DEV-Environment) voneinander trennen.
 
 ---
 

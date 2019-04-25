@@ -345,6 +345,11 @@ node {
 
 ### Automatisierung einer Jenkins Installation
 
+* [Jenkins Startup Hooks](https://wiki.jenkins.io/display/JENKINS/Groovy+Hook+Script)
+* [Breaking the Jenkins Monolith](https://medium.com/buildit/breaking-the-jenkins-monolith-52c47799ddb0)
+  * mit guten Beispielen wie die Konfiguration automatisiert werden kann (mit Tests)
+  * inkl. automatischer Jobkonfiguration
+
 Ich konnte nun zwar die Konfiguration von JDK und Maven über Docker Container loswerden, doch die Installation von
 
 * Plugins

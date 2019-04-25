@@ -2,6 +2,8 @@
 
 Hierbei handelt es sich um eine High-Level-Vorgehensmodell, bei dem der Planungshorizont auf Qualtals- oder Jahresebene liegt. Ursprünglich wurde es von Intel entwickelt, mittlerweile wird es von sehr erfolgreichen Unternehmen unterschiedlicher Größe (vom Startup bis zum Konzern) verwendet.
 
+---
+
 ## Ziel
 
 * Beschreibung der mittelfristigen Vision (Objective - nicht messbar) und wichtiger Zwischenergebnisse (Key-Result - messbar) auf dem Weg dorthin
@@ -10,6 +12,8 @@ Hierbei handelt es sich um eine High-Level-Vorgehensmodell, bei dem der Planungs
   * herausfordernd und motivierend
   * Fokus für den Planungshorizont
     * gibt dem Team die Chance an den committeten Zielen festzuhalten, wenn von außen neue Themen reingetragen werden
+
+---
 
 ## Buch Radical Focus
 
@@ -27,3 +31,19 @@ Hier eine Sammlung besonders wichtiger Zitate:
   * > Key Result vs. User-Story
 * "Do not change OKRs halfway through the quarter. If you see you've set them badly, suck it up and either fail or nail them, and use that learning to set them better next time. [...] Changing them dilutes focus, and keeping teams focused is the entire point of the OKR." (Seite 115)
 * "Ensures KR is positive." (Seite 131)
+
+## Felipe Castro
+
+* https://felipecastro.com
+
+Leider hat mir das Buch _Radical Focus_ noch nicht wirklich geholfen gute OKRs zu definieren - ich finde das immer noch (trotz Praktizierung seit über einem Jahr) sehr schwierig. Häufig finde ich unsere Key-Results nicht messbar formuliert ... in meinem Arbeitsbereich sind die Metriken scheinbar häufig nicht vorhanden oder ich sehe sie nicht. Stattdessen formuliere ich Erreichungsgrade häufig an Aktivitäten (Stelle Feature X bereit) und nicht an einem Outcome (Feature X wird von 10% der Nutzer verwendet). Ich versuche folgenden Ansatz:
+
+* Objective:
+  * kurz/prägnant ("If you have to stop to breathe while reading your Objective.")
+  * Vision, nicht messbar
+* Key-Result:
+  * messbar (_“If it does not have a number, it is not a Key Result”, Marissa Mayer_)
+  * keine Activity, sondern ein Outcome (Einfluß auf Dein Business, für Deinen Kunden) ... es wird noch nicht definiert wie wir das Ziel erreichen - dieses Verständnis muß erst noch erarbeitet werden
+* Activity (User-Story, Task)
+
+Bei OKRs geht es um unternehmensweites Alignment, um zu verhindern, daß ein Team eine Brücke beginnt aber das andere einen Tunnel gräbt. Hierbei werden häufig Teamgrenzen überschritten und es entstehen virtuelle Teams, die an einem Shared OKR arbeiten - so verhält es sich ja auch mit Unternehmens-OKRs, zu dessen Erfolg ALLE beitragen sollen.

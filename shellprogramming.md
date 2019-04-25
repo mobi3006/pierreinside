@@ -18,12 +18,13 @@ Später kam dann Provisioning im Docker-Umfeld hinzu und der Aufbau einer komple
 
 Leider bin ich trotz dieser reichhaltigen Erfahrung noch immer kein Freund der Shellprogrammierung, weil
 
+* Exception Handling ... Traps, Fail-Fast (`set +e`, `set +u`, ...) fühlen sich nicht besonders toll und stabil an. Selbst wenn man `set -e`, um fail-fast abzubilden, kann JEDER in seinem Script (das aufgerufen wird) ein `set +e` machen (weil sein Skript nicht fail-fast kompatibel ist) und vergessen `set -e` wieder zurückzustellen. Dadurch können kleinste Änderungen extreme Seiteneffekte haben.
+  * die Default-Einstellung bei Bash-Scripten ist, daß Exit-Codes ungleich 0 einfach ignoriert werden - dadurch werden Fehler erst viel später bzw. gar nicht festgestellt - ANTI-PATTERN
 * Shells sind untereinander nicht kompatibel (sh, bash, zsh) funktionieren im wesentlichen ähnlich, im Detail gibt es dann aber doch Unterschiede (z. B. if-clause, functions) ... Mit einem Shebang (#!/bin/bash) in den Scripten lässt sich das Problem nahezu umgehen, doch in beim Source (`source seten.sh`) hilft das nicht - hier kommt es auf die gewählte Shell des Ausführenden an
 * GNU Tools sind nicht plattformunabhängig ... wer `curl` unter Linux, MacOS, Cygwin nutzen will dreht durch (https://daniel.haxx.se/blog/tag/securetransport/)
-* Fehlersuche ist eine einzige Katastrophe ... trotz `set -x` fühle ich mich wie in den 80ern - `echo` ist mein einziger Freund 
+* Fehlersuche ist eine einzige Katastrophe ... trotz `set -x` fühle ich mich wie in den 80ern - `echo` ist mein einziger Freund
 * Refactorings ... ich habe noch kein gutes Tool gefunden
 * automatisiertes Testen ... geht das?
-* Exception Handling ... Traps, Fail-Fast (`set +e`, `set +u`, ...) fühlen sich auch nicht besonders toll an
 * Returnvalues eines Skripts - `echo` beißt sich leider mit Logging-Ausgaben. Selbst wenn man darauf verzichten kann ... es ist fragil. http://stackoverflow.com/questions/3236871/how-to-return-a-string-value-from-a-bash-function
 
 Hier habe ich auch eine "schöne" Auflistung der Schwächen gefunden: http://mywiki.wooledge.org/BashWeaknesses 
@@ -32,11 +33,11 @@ Das sollte man wenigstens beherzigen:
 
 * http://www.davidpashley.com/articles/writing-robust-shell-scripts/
 
-Trotz all dieser Nachteile habe ich noch keine gute Alternative gefunden, wenn es um typische Dateioperationen (`cp`, `mv`, `ln`, `find`, `grep`, ...) geht. Für Contentbasierte Operationen (z. B. Suchen in XML-Files) ist es sicher nicht geeignet ... hier würde ich Perl, Python, Groovy, ... verwenden - das ist klar.
+Trotz all dieser Nachteile habe ich noch keine gute Alternative gefunden, wenn es um typische Dateioperationen (`cp`, `mv`, `ln`, `find`, `grep`, ...) geht. Für Contentbasierte Operationen (z. B. Suchen in XML-Files) ist es sicher nicht geeignet ... hier würde ich Perl, Python, Groovy, ... verwenden - das ist klar. Vielleicht ist Go eine Alternative ...
 
 In diesem Beitrag ([When to use Bash and when to use Perl/Python/Ruby?](http://superuser.com/questions/414965/when-to-use-bash-and-when-to-use-perl-python-ruby)) wird das Thema diskutiert und insbesondere dieser Argumentation kann ich zustimmen:
 
-> "Bash is closer to the file system and can be great for first draft solutions to problems which are NOT well defined. For this reason, a bash script might be a good first choice to prototype something in with the full intention of porting it to python once the problem is better understood." ([Travis](http://superuser.com/users/503698/travis))
+> "Bash is closer to the file system and can be great for first draft solutions to problems which are NOT well defined. For this reason, a bash script might be a good first choice to prototype something in with the full intention of porting it to python once the problem is better understood." ([Travis](https://superuser.com/questions/414965/when-to-use-bash-and-when-to-use-perl-python-ruby/980247#980247))
 
 ---
 

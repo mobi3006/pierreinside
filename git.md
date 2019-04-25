@@ -19,8 +19,8 @@ Sehr gute Quellen:
 
 Linus Torvalds hat Git für seine Arbeit am Linux-Kernel entwickelt, weil es kein Tool gab, das seinen Anforderungen gerecht wurde. Dementsprechend hat das Tool folgende Merkmale:
 
-* mergen vieler Dateien \(im Sinne eines _Integration-Managers_ - siehe unten\) ... die einzelne Datei spielt keine große Rolle.
-* extrem performant \(u. a. durch den lokalen Ansatz\) hinsichtlich Diffs, ...
+* mergen vieler Dateien (im Sinne eines _Integration-Managers_ - siehe unten) ... die einzelne Datei spielt keine große Rolle.
+* extrem performant \u. a. durch den lokalen Ansatz) hinsichtlich Diffs, ...
 * jeder Kernel-Entwickler kann Arbeiten, ohne andere zu beeinflussen ... erst wenn die Arbeit DONE ist, kann entschieden werden, ob die Änderungen übernommen werden.
 * möglichst hohe Freiheitsgrade in der Arbeitsorganisation für jeden einzelnen Entwickler
 
@@ -28,30 +28,30 @@ Linus Torvalds hat Git für seine Arbeit am Linux-Kernel entwickelt, weil es kei
 
 Diese _Integration Manager_-Modell  Arbeitsweise paßt zu den wenigstens Standard-Entwicklern. Dennoch können auch Standard-Entwickler von diesem Ansatz profitieren.
 
-Einer der größten Vorteile dieses Modells ist, daß es den Entwicklern große Freiheitsgrade \(Branching, Tagging, Push, Pull, Verteilung, Zentralisierung\) bei der Arbeitsorganisation läßt. Je nach Aufgabe kann man sich jedes mal neu entscheiden wie man sich organisiert ... man wählt den besten Ansatz für die jeweilige Problemstellung.
+Einer der größten Vorteile dieses Modells ist, daß es den Entwicklern große Freiheitsgrade (Branching, Tagging, Push, Pull, Verteilung, Zentralisierung) bei der Arbeitsorganisation läßt. Je nach Aufgabe kann man sich jedes mal neu entscheiden wie man sich organisiert ... man wählt den besten Ansatz für die jeweilige Problemstellung.
 
 Diese Freiheitsgrade erfordern aber auch Vertrauen und gute Entwickler. Und genau das könnte vielen  Verantwortlichen in den Projekten\/Unternehmen Angst machen ...
 
 > Aus meiner Sicht ist diese Angst vollkommen unbegründet, denn ein Unternehmen MUSS Vertrauen in seine Mitarbeiter haben, um überhaupt Software entwickeln zu können. Warum sollte es darauf vertrauen, daß qualitativ hochwertige Software entsteht, wenn es seinen Entwicklern nicht einmal zutraut ein Versionsverwaltungssystem sinnvoll zu nutzen? Solche Firmen sind zum Scheitern verurteilt.
 
-Ich habe jehrelang mit Subversion und maven gearbeitet. Dabei bin ich nach einiger Zeit dazu übergegangen, ein paar Stunden \(selten Tage\) offline zu arbeiten, um nicht von anderen Commits gestört zu werden. Bei maven habe ich die Variante No-Remote-Snapshot-Updates gewählt \(siehe [Remote-SNAPSHOT-Abhängigkeiten ... DONT DO THIS](maven.md)\).
+Ich habe jehrelang mit Subversion und maven gearbeitet. Dabei bin ich nach einiger Zeit dazu übergegangen, ein paar Stunden (selten Tage) offline zu arbeiten, um nicht von anderen Commits gestört zu werden. Bei maven habe ich die Variante No-Remote-Snapshot-Updates gewählt (siehe [Remote-SNAPSHOT-Abhängigkeiten ... DONT DO THIS](maven.md)).
 
 ---
 
 ## Idee
 
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-4.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-4.shtml)
-* Git Workflows: 
+* Git Workflows:
   * [https:\/\/git-scm.com\/about\/distributed](https://git-scm.com/about/distributed)
   * [https:\/\/www.atlassian.com\/git\/tutorials\/comparing-workflows](https://www.atlassian.com/git/tutorials/comparing-workflows)
 
-Bei Git handelt es sich um ein Versionssystem, das ohne dedizierten zentralen Server auskommt. Stattdessen gibt es viele mehr oder weniger gleichberechtigte vollwertige Repositories \(mit allen Versionen der verwalteten Ressourcen\), die bei Bedarf synchronisiert werden.
+Bei Git handelt es sich um ein Versionssystem, das ohne dedizierten zentralen Server auskommt. Stattdessen gibt es viele mehr oder weniger gleichberechtigte vollwertige Repositories (mit allen Versionen der verwalteten Ressourcen), die bei Bedarf synchronisiert werden.
 
 Jeder Entwickler wird für "sein" Repository zum Administrator, auf dem er Branches und Tags erstellt.
 
 ### Verteiltes Modell
 
-Git erfordert - im Gegensatz zu Subversion - kein zentrales Repository. ABER: man kann Git so nutzen \(Shared-Repository-Modell\) und das wird auch getan \(z. B. [GitHub](http://github.com)\).
+Git erfordert - im Gegensatz zu Subversion - kein zentrales Repository. ABER: man kann Git so nutzen (Shared-Repository-Modell) und das wird auch getan (z. B. [GitHub](http://github.com)).
 
 Während man bei Subversion allerdings zentral am Server Branches\/Tags erzeugt hat, tut das bei Git jeder Nutzer.
 
@@ -59,7 +59,7 @@ Während man bei Subversion allerdings zentral am Server Branches\/Tags erzeugt 
 
 ### Workflows
 
-Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflows \(man kann sich ausser den folgenden sicher noch andere überlegen\):
+Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflows (man kann sich ausser den folgenden sicher noch andere überlegen):
 
 * Peer-to-Peer-Ansatz
 * Shared-Repository-Ansatz
@@ -72,7 +72,7 @@ Um mit Kollegen an den gleichen Sourcen zu arbeiten gibt es verschiedene Workflo
 
 Bei diesem Ansatz tauscht jeder Entwickler mit jedem Entwickler per Git-Pull oder Git-Push die Sourcen aus. Dieser Ansatz skaliert nicht besonders gut.
 
-Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe \(ab 3-4 Leute\) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher einen Shared-Repository-Ansatz zu fahren.
+Während man mit einigen wenigen Entwicklern noch Peer-to-Peer arbeiten kann, ist das ab einer gewissen Größe (ab 3-4 Leute) vermutlich mit viel Aufwand verbunden, weil sich bei 4 Personen jeder mit 3 Personen austauschen muss. In diesen Fällen ist es einfacher einen Shared-Repository-Ansatz zu fahren.
 
 #### Shared-Repository-Ansatz - SVN-like
 
@@ -90,7 +90,7 @@ Lokal kann der Entwickler Branches und Tags erstellen und bei Bedarf sogar weite
 
 #### Integration Manager Modell
 
-Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei einen ausgezeichneten Integration Manager, der die Änderungen der anderen Entwickler integriert. Der Integration Manager führt das sog. _Blessed Repository_ \(nur er hat dort Schreibrechte - kann darauf `git push` machen\). Jeder Entwickler erstellt einen Fork des Blessed Repository und gibt dem Integration Manager Leserechte auf diesem Fork-Repository. Der Integration Manager integriert die Änderungen der Entwickler in sein Arbeitsrepository und pusht sie ins Blessed Repository.
+Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei einen ausgezeichneten Integration Manager, der die Änderungen der anderen Entwickler integriert. Der Integration Manager führt das sog. _Blessed Repository_ (nur er hat dort Schreibrechte - kann darauf `git push` machen). Jeder Entwickler erstellt einen Fork des Blessed Repository und gibt dem Integration Manager Leserechte auf diesem Fork-Repository. Der Integration Manager integriert die Änderungen der Entwickler in sein Arbeitsrepository und pusht sie ins Blessed Repository.
 
 ---
 
@@ -100,37 +100,37 @@ Linux Torvalds sagte in einer [Präsentation](2) mal, daß Git Content-based ist
 
 > Eine Datei A beherbergt zum Zeitpunkt t1 eine Methode `calculatePrice()`. Diese Methode wird zum Zeitpunkt t2 in die Datei B verschoben. Wenn der Entwickler nun die Historie zu `calculatePrice()` ansehen möchte, dann ist es bei Git kein Problem, den gesamten Lebenszyklus zu berücksichtigt, d. h. das Verschieben von A nach B ist transparent. Bei Subversion ist das schwierig, weil es File-based ist.
 
-Eventuell ist das auch der Grund warum Merging mit Git so gut \(automatisiert und zuverlässig\) funktioniert. Bei SVN ist das aufwendiger und viele versuchen, es zu vermeiden. Diese Schwäche sorgt dafür, daß Subversion-User in der Wahl ihrer Arbeistweisen eingeschränkt sind.
+Eventuell ist das auch der Grund warum Merging mit Git so gut (automatisiert und zuverlässig) funktioniert. Bei SVN ist das aufwendiger und viele versuchen, es zu vermeiden. Diese Schwäche sorgt dafür, daß Subversion-User in der Wahl ihrer Arbeistweisen eingeschränkt sind.
 
 **Repository:**
 
-* bildet die Basis der Versionsverwaltung - alle Tools \(commit, checkout, branch, merge, ...\) nutzen das Repository als Datenbasis. Hier sind alle Änderungen getrackt.
-* rein Filesystem basiert \(es ist kein Server oder Prozess erforderlich\) - somit auch leicht zu sichern
+* bildet die Basis der Versionsverwaltung - alle Tools (commit, checkout, branch, merge, ...) nutzen das Repository als Datenbasis. Hier sind alle Änderungen getrackt.
+* rein Filesystem basiert (es ist kein Server oder Prozess erforderlich) - somit auch leicht zu sichern
 
 **Remote Repository:**
 
-Entferntes Repository, das über den Origin-Parameter in Verbindung mit dem lokalen Repository steht \(z. B. weil es das geclonte Repository ist, aus dem das lokale Repository entstanden ist\)
+Entferntes Repository, das über den Origin-Parameter in Verbindung mit dem lokalen Repository steht (z. B. weil es das geclonte Repository ist, aus dem das lokale Repository entstanden ist)
 
 **Index\/Stage:**
 
-Container, den der Entwickler bewusst explizit mit geänderten\/gelöschten\/hinzugefügten Ressourcen befüllt \(z. B. `git add bla.txt`\). Dieser Container wird später committed ... die geänderten Ressourcen bilden zusammen mit den Änderungen das CommitObject
+Container, den der Entwickler bewusst explizit mit geänderten\/gelöschten\/hinzugefügten Ressourcen befüllt (z. B. `git add bla.txt`). Dieser Container wird später committed ... die geänderten Ressourcen bilden zusammen mit den Änderungen das CommitObject
 
 **CommitObject:**
 
-* ein CommitObject besteht aus Pointern auf Ressourcen \(Dateien\) und deren Änderungen zur Vorversion. Da ein Git-Repository in sich alle Änderungen aller Branches trägt sind Vergleiche zwischen Revisionen einer Ressource komplett lokal möglich - dazu werden die CommitObjects benötigt
+* ein CommitObject besteht aus Pointern auf Ressourcen (Dateien) und deren Änderungen zur Vorversion. Da ein Git-Repository in sich alle Änderungen aller Branches trägt sind Vergleiche zwischen Revisionen einer Ressource komplett lokal möglich - dazu werden die CommitObjects benötigt
 * nur das erste CommitObject hat keinen Vorfahren - alle anderen haben i. d. R. einen Vorfahren, bei gemergten Branches zwei Vorfahren
 
 **Aktueller Zustand eines Branches:**
 
-Der aktuelle Zustand eines Branches ergibt sich aus den CommitObjects \(repräsentieren die Diffs\) von der Wurzel bis zum aktuellen Head-CommitObject
+Der aktuelle Zustand eines Branches ergibt sich aus den CommitObjects (repräsentieren die Diffs) von der Wurzel bis zum aktuellen Head-CommitObject
 
 **Head:**
 
-* benanntes CommitObject \(Teilmenge aller CommitObjects\) - durch Branching wird ein neuer Head erzeugt, der dann eine eigene Historie entwickeln kann und irgendwann evtl. mal wieder mit dem anderen Zweig zusammengeführt wird
+* benanntes CommitObject (Teilmenge aller CommitObjects) - durch Branching wird ein neuer Head erzeugt, der dann eine eigene Historie entwickeln kann und irgendwann evtl. mal wieder mit dem anderen Zweig zusammengeführt wird
 * jeder separate Branch hat einen eigenen Head
-* es gibt immer mindestens einen Head, den sog. MASTER \(der Head vom Hauptzweig\)
+* es gibt immer mindestens einen Head, den sog. MASTER (der Head vom Hauptzweig)
 * der aktuell selektierte Head wird mit HEAD bezeichnet, wenn es der Hauptzweig ist gilt HEAD == MASTER
-* neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories \(entstehen durch clonen eines Repositories\) = Remote-Head
+* neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
 
 **Clone:**
 
@@ -180,7 +180,7 @@ Im Gegensatz zu SVN hat Git keine Metadaten auf jeder einzelnen Datei. Stattdess
 
 dann wird das bei einem `git diff` VOR DEM COMMIT als Löschung und Neuanlage dargestellt. Schaut man sich nach dem Commit aber die Historie an, dann ist sie erhalten geblieben, weil diese Änderung als Verschieben interpretiert wird. ACHTUNG: das geschieht ausschließlich durch Analyse der Commit-Objekte ... keine Sicherheit, ob das auch alle Git-Clients machen oder es noch in Zukunft funktioniert.
 
- Diese Vorgehen hat allerdings den Vorteil, daß man solche Refactorings in einem normalen File-Browser oder über Betriebssystemkommandos (`mv folderA/meineDatei.txt folderB/meineDatei.txt`) durchführen kann. Man muß hier kein spezielles 
+Diese Vorgehen hat allerdings den Vorteil, daß man solche Refactorings in einem normalen File-Browser oder über Betriebssystemkommandos (`mv folderA/meineDatei.txt folderB/meineDatei.txt`) durchführen kann. Man muß hier kein spezielles Tool verwenden, das die Metadaten migriert.
 
 ---
 
@@ -188,25 +188,18 @@ dann wird das bei einem `git diff` VOR DEM COMMIT als Löschung und Neuanlage da
 
 * https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf
 
-Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit bin ich beruflich ein Subversion-Nutzer\).
+Die Befehle sind sehr ähnlich zu Subversion (glücklicherweise, denn derzeit bin ich beruflich ein Subversion-Nutzer).
 
 ### Arbeiten am Repository
 
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-1.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-1.shtml)
-
 * Erstellung eines lokalen Repositories
-
   * Option 1: `git init`
-
     * die Ressourcen im aktuellen Verzeichnis bilden das Repository, das im Verzeichnis `.git` abgelegt ist
     * möchte man dieses Repository auch remote nutzen (z. B. bei GitHub), so muß zunächst ein Remote-Target angegeben werden (`git remote add origin git@github.com:mobi3006/de.cachaca.learn.oauth2.git`) und dann kann das Repository auf remote synchronisiert werden (`git push --set-upstream origin master`).
-
   * Option 2: `git clone ../gitTest`
-
     * Repository, das im Verzeichnis `../gitTest` liegt, clonen
-
   * Option 3: `git clone ssh://user@server/absolutePath/to/repository myDir`
-
     * ACHTUNG: es ist KEIN Doppelpunkt zwischen Servername und dem Pfad zum Git-Repository
     * Remote-Repository lokal clonen - `myDir` kann optional weggelassen werden
     * dadurch entstehen Remote-Head-CommitObjects auf das Original-Repository, die den Namen `origin/[HEAD_NAME]` haben
@@ -214,10 +207,9 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 ### Arbeiten am Index
 
 * `git status`: welche Änderungen seit letztem commit gemacht. Folgende Änderungen werden dargestellt:
-
-  * Änderungen, die bereits im Index liegen und dementsprechend bei einem `git commit` committed würden \(Folge eines `git add`\)
+  * Änderungen, die bereits im Index liegen und dementsprechend bei einem `git commit` committed würden (Folge eines `git add`)
   * Änderungen, die noch nicht im Index liegen
-  * neue Ressourcen \(untracked files\)
+  * neue Ressourcen (untracked files)
 
     ```
           ~/src/gitTest> git status
@@ -247,21 +239,17 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
         # Your branch is ahead of 'origin/master' by 1 commit.
     ```
 
-* Ressourcen zum Index hinzufügen \(in Vorbereitung eines Commits\):
+* Ressourcen zum Index hinzufügen (in Vorbereitung eines Commits):
   * `git add myfile.txt`
-    * Dateien zu einem Index hinzufügen \(ACHTUNG: Im Gegensatz zu Subversion, sind alle unveränderten Dateien automatisch Bestandteil eines Commits - man muss also nur die neuen oder geänderten Dateien explizit hinzufügen\)
+    * Dateien zu einem Index hinzufügen (ACHTUNG: Im Gegensatz zu Subversion, sind alle unveränderten Dateien automatisch Bestandteil eines Commits - man muss also nur die neuen oder geänderten Dateien explizit hinzufügen)
     * etwas seltsam erscheint auf den ersten Blick, daß die Löschung einer Datei auf dem Filesystem (``rm myfile.txt``) auch per ``git add myfile.txt`` in den Index aufgenommen wird
-
-
-
-* Ressourcen aus dem Index rausnehmen \(in Vorbereiotung eines Commits\):
+* Ressourcen aus dem Index rausnehmen (in Vorbereiotung eines Commits):
   * `git reset HEAD myfile.txt`
-
 
 ### Lokale Änderungen
 
-* Ressourcen ignorieren: das kann man per User oder per Repository machen oder lokal \(für ein Repository\)
-  * per Repository: eine Datei mit dem Namen `.gitignore` anlegen und dort die Dateien aufführen \(reguläre Ausdrücke sind meines Wissens erlaubt\)
+* Ressourcen ignorieren: das kann man per User oder per Repository machen oder lokal (für ein Repository)
+  * per Repository: eine Datei mit dem Namen `.gitignore` anlegen und dort die Dateien aufführen (reguläre Ausdrücke sind meines Wissens erlaubt)
   * per User:
     * in ``~/.gitconfig`` folgenden Eintrag machen und dann die Ignores in der angegebenen Datei machen:
 
@@ -271,42 +259,24 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 ```
 
 * `git diff`
-
   * Änderungen an Resourcen seit letztem commit anzeigen
-
 * `git diff myfile.txt`
-
   * Änderung an der Datei `myfile.txt` seit letztem commit anzeigen
-
 * `git diff head1 .. head2`
-
   * Änderungen zwischen den beiden Heads anzeigen
-
-* `git diff head1 ... head2` \(3 Punkte !!!\)
-
+* `git diff head1 ... head2` (3 Punkte !!!)
   * Änderungen zwischen Head2 und dem gemeinsamen Vorfahren von Head1 und Head2 
-
 * Änderungen lokal commiten, indem das aktuelle CommitObject committed wird:
-
 * `git commit`
-
   * alle Änderungen committen, die im aktuellen Index sind ... nach erfolgreichem Commit wurde im Repository ein neues HEAD-CommitObject mit dem Inhalt des Index angelegt.
-
 * `git commit -a`
-
   * alle geänderten Dateien zum Index hinzufügen und diesen committen
-
 * `git commit -m "mein Kommentar"`
-
 * Änderungen, die noch nicht im Index gestaged wurden, rückgängig machen
-
   * `git checkout -- datei.txt`
   * ``git checkout -- .``
-
 * Ressourcen löschen
-
   * `git rm myfile.txt`
-
 
 ### Arbeiten mit Branches
 
@@ -314,53 +284,33 @@ Die Befehle sind sehr ähnlich zu Subversion \(glücklicherweise, denn derzeit b
 * [https:\/\/git-scm.com\/book\/de\/v1\/Git-Grundlagen-Mit-externen-Repositorys-arbeiten](https://git-scm.com/book/de/v1/Git-Grundlagen-Mit-externen-Repositorys-arbeiten)
 
 * Versionsstand herstellen - ACHTUNG: auf noch nicht committe Änderungen achten, wenn man den Branch dabei wechselt!!!
-
   * `git checkout`
-
     * aktuell konfigurierten Branch aktualisieren
-
   * `git checkout <HEADNAME>`
-
   * `git checkout HEAD`
   * `git checkout mybranch`
   * `git checkout 0df81ba8e4281f9f0edbd6c586e26d8f42073522`
-
 * `git branch`
-
-  * zeigt die existierenden Branches an - der aktuell selektierte Branch wird mit einem Sternchen gekennzeichnet \(hätte man eine [oh-my-zsh Shell](https://github.com/robbyrussell/oh-my-zsh) laufen, dann würde man das sofort sehen\)
-
+  * zeigt die existierenden Branches an - der aktuell selektierte Branch wird mit einem Sternchen gekennzeichnet (hätte man eine [oh-my-zsh Shell](https://github.com/robbyrussell/oh-my-zsh) laufen, dann würde man das sofort sehen)
 * `git branch mybranchname`
-
   * basierend auf HEAD CommitObject einen neuen Branch mit dem Namen _mybranchname_ erzeugen
-
 * `git branch mybranchname HEAD^`
-
   * basierend auf dem Vorgänger des HEAD-CommitObjects einen neuen Branch mit dem Namen _mybranchname_ erzeugen
-
 * `git branch mybranchname 0df81ba8e4281f9f0edbd6c586e26d8f42073522`
-
-  * basierend auf dem CommitObject mit dem Namen 0df81ba8e4281f9f0edbd6c586e26d8f42073522 \(SHA1-Name\) einen neuen Head \(= eine neue Version\) mit dem Namen mybranchname erzeugen
-
+  * basierend auf dem CommitObject mit dem Namen 0df81ba8e4281f9f0edbd6c586e26d8f42073522 (SHA1-Name) einen neuen Head (= eine neue Version) mit dem Namen mybranchname erzeugen
 * `git branch -d mybranchname`
-
-  * Head eines Branches löschen, damit er nicht mehr in der Liste der Heads auftaucht \(git branch\). Man verliert nicht die CommitObjects, die in diesem Branch committed wurden
-
+  * Head eines Branches löschen, damit er nicht mehr in der Liste der Heads auftaucht (git branch). Man verliert nicht die CommitObjects, die in diesem Branch committed wurden
 * `git checkout mybranchname`
-
   * zum Branch mybranchname wechseln - dadurch wird HEAD auf das letzte CommitObject im mybranchname-Branch gesetzt
-
 * `git checkout master`
-
   * zum master Branch wechseln - dadurch wird HEAD auf das letzte CommitObject im Master-Branch gesetzt
-
 
 ### Mergen von Branches
 
 * [http:\/\/www.eecs.harvard.edu\/~cduan\/technical\/git\/git-3.shtml](http://www.eecs.harvard.edu/~cduan/technical/git/git-3.shtml)
-
 * `git merge mybranch`
-  * merge des _mybranch_ in den HEAD \(der HEAD sollte natürlich nicht _mybranch_ sein\)
-  * sollte im HEAD keine Änderung seit dem Branching erfolgt sein, handelt es sich um einen Fast-Forward-Merge - dann werden HEAD und der Ziel-Branch \(z. B. master\) einfach auf des CommitObject von mybranch gesetzt, es entsteht kein neues CommitObject
+  * merge des _mybranch_ in den HEAD (der HEAD sollte natürlich nicht _mybranch_ sein)
+  * sollte im HEAD keine Änderung seit dem Branching erfolgt sein, handelt es sich um einen Fast-Forward-Merge - dann werden HEAD und der Ziel-Branch (z. B. master) einfach auf des CommitObject von mybranch gesetzt, es entsteht kein neues CommitObject
 
 Beim Mergen können Konflikte entstehen ... das wird in der Ausgabe angezeigt und dann findet man in den automatisch gemergten Dateien Kennzeichen (``<<<<<``), die beide Versionen darstellen. Diese Dateien bearbeitet man nach und committed dann.
 
@@ -369,92 +319,66 @@ Beim Mergen können Konflikte entstehen ... das wird in der Ausgabe angezeigt un
 * `git tag -a 1.0.0 -m "tag for version 1.0.0"`
   * aktuell konfigurierten Branch mit der Bezeichnung 1.0.0 taggen
 
-
 ### Commit-Historie
 
 * `git log`
-
   * zeige alle CommitObject-Vorfahren zum HEAD an
-
 * `git log head`
-
   * identisch zu `git log`
-
 * `git log master`
-
   * identisch zu `git log`
-
 * `git log 1c8a778cd20b2991094914b573bdcda27678c51b`
-
   * zeige alle CommitObject-Vorfahren zum CommitObject 1c8a778cd20b2991094914b573bdcda27678c51 an
-
 * `git log head1 .. head2`
-
   * zeige alle CommitObjects
-
 
 ### Arbeiten mit Remote-Repository
 
 * `git clone ssh://user@server/absolutePath/to/repository`
-
   * Remote-Repository lokal clonen
   * das Remote-Repository wird automatisch mit dem Kurznamen _origin_ benanntngetragen
-
 * `git remote -v`: welche Remote-Repositories sind konfiguriert?
-
 * Remote-Repository unter dem Kurznamen _team1_ konfigurieren, so daß man dorthin ein push machen kann
   * `git remote add origin https://myserver/de.cachaca.learn.anything.git`
-    * `origin` ist dabei der Name Kurzname des Repositories, der auch beim Push \(`git push -u origin master`\) angegeben wird
-
-
-
+    * `origin` ist dabei der Name Kurzname des Repositories, der auch beim Push (`git push -u origin master`) angegeben wird
+    * die konfigurierten Kurznamen findet man per `git remote -v`
 * Remote-Repository mit dem Kurznamen _team1_ umkonfigurieren
-
   * `git remote set-url origin https://otherserver/de.cachaca.learn.anything.git`
-
 * Remote-Repository mit dem Kurznamen _team1_ entfernen
-
   * `git remote remove team1`
-
 * Änderungen in ein Remote Repository pushen
-
   * `git push -u origin master`
-
 * `git fetch`
-
   * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen, d. h. alle CommitObjects aller Branches werden ins lokale Repository übernommen. ACHTUNG: das ändert nicht den aktuellen Zustand des aktuellen Branches ... das erfolgt erst bei `git merge`
-
 * `git remote add SYMBOLIC_NAME_OTHER_REPO URL_TO_OTHER_REPO`
-
   * dann kann man per `git pull SYMBOLIC_NAME_OTHER_REPO BRANCH_NAME` die Sourcen ins lokale Repository ziehen ... die liegen dort erst mal unverbunden rum und man muss sie per git merge einbinden
   * dieser Befehl passiert automatisch, wenn man das eigene Repository als Clone eines anderen Repositories angelegt hat.
-
 * `git pull`
-
   * macht ein `git fetch` und `git merge` in einem Kommando
   * Änderungen aus dem Remote-Repository ins lokale Repository übernehmen und die Änderungen in den eigenen Entwicklungsstrang mergen
-  * hierdurch kommen evtl. weitere Heads des geclonten Repositories hinzu \(tragen das Prefix origin\/\)
-  * **ACHTUNG:** manche Entwickler raten von `pull`  ab, weil es schlecht nachvollziehbar und voller Magic ist \(siehe [http:\/\/longair.net\/blog\/2009\/04\/16\/git-fetch-and-merge\/](http://longair.net/blog/2009/04/16/git-fetch-and-merge/)\)
-
+  * hierdurch kommen evtl. weitere Heads des geclonten Repositories hinzu (tragen das Prefix origin\/)
+  * **ACHTUNG:** manche Entwickler raten von `pull`  ab, weil es schlecht nachvollziehbar und voller Magic ist (siehe [http:\/\/longair.net\/blog\/2009\/04\/16\/git-fetch-and-merge\/](http://longair.net/blog/2009/04/16/git-fetch-and-merge/))
 * `git push`
-
   * Änderungen aus dem lokalen Repository ins Remote-Repository zurückspielen
-  * im entfernten Repository müssen die Heads per git checkout weitergesetzt werden \(das geschieht nicht automatisch\)
-
+  * im entfernten Repository müssen die Heads per git checkout weitergesetzt werden (das geschieht nicht automatisch)
+* `git ls-remote`
+  * welche remote Branches und Pull-Requests existieren
 
 ---
 
 ## Konfiguration
-* https://git-scm.com/docs/gitattributes
+
+* [.gitattributes](https://git-scm.com/docs/gitattributes)
 
 Man unterscheidet die Konfiguration auf verschiedenen Ebenen
 
 * `--system`: systemspezifisch\/userübergreifend
-* `--global`: userspezifisch ... für alle Repositories \(liegt in `~/.gitconfig`\)
-* `--local`: Repository-spezifisch \(liegt in `$REPOSITORY_HOME/.git/config`\)
+* `--global`: userspezifisch ... für alle Repositories (liegt in `~/.gitconfig`)
+* `--local`: Repository-spezifisch (liegt in `$REPOSITORY_HOME/.git/config`)
 
 ### Benutzerspezifische Konfiguration
-Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei `~/.gitconfig` machen. 
+
+Einstellungen, die für ALLE Repositories gelten sollen, kann man in der Datei `~/.gitconfig` machen.
 
 Hierin können weitere benutzerspezifische Konfigurationen referenziert werden:
 
@@ -477,36 +401,62 @@ durchführen. Alternativ dazu kann man auch
 git config --global --edit
 ```
 
-Dadurch wird die Datei `~/.gitconfig` um die Properties erweitert. Hier sollte man \([http:\/\/help.github.com\/line-endings\/](http://help.github.com/line-endings/)\)
+Dadurch wird die Datei `~/.gitconfig` um die Properties erweitert.
+
+### Line-Endings
+
+* [http://help.github.com/line-endings/](http://help.github.com/line-endings/)
+* [Änderung Line-Endings Konfiguration](https://stackoverflow.com/questions/15641259/how-to-normalize-working-tree-line-endings-in-git)
+
+In Cross-Platform-Umgebungen (Nutzer unterschiedlicher Betriessysteme - Microsoft Window, Mac OS, Linux) ist eine adäquate Konfiguration der GIT-Clients erforderlich, um nervige (zeitaufwendige) Probleme zu verhindern. Die Herausforderung ist, daß die Konfiguration auf den jeweiligen Betriebssystemen unterschiedlich sein muß.
+
+Ziel sollte sein, im GIT-Repository **IMMER** Unix-Line-Endings (LF) zu verwenden, aber in den lokalen Files eine entsprechende Konvertierung vorzunehmen. Folgende Einstellungen werden deshalb vorgenommen:
+
+* Micosoft Windows
+  * `git config --global core.autocrlf true`
+* Linux
+  * `git config --global core.autocrlf input`
+* MacOS
+  * scheint out-of-the-box zu funktionieren ... oder so wie Linux - hier bin ich mir nicht sicher
+
+In manchen Fällen macht es auch in nicht-Linux-Umgebungen Sinn, Unix-Line-Endings zu verwenden, z. B. bei Shell-Skripten (`*.sh`), die von einem Bash-Interpreter (z. B. Babun) lokal auszuführen sind. Ähnlich verhält es sich mit Windows-Batch-Skripten (`*.bat`), die zwar unter Linux nie ausgeführt werden, aber evtl. editiert werden und dann natürlich ihre Windows-Line-Endings behalten sollen - ansonsten meckert vielleicht der BAT-Interpreter. In diesem Fall empfehle ich die Verwendung von `<GIT-REPO>/.gitattributes` in dieser Form (eine zentrale Konfiguration würde bedeuten, daß man wieder Dokumentation benötigt und die liest niemand):
 
 ```
-[core]
-    autocrlf = true
+*.sh        text eol=lf
+*.bat       text eol=crlf
 ```
 
-aufnehmen, damit LineEndings immer als LF \(Linux-like\) im Repository landen und nicht Windows-like als CRLF \(näheres siehe [http:\/\/help.github.com\/line-endings\/](http://help.github.com/line-endings/)\). Dies sollten ALLE Git-Nutzer tun, denn auch Linux\/Unix-User könnten von anderen Quellen \(z. B. ein Source File kommt per Mail von einem Windows-User\) eingeschleust werden.
+> ACHTUNG: ich bin mir nicht sicher, aber ich hatte schon mal das Gefühl, daß ich zwischen `*.sh` und dem `text` zwei Tabs statt Blanks machen mußte, damit die Konfiguration Wirkung zeigte.
+
+Diese Änderung führt allerdings nicht automatisch zu einer Anpassung der Dateien. Das muß explizit per ([Details hier](https://stackoverflow.com/questions/15641259/how-to-normalize-working-tree-line-endings-in-git))
+
+```bash
+git rm --cached -r .
+git reset --hard
+```
+
+getriggert werden.
 
 ### Repositoryspezifische Konfiguration
-Jedes Git-Repository hat ein Verzeichnis .git \(im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat\). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
 
-* config
- * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` benutzerspezifisch zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen \(GitHub, BitBucket, lokales Synology, ...\)
+Jedes Git-Repository hat ein Verzeichnis .git (im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
+
+* `.gitconfig`
+ * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` benutzerspezifisch zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen (GitHub, BitBucket, lokales Synology, ...)
+* `.gitattributes`
+* `.gitignore`
 
 Änderungen daran lassen sich beispielsweise per
 
-```
+```bash
 git config user.name "Your Name Here"
 git config user.email your@email.com
 ```
 
 durchführen ... BEACHTE: ``--global`` fehlt hier!!!
 
-### Line-Endings
-* https://help.github.com/articles/dealing-with-line-endings/
-
-In heterogenen Umngebungen mit Windows-, Linux-, MacOS-Nutzern muß man sich mit dem Thema auseinandersetzen.
-
 ### Alias
+
 Manche Befehlskombinationen möchte man immer wieder verwenden und schnell im Zugriff haben. Hierzu kann man - ähnlich wie in der Shell - entsprechende Aliase in der ``~/.gitconfig`` definieren. Hat man beispielsweise diese definiert:
 
 ```
@@ -519,21 +469,26 @@ dann lässt sich die pseudografische History-Darstellung per ``git hist`` auf de
 ---
 
 ## Tooling
+
 Für die Arbeit mit Git benötigt man einen Git Client. Auch wenn ich versuche, viele Dinge über die Command-Line zu tun, so mache ich einige Dinge doch lieber über eine GUI (z. B. in der History navigieren und Vergleiche machen).
 
 ### Command-Line
 
 ### GitHub Desktop
+
 Der [GitHub Desktop](https://desktop.github.com/) hat mir wirklich Spaß gemacht als ich mit [GitBook](gitbook.md) begonnen habe.
 
 ### Git-GUI
+
 schien mir auch ganz brauchbar
 
 ---
 
 ## Typische Use-Cases
+
 ### Neues lokales Repository aufsetzen
-Im folgenden gehe ich davon aus, dass der Benutzer bereits Dateien angelegt hat \(in ~\/mySources\), aber noch nicht unter Git-Versionskontrolle gestellt hat. Dann:
+
+Im folgenden gehe ich davon aus, dass der Benutzer bereits Dateien angelegt hat (in ~\/mySources), aber noch nicht unter Git-Versionskontrolle gestellt hat. Dann:
 
 ```
 cd ~/mySources
@@ -544,7 +499,7 @@ git commit -m "inital commit"
 
 ### Zentrales Repository aufsetzen
 
-Ich gehe davon aus, daß ein Entwickler mal mit dem Projekt begonnen hat und die Sourcen zunächst lokal liegen hat. Diese Sourcen will er dann in ein zentales Repository stellen, um sie mit anderen zu teilen. Es wird empfohlen, das zentrale Repository nur als sog. _Bare Repository_ anzulegen, d. h. der zentrale Server hat keine eigene Working-Copy, sondern hält nur die Repository-Information \(mehr wäre vermutlich auch Platzverschwendung\). Das vereinfacht die Sache, denn ansonsten würde die Working-Copy nicht automatisch upgedated und das würde nur zu Verwirrung führen \(kann ich aus eigener Erfahrung bestätigen\).
+Ich gehe davon aus, daß ein Entwickler mal mit dem Projekt begonnen hat und die Sourcen zunächst lokal liegen hat. Diese Sourcen will er dann in ein zentales Repository stellen, um sie mit anderen zu teilen. Es wird empfohlen, das zentrale Repository nur als sog. _Bare Repository_ anzulegen, d. h. der zentrale Server hat keine eigene Working-Copy, sondern hält nur die Repository-Information (mehr wäre vermutlich auch Platzverschwendung). Das vereinfacht die Sache, denn ansonsten würde die Working-Copy nicht automatisch upgedated und das würde nur zu Verwirrung führen (kann ich aus eigener Erfahrung bestätigen).
 
 * [http:\/\/www.kernel.org\/pub\/software\/scm\/git\/docs\/user-manual.html\#setting-up-a-public-repository](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html#setting-up-a-public-repository)
 
@@ -553,7 +508,6 @@ Ich gehe davon aus, daß ein Entwickler mal mit dem Projekt begonnen hat und die
   touch ~/centralRepo/git-daemon-export-ok
   scp -r ~/centralRepo USER@HOST:/home/bla/...
   ```
-
 
 #### Variante 1
 
@@ -570,7 +524,7 @@ cd ~/existingGitRepsoitoy
 git remote add origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY
 ```
 
-**ACHTUNG:** das erste push erfordert noch `git push origin master` \(danach sollte es automatisch funktionieren\) oder man fügt folgenden Eintrag in `.git/config` hinzu:
+**ACHTUNG:** das erste push erfordert noch `git push origin master` (danach sollte es automatisch funktionieren) oder man fügt folgenden Eintrag in `.git/config` hinzu:
 
 ```
     [branch "master"]
@@ -585,7 +539,7 @@ git remote add origin ssh://USER@HOST/ABSOLUTER_PFAD_ZUM_REPOSITORY
 
 ### Zentraler-Repository-Ansatz mit GitHub
 
-Die Arbeit mit GitHub könnte folgendermaßen aussehen \(in der Kombination von GitHub Desktop Tool und GitHub Webapplikation wird dieser Workflow sehr gut durch Tooling unterstützt ... aber man kann auch Standard-Tools verwenden\).
+Die Arbeit mit GitHub könnte folgendermaßen aussehen (in der Kombination von GitHub Desktop Tool und GitHub Webapplikation wird dieser Workflow sehr gut durch Tooling unterstützt ... aber man kann auch Standard-Tools verwenden).
 
 #### Schritte 1a - GitHub Repository aus lokalen Ressourcen initial erstellen
 
@@ -594,10 +548,10 @@ Achtung: ich verwende hier GitHub Desktop, der die Sache sehr einfach macht
 ```
 
 * GitHub Desktop starten und mit einem GitHub-Account verknüpfen
-* Anlegen eines GitHub-Git-Repositories per "Add" ... hier kann man einen lokalen Ordner auswählen \(aka LOCAL\_GIT\_REPOSITORY\), der entweder schon ein lokales Git-Repository ist oder wird per Knopfdruck zu einem gemacht wird. Keine Angst - man muß hier gar nichts machen \(Server aufsetzen oder ähnliches\), denn das lokale Git-repository liegt im Filesystem \(in einem Verzeichnis .git\).
+* Anlegen eines GitHub-Git-Repositories per "Add" ... hier kann man einen lokalen Ordner auswählen (aka LOCAL\_GIT\_REPOSITORY), der entweder schon ein lokales Git-Repository ist oder wird per Knopfdruck zu einem gemacht wird. Keine Angst - man muß hier gar nichts machen (Server aufsetzen oder ähnliches), denn das lokale Git-repository liegt im Filesystem (in einem Verzeichnis .git).
 * sofern in $LOCAL\_GIT\_REPOSITORY noch keine Dateien drin legen ... einfach mal eine anlegen
-* Commit der Änderungen an den Dateien in $LOCAL\_GIT\_REPOSITORY \(hierbei handelt es sich um das initiale Commit in den master-Branch\) ins lokale GIT Repository \(dadurch werden nur ein paar Änderungen an $LOCAL\_GIT\_REPOSITORY\/.git vorgenommen \(total schmerzfrei\)
-* Sync der lokalen Änderungen am Repository auf den GitHub Server per "Sync" - dadurch wird der master-Branch auch auf GitHub veröffentlich und andere lönnen ihn auch sehen \(je nch dem ob es sich um ein Public oder private Repository handelt, können es ALLE sehen oder nur ausgewählte Personen\)
+* Commit der Änderungen an den Dateien in $LOCAL\_GIT\_REPOSITORY (hierbei handelt es sich um das initiale Commit in den master-Branch) ins lokale GIT Repository (dadurch werden nur ein paar Änderungen an $LOCAL\_GIT\_REPOSITORY\/.git vorgenommen (total schmerzfrei)
+* Sync der lokalen Änderungen am Repository auf den GitHub Server per "Sync" - dadurch wird der master-Branch auch auf GitHub veröffentlich und andere lönnen ihn auch sehen (je nch dem ob es sich um ein Public oder private Repository handelt, können es ALLE sehen oder nur ausgewählte Personen)
   * jetzt sollten die Änderungen auch über die GitHub-Webapplikation zu sehen sein
 
 
@@ -616,12 +570,12 @@ Nun kommt es auf die Art der Änderung an und auf die eigene Organisation:
 Achtung: ich verwende hier GitHub Desktop, der die Sache sehr einfach macht
 ```
 
-* Branch des lokalen GitHub-Repository auf dem lokalen Rechner erzeugen \(z. B. per GitHub Desktop oder mit git-CommandLineInterface\) und als aktiven Branch kennzeichnen
+* Branch des lokalen GitHub-Repository auf dem lokalen Rechner erzeugen (z. B. per GitHub Desktop oder mit git-CommandLineInterface) und als aktiven Branch kennzeichnen
 
   * Content ändern, Seiten ergänzen
   * Commit der Änderungen in den lokalen Branch ... ACHTUNG: man muß erst lokal committen, damit man die Änderungen am Local-Repository ins Remote-Repository syncen\/pushen kann
 
-* Veröffentlichen \(sync\/push\) der lokalen Änderungen nach GitHub \(per GitHub Desktop "Sync"\)
+* Veröffentlichen (sync\/push) der lokalen Änderungen nach GitHub (per GitHub Desktop "Sync")
 
   * jetzt sollten die Änderungen auch über die GitHub-Webapplikation zu sehen sein
 
@@ -637,14 +591,14 @@ Achtung: ich verwende hier GitHub Desktop, der die Sache sehr einfach macht
 
 * [http:\/\/blog.osdev.org\/git\/2014\/02\/13\/using-git-on-a-synology-nas.html](http://blog.osdev.org/git/2014/02/13/using-git-on-a-synology-nas.html)
 
-Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern \(evtl. legt man auch einen User `gituser` an\) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist und läuft. Der ssh-Server wird benötigt, um
+Synology bietet auch ein Git-Server-Paket, das über die Admin-Oberfläche schnell installiert ist. Dann muß man den relevanten Usern (evtl. legt man auch einen User `gituser` an) noch Zugriff auf den Git-Server erlauben und sich noch vergewissern, daß der ssh-Server eingerichtet ist und läuft. Der ssh-Server wird benötigt, um
 
-* im folgenden ein Bare-Repository auf der Synology-Diskstation anzulegen \(siehe unten\)
-* zwischen Git-Client und Git-Bare-Repository zu kommunizieren \(u. a. `git clone`, `git push`\)
+* im folgenden ein Bare-Repository auf der Synology-Diskstation anzulegen (siehe unten)
+* zwischen Git-Client und Git-Bare-Repository zu kommunizieren (u. a. `git clone`, `git push`)
 
 #### Bare-Repository auf Diskstation anlegen
 
-Als User `root` \(ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet\) per ssh auf die Diskstation wechseln:
+Als User `root` (ACHTUNG: das ist nicht der Admin-User, mit dem man sich an der Admin-UI anmeldet) per ssh auf die Diskstation wechseln:
 
 ```
 ssh root@diskstation
@@ -666,11 +620,11 @@ chown -R myuser:users myrepo.git   # (B)
 
 ein sog. _Bare-Repository_ anlegen.
 
-**ACHTUNG:** natürlich muß man die Location \(A\) und den Owner bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend\/schreibend zugreifen kann.
+**ACHTUNG:** natürlich muß man die Location (A) und den Owner bzw. die Berechtigungen so wählen, daß der User, mit dem sich der Client später verbinden möchte, auch lesend\/schreibend zugreifen kann.
 
 #### Diskstation Repository clonen
 
-Auf dem Client wird das Repository lokal geclont \(Achtung: es handelt sich hier um eine ssh-URL - nicht um https\):
+Auf dem Client wird das Repository lokal geclont (Achtung: es handelt sich hier um eine ssh-URL - nicht um https):
 
 ```
 git clone ssh://myuser@diskstation/volume1/homes/myuser/git-repos/myrepo.git
@@ -687,7 +641,7 @@ Nach der Konfiguration von ssh über die Synology-Adminoberfläche ist es nur de
 ssh pfh@diskstation
 ```
 
-erhält die Fehlermeldung \([http:\/\/gresch.io\/2016\/01\/fatal-interactive-git-shell-is-not-enabled-on-synology\/](http://gresch.io/2016/01/fatal-interactive-git-shell-is-not-enabled-on-synology/)\)
+erhält die Fehlermeldung ([http:\/\/gresch.io\/2016\/01\/fatal-interactive-git-shell-is-not-enabled-on-synology\/](http://gresch.io/2016/01/fatal-interactive-git-shell-is-not-enabled-on-synology/))
 
 ```
 fatal: Interactive git shell is not enabled.
@@ -701,7 +655,7 @@ DiskStation> cat /etc/passwd
 pfh:x:1027:100::/var/services/homes/pfh:/var/packages/Git/target/bin/git-shell
 ```
 
-der in die Richtung "git-shell" geht. Das muß per vi-Editor \(`vi /etc/passwd`\) in
+der in die Richtung "git-shell" geht. Das muß per vi-Editor (`vi /etc/passwd`) in
 
 ```
 DiskStation> cat /etc/passwd
@@ -716,15 +670,15 @@ abgeändert werden.
 
 Für die Performance wird GIT ja immer angepriesen und das war auch eine der Zielvorgaben des "Erfinders" Linus Torvalds.
 
-Ich machte allerdings zunächst mal ganz andere Erfahrungen. Mein 3 GB großes neu aufgesetztes Repository \(ca. 3000 Dateien - kaum Versionen\) war bei der Statusüberprüfung per `git status` sehr langsam. Zugegebenermaßen habe ich viele binäre Dateien drin und es hätte gut sein können, daß GIT darauf nicht optimiert ist und dementsprechend keine gute Wahl für meinen Use-Case ist. Deshalb ging ich dem Problem auf den Grund.
+Ich machte allerdings zunächst mal ganz andere Erfahrungen. Mein 3 GB großes neu aufgesetztes Repository (ca. 3000 Dateien - kaum Versionen) war bei der Statusüberprüfung per `git status` sehr langsam. Zugegebenermaßen habe ich viele binäre Dateien drin und es hätte gut sein können, daß GIT darauf nicht optimiert ist und dementsprechend keine gute Wahl für meinen Use-Case ist. Deshalb ging ich dem Problem auf den Grund.
 
 ### PROBLEM 1
 
-Performance war stark schwanken: mal 1 Sekunde und dann wieder 3 Minuten \(im gleichen Setup\)
+Performance war stark schwanken: mal 1 Sekunde und dann wieder 3 Minuten (im gleichen Setup)
 
 ### LÖSUNG 1
 
-Ich verwendete zwei unterschiedliche Systeme, um auf das gleiche Repository zuzugreifen \(von Windows per cygwin und von Suse-Linux über einen Shared Folder meiner VM\). Des Rätsels Lösung war der ständige Neuaufbau des Caches \(`.git/index`\) - erkennbar nur am neuen Zeitstempel der Datei, denn inhaltlich waren die Dateien identisch \(ich habe die Ergebnisse von `git ls-files --stage > index.txt` miteinander verglichen\). Ich vermute aufgrund unterschiedlicher Git-Clients werden die Verwaltungsinformationen neu aufgebaut. Ich habe Clients der Versionen 1.6.0.2 bzw. 1.7.3.3 verwendet, vielleicht lag es auch an den verschiedenen Plattformen \(cygwin vs. Suse\). Der Wert `core.repositoryformatversion` in `.git/config` war bei beiden Clients allerdings 0.Der Aufbau der Metadaten dauert eben seine Zeit, allerdings ist das normalerweise nur sehr selten erforderlich.
+Ich verwendete zwei unterschiedliche Systeme, um auf das gleiche Repository zuzugreifen (von Windows per cygwin und von Suse-Linux über einen Shared Folder meiner VM). Des Rätsels Lösung war der ständige Neuaufbau des Caches (`.git/index`) - erkennbar nur am neuen Zeitstempel der Datei, denn inhaltlich waren die Dateien identisch (ich habe die Ergebnisse von `git ls-files --stage > index.txt` miteinander verglichen). Ich vermute aufgrund unterschiedlicher Git-Clients werden die Verwaltungsinformationen neu aufgebaut. Ich habe Clients der Versionen 1.6.0.2 bzw. 1.7.3.3 verwendet, vielleicht lag es auch an den verschiedenen Plattformen (cygwin vs. Suse). Der Wert `core.repositoryformatversion` in `.git/config` war bei beiden Clients allerdings 0.Der Aufbau der Metadaten dauert eben seine Zeit, allerdings ist das normalerweise nur sehr selten erforderlich.
 
 Der folgende Befehl zeigt den Inhalt der binären Datei `.git/index` in leserlicher Form an
 
@@ -748,22 +702,22 @@ Ich verwendete neben dem Windows XP-Verzeichnis und dem Shared Folder im Suse-Im
 
 ### LÖSUNG 3
 
-Das lag an veränderten Berechtigungen \(bei einem `git diff file1.txt` gekam ich die Meldung `old mode 100755 new mode 100644`\). Und das stimmte auch ... ich hatte das Repository per `cp -a ...` von der Festplatte \(NTFS formatiert\) auf den USB-Stick \(FAT32\) kopiert und dabei ändert sich die Berechtigung von 755 auf 644. Durch Änderung der Repository-Konfiguration \(`.git/config`\) `core.filemode = false` konnte ich das Problem beseitigen.
+Das lag an veränderten Berechtigungen (bei einem `git diff file1.txt` gekam ich die Meldung `old mode 100755 new mode 100644`). Und das stimmte auch ... ich hatte das Repository per `cp -a ...` von der Festplatte (NTFS formatiert) auf den USB-Stick (FAT32) kopiert und dabei ändert sich die Berechtigung von 755 auf 644. Durch Änderung der Repository-Konfiguration (`.git/config`) `core.filemode = false` konnte ich das Problem beseitigen.
 
 Unter Berücksichtigung dieser Erkenntnisse stabilisierte sich die Performance. Hier das Ergebnis:
 
-|  | Aufruf, Cache wird neu erzeugt \(in s\) | Aufruf mit befülltem Cache \(in s\) |
+|  | Aufruf, Cache wird neu erzeugt (in s) | Aufruf mit befülltem Cache (in s) |
 | --- | --- | --- |
-| Festplatte des Windows XP Systems \(cygwin git\) | 120 | 1 |
-| Festplatte des Windows XP Systems als Shared Folder \(suse git\) | 390 | 8 |
-| USB-Stick \(USB 2.0\) des Windows XP Systems \(cygwin git\) |  | 5 |
-| USB-Stick \(USB 2.0\) des Windows XP Systems als Shared Folder \(suse git\) | 420 | 30 |
-| USB-Stick \(USB 2.0\) direkt in die VM eingebunden \(USB 2.0\) \(suse git\) | 720 | 0-60 |
-| Festplatte eines Debian 5 Systems \(debian git\) |  | 1 |
+| Festplatte des Windows XP Systems (cygwin git) | 120 | 1 |
+| Festplatte des Windows XP Systems als Shared Folder (suse git) | 390 | 8 |
+| USB-Stick (USB 2.0) des Windows XP Systems (cygwin git) |  | 5 |
+| USB-Stick (USB 2.0) des Windows XP Systems als Shared Folder (suse git) | 420 | 30 |
+| USB-Stick (USB 2.0) direkt in die VM eingebunden (USB 2.0) (suse git) | 720 | 0-60 |
+| Festplatte eines Debian 5 Systems (debian git) |  | 1 |
 
 **Fazit**
 
-Die SharedFolder \(oder evtl. sogar das gesamte VirtualBox-Filesystem\) ist sehr langsam und braucht viel Leistung \(die CPU-Usage war beim git status innerhalb einer VM sehr hoch - mein Laptop-Lüfter drehte richtig hoch\). Innerhalb der VM sollte man einige ressourcenintensive Tools nicht nutzen.
+Die SharedFolder (oder evtl. sogar das gesamte VirtualBox-Filesystem) ist sehr langsam und braucht viel Leistung (die CPU-Usage war beim git status innerhalb einer VM sehr hoch - mein Laptop-Lüfter drehte richtig hoch). Innerhalb der VM sollte man einige ressourcenintensive Tools nicht nutzen.
 
 ---
 
@@ -778,31 +732,27 @@ Die SharedFolder \(oder evtl. sogar das gesamte VirtualBox-Filesystem\) ist sehr
 
 **Frage 1:** Das clonen übers Netzwerk dauert sehr lange. Woran liegt das?
 
-**Antwort 1:** Die Ressourcen werden scheinbar gepackt und erst dann per ssh übertragen. Das verursacht auf dem Server entsprechend Last \(unter Linux wird man die Prozesse git-pack-object, git-upload-pack und sshd sehen, die entsprechende CPU- und I\/O-Last erzeugen\). Bei einem unperformanten Server bzw. Client kann das u. U. eine ganze Weile dauern.
+**Antwort 1:** Die Ressourcen werden scheinbar gepackt und erst dann per ssh übertragen. Das verursacht auf dem Server entsprechend Last (unter Linux wird man die Prozesse git-pack-object, git-upload-pack und sshd sehen, die entsprechende CPU- und I\/O-Last erzeugen). Bei einem unperformanten Server bzw. Client kann das u. U. eine ganze Weile dauern.
 
-**Frage 2:** Nach einem Clone dauert das erste git status extrem lang \(die nachfolgenden git status Aufrufe sind wieder schnell\) - ist das üblich?
+**Frage 2:** Nach einem Clone dauert das erste git status extrem lang (die nachfolgenden git status Aufrufe sind wieder schnell) - ist das üblich?
 
 **Antwort 2:** Ich vermute, daß das Repository hier nochmals aktualisiert wird.
 
-**Frage 3:** Nach einem Clone \(von einem Linux-System\) auf ein Windows-System sind alle Dateien als geändert gekennzeichnet. Die Diffs zeigen eine nicht-sichtbare Änderung am Ende der Datei. Hä?
+**Frage 3:** Nach einem Clone (von einem Linux-System) auf ein Windows-System sind alle Dateien als geändert gekennzeichnet. Die Diffs zeigen eine nicht-sichtbare Änderung am Ende der Datei. Hä?
 
-**Antwort 3:** Die Zeilenendekennzeichnungen sind unter Windows \(CRLF - CarriageReturnLineFeed\) und Linux\/Unix \(LF - LineFeed\) sind unterschiedlich. Daher kommen die Unterschiede. Jeder Git-User \(sowohl Windows- als auch Linux-User\) sollten IMMER
+**Antwort 3:** Die Zeilenendekennzeichnungen sind unter Windows (CRLF - CarriageReturnLineFeed) und Linux\/Unix (LF - LineFeed) sind unterschiedlich. Daher kommen die Unterschiede. Jeder ([siehe Stackoverflow](https://stackoverflow.com/questions/10418975/how-to-change-line-ending-settings) - [siehe auch](https://help.github.com/en/articles/dealing-with-line-endings))
 
-```
-[core]
-    autocrlf = true
-```
+* Windows-Git-User sollte die Einstellung `core.autocrlf = true` verwenden
+* Linux-Git-User sollte die Einstellung `core.autocrlf = input` verwenden
 
-in ihre `~/.gitconfig` aufnehmen. Das verhindert, daß ein CRLF im Repository landet - stattdessen wird es beim commit immer automatisch nach LF umgewandelt. Mehr Details hier: [http:\/\/help.github.com\/line-endings\/](http://help.github.com/line-endings/)
-
-**Frage 4:** Ich bekomme alle Dateien eines geclonten Repositories \(Source-Repository unter Linux, geclontes Repository unter cygwin\/Windows\) als geändert angezeigt. Bei einem git diff FILE bekomme ich die Ausgabe:
+**Frage 4:** Ich bekomme alle Dateien eines geclonten Repositories (Source-Repository unter Linux, geclontes Repository unter cygwin\/Windows) als geändert angezeigt. Bei einem git diff FILE bekomme ich die Ausgabe:
 
 ```
 old mode 100755
 new mode 100644
 ```
 
-**Antwort 4:** Die Permissions sind unterschiedlich. Hier sollte man `core.filemode = false` setzen \(entweder in `~/.gitconfig` zentral für alle Repositories oder für ein einzelnes Repository in `.git/config`\).
+**Antwort 4:** Die Permissions sind unterschiedlich. Hier sollte man `core.filemode = false` setzen (entweder in `~/.gitconfig` zentral für alle Repositories oder für ein einzelnes Repository in `.git/config`).
 
 **Frage 5:** Beim Clonen eines Repository bekomme ich folgende Fehlermeldung:
 

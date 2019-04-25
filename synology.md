@@ -204,9 +204,11 @@ Hier läßt sich die ganze Misere nachlesen: [https://forum.synology.com/enu/vie
 
 > Fazit aus diesem Thread: "This feature works just fine on QNAP [...] I really wish that I stayed with QNAP"
 
-## Foto/Video Synchronisierung von iOS
+---
 
-[siehe andere Seite](ipadPro.md)
+## Foto/Video Synchronisierung von iOS auf Synology
+
+[in eine eigene Datei verschoben](fotoVideoSammlung.md)
 
 ## Foto/Video Alben anschauen
 

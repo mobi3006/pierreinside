@@ -1,45 +1,12 @@
-# Getting started - mit vorkonfiguriertem Vagrant-Image
+# Getting started
 
-Am besten erlernt man eine neue Technologie durch ausprobieren. Deshalb am bestern per Vagrant ein Linux-Image mit bereits eingebautem Docker-Support anlegen. Das ist eine Sache von 5 Sekunden Arbeit:
+## From Scratch unter Microsoft Windows
 
-```bash
-vagrant init box-cutter/ubuntu1404-docker
-vagrant up
-```
-
-Und dann noch ein paar Sekunden/Minuten auf den Download des Images warten - währenddessen gleich einen DockerHub-Account anlegen.Dann per
-
-```bash
-vagrant ssh
-```
-
-ein SSH-Connect auf das neue Image machen. Anschließend werden die Credentials für DockerHub per
-
-```bash
-sudo docker login
-```
-
-abgefragt und in ``$HOME/.dockercfg`` abgelegt. Und nun noch einen Docker-Container starten:
-
-```bash
-sudo docker run ubuntu:14.04 /bin/echo 'Hello world'
-```
-
-Voila :-)
-
-Aber nicht nur *Hello World* (für das man sicher keinen eigenen Container benötigt) geht so schnell. Auch diese Web-Applikation (eigentlich handelt es sich um das Docker-Images *training/webapp* mit einer Web-Applikation)
-
-```bash
-docker run -d -p 5000:5000 training/webapp python app.py
-```
-
-ist schnell mal deployed.
-
-Je nach Netzwerkkonfiguration des Images (NAT, Bridge) kann vom Wirtsystem direkt über die IP-Adresse des Images auf ``http://localhost:5000`` zugegriffen werden (Bridge-Mode) oder es muß Port-Forwarding in das Images hinein konfiguriert werden.
+[siehe eigene Seite](docker_windows.md)
 
 ---
 
-## Getting started - from Scratch
+## From Scratch unter Linux
 
 From-Scratch meint hier, ohne vorinstalliertes Docker (im vorigen Beispiel war das bereits im VirtualBox-Image ``ubuntu1404-docker`` vorinstalliert) - natürlich kann man auch hier die Linux-Box per Vagrant erzeugen. Wie es danach weitergeht hängt von der verwendeten Linux-Distribution ab.
 
@@ -83,3 +50,45 @@ Zudem sollte man den Docker-Daemon beim Systemstart hochfahren:
 ```bash
 chkconfig docker on
 ```
+
+---
+
+## Mit vorkonfiguriertem Vagrant-Image
+
+Am besten erlernt man eine neue Technologie durch ausprobieren. Deshalb am bestern per Vagrant ein Linux-Image mit bereits eingebautem Docker-Support anlegen. Das ist eine Sache von 5 Sekunden Arbeit:
+
+```bash
+vagrant init box-cutter/ubuntu1404-docker
+vagrant up
+```
+
+Und dann noch ein paar Sekunden/Minuten auf den Download des Images warten - währenddessen gleich einen DockerHub-Account anlegen.Dann per
+
+```bash
+vagrant ssh
+```
+
+ein SSH-Connect auf das neue Image machen. Anschließend werden die Credentials für DockerHub per
+
+```bash
+sudo docker login
+```
+
+abgefragt und in ``$HOME/.dockercfg`` abgelegt. Und nun noch einen Docker-Container starten:
+
+```bash
+sudo docker run ubuntu:14.04 /bin/echo 'Hello world'
+```
+
+Voila :-)
+
+Aber nicht nur *Hello World* (für das man sicher keinen eigenen Container benötigt) geht so schnell. Auch diese Web-Applikation (eigentlich handelt es sich um das Docker-Images *training/webapp* mit einer Web-Applikation)
+
+```bash
+docker run -d -p 5000:5000 training/webapp python app.py
+```
+
+ist schnell mal deployed.
+
+Je nach Netzwerkkonfiguration des Images (NAT, Bridge) kann vom Wirtsystem direkt über die IP-Adresse des Images auf ``http://localhost:5000`` zugegriffen werden (Bridge-Mode) oder es muß Port-Forwarding in das Images hinein konfiguriert werden.
+

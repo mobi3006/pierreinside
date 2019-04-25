@@ -4,7 +4,17 @@
 
 Nomad ist ein weiteres Tool aus dem Sortiment von HashiCorp. Es wird als Scheduler für Services (gestartet über einen sog. [Driver](https://www.nomadproject.io/docs/drivers/index.html)) verwendet. Einfacher ausgedrückt: hiermit werden Prozesse auf Worker-Maschinen gestartet.
 
+Nomad sorgt auch selbständig dafür, daß die gewünschte Anzahl an Service-Knoten läuft, indem es kontinuierlich einen HealthCheck macht und bei Bedarf neue Knoten startet. Sowohl Nomad Server als auch Nomad Clients/Worker werden in Produktiv-Szenarien auf verschiedene Regions verteilt (z. B. AWS: Availability Zones). Auf diese Weise wird die Verfügbarkeit verbessert.
+
+Beim Rollout einer neuen Version bietet Nomad in der [Job Stanza](https://www.nomadproject.io/docs/job-specification/update.html) Unterstützung für
+
+* Blue/Green Deployments
+* Rollling Deployments
+* Canary Deployments
+
 > BTW: Nomad verwendet sehr ähnliche Konzepte wie bei [Terraform](terraform.md) ... auch ein HashiCorp Produkt.
+
+---
 
 ## Architektur und Konzepte
 
@@ -42,19 +52,26 @@ Das sind die Standardports von Nomad Client und Server:
 * 4648
   * Nomad Server Serf Check
 
+---
+
 ## Verfügbare Resourcen
 
 Der Nomad Server Node muß wissen welche Target Nodes für die Ausführung von Aufgaben zur Verfügung stehen. Hierzu informiert der Nomad Client Agent kontinuierlich über die tatsächlich verfügbaren Resourcen (CPU, Speicher, Network-I/O, Plattenplatz, ...). Steht dann eine Aufgabe an, dann kann der Nomad Server einen passenden Target Node auswählen.
+
+---
 
 ## Start Services auf Worker Maschinen
 
 Für den Start eines Services auf einer Nomad Client Maschine (= Nomad Worker) stehen verschiedene [Driver](https://www.nomadproject.io/docs/drivers/index.html) zur Verfügung:
 
 * Docker
+  * derzeit (April 2019) kann Nomad **unter Windows** keine Docker-Linux container starten
 * Java
 * ...
 
 Hierbei kümmert sich Nomad (definiert im Nomad-Job) auch um die Ressourcenzuweisung (z. B. Memory).
+
+---
 
 ## Jobs
 
@@ -64,9 +81,9 @@ Die Beschreibung erfolgt in der HashiCorp Configuration Language (HCL).
 
 > Job-Datei ->1 Job ->* group -> Evaluation -> Allocation ->* task
 
-es wird der gewünschte Zustand beschrieben - Nomad ermittelt daraus in der Planungsphase die tatsächlichen Aktionen im Vergleich zum aktuell laufenden Setup. Sollte ein Service abrauchen (wird über einen definierten Health-Check, den der Service anbieten muß), dann triggered Nomad automatisch ein Deployment.
+es wird der gewünschte Zustand beschrieben - Nomad ermittelt daraus in der Planungsphase die tatsächlichen Aktionen im Vergleich zum aktuell laufenden Setup. Sollte ein Service unhealthy werden (über einen im Job definierten Health-Check - kann unterschiedlich komplex sein - bei Spring Applikationen bietet sich die Actuator Health Endpoint an), den der Service anbieten muß), dann triggered Nomad automatisch ein Deployment.
 
-Im Job die notwendigen Ressource-Anforderungen (Hardware, Architektur, Software (Betriebssystem, Kernel, Driver)) für einen Service definiert ... das ermöglicht dem Nomad Server einen passenden Nomad Client (= Worker) zu finden, der mit einer Allokation beauftragt wird.
+Im Job werden die notwendigen Ressource-Anforderungen (Hardware, Architektur, Software (Betriebssystem, Kernel, Driver)) für einen Service definiert ... das ermöglicht dem Nomad Server einen passenden Nomad Client (= Worker) zu finden und mit einer Task zu beauftragen. Der Worker verwendet eine sog. Allokation, um die Task abzuarbeiten - ist die Task fertig, dann wird die Allokation gelöscht.
 
 * [kleines Beispiel](https://www.nomadproject.io/docs/job-specification/index.html)
 * [`job`](https://www.nomadproject.io/docs/job-specification/job.html)
@@ -93,6 +110,8 @@ Vor der Ausführung eines Jobs via `nomad job run my-job.nomad`, sollte man den 
 
 Unter `/var/lib/nomad/alloc` findet man die Allokationen des Jobs. Hier sind u. a. auch Log-Files zu finden.
 
+---
+
 ## Nomad Befehle
 
 * [Dokumentation](https://www.nomadproject.io/docs/commands/index.html)
@@ -114,6 +133,8 @@ Die Nomad-Befehle werden mit dem Binary `nomad` abgesendet und vom Nomad Agent (
   * mit diesem Kommando kann auch ein Re-Deployment des Services getriggert werden, z. B. wenn man die Konfiguration geändert hat, die in einem [Consul](consul.md) liegt und bei Start der Anwendung einmalig gezogen wird. Ohne eine Änderung am aktuellen Status, muß keine neue Allokation erzeugt werden.
 * `nomad job stop myService`
   * wenn ein Service nicht startet (z. B. weil ein Fehler in der Konfiguration vorliegt oder die Applikation einen Fehler hat), dann würde aufgrund des automatischen Re-Deployments von Nomad (wenn der Zielzustand nicht erreicht ist - Healthcheck) immer wieder eine erneute Allokation gestartet. In diesem Fall macht es Sinn, die Ausführung des Jobs zu stoppen. Ansonsten würde sich der Nomad-Server in einer Endlosschleife befinden.
+
+---
 
 ## Nomad UI
 
