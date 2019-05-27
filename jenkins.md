@@ -102,7 +102,7 @@ Mein Java befindet sich aber in `/usr/lib/jvm/java`. Als Workaround habe ich ein
 
 ### Jobs
 
-Jobs stellen den Trigger zur Ausführung von Pipelines zur Verfügung. Jobs werden entweder manuell oder automatisch (z. B. beim Commit in einen Source-Branch - aka "SCM polling trigger") gestartet.
+Jobs stellen den Trigger zur Ausführung von Pipelines zur Verfügung. Jobs werden entweder manuell oder automatisch (z. B. beim Commit in einen Source-Branch - aka "SCM polling trigger") gestartet. Sehr praktisch ist, daß man Jobs auch mit einem API-Token per HTTP-Request triggern kann. Auf diese Weise kann man jederzeit bequem einen Jublauf triggern.
 
 Es gibt verschiedene Job-Typen:
 
@@ -137,6 +137,10 @@ Man unterscheidet zwei Arten von Pipeline Definitionen:
     * Exception Handling
     * Kontrollstrukturen (`if`, ...)
   * es existiert sogar ein eigenes Ökosystem, um die Effizienz durch Reuse zu erhöhen - [Nutzung/Erstellung von Shared Libraries](https://jenkins.io/doc/book/pipeline/shared-libraries/)
+
+Am besten startet man einen lokaken Jenkins und legt einen Pipeline-Job an. Dann kann man sich Pipeline-Code über "Pipeline Syntax" generieren lassen.
+
+> Leider ist das kein schöner Entwicklungszyklus ... eher Trial-and-Error.
 
 #### Trigger
 
@@ -181,6 +185,25 @@ Nicht alle Tools werden über Plugins integriert. Tools wie
 * ...
 
 werden über "Jenkins - Global Tool Configuration" konfiguriert.
+
+---
+
+## Benutzer
+
+Es stehen verschiedene Möglichkeiten der Userverwaltung zur Verfügung (konfiguriert in "Jenkins - Configure Global Security"):
+
+* Jenkins-Userverwaltung
+* Active Directory
+
+Berechtigung können auf verschiedenen Granularitätsstufen vergeben werden
+
+* Anyone can do anything
+* Logged-in users can do anything
+* Legacy Mode
+* Matrix-based security
+* Project-base Matrix Authorization Strategy
+
+---
 
 ## Shared Libraries
 

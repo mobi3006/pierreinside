@@ -2,11 +2,15 @@
 
 Docker ist eine feine Sache, doch die Fehlersuche gestaltet sich hin und wieder zum Albtraum, da der Container zunächst mal irgendwie nicht greifbar ist - insbesondere nicht, wenn er nicht mehr läuft. Die Fehlersuche hat mich anfangs vor ein ziemliches Problem gestellt und dazu bewogen, die Docker-Konzepte zunächst mal ansatzweise zu verstehen. Nichtsdestotrotz stand ich auch danach erst mal wie der Ochs vorm Berg.
 
+---
+
 ## Container läuft noch
 
 Wenn ein Docker Container nicht schon beim Start stirbt oder gleich nach dem Start beendet wird (weil nur ein paar Befehle ausgefürt werden), dann ist die Fehlersuche schon mal einfacher.
 
 ### Logs anschauen
+
+* [siehe auch hier](docker_logging.md)
 
 Per `docker logs myContainer` kann man sich die Logs des Container anschauen - das funktioniert auch mit nicht mehr laufenden Containern (siehe ``docker ps -a``).
 
@@ -61,6 +65,8 @@ erhält man auf der Konsole zusätzliche Informationen wie diese:
 ```
 
  Am besten führt man diesen Befehl in einem anderen Konsolenfenster aus, damit sich die Informationen nicht so mitten rein mischen.
+
+---
 
 ## Container stirbt beim Start
 

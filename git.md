@@ -184,6 +184,47 @@ Diese Vorgehen hat allerdings den Vorteil, daß man solche Refactorings in einem
 
 ---
 
+## Workflows und Branching Models
+
+* [Git flow und Alternativen](https://docs.gitlab.com/ee/workflow/gitlab_flow.html)
+
+Git ist zunächst mal sehr offen wie man es benutzt - eine Stärke, aber für Newbies eine große Herausforderung. Deshalb sollte man sich auf die Suche nach Best-Practices machen.
+
+Zentrale Frage ist "Mit wievielen Branchen will/muß ich arbeiten, um meinen Release-Zyklus abzubilden?"
+
+* nur `master` und Feature/Bugfix-Branches
+  * `master` ist zu **JEDEM** Zeitpunkt releasebar (= Deployment auf eine Stage - z. B. nach Live)
+* `master`, `development` (= Integration Branch) und Feature/Bugfix-Branchesm
+  * hier wird ein Integration Branch verwendet, um die Qualität bei hoher (automatisierter) Testabdeckung sicherzustellen und das Risiko einer Destabilisierung des `master` Branch zu reduzieren (erst wenn der `development` Build erfolgreich war, darf nach `master` gemergt werden)
+  * macht Sinn, wenn
+    * viele Entwickler parallel an einem Repository arbeiten (viele Feature-Branches parallel) und dadurch beim Mergen in den `master` Probleme ergeben, so daß der `master` bricht. Dann wäre `master` nicht mehr releasebar
+    * ein gebrochener `master` große Schmerzen verursacht, weil stündlich released wird (wird nur alle zwei Wochen released ist es weniger dramatisch)
+  * Atlassian empfiehlt, vom `master` Branch (der Branch mit der besten Qualität - Fehler aus dem Development Branch können sich nicht verbreiten und die Feature-Branches zerstören) den Feature-Branch abzuzweigen - danach mergt man in den `development` Branch um zu prüfen, ob die Änderungen mit denen anderer Entwickler kompatibel sind. Ist das der Fall wird der Feature-Branch (!!! nicht der `development` Branch) in den `master` Branch gemergt. Das Feature ist nun ready-for-deployment
+    * funktioniert natürlich nur, wenn schnell auch in den `master` gemergt wird, so daß neue Features auch nachfolgenden Featureentwicklungen zur Verfügung stehen
+    * das wiederum funktioniert nur, wenn jedes gemergte Feature auch potentiell ausgerollt werden darf (sollte das nicht der Fall sein, so kann man mit Feature-Toggles arbeiten, um mergen zu können ohne sichtbar zu sein) - ansonsten muß man den Merge der Feature-Branches noch zurückhalten
+
+> Als grundsätzliche Regel lässt sich festhalten: Je kürzer die Release-Zyklen, desto weniger Branches sind notwendig.
+
+Auf diesen Branching Models setzen verschiedene Workflows auf (einige sind in ["Git flow und Alternativen"](https://docs.gitlab.com/ee/workflow/gitlab_flow.html) beschrieben):
+
+* Branch-per-Issue-Workflow
+  * for SaaS Teams
+  * for Multiple-version support
+* Git Flow
+  * wenn man kein Continuous Deployment nutzen kann
+* GitHub Flow
+  * wenn man Continuous Deployment nutzen kann
+* GitLab Flow
+  * bei einer Mischform - man kann nicht einfach sofort deployen, aber es dauert auch nicht allzu lang
+
+Für mich macht der GitLab Flow keinen Sinn, denn eigentlich will ich meine Release-Artefakte ausgehend vom Master bauen und diese dann bei Bedarf auf die Stages promoten. Das geschieht dann entweder sofort (Continuous Deployment) oder zu einem geplanten Zeitpunkt. Hat man mehrere Integration-Stages (TEST, CUSTOMER-TEST, LIVE), dann promotet man die gebauten Releases von Stage zu Stage. Bei Hotfixes brancht man dann einen Hotfix-Branch vom Tag ab, das gerade hotfixed werden soll - dann baut man daraus ein neues Artefakt. Auf diese Weise kann man sowohl Continuous Deployment als auch Postponed Deployment mit dem gleichen Branching Model abbilden.
+
+> Allerdings: wenn es lange dauert bis der Hotfixes (für LIVE) wieder durch neue Feature-Releases auf die Intermediate-Stages (CUSTOMER-TEST, TEST) kommen, dann müßte man die Hotfixes irgendwie auch auf die Intermediate-Stages bekommen. In dem Fall sind dann Stage-Branches vielleicht wirklich hilfreich, denn damit können Hotfixes in alle Intermediate-Branches auto-merged werden.
+
+Wenn man Hotfix-Branch nicht sofort wieder löscht, sondern dauerhaft nutzt, um auch nachfolgende Hotfixes abzubilden, dann hat man eine Art Stage-Branch (vermutlich allerdings ohne Auto-Merge-Hotfixes), so wie beispielsweise [Environment branches with GitLab flow](https://docs.gitlab.com/ee/workflow/gitlab_flow.html#environment-branches-with-gitlab-flow).
+
+---
+
 ## Befehle
 
 * https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf

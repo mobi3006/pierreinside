@@ -39,7 +39,9 @@ Per Default wird ein Verzeichnis ``~/.VirtualBox`` angelegt, in dem sich zwei Un
 
 ---
 
-## Shared Folder
+## Datei-Sharing
+
+### Shared Folder
 
 Über Shared Folder kann man Verbindung zum Wirtssystem aufnehmen. In einem Linux-Gastsystem mounted man den Shared-Folder per
 
@@ -57,11 +59,11 @@ Man kann auch die Option Automatisch einbinden wählen, dann wird das Verzeichni
 
 gemounted. Allerdings hat man dann nicht soviele Konfigurationsmöglichkeiten wie über das "manuelle" (bzw. auch hier kann man das automatische Mounten bei Systemstart aktivieren) Mounten in Linux.
 
-### Symbolische Links und HardLinks
+#### Symbolische Links und HardLinks
 
 Leider unterstützt das VBoxSF-Filesystem in Version 3.1.2 keine symbolischen Links und auch keine HardLinks im SharedFolder - das schränkt die Nutzung von einem Linux-Gastsystem deutlich ein :-( Mehr dazu siehe hier: http://www.virtualbox.org/ticket/818 - das Anlegen eines solchen Links wird mit der Meldung ``Operation not permitted`` quittiert.
 
-### Owner und Group
+#### Owner und Group
 
 Beim mounten per ``mount -t vboxsf SHARED_FOLDER_NAME MOUNTPOINT`` werden alle Dateien dem User Root zugeschlagen. Durch Verwendung folgender Mountoptionen lässt sich das ändern:
 
@@ -75,11 +77,31 @@ mount -t vboxsf -o uid=1000,gid=100 WINDOWS_C /mnt/WINDOWS_C/
 WINDOWS_C     /mnt/WINDOWS_C     vboxsf     uid=1000,gid=100      0 1
 ```
 
+#### Performance
+
+* [Performance-Vergleich - files sharing](https://jsosic.wordpress.com/tag/shared-folders/)
+
+Leider ist die Performance auf einem `vboxsf`-Shared-Folder ganz schlecht ... es genügt, um Konfigurationsdateien zu lesen. Will man allerdings I/O-intensivere Aktionen (z. B. Java-Compilierung) durchführen, dann ist es zu langsam.
+
+> für einen Maven-Build, der auf meinem Linux Filesystem 20 Sekunden dauert, habe ich 8 Minuten benötigt
+
+### CIFS Sharing
+
+Hierzu kann man beispielsweise auf seinem Windows-Host ein Verzeichnis freigeben. Danach muß man ein Verzeichnis in seinem Home-Verzeichnis erstellen `mkdir /home/pfh/windows_shared_folder` (oder zumindest in einem Verzeichnis, auf das man Schreibberechtigung hat). Über den Windows-Rechnernamen und den Namen des Verzeichnisses (z. B. `\\workbench\shared-folder`) kann man dann das Verzeichnis mounten::
+
+```
+sudo mount -t cifs -o username=windows_username,uid=1000,gid=1000 //workbench/shared_folder /home/pfh/windows_shared_folder
+```
+
+> Hierzu muß allerdings `/sbin/mount.cifs` vorhanden sein - sollte es fehlen, dann bekommt man es per `apt-get install cifs-utils smbclient`.
+
+Leider ist die Performance nicht so gut wie ich erhofft hätte. Für einen Maven-Build, der auf meinem Linux Filesystem 20 Sekunden dauert, habe ich mit dem CIFS-Share über 3 Minuten benötigt. Immerhin deutlich besser als mit VirtualBox-Shared-Folder (8 Minuten) aber dennoch inakzeptabel langsam :-(
+
 ---
 
 ## Snapshots
 
-Ein sehr angenehmes Features sind die Snapshots. Vor größeren Umbauten kann man hier einen Snapshot ziehen, auf den man dann wieder zurückwechseln kann. 
+Ein sehr angenehmes Features sind die Snapshots. Vor größeren Umbauten kann man hier einen Snapshot ziehen, auf den man dann wieder zurückwechseln kann.
 
 > ACHTUNG: Nach einem Snapshot wird eine neue Virtualbox-Festplatte (Speicherort über *VirtualBox-Menü - Snapshot*) angelegt und dort werden die neuen Daten abgelegt. Die alte Festplatte wird ab dem Zeitpunkt nicht mehr angefaßt (das ist der alte Zustand!!!). GANZ WICHTIG: man sollte die Snapshots zeitnah löschen, so daß ein Merge in die alte Festplatte erfolgt - das Arbeiten mit mehreren Festplatten ist sicherlich nicht ganz optimal.
 
@@ -87,7 +109,7 @@ Wer dem beim Löschen eines Snapshots durchgeführten Merge nicht traut clont se
 
 ### Performance
 
-Beim Snapshotting sollte man aufpassen wo die neuen Festplatten abgelegt werden. Per Default ist das ``~/VirtualBox VMs/imageName\Snapshots``. Je nach Festplatten-Layout kann das die evtl. kleine System-Platte "vollmüllen" (ich mag solche Layouts nicht und kann den Sinn auch nicht nachvollziehen). Viel schlimmer ist allerdings, daß in Unternehmen nur bestimmte Verzeichnisse vom Virenscanner ausgenommen sind (i. d. R. Developer-Verzeichnisse) und dieses evtl. nicht dabei ist. Dann sinkt natürlich die Performance.
+Beim Snapshotting sollte man aufpassen wo die neuen Festplatten abgelegt werden. Per Default ist das ``~/VirtualBox VMs/imageName\Snapshots``. Je nach Festplatten-Layout kann das die evtl. kleine System-Platte "vollmüllen" (ich mag solche Layouts nicht und kann den Sinn auch nicht nachvollziehen). Viel schlimmer ist allerdings, daß in Unternehmen nur bestimmte Verzeichnisse vom Virenscanner ausgenom,men sind (i. d. R. Developer-Verzeichnisse) und dieses evtl. nicht dabei ist. Dann sinkt natürlich die Performance.
 
 ### Performance beim Löschen von Snapshots
 
