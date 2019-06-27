@@ -1,9 +1,41 @@
 # Jenkins
 
+Einsortieren:
+
+* http://wiki.jenkins-ci.org/display/JENKINS/Git+Parameter+Plugin
+
+
 * [Dokumentation](https://jenkins.io/doc/)
 * [Handbuch](https://jenkins.io/doc/book/)
 
 Jenkins wird zur Automatisierung von Builds und Deployments verwendet.
+
+---
+
+## TLDR;
+
+Die Idee von Jenkins ist prinzipiell gut ... aber ob ich wirklich Jenkins nehmen würde, wenn ich die freie Wahl hätte - ich denke nicht.
+
+Das gute zuerst: Es gibt unzählige Plugins für Jenkins und eine große Community - insofern schießt man sich nicht ins Abseits, wenn man sich dafür entscheidet. Groovy macht die Möglichkeiten THEORETISCH grenzenlos, praktisch setzt das fehlende Tooling feste Grenzen.
+
+ABER:
+
+* die Web-UI ist fürchterlich - unintuitiv und buggy
+* die Pipline-Sprache existiert als declarative und scripted Variante - schaut man in Foren, um das eigene Problem zu lösen ist es Laien anfangs meist nicht klar welche Variante in der Lösung beschrieben ist. Zudem ist die Developer Experience sehr bescheiden - wie soll man vernünftig an den Pipelines arbeiten, wenn
+  * es keine ordentliche Entwicklungsumgebung (Auto-Vervollständigung, Debugging) gibt. Die Pipelines müssen aufgrund der fehlenden Entwicklungsumgebung immer erst mal ins Remote-Git-Repository gebracht werden (commit, push), um dann den Job zu triggern
+  * die Fehlermeldungen sehr kryptisch sind
+
+    > ich habe mal einen Pipeline-Parameter `my-param` genannt und wollte ihn per `${params.my-param}` referenzieren ... ging nicht - die Fehlermeldung war nichtssagend. Die Doku paßte zu meiner Nutzung und deshalb habe ich den Fehler in dem eingebetteten Kontext gesucht. Zwei Stunden später hat es dann durch eine Umbenennung der Parameter-Variable von `my-param` zu `my_param` funktioniert. Ich liebe es.
+
+  * der Workaround über _Jenkins Pipeline Syntax Generator_ funktioniert nicht gut
+* das Pipeline-Konzept und die Jobs passen nicht zueinander .. ich muß einen Job anlegen, um daran eine Pipeline zu referenzieren, die genau diesen Job beschreiben soll. Parameter kann ich aber beispielsweise im Job UND in der Pipeline definieren ... was zieht nun?
+  * aus diesem Grund hat man gelegentlich auch das Henne-Ei-Problem wie hier
+    * ich definiere einen Job, der die Pipeline (mit Build-Parameters) aus dem GIT-Repo holt
+    * beim ersten Start kann ich keine Build-Parameter eingeben, weil Jenkins noch gar nicht weiß, daß es welche gibt
+    * beim zweiten Start "kennt" Jenkins dann die Pipeline und bietet mir beim Start Build-Parameter zur Auswahl an
+    * ... fühlt sich gar nicht gut ...
+
+Fazit: die Entwicklung von Pipelines verkommt zum nervenaufreibenden Trial-and-Error mit `echo` Statements, bei dem man nie den Eindruck hat, die Sprache zu beherrschen.
 
 ---
 

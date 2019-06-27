@@ -2,7 +2,7 @@
 
 * [Homepage](https://code.visualstudio.com/?wt.mc_id=DX_841432&utm_source=vscom&utm_medium=ms%20web&utm_campaign=VSCOM%20Home)
 
-Aus einem Atom-Fork hervorgegangen ... die out-of-the-box Git-Integration ist schon mal sehr beeindruckend. Zudem bringt es noch weitere meiner favorisierten Features mit (auto-reveal-in-sidebar, Terminal, git-diff ... lokale Änderungen werden im Editor markiert), die bei Atom nachträglich installiert werden müssen. 
+Aus einem Atom-Fork hervorgegangen ... die out-of-the-box Git-Integration ist schon mal sehr beeindruckend. Zudem bringt es noch weitere meiner favorisierten Features mit (auto-reveal-in-sidebar, Terminal, git-diff ... lokale Änderungen werden im Editor markiert), die bei Atom nachträglich installiert werden müssen.
 
 ## Installation
 
@@ -33,11 +33,17 @@ Im Gegensatz zu Atom hat VSC keine grafische Darstellung der Konfiguration (File
 Die Konfiguration kann auf verschiedenen Ebenen erfolgen:
 
 * userspezifisch: `~/.config/Code - Insiders/User/settings.json`
-* projektspezifisch (Projekt = Workspace): `${PROJECT_DIR}/.vscode/settings.json` 
+* projektspezifisch (Projekt = Workspace): `${PROJECT_DIR}/.vscode/settings.json`
 
 Man überschreibt dann immer die Default-Setting, die man nicht ändern kann ... eine gute Idee.
 
-## Meine Keybindings
+### Lieblingssettings
+
+* workbench.editor.enablePreview : false
+  * VSC unterscheidet zwischen _Open in Preview-Mode_ (wenn man per _Go to File_ eine Datei öffnet) und _Open in Full Mode_ (wenn man eine Datei per Mausclick öffnet). Im Preview-Mode kann nur eine einzige Datei im Tab offengehalten werden ... das öffnen der nächsten Datei tauscht diesen Tab aus - die vorige Datei ist dann wieder zu. Total dämlich ... ganz schnell weg damit.
+* markdown-pdf.convertOnSave : true
+
+### Meine Keybindings
 
 * Eclipse Keymap ... Plugin nachinstalliert
 * Terminal anzeigen/verstecken: Ctrl-^
@@ -47,7 +53,7 @@ Man überschreibt dann immer die Default-Setting, die man nicht ändern kann ...
   * bei der Auswahl Ctrl drücken => weiteres Fenster wird geöffnet
 * `Ctrl-e` Liste der geöffneten Files ... Navigation per Ctrl-(Shift)-e
 * `Ctrl-,` Settings anschauen
-* `Ctrl-.` Keybindings anschauen 
+* `Ctrl-.` Keybindings anschauen
 
 ## Plugins
 
@@ -87,7 +93,7 @@ Nochmal interessanter wird es dadurch, daß auch Zeileneinsprünge möglich sind
 test/pierre.txt:35:Sonne scheint
 ```
 
-Per `v test/pierre.txt:35` wird VSC direkt an der richtigen Stelle geöffnet. 
+Per `v test/pierre.txt:35` wird VSC direkt an der richtigen Stelle geöffnet.
 
 ... echtes Workbench Feeling :-)
 
