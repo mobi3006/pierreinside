@@ -2,11 +2,13 @@
 
 * [Homepage](https://www.vaultproject.io)
 
-Vault ist ein weiteres Tool aus dem Sortiment von HashiCorp. Ähnlich wie [Consul](consul.md) ist es ein Key/Value Store ... allerdings für das sicher Aufbewahren von Geheimnissen (z. B. Username/Password).
+Vault ist ein weiteres Tool aus dem Sortiment von HashiCorp. Ähnlich wie [Consul](consul.md) ist es ein Key/Value Store ... allerdings für das sichere Aufbewahren von Geheimnissen (z. B. Username/Password). Hierzu werden die Daten verschlüsselt gespeichert und selbst Vault kann die Daten nur dann lesen, wenn ein [Unsealing](https://www.vaultproject.io/docs/concepts/seal.html) stattgefunden hat.
+
+---
 
 ## Getting Started
 
-Wie immer in der heutigen Zeit kommt man am schnellsten mit [Docker](docker.md) voran:
+Wie so häufig kommt man am schnellsten mit [Docker](docker.md) voran:
 
 ```bash
 docker run --cap-add=IPC_LOCK -d --net=host --name=myVault -e VAULT_DEV_ROOT_TOKEN_ID=root vault
@@ -31,9 +33,13 @@ so daß der Container per `docker-compose up -d vault` im Development Mode gesta
 command: server -config=/vault/config/vault-config.json
 ```
 
-> ACHTUNG: der Container verliert seine Daten durch einen Restart, da er nur In-Memory Storage - lösbar durch Verwendung anderer Storage Backends (z. B. Consul oder File Storage mit einem persistenten Volume). Ohne den Parameter `VAULT_DEV_ROOT_TOKEN_ID` wird ein Token generiert (z. B. `b9f49ccd-aac7-e894-66e3-798a43022c2b`) und beim Startup im Log ausgegeben - die Token Authentication Methode ist per Default eingeschaltet.
+> ACHTUNG: der Container verliert seine Daten durch einen Restart, da er nur In-Memory Storage - lösbar durch Verwendung anderer Storage Backends (z. B. Consul oder File Storage mit einem persistenten Volume). Ohne den Parameter `VAULT_DEV_ROOT_TOKEN_ID` wird ein zufälliger [Token](https://www.vaultproject.io/docs/concepts/tokens.html) generiert (z. B. `b9f49ccd-aac7-e894-66e3-798a43022c2b`) und beim Startup im Log ausgegeben. Die Token Authentication Methode ist per Default eingeschaltet - man benötigt den Token beispielsweise beim Login über die WEB-UI.
 
-Das WEB UI steht dann unter [http://localhost:8200/ui](http://localhost:8200/ui) zur Verfügung - per `root` token kann man sich anmelden.
+Das WEB UI steht dann unter [http://localhost:8200/ui](http://localhost:8200/ui) zur Verfügung - per `root` Token kann man sich anmelden.
+
+### Developer Mode
+
+Wird Vault im [Developer-Mode](https://www.vaultproject.io/docs/concepts/dev-server.html) gestartet, so ist es automatisch unsealed, d. h. eine Eingabe des Master-Keys zum Entschlüsseln des Verschlüsselungs-Keys der Daten ist nicht mehr erforderlich.
 
 ### Docker Deployment - CLI
 
@@ -84,6 +90,8 @@ storage "consul" {
 
 Anschließend sollte man unter `Key/Values - vault/logical` die Keys sehen. Im Vault WEB-UI sieht man sie auch weiterhin ... macht ja Sinn, d
 
+---
+
 ## Konzepte
 
 * Vault verschlüsselt die Werte bevor sie zum Backend Storage gesendet werden - dementsprechend speichert das Storage nur Bits ... eine Interpretation/Nutzung ist nicht möglich
@@ -99,6 +107,8 @@ resource "vault_generic_secret" "mySecret" {
 }
 ```
 
+---
+
 ## Nutzung
 
 Vault stellt folgende Interfaces zur Verfügung
@@ -107,11 +117,14 @@ Vault stellt folgende Interfaces zur Verfügung
 * [CLI `vault`](https://www.vaultproject.io/intro/getting-started/first-secret.html)
 * [REST interface](https://www.vaultproject.io/api/index.html)
 
+---
+
 ## Authentication Method
 
 Vault unterstützt viele Authentifizierungsmethoden
 
-* Token
+* [Token](https://www.vaultproject.io/docs/concepts/tokens.html)
+  * im Developer-Mode standardmäßig freigeschaltet - es wird ein Token beim Start generiert und im Log ausgegeben
 * Username/Password
 * TLS Zertifikate
 * AppRole
@@ -121,11 +134,33 @@ Vault unterstützt viele Authentifizierungsmethoden
   * GitHub
 * ...
 
+---
+
+### Authorization
+
+ACL (Access Control List) definiert welche Berechtigungen ein User (identifiziert über Token)
+
+Roles
+
+---
+
 ## Storage
 
 * In-Memory
 * Festplatte
 * Consul
+
+Vault selbst speichert die Daten verschlüsselt - Vault hat nur Zugriff, wenn es über den Master-Key verfügt. Die Verschlüsselung erfolgt mit einem Key, der mit dem sog. Master-Key verschlüsselt ist. Dieser Master-Key muß Vault im sog. [Unsealing-Prozess](https://www.vaultproject.io/docs/concepts/seal.html) übergeben werden - das kann von verschiedenen Endgeräten verteilt erfolgen, um die Sicherheit zu erhöhen.
+
+### Master-Key
+
+Der Master-Key ist allerdings kein einzelner Schlüssel, der EINEM Operator zur Verfügung steht. Stattdessen kann das Secret auf verschiedene Stakeholder verteilt werden und eine bestimmte Anzahl genügt, um den Master-Key zu rekonstruieren. [Shamir Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) ist das dahinterliegende Konzept.
+
+### Auto-Unseal
+
+Um ein Auto-Unseal zu unterstützen (und somit Auto-Setup zu unterstützen) wird das Secret von Personen auf Geräte/Services umverteilt.
+
+---
 
 ## Secret Engines
 

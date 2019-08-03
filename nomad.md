@@ -4,7 +4,9 @@
 
 Nomad ist ein weiteres Tool aus dem Sortiment von HashiCorp. Es wird als Scheduler für Services (gestartet über einen sog. [Driver](https://www.nomadproject.io/docs/drivers/index.html)) verwendet. Einfacher ausgedrückt: hiermit werden Prozesse auf Worker-Maschinen gestartet.
 
-Nomad sorgt auch selbständig dafür, daß die gewünschte Anzahl an Service-Knoten läuft, indem es kontinuierlich einen HealthCheck macht und bei Bedarf neue Knoten startet. Sowohl Nomad Server als auch Nomad Clients/Worker werden in Produktiv-Szenarien auf verschiedene Regions verteilt (z. B. AWS: Availability Zones). Auf diese Weise wird die Verfügbarkeit verbessert.
+Nomad sorgt auch selbständig dafür, daß die gewünschte Anzahl an Service-Knoten läuft, indem es kontinuierlich einen HealthCheck macht und bei Bedarf neue Knoten startet. Außerdem werden die Services auf Knoten gestartet, die die notwendigen Voraussetzungen (Betriebssystem, Ressourcen, ...) erfüllen. 
+
+Sowohl Nomad Server als auch Nomad Clients/Worker werden in Produktiv-Szenarien auf verschiedene Regions verteilt (z. B. AWS: Availability Zones). Auf diese Weise wird die Verfügbarkeit verbessert.
 
 Beim Rollout einer neuen Version bietet Nomad in der [Job Stanza](https://www.nomadproject.io/docs/job-specification/update.html) Unterstützung für
 
@@ -79,7 +81,7 @@ Hierbei kümmert sich Nomad (definiert im Nomad-Job) auch um die Ressourcenzuwei
 
 Die Beschreibung erfolgt in der HashiCorp Configuration Language (HCL).
 
-> Job-Datei ->1 Job ->* group -> Evaluation -> Allocation ->* task
+> Job-Datei -> ein Job ->* group -> Evaluation -> Allocation ->* task
 
 es wird der gewünschte Zustand beschrieben - Nomad ermittelt daraus in der Planungsphase die tatsächlichen Aktionen im Vergleich zum aktuell laufenden Setup. Sollte ein Service unhealthy werden (über einen im Job definierten Health-Check - kann unterschiedlich komplex sein - bei Spring Applikationen bietet sich die Actuator Health Endpoint an), den der Service anbieten muß), dann triggered Nomad automatisch ein Deployment.
 
@@ -96,9 +98,11 @@ Im Job werden die notwendigen Ressource-Anforderungen (Hardware, Architektur, So
   * kleinste ausführbare Einheit
   * wird von einem `driver` ausgeführt
 
+Für jede Service-Instanz wird eine eigene Allokation erzeugt, d. h. zur Ausführungszeit werden aus einem Job 1-n Allokationen, die auf den Nomad-Workern ausgeführt werden. Hinter jedem laufenden Service steht eine Allokation.
+
 ### Ausführung
 
-Nomad Jobs werden explizit durch den Admin (per `nomad job plan my-job.nomad`) oder durch Nomad selbst (wenn ein Service abraucht ... hierzu benötigt der Service entsprechende Health-Check Services) geplant (sog. Evaluation), d. h. hier wird ermittelt, welche Aktionen (sog. Allocation ... auf den Nomad-Clients kann man die Allocation-Logs auf dem Filesystem ansehen) auszuführen sind. Beispiel:
+Nomad Jobs werden explizit durch den Admin (per `nomad job plan my-job.nomad`) oder durch Nomad selbst (wenn ein Service nicht mehr erreichbar ist ... hierzu benötigt der Service entsprechende Health-Check Services) geplant (sog. Evaluation), d. h. hier wird ermittelt, welche Aktionen (sog. Allocation ... auf den Nomad-Clients kann man die Allocation-Logs auf dem Filesystem ansehen) auszuführen sind. Beispiel:
 
 > Ein Service soll nun mit 3 Instanzen bereitgestellt werden (ist jetzt so im Job geändert worden). Derzeit laufen aber nur 2.
 

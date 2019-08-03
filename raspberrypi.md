@@ -79,14 +79,16 @@ Man kann auf das Breadboard auch n
 Notwendige Vorbereitungen:
 
 * auf einem aktuellen Raspbian ist das Oracle Java runtime environment schon vorinstalliert
-* Pi4J benötigt eine Installation der nativen Bibliothek [WiringPi](http://wiringpi.com/) auf dem RPi
-  * per `curl -sSL https://pi4j.com/install | sudo bash` wird die Installation vorbereitet
-  * per `sudo apt-get update && sudo apt-get install pi4j` erfolgt die Installation
+* [Installation](http://wiringpi.com/download-and-install/) der nativen Bibliothek [WiringPi](http://wiringpi.com/) auf dem RPi
+* [Pi4J Installation](https://pi4j.com/1.2/install.html)
 * Java-Programme sehen dann beispielsweise so aus:
   * [Control GPIO](https://github.com/Pi4J/pi4j/blob/master/pi4j-example/src/main/java/ControlGpioExample.java)
   * [Listen GPIO](https://github.com/Pi4J/pi4j/blob/master/pi4j-example/src/main/java/ListenGpioExample.java)
   * [Shutdown GPIO](https://github.com/Pi4J/pi4j/blob/master/pi4j-example/src/main/java/ShutdownGpioExample.java)
   * [Trigger GPIO](https://github.com/Pi4J/pi4j/blob/master/pi4j-example/src/main/java/TriggerGpioExample.java)
+
+> Ich meinem Raspberry Pi 3 B+ hat die Nutzung von WiringPi nicht funktioniert. Nachdem `sudo apt-get install wiringpi` zu "undefined Symbol: wiringPiVersion" führte, versuchte ich mich an der Installation per Git-Repository. Das erste Problem bei der Installation von `git-core` (fehlendes Python Modul `ConfigParser`) konnte ich noch lösen, indem ich auf meinem System Python 2 als Default eingestellt habe (via `update-alternatives`). Das nachfolgende Problem "Unable to determine hardware version. I see: Hardware BCM2835 - expecting BCM2708 or BCM2709" war zu hartnäckig. Weder die beschriebene Installation über Git (mit `build`) hat funktioniert, noch die [Installation der Latest Version](http://wiringpi.com/wiringpi-updated-to-2-52-for-the-raspberry-pi-4b/) via `sudo dpkg -i wiringpi-latest.deb` hat funktioniert.
+>> Ich habe dann aufgegeben ...
 
 ### Arcade Button
 
@@ -241,6 +243,7 @@ Zubehör gibt es häufig auch als Starter Kits ... das macht auf jeden Fall Sinn
 
 ## Bastelideen
 
+* [Pico Spielekonsole mit Lucky Luke Spiel](https://github.com/mobi3006/pico)
 * [Projekt Sportstracker - unser eigenes Projekt](projekt_sportstracker.md)
 * https://raspberry.tips/hausautomatisierung/raspberry-pi-software-zur-hausautomatisierung/
 * http://raspberrypiguide.de/howtos/powerpi-raspberry-pi-haussteuerung/

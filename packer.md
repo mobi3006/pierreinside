@@ -2,7 +2,15 @@
 
 Mit diesem Tool werden Images unterschiedlichster Art gebaut: Docker, AMI, VMWare, Virtualbox, ...
 
+---
+
 ## Builder
+
+Die Builder-Sektion legt fest
+
+* welches Image ist die Quelle
+* welcher Image-Typ soll erstellt werden
+* 
 
 ### Docker Builder
 
@@ -13,6 +21,8 @@ Die Konfiguration von Docker Images basiert NICHT auf `Dockerfile` sondern auf e
 Damit ist die Sprache zunächst mal unabhängig vom Image-Typ - allerdings erfolgt die Konfiguration in einer eigenen DSL.
 
 > ich bin gespannt wie gut sich das anfühlt bei der Fehlersuche ... da hab ich mit einer in ANT eingebetteten DSL schon mal unangenehme Erfahrungen gemacht.
+
+---
 
 ## Provisioning
 
@@ -27,6 +37,8 @@ Provisioning bezeichnet die Detailkonfiguration des Images (z. B. installierte S
 
 ### Ansible Provisioning
 
+---
+
 ## Post-Processors
 
 Nach der Fertigstellung des Images werden die Artefakte in einem Repository gespeichert - das erledigen die Post-Processors:
@@ -37,6 +49,15 @@ Nach der Fertigstellung des Images werden die Artefakte in einem Repository gesp
 * Google Compute Export
 * vSphere
 * ...
+
+---
+
+## CLI
+
+* `packer validate`
+* `packer build`
+
+---
 
 ## Jenkins Integration
 
