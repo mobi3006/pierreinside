@@ -79,13 +79,23 @@ sudo apt-get install awscli
 
 habe ich nur eine awscli-1.14.xxx bekommen.
 
-Anschließend muß man die Credentials `~/.aws/credentials` noch einbinden (die Kommandos hängen davon ab, ob man die Python Installation verwendet hat oder die Package-Installation - [siehe Dokumentation](https://linuxhint.com/install_aws_cli_ubuntu/)):
+Anschließend muß man die Credentials `~/.aws/credentials` noch einbinden.
+
+Die Kommandos hängen davon ab, ob man die Python Installation verwendet hat oder die Package-Installation - [siehe Dokumentation](https://linuxhint.com/install_aws_cli_ubuntu/)):
 
 ```bash
 python -m awscli configure
 ```
 
+bzw.
+
+```bash
+aws configure
+```
+
 Hier wird man interaktiv nach den Crentials (AWS Access Key ID, AWS Secret Access Key, Default region). Aus den Angaben werden die Dateien `~/.aws/credentials` und `~/.aws/config` erzeugt.
+
+> AWS Roles verwendet man, wenn man seine Credentials nicht auf der Instanz hinterlegen möchte. Auf diese Weise kann man eine Role mit Permissions auf ein S3-Bucket anlegen und einer EC2-Instanz zuweisen. Dadurch hat die EC2-Instanz automatisch Zugriff auf das S3. Bucket. Mit [Terraform](terraform.md) läßt sich das auch schön automatosieren.
 
 Anschließend sollte man Zugriff haben und folgenden Befehl ausführen können:
 
@@ -97,16 +107,38 @@ aws iam get-user --user-name your_username@example.com
 
 ---
 
+## Kosten
+
+Zum Ausprobieren kann man sich einen kostenlosen (12 Monate) Free-Tier-Account anlegen. Will man aber Business auf der Platform betreiben, dann möchte man natürlich wissen, welche Kosten auf einen zukommen. Leider ist das allerdings nicht ganz einfach ... erstens muß man natürlich wissen, welche Last man bewältigen muß und zweitens muss man sich mit den AWS Tools ganz gut auskennen, um wirklich zuverlässige Zahlen zu bekommen.
+
+### Cost Explorer
+
+Hier kann man den aktuellen Verbrauch, den historischen und einen Forecast sehen. Man kann hier jede Menge filtern und gruppieren.
+
+### CloudWatch
+
+* [Cloudwatch in AWS Console](https://console.aws.amazon.com/cloudwatch)
+
+* Ressource Gruppen
+  * per Region
+* Dashboard mit Widgets
+
+---
+
 ## Konzepte
 
 ### Oranisationsebenen
 
-- [Konzept Regionen und Availability Zones](https://docs.aws.amazon.com/de_de/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
+* [Konzept Regionen und Availability Zones](https://docs.aws.amazon.com/de_de/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 
-- alle Regionen sind unabhängig voneinander
-- Region (z. B. us-east-1, us-east-2, us-west-1, eu-west-1)
-  - jede Region ist ein unterschiedlicher geografischer Bereich
-  - in jeder region gibt es wiederum mehrere physisch isolierte Standorte (Availability Zones)
+* alle Regionen sind unabhängig voneinander und man muß bei der Nutzung der AWS Console (Web-UI) die entsprechende Region auswählen
+* Region (z. B. us-east-1, us-east-2, us-west-1, eu-west-1)
+  * jede Region ist ein unterschiedlicher geografischer Bereich
+  * in jeder region gibt es wiederum mehrere physisch isolierte Standorte (Availability Zones)
+    ** us-east-1a
+    ** us-east-1b
+    ** ...
+    ** us-east-1f
 
 ### Availability Zones
 
@@ -114,18 +146,26 @@ Amazon muß natürlich auch selbst mal Wartungsarbeiten durchführen (oder hat a
 
 Der Elastic Load Balancer (ELB), der häufig der einzige öffentliche Zugangspunkt für Requests ist, sorgt dafür, daß die Requests aus dem Internet in die tatsächlich verfügbare Availability Zones delegiert werden.
 
+### Auto-Scaling-Group (ASG)
+
+Vorteil einer Cloud-Lösung gegenüber Bare-Metal ist, daß die Cloud-Lösung on-demand skaliert werden kann. Eine Auto-Scaling-Group übernimmt die automatische Skalierung der Instanzen, d. h. man gibt z. B. an, daß man
+
+* mind. 2 Instanzen
+* max. 10 Instanzen
+
+laufen lassen will. Die ASG sorgt dann aufgrund von Lastmetriken und Healthchecks für die automatische Erzeugung/Zerstörung von Instanzen. Auf diese Weise kann man dynamisch auf Lastspitzen reagieren, ohne die Kosten aus dem Ruder laufen zu lassen (denn die Instanzen werden auch reduziert, wenn keine Last anfällt).
+
 ---
 
 ## S3
 
-Dieser Dient bietet einen File-Server in Form von sog. S3-Buckets. Der Names des Buckets muß global eindeutig sein.
+Dieser Dienst bietet einen File-Server in Form von sog. S3-Buckets. Der Names des Buckets muß global eindeutig sein.
 
 ---
 
 ## Elastic Load Balancer (ELB)
 
 * [siehe in separater Seite](proxy.md)
-
 * [AWS - ELB](https://aws.amazon.com/de/elasticloadbalancing/)
 
 Amazon bietet folgende Arten von Loadbalancers:
@@ -140,6 +180,18 @@ Amazon bietet folgende Arten von Loadbalancers:
       * es könnte sein, daß mehrere Domains auf einen Loadbalancer geroutet werden (über DNS), dann kann der ELB über den Hostnamen ein entsprechendes Routing anbieten
     * pfad-basiert
 * Network Load Balancer
+
+Diese ELBs werden u. a. eingesetzt, um Verfügbarkeit durch Availability-Zones zu garantieren.
+
+---
+
+## Monitoring
+
+Verwendet man AWS-Services wie S3, RDS, ... so erfolgt das Monitoring über AWS-Cloudwatch, das ähnlich zu [Instana](instana.md) ist.
+
+### Instana Integration
+
+Verwendet man [Instana](instana.md), so möchte man die Monitoring-Daten zentral in Instana sammeln. Hierzu muß man eine AWS-Cloudwatch-Instana-Bridge verwenden, die die Daten von Cloudwatch ausliest und nach Instana transferiert. Hierbei werden die REST-Interfaces genutzt.
 
 ---
 

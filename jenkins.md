@@ -398,7 +398,7 @@ node {
 }
 ```
 
-### Automatisierung einer Jenkins Installation
+### Automatisierung einer Jenkins Installation - auf die harte Tour
 
 * [Jenkins Startup Hooks](https://wiki.jenkins.io/display/JENKINS/Groovy+Hook+Script)
 * [Breaking the Jenkins Monolith](https://medium.com/buildit/breaking-the-jenkins-monolith-52c47799ddb0)
@@ -428,7 +428,7 @@ Welche Alternativen sind möglich?
 * REST API nutzen
 * Groovy Schnittstelle nutzen ... alle -Skripte in `${JENKINS_HOME}/init.groovy.d` werden beim Start idempotent ausgeführt.
 
-### Optimierung 2: Jenkins als Docker Container
+#### Optimierung 2: Jenkins als Docker Container
 
 * [Docker in Docker? - Can you run Docker inside a Docker container?](https://itnext.io/docker-in-docker-521958d34efd)
 
@@ -483,6 +483,11 @@ pipeline {
 Job ausgeführt ... funktioniert - per `watch docker ps` sehe ich während der Jobausführung auch den Docker-Agent :-)
 
 Die Jobs (inkl. History) werden in `/var/jenkins_home` abgelegt, das in obigem Beispiel auf dem Docker Host (`-v /tmp/jenkins-data:/var/jenkins_home`) abgelegt wird. Auf diese Weise verliert man nichts, wenn man den Container löschen muß.
+
+### Automatisierung einer Jenkins Installation - auf die komfortable Tour
+
+* [Jenkins Configuration as Code 1](https://www.praqma.com/stories/jenkins-configuration-as-code/)
+* [Jenkins Configuration as Code 2](https://www.praqma.com/stories/start-jenkins-config-as-code/)
 
 ### Development Environment
 

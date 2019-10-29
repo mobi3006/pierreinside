@@ -6,13 +6,21 @@ Für die Erzeugung eigener Docker-Images gibt es zwei Möglichkeiten:
 
 2. ein ``Dockerfile`` erzeugen, das die Bauanleitung für das Image darstellt - siehe https://docs.docker.com/engine/tutorials/dockerimages/#/building-an-image-from-a-dockerfile
 
-Im ersten Fall kann man von außen nicht beurteilen, in welchem Zustand das Image ist (welche Änderungen wurden vorgenommen). 
+Im ersten Fall kann man von außen nicht beurteilen, in welchem Zustand das Image ist (welche Änderungen wurden vorgenommen). Außerdem ist das auch nicht gut reproduzierbar ... manuelles Anpassen statt Automatisierung wird gefördert. Deshalb sollte man das vermeiden!!!
 
-Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderungen basierend auf einem Base-Image durchgeführt wurden. 
+Verwendet man hingegen ein Dockerfile kann jeder nachvollziehen welche Änderungen basierend auf einem Base-Image durchgeführt wurden. Man kann hier die üblichen Verfahren wie Code-Reviews, Build-on-Change, ... verwenden.
+
+> "5) Don’t create images from running containers – In other terms, don’t use “docker commit” to create an image. This method to create an image is not reproducible  and should be completely avoided. Always use a Dockerfile or any other S2I (source-to-image) approach that is totally reproducible, and you can track changes to the Dockerfile if you store it in a source control repository (git)." ([10 things to avoid in docker containers](https://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/))
+
+Im übrigen wird beim `docker build` nichts anderes gamacht als einzelne Container erzeugt (und wieder weggeworfen), auf denen die `Dockerfile`-Anweisungen ausgeführt werden. Insofern handelt es sich um einen automatisierten Option-1 Prozess.
 
 ---
 
 ## Dockerfile
+
+* [MUST-READ - Dockerfile Best practices](https://docs.docker.com/v17.09/engine/userguide/eng-image/dockerfile_best-practices/#expose)
+* [MUST-READ - 9 Common Dockerfile Mistakes](https://runnable.com/blog/9-common-dockerfile-mistakes)
+* [MUST READ - 10 things to avoid in docker containers](https://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/)
 
 Hat man ein ``Dockerfile`` erzeugt, dann baut man das entsprechende Image per
 
@@ -20,27 +28,100 @@ Hat man ein ``Dockerfile`` erzeugt, dann baut man das entsprechende Image per
 docker build -t mobi3006/myFirstDockerImage .
 ```
 
-aus dem Verzeichnis, in dem sich das ``Dockerfile`` befindet. In obigen Beispiel bekommt das Image den Namen ``myFirstDockerImage``. Unter diesem Namen kann es dann beispielsweise per
+aus dem Verzeichnis, in dem sich das ``Dockerfile`` befindet.
+
+> `.` ist in diesem Fall der sog. Build-Context
+
+In obigen Beispiel bekommt das Image den Namen ``myFirstDockerImage``. Unter diesem Namen kann es dann beispielsweise per
 
 ```bash
 docker run myFirstDockerImage
 ```
 
-gestartet werden.
+gestartet werden. Das Image befindet sich damit aber nur in der lokalen Registry - in vielen Fällen wird man die Images zentral bereitstellen wollen und muß das Images per `docker push ...` noch registrieren
 
 ### Was beim Build passiert
 
-Der Build eines Images besteht darin, basierend auf dem Base-Image (``FROM mysql``) einen Container zu instanziieren und darauf die Anweisungen aus dem Dockerfile auszuführen. Nach jedem erfolgreichen Step hat man einen neuen Containerzustand und der wird in ein Image committet (z. B. mit den seltsamen Namen ``d799d66c1d0b``).
+Der Build eines Images besteht darin, basierend auf dem Base-Image (``FROM mysql``) einen Container zu instanziieren und darauf die Anweisungen aus dem Dockerfile auszuführen. Nach jedem erfolgreichen Step hat man einen neuen Containerzustand und der wird in ein (Intermediate-) Image committet (z. B. mit den seltsamen Namen ``d799d66c1d0b``).
+
+> "Only the instructions RUN, COPY, ADD create layers. Other instructions create temporary intermediate images, and do not increase the size of the build." ([Dockerfile-Best-Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/))
+
+Die Layer kann man sich übrigens per `docker history myFirstDockerImage` anschauen.
 
 > "Next you can see each instruction in the Dockerfile being executed step-by-step. You can see that each step creates a new container, runs the instruction inside that container and then commits that change - just like the docker commit work flow you saw earlier. When all the instructions have executed you’re left with the 97feabe5d2ed image (also helpfuly tagged as ouruser/sinatra:v2) and all intermediate containers will get removed to clean things up." (https://docs.docker.com/engine/tutorials/dockerimages/)
 
 Bei erfolgreichem Build sorgt der letzte Commit (= aktueller Zustand des Containers wird in ein Image persistiert) dafür, daß das Image den angegebenen sprechenden Namen erhält (z. B. ``mysql:5.7``).
 
-### Versionierung der Build-Step-Ergebnisse
+> Beim Start eines solchen Images ist dann schon alles vorbereitet und als oberster [Layer](https://docs.docker.com/storage/storagedriver/) wird ein writable Layer gesetzt, so daß man im Container Veränderungen vornehmen kann.
 
-Ein Docker-Build kann sehr schnell sein, denn durch die Versionierung der einzelnen Steps, müssen nur noch die geänderten Steps neu durchgeführt werden. Ändert sich nichts, dann wird auch nichts getan.
+Docker Images können schon mal groß werden - deshalb versucht man mit dem Layered-Filesystem eine Optimierung der Artefakte. Das zahlt sich nicht nur im Speicherverbrauch der Images aus, sondern auch beim Download durch die Nutzer der Images. Somit können Docker Container schneller gestartet werden, auch wenn sie vermeintlich groß sind und noch nicht lokal zur Verfügung stehen.
 
-**DESHALB:** um beste Build-Performance zu erzielen, sollte die Reihenfolge der Statements geeignet gewählt sein!!!
+Ein Docker-Build kann sehr schnell sein, denn durch die Versionierung der einzelnen Steps, müssen nur noch die geänderten Steps neu durchgeführt werden. Ändert sich nichts, dann wird auch nichts getan ... im Build sieht man das am `Using cache`:
+
+```log
+Step 3/13 : ENV MAVEN_HOME /usr/share/maven
+ ---> Using cache
+ ---> 704681550aa8
+```
+
+Von dieser Optimierung muß man wissen, wenn man ein `Dockerfile` schreibt, denn
+
+> "Another issue is with running apt-get update in a different line than running your apt-get install command. The reason why this is bad is because a line with only apt-get update will get cached by the build and won't actually run every time you need to run apt-get install. Instead, make sure you run apt-get update in the same line with all the packages to ensure all are updated correctly." ([9 Common Dockerfile Mistakes](https://runnable.com/blog/9-common-dockerfile-mistakes))
+
+**DESHALB:** um beste Build-Performance und Ressourcennutzung zu erzielen, sollte man explizit sein und nicht diesem Anti-Pattern verfallen:
+
+```
+# !!! ANTIPATTERN !!!
+COPY ./my-app/ /home/app/
+RUN npm install # or RUN pip install or RUN bundle install
+# !!! ANTIPATTERN !!!
+```
+
+Ändert man etwas an einem Layer, dann müssen alle darüberliegenden Layer neu gebaut werden.
+
+**DESHALB:** um beste Build-Performance und Ressourcennutzung zu erzielen, sollte die Reihenfolge der Statements geeignet gewählt sein!!!
+
+**ACHTUNG:** bei Updates am Betriebssystem (z. B. `RUN apt-get upgrade`) will man das Caching i. a. nicht haben, denn Docker würde zum Buildzeitpunkt keine Änderung an dem Layer erkennen können und würde den gecachten Stand verwenden, ohne das `apt-get upgrade` durchzuführen.
+
+Beim Download eines Docker Images (während eines Build oder beim Start eines Containers) sieht man die Layer übrigens auch:
+
+```log
+Sending build context to Docker daemon  59.19MB
+Step 1/13 : FROM maven:3.6.1-jdk-8
+3.6.1-jdk-8: Pulling from library/maven
+9cc2ad81d40d: Downloading [=========================================>         ]  37.23MB/45.37MB
+e6cb98e32a52: Download complete
+ae1b8d879bad: Download complete
+42cfa3699b05: Download complete
+8d27062ef0ea: Download complete
+9b91647396e3: Download complete
+7498c1055ea3: Downloading [==================>                                ]  39.37MB/104.2MB
+58d962a105be: Download complete
+3a71983ad027: Download complete
+0f1fddd5e427: Download complete
+```
+
+Jedes gecachte Layer muß dann nicht mehr runtergeladen werden. ALLERDINGS: gecachte Layer können ganz schön viel Platz verbrauchen. deshalb sollte man gelegentlich mal aufräumen!!!
+
+### Use multi-stage builds
+
+* [Docker-Dokumentation - Multi-Stage Builds](https://docs.docker.com/develop/develop-images/multistage-build/)
+
+Manchmal paketiert man nicht nur die Artefakte im Build, sondern stößt auch tatsächlich Builds der Software an. Die Zwischenartefakte will man natürlich nicht im Image haben. Vor Docker 17.05 mußte man sich hier selbst helfen ... ab 17.05 verwendet man Multi-Stage Builds.
+
+### Empfehlungen
+
+* "4) Don’t use a single layer image – To make effective use of the layered filesystem, always create your own base image layer for your OS, another layer for the username definition, another layer for the runtime installation, another layer for the configuration, and finally another layer for your application. It will be easier to recreate, manage, and distribute your image." ([10 things to avoid in docker containers](https://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/))
+* die Reihenfolge wird bestimmt durch "was ändert sich häufiger" bzw. "was muß ich bei einer Änderung noch ändern" ... dementsprechend updated man zuerst das Betriebssystem und am Ende die Anwendung
+* "The solution is perform updates and cleanups in a single RUN instruction, which both updates the image, and frees space (resulting in a smaller image) at the same time." ([Keep it small: a closer look at Docker image sizing](https://developers.redhat.com/blog/2016/03/09/more-about-docker-images-size/))
+* was man runterlädt sollte man nach der Installation auch im selben RUN Command entfernen:
+
+  ```Dockerfile
+  RUN apt-get update \
+         && apt-get -y install xdg-utils wget unzip \
+         && apt-get clean \
+         && rm -rf /var/lib/apt/lists/*
+  ```
 
 ---
 

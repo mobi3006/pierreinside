@@ -45,7 +45,7 @@ Wird Vault im [Developer-Mode](https://www.vaultproject.io/docs/concepts/dev-ser
 
 Wenn man das Kommandozeilen Interface verwenden möchte, dann erzeugt man am besten per `docker exec -it vault sh` und exportiert die folgenden Umgebungsvariablen:
 
-```
+```bash
 export VAULT_ADDR=http://vault:8200
 export VAULT_TOKEN=root
 ```
@@ -154,11 +154,21 @@ Vault selbst speichert die Daten verschlüsselt - Vault hat nur Zugriff, wenn es
 
 ### Master-Key
 
-Der Master-Key ist allerdings kein einzelner Schlüssel, der EINEM Operator zur Verfügung steht. Stattdessen kann das Secret auf verschiedene Stakeholder verteilt werden und eine bestimmte Anzahl genügt, um den Master-Key zu rekonstruieren. [Shamir Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) ist das dahinterliegende Konzept.
+Der Master-Key ist in Produktivszenarien allerdings kein einzelner Schlüssel, der EINEM Operator zur Verfügung steht. Stattdessen wird dieses Geheimnis in sog. Shared Keys zerteilt ... und zwar so, daß eine bestimmte Anzahl von Shared-Keys ausreicht, um den Master-Key zu restaurieren. [Shamir Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) ist das dahinterliegende Konzept
+
+Beispiel:
+
+> Der Master-Key wird in 5 Shared Keys zerteilt Teile und 3 genügen, um den Masterkey wiederherzustellen.
+
+```
+vault operator init -key-shares=5 -key-threshold=3
+```
 
 ### Auto-Unseal
 
-Um ein Auto-Unseal zu unterstützen (und somit Auto-Setup zu unterstützen) wird das Secret von Personen auf Geräte/Services umverteilt.
+Um ein Auto-Unseal zu unterstützen (und somit Auto-Setup zu unterstützen) wird das Secret von Personen auf Geräte/Services umverteilt und dann genügt auch nur ein einziger _Cloud based key_.
+
+[Auto-Unsealing mit AWS KMS](https://learn.hashicorp.com/vault/operations/ops-autounseal-aws-kms)
 
 ---
 

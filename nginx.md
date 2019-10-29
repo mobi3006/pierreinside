@@ -11,7 +11,7 @@ Dieser sehr schlanke Webserver wird nicht nur gern als solcher eingesetzt, sonde
 
 ## Name-based virtual Servers
 
-In einer nginx Konfiguration (`app.conf`) können mehrere (virtuelle) Server definiert werden. Wenn unterschiedliche DNS-Namen (z. B. `intern.cachaca.de` + `extern.cachaca.de`) auf die gleiche IP-Adresse geroutet wird, dann können entsprechende virtuelle Server-konfigurationen für diese beiden Namen existieren, so daß Requests unterschiedlich weiterverarbeitet werden.
+In einer nginx Konfiguration (`app.conf`) können mehrere (virtuelle) Server (`server/server_name`) definiert werden. Wenn unterschiedliche DNS-Namen (z. B. `intern.cachaca.de` + `extern.cachaca.de`) auf die gleiche IP-Adresse geroutet wird, dann können entsprechende virtuelle Server-konfigurationen für diese beiden Namen existieren, so daß Requests in Abhängigkeit der verwendeten URL unterschiedlich behandelt/weiterverarbeitet werden.
 
 ---
 

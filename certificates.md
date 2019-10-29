@@ -51,16 +51,61 @@ Um mit Zertifikaten rumzuspielen bietet sich das Docker-Image von [NGINX](https:
 ### Aufbau einer eigenen CA
 
 * [Getting Started](https://www.phildev.net/ssl/opensslconf.html)
-* https://github.com/openssl/openssl/blob/master/apps/openssl.cnf
 * [OpenSSL Cookbook](https://www.feistyduck.com/library/openssl-cookbook/online/ch-openssl.html)
+* [OpenSSL Template Beispiel](https://github.com/openssl/openssl/blob/master/apps/openssl.cnf)
 
 Mit `openssl` lassen sich leicht mit Zertifikate oder CSRs (Certificate Sign Requests) anlegen. Will man das ein wenig automatisieren, so bietet es sich an eine gemeinsame Konfigurationsdatei [`ca.conf` nach diesem Schema](https://github.com/openssl/openssl/blob/master/apps/openssl.cnf) anzulegen (Linux Systeme mit installierten `openssl` bieten eine Default-Konfiguration unter `/etc/ssl/openssl.cnf`) und bei den Requests zu referenzieren:
 
 ```bash
-openssl req -new -out my.csr -key my.key -config ca.conf
+openssl req \
+        -new \
+        -out my.csr \
+        -key my.key \
+        -config ca.conf             # <======== Referenzierung
 ```
 
-Die Syntax dieser Datei ist nicht besonders intuitiv, da manche Values (in dieser Key/Value-Datei) Sections referenzieren. Deshalb empfehle die Lektüre "Getting Started" (siehe oben).
+Die Syntax dieser INI-type-Datei ist nicht besonders intuitiv, da manche Values (in dieser Key/Value-Datei) Sections referenzieren, ohne daß das ersichtlich ist:
+
+```ini
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+dir = /root/ca
+```
+
+Außerdem kann man beim `openssl ca -extensions server_cert`-Kommando, direkt eine Sektion explizit referenzieren
+
+```ini
+[ server_cert ]
+# Extensions for server certificates (`man x509v3_config`).
+basicConstraints = CA:FALSE
+nsCertType = server
+nsComment = "OpenSSL Generated Server Certificate"
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer:always
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+```
+
+oder das ist implizit gemacht - diese Sektion wird automatisch bei einem `openssl req -x509` verwendet:
+
+```ini
+[ req ]
+# Extension to add when the -x509 option is used.
+x509_extensions     = v3_ca
+
+[ v3_ca ]
+# Extensions for a typical CA (`man x509v3_config`).
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints = critical, CA:true
+keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+```
+
+> Dieses implizite Resolving ist nicht besonders intuitiv - bessert sich aber, wenn man für die verschiedenen Sub-Kommandos (`ca`, `req`, ...) unterschiedliche Template Dateien verwendet, die man mit `-config file` explizit referenziert.
+
+Deshalb empfehle die Lektüre "Getting Started" (siehe oben).
 
 ---
 

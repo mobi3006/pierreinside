@@ -7,7 +7,7 @@ Bei diesem Tool handelt es sich um ein Application Performance Monitoring (APM) 
 * [Michael Krumm - Youtube](https://www.youtube.com/watch?v=wghFJGpF3Fw)
 * [Instana Webinar](https://www.youtube.com/watch?v=z14wXHzw5lU)
 
-Bei Instana ist Auto-Detection von neuen Hosts (physikalische Sicht), Services, internen Applikationsstrukturen Strukturen (APIs) und deren Beziehungen zueinander das Guiding Light. Insbesondere in elastischen Cloud-Deployments ist das eine sehr wichtige Eigenschaft. Instana versucht, die Semantik der Anwendungen zu verstehen, um nicht nur Daten, sondern tatsächlich Informationen und automatisches Alerting zu liefern. Bei diesem Ziel ist jede (hart geforderte) manuelle Intervention (zur expliziten Abbildung dieser Strukturen) aufgrund des elastischen/agilen Umfeld nicht akzeptabel, weil es zum Scheitern verurteilt ist. Maintenance-Free. Hierzu enthält Instana viel Wissen über Technologien (z. B. JPA), denn das wird bei der Interpretation der Daten benötigt. Auf diese Weise werden die verschiedenen Layer der Applikation erkannt. Damit ist ein Drill-Down vom Web-Service-Request bis runter zu den dadurch ausgelösten Datanbank-Zugriffen möglich. Tatsächliche Bottlenecks können so nicht nur entdeckt, sondern eine evtl. Lösung zeichnet sich im besten Fall schon ab (z. B. wenn 2000 Datenbank-Calls abgesetzt werden, dann werden scheinbar Datenbankzugriffe in einer Loop-Schleife gemacht ... das skaliert natürlich nicht und muß durch Bulk-Queries ersetzt werden). Datenströme (logische Sicht) werden inkl. der Auslastung dargestellt und ermöglichen somit eine gezielte Analyse der Bottlenecks. Asynchrone Kommunikation durch das System kann dem initiierenden Request zugeordnet werden, so daß letztlich der gesamte Kommunikationsweg untersucht werden kann - und das im Live-System.
+Bei Instana ist Auto-Detection von neuen Hosts (physikalische Sicht), Services, internen Applikationsstrukturen Strukturen (APIs) und deren Beziehungen zueinander das Guiding Light. Insbesondere in elastischen (und somit sehr dynamischen) Cloud-Deployments ist das eine sehr wichtige Eigenschaft. Instana versucht, die Semantik der Anwendungen zu verstehen, um nicht nur Daten, sondern tatsächlich Informationen und automatisches Alerting zu liefern. Bei diesem Ziel ist jede (hart geforderte) manuelle Intervention (zur expliziten Abbildung dieser Strukturen) aufgrund des elastischen/agilen Umfeld nicht akzeptabel, weil es zum Scheitern verurteilt ist. Maintenance-Free. Hierzu enthält Instana viel Wissen über Technologien (z. B. JPA, Docker, Jenkins), denn das wird bei der Interpretation der Daten und einer adäquaten Darstellung der Informationen (u. a. auch navigierbar) benötigt. Auf diese Weise werden die verschiedenen Layer der Applikation erkannt. Damit ist ein Drill-Down vom Web-Service-Request bis runter zu den dadurch ausgelösten Datanbank-Zugriffen möglich. Tatsächliche Bottlenecks können so nicht nur entdeckt, sondern eine evtl. Lösung zeichnet sich im besten Fall schon ab (z. B. wenn 2000 Datenbank-Calls abgesetzt werden, dann werden scheinbar Datenbankzugriffe in einer Loop-Schleife gemacht ... das skaliert natürlich nicht und muß durch Bulk-Queries ersetzt werden). Datenströme (logische Sicht) werden inkl. der Auslastung dargestellt und ermöglichen somit eine gezielte Analyse der Bottlenecks. Asynchrone Kommunikation durch das System kann dem initiierenden Request zugeordnet werden, so daß letztlich der gesamte Kommunikationsweg untersucht werden kann - und das im Live-System.
 
 Die Root-Cause-Analyse soll von Instana vereinfacht werden - deshalb:
 
@@ -18,7 +18,7 @@ Die Root-Cause-Analyse soll von Instana vereinfacht werden - deshalb:
 
 ## Alternativen
 
-Mit Ansätzen wie der [Zeitreihen-Datenbankk Prometheus](https://prometheus.io/) lassen sich auch eigene Lösungen stricken, die allerdings zunächst (vielleicht auch dauerhaft) einen hohen zeitlichen Invest erfordern. Letztlich ist man als Betreiber einer Anwendung aber nicht mit den reinen Daten zufrieden, sondern der Nutzen steht und fällt mit der Möglichkeit, aus diesen Unmengen an Daten tatsächlich Informationen zu gewinnen. Nur dadurch lassen sich Probleme/Bottlenecks in der Anwendung aufdecken und gewinnbringende Verbesserungen umsetzen.
+Mit Ansätzen wie der [Zeitreihen-Datenbank Prometheus](https://prometheus.io/) lassen sich auch eigene Lösungen stricken, die allerdings zunächst (vielleicht auch dauerhaft) einen hohen zeitlichen Invest erfordern. Letztlich ist man als Betreiber einer Anwendung aber nicht mit den reinen Daten zufrieden, sondern der Nutzen steht und fällt mit der Möglichkeit, aus diesen Unmengen an Daten tatsächlich Informationen zu gewinnen. Nur dadurch lassen sich Probleme/Bottlenecks in der Anwendung aufdecken und gewinnbringende Verbesserungen umsetzen.
 
 Aus guten Grund wurden Lösungen wie Instana, New Relic, Dynatrace, ... geschaffen, die für teures Geld verkauft werden. Eine Selbstimplementierung kann sich wahrscheinlich nur ein Großunternehmen leisten. Eine Adaption vorhandener Open-Source-Lösungen kann auch zeitaufwendig sein oder gar in die Sackgasse führen.
 
@@ -34,9 +34,15 @@ Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Def
 
 ### Application Perspective
 
-Application Perspective ist eine gefilterte Ansicht für selektierte Services - Definition durch den Benutzer (Subset aus Services, Endpoints). Alle Requests, die über irrelevante (d. h. applikationsfremde) Services/Endpoints getriggert werden, werden ignoriert. Bei der Definition einer Application Perspective kann man einfach einen oder mehrere Services selektieren und dann alle Downstream-Services automatisch selektieren lassen.
+Application Perspective ist eine gefilterte Ansicht für selektierte Services/Endpoints - Definition durch den Benutzer (Subset aus Services, Endpoints). Unterschiedliche Rollen (DEV, DEVOPS, SRE) haben unterschiedliche Interessen und sollten sich dementsprechend ad-hoc ihre Application Perspective zusammenstellen können.
+
+Alle Requests, die über nicht ausgewählte (= irrelevante, d. h. applikationsfremde) Services/Endpoints getriggert werden, bleiben unberücksichtigt. Bei der Definition einer Application Perspective kann man einfach einen oder mehrere Services selektieren und dann alle Downstream-Services automatisch selektieren lassen.
+
+Das praktische an dieser Application Perspective ist, daß sie automatisch erweitert wird, z. B. wenn ein neuer Service hinzukommt, der zu den Filterkriterien paßt.
 
 ### Services und Endpoints
+
+Ein Service hat 1-n Endpoints.
 
 * Services und Endpoints automatically discovered
   * endpoints define the API of a service
@@ -49,21 +55,40 @@ Application Perspective ist eine gefilterte Ansicht für selektierte Services - 
   * services: collection of endpoints
     * kann verteilt sein ... davon abstrahiert Instana
 
-### Traces
+Instana versucht, den Servicenamen nach technologieabhängigen Algorithmen festzulegen. Die Regeln sind hier dokumentiert, so daß man durch Einhaltung gewisser sinnvoller Konventionen den Namen "selbst" bestimmen kann. Man kann andernfalls auch die environment Variable `INSTANA_SERVICE_NAME` setzen oder in Instana ein entsprechendes Custom-Mapping definieren (das ist dann aber auf jeder Instana Instanz zu tun :-(
 
-Traces sind real-time informationen über die Aktivitäten, die die Services ausführen.
+### Traces, Calls, Spans
 
-### Infrastrcuture Map
+* [Instana Dokumentation](https://docs.instana.io/core_concepts/tracing/)
 
-* unmonitored Hosts
-  * haben keine Instana-Agents installiert
-    * monitored Agents öffnen Verbindungen zu diesen unmonitored Hosts
+Ein Trace ist der Weg eines Requests durch die Anwendungslandschaft bis zur Antwort. Ein Trace besteht aus 1-n Calls - ein Call ist eine Kommunikation zwischen Diensten. Ein Call besteht aus 1-2 Spans (Entry Span, Intermediate Span, Exit Span). Ein Span ist ein Ausführungsabschnitt innerhalb eines Service.
+
+"The first span in a particular service indicates that a call entered the service, and is called an entry span (The Dapper paper refers to it as a “server span”). Spans of calls leaving a service are called exit spans (in the Dapper paper they are “client spans”). Intermediate spans mark significant sections of code so the trace runtime can be clearly attributed to the correct code." ([Instana Dokumentation](https://docs.instana.io/core_concepts/tracing/#further-concepts))
+
+> Mit dem sog. [Custom Tracing](https://docs.instana.io/quick_start/custom_tracing/) lassen sich (intermediate) Spans im Applikationscode per Instana-SDK (z. B. [Instana Java-SDK](https://github.com/instana/instana-java-sdk)) definieren, um so beispielsweise innerhalb eines Services weitere Zwischenmessungen von Laufzeiten abzubilden.
+
+### Infrastructure Map
+
+Hier bekommt man einen sehr guten Überblick, über die Landschaft:
+
+* Hosts
+* Services
+
+Man kann hier
+
+* Filtern - über eine Query-Sprache wie `entity.service.name:blablubb`
+  * man kann auch Freitext versuchen ... z. B. den Service-Namen
+* Gruppieren nach
+  * Availability Zone
+  * Tags: häufig tagged man die Hosts, Services nach verschiedenen Aspekten (Live/Test/Dev, UI/Middleware/DB, ...)
+
+Unmonitored Hosts haben keine Instana-Agents installiert ... das könnten beispielsweise Third-Party-Services sein, die aus der eigenen Anwendungslandschaft aufgerufen werden und somit beim Tracing involviert sind.
 
 ### Change, Issue, Incident
 
 Datenaufzeichnung ist die Grundlage, um daraus Informationen zu gewinnen. Die geringstmögliche Beaobachtung ist ein Change - hierzu muß vergleicht Instana die Veränderungen am System (z. B. Service gestartet/gestoppt). Instana sammelt die Systemdaten kontinuierlich und benötigt eine kritische Menge an Daten, um einen Überblick über den "normalen" Verlauf zu bekommen und Abweichungen davon festzustellen. Diese Abweichungen werden als Issue bewertet. Nach bestimmten Regeln (system-based oder custom-based) wird aus einem Issue ein Incident.
 
-Change, Issue und Incident haben alle einen Startzeitpunkt und einen Endzeitpunkt.
+Change => Issue => Incident haben alle einen Startzeitpunkt und einen Endzeitpunkt.
 
 * Change:
   * start/stop eines Servers/Services
@@ -103,7 +128,7 @@ Instana bietet - ausgehend von einem Services-Aufruf (z. B. Webservice) - einen 
 
 ### Interaction Discovery
 
-Instana kann den Weg eines Client-Requests an einen Service über andere Services bis auf unterste Ebene tracen und nachverfolgen. Auf diese Weise lassen sich einersets ganz fein granulare Daten gewinnen (z. B. welche SQL-Query wurde gegen die Datenbank abgesetzt, wie lange hat das gedauert und wie hoch war die I/O-Rate in der Datenbank) und andererseits grobgranulare Informationen (z. B. wie häufig wurde ein Service aufgerufen?) ableiten.
+Instana verwendet Traces, um den Weg eines Client-Requests an einen Service und durch die (Microservice-) Anwendungslandschaft zu verfolgen. Auf diese Weise lassen sich einersets ganz fein granulare Daten gewinnen (z. B. welche SQL-Query wurde gegen die Datenbank abgesetzt, wie lange hat das gedauert und wie hoch war die I/O-Rate in der Datenbank) und andererseits grobgranulare Informationen (z. B. wie häufig wurde ein Service aufgerufen?) ableiten.
 
 ### Zero Configuration
 
@@ -134,12 +159,24 @@ Instana kommt mit einer Vielzahl komponentenspezifischer Sensoren
 
 so daß immer die relevanten Metriken gezogen und dargestellt werden können. Das geht sogar soweit, daß zu ein ElasticSearch Knoten Metriken auf folgenden Ebenen im direkten Zugriff sind:
 
+* Spring-Boot
+* Docker
 * Lucene Index
 * ElastciSearch Shard
 * ElasticSearch Cluster
 * Java-VM
 * OS-Prozess
 * Host
+* ...
+
+Im UI wird hierzu für jede Ebene spezifische Informationen geliefert. Beispiel:
+
+> Bei einer Spring-Boot Anwendung, die in einem Docker-Container auf einem Linux-System läuft, gibt es die folgenden Ebenen und Informationen:
+> * Host: CPU, Betriebssystem, Hostname, Netzwerkschnittstellen, ...
+> * Docker Container: Image, Start-Kommando, Startzeitpunkt, Ports, Container Labels, Scheduler (Docker-Compose, Nomad, ...)
+> * Prozess: Umgebungsvariablen, Startparameter
+> * JVM: Java-Version, Memory-Settings, JVM-Parameter
+> * Spring Boot: Konfiguration
 
 Das ist bei der Fehleranalyse sehr hilfreich.
 
@@ -173,17 +210,27 @@ Instana plant die Sensorentwicklung offen zu gestalten, so daß man für nicht u
 Sollte Instana wichtige Strukturen/Zusammenhänge in der Anwendung nicht selbständig erkennen, so lassen sich im Code Metainformationen über Annotationen hinterlegen:
 
 ```java
-@Span(type = Span.Type.INTERMEDIATE, value = "myService#execute")
+@Span(type = Span.Type.INTERMEDIATE, value = "myService.methodExecution")
 ```
+
+In der _Analyze Trace_ View kann man dann eine Filter `sdk.myService.methodExecution` definieren, um die Daten zu sehen.
 
 ### API
 
 * [API Dokumentation](https://docs.instana.io/quick_start/api/)
   * u. a. genutzt von [Grafana Instana Plugin](https://grafana.com/plugins/instana-datasource)
 
-Instana bietet eine REST-API, um die Daten automatisiert in die eigenen Workflows einzubinden. Hierzu benötigt man einen API-Key, den man über die Instana UI im Bereich Access Control erzeugen kann (hier definiert man die entsprechenden Berechtigungen).
+Instana bietet eine REST-API, um die Daten automatisiert in die eigenen Workflows einzubinden. Aber auch, um eigene Informationen über die Instana-Agent-REST-API ins Monitoring zu bekommen, z. B. bei neuen Deployments.
 
-### Auswertungen über Kategorisierung und Filter
+Die [Rest-APIs basieren auf OpenAPI v3 (formerly known as Swagger)](https://instana.github.io/openapi/openapi.yaml). Diese Schnittstellenbeschreibung läßt sich einfach in Postman importieren und dann können komfortabel Requests abgesetzt werden. Alternativ kann man sich aus der REST-OpenAPI per [OpenAPI Client Generator](https://github.com/OpenAPITools/openapi-generator) Client-Libs (Java, Go, Python, ...) erzeugen lassen.
+
+Hierzu benötigt man einen API-Key, den man über die Instana UI im Bereich Access Control erzeugen kann. An diesem API-Key hängen die entsprechenden Berechtigungen.
+
+### API mit Postman
+
+Den API-Key definiert man am besten auf höchster Ebene (am Instana-Paket) und referenziert ihn in den einzelnen Requests nur mit "Inherit from Parent". Als Key verwendet man `authorization`, als Value `apiToken {{instanaApiToken}}` - wobei man die Variable `instanaApiToken` dann noch definieren und setzen muß.
+
+### Dynamic Focus Queries - Auswertungen über Kategorisierung und Filter
 
 Es stehen folgende Kategorisierungsmöglichkeiten zur Verfügung:
   
@@ -192,13 +239,19 @@ Es stehen folgende Kategorisierungsmöglichkeiten zur Verfügung:
 * Zones (`entity.zone=myzone`)
 * Tags
   * ein Services kann mehrere Tags haben, so daß auf verschiedenen Ebenen gefiltert werden kann
-* `entity.type=`
+* Queries über Lucene-Syntax ... per AND verknüpft (OR muss explizit angegeben werden). Hierbei unterstützt Instana auf den Keys (z. B. `entity.tag.name`) vollständig Auto-Completion, auf den Values aber nur teilweise. Ich wünschte auf den Values würde es besser funktionieren, denn bei `entity.severity:10` weiß man natürlich nicht, was die `10` bedeutet ... hier muß man das Datenmodell schon gut kennen.
+  * `entity.tag.name:foo=bar`
+  * `entity.type:springboot`
+  * `entity.docker.label:maintainer=Pierre`
+  * `entity.host.cpu.count:<4 AND entity.zone:production) OR entity.host.cpu.count:>4`
 
 ### Cloud-Deployment Datenschutz
 
 Im Gegensatz zu On-Premise-Hosting gibt man beim Cloud-Hosting durch Instana die Daten in deren Obhut - ist das sicher?
 
 > Instana ist SOX-compliant und sichert zu, daß kein Content in Form von URL-Parametern oder Post-Request-Pasyloads auf den Servern
+
+---
 
 ## Architektur
 
@@ -210,11 +263,14 @@ Im Gegensatz zu On-Premise-Hosting gibt man beim Cloud-Hosting durch Instana die
     * Appserver (z. B. Tomcat)
     * ElasticSearch
     * ...
-  * schickt Messwerte ans Backend (On-Premise vs. Cloud)
+  * schickt Daten ans Backend (On-Premise vs. Cloud)
+    * ACHTUNG: die gesendeten Daten lassen sich einschränken - auf diese Weise ist es beispielsweise möglich bei SQL-Queries keine Werte der `WHERE-clauses zu übermitteln, so daß im Instana-UI keine "Geheimnisse" sichtbar sind
 * Backend (Cloud oder On-Premise)
   * sammelt die Daten der Agents
   * basierend auf Cassandra, Kafka, ElasticSearch ... scale-out possible with these technologies
 * Web-User-Interface
+
+---
 
 ## User-Interface
 
@@ -222,14 +278,20 @@ Im Gegensatz zu On-Premise-Hosting gibt man beim Cloud-Hosting durch Instana die
 * logische Sicht auf Services
 * Traces - einzelne Messpunkte, die bis in den Code (wird decompiliert) runtergehen
 
+---
+
 ## Integrationsmöglichkeiten
 
 * [Grafana-Integration](https://grafana.com/)
   * Instana läßt sich als Data-Source in Grafana nutzen (siehe [Instana Plugin](https://grafana.com/plugins/instana-datasource))
 
+---
+
 ## Konzepte
 
 ![Konzepte](images/instana.png)
+
+---
 
 ## Getting Started
 
@@ -264,8 +326,10 @@ services:
 
 Nach dem Start (`docker-compose up instana-agent`) sollte der Host im [Portal](http://instana.io) auftauchen.
 
+---
+
 ## FAQ
 
-**Frage 1:** Welchen Impact hat Instana auf die Performance der Anwendnung?
+**Frage 1:** Welchen Impact hat Instana auf die Performance der Anwendung?
 
 **Antwort 1:** Java-Anwendungen werden instrumentiert - das dauert ein wenig, ansonsten hat Instana [keine/kaum negativen Einfluss auf die Performance](https://youtu.be/wghFJGpF3Fw?t=1716). Natürlich benötigt der Instana-Agent Ressourcen (Memory/Network-I/O).

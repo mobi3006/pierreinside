@@ -41,18 +41,34 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
 * Eltern schlafen im Auto - Kinder im Zelt
   * wir werden im richtigen Urlaub IMMER einzusätzliches Zelt dabei haben, so daß das Auto auch noch für Ausflüge zur Verfügung steht
   * zur Not - bei Zwischenübernachtungen - kann man auch mal mit 2 Erwachsenen und 3 Kindern im Bus schlafen
+* im unteren Bereich sollte man auch bequem schlafen können ... wir werden ja auch älter und der Weg nach oben wird dann vielleicht irgendwann doch beschwerlicher
 
 ### MUST-HAVE
 
 * 5 Sitzplätze für Erwachsene ... lieber 6-7 (zumindest im Alltag)
 * Aufstelldach
-* nicht untermotorisiert (ca. 150 PS Diesel)... vielleicht auch mal eine Anhängerkupplung
+* gut motorisiert (ca. 150 PS Diesel)
+  * vielleicht hängt man irgendwann mal was dran (Anhängerkupplung) - derzeit aber nicht (höchstens nachrüsten)
+  * auch für die Wiederverkauf wichtig
 * Park-Distance-Control
   * Rückfahrkamera
+* toter Winkel Assistent
+* Standheizung (Frühjahr, Herbst)
+  * verlängert die Nutzungszeit sicherlich um 2 Monate
+* Sitzheizung
+* Bluetooth
+  * Freisprecheinrichtung
+  * Audio-Senke (auch für Navigationssystem am Handy)
+* Privacy-Paket (getönte Scheiben hinten)
+  * alternativ: Rollos
+* im oberen Schlafbereich rechts/links Fliegengitter zur Durchlüftung
+* Armlehnen Fahrer/Beifahrer
 
 ### NICE-TO-HAVE
 
 * Doppelklimaanlage (damit es hinten auch kühl wird)
+* austellbares Heckfenster
+* im Aufstelldach nach vorne ein Fenster
 * integrierte Schubladen unter der Rücksitzbank
 * aufstellbarer Tisch
 
@@ -60,17 +76,39 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
 
 ### DONT-HAVE
 
-* kein festes Hochdach
+* festes Hochdach
 * Küche/Spüle
   * niemand kocht in diesem Auto
 * Toilette
 * Dusche
+* Navigationssystem oder großer Radio-Schnick-Schnack
+* Multimedia-Support
+  * fraglich wie lange das wirklich unterstützt wird ... bei einem Apple-Dienst vielleicht länger als bei einem Android-Dienst - dafür ist Apple sicherlich weniger offen (welche Apps werden unterstützt)
+    * ich glaube, daß mein Handy/Tablet immer die aktuellere Software haben wird und auch leicht ausgetauscht werden kann - wichtig ist nur, daß der Ton auf die Auto-Lautsprecher ausgegeben werden kann (Bluetooth)
+  * [Apple Carplay](https://www.youtube.com/watch?v=8Bf1sg_tSfM)
+    * derzeit muß man noch eine USB-Verbindung herstellen
+  * Android Auto
+  * [MirrorLink](https://de.wikipedia.org/wiki/MirrorLink)
+
+### DONT-KNOW
+
+* LED-Scheinwerfer - sollen heller sein
+* Allrad-Antrieb
+  * Wintereinsatz
+  * Straßenlage soll besser sein
+  * Wiederverkauf
+* Markise
+  * bei Kurzaufenthalten (1-2 Tage) könnte ich mir sie recht nützlich vorstellen
+  * bei längeren Aufenthalten wird man ein Zelt aufbauen und dann braucht man die Markise maximal für eine Überdachung zum Zelt
+* Automatik
+  * ich bin mir nicht sicher, ob die dann auch noch bei höheren Laufleistungen nicht zickt
 
 ### Problemlösungen
 
 * mobiler Kühlschrank
   * Kompressorkühlbox zwischen Fahrer und Beifahrer
 * keine Einbauschränke - eher rausnehmbare Kisten/Einbauschränke
+* separates Zelt, so daß man mit dem Auto noch wegfahren kann
 
 ### Fazit
 
@@ -78,24 +116,239 @@ Die typischen Camper ist für uns nicht interessant, da er mit Ausbau nicht den 
 
 ---
 
-## VW California Beach - Bulli
+## Abgasnormen
+
+* [Wikipedia](https://de.wikipedia.org/wiki/Abgasnorm)
+
+... wird ja immer wichtiger in Zukunft - wer will schon einzelne Städte meiden müssen, weil man nicht mehr rein darf :-(
+
+Die meister Camper sind Diesel ... "In dieser Wagenklasse führt am Diesel kein Weg vorbei" ([autozeitung](https://www.autozeitung.de/vw-multivan-mercedes-v-klasse-peugeot-traveller-renault-trafic-test-192199.html))
+
+* aktuell sind
+  * Euro 6d (bis 120mg/km NOx)
+  * Euro 6d temp (bi2 168)
+
+### AdBlue
+
+> "Abhängig von der NOx-Konzentration und dem Motorzustand wird Adblue zur Reduktion zu Stickstoff, Kohlendioxid und Wasser eingebracht. Der Verbrauch an AdBlue liegt bei etwa 4 % bis 6 % des Kraftstoffverbrauchs[11] oder bei PKWs bis zu 8,5 Liter pro 1000 Kilometer." ([Wikipedia](https://de.wikipedia.org/wiki/AdBlue))
+
+---
+
+## Preisreduktion
+
+* Schwerbehinderung
+  * [BBAB](https://www.bbab.de/behindertenrabatt-beim-autokauf/behindertenrabatt-nach-marken/)
+  * [ADAC](https://www.adac.de/-/media/adac/pdf/jze/preisnachlass-beim-neuwagenkauf-fuer-menschen-mit-behinderung.pdf?la=de-de)
+  * allerdings muß man bedenken, daß die Hersteller/Händler teilweise bis zu 30% Rabatt ohne Schwerbehinderung gewähren ... keine Ahnung, ob das bei den Campern auch so ist
+    * in einigen Foren wurde von 8-17% berichtet (aber schon ein paar Jahre her)
+* EU-Import
+  * ... aber genau schauen, wann das Fahrzeug gebaut wurde ... und wann dementsprechend die Herstellergarantie abläuft
+* Lagerfahrzeug
+  * ... aber genau schauen, wann das Fahrzeug gebaut wurde ... und wann dementsprechend die Herstellergarantie abläuft
+
+---
+
+## Finanzierung
+
+Am besten man zahlt das Auto ohne Finanzierung ... bei > 40 TEUR kann sich das aber nicht jeder stemmen.
+
+Derzeit bietet Mercedes einen Zins von 2,5% an (bei einer sehr hohen Tilgung - 4 Jahre bis zur Kompletttilgung - 800 Euro Monatsrate => 2000 Euro Zinsen über die Gesamtlaufzeit) ... der Bauzins liegt bei 1,5%.
+
+### Leasing
+
+> "Dank der niedrigen Monatsraten scheint es auf den ersten Blick auch günstiger zu sein, ein Auto zu leasen anstatt es zu finanzieren. Doch Verpflichtungen, Einschränkungen und mögliche Zusatzkosten am Laufzeitende könnten Ihnen dabei einen Strich durch die Rechnung machen. [...] Und welche Variante ist nun sinnvoll, wenn Sie ein Auto leasen möchten? Wir empfehlen Ihnen das Kilometer-Leasing, da hier das Risiko einer Nachzahlung kalkulierbar ist. So können Sie bereits im Vertrag die Weichen stellen, wenn Sie ungefähr wissen, wie intensiv Sie das Fahrzeug nutzen werden. Beim Restwert-Leasing dagegen überwiegen die Nachteile. Zum einen setzen einige Händler den Restwert bewusst unrealistisch hoch an, um so mit niedrigen Monatsraten werben zu können. Zum anderen kann sich die Marktlage innerhalb der Leasingdauer erheblich ändern, so dass der Restwert drastisch sinkt. Auch ein Unfall während der Leasingzeit hat Einfluss auf den Restwert. Entscheiden Sie sich am Vertragsende das Auto zu kaufen, kann es zudem sein, dass der Restwert nicht mit dem Kaufpreis übereinstimmt – Sie müssen dann also mehr für das Fahrzeug zahlen." ([Dr. Klein](https://www.drklein.de/auto-leasing.html))
+
+* man wird nur als Halter im KFZ-Schein eingetragen ... Eigentümer bleibt der Leasing-Geber
+* Anzahlung
+* monatliche feste Rate über meistens 2-3 Jahre
+* nach der Leasingzeit:
+  * Rückgabe
+  * weiter leasen
+  * kaufen (Leasingvertrag sollte dann eine Kaufoption beinhalten)
+
+> "Unser Fazit: Wenn Sie das Fahrzeug nicht beruflich nutzen möchten, ist eine Finanzierung in den meisten Fällen besser als Auto-Leasing. Denn auch wenn die Monatsraten günstig klingen – nach Vertragsende ist das Fahrzeug noch lange nicht abgezahlt. Hier würden Sie noch eine hohe Abschlusszahlung leisten müssen, wenn Sie das Auto kaufen möchten. Im Gegensatz zum Autokredit: Hier zahlen Sie wahrscheinlich eine höhere Monatsrate, dafür ist das Auto aber nach der Vertragslaufzeit bezahlt und gehört Ihnen." ([Dr. Klein](https://www.drklein.de/auto-leasing.html))
+
+### Bank-Finanzierung
+
+* hier kann man hohe Barzahler-Rabatte (10-20%) nutzen (im Gegensatz zum Leasing)
+
+---
+
+## VW California Beach - Bulli T5
+
+---
+
+## VW California Beach - Bulli T6
 
 > Beach < Coast < Ocean ... Beach ist ohne Küche/Schränke ... [siehe hier](https://www.mieten-testen-kaufen.de/mieten/wohnmobile/vw-t6-california-beach/?file=files/cts-theme/pdf/VW-California/Der-neue-California-Der%20neue%20California.pdf)
+
+Der T6 ist wohl nur ein T5-Upgrade und keine Neuentwicklung. Der T7 soll eine Neuentwicklung werden.
 
 ### Infos
 
 * sehr teuer ... selbst 10 Jahre alte mit 200 TKM kosten noch über 20.000 Euro
+* träges DSG (Automatik)
+* 4,90m Länge
+* [3-monatiger Auslieferungsstopp wegen zu hohen Schadstoffemissionen](https://www.autozeitung.de/lieferstopp-vw-192423.html)
+* Ausbau von Sitzen ist nicht komfortabel ... die Sitze sind sehr schwer
+  * "Beim Sitzausbau meine ich vor allem wenn die Sitzbank von hinten (6- Sitzer) nach vorne soll (5-Sitzer). Das ist bei mir leider öfter fällig und endete beim letzten Mal im Tobsuchtsanfall" ([motor-talk](https://www.motor-talk.de/forum/t6-oder-v-klasse-kaufhilfe-erbeten-t6233500.html?page=6))
+
+### Preis
+
+Unsere Ausstattung beim VW-Konfigurator:
+
+* Beach - 150 PS: 53.500 Euro ... 55.000 Euro
+  * Abgasnorm: 6dtemp
+  * Privacy Paket
+  * halbautomatische Klimaanlage 2-Zonen (bei Mercedes Aufpreis)
+  * Halogen-Licht
+    * Aufpreis LED: 2000 Euro
+  * Extra - Sitzheizung: 500 Euro
+  * Extra - Standheizung: 1800 Euro
+  * Extra - Rückfahrkamera: 300 Euro
+  * Aufpreise (optional):
+    * Markise: 690 Euro
+    * Gepäcksicherungsnetz: 250 Euro
+    * Zusatzsitz: 580 Euro
+    * Zulässiges Gesamtgewicht 3080kg: 1000 Euro
+
+Bei Import-Fahrzeugen muß man die Ausstattung genau anschauen ... teilweise ist die Ausstattung anders - das kann zu Enttäuschungen führen.
 
 ---
 
-## Mercedes Marco Polo Activity
+## Mercedes Marco Polo
 
 > MP Activity Edition < MP Activity < MP Horizon Edition < MP Horizon < Marco Polo ... [siehe hier](https://www.mieten-testen-kaufen.de/mieten/wohnmobile/mercedes-marco-polo/?file=files/cts-theme/pdf/Mercedes-Marco-Polo/Mercedes_Marco_Polo_2017.pdf)
 
 ### Infos
 
+* Activity basiert auf Vito, ab Horizon basiert er auf der V-Klasse
+* Edition Modelle haben bereits viele Extras drin
 * teuer, aber günstiger als die VWs
-* weniger hipp als die Bullis
+* Ausbau von Westfalia
+* 5,14m Länge
+* Höhe
+  * Activity: 1,98 m
+  * Horizon / Marco Polo: 2,00 m
+  * Grund der unterschiedlichen Höhen liegt daran, daß Activity auf Vito basiert und die anderen auf der V-Klasse
+* Maximalgewicht: 3100 kg
+  * Nutzlast
+    * zwischen 670 und 1000 kg
+      * Automatik verringert die Nutzlast um 250 kg
+      * Allrad verringert die Nutzlast um 70 kg
+* durch Tellerrost (oben) sind die beiden Liegeseiten voneinander entkoppelt (der andere kullert nicht weg)
+  * Liegefläche oben 1,13 breit
+  * Liegefläche unter 1,35 breit
+* Ausbau von Sitzen ist nicht komfortabel ... aber hier gab es auch schon andere Meinungen ("Also das ist m.E. definitiv kein Makel der V-Klasse")
+  * "bei der V-Klasse kann eine 3er-Sitzbank mit umlegbarem/herausnehmbaren äußeren Sitz konfiguriert werden" ([motor-talk.de](https://www.motor-talk.de/forum/t6-oder-v-klasse-kaufhilfe-erbeten-t6233500.html?page=5))
+* die Variante mit einem Einzelsitz ist interessant
+
+  ![6-Sitzer](images/Mercedes-MarcoPolo-6-Sitzer.png)
+
+* bei mobile.de habe ich im August 2019 bei den Gebrauchtwagen ab 2016 insgesamt 103 Treffer erhalten ... nur 1 Wagen hatte ein Schaltgetriebe - 102 Automatik
+
+### Preis
+
+* [Schwerbehinderung-Rabatt](https://www.adac.de/-/media/adac/pdf/jze/preisnachlass-beim-neuwagenkauf-fuer-menschen-mit-behinderung.pdf?la=de-de) (mind. 50% GdB)
+  * 15% auf Listenpreis
+  * 2% zusätzlich auf Marco Polo
+* je nach Ausstattung gibt es den mit
+  * Vorderrad-Antrieb (nur bis 136 PS)
+  * Hinterrad-Antrieb
+  * Allrad-Antrieb
+* Allrad => Automatik
+  * damit verteuert sich der Activity (Edition gibt es so nicht) mit 136 PS um 8.000 Euro
+  * Automatik gibts auch ohne Allrad
+* Automatik kostet ca. 4000 Euro
+* Allrad kostet ca. 4000 Euro
+* Grundpreis - Schaltgetriebe
+  * Activity - 200d - 136 PS: 48.200 Euro
+    * CO2 Ausstoss: 179 g/km
+  * Activity Edition - 200d - 136 PS: 46.500 Euro
+  * Activity Edition - 220d - 163 PS: 50.500 Euro
+    * allerdings mit Automatik (ohne gibts den nicht) ... somit kostet die Automatik keinen Aufpreis
+  * Horizon Edition - 220d - 163 PS: 58.000 Euro
+    * allerdings mit Automatik (ohne gibts den nicht)
+    * CO2 Ausstoss: 161 g/km
+* ACHTUNG: scheinbar gibt es den auch mit unterschiedlichen Gewichtsvarianten
+* Unsere Ausstattung
+  * Activity Edition 163 PS: Activity Edition 136 PS + 4000 Euro
+    * dann ist die Automatik schon drin
+    * gebraucht: 41.900 VB
+      * 1 Jahr alt
+      * 35 TKM
+      * feste Anhängerkupplung
+      * Park-Paket
+      * Sitzheizung
+      * 1 Zusatzeinzelsitz
+      * Lordosenstützen vorne
+      * Zusatzwärmetauscher hinten
+      * Colorverglasung im Fond ... gegen Hitze/Blickschutz?!?
+      * Abgasnorm Euro 6b
+        * dachte die haben 6dtemp?!?
+      * 3100 kg Maximalgewicht
+      * OHNE Standheizung
+  * Activity Edition 136 PS: 48.500 Euro ... 50.000 Euro
+    * Abgasnorm: 6dtemp
+    * Alufelgen
+    * Colorverglasung im Fond ... gegen Hitze/Blickschutz?!?
+    * Sitzheizung vorne
+    * Lordosenstütze vorne
+    * halbautomatische Klimaanlage vorne
+    * klappbarer Tisch
+    * Halogen-Licht
+      * Aufpreis LED: 2000 Euro
+    * Extra - Standheizung: 1800 Euro
+      * **ACHTUNG:** man kann den ab Werk optional erhältlichen Zuheizer für 200 Euro zu einer vollwertigen Standheizung umbauen
+    * Extra - Park-Paket (mit Rückfahrkamera): 300 Euro
+    * Aufpreise (optional):
+      * zusätzlicher Einzelsitz: 750 Euro
+      * Gepäcksicherungsnetz: 250 Euro
+      * 12V-Steckdose im Kofferraum: 60 Euro
+      * Zurrösen für Schienensystem: 40 Euro
+      * Totwinkel-Assistent: 570 Euro
+      * zwei zusätzliche Schlüssel: 160 Euro
+      * Teppichboden: 300 Euro
+      * Akustikpaket (weniger Innengeräusche): 300 Euro
+      * Zusatzwärmetauscher im Fond: 420 Euro
+      * Klimaanlage im Fond: 720 Euro
+      * Schlafauflage Bett unten: 400 Euro
+      * Einfülldeckel Diesel in rot: 20 Euro
+
+---
+
+## Vergleich VW vs. Mercedes
+
+### Pro VW
+
+* VW ist deutlich leichter und hat somit die höhere Zuladung
+* der unteren Schlafbereich ist zum Schlafen bequemer
+  * fast plan
+  * bessere Matratze
+* cooler
+* Raumnutzung angeblich effizienter
+* mehr Ablagemöglichkeiten
+* kürzer bei gleichem Innenraum
+  * ABER: angeblich wurde der Mercedes 15cm länger gemacht, um die Sicherheit zu erhöhen - VW hat hier wohl Nachholbedarf
+    * [VW T5 Crashtest von 2013 - mangelnder Fußgängerschutz, sonst gut](https://www.autobild.de/artikel/vw-t5-im-euro-ncap-crashtest-4471041.html)
+
+### Pro Mercedes
+
+* ein wenig günstiger
+* im Fond bessere Sitze, die zum Liegen aber unbequemer sind
+* eleganter
+* als Fahrer noch mehr wie PKW (man sitzt niedriger)
+* jüngeres Fahrzeug - VW T6 ist eigentlich ein T5 mit Facelifts (keine Neuentwicklung)
+  * vielleicht sind damit aber auch alle Kinderkrankheiten beim VW beseitigt
+* Ausbau von Sitzen ist bei beiden nicht komfortabel, aber
+  * "bei der V-Klasse kann eine 3er-Sitzbank mit umlegbarem/herausnehmbaren äußeren Sitz konfiguriert werden [...] In der Tat ist da System mit den Einhaken und Einsetzen etwas anspruchsvoll, aber nur wenn man das System nicht kennt. Wenn man das einmal verstanden oder ordentlich erklärt bekommen hat, geht es meiner Meinung nach sehr einfach. Vor Allem sehr flexibel." ([motor-talk.de](https://www.motor-talk.de/forum/t6-oder-v-klasse-kaufhilfe-erbeten-t6233500.html?page=5))
+  * die Sitze sind leichter ... insbesondere wenn man einen Einzelsitz hat
+
+### Meinungen anderer
+
+* "Der T6 ist eigentlich ein T5.3 und von der Entwicklung ein 15 Jahre altes Auto... Ich hatte im Multivan (fast immer) Abgasgeruch im Auto (Krümmerundichtigkeiten beim 5 Zylinder) und das grenzt an Körperverletzung. VW meinte, da bin ich ein Einzelfall...das TX-Board berichtet anders. Jedes Auto hat Licht & Schatten. Ich finde der T5/T6 ist toll, man sitzt höher und der Innenraum ist vom Nutzen und Variabilität durchdachter. In der V-Klasse sitzt man eher wie in einem größeren PKW, Diesel-Automatik kann MB am besten (mein Gefühl) und ich fahre entspannter, ruhiger damit." ([Motortalk - Blacktron2001](https://www.motor-talk.de/forum/t6-oder-v-klasse-kaufhilfe-erbeten-t6233500.html#commentlistJumpMarker))
+* "gute Dauertestbewertung bei AMS und Autobild; während die T6/T5 und sonstige VW unserer Freude durchweg sehr defektanfällige Autos sind" ([Motortalk - SuperBausH
+](https://www.motor-talk.de/forum/t6-oder-v-klasse-kaufhilfe-erbeten-t6233500.html#commentlistJumpMarker))
 
 ---
 
@@ -125,6 +378,13 @@ Die typischen Camper ist für uns nicht interessant, da er mit Ausbau nicht den 
 
 ---
 
+## Pössl Vanster
+
+* basiert auf Citroen Jumpy
+* unter 30 TEUR
+
+---
+
 ## Hymer Crosscamp
 
 > Dieses Auto ist fast baugleich zum Pössl Campster, da die Basis (Citroen, Toyota) gleich ist und der Ausbau von Unternehmen (Pössl, Hymer) gemacht wurde, die beide zur Detleffs-Gruppe gehören.
@@ -148,9 +408,39 @@ Die typischen Camper ist für uns nicht interessant, da er mit Ausbau nicht den 
 
 ---
 
+## Adria Active - Renault Traffic
+
+* sehr ähnlich zum Campster/Crosscamp
+* ab 2020
+
+---
+
+## Hymer Car Sidney - Ducato
+
+* Länge: 4,96
+* Höhe: 2,35
+* Breite: 2,05
+* 4-5 Personen
+
+* [Video](https://wwww.youtube.com/watch?v=OVQrRGj44gA)
+
+---
+
 ## Eigenumbau vom Profi
 
 * Spacecamper
+
+---
+
+## Zubehör
+
+* Einbauküchen
+  * z. B. im Schienensystem montiert
+  * von Vanessa
+* Liegeauflage
+  * von Vanessa
+* Kühlschrank
+  * von Engel
 
 ---
 

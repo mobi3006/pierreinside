@@ -1,5 +1,6 @@
 # Monitoring
-Monitoring ist für den professionellen Betrieb und die Weiterentwicklung einer Anwendung unabdingbar.
+
+Monitoring und Alerting ist für den professionellen Betrieb und die Weiterentwicklung einer Anwendung unabdingbar.
 
 Betrieb:
 
@@ -15,7 +16,8 @@ Weiterentwicklung:
 
 ---
 
-# Granularität
+## Granularität
+
 Aus meiner Sicht gibt es verschiedene Granularitäten
 
 * Business-Sicht
@@ -27,8 +29,13 @@ Aus meiner Sicht gibt es verschiedene Granularitäten
 
 ---
 
-# Produkte
-## Zabbix
+## Produkte
+
+### Instana
+
+[siehe separate Seite](instana.md)
+
+### Zabbix
 
 ## Nagios
 

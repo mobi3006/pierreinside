@@ -112,9 +112,9 @@ Das ist das Salz in der Suppe ...
 
 ### Good Notes
 
-Super app - die 8 Euro sind gut investiert ... jetzt ist das iPad tatsächlich ein richtiger Papierersatz. Mehr noch, denn es kann meine krakelige Handschrift zu 95% erkennen. Auf diese Weise kann ich aus meinen handschriftlichen Aufzeichnungen während eines Meetings ganz leicht einen Export in elektronischer Form machen, so daß Protokolle schnell erstellt sind. 
+Super app - die 8 Euro sind gut investiert ... jetzt ist das iPad tatsächlich ein richtiger Papierersatz. Mehr noch, denn es kann meine krakelige Handschrift zu 95% erkennen. Auf diese Weise kann ich aus meinen handschriftlichen Aufzeichnungen während eines Meetings ganz leicht einen Export in elektronischer Form machen, so daß Protokolle schnell erstellt sind.
 
-> Das ist die perfekte Kombination: nicht mit der unhandlichen Tastatur hantieren müssen und trotzdem nicht alles abtippen müssen 
+> Das ist die perfekte Kombination: nicht mit der unhandlichen Tastatur hantieren müssen und trotzdem nicht alles abtippen müssen
 
 ### Drawexpress
 

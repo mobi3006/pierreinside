@@ -83,3 +83,4 @@
 * pick
 * degrade
 * compensate
+* distract
