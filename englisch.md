@@ -84,3 +84,4 @@
 * degrade
 * compensate
 * distract
+* extent

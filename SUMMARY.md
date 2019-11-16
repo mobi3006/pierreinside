@@ -8,6 +8,7 @@
     * [Linux Initialisierung](linux_initialization.md)
     * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
     * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
+    * [Ubuntu 18.04 LTS](ubuntu_1804_lts.md)
   * Konsole
     * [ssh](ssh.md)
     * [zsh](zsh.md)
@@ -23,13 +24,17 @@
     * [IntelliJ - IDEA](idea.md)
 * Softwareentwicklungsprozess
   * [Schätzungen](estimations.md)
+  * [Eventstorming](eventstorming.md)
+  * [OKR](okr.md)
 * [Architektur](architecture.md)
+  * [Uncle Bob](uncleBob.md)
   * [Microservices](microservices.md)
   * [NoSQL](nosql.md)
     * [ElasticSearch](elasticSearch.md)
   * [Hystrix](hystrix.md)
   * [Reactive Programming](reactiveProgramming.md)
   * AngularJS
+  * [Service Mesh](service-mesh.md)
 * [Networking](networking.md)
   * Dependency Injection
 * Programming
@@ -45,6 +50,7 @@
     * [REST](rest.md)
     * [Spring MVC REST](springMvc_rest.md)
     * [Swagger](swagger.md)
+    * [Postman](postman.md)
   * Spring Ecosystem
     * [Spring Core](springCore.md)
     * [Spring Boot](springBoot.md)
@@ -100,6 +106,7 @@
   * [Maven](maven.md)
   * [Bamboo](bamboo.md)
   * [Jenkins](jenkins.md)
+  * [Travis CI](travis.md)
   * [Shellprogrammierung](shellprogramming.md)
   * [Konfiguration Management](configurationManagement.md)
   * [Vagrant](vagrant.md)
@@ -124,15 +131,33 @@
       * [Docker Host](docker_host.md)
       * [Docker Scaling](docker_scaling.md)
       * [Docker Ressources](docker_resources.md)
+      * [Docker Logging](docker_logging.md)
       * [windowsContainer](windowsContainer.md)
     * [Cloud Deployment Provider](cloudDeployment_provider.md)
+      * [AWS](aws.md)
+      * [Google Cloud Platform](gcp.md)
     * [Docker Orchestrierung](docker_orchestration.md)
       * [CoreOS](coreos.md)
       * [Kubernetes](kubernetes.md)
+      * [Nomad](nomad.md)
+  * [PHP](php.md)
+  * [Python](python.md)
+    * [Kivy UI](kivy.md)
 * Operations
+  * [Proxy](proxy.md)
+    * [NGINX](nginx.md)
+  * [DNS](dns.md)
   * [Logging](logging.md)
     * [Graylog](graylog.md)
+    * [Fluentd](fluentd.md)
   * [Monitoring](monitoring.md)
+  * Infrastructure-as-Code
+    * [Terraform](terraform.md)
+    * [Packer](packer.md)
+  * Deployment
+    * [Vault](vault.md)
+    * [Consul](consul.md)
+    * [Fabio](fabio.md)
 * Rechtliches
   * [Software-Lizenzen](license.md)
 * Git Ecosystem
@@ -152,26 +177,37 @@
   * [Animationsfilme](animationsfilme.md)
 * Storage
   * [Synology](synology.md)
+  * [Foto/Video Sammlung](fotoVideoSammlung.md)
 * Collaboration
   * [Microsoft Teams](microsoft_teams.md)
 * [Hausautomatisierung](homeAutomation.md)
   * [Raspberry Pi](raspberrypi.md)
   * [Heimnetzwerk](heimnetzwerk.md)
+* Konferenzen
+  * [Velocity Berlin 2019](velocoty-berlin-2019.md)
 * Misc
+  * [Command Line Interface](cli.md)
+  * [Google API](google-api.md)
+  * [Plant UML](plantuml.md)
+  * [Chromium](chromium.md)
   * [iPad Pro](ipadPro.md)
   * [Projekt Sportstracker](projekt_sportstracker.md)
   * Handy
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
+    * [2019](handy_2019.md)
   * Laptop
     * [2018](laptop_2018.md)
+    * [Chromebook](chromebook.md)
   * Monitor
     * [4k](monitor_4k.md)
   * Fahrrad
     * [Jonas 2018](mountainbike_2018.md)
+    * [SQLab](sqlab.md)
   * Spielekonsole
     * [2017](spielekonsole_2017.md)
       * [Playstation 4](playstation.md)
+  * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
   * [AV Receiver](avReceiver.md)
   * [Musik Streaming](musicStreaming.md)
   * [Sky](sky.md)
@@ -180,4 +216,7 @@
   * [DFB Talentförderung](dfb_talentförderung.md)
   * [Google Impact Challenge](googleImpactChallengeDeutschland.md)
   * [Camper](camper.md)
+  * [Quick Mill Orione 3000](quickMillOrione3000.md)
+  * [Fußball Tools](fussball.md)
+  * [Online Lernplattformen](online-lern-plattformen.md)
 * [Englisch](englisch.md)
