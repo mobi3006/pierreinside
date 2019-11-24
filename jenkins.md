@@ -486,8 +486,10 @@ Die Jobs (inkl. History) werden in `/var/jenkins_home` abgelegt, das in obigem B
 
 ### Automatisierung einer Jenkins Installation - auf die komfortable Tour
 
-* [Jenkins Configuration as Code 1](https://www.praqma.com/stories/jenkins-configuration-as-code/)
-* [Jenkins Configuration as Code 2](https://www.praqma.com/stories/start-jenkins-config-as-code/)
+* Option 1: Jenkins Plugin
+  * [Jenkins Configuration as Code 1](https://www.praqma.com/stories/jenkins-configuration-as-code/)
+  * [Jenkins Configuration as Code 2](https://www.praqma.com/stories/start-jenkins-config-as-code/)
+* Option 2: Jenkins-as-Code Reference-Server
 
 ### Development Environment
 

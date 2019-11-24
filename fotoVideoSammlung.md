@@ -4,6 +4,21 @@ Ich verwende im wesentlichen meine [Synology](synology.md) als Fileserver und di
 
 Problematisch ist, daß die Synchronisierung aufgrund meiner heterogenen Gerätelandschaft (Microsoft Windows, MacOS, Android, iOS, GoPro, Spiegelreflexkamera) unterschiedlich funktioniert und ich eine Synchronisierung über die Cloud aus verschiedenen Gründen ablehne (siehe unten).
 
+## tl;dr
+
+Der erste Use-Case, der in meiner Landschaft nicht paßt und mich überlegen läßt, mein iPhone durch Android Handy zu ersetzen. Das macht mich wahnsinnig und ich habe schon Tage mit diesem Problem verbracht. Nur das iPhone (und natürlich die anderen Apple Geräte) macht hier Probleme, weil
+
+* Apple verwendet von Synology nicht unterstützte Formate (HEIC), d. h. eine Transformation MUSS erfolgen, wenn man Synology - DS Photo verwenden will
+  * über Einstellungen - Fotos - Auf MAC oder PC übertragen - Automatisch kann man zwar bei der Übertragung eine Umwandlung durchführen lassen, doch
+    * die USB-Verbindung zum Windows PC per Windows Explorer funktioniert nicht stabil und schnell ... ständige Abbrüche
+      * iTunes ist der letzte Scheiß - ich habe nicht mal einen Abschnitt "Foto" gefunden ... der Button "Synchronisiere" war nicht clickbar
+    * das Kopieren dauert dadurch sehr lang
+  * beim Upload nach OneDrive erfolt - entgegen einigen Foren - keine automatische Konvertierung
+
+Nach 1,5 Jahren iPhone-Nutzung habe ich nun endlich rausgefunden, daß man die Kamera auf maximale Kompatibilität einstellen kann (Einstellungen - Kamera - Formate - Maximale Kompatibilität). Dann werden Bilder im JPG-Format statt HEIC-Format aufgenommen. Keine Ahnung welche Auswirkungen es auf Videos hat (evtl. andere Codecs), aber das erscheint mir eine sinnvolle Einstellung in meinem Anwendungsfall.
+
+Da ich meine Daten noch immer nicht in die Cloud (OneDrive) kopieren will, um sie dann auf meinen Rechner runterzuladen und zu kategorisieren,habe ich mir einen [HooToo Lightning USB Adapter](https://www.amazon.de/HooToo-Laufwerk-Zertifiziert-Lightning-Computer/dp/B01HEHXF3A/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=hootoo&qid=1574608249&smid=A2X2NO3429IQ5W&sr=8-5) für 28 Euro gekauft. Dieser Stick hat eine MFI-Zertifizierung - derzeit (2019) funktioniert er ... mal sehen ob das so bleibt, denn Apple ändert ja mal gern was an der Kompatibilität solcher Devices.
+
 ---
 
 ## Idee - temporäre lokale Sammlung
@@ -51,9 +66,11 @@ In dieser Beziehung ist iOS echt fürchterlich - nichts zu spüren von "funktion
 
 #### Cloud Synchronisierung
 
-Scheinbar gibt es aber im iOS Umfeld gar nicht so viele Alternativen ... iCloud ist nun doch recht beliebt. Und scheinbar tut Apple alles dafür, um alle iOS User in ihre Cloud zu locken (glücklicherweise sind Cloud-Alternativen vorhanden), denn
+Scheinbar gibt es aber im iOS Umfeld gar nicht so viele Alternativen ... iCloud ist nun doch recht beliebt. Und scheinbar tut Apple alles dafür, um alle iOS User in ihre Cloud zu locken, denn
 
 > "Aufgrund der Einschränkungen von iOS können iOS-Apps keine Hintergrundaufgaben länger als 3 bis 10 Minuten ausführen, auch nicht mit aktivierten Geofences." [Synology DS Photo Dokumentation](https://www.synology.com/de-de/knowledgebase/Mobile/help/DSphoto/iOS_iPhone)
+
+Aber ich kann meine Fotos/Videos auch auf andere Cloud-Speicher kopieren (OneDrive, Google Drive) ... aber noch habe ich mich aus Sicherheitsgründen nicht dazu durchringen können.
 
 #### App Documents
 
@@ -84,31 +101,35 @@ Hierfür benötigt es auf dem Synology einen Cloud Station Server.
 
 ## Algorithmus
 
-> ACHTUNG - bitte iOS Konfiguration prüfen: Die iOS Photos App hat auf dem Endgerät eine Einstellung "Auf MAC oder PC übertragen - Automatisch" bzw "Auf MAC oder PC übertragen - Originale bebehalten". Apple verwendet teilweise proprietäre Formate (HEIC für Fotos - bestimmte Codecs für Videos), die auf anderen Platformen (z. B. Windows) evtl. nicht verfügbar sind. Deshalb werden die Dateien bei Bedarf automatisch im Hintergrund beim Kopiervorgang via Windows Explorer konvertiert (im Windows Explorer werden die Bilder vom iPhone schon mit der Endung `jpg` angezeigt, wenn die Option `Automatisch` eingestellt ist ... das macht die Sache noch transparenter/undurchsichtiger). Das kostet natürlich Zeit (Kopiervorgang dauert länger trotz USB 3) und sorgt für unterschiedliche Dateigrößen ... sorgt aber evtl. für bessere Unterstützung auf den Endgeräten.
->> ACHTUNG - ACHTUNG - PROBLEM: irgendwann brach die Synchronisierung immer wieder mit dem gleichen Fehler "Device is unreachable" ab ... gemeint war das iPhone. Google (aka micatek im Diskussionsforum von Apple) half mir mal wieder auf die Sprünge. Die Photos App ist per Default auf dem iPhone so konfiguriert, daß "Auf MAC oder PC übertragen - Automatisch" eingestellt ist. Wenn die Variante "Auf MAC oder PC übertragen - Originale beibehalten" (und einem Neustart des iPhones klappte die Synchronisierung problemlos ... und das Tempo schien mir auch höher (zumindest von iOS nach Windows ist das ja klar, da keine Konvertierung erfolgt).
->>> ABER: bei dieser Einstellung erfolgt KEINE automatische Konvertierung der Foto/Video-Formate - DS Photo wird hier auf einigen Devices Probleme haben. Deshalb ist dies nur die allerletzte Lösung ... da eine manuelle Konvertierung erfolgen muß.
+> ACHTUNG - PROBLEM - ACHTUNG: anfangs habe ich versucht, die Fotos/Videos per USB-Kabel vom iPhone auf meinen Windows-Rechner zu kopieren. Hierbei hatte ich am iPhone "Einstellungen - Fotos - Auf MAC oder PC übertragen - Automatisch" eingestellt, um die Multimedia-Dateien beim Kopieren automatisch in kompatible (Stichwort HEIC) Formate umzuwandeln. Das klappte leider mehr schlecht als recht. Die Synchronisierung brach immer wieder mit dem gleichen Fehler "Device is unreachable" ab ... gelegentlich funktionierte es aber auch. Bei iOS 11 konnte ich das Problem mit der Umstellung auf die Einstellung "Originale beibehalten" lösen (anschließend mußte ich die Fotos manuell per XnView von HEIC nach JPG konvertieren), doch bei iOS 13 klappte auch das nicht mehr.
+
+Meine Lösung 2019 besteht nun aus einem [Lightning-USB-Adapter mit 64 GB Speicher von HooToo (28 Euro)](https://www.amazon.de/HooToo-Laufwerk-Zertifiziert-Lightning-Computer/dp/B01HEHXF3A/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=hootoo&qid=1574608249&smid=A2X2NO3429IQ5W&sr=8-5), über den ich die Multuimedia-Dateien auf meinen Windows-Rechner bekomme. Allerdings muß ich sie anschließend in Windows-kompatible Formate umwandeln ... zumindest die Bilder - die Videos sind Synology-kompatibel.
+
+> Alternative für die Zukunft: Kopieren der Multimedia-Daten in die Cloud - bei OneDrive habe ich genügend Speicher. Derzeit habe ich mich aus Sicherheitsgründen noch nicht zu einer solchen Lösung durchringen können.
 
 * externe Festplatte über USB 3.0 anschließen
   * auf dieser Festplatte werde ich meine Multimediadateien zunächst sammeln (von verschiedenen Quellen), konvertieren und kategorisieren
   * Ordner `sammlung` anlegen
-* alle Geräte (aka `device_foo`) nacheinander anschließen (ACHTUNG: GoPro und Spiegelreflexkamera nicht vergessen) und folgende Aktivitäten durchführen - ACHTUNG: bei iOS Geräten kann es schon mal eine knappe Minute dauern bis das Gerät im Windows-Explorer navigierbar ist
-  * externe Festplatte
-    * Ordner `device_foo` anlegen
-  * auf iPhone Ordnerinhalte ein `Group by Type` machen (wir sind nämlich nicht an `AAE-File` interessiert) und nach Größe sortieren
-  * alle Fotos (`JPG`) seit dem letzten "Backup Done"-Foto (Marker für die letzte Synchronisierung) per Windows Explorer nach `device_foo` kopieren
-    * bei iOS Endgeräten: die `HEIC` Dateien werden dabei nach `JPG` konvertiert und erhalten einen entsprechende Dateinamen-Extension
-    * Dateien Batchumbennen gemäß EXIF Header (XnView: `<Date[ymd_HMS]>`)
-  * von den Videos (z. B. `MOV`) seit dem letzten "Backup Done"-Foto (Marker für die letzte Synchronisierung) nur die mit mind. 5 MB Größe (die anderen sind entweder eh Müll oder Live-Foto-Videos, an denen ich nicht interessiert bin) per Windows Explorer nach `device_foo` kopieren
-    * bei iOS Endgeräten: die `MOV` Videos erhalten dabei einen Windows Codec - die Größe nimmt zu aber die Videos lassen sich auf mehr Plattformen ansehen (u. a. DS Photo mit Amazon Fire)
-    * anschließend überprüfen, ob die Original-Zeitstempel erhalten sind
-      * ACHTUNG: Windows Explorer zeigt häufig `Date` an und das ist der Zeitpunkt des letzten Zugriffs - wir sind am `Date modified` interessiert ... da bin ich schon reingefallen!!!
-    * Dateien Batchumbennen gemäß Dateistempel `Date modified` umbenennen (XnView: `<Modified_Date[ymd_HMS]>`)
-  * alle Dateien per Windows Explorer aus `device_foo` nach `sammlung` verschieben
-  * auf dem Endgerät ein "Backup Done"-Foto aufnehmen (Marker für die letzte Synchronisierung)  
-* Android Geräte werden kontinuierlich auf das Netzwerkshare synchronisiert ... hier für jedes Gerät folgendermaßen vorgehen
-  * Dateien vom Netzwerkshare nach `device_foo` verschieben
-  * weiteres Vorgehen wie bei iOS (siehe oben)
-  * alle Dateien per Windows Explorer aus `device_foo` nach `sammlung` verschieben
+* alle Geräte (aka `device_foo`) nacheinander anschließen (ACHTUNG: GoPro und Spiegelreflexkamera nicht vergessen) und folgende Aktivitäten durchführen
+  * auf USB-Platte den Ordner `_already_transferred_to_synology_` anschauen und das Datum der letzten Foto-Synchronisierung rausfinden (z. B. Datum des letzten Bildes rausfinden)
+  * auf externer USB-3.0-Festplatte Ordner `device_foo` anlegen
+  * jetzt je nach Device alle Dateien seit der letzten Synchronisierung auf die USB-Platte kopieren:
+    * iOS:
+      * HooToo-Lightning-Stick anschließend und die Fotos/Videos aus dem Ordner "Zuletzt" über die App iPlugmate auf den Stick kopieren
+      * Dateien auf die USB-Festplatte kopieren ... in den Ordner `device_foo`
+      * Ordner `device_foo` gruppieren nach Typ und sortieren nach Größe
+        * `PNG` Dateien löschen - hierbei handelt es sich um Screenshots
+        * `MOV` unter 5 MB löschen - hierbei handelt es sich um Live-Photo-Videos oder Schrott-Videos unter 3 Sekunden
+        * `HEIC` Dateien (sofern vorhanden) per XnView in JPG umwandeln (Werkzeuge - Stapelverarbeitung)
+    * Android
+      * Synchronisierung über FolderSync App mit dem Netzwerkshare anstoßen
+      * Dateien vom Netzwerkshare auf die USB-Festplatte kopieren ... in den Ordner `device_foo`
+* pro `device_foo`
+  * alle Bilder gemäß EXIF-Header drehen
+  * alle Bilder gemäß EXIF-Header umbenennen (XnView: `<Date[ymd_HMS]>`)
+  * alle Filme gemäß Dateistempel `Date modified` umbenennen (XnView: `<Modified_Date[ymd_HMS]>`)
+* alle `device_foo` Dateien in `sammlung` vereinen
+* auf dem Endgerät ein "Backup Done"-Foto aufnehmen (Marker für die letzte Synchronisierung)  
 * Bilder und Videos innerhalb von `sammlung` kategorisieren (großen Müll löschen) ... da dies der letzte Schritt ist, sind auch alle Dateien von VERSCHIEDENEN Endgeräten zum gleichen Event einfach einzusortieren
   * Kategorisierung nach Jahr (z. B. `2018`)
     * Kategorisierung nach Quartal (z. B. `20180100_familie_Q1`)

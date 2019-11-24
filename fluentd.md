@@ -10,6 +10,18 @@ Auf diese Weise entsteht eine konsolidierte Sicht auf die Log-Nachrichten, die a
 
 > Dieses Thema ist unternehmenskritisch, da Logs i. a. in Produktivumgebungen die einzige Möglichkeit sind, um Fehler zu analysieren und den Kunden vor längeren Systemausfällen zu schützen. Die Verwendung von Real-Time-Analyse-Tools wie [Instana](instana.md) ist noch besser ...
 
+Aus diesem Grund kann Fluentd
+
+* aus [vielen Quellen lesen (TCP, UDP, Syslog, tail, ...)](https://docs.fluentd.org/input)
+* in [viele Ziele schreiben (StdOut, file, S3, ElasticSearch, http, ...)](https://docs.fluentd.org/output)
+
+Zwischendrin werden Messages
+
+* [gefiltert](https://docs.fluentd.org/filter)
+* [geparst](https://docs.fluentd.org/parser)
+  * es gibt Standard-Parser für typische Log-Formate wie z. B. [NGINX](https://docs.fluentd.org/parser/nginx)
+  * für Custom-Formate schreibt man einen Parser
+
 ---
 
 ## Alternativen
