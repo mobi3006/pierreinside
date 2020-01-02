@@ -50,7 +50,7 @@ Eine Integration von Fluentd kann über den Log-Driver geschehen aber auch durch
 
 ## Log-Driver Konfiguration im Docker-Daemon
 
-Man kann die Log-Driver Konfiguration im Docker-Daemon als Default für alle Docker Container in der Datei `/etc/docker/daemon.json` vornehmen. So findet man heraus welcher Logging-Driver im Daemon konfiguriert ist:
+Man kann die Log-Driver Konfiguration im Docker-Daemon als Default für alle Docker Container in der Datei `/etc/docker/daemon.json` vornehmen ([siehe Dokumentation](https://docs.docker.com/config/containers/logging/configure/)). So findet man heraus welcher Logging-Driver im Daemon konfiguriert ist:
 
 ```bash
 docker info --format '{{.LoggingDriver}}'

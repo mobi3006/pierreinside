@@ -2,7 +2,8 @@
 
 ---
 
-# Getting Started
+## Getting Started
+
 Ich liebe [Docker](docker.md), denn damit funktioniert der Start innerhalb weniger Sekunden (http://docs.graylog.org/en/2.2/pages/installation/docker.html). Folgenden Inhalt als `docker-compose.yml` speichern
 
 ```
@@ -33,7 +34,7 @@ und danach ein `docker-compose`. Wenige Sekunden später (nicht ungeduldig sein 
 
 Die Daten werden auch erstmal nur im Container persistiert ... sind also weg, wenn man man den Container löscht. Im Abschnitt *Automatisiertes Docker Deployment* werde ich einige Verbesserungen beschreiben.
 
-Zunächst muß man Graylog einen Input-Kanal verpassen (System - Inputs), über den Nachrichten reinkommen können. Mm besten verwendet man einen ganz einfachen *Plaintext TCP* oder *Plaintext UDP* Inputkanal. Dann kann man per [Netcat](https://wiki.ubuntuusers.de/netcat/) über die Konsole Nachrichten zum Inputkanal schicken:
+Zunächst muß man Graylog einen Input-Kanal verpassen (System - Inputs), über den Nachrichten reinkommen können. Am besten verwendet man einen ganz einfachen *Plaintext TCP* oder *Plaintext UDP* Inputkanal. Dann kann man per [Netcat](https://wiki.ubuntuusers.de/netcat/) über die Konsole Nachrichten zum Inputkanal schicken:
 
 ```
 echo "first log message" | nc -w 0 -u 127.0.0.1 5555
@@ -43,7 +44,8 @@ echo "first log message" | nc -w 0 -u 127.0.0.1 5555
 
 ---
 
-# Inputtypen
+## Inputtypen
+
 Folgende Inputmöglichkeiten stehen out-of-the-box zur Verfügung:
 
 * Plaintext TCP, UDP, Kafka, AMQP
@@ -51,16 +53,27 @@ Folgende Inputmöglichkeiten stehen out-of-the-box zur Verfügung:
 * GELF TCP, UDP, Kafka, AMQP, HTTP
 * Beats
 
+Man kann in Graylog dann ein entsprechendes Parsing definieren und vornehmen - ich bin mir aber nicht sicher wie performant und komfortabel das ist. Wahrscheinlich ist es besser, Ansätze wir [Fluentd](fluentd.md) zu verwenden oder gleich JSON-basierte Log-Daten zu schicken (z. B. GELF-Format).
+
+### GELF-Protocol - Graylog Extended Log Format
+
+* [Protocol Beschreibung](https://docs.graylog.org/en/3.1/pages/gelf.html)
+
+Das GELF-Format ist ein sehr einfaches JSON-Format. Das GELF-Protocol ist ein Protokoll, das die Nutzdaten im GELF-Format verschickt.
+
 ---
 
-# Anwendungslogging
+## Anwendungslogging
+
+* [siehe auch in diesem Abschnitt](logging.md)
+
 Microservices sind derzeit ein Hype, der die Notwendigkeit eines zentralen Log-Reportings erhöht. Niemand kann die vielen Log-Files auswerten, wenn sie nicht irgendwo gesammelt werden. Hier haben sich Ansätze wie Graylog und ELK etabliert, die ein komfortable UI Schnittstelle (und REST-Schnittstellen) zur Auswertung der Logs bietet.
 
 Graylog hat mit [GELF](http://docs.graylog.org/en/2.2/pages/gelf.html) sogar ein eigenes Log-Format aus der Taufe gehoben und bietet für verschiedenen Programmiersprachen APIs an. Über GELF lassen sich auch Logs von Windows-Maschinen integrieren.
 
 Um Java-Logs ins Graylog zu bekommen, muß man an der Anwendung i. a. nichts verändert. Meistens verwenden die Anwendnungen eh schon Java-Logging und hierfür gibt es den sog. `GelfAppender`, den man in die log4j Konfiguration integriert:
 
-```
+```xml
 <appender name="GELF" class="me.moocar.logbackgelf.GelfAppender">
         <graylog2ServerHost>localhost</graylog2ServerHost>
         <graylog2ServerPort>5559</graylog2ServerPort>
@@ -74,14 +87,16 @@ Um Java-Logs ins Graylog zu bekommen, muß man an der Anwendung i. a. nichts ver
 </appender>
 ```
 
-Anschließend benötigt Graylog aber noch einen GELF- Inputkanal (System - Inputs), der an den o. a. Port `5559` gebunden wird. 
+Anschließend benötigt Graylog aber noch einen GELF- Inputkanal (System - Inputs), der an den o. a. Port `5559` gebunden wird.
 
 ---
 
-# Automatisiertes Docker Deployment
+## Automatisiertes Docker Deployment
+
 Mit dem *Getting Started* Ansatz bekommt man zunächst nur einen leeren Graylog Server zum Laufen. Man will die Konfiguration aber nicht immer wieder erneuern, wenn man den Container neu aufsetzt (z. B. wegen eines Image Updates). Außerdem nöchte man die Konfiguration evtl. unter Versionskontrolle stellen.
 
-## Konfiguration
+### Konfiguration
+
 Graylog bietet die Möglichkeit sog. Content-Packages zu exportieren/importieren ... und das bereits beim Startup oder aber auch während des laufenden Betriebs. Auf diese kann man auch leicht Konfigurationen zwischen Servern austauschen.
 
 Für den automatischen Import eines Content-Packages (hier `my-contentPack.json`) beim Serverstart muß folgende Konfiguration (`graylog.conf`) vorgenommen werden:
@@ -92,12 +107,14 @@ content_packs_dir = /usr/share/graylog/data/contentpacks
 content_packs_auto_load = grok-patterns.json, my-contentPack.json
 ```
 
-### Alternative: MongoDB dump/restore
+#### Alternative: MongoDB dump/restore
+
 * https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
 
 Graylog verwendet MongoDB als Storage für die Konfiguration. Dementsprechend kann man die gesamte (!!!) Konfiguration sichern (`mongodump --out /dump/ --db graylog`) und wiederherstellen (`mongorestore --db=graylog /dump/graylog`).
 
-## REST API
+### REST API
+
 * http://docs.graylog.org/en/2.2/pages/configuration/rest_api.html
 
 Die REST API kann bei einigen Dingen sehr hilfreich sein. Über *System - Nodes - API browser* gelangt man zu einem [Swagger-UI](http://swagger.io/), mit dem sich die REST-Schnittstelle aus dem Browser heraus bedienen läßt.

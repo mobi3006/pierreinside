@@ -8,34 +8,147 @@ Problematisch ist, daß die Synchronisierung aufgrund meiner heterogenen Geräte
 
 Der erste Use-Case, der in meiner Landschaft nicht paßt und mich überlegen läßt, mein iPhone durch Android Handy zu ersetzen. Das macht mich wahnsinnig und ich habe schon Tage mit diesem Problem verbracht. Nur das iPhone (und natürlich die anderen Apple Geräte) macht hier Probleme, weil
 
-* Apple verwendet von Synology nicht unterstützte Formate (HEIC), d. h. eine Transformation MUSS erfolgen, wenn man Synology - DS Photo verwenden will
+* Apple verwendet von Synology nicht unterstützte Formate (für Fotos HEIC, für Videos HEVC Codec), d. h. eine Transformation MUSS erfolgen, wenn man Synology - PhotoStation (in Kombination mit DS Photo) verwenden will, da PhotoStation keine HEIC-Formate unterstützt (BTW: es gibt _Synology Moments_ als Alternative zu _PhotoStation_ doch das gibt es nicht für meine alte DS112+ und natürlich weiß ich auch nicht, ob es so gut für meinen Use-Case funtionieren würde)
   * über Einstellungen - Fotos - Auf MAC oder PC übertragen - Automatisch kann man zwar bei der Übertragung eine Umwandlung durchführen lassen, doch
-    * die USB-Verbindung zum Windows PC per Windows Explorer funktioniert nicht stabil und schnell ... ständige Abbrüche
+    * ist die USB-Verbindung zum Windows PC per Windows Explorer nicht mehr stabil ... ständige Abbrüche mit der Fehlermeldung "Device Is Unreachable" ([siehe hier](https://www.fonepaw.com/transfer/the-device-is-unreachable-iphone-android.html))
       * iTunes ist der letzte Scheiß - ich habe nicht mal einen Abschnitt "Foto" gefunden ... der Button "Synchronisiere" war nicht clickbar
     * das Kopieren dauert dadurch sehr lang
   * beim Upload nach OneDrive erfolt - entgegen einigen Foren - keine automatische Konvertierung
 
-Nach 1,5 Jahren iPhone-Nutzung habe ich nun endlich rausgefunden, daß man die Kamera auf maximale Kompatibilität einstellen kann (Einstellungen - Kamera - Formate - Maximale Kompatibilität). Dann werden Bilder im JPG-Format statt HEIC-Format aufgenommen. Keine Ahnung welche Auswirkungen es auf Videos hat (evtl. andere Codecs), aber das erscheint mir eine sinnvolle Einstellung in meinem Anwendungsfall.
+Nach 1,5 Jahren iPhone-Nutzung habe ich nun endlich rausgefunden, daß man die Kamera auf maximale Kompatibilität einstellen kann (Einstellungen - Kamera - Formate - Maximale Kompatibilität). Dann werden Bilder im JPG-Format statt HEIC-Format aufgenommen und Videos erhalten ein anderes Codec. Das erscheint mir eine sinnvolle Einstellung in meinem Anwendungsfall.
 
-Da ich meine Daten noch immer nicht in die Cloud (OneDrive) kopieren will, um sie dann auf meinen Rechner runterzuladen und zu kategorisieren,habe ich mir einen [HooToo Lightning USB Adapter](https://www.amazon.de/HooToo-Laufwerk-Zertifiziert-Lightning-Computer/dp/B01HEHXF3A/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=hootoo&qid=1574608249&smid=A2X2NO3429IQ5W&sr=8-5) für 28 Euro gekauft. Dieser Stick hat eine MFI-Zertifizierung - derzeit (2019) funktioniert er ... mal sehen ob das so bleibt, denn Apple ändert ja mal gern was an der Kompatibilität solcher Devices.
+### Mein Setup
+
+Ich habe eine relativ alte [Synology DS112+](synology.md), die aber immer noch gut genug ist. Dort verwende ich das Paket _PhotoStation_, um meine Bilder für die App _DS Photo_ bereitzustellen. Die App gibt es für Android und iOS Handys und auch für Fire TV, um mit der gesamten Familie die alten Fotos am Fernseher anschauen zu können. Klappt wunderbar.
+
+Leider unterstützt PhotoStation keine Apple-Formate wie HEIC und HEVC, so daß eine Konvertierung erfolgen muß.
+
+---
+
+## Probleme mit den Apple-Formaten HEIC/HEVC
+
+Apple speichert Bilder per default im sog. HEIC-Format, das im Vergleich zu JPEG eine bessere Komprimierung erreicht. Exit-Header werden hier auch unterstützt.
+
+Windows kann mittlerweile das HEIC-Format lesen und anzeigen (mit Windows Photos), doch meine Synology PhotoStation kann damit nicht umgehen. Ich MUSS also die Apple-Formate in PhotoStation unterstützte Formate konvertieren.
+
+Da ich allerdings pro Jahr mehr als 5000 Fotos/Videos mache, brauche ich eine Lösung, die sich automatisieren läßt.
+
+### Lösung 1: Apple-USB-Synchroniserung - Beste Lösung ... funktioniert nicht mehr
+
+Koppelt man das iPhone per Lightning-USB-Kabel an den Windows-Rechner und hat im iPhone _Einstellungen - Fotos - Auf Mac oder PC übertragen_ auf _Automatisch_ stehen, so erfolgt eine Exif-konforme Konvertierung der HEICs nach JPEGs während des Kopierens per Windows-Explorer ... das Kopieren dauert dementsprechend länger.
+
+> Problem: meine USB-Verbindung war nicht stabil ... nach einigen Minuten ist die Verbindung immer wieder abgebrochen. Mit iOS 11 klappte es noch ... mit iOS 13 hatte ich keine Chance mehr.
+
+Das Problem ist übrigens im [Internet](https://www.fonepaw.com/transfer/the-device-is-unreachable-iphone-android.html)(oder auch [hier](https://www.guidingtech.com/fix-device-attached-to-the-system-is-not-functioning-error-iphone/)) hinlänglich beschrieben worden. Die angebliche Lösung "Keep Originals" (die in meinem Fall keine Konvertierung ausgelöst hätte und somit auch unbrauchbar wäre) hat bei iOS 13 nicht mehr funktioniert.
+
+Mittlerweile bekomme ich im Windows Explorer nicht mehr immer eine Verbindung hin - oder es dauert extrem lang ... keine Ahnung, ob es am iTunes liegt oder meinem Windows - Dreckstool.
+
+### Lösung 2: Apple speichert in JPEG statt HEIC
+
+Unter _Einstellungen - Kamera - Formate_ kann man auf _Maximale Kompatibilität_ einstellen, um Fotos in JPEG statt HEIC zu speichern.
+
+> Das habe ich in meinem Fall getan, doch hatte ich zu diesem Zeitpunkt schon 5000 Fotos im HEIC-Format aufgenommen. Ich mußte also eine Lösung für die Konvertierung HEIC-2-JPEG finden.
+
+### Lösung 3: Nachträgliche Konvertierung
+
+Mit Tools wie iMazing HEIC Converter (für Fotos) und Handbrake (für Videos) lassen sich die Dateien nachträglich konvertieren.
+
+Sicherlich ein wenig Arbeit und nicht komplett automatisierbar, aber aufgrund der noch fehlenden (funktionierenden) Alternativen zumindest eine Option.
+
+### Lösung 4: Apple Photos => DS Photo
+
+Die Apple Photos App kann man über _Einstellungen - Fotos - Auf Mac oder PC übertragen_ auf _Automatisch_ stellen, um beim Kopieren (z. B. nach DS Photo) eine automatische Konvertierung von HEIC nach JPEG (unter Beibehaltung der Exif-Header) zu bekommen.
+
+> In Synology PhotoStation sollte man allerdings die startende Optimierung der Bilder (in verschiedene Vorschau-Formate) unterbinden ... zumindest wenn man die Dateien anschließend noch kategorisieren/filtern möchte. Das ist wichtig, da die Optimierung auf der schwachbrüstigen Synology seeeeeehr lanege dauert.
+
+Mit folgenden Einschränkungen muß man leben:
+
+* Dateien erhalten den Zeitstempel des Kopiervorgangs und den Namen vom iPhone (`IMG_3666.JPG` oder `IMG_3667.MOV`)
+  * für Fotos ist das kein Problem wegen des vorhandenen EXIF-Headers
+  * für Filme ist das ein großes Problem, da keine Meta-Information existiert
+* man kann nicht 5000 Fotos/Videos auf einen Schlag kopieren - man muß 1000er Päkchen machen
+  * im Vergleich zum "Apple Photos => Onedrive" ist diese Einschränkung allerdings akzeptabel.
+
+Aufgrund des Problems mit den Filmen ist diese Variante keine Option für mich.
+
+### Lösung 4a: DS Photo Synchronisierung
+
+In der DS Photo App des iPhone kann man das _Photo Backup_ konfigurieren, so daß Fotos automatisch synchronisiert werden. Ein sehr praktisches Feature, das auch ganz gut funktioniert. Hier werden die Einstellungen von der Fotos App verwendet, so daß - bei entsprechender Konfiguration von "Automatisch" (= Maximale Kompatibilität) - eine Umwandlung von den Apple-Formaten in PhotoStation-kompatible Formate erfolgt.
+
+> ABER: Die Synology PhotoStation optimiert die Fotos immer automatisch und das dauert auf der schwachbrüstigen Synology seeeeehr lange. Leider habe ich es nicht geschafft, einzelne Ordner von dieser Optimierung auszuschließen. Schade, aber man kann die Optimierung manuell über die Synology Web-UI ausschalten (nach dem manuellen Starten der Synchronisierung) - für eine Vollautomatische Synchronisierung sicherlich keine Option, aber halbautomatisch nutzbar.
+
+Im Gegensatz zum Kopieren über die Apple Fotos App bleiben die Zeitstempel der Dateien erhalten - die Dateien tragen den Namen der iPhone-Datei. Somit ist ist hier kein Problem mit Filmen und auch nicht mit Fotos (die neben dem Zeitstempel auch den richtigen Exif-Header aufweisen).
+
+Ganz wichtige Einstellungen im "DS-Photo - Photo Backup":
+
+* Qualität auf "Hoch" stellen - sonst verliert man wichtige Pixel!!!
+* ganz angenehm ist, daß man Live-Photo-Filme rausfilter kann (das mußte ich sonst immer manuell machen, da Synology Photo Station keine Live-Photos unterstützt).
+
+DAS IST EINE LÖSUNG für mein Problem.
+
+### Lösung 5: Apple Photos => Onedrive
+
+Die Apple Photos App kann man über _Einstellungen - Fotos - Auf Mac oder PC übertragen_ auf _Automatisch_ stellen, um beim Kopieren (z. B. Onedrive) eine automatische Konvertierung von HEIC nach JPEG (unter Beibehaltung der Exif-Header) zu bekommen.
+
+Über die Fotos-App vom iPhone wird der Kopiervorgang gestartet.
+
+Mit folgenden Einschränkungen muß man leben:
+
+* Dateien erhalten den Zeitstempel des Kopiervorgangs und den Namen vom iPhone (`IMG_3666.JPG` oder `IMG_3667.MOV`)
+  * für Fotos ist das kein Problem wegen des vorhandenen EXIF-Headers
+  * für Filme ist das ein großes Problem, da keine Meta-Information existiert
+* man kann nicht 5000 Fotos/Videos auf einen Schlag kopieren - man muß 30er Päkchen machen (im Gegensatz zum DS Photo Kopiervorgang bei dem 1000er Päkchen möglich waren)
+
+Aufgrund des Problems mit den Filmen ist diese Variante keine Option für mich.
+
+### Lösung 5a: Onedrive-Cloud-Synchroniserung
+
+Bis Herbst 2019 konnte man bei Onedrive iOS App einstellen, ob eine automatische Konvertierung von HEIC nach JPEG erfolgen soll. Im Dezember 2019 ist diese Option leider verschwunden und somit landen HEIC-Dateien auf dem Onedrive. Leider erfolgt auch keine Konvertierung, wenn man Onedrive auf einen Windows-Rechner synchronisiert (macht ja auch irgendwie Sinn).
+
+Somit hilft Onedrive hier in meinem Fall nicht weiter.
+
+### Lösung 6: Hootoo USB-Stick
+
+Der [HooToo Lightning USB Adapter](https://www.amazon.de/HooToo-Laufwerk-Zertifiziert-Lightning-Computer/dp/B01HEHXF3A/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=hootoo&qid=1574608249&smid=A2X2NO3429IQ5W&sr=8-5) für 28 Euro bietet einen Lightning und einen USB3 Anschluß im Bundle mit 64/128/256 GB Speicher. Beim Kopieren der HEIC-Dateien erfolgt automatisch eine Konvertierung nach JPEG ...
+
+> ABER: Leider gehen die EXIF-Header verloren (Aufnahmedatum, Geo-Tagging) und die Dateien erhalten einen Filesystem-Zeitstempel des Kopierdatums. Typischerweise verwende ich den Exif-Header, um die Dateien zu benennen, so daß der Stick für mich unbrauchbar ist.
+
+Dieser Stick hat eine MFI-Zertifizierung - derzeit (2019) funktioniert er ... mal sehen ob das so bleibt, denn Apple ändert ja mal gern was an der Kompatibilität solcher Devices.
+
+### Lösung 7: Synology Moments
+
+Diese Alternative zu Synlogy PhotoStation unterstützt die Apple-Formate, so daß eine Konvertierung nicht erforderlich wäre. Außerdem unterstützt Moments auch Live-Photos ... ist halt eine neuere Lösung.
+
+> ABER: meine in die Jahre gekommene DS112+ wird von Moments nicht unterstützt. Hier gibt es aber eine Positive Überraschung, denn in [DSM 7](https://www.synology.com/de-de/company/news/article/Synology_2020) (ab 2020 - ich habe derzeit 6.2) werden PhotoStation und Moments zu "Synology Photos" verschmelzen. Leider wird [meine Synology kein DSM 7 erhalten](https://www.ifun.de/synology-dsm-6-2-1-die-letzten-updates-fuer-zahlreiche-alt-modelle-126579/) ... der Support läuft langsam aus.
 
 ---
 
 ## Idee - temporäre lokale Sammlung
 
-Ich habe mir angewöhnt einmal im Quartal/Halbjahr die Dateien aller Endgeräte auf einer externen USB 3.0 Festplatte zu sammeln. Dort werden die Dateien umbenannt im mein einheitliches Namensschema `YYMMDD_HHMMSS`, gedreht gemäß EXIF Ausrichtung und in Windows-kompatible Formate umgewandelt (z. B. `JPEG` statt `HEIC`-Format). Das passiert mit den Dateien aller Geräte zunächst separat - anschließend werden die Dateien nach Quartalen getrennt und nach Themen sortiert in einem gemeinsamen Ordner der externen Festplatte gesammelt. Ist das abgeschlossen, dann werden die Dateien über den Synology Uploader (spart Ressourcenn auf dem Synology - die Indizierung dauert dann nicht Tage, sondern nur Stunden) auf den Photostation-Bereich der Synology kopiert.
+Ich habe mir angewöhnt einmal im Quartal/Halbjahr/Jahr die Dateien aller Endgeräte auf einer externen USB 3.0 Festplatte zu sammeln. Dort werden die Dateien
+
+* umbenannt im mein einheitliches Namensschema `YYMMDD_HHMMSS`
+* gedreht gemäß EXIF Ausrichtung
+* bei Bedarf in Windows-kompatible Formate umgewandelt (z. B. `JPEG` statt `HEIC`-Format)
+
+Das passiert mit den Dateien aller Geräte zunächst separat - anschließend werden die Dateien
+
+* nach Jahren/Quartalen und Themen getrennt in einem gemeinsamen Ordner der externen Festplatte gesammelt
+* irrelevante gelöscht
+
+Ist das abgeschlossen, dann werden die Dateien über den Synology Uploader (spart Ressourcen auf dem Synology - die Indizierung dauert dann nicht Tage, sondern nur Stunden) auf den Photostation-Bereich der Synology kopiert.
 
 Danach sind die Erinnerungen über DS Photo App verfügbar.
 
 ### Warum nicht automatisiert
 
-Die Vielzahl unterschiedlicher Endgeräte erschwert den Vorgang - das fängt schon damit an, daß iOS andere Formate/Codecs verwendet als Android und mein DS Photo auch nicht alle Formaten auf allen Endgeräten abspielen kann.
+Die Vielzahl unterschiedlicher Endgeräte (Android, iOS, SD-Karte der Spiegelreflexkamera, GoPro) erschwert den Vorgang - das fängt schon damit an, daß iOS andere Formate/Codecs verwendet als Android und mein DS Photo auch nicht alle Formaten auf allen Endgeräten abspielen kann.
 
 > Mir ist schon bewußt, daß dies eine recht fragile Angelegenheit ist und sich jederzeit etwas ändern kann - was dann wiederum mit zeitaufwendiger Recherche verbunden ist. Bisher funktioniert der Ansatz aber recht gut - das Endergebnis ist gut ... der Weg dorthin manchmal recht beschwerlich.
 
-Da ich keine hochperformante Anbindung ans Internet, um 10 GB Videos in der Cloud zu sammeln, die ich später dann doch vielleicht wegwerfe ... zudem ist das nicht ganz günstig (Cloud-Speicher) und aus Sicherheitserwägungen fragwürdig. Eine Synchronisierung von iOS Geräten auf die Synology scheint kein typischer Use-Case zu sein ... Apple will seine iCloud platzieren. Ich habe nahezu kostenlosen Speicher auf meiner [Synology](synology.md) ... warum sollte ich den nicht nutzen.
+Mittlerweile verfüge ich auch über eine brauchbare Upload-Bandbreite (40 MBit/s) und kann eine Cloud-Speicherung in Erwägung ziehen. Mit Office 365 habe ich auch günstigen Online-Speicher. Nur Sicherheitserwägungen halten mich noch davon ab. Eine Synchronisierung von iOS Geräten auf die Synology scheint kein typischer Use-Case zu sein ... Apple will seine iCloud platzieren. Ich habe nahezu kostenlosen Speicher auf meiner [Synology](synology.md) ... warum sollte ich den nicht nutzen.
 
-Darüberhinaus muß ich die Fotos noch nachbearbeiten hinsichtlich Dateinamen-Schema und Ausrichtung.
+Darüberhinaus will ich meine Fotos/Videos noch nach Events kategorisieren und das ist automatisiert noch nicht möglich.
 
 Die manuelle Synchronisierung von Daten hat natürlich auch einige Nachteile:
 
@@ -66,7 +179,7 @@ In dieser Beziehung ist iOS echt fürchterlich - nichts zu spüren von "funktion
 
 #### Cloud Synchronisierung
 
-Scheinbar gibt es aber im iOS Umfeld gar nicht so viele Alternativen ... iCloud ist nun doch recht beliebt. Und scheinbar tut Apple alles dafür, um alle iOS User in ihre Cloud zu locken, denn
+iCloud ist der Apple-Cloud-Speicher und am besten integriert. Doch man kann auch Onedrive oder Google Drive einrichten - leider mit Einschränkungen, denn Apple tut scheinbar alles dafür, um alle iOS User in ihre Cloud zu locken:
 
 > "Aufgrund der Einschränkungen von iOS können iOS-Apps keine Hintergrundaufgaben länger als 3 bis 10 Minuten ausführen, auch nicht mit aktivierten Geofences." [Synology DS Photo Dokumentation](https://www.synology.com/de-de/knowledgebase/Mobile/help/DSphoto/iOS_iPhone)
 
@@ -74,7 +187,7 @@ Aber ich kann meine Fotos/Videos auch auf andere Cloud-Speicher kopieren (OneDri
 
 #### App Documents
 
-Die App Documents hab ich bis heute nicht verstanden. Komlett unintuitiv ...
+Die App Documents hab ich bis heute nicht verstanden. Auf keinen Fall intuitiv ...
 
 #### Synology App DS Photo
 

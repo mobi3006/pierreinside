@@ -1,6 +1,6 @@
 # Campingbus
 
-Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar sind und wir das Campen nicht verabscheuen (einige Familienmitglieder mögen es, andere können sich damit arrangieren), suchen wir nach einer bezahlbaren Urlaubsalternative, die es uns ermöglicht, die Welt zu entdecken. Eine Pauschalreise im Hotel ist hier nicht wirklich geeignet und ich kenne es auch eigener Erfahrung, mit dem Auto durch Europa zu Touren und an einsamen entlegenen Stränden den VW Bus zu parken.
+Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar sind und wir das Campen langsam alle mögen (nicht alle im Zelt), suchen wir nach einer bezahlbaren Urlaubsalternative, die es uns ermöglicht, die Welt zu entdecken. Eine Pauschalreise im Hotel ist hier nicht wirklich geeignet (denn meistens liegt man nur am STrand oder Hotelpool und läßt sich im Hotel bekochen). Als Kind bin ich auch mit meinen Eltern durch Europa getourt und war begeistert - schöne Geschichten, an die ich mich noch 30 Jahre später gerne erinnere.
 
 ---
 
@@ -38,7 +38,7 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
 * meistens wird das Auto im Alltag als PKW verwendet ... wir brauchen den Platz in 90% der Nutzungszeit
 * 3-4 mal im Jahr Nutzung für den Urlaub (auch schlafen)
 * 3-4 mal im Jahr ein verlängertes Wochenende
-* Eltern schlafen im Auto - Kinder im Zelt
+* Eltern schlafen im Auto - Kinder im Zelt - wir haben ein kleines 3-Kinder Wurfzelt, das in 60 Sekunden auf- und in 180 Sekunden abgebaut ist
   * wir werden im richtigen Urlaub IMMER einzusätzliches Zelt dabei haben, so daß das Auto auch noch für Ausflüge zur Verfügung steht
   * zur Not - bei Zwischenübernachtungen - kann man auch mal mit 2 Erwachsenen und 3 Kindern im Bus schlafen
 * im unteren Bereich sollte man auch bequem schlafen können ... wir werden ja auch älter und der Weg nach oben wird dann vielleicht irgendwann doch beschwerlicher
@@ -89,19 +89,20 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
     * derzeit muß man noch eine USB-Verbindung herstellen
   * Android Auto
   * [MirrorLink](https://de.wikipedia.org/wiki/MirrorLink)
+* Allrad-Antrieb
+  * für den Wintereinsatz wäre das ganz nett, aber eigentlich haben wir im Flachland kaum Schnee und für eine Woche Skifahren pro Jahr lohnen sich die 3000 Euro Aufpreis nicht
+  * Straßenlage soll allerdings grundsätzlich besser sein
+    * Wiederverkauf könnte ein Argument sein - ich glaube aber kein wesentliches
+* Automatik
+  * im Stau ganz nett
+  * ich bin mir nicht sicher, ob die dann auch noch bei höheren Laufleistungen nicht zickt
 
 ### DONT-KNOW
 
 * LED-Scheinwerfer - sollen heller sein
-* Allrad-Antrieb
-  * Wintereinsatz
-  * Straßenlage soll besser sein
-  * Wiederverkauf
 * Markise
-  * bei Kurzaufenthalten (1-2 Tage) könnte ich mir sie recht nützlich vorstellen
+  * bei Kurzaufenthalten (1-2 Tage ... insbesondere bei Dauerregen - quasi als Vordach, um die Schuhe zumindest mal abstellen zu können) könnte ich mir sie recht nützlich vorstellen
   * bei längeren Aufenthalten wird man ein Zelt aufbauen und dann braucht man die Markise maximal für eine Überdachung zum Zelt
-* Automatik
-  * ich bin mir nicht sicher, ob die dann auch noch bei höheren Laufleistungen nicht zickt
 
 ### Problemlösungen
 
@@ -112,7 +113,7 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
 
 ### Fazit
 
-Die typischen Camper ist für uns nicht interessant, da er mit Ausbau nicht den notwendigen Platz für 5-6 Erwachsenen bietet ... eher einen spartanischer Bus mit Hochstelldach.
+Die typischen vollausgestatteter Camper ist für uns nicht interessant, da er mit Ausbau nicht den notwendigen Platz für 5-6 Erwachsenen bietet ... eher einen spartanischer Bus mit Hochstelldach.
 
 ---
 
@@ -126,7 +127,7 @@ Die meister Camper sind Diesel ... "In dieser Wagenklasse führt am Diesel kein 
 
 * aktuell sind
   * Euro 6d (bis 120mg/km NOx)
-  * Euro 6d temp (bi2 168)
+  * Euro 6d temp (bis 168mg/km)
 
 ### AdBlue
 
@@ -154,19 +155,38 @@ Am besten man zahlt das Auto ohne Finanzierung ... bei > 40 TEUR kann sich das a
 
 Derzeit bietet Mercedes einen Zins von 2,5% an (bei einer sehr hohen Tilgung - 4 Jahre bis zur Kompletttilgung - 800 Euro Monatsrate => 2000 Euro Zinsen über die Gesamtlaufzeit) ... der Bauzins liegt bei 1,5%.
 
+Im Zeitalter von Negativzinsen macht die Aufnahme eines Kredits keinen Sinn, wenn man über genügend verfügbares Vermögen verfügt. Beim aktuell geringen Preisverfall bei VW-Bussen ist das vielleicht schon fast die bessere Anlage ;-)
+
 ### Leasing
 
 > "Dank der niedrigen Monatsraten scheint es auf den ersten Blick auch günstiger zu sein, ein Auto zu leasen anstatt es zu finanzieren. Doch Verpflichtungen, Einschränkungen und mögliche Zusatzkosten am Laufzeitende könnten Ihnen dabei einen Strich durch die Rechnung machen. [...] Und welche Variante ist nun sinnvoll, wenn Sie ein Auto leasen möchten? Wir empfehlen Ihnen das Kilometer-Leasing, da hier das Risiko einer Nachzahlung kalkulierbar ist. So können Sie bereits im Vertrag die Weichen stellen, wenn Sie ungefähr wissen, wie intensiv Sie das Fahrzeug nutzen werden. Beim Restwert-Leasing dagegen überwiegen die Nachteile. Zum einen setzen einige Händler den Restwert bewusst unrealistisch hoch an, um so mit niedrigen Monatsraten werben zu können. Zum anderen kann sich die Marktlage innerhalb der Leasingdauer erheblich ändern, so dass der Restwert drastisch sinkt. Auch ein Unfall während der Leasingzeit hat Einfluss auf den Restwert. Entscheiden Sie sich am Vertragsende das Auto zu kaufen, kann es zudem sein, dass der Restwert nicht mit dem Kaufpreis übereinstimmt – Sie müssen dann also mehr für das Fahrzeug zahlen." ([Dr. Klein](https://www.drklein.de/auto-leasing.html))
 
 * man wird nur als Halter im KFZ-Schein eingetragen ... Eigentümer bleibt der Leasing-Geber
-* Anzahlung
-* monatliche feste Rate über meistens 2-3 Jahre
+* Anzahlung - häufig auch ohne
+* monatliche feste Rate über meistens 2-4 Jahre
 * nach der Leasingzeit:
   * Rückgabe
+    * ACHTUNG: hier wird vermutlich jeder kleine Kratzer als grpßer Schaden bewertet
   * weiter leasen
   * kaufen (Leasingvertrag sollte dann eine Kaufoption beinhalten)
 
 > "Unser Fazit: Wenn Sie das Fahrzeug nicht beruflich nutzen möchten, ist eine Finanzierung in den meisten Fällen besser als Auto-Leasing. Denn auch wenn die Monatsraten günstig klingen – nach Vertragsende ist das Fahrzeug noch lange nicht abgezahlt. Hier würden Sie noch eine hohe Abschlusszahlung leisten müssen, wenn Sie das Auto kaufen möchten. Im Gegensatz zum Autokredit: Hier zahlen Sie wahrscheinlich eine höhere Monatsrate, dafür ist das Auto aber nach der Vertragslaufzeit bezahlt und gehört Ihnen." ([Dr. Klein](https://www.drklein.de/auto-leasing.html))
+
+Bei [leasingmarkt.de](https://www.leasingmarkt.de) habe ich mir einen sehr gut ausgestatteten (Standheizung, Einparkhilfe, Privacy) T6.1 angeschaut. Die reinen Nutzungskosten (keine Versicherung/Wartung) - eine Reparatur/Inspektions-Inklusion liegt bei 80 Euro pro Monat:
+
+* bei 15.000 km Laufleistung:
+  * 48 Monate ohne Anzahlung: 634 Euro x 48 = 30.400
+  * 48 Monate mit 10.000 Euro Anzahlung: 426 x 48 + 10.000 = 30.400
+  * 48 Monate mit 20.000 Euro Anzahlung: 218 x 48 + 20.000 = 30.400
+* bei 10.000 km Laufleistung:
+  * 48 Monate ohne Anzahlung: 590 Euro x 48 = 28.300
+  * 36 Monate ohne Anzahlung: 673 Euro x 36 = 24.200
+
+=> Anzahlung bringt gar nichts???
+
+* 1,99% Sollzins:
+* Bruttolistenpreis: 64.354,00 €
+* Kaufpreis: 52.990,00 €
 
 ### Bank-Finanzierung
 
@@ -176,13 +196,15 @@ Derzeit bietet Mercedes einen Zins von 2,5% an (bei einer sehr hohen Tilgung - 4
 
 ## VW California Beach - Bulli T5
 
+Hier gibt es wohl große Probleme mit einer Dichtung, die zu großem Ölverbrauch führt und mittelfristig zu einem kaputten Motor.
+
 ---
 
 ## VW California Beach - Bulli T6
 
 > Beach < Coast < Ocean ... Beach ist ohne Küche/Schränke ... [siehe hier](https://www.mieten-testen-kaufen.de/mieten/wohnmobile/vw-t6-california-beach/?file=files/cts-theme/pdf/VW-California/Der-neue-California-Der%20neue%20California.pdf)
 
-Der T6 ist wohl nur ein T5-Upgrade und keine Neuentwicklung. Der T7 soll eine Neuentwicklung werden.
+Der T6 ist wohl nur ein T5-Upgrade und keine Neuentwicklung.
 
 ### Infos
 
@@ -213,6 +235,16 @@ Unsere Ausstattung beim VW-Konfigurator:
     * Zulässiges Gesamtgewicht 3080kg: 1000 Euro
 
 Bei Import-Fahrzeugen muß man die Ausstattung genau anschauen ... teilweise ist die Ausstattung anders - das kann zu Enttäuschungen führen.
+
+---
+
+## VW California Beach - T7
+
+2021 soll das neue Modell auf Basis MQB (modularer Querbaukasten) auf den Markt kommen. Er bietet Vorteile für Volkswagen, da auf ihm eine Vielzahl von PKWs basieren werden (Caddy, Sharan, ...) - dadurch lassen sich Fahrzeuge günstiger bauen. Es bietet 48 Volt Bordnetz, auf dem Infotainment-Systeme aufsetzen.
+
+Die Nutzlast wird allerdings geringer sein als bei den vorherigen Modellen (bis T6.1), so daß das alte Modell weiterhin für Nutzfahrzeuge (Transporter) weitergenutzt wird. Für Camper ist die Nutzlast aufgrund der Zuladung (u. a. Küche, Gepäck, Personen) von wichtiger Bedeutung. Beim Mercedes Marco Polo ist das für viele schon jetzt ein Argument für den VW-Bus T5/T6.
+
+Den T7 wird es nicht als reinen E-Bus geben - das kommt erst mit dem ID Buzz, der 2022 auf den Markt kommt. Für Camper wäre das aufgrund der typischen Fahrleistung wahrscheinlich keine dauerhafte Lösung, aber ein PlugIn-Hybrid wäre vermutlich die beste Alternative - so könnte man in der Stadt elektrisch fahren und die Fahrverbote umgehen. 
 
 ---
 
