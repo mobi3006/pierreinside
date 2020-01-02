@@ -18,7 +18,7 @@ Relevante Geräte:
 * [DS718+](https://www.synology.com/en-global/products/DS718+)
   * 430 Euro (ohne Festplatten)
 
-Mir scheint, daß da bald eine 20er Reihe kommen wird, auf die ich auf jeden Fall noch warten sollte. Die [DS112j](https://www.synology.com/en-global/products/DS120j) ist seit November 2019 bereits verfügbar (allerdings nur 512 MB RAM und Dual Core 800 MHz).
+Mir scheint, daß da bald eine 20er Reihe kommen wird, auf die ich auf jeden Fall noch warten sollte. Die [DS112j](https://www.synology.com/en-global/products/DS120j) ist seit November 2019 bereits verfügbar (allerdings nur 512 MB RAM und Dual Core 800 MHz). Die DS218 kam im Dezember 2017 raus, die DS118 im Oktober 2017.
 
 ---
 
