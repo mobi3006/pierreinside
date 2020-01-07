@@ -192,6 +192,24 @@ Bei [leasingmarkt.de](https://www.leasingmarkt.de) habe ich mir einen sehr gut a
 
 * hier kann man hohe Barzahler-Rabatte (10-20%) nutzen (im Gegensatz zum Leasing)
 
+### Mieten
+
+Bei [multicamper.de](https://multicamper.com/) kann man einen Camper für ca. 100 Euro/Tag mieten - die Firma ist gerade mal 10km von uns entfernt ... das wäre also sehr unproblematisch. Bei einer Nutzung von 4 Wochen im Jahr kommt man da auf 3000 Euro Miete. Im Vergleich zu einem Leasing mit 30.000 Euro in 4 Jahren könnten wir zum gleichen Preis 10 Jahre mieten.
+
+### Fazit
+
+In Anbetracht der aktuellen Diesel-Diskussion mit angedrohten/geplanten Fahrverboten und einer unsicher Zukunft macht ein Kauf keinen großen Sinn, weil
+
+* wir nicht wissen, wie lange uns das Campen Spaß macht
+* wie sich die Fahrverbote entwickeln
+* wie sich die Kraftstoffpreise entwickeln
+
+Ein Verkauf nach einigen Jahren kann also einen großen Verlust bedeuten.
+
+Leasing im Vergleich zum Mieten macht keinen Sinn (siehe Rechnung oben).
+
+=> Mieten ist derzeit die beste Variante - sollten wir irgendwann einen neuen Alltagswagen brauchen, dann könnten wir allerdings über einen Kauf nachdenken. Vielleicht hat sich die Zukunft der Diesels bis dahin geklärt.
+
 ---
 
 ## VW California Beach - Bulli T5

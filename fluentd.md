@@ -190,7 +190,7 @@ Mit de `copy`-Befehl kann man die Daten auch an mehrere Targets verschicken, hie
 
 ## Getting Started
 
-### Docker
+### Fluentd Docker Container
 
 * [Link auf offizielle Doku](https://docs.fluentd.org/container-deployment/install-by-docker)
 
@@ -254,3 +254,18 @@ Per `docker rm -f pierre-fluentd` lösche ich den Fluentd-Container wieder nach 
 * [Homepage](https://docs.fluentd.org/deployment/fluentd-ui)
 
 ... noch nicht ausprobiert - ich mag die Console lieber
+
+---
+
+## Nutzung von Fluentd im Docker-Umfeld
+
+### Docker fluentd-log-driver
+
+* [siehe auch hier](docker_logging.md)
+
+Der Docker Log-Driver kann von Console (default) auf Fluentd umgestellt werden (`docker run --log-driver=fluentd my-image`). Dann bekommt man keine `/var/lib/docker/**.log` Files mehr erstellt, sondern die Log-Informationen werden direkt nach Fluentd geschickt.
+
+Dieser Ansatz hat allerdings den Nachteil, daß `docker logs` nicht mehr funktioniert.
+
+Kommt der Fluentd-server nict mit der Abarbeitung nach oder die Netzwerk-Kommunikation ist gestört, dann werden die Log-Nachrichten im RAM oder auf der Platte gepuffert (`fluentd-buffer-limit`).
+

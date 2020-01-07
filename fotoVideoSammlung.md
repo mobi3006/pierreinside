@@ -8,7 +8,7 @@ Problematisch ist, daß die Synchronisierung aufgrund meiner heterogenen Geräte
 
 Der erste Use-Case, der in meiner Landschaft nicht paßt und mich überlegen läßt, mein iPhone durch Android Handy zu ersetzen. Das macht mich wahnsinnig und ich habe schon Tage mit diesem Problem verbracht. Nur das iPhone (und natürlich die anderen Apple Geräte) macht hier Probleme, weil
 
-* Apple verwendet von Synology nicht unterstützte Formate (für Fotos HEIC, für Videos HEVC Codec), d. h. eine Transformation MUSS erfolgen, wenn man Synology - PhotoStation (in Kombination mit DS Photo) verwenden will, da PhotoStation keine HEIC-Formate unterstützt (BTW: es gibt _Synology Moments_ als Alternative zu _PhotoStation_ doch das gibt es nicht für meine alte DS112+ und natürlich weiß ich auch nicht, ob es so gut für meinen Use-Case funtionieren würde)
+* Apple verwendet von Synology nicht unterstützte Formate (für Fotos HEIC, für [Videos HEVC Codec - H.265](https://de.wikipedia.org/wiki/High_Efficiency_Video_Coding)), d. h. eine Transformation MUSS erfolgen, wenn man Synology - PhotoStation (in Kombination mit DS Photo) verwenden will, da PhotoStation keine HEIC-Formate unterstützt (BTW: es gibt _Synology Moments_ als Alternative zu _PhotoStation_ doch das gibt es nicht für meine alte DS112+ und natürlich weiß ich auch nicht, ob es so gut für meinen Use-Case funtionieren würde)
   * über Einstellungen - Fotos - Auf MAC oder PC übertragen - Automatisch kann man zwar bei der Übertragung eine Umwandlung durchführen lassen, doch
     * ist die USB-Verbindung zum Windows PC per Windows Explorer nicht mehr stabil ... ständige Abbrüche mit der Fehlermeldung "Device Is Unreachable" ([siehe hier](https://www.fonepaw.com/transfer/the-device-is-unreachable-iphone-android.html))
       * iTunes ist der letzte Scheiß - ich habe nicht mal einen Abschnitt "Foto" gefunden ... der Button "Synchronisiere" war nicht clickbar
@@ -27,7 +27,7 @@ Leider unterstützt PhotoStation keine Apple-Formate wie HEIC und HEVC, so daß 
 
 ## Probleme mit den Apple-Formaten HEIC/HEVC
 
-Apple speichert Bilder per default im sog. HEIC-Format, das im Vergleich zu JPEG eine bessere Komprimierung erreicht. Exit-Header werden hier auch unterstützt.
+Apple speichert Bilder per default im sog. HEIC-Format, das im Vergleich zu JPEG eine bessere Komprimierung erreicht. Exif-Header werden hier auch unterstützt. Videos werden bei Apple mit dem [HEVC-Codec]((https://de.wikipedia.org/wiki/High_Efficiency_Video_Coding) ausgestattet, der auch als H.265 bekannt ist.
 
 Windows kann mittlerweile das HEIC-Format lesen und anzeigen (mit Windows Photos), doch meine Synology PhotoStation kann damit nicht umgehen. Ich MUSS also die Apple-Formate in PhotoStation unterstützte Formate konvertieren.
 
@@ -51,7 +51,7 @@ Unter _Einstellungen - Kamera - Formate_ kann man auf _Maximale Kompatibilität_
 
 ### Lösung 3: Nachträgliche Konvertierung
 
-Mit Tools wie iMazing HEIC Converter (für Fotos) und Handbrake (für Videos) lassen sich die Dateien nachträglich konvertieren.
+Mit Tools wie iMazing HEIC Converter (für Fotos) und [Handbrake (für Videos)](handbrake.md) lassen sich die Dateien nachträglich konvertieren.
 
 Sicherlich ein wenig Arbeit und nicht komplett automatisierbar, aber aufgrund der noch fehlenden (funktionierenden) Alternativen zumindest eine Option.
 
