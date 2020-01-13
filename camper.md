@@ -201,14 +201,19 @@ Bei [multicamper.de](https://multicamper.com/) kann man einen Camper für ca. 10
 In Anbetracht der aktuellen Diesel-Diskussion mit angedrohten/geplanten Fahrverboten und einer unsicher Zukunft macht ein Kauf keinen großen Sinn, weil
 
 * wir nicht wissen, wie lange uns das Campen Spaß macht
+* wir nicht unbedingt gezwungen sein wollen, einen Camping-Urlaub zu machen (hat man einen Camper für 50.000 Euro gekauft, dann muß man ihn auch für den Urlaub nutzen sonst rentiert es sich nicht)
 * wie sich die Fahrverbote entwickeln
 * wie sich die Kraftstoffpreise entwickeln
+* wie sich Elektroautos entwickeln - vielleicht sind E-Autos (oder andere Energiequellen) in Zukunft auch für größere Strecken ausgelegt ... wir befinden uns gerade in einer Übergangsphase
 
-Ein Verkauf nach einigen Jahren kann also einen großen Verlust bedeuten.
+Bewertung der Alternativen:
 
-Leasing im Vergleich zum Mieten macht keinen Sinn (siehe Rechnung oben).
-
-=> Mieten ist derzeit die beste Variante - sollten wir irgendwann einen neuen Alltagswagen brauchen, dann könnten wir allerdings über einen Kauf nachdenken. Vielleicht hat sich die Zukunft der Diesels bis dahin geklärt.
+* Kauf:
+  * ein Verkauf nach einigen Jahren kann also einen großen Verlust bedeuten
+* Leasing:
+  * im Vergleich zum Mieten macht es keinen Sinn (siehe Rechnung oben)
+* Mieten
+  * ist derzeit die beste Variante - sollten wir irgendwann einen neuen Alltagswagen brauchen, dann könnten wir allerdings über einen Kauf nachdenken. Vielleicht hat sich die Zukunft der Diesels bis dahin geklärt.
 
 ---
 
