@@ -87,6 +87,30 @@ store(name="Pierre", age=27)
 * List Comprehensions: `squares = [x**2 for x in range(10)]`
 
 ---
+## Python in Kombination mit Shell
+
+### Python executes Shell-Commands
+
+Mit [Fabric](http://www.fabfile.org/) steht eine sehr brauchbare Python Library zur Verfügung, um aus Python-Code (remote) Shell-Kommandos abzusetzen und die Ergebnisse in Python weiterzuverarbeiten.
+
+Die Installation ist mit `pip` schnell erledigt
+
+```bash
+pip install fabric2
+```
+
+Danach kann man Programme wie `hello-fabric.py`
+
+```python
+from fabric2 import Connection
+c = Connection('localhost')
+result = c.run('uname -s')
+print("result: " + result.stdout.strip())
+```
+
+per `python hello-fabric.py` ausführen.
+
+In der [Dokumentation](http://docs.fabfile.org/en/2.5/) findet man erste Programmier-Beispiele.
 
 ## Kinder lernen programmieren
 

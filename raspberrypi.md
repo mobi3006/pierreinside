@@ -69,7 +69,28 @@ Man kann auf das Breadboard auch n
 
 > "Bevor man einen GPIO als Eingang oder Ausgang benutzen kann, muss dieser konfiguriert bzw. eingestellt werden. Leider merkt sich der Raspberry Pi diese Einstellung nicht. Deshalb muss die Einstellung bei jedem Neustart erneut ausgeführt werden." ([GPIO konfigurieren/einstellen](https://www.elektronik-kompendium.de/sites/raspberry-pi/2202131.htm))
 
-### Programmieren mit Java
+### Programmieren mit Java und pigpio
+
+* [Javamagazin 1.2020 - Java statt C](https://jaxenter.de/java/java-programmiersprache-c-raspberry-pi-90176)
+* [Elektronik Kompendium](https://www.elektronik-kompendium.de/sites/raspberry-pi/2202121.htm)
+* [Java Bibliothek `jpigpio`](https://github.com/nkolban/jpigpio)
+
+Die meisten Java-Biliotheken für RPi müssen die Programme mit `sudo` als `root` laufen lassen, weil Raspbian den Zugriff auf die I/O-Ports sonst verweigert. Das will man aber natürlich nicht mal auf seinem RPi. `pigpio` verwendet einen Dämon-Prozess (= Server), der die Befehle im Auftrag ausführt.
+
+Installation auf dem Raspberry per
+
+```bash
+wget https://github.com/joan2937/pigpio/archive/master.zip
+unzip master.zip
+cd pigpio-master
+make
+sudo make install
+sudo /usr/local/bin/pigpiod -s 10 # server/daemon start
+```
+
+`pigpiod` hat noch nichts mit Java zu tun ... es liefert aber eine Schnittstelle zur Hardware. Mit der Java-Bibliothek `jpigpio` kommuniziert später das selbst-geschriebene Java-Programm mit dem `pigpio`-Dämon. Verwendet man `jpigpio.Pigpio`, so muß das Programm auf dem Raspberry-Pi laufen. Verwendet man hingegen `jpigpio.PigpioSocket`, so kann das eigene Java-Programm lokal (z. B. auf einem Laptop) laufen - PigpioSocket kommuniziert dann remote.
+
+### Programmieren mit Java und PI4J
 
 * https://pi4j.com/
 * [Java auf Raspberry PI installieren](http://www.savagehomeautomation.com/pi-jdk)
