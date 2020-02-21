@@ -2,6 +2,8 @@
 
 Python unterstützt verschiedene Paradigmen (Strukturierte Programmierung gleichermaßen wie Objektorientierte Programmierung). Es handelt sich hier um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
 
+---
+
 ## Getting started - Command Line
 
 Install Python `sudo apt-get install python3-pip` and create a file `hello.py`
@@ -12,6 +14,8 @@ print(msg)
 ```
 
 and execute the command `python hello.py` ... viola :-)
+
+---
 
 ## Getting started - Visual Studio Code
 
@@ -25,6 +29,33 @@ print(msg)
 ```
 
 and execute the command "Run Selection/Line in Python Terminal" :-)
+
+---
+
+## Python in Kombination mit Shell
+
+### Python executes Shell-Commands
+
+Mit [Fabric](http://www.fabfile.org/) steht eine sehr brauchbare Python Library zur Verfügung, um aus Python-Code (remote) Shell-Kommandos abzusetzen und die Ergebnisse in Python weiterzuverarbeiten.
+
+Die Installation ist mit `pip` schnell erledigt
+
+```bash
+pip install fabric2
+```
+
+Danach kann man Programme wie `hello-fabric.py`
+
+```python
+from fabric2 import Connection
+c = Connection('localhost')
+result = c.run('uname -s')
+print("result: " + result.stdout.strip())
+```
+
+per `python hello-fabric.py` ausführen.
+
+In der [Dokumentation](http://docs.fabfile.org/en/2.5/) findet man erste Programmier-Beispiele.
 
 ## Kinder lernen programmieren
 

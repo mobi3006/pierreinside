@@ -87,7 +87,7 @@ In dieser Architektur wird das API-Gateway um einen zentralen Router erweitert, 
 
 ### Proxy per Node
 
-In dieser Architektur wird der zentrale Proxy des Router Mesh durch einen Proxy pro virtualler oder physischer Maschine (auf der mehrere Service laufen) ersetzt.
+In dieser Architektur wird der zentrale Proxy des Router Mesh durch einen Proxy pro virtueller oder physischer Maschine (auf der mehrere Service laufen) ersetzt.
 
 ### Sidecar-Proxy
 

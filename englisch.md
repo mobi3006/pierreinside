@@ -85,3 +85,15 @@
 * compensate
 * distract
 * extent
+* demand
+* attendee
+* confirm
+* elaborate
+* travel
+* expense
+* compensation
+* convey
+* purpose
+* vivid
+* compelling
+*

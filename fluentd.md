@@ -72,6 +72,7 @@ Fluentd verwendet einen Plugin-Ansatz für diese Aspekte - Erweiterbarkeit war e
 
 Konzepte ([fluentd documentation](https://docs.fluentd.org/configuration/config-file)):
 
+* Fluentd verwendet eine Positionsdatei (konfiguriert per `pos_file /var/log/fabio/fabio.fluentd.pos`), die kennzeichnet bis wohin die Logeinträge verarbeitet wurden. Selbst wenn Fluentd mal hängen sollte, gehen keine Logs in der Prozessierung verloren
 * "Fluentd allows you to route events based on their tags"
   * woher kommen die Tags?
     * wenn eine Log-Nachricht bereits im JSON-Format kommt (beispielsweise weil man den Logback-GelfAppender verwendet), dann kann dort schon ein `tag` verbaut sein
@@ -82,6 +83,14 @@ Konzepte ([fluentd documentation](https://docs.fluentd.org/configuration/config-
   * "Wider match patterns should be defined after tight match patterns."
   * "If you want to send events to multiple outputs, consider out_copy plugin."
   * "The common pitfall is when you put a `<filter>` block after `<match>`."
+
+Datenmodell
+
+* timestamp
+* tag
+* label
+* record (= Payload)
+  * ACHTUNG: der Record kann auch einen `tag` haben, das dann aber nicht zu verwechseln ist mit dem `tag` des Fluentd-Modells. Andererseits kann man den Fluentd-Tag in den Record übernehmen
 
 Die wichtigesten Elemente sind:
 
@@ -104,7 +113,11 @@ Die wichtigesten Elemente sind:
 * `@type`
   * hierüber wird das Plugin selektiert und damit die unterstützen nachfolgenden Aktionen/Konfigurationen
 * `tag`
-  * einem Event ein weiteres Tag verpassen - über die Tags wird bei `filter` und `match` selektiert
+  * einem Event ein Tag verpassen - über die Tags wird bei `filter` und `match` selektiert
+  * Tags können eine Hierarchie haben (durch Punkte getrennt)... `tag "infrastructure.service.consul"` und bei hierarchischen Filtern/Matchern, darf man nicht vergessen, daß man sowas machen kann/muß:
+    * `<filter infrastructure.*>`
+    * `<filter **>`
+      * `<filter *>` funktioniert dann NICHT!!!
 * `@label`
   * hierbei handelt es sich um leichtgewichtige `tag`s:
     > "The "label" directive groups filter and output for internal routing. "label" reduces the complexity of tag handling. [...] "label" is useful for event flow separation without tag prefix." ([fluentd documentation](https://docs.fluentd.org/configuration/config-file))
@@ -185,6 +198,15 @@ Mit de `copy`-Befehl kann man die Daten auch an mehrere Targets verschicken, hie
   </match>
 </match>
 ```
+
+### Fehlersuche
+
+Die Fehlersuche gestaltet sich leider nicht so angenehm, da die Verarbeitung recht komplex werden kann und dementsprechend viele Fehlerquellen möglich sind. Häufig kann man dann auch nur an einem laufenden System herumexperimentieren - nicht in einer schönen kleinen IDE.
+
+Das Fluentd-Log-File ist immer ein guter Anlaufpunkt, um
+
+* die Syntax der Konfigurationsdateien zu prüfen
+* nach einem `pattern not matched` Ausschau zu halten - ein Indikator, daß ein Log-Event keinem Pattern entspricht und somit sehr wahrscheinlich ignoriert wurde
 
 ---
 
