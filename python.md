@@ -2,6 +2,8 @@
 
 Python unterstützt verschiedene Paradigmen (Strukturierte Programmierung gleichermaßen wie Objektorientierte Programmierung). Es handelt sich hier um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
 
+---
+
 ## Getting started - Command Line
 
 Install Python `sudo apt-get install python3-pip` and create a file `hello.py`
@@ -12,6 +14,8 @@ print(msg)
 ```
 
 and execute the command `python hello.py` ... viola :-)
+
+---
 
 ## Getting started - Visual Studio Code
 
@@ -25,6 +29,64 @@ print(msg)
 ```
 
 and execute the command "Run Selection/Line in Python Terminal" :-)
+
+---
+
+## Sprache
+
+* Funktionen liefern IMMER einen Returnwert ... wenn nicht explizit mit `return bla`, dann ist der Returnwert immer `None`
+* Funktionsparameter können Defaultwerte haben und sind dann optional: `def ask_ok(prompt, retries=4)`
+* mit `*args` gibt es eine spezielle Variante von Übergabeparameter: Argumentliste
+
+```python
+def store(*args):
+    ...
+
+store("Pierre", "Silke")
+```
+
+* mit `*kvargs` gibt es eine spezielle Variante von Übergabeparameter: Dictionary
+
+```python
+def store(**kvargs):
+    ...
+
+store(name="Pierre", age=27)
+```
+
+* Datenstrukturen:
+  * `list` mit Funktionen - kann man auch als Stack mit `list.append()`/`list.pop()` verwenden oder Queues (nicht performant - besser `queue` aus dem `collections`-Paket verwenden) mit `list.append()`/`list.popleft()`:
+    * `list.append(x)`
+    * `list.insert(1, x)`
+    * `list.index("banana")`
+    * `list.remove(x)`
+    * `list.sort(key=None, reverse=false)`
+    * `list.reverse()`
+    * ...
+  * `map`
+  * `set`: `myset={"Pierre", "Silke", "Jonas"}`
+    * mit comprehensions: `a = {x for x in 'abracadabra' if x not in 'abc'}`
+    * Operationen: `myset - { "Pierre" }` liefert `{"Silke", "Jonas"}`
+  * Tupel: `('n', 'no', 'nop', 'nope')`
+    * Elemente müssen nicht vom gleichen Datentyp sein: `((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))`
+    * im Gegensatz zu `list` ist ein Tuppel immutable und hat i. a. unterschiedliche Datentypen - Tupel werden in anderen Use-Cases verwendet
+  * Dictionary: `tel = {'jack': 4098, 'sape': 4139}`
+    * `tel['pierre']=3006` => `{'jack': 4098, 'sape': 4139, 'pierre': 3006}`
+* wichtige Funktionen:
+  * `age=int(input("How old are you? "))`
+  * `l=range(3,6)   # l=[3,4,5]`
+  * Lambdafunktionen
+
+    ```python
+    >>> pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+    >>> pairs.sort(key=lambda pair: pair[1])
+    >>> pairs
+    [(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]
+    ```
+
+* List Comprehensions: `squares = [x**2 for x in range(10)]`
+
+---
 
 ## Kinder lernen programmieren
 
