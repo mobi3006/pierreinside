@@ -148,14 +148,6 @@ Mit `go env` erhält man eine Übersicht über alle unterstützten Umgebungsvari
 * `main` ist das Default-Package, das eine `main()` Funktion beherbergen muß - auf diese Weise können einfache Go-Programme ohne Module bereitgestellt werden
   * das `main`-Package wird nicht in ein Unterverzeichnis gepackt
 
-### Imports
-
-* ein `import` in Go-Programmen referenziert ein Package
-  * wenn es sich um ein Package handelt, das nicht zum aktuellen Modul gehört und auch kein Go-internes Paket ist, dann wird automatisch die letzte Version des entsprechenden Moduls in den Modul-Deskriptor eingetragen (so es sich um ein Modul handelt)
-    * es werden nur direkte Dependencies in den Modul-Deskriptor eingetragen - keine transitiven. Die transitiven Abhängigkeiten werden über die Modul-Deskriptoren der explizit referenzierten Module aufgelöst. Da der Source-Code (und somit die `go.mod`-Dateien) der expliziten Module nach `${GOPATH}/pkg` runtergeladen werden ist das kein Problem
-    * bei `go build` wird in einem solchen Fall automatisch der Source Code des Pakets nach `${GOPATH}/pkg` runtergeladen und somit als Source-Code zur Compilierung zur Verfügung stehen
-    * gibt es keine Binaries???
-
 ### Wichtige Kommandos
 
 * `go mod`
@@ -172,12 +164,108 @@ Mit `go env` erhält man eine Übersicht über alle unterstützten Umgebungsvari
   * compiliert und installiert das Go-Programm ins lokale GO-Repository (`GOBIN`)
   * sollte ein Binary im Arbeitsverzeichnis liegen, dann wird es gelöscht ... will man es neu erzeugen, dann per `go build`
 
+### Imports
+
+* ein `import` in Go-Programmen referenziert ein Package
+  * wenn es sich um ein Package handelt, das nicht zum aktuellen Modul gehört und auch kein Go-internes Paket ist, dann wird automatisch die letzte Version des entsprechenden Moduls in den Modul-Deskriptor eingetragen (so es sich um ein Modul handelt)
+    * es werden nur direkte Dependencies in den Modul-Deskriptor eingetragen - keine transitiven. Die transitiven Abhängigkeiten werden über die Modul-Deskriptoren der explizit referenzierten Module aufgelöst. Da der Source-Code (und somit die `go.mod`-Dateien) der expliziten Module nach `${GOPATH}/pkg` runtergeladen werden ist das kein Problem
+    * bei `go build` wird in einem solchen Fall automatisch der Source Code des Pakets nach `${GOPATH}/pkg` runtergeladen und somit als Source-Code zur Compilierung zur Verfügung stehen
+    * gibt es keine Binaries???
+
+### Call by Value vs. Call by Reference
+
+* Funktionen und Methoden können entweder einen Parameter per Copy oder als Referenz (= Pointer) erhalten. Bei der Übergabe als Pointer, ist der Parameter In- und Output-Parameter, d. h. Änderungen am Wert sind nach außen sichtbar. Bei der Übergabe als Copy wird der Wert kopiert und der aufgerufenen Funktion/Methode steht nur eine Kopie zur Verfügung. In folgendem Beispiel werden die beiden Übergabevarianten gezeigt:
+* Beispiel aus der [Go-Tour](https://tour.golang.org/methods/5)
+
+```go
+package main
+
+import (
+  "fmt"
+  "math"
+)
+
+type Vertex struct {
+  X, Y float64
+}
+
+// Call-by-Value
+func Abs(v Vertex) float64 {
+  return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+// Call-by-Reference
+func Scale(v *Vertex, f float64) {
+  v.X = v.X * f
+  v.Y = v.Y * f
+}
+
+func main() {
+   v := Vertex{3, 4}
+   Scale(&v, 10)
+  fmt.Println(Abs(v))
+}
+```
+
 ### Objektorientierung
 
-* nicht klassenbasiert
-* Datentypen (`struct`) können Methoden besitzen
+* nicht klassenbasiert, sondern `struct` und `interface` basiert
+* Methoden sehen ganz ähnlich wie `func` aus - in folgendem Beispiel wird eine Funktion `Abs()` definiert und eine Methode `Scale(f float64)` auf dem `Vertex struct`:
+
+    ```go
+    type Vertex struct {
+      X, Y float64
+    }
+
+    func (v Vertex) Abs() float64 {
+      return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+
+    func (v *Vertex) Scale(f float64) {
+      v.X = v.X * f
+      v.Y = v.Y * f
+    }
+
+    func main() {
+      v := Vertex{3, 4}
+      v.Scale(10)
+      fmt.Println(v.Abs())
+    }
+    ```
+
+  * mit einem ganz wichtigen Unterschied:
+    * [Tour Link](https://tour.golang.org/methods/6)
+    * [Tour Link](https://tour.golang.org/methods/7)
+  * "all methods on a given type should have either value or pointer receivers" ([Link](https://tour.golang.org/methods/8))
+* Datentypen (`struct`) können Methoden besitzen, die aber implizit dem Typen zugeordnet sind ... es gibt im Gegensatz zu Java kein `implements`, das die Zuordnung explizit machen würde
 * Polymorphie über Interfaces (`type Tier interface {}`) - zur Laufzeit an Implementierung gebunden (Dynamic Binding)
 * keine Vererbung - stattdessen Komposition über Embedding (Form von Mixins)
+* [hier eine ganz allgemeine Implementierung](https://tour.golang.org/methods/10):
+
+```go
+package main
+
+import "fmt"
+
+type I interface {
+  M()
+}
+
+type T struct {
+  S string
+}
+
+// T implementiert das Interface I,
+// es erfolgt keine explizite Kennzeichnung
+func (t T) M() {
+  fmt.Println(t.S)
+}
+
+func main() {
+  var i I = T{"Hallo Pierre"}
+  i.M()
+}
+```
 
 ```Go
 ```
