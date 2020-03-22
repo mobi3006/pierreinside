@@ -27,6 +27,8 @@ Unsere ersten Ideen
 
 ![Erste Idee](images/sportstracker/sportstracker_wieEsAnfing1.jpg)
 
+> Leider haben wir das Projekt nicht lange verfolgt. Es fehlten einfach doch noch die Grundlagen. Das wollen wir nun im Jahr 2020 mit [Scratch](scratch.md) nachholen. Die ersten Grundlagen wurden bereits in der Schule gelegt. Langfristig wollen wir aber weiterhin mit dem [Raspberry Pi](raspberrypi.md) rumspielen. Projekte wie [Lucky Luke auf einer selbstgebauten Spielekonsole](https://github.com/mobi3006/pico) eröffnen doch viel mehr Möglichkeiten.
+
 ## Aufbau
 
 ![Aufbau - Grobskizze](images/sportstracker/sportstracker_aufbau.jpg)
@@ -40,13 +42,17 @@ Seit zwei Jahren habe ich dieses 5 Euro Ding zuhause rumliegen ... auf diese Wei
 ## Los geht's
 
 Der Lötkolben steht auch schon parat... das dauert aber noch, denn zunächst werden wir uns mal mit der Software beschäftigen ... Hardware wird später eingebunden:
+
 ![Aufbau - Grobskizze](images/sportstracker/sportstracker_esGehtLos1.jpg)
+
 ... die Gummibärchen vertilgt ... jetzt hat der Raspi ein zuhause:
 
 ![Aufbau - Grobskizze](images/sportstracker/sportstracker_erstesGehaeuse1.jpg)
 
 Sieht doch schon ganz brauchbar aus:
+
 ![Aufbau - Grobskizze](images/sportstracker/sportstracker_erstesGehaeuse2.jpg)
+
 Leider blieb beim ersten Startversuch der Bildschirm schwarz ... so ists halt - die Fehlersuche beginnt.
 
 ## Jetzt geht' wirklich los

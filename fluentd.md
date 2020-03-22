@@ -359,7 +359,7 @@ Per `docker logs pierre-fluentd` kann ich die Initialisierung des Fluentd-Server
 
 Anschließend kann ich über den HTTP-Endpoint Log-Nachrichten erzeugen:
 
-* im Browser: http://localhost:9880/pierre?json={%22logit%22:%22now%22}
+* im Browser: http://localhost:9880/pierre?json={"logit":"now"}
 * per curl: `curl -X POST -d 'json={"json":"message"}' http://localhost:9880/pierre`
 
 und die Ausgabe im Verzeichnis `/tmp/fluentd/log` anschauen.
