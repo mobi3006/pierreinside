@@ -80,23 +80,26 @@ Manche Code-Stellen verstehe ich nicht und ich möchte gerne mal die Parameter v
 
 ## Konzepte
 
-* Skripte (= Programmcode)
-  * ist immer an eine Figur (= Objekt: Katze, Ball, ...) gebunden
-    * verwendet man mehrere Figuren, dann kann jede ihre eigenen Aktionen ausführen
-* Figuren
-  * Bibliothek vorhanden
-  * lassen sich editieren (= Kostüm)
-  * man kann neue erstellen
-    * hochladen
-    * malen
 * Bühne
+  * Hintergrund-Bild des Programms
   * Bühnenbilder
     * Bibliothek vorhanden
     * lassen sich editieren
     * man kann neue erstellen
       * hochladen
       * malen
+* Figuren
+  * Figuren befinden sich auf der Bühne
+  * Bibliothek vorhanden
+  * lassen sich editieren (= Kostüm)
+  * man kann neue erstellen
+    * hochladen
+    * malen
+* Skripte (= Programmcode)
+  * ist immer an eine Figur (= Objekt: Katze, Ball, ...) gebunden
+    * verwendet man mehrere Figuren, dann kann jede ihre eigenen Aktionen ausführen
 * Klänge
+  * können im Code abgespielt werden
   * Bibliothek vorhanden
   * lassen sich editieren
   * man kann neue erstellen
@@ -105,7 +108,7 @@ Manche Code-Stellen verstehe ich nicht und ich möchte gerne mal die Parameter v
 
 ### Skripte
 
-* Programmierelemente aus
+* Programmierelemente aus (man kann auch Kommentare hinzufügen)
   * Bewegung
   * Klang
   * Ereignisse
@@ -115,3 +118,7 @@ Manche Code-Stellen verstehe ich nicht und ich möchte gerne mal die Parameter v
 * aus Programmcode läßt sich ein parametrisierter Block (= Modul) erstellen
 
   ![Scratch](images/scratch-bloecke.png)
+
+  * leider kann man Blöcke nicht projektübergreifend nutzen
+* im Code können Variablen verwendet werden, um Zustände zu speichern und im Code zu verwenden (z. B. ein Punktestand)
+* Konfiguration kann über Variablen erfolgen

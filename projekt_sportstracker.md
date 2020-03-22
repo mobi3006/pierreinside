@@ -27,6 +27,8 @@ Unsere ersten Ideen
 
 ![Erste Idee](images/sportstracker/sportstracker_wieEsAnfing1.jpg)
 
+> Leider haben wir das Projekt nicht lange verfolgt. Es fehlten einfach doch noch die Grundlagen. Das wollen wir nun im Jahr 2020 mit [Scratch](scratch.md) nachholen. Die ersten Grundlagen wurden bereits in der Schule gelegt. Langfristig wollen wir aber weiterhin mit dem [Raspberry Pi](raspberrypi.md) rumspielen.
+
 ## Aufbau
 
 ![Aufbau - Grobskizze](images/sportstracker/sportstracker_aufbau.jpg)
