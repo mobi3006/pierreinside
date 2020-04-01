@@ -58,6 +58,8 @@ Die von meinen Docker Services bereitgestellten Ports mußten dann noch über di
 * [Tutorial: Using the AWS CLI to Deploy an Amazon EC2 Development Environment](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-tutorial.html)
 * [Install `awscli` auf Ubuntu 18.04 LTS - verschiedene Varianten](https://linuxhint.com/install_aws_cli_ubuntu/)
 
+#### Installation per Python Paket Manager
+
 Ich habe die Command-Line Tools von AWS über `pip` (Python Paket Manager) installiert wie [hier beschrieben](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html):
 
 > Ich hatte den `pip` schon installiert - [so hätte ich ihn installieren können](https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html)
@@ -66,9 +68,13 @@ Ich habe die Command-Line Tools von AWS über `pip` (Python Paket Manager) insta
 pip install awscli --upgrade --user
 ```
 
-So bin ich an die aktuelle Version 1.16.96 gekommen (über diesen Weg werden auch Updates installiert).
+So bin ich an die aktuelle Version 1.16.96 gekommen (über diesen Weg werden auch Updates installiert) - auf diese Weise kann man auch ein Update machen.
 
 > Die Option `--user` sorgte dafür, daß die Installation nur in meinem Home-Verzeichnis erfolgte (`~/.local/bin/aws`). Ich habe dieses Python Script in meinen `$PATH` gelegt, so daß ich es von überall aufrufen kann.
+
+#### Installation per Ubunti Package Manager
+
+> ACHTUNG: nicht zu empfehlen - alte Version!!!
 
 Über meinen Ubuntu Package-Manager (auf Ubuntu 18.04 LTS)
 
@@ -79,6 +85,8 @@ sudo apt-get install awscli
 
 habe ich nur eine awscli-1.14.xxx bekommen.
 
+#### Konfiguration
+
 Anschließend muß man die Credentials `~/.aws/credentials` noch einbinden.
 
 Die Kommandos hängen davon ab, ob man die Python Installation verwendet hat oder die Package-Installation - [siehe Dokumentation](https://linuxhint.com/install_aws_cli_ubuntu/)):
@@ -87,15 +95,32 @@ Die Kommandos hängen davon ab, ob man die Python Installation verwendet hat ode
 python -m awscli configure
 ```
 
-bzw.
+> Als erfahrener AWSler kann man die dabei angelegten Dateien in `~/.aws` aber auch manuell anlegen.
 
-```bash
-aws configure
+Hier wird man interaktiv nach den Crentials (AWS Access Key ID, AWS Secret Access Key, Default region). Aus den Angaben werden die Dateien `~/.aws/credentials` und `~/.aws/config` erzeugt. Diese Credentials kann man sich in der AWS Console (Web UI) im Bereich "IAM - Access Management - Users - <USER> - Security Credentials - Access Keys" erzeugen lassen. Kein Problem, wenn man ihn mal vergißt - einfach neu erzeugen und in `~/.aws/credentials` eintragen. Hat man mehrere AWS Accounts, dann kann man die im [INI File Format](https://en.wikipedia.org/wiki/INI_file) konfigurieren
+
+```
+[default]
+aws_access_key_id = bla
+aws_secret_access_key = blubb
+
+[mySecondAccount]
+aws_access_key_id = what
+aws_secret_access_key = isthat
 ```
 
-Hier wird man interaktiv nach den Crentials (AWS Access Key ID, AWS Secret Access Key, Default region). Aus den Angaben werden die Dateien `~/.aws/credentials` und `~/.aws/config` erzeugt.
+und dann bei einem AWS-CLI Kommando bei Bedarf das Default [Profil überschreiben](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html): `aws iam get-user --user-name your_username@example.com --profile mySecondAccount`.
 
 > AWS Roles verwendet man, wenn man seine Credentials nicht auf der Instanz hinterlegen möchte. Auf diese Weise kann man eine Role mit Permissions auf ein S3-Bucket anlegen und einer EC2-Instanz zuweisen. Dadurch hat die EC2-Instanz automatisch Zugriff auf das S3. Bucket. Mit [Terraform](terraform.md) läßt sich das auch schön automatosieren.
+
+Der Python-Aws-CLI-Installer bringt auch gleich die passende [Shell-Auto-Completion](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html) mit. Unter `~/.local/bin/aws_completer.` sind die notwendigen Quellen abgelegt. Durch hinzufügen folgender Zeilen zur `~/.zshrc` wird die AWS-Auto-Completion automatisch aktiviert:
+
+```bash
+autoload bashcompinit && bashcompinit
+complete -C '/home/pfh/.local/bin/aws_completer' aws
+```
+
+#### Test
 
 Anschließend sollte man Zugriff haben und folgenden Befehl ausführen können:
 

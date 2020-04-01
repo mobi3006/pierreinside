@@ -10,10 +10,10 @@
 * request
 * increase
 * decrease
-* speed annoyingup
-* slow dannoyingown
-* complaannoyingin
-* satisfannoyingaction
+* speed up
+* slow down
+* complain
+* satisfaction
   * satisfied - happy - pleased
   * dissatisfaction
 * run into trouble
@@ -45,17 +45,16 @@
 * confirm - confirmation
 * approve - approval
 * lenient -patient
-* disturb
-* annoying
-* weird -annoying strange - scary
-* draftannoying
-* announcannoyinge - publish - provide
-* affectannoying
-* promiseannoying
-* proposeannoying - proposal
-* guarantannoyingee
-* guessannoying
-* troubleannoying
+* distur
+* weird - strange - scary
+* draft 
+* announce - publish - provide
+* affect 
+* promise 
+* propose  - proposal
+* guarantee
+* guess 
+* trouble 
 * increase - decrease
 * continue
 * suggest
@@ -96,4 +95,5 @@
 * purpose
 * vivid
 * compelling
-*
+* leverage
+* attend
