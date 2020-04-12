@@ -176,8 +176,10 @@
   * [Leanpub](leanpub.md)
   * [Animationsfilme](animationsfilme.md)
 * Storage
-  * [Synology](synology.md)
+  * [Synology 2012](synology-2012.md)
+  * [Synology 2020](synology-2020.md)
   * [Foto/Video Sammlung](fotoVideoSammlung.md)
+    * [Handbrake](handbrake.md)
 * Collaboration
   * [Microsoft Teams](microsoft_teams.md)
 * [Hausautomatisierung](homeAutomation.md)
@@ -185,13 +187,15 @@
   * [Heimnetzwerk](heimnetzwerk.md)
 * Konferenzen
   * [Velocity Berlin 2019](velocoty-berlin-2019.md)
+* IT mit Kindern
+  * [Projekt Sportstracker](projekt_sportstracker.md)
+  * [Scratch](scratch.md)
 * Misc
   * [Command Line Interface](cli.md)
   * [Google API](google-api.md)
   * [Plant UML](plantuml.md)
   * [Chromium](chromium.md)
   * [iPad Pro](ipadPro.md)
-  * [Projekt Sportstracker](projekt_sportstracker.md)
   * Handy
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
@@ -219,4 +223,5 @@
   * [Quick Mill Orione 3000](quickMillOrione3000.md)
   * [Fußball Tools](fussball.md)
   * [Online Lernplattformen](online-lern-plattformen.md)
+  * [Slate](slate.md)
 * [Englisch](englisch.md)

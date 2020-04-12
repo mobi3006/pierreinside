@@ -6,7 +6,7 @@ Das ist sehr praktisch, wenn man lokal in einer kleinen Landschaaft unterwegs is
 
 Zudem kann es passieren, daß die Anwendungen in ganz unterschiedlichen Log-Formaten (JSON, XML) mit ganz unterschiedlichen Benennungen der Attribute arbeiten. Diese Daten muß man dann i. a. konsolidieren und in ein gemeinsames Format bringen.
 
-> [LogStash](https://www.elastic.co/products/logstash) (z. B. im ELK-Stack - L = Logstash) ist ein typisches Tool für die Konsolidierung/Filterung von Daten.
+> [LogStash](https://www.elastic.co/products/logstash) (z. B. im ELK-Stack - L = Logstash) und [Fluentd](fluentd.md) sind typische Tools für die Konsolidierung/Filterung von Logs.
 
 ---
 
@@ -14,7 +14,7 @@ Zudem kann es passieren, daß die Anwendungen in ganz unterschiedlichen Log-Form
 
 * [Configure Logging Driver](https://docs.docker.com/config/containers/logging/configure/)
 
-Abhängig vom gewählten Log-Driver kann man weitere Parameter konfigurieren. Der Log-Driver kann die Nachrichten sogar [mit weiteren Informationen anreichern](https://docs.docker.com/config/containers/logging/log_tags/) (z. B. Applikationsversion).
+Abhängig vom gewählten Log-Driver kann man weitere Parameter konfigurieren. Der Log-Driver kann die Nachrichten sogar [mit weiteren Informationen anreichern](https://docs.docker.com/config/containers/logging/log_tags/) (z. B. Applikationsversion). Den Log-Driver kann man Docker-zentral in `/etc/docker/daemon.json` einstellen und beim Docker-Container-Start (z. B. im `docker-compose.yml`-File oder als Parameter `--log-driver`) überschreiben.
 
 ### json-file
 
@@ -40,7 +40,7 @@ Vom Fluentd-Log-Driver werden standardmäßig einige Informationen hinzugefügt 
 
 Ein [Fluentd-Server](fluentd.md) kann die Nachrichten - ähnlich wie Logstash - filtern, konsolidieren und mit Daten anreichern.
 
-Eine Integration von Fluentd kann über den Log-Driver geschehen aber auch durch Verwendung des json-File-Log-Drivers und einer Fluentd-Konfiguration, die die Log-Files vom Docker-Host (`/var/lib/docker/containers/...`) im tail-Mode liest und verarbeitet. Letztere Variante hat den Vorteil, daß man die Log-Nachrichten bei `docker logs my-container` noch sieht - geht man über Fluentd-Log-Driver, so kann man sich nur an den Fluentd-Server wenden, um die Logs zu sehen ... und dort kommen Logs von vielen Containern an - das kann unübersichtlich werden.
+Eine Integration von Fluentd kann über den Fluentd-Log-Driver geschehen. Eine andere Form der Integration besteht im JSON-LogDriver, der eine Datei auf dem Docker-Host (`/var/lib/docker/containers/...`)erzeugt, die wiederum von Fluentd im tail-Mode gelesen wird. Letztere Variante hat den Vorteil, daß man die Log-Nachrichten bei `docker logs my-container` noch sieht ... die typische Arbeitsweise mit Docker.
 
 ### Google Cloud
 
