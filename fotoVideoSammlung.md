@@ -248,3 +248,9 @@ Meine Lösung 2019 besteht nun aus einem [Lightning-USB-Adapter mit 64 GB Speich
     * Kategorisierung nach Quartal (z. B. `20180100_familie_Q1`)
       * innerhalb eines Quartals Kategorisierung nach Event (z. B. `20180210_skiurlaub`)
 * `sammlung` per "Photo Station Uploader" nach Synology Photostation (Ordner `photos`) kopieren und - nach Prüfung ob alles angekommen ist - in `sammlung` löschen
+
+---
+
+## Foto-Mosaik-Edda
+
+Mit diesem Tool kann man kostenlos ein Bild aus vielen anderen Bildern zusammensetzen. Die Ergebnisse sind sehr brauchbar und man muß keine Zeit investieren - allerdings sind die Einstellungsmöglichkeiten (zumindest in der kostenlosen Version) stark eingeschränkt.
