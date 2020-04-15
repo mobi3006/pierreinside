@@ -2,6 +2,8 @@
 
 Im Mai 2016 haben wir einen günstigen Pool bei Aldi für 129 Euro gekauft (8000 Liter) ... das sollte mal reichen, um erste Erfahrungen zu sammeln (und zu testen, ob es den Kindern und uns überhaupt Spaß macht oder wir doch lieber ins Schwimmbad gehen).
 
+---
+
 ## Pflege
 
 Links:
@@ -45,6 +47,9 @@ um ein Umkippen des Wassers und somit eine Gesundheitsgefährung zu vermeiden.
   * per Pumpe - hier wird ein langer Schlauch an den Ausgang vom Skimmer angeschlossen, die andere Seite vom Schlauch kommt an eine Bodenbürste, so daß der Dreck in die Pumpe gesaugt und dort gefiltert wird
 * Becken-Bürste, um den Boden und Rand abzubürsten und dadurch den Wirkungsgrad der Chemikalien zu erhöhen
 * Abdeckplane (Algen brauchen Licht zum Wachsen)
+* Spielereien
+  * [Schwimmgürtel statt Gegenstromanlage](https://www.amazon.de/Schwimmtrainer-Gegenstromanlage-gepolsterter-Schwimmgurt-Schwimmtube/dp/B01GIMZV8O/ref=sr_1_1?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=schwimmg%C3%BCrtel+body+cross&qid=1586710374&sr=8-1)
+  * Wasserhängematte
 
 ### Vorgehensweise
 
@@ -54,9 +59,12 @@ Meine gesammelten Tipps aus verschiedenen Quellen:
   * auswaschen
 * Poolnutzung
   * regelmäßig Chlor und PH-Wert kontrollieren (mind. 1 x pro Woche)
+    * PH-Wert sollte zwischen 7,0 und 7,5 liegen - ansosten braucht man zu viel Chemie
     * Dauerchlorierung mit Tabs, die in einen Schwimmer kommen
     * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
   * bei grünlichem Wasser Algicid reingeben und Pumpe länger laufen lassen
+    * Filterballs vorher überprüfen ... evtl. rückspülen
+    * VORHER: PH-Wert auf den richtigen Wert bringen
   * bei bräunlichem Wasser ... und Pumpe länger laufen lassen
   * bei milchigem Wasser ... und Pumpe länger laufen lassen
   * Skimmer verwenden, um groben Schmutz VOR der Pumpe rauszufiltern
@@ -67,9 +75,12 @@ Meine gesammelten Tipps aus verschiedenen Quellen:
     * wir haben den: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
   * Filterreinigung:
     * Kartusche: regelmäßig entnehmen und abspritzen
+    * einmal wöchentlich rückspülen - gelegentlich die Filterballs prüfen (häufig setzen sich auch Algen ab)
     * Sand und Filter Balls: Rückspülen und Nachspülen sobald der Druck in den gelben Bereich wechselt (siehe Manometer), um den Dreck aus dem Sand zu waschen und abzulassen
 * Wintereinlagerung:
   * Pool gründlich waschen (Putzmittel für Pools) und dann ausgiebig trocknen
+
+---
 
 ## Pumpe
 
@@ -109,11 +120,11 @@ So war es kein größeres Problem mehr und mit meinem jetzigen Wissen würde ich
 
 Steinbach gibt hierzu [folgende Empfehlung](http://www.steinbach.at/info/detail.php?viewID=16344):
 
-* Bis zu einer Wassertemperatur von ca. 20 °C: 
+* Bis zu einer Wassertemperatur von ca. 20 °C:
   * Das Wasser soll mindestens 2 x täglich umgewälzt werden.
-* Bis zu einer Wassertemperatur von ca. 24 °C: 
+* Bis zu einer Wassertemperatur von ca. 24 °C:
   * Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 2 Stunden
-* Ab einer Wassertemperatur von ca. 24 °C: 
+* Ab einer Wassertemperatur von ca. 24 °C:
   * Das Wasser soll mindestens 2 x täglich umgewälzt werden. + 4 Stunden
 
 Pro Umwälzung braucht die Comfort 50 eine gute Stunde ... also 2 Stunden für 2 Umwälzungen. Obige Empfehlungen ergeben also folgende Laufzeiten:
@@ -151,6 +162,9 @@ Ersatzteile scheinen kein Problem zu sein - [siehe hier](http://www.steinbach.at
 
 * während des Pumpenbetriebs sollte man aus Sicherheitsgründen nicht baden
 * Druck am Manometer beobachten ... sobald im gelben Bereich: Rückspülen und Nachspülen, um den Dreck aus dem Filter zu waschen
+* Rückspülen ist wichtig - sonst können die Filter Balls irgendwann keine Teilchen mehr binden ... evtl. auch mal austauschen!!!
+
+---
 
 ## Tools
 
@@ -161,13 +175,58 @@ Ersatzteile scheinen kein Problem zu sein - [siehe hier](http://www.steinbach.at
 
 * Poolsauger und -kescher: https://www.amazon.de/gp/product/B004FEER0Q/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1
   * das Absaugen klappt erstaunlich gut :-)
+* Löcher flicken
+  * wir hatten mal ein kleines Loch im Pool und im Baumarkt habe ich mir ein Unterwasser-Flick-Set gekauft ... hat irgendwie gar nicht funktioniert. Ich habe dann stattdessen 1000 Liter abgelassen und dann hat es funktioniert.
 
-## Bewertung
+---
+
+## Bewertung Version 1.0
 
 Es hat sich gelohnt ... der Garten ist nun zwar zu etwas anderem kaum noch zu gebrauchen (3,7m Durchmesser), aber er wird genutzt. Von den Kindern, den Eltern und den Großeltern. Das Schwimmbad wird zwar nicht ersetzt, aber wenn man mal nicht die Zeit/Muße fürs Schwimmbad hat oder das Wetter nur durchwachsen ist (wie im Sommer 2016 häufiger), dann ist der Pool perfekt. Im nächsten Jahr wird er wieder aufgebaut und sicherlich wird die ein oder andere Optimierung vorgenommen
 
+* der Pool könnte tiefer sein ... von den 75cm bleiben 60cm übrig ... für kleine Kinder ok, aber für Jugendliche und Erwachsene ist das wirklich zu flach
+* statt der blauen Außenwand wäre eine Rattan-Optik ganz angenehm, das würde sich weniger auffällig in den Garten einfügen
+
+---
+
 ## Swimming-Pool 2.0
 
-* der Pool könnte tiefer sein
-* statt der blauen Außenwand wäre eine Rattan-Optik ganz angenehm, das würde sich weniger auffällig in den Garten einfügen
-  * in den Boden eingelassen wäre natürlich optimal ... aber da würde man dann sicher eher ein richtiges Schwimmbecken bauen
+Nach 4 Saisons hatte der erste Pool einige kleine Löcher und die Stangen waren schon sehr verrostet - deshalb haben wir ihn nach der Saison 2019 entsorgt.
+
+Eigentlich wollten wir für 2020 keinen neuen anschaffen, doch die Corona-Krise und die sportlichen Aktivitäten der Kinder hat uns umdenken lassen. Ins Schwimmbad wird man evtl. auf absehbare Zeit nicht kommen und die Kinder haben jeweils 2-3 Tage die Woche Fußballtraining und dann nach einem langen Schulatg auch keine Zeit, ins Schwimmbad zu gehen. Mit dem Pool im Garten kann man schnell mal eben 30 Minuten abkühlen und Spaß haben.
+
+Diesmal soll es eine Rechteckform sein - läßt sich zum Spielen und "Schwimmen" besser nutzen.
+
+### Rechteck-Pool Intex
+
+Der [Intex Ultra XTR Frame Pool](https://www.intexcorp.com/ultraxtr/) mit einer Größe von 549 x 274 x 132cm (17.200 Liter ... doppelt so viel wie Version 1.0) einer grauen Außenhaut hat uns gut gefallen. Der Platzbedarf ist aufgrund der herausragenden Träger (4 auf der langen Seite, 2 auf der kurzen) allerdings größer:
+
+Mit ca. 700 Euro ist er natürlich deutlich teurer als die Version 1.0, doch immer 
+
+[Aufbau](https://www.youtube.com/watch?v=tAkJzNG35qs)
+
+### Rechteck-Pool Bestway
+
+Der [Bestway Power Steel](https://www.bestwaystore.de/pools/power-steel-pools/ovale-power-steel-pools-mit-kartuschenfilter/967/power-steel-frame-pool-komplett-set-549-x-274-x-122-cm-mit-filterpumpe-oval-grau) im Vergleich zum Intex:
+
+* ca. 100 Euro günstiger
+* oval statt rechteckig
+* 10cm flacher ... somit ist die Wasserhöhe wohl eher bei knapp über 110 cm
+* 13.400 Liter statt 17.200 Liter
+
+### Pumpe
+
+Die mitgelieferten Pumpen taugen i. a. nicht viel ... am liebsten wäre mir eine Lieferung ohne Pumpe. Unsere Steinbach-Pumpe Speed Clean Comfort 50 ist auf 33.000 Liter ausgelegt - schafft 6.600 Liter/h ... braucht also 5 Stunden (kein Problem nachts), um das Wasser zweimal zu filtern.
+
+Keine neue Pumpe erforderlich.
+
+### Tips
+
+* bei der Größe ist ein gerader Untergrund noch wichtiger
+  * bisher habe ich immer Styropor (2cm) ausgelegt, um Unebeneheiten auszugleichen und ein angenehmes Fußgefühl zu haben
+    * vielleicht ist Styrodur besser als Styropor - weniger druckempfindlich ... bei mir hat bisher das druckempfindliche Stypropor die Unebenheiten ausgeglichen ... muß man abwägen  
+    * zudem sollte man eine Folie zwischen Rasen und Pool legen, um zu verhindern, daß Feuchtigkeit zwischen Rasen und Pool kommt und das Rasen fault/stinkt
+  * vielleicht sollte ich diesmal außerdem noch feinen Sand (Fugensand) ausbringen
+    * am besten befeuchten vor dem drüberlegen der Folie damit der Sand bleibt wo er ist
+  * bei Stahlrahmenpool sollte das Gefälle auf 5m nicht größer sein als 3cm ... im schlimmsten Fall kippt der Pool um
+* nach 2-3 Jahren waren die Stangen des ersten Pool stark verrostet - evtl. sollten man ihnen vor der Erstmontage Hohlraumversiegelung gönnen?!?
