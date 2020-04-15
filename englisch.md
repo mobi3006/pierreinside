@@ -97,3 +97,5 @@
 * compelling
 * leverage
 * attend
+* bother
+* mitigate

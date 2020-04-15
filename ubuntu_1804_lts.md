@@ -56,12 +56,18 @@ Eine permanente Änderung erfolgt in Grub als Kernel Parameter:
 
 Frage 1: Ich verwende NAT und im Homeoffice über VPN habe ich immer wieder Probleme Hostnamen aus dem Private Network aufzulösen. Nicht immer, aber irgendwann passiert es dann mal und dann muß ich die Netzwerkverbindung neu initialisieren (`sudo systemctl stop systemd-resolved && sudo systemctl start systemd-resolved`). Was ist das Problem?
 
-Antwort 1: Schau mal in `/var/log/syslog`, ob da was zu finden ist. [Hier](https://ohthehugemanatee.org/blog/2018/01/25/my-war-on-systemd-resolved/) habe ich gelesen, daß es etwas mit `systemd-resolvd` von Ubuntu zu tun hat - eine Anpassung von `/etc/systemd/resolved.conf` wie in den Antworten geschrieben hat noch nicht geholfen.
+Antwort 1: Der `systemd-resolved` ist ein DNS-Cache, den Ubuntu verwendet ... deshalb ist der Prozess auch an den Port `53` auf Deinem System gebunden. Bei einem `netstat -taupen | grep 53` bekomme ich folgende Ausgabe:
+
+```
+3:tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      102        410742     28695/systemd-resol
+```
+
+Die Konfiguration ist unter `/etc/systemd/resolved.conf` zu finden ... wenn man daran etwas ändert muß man den Service per `systemctl restart systemd-resolved` neu starten. [Hier](https://ohthehugemanatee.org/blog/2018/01/25/my-war-on-systemd-resolved/) findet man einen guten Artikel. Eine Anpassung von `/etc/systemd/resolved.conf` wie in den Antworten geschrieben hat noch nicht geholfen.. Schau mal in `/var/log/syslog`, ob da was zu finden ist.
 
 Frage 2: Mein System scheint immer mal wieder einzufrieren ... es wird der Login-Screen gezeigt und nach erfolgreichem Login erhalte ich einen einfarbigen dunklen Bildschirm. Im `/var/log/syslog` sehe ich
 
 ```
-an 14 08:37:06 workbench kernel: [ 3540.582228] INFO: rcu_sched detected stalls on CPUs/tasks:
+Jan 14 08:37:06 workbench kernel: [ 3540.582228] INFO: rcu_sched detected stalls on CPUs/tasks:
 Jan 14 08:37:06 workbench kernel: [ 3540.582237] 	0-...!: (1 GPs behind) idle=e8c/0/0 softirq=16644/16644 fqs=0 
 Jan 14 08:37:06 workbench kernel: [ 3540.582240] 	1-...!: (4 GPs behind) idle=82c/0/0 softirq=17176/17176 fqs=0 
 Jan 14 08:37:06 workbench kernel: [ 3540.582242] 	2-...!: (8 GPs behind) idle=ca0/0/0 softirq=20991/20992 fqs=0 

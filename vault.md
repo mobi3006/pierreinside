@@ -79,7 +79,7 @@ vault:
         VAULT_DEV_ROOT_TOKEN_ID: root
 ```
 
-Bei dieser Konfiguration würde eine Datei `./vault-config/config.hcl` den Vault Container entsprechend konfigurieren. In diesem Beispiel wird Consul (statt der In-Memory Datenbank) als Storage Engine verwendet Consul muß natürlcih auch gestartet sein):
+Bei dieser Konfiguration würde eine Datei `./vault-config/config.hcl` den Vault Container entsprechend konfigurieren. In diesem Beispiel wird Consul (statt der In-Memory Datenbank) als Storage Engine verwendet Consul muß natürlich auch gestartet sein):
 
 ```hcl
 storage "consul" {
@@ -154,6 +154,8 @@ Vault selbst speichert die Daten verschlüsselt - Vault hat nur Zugriff, wenn es
 
 ### Master-Key
 
+![Vault Verschlüsselung](images/vault-encryption-big.jpg)
+
 Der Master-Key ist in Produktivszenarien allerdings kein einzelner Schlüssel, der EINEM Operator zur Verfügung steht. Stattdessen wird dieses Geheimnis in sog. Shared Keys zerteilt ... und zwar so, daß eine bestimmte Anzahl von Shared-Keys ausreicht, um den Master-Key zu restaurieren. [Shamir Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) ist das dahinterliegende Konzept
 
 Beispiel:
@@ -192,8 +194,72 @@ Ein URL-Pfad-Prefix (z. B. `secret`, `aws`) ist an eine Secret Engine gebunden.
 
 Der AWS Secret Store wird per `vault secrets enable -path=aws aws` eingeschaltet.
 
+---
+
 ## Provisioning von Key/Values
 
 ### Terraform
 
 * [Terraform - Vault Provider](https://www.terraform.io/docs/providers/vault/index.html)
+
+Secrets werden in Terraform - ganz ähnlich wie Konfigurationswerte in Consul - über die Resource `vault_generic_secret` in Vault abgelegt:
+
+```hcl
+resource "vault_generic_secret" "myservice_smtp_credentials" {
+  path = "secret/myservice/smtp/credentials"
+
+  data_json = <<EOT
+{
+  "username": "user1",
+  "password": "password1"
+}
+EOT
+}
+```
+
+Zugriffe auf diese Werte (= Secrets) sind geschützt und man benötigt entsprechende Berechtigungen, um darauf zuzugreifen. In einer sog. `vault_policy` werden verschiedene Berechtigungsprofile definiert
+
+```hcl
+resource "vault_policy" "myservice_read_policy" {
+  name = "myservice"
+
+  policy = <<EOT
+path "secret/myservice/*" {
+  policy = "read"
+}
+EOT
+}
+```
+
+Beim Zugriff auf Secrets `secret/myservice/*` (z. B. über ein Consul-Template) benötigt man einen entsprechenden Token, der für den Scope freigegeben ist. In einem Nomad-Job (der auf die Secrets zugreifen muß, um in der Konfiguration die Passwörter zur Hand zu haben) verwendet man deshalb die [`vault`-Stanza](https://nomadproject.io/docs/job-specification/vault/), um ein Token on-the-fly auszustellen:
+
+```
+job "myservice_job" {
+  group "example" {
+    task "myservice_server" {
+      vault {
+        policies = ["myservice_read_policy"]
+
+        change_mode   = "signal"
+        change_signal = "SIGUSR1"
+      }
+    }
+  }
+}
+```
+
+Wie bereits erwähnt gibt man den Root-Token niemals weiter - dennoch muß man natürlich die Secrets lesen können (sonst gäbe es keinen Grund sie zu hinterlegen). Deshalb kann man Tokens mit eingeschränkten Berechtigungen ausstellen. Hierzu definiert man sog. Policies, in denen die Berechtigungen auf Basis von Policies definiert sind.
+
+---
+
+## Vault CLI
+
+* `vault token lookup s.566431636764125361235`
+  * gibt nützliche Informationen zu einem Token aus ... wenn man bespielsweise in Berechtigungsprobleme läuft
+    * `expire_time`
+    * `issue_time`
+    * `last_renewal`
+    * `policies`
+    * `renewable`
+      * Secrets haben zumeist nur einen eingeschränkten Gültigkeitszeitraum ... man kann Vault mit der Erneuerung von Secrets beauftragen - in dem Fall muß man dann natürlich auch dafür sorgen, daß die neuen Tokens an die Clients verteilt werden
+
