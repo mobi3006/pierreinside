@@ -5,14 +5,20 @@ Ich hatte diesen Farbdrucker im Jahr 2015 wegen folgender Eigenschaften erworben
 * Laserdrucker - bei meinem niedrigen Druckvolumen trocknet Tinte ein (hauptsächlich in den Düsen)
 * Farbe - die Kinder brauchen für die Schule immer mal wieder gute Farbausdrucke (auch zum Lernen ist das besser)
   * für schwarz-weiß-Ausdrucke verwende ich meinen druckgünstigen Kyocera FS-920 (15 Euro für eine Tonerkartusche, die tausende Seiten druckt)
-* Scanner mit Ablage auf [Synology Fileserver](synology.md) ... nutze ich sehr regelmäßig
-* Netzwerkfähig
+* Scanner mit Ablage auf [Synology Fileserver](synology.md) ... nutze ich sehr regelmäßig - nie mehr ohne
+  * insbesondere in der Corona-Zeit 2020 (wochenlanges Homeschooling) war das superpraktisch fürs Einscannen und Verschicken der Hausaufgaben
+* netzwerkfähig
+  * ohne Konfiguration konnte ich von meinem iPad drucken
 
-Seitdem bin ich sehr zufrieden.
+Ich bin sehr zufrieden.
+
+---
 
 ## August 2016 - Schwarz-Toner getauscht
 
 Nach nur 150 Seiten schwarz-Druck war der Toner schon leer (bei der Auslieferung sind nur ganz kleine Tonerkassetten drin). Ich bestellte [diesen No-Name Toner von Colour Direct](https://www.amazon.de/gp/product/B00KS8IJO8/ref=oh_aui_search_detailpage?ie=UTF8&psc=1). Alles prima ... tolles DRuckergebnis.
+
+---
 
 ## Frühjahr 2018 - Tonertausch mit schlechten Ergebnissen
 
@@ -41,3 +47,11 @@ Selbst die Testseite brachte kein rot raus ... damit konnte ich den Rechner (Dru
 ### Farbkorrektur
 
 Im Menü kann man eine Farbkorrektur über die Farbregistrierungstabelle vornehmen. Mehrfach startete ich die automatische Farbkorrektur, doch die Verbesserungen waren gering. Die manuelle Anpassung brachte dann endlich deutliche Verbesserungen. So konnte ich den Drucker endlich wieder in Betrieb nehmen. Sicher ... die Original-Farben sind bestimmt besser ... aber 150 Euro mehr sind sie mir derzeit nicht wert. Viellecht probiere ich es beim nächsten mal aber doch aus.
+
+---
+
+## April 2020 - gelber Toner leer
+
+In der Corona-Krise wurde relativ viel gedruckt und somit war der gelbe Toner leer. Seltsamerweise konnte man auch nicht schwarz-weiß drucken ... der Drucker war als "Kein Toner / no ink" im Druckertreiber gekennzeichnet und Testseiten konnten kamen nicht mehr raus. Schwarz-Weiß-Kopieren funktionierte aber kein problemlos ... vielleicht eine Einschränkung des Druckertreibers oder des Print-Moduls im Drucker.
+
+Glücklicherweise hatte ich noch gelben Toner vom Tausch aus 2018 - rein und er druckt wieder - diesmal keine Probleme mit der Druckqualität :-)
