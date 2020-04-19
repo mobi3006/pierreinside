@@ -10,6 +10,18 @@ Dennoch bin ich nicht bereit, über 1000 Euro für einen Weber-Grill zu bezahlen
 
 ---
 
+## Mein erster Gasgrill
+
+Es ist ewige Zeit her ... es war ein Gasgrill mit Lava-Steinen.
+
+---
+
+## Mein zweiter Gasgrill
+
+... rostete dann irgendwann an den Brennern durch - das ist die Schwachstelle der Billig-Grills - keine Ahnung, ob die teuren Grills hier besser sind ... vielleicht wird hier mehr Edelstahl verbaut, so daß sie länger halten.
+
+---
+
 ## Bis 2020
 
 Wir hatten einen Gasgrill mit folgenden Daten:
@@ -55,3 +67,4 @@ Der Rost nagt an dem alten Grill und deshalb bin ich auf der Suche nach Ersatz m
   * sehr gut für Steaks
 * inkl. Wetterschutzhülle
 * geschlossen - man sieht die Gasflasche nicht
+* [Test von Familie Schardt](http://familietestet.de/gassgrill-enders-boston-pro-4-turbo-ii-von-aldi-sued/)
