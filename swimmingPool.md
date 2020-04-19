@@ -195,7 +195,9 @@ Nach 4 Saisons hatte der erste Pool einige kleine Löcher und die Stangen waren 
 
 Eigentlich wollten wir für 2020 keinen neuen anschaffen, doch die Corona-Krise und die sportlichen Aktivitäten der Kinder hat uns umdenken lassen. Ins Schwimmbad wird man evtl. auf absehbare Zeit nicht kommen und die Kinder haben jeweils 2-3 Tage die Woche Fußballtraining und dann nach einem langen Schulatg auch keine Zeit, ins Schwimmbad zu gehen. Mit dem Pool im Garten kann man schnell mal eben 30 Minuten abkühlen und Spaß haben.
 
-Diesmal soll es eine Rechteckform sein - läßt sich zum Spielen und "Schwimmen" besser nutzen.
+Diesmal sollte er tiefer sein - vielleicht eine Rechteckform statt rund - läßt sich zum Spielen und "Schwimmen" besser nutzen. Tiefer bedeutet allerdings - zumindest nach aktueller Recherche - auch größer in der Fläche ... und das wiederum bedeutet noch weniger Rasen, der dann bei 4 Monaten Nutzung für immer tot ist.
+
+Pool 1.0 hatte einen Durchmesser von 366 cm (Brutto knapp 400 cm) und eine Tiefe von 75 cm (von denen gerade mal 60 genutzt werden konnten). Allerdings hatte er schon sehr gut in den eh gepflasterten Bereich im Garten gepaßt, der von Rasen umgeben ist.
 
 ### Rechteck-Pool Intex
 
@@ -214,7 +216,21 @@ Der [Bestway Power Steel](https://www.bestwaystore.de/pools/power-steel-pools/ov
 * 10cm flacher ... somit ist die Wasserhöhe wohl eher bei knapp über 110 cm
 * 13.400 Liter statt 17.200 Liter
 
-### Pumpe
+### Rund-Pool - 366
+
+* 366 cm Durchmesser
+* 99 cm Tiefe - 23cm mehr als Pool 1.0
+* 8500 Liter
+* ca. 200 Euro
+
+### Rund-Pool - 457
+
+* 457 cm Durchmesser
+* 122 cm Tiefe - 46cm mehr als Pool 1.0
+* 17000 Liter
+* ca. 300 Euro
+
+### Mitgelieferte Pumpen
 
 Die mitgelieferten Pumpen taugen i. a. nicht viel ... am liebsten wäre mir eine Lieferung ohne Pumpe. Unsere Steinbach-Pumpe Speed Clean Comfort 50 ist auf 33.000 Liter ausgelegt - schafft 6.600 Liter/h ... braucht also 5 Stunden (kein Problem nachts), um das Wasser zweimal zu filtern.
 

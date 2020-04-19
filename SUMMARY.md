@@ -9,6 +9,7 @@
     * [Ubuntu 14.10 LTS](ubuntu_1410_lts.md)
     * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
     * [Ubuntu 18.04 LTS](ubuntu_1804_lts.md)
+    * [Ubuntu 20.04 LTS](ubuntu_2004_lts.md)
   * Konsole
     * [ssh](ssh.md)
     * [zsh](zsh.md)

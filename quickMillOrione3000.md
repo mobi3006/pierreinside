@@ -33,7 +33,7 @@ Die Mühle arbeitet perfekt (ist allerdings schon einmal kaputt gegangen und wir
 
 ---
 
-## Reparaturen
+## Reparaturen/Wartung
 
 Glücklicherweise haben wir mit der Firma Kudlek (seit 2018 mit Hausgeräte Becker vereint) vor Ort, die bei größeren Problemen helfen können oder aber auch immer Ersatzteile sofort verfügbar haben.
 
@@ -57,6 +57,14 @@ Glücklicherweise haben wir mit der Firma Kudlek (seit 2018 mit Hausgeräte Beck
     * mit dem Schraubenzieher und einer Nadel gesäubert (Entfetter funktioniert auch ganz gut - 2 Tage eingeweicht)
   * läuft wieder ... aber nach ein paar Bezügen wieder Probleme
     * ich habe den Kaffee nicht gewechselt - auch nicht den Mahlgrad geändert ... aber es bleibt nach dem Bezug immer sehr viel Pulver an diesem Sieb hängen. Ich werde mir das Sieb erneut anschauen.
+
+---
+
+### Entkalken
+
+* [Howto](https://www.coffeecircle.com/de/e/quickmill-orione-entkalken)
+
+Wir verwenden extra weiches Wasser vom Discounter, denn das Wasser in unserem Ort ist sehr hart. Aus diesem Grund müssen wir sicherlicht seltener entkalken, aber 2 mal pro Jahr sollte es schon sein.
 
 ---
 

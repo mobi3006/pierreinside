@@ -4,7 +4,7 @@ Man glaubt es kaum, aber dieses Gerät ist mein erstes Apple-Gerät. Die Apple-H
 
 Deshalb hatte ich immer wieder nach einem Samsung Note Nachfolger für mein mittlerweile betagtes Note 8 (... rational ist eine Ablösung aber noch unbegründet ;-)
 
-Doch dann kam Apple mit dem iPad Pro 9.7 ... das 12.9 war mir vor einem halben Jahr zu groß. Es war einfach das perfekte Gerät:
+Doch dann kam Apple mit dem iPad Pro 9.7 im Jahr 2016 und als es dann im April verfügbar war schug ich zu ... das 12.9 war mir vor einem halben Jahr zu groß. Es war einfach das perfekte Gerät:
 
 * Stiftbedienung - ich verwende mein Galaxy Note 8 als Papier-Ersatz (in Meetings ... zusammen mit der App *Good Notes*)
 * portabel (ich werde es auch bei Fußball-Spieltagen meiner Kinder dabei haben, um Videos zu drehen und [Berichte zu schreiben](http://asvdjk.wordpress.com))
@@ -23,10 +23,10 @@ Doch dann kam Apple mit dem iPad Pro 9.7 ... das 12.9 war mir vor einem halben J
 * muß ich mich in die Internas begeben, um Fehler analysieren zu können und Workarounds zu schaffen ... oder ist das so einfach, daß es kaum Zeit kostet ... oder gibt es das bei Apple einfach nicht?
   * eins vorweg: nach 4 Wochen Benutzung mußte hatte ich noch keine Fehleranalyse-Sessions ... [aber der Software-Update 9.3.2 hätte beinahe aus meinem Tablet ein Schneidebrett gemacht](http://www.golem.de/news/error-56-ios-9-3-2-macht-ipad-pro-9-7-zoll-unbrauchbar-1605-120926.html) ... glücklicherweise habe ich nicht auf den Upgrade-Button gedrückt
 * wird es sich in meinen Alltag integrieren lassen ... hinsichtlich Integration in Nicht-Apple-Umgebungen ist es vielleicht nicht so gut bestellt
-  * eins vorweg: es klappt erstaunlich gut ... 
+  * eins vorweg: es klappt erstaunlich gut ...
 * wird die Stiftbedienung von genügend für MICH brauchbaren Apps unterstützt
   * Hoffnung macht mir hier, daß derzeit die Stifbedienung im Aufwind ist ... mein bisheriger Favorit Samsung setzt aber voll und ganz auf Windows 10 Tablets im Stiftbereich
-* ist das Arbeiten ohne Cloud möglich ... ich will keinem Cloud-Anbieter meine teilweise geschäftlichen Informationen (auch wenn diese nicht Top-Secret sind) anvertrauen. 
+* ist das Arbeiten ohne Cloud möglich ... ich will keinem Cloud-Anbieter meine teilweise geschäftlichen Informationen (auch wenn diese nicht Top-Secret sind) anvertrauen.
 * nicht alle von mir in 5 Jahren Android liebgewonnenen Apps sind auch unter iOS verfügbar. Werde ich passenden Ersatz finden? Wie sehr wird es mich stören, daß ich dann mindestens zwei Anwendung für die gleiche Aufgabe nutzen muß?
 
 Keine Rolle spielte bei meiner Entscheidung, daß die Apps unter iOS zumeist Geld kosten und auch teurer sind. Ich bin selbst Softwareentwickler und weiß wieviel Zeit/Geld die Erstellung einer hochwertigen Anwendung kostet. Gute Software möchte ich auch belohnen ... deshalb habe ich es mir auch zur Angewohnheit unter Android gemacht die Vollversionen zu kaufen (auch wenn die Lite-Versionen oft schon ausreichten für meine Bedürfnisse). Außerdem glaube ich, daß 5-10 Euro für richtig brauchbare Apps den Bock nicht fett machen (das Gerät an sich kostet 1000 Euro) ... die 100 Euro kann ich dann auch noch drauflegen (auch wenn es schon ein bissl ärgerlich ist, daß man dann eine Android-App UND eine iOS-App bezahlt hat).
@@ -37,7 +37,7 @@ Keine Rolle spielte bei meiner Entscheidung, daß die Apps unter iOS zumeist Gel
 
 ### Android
 
-Hier gibt es seltsamerweise keine braucbaren Neuentwicklungen mit Stiftbedienung. Alle ehemaligen "Android-Hersteller" scheinen auf Windows 10 für Tablets mit Stiftbedienung zu setzen.
+Hier gibt es seltsamerweise keine brauchbaren Neuentwicklungen mit Stiftbedienung. Alle ehemaligen "Android-Hersteller" scheinen auf Windows 10 für Tablets mit Stiftbedienung zu setzen.
 
 ### Windows 10
 
@@ -48,6 +48,26 @@ Letztlich habe ich mir die Frage gestellt, ob ich einen Laptop mit Tablet-Featur
 Diese Frage habe ich für mich mit Apple iPad Pro beantwortet. Wenn es was am iPad Pro zu bemängeln gibt, dann vielleicht, daß es nicht die OS X Anwendungen laufen lassen kann ... man ist auf die iOS Apps beschränkt. Wenn ich allerdings meine Entscheidung gegen ein Windows 10 Convertible konsequent weiterdenke ("optimiert für Nicht-Tastatur-Ansatz und Stiftbedienung"), dann ist das kein Argument für mich. Vielleicht wäre es sogar schlecht ...
 
 ABER: Windows scheidet aufgrund des schlechten App-Stores (wenig Auswahl) aus
+
+---
+
+## Hülle
+
+Ein Gerät für 1000 Euro braucht natürlich auch eine Hülle - zu schnell ist es mal aus der Hand gefallen oder verkratzt in einer Tasche.
+
+Ich habe mich für das Under Armor Gear (UAG) Folio entschieden. Eine sehr gute Hülle für 50 Euro.
+
+### Austausch 2020
+
+Nach 4 Jahren ist die Hülle sehr abgenutzt und der magnetische Schließmechanismus reißt bald ab (sehr dünn). Deshalb habe ich mich nach Ersatz umgesehen, denn das iPad läuft noch wie am ersten Tag ... das ist der Wahnsinn.
+
+Mein ursprüngliches Folio Case scheint es nicht mehr zu geben und das UAG-Metropolis gefällt mir nicht. Einzig das UAG-Plyo scheint eine Alternative zu sein, die auch tatsächlich noch auf mein Gerät paßt.
+
+In [einem Review](https://www.youtube.com/watch?v=E6yK6sKkJyc) hat mir das Zugu-Case "The Muse" gut gefallen ... es bietet mehr Aufstellvariationen (man kann es sogar an den Kühlschrank hängen - starke Magneten) und die Stiftlösung gefällt mir auch sehr gut. Allerdings gibt es das wohl nicht mehr für mein iPad Pro 2016 ... nur noch für die 9.7 iPad Modelle (und die sind [nicht kompatibel](https://www.zugucase.com/faq/)) :-(
+
+> Interessant, daß heutzutage ein Gerät so lange nutzbar ist, daß es kein Zubehör mehr gibt
+
+Deshalb habe ich mich für das UAG-Plyo entschieden.
 
 ---
 
