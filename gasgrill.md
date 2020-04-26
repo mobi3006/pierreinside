@@ -53,7 +53,7 @@ Der Rost nagt an dem alten Grill und deshalb bin ich auf der Suche nach Ersatz m
 * Außenabmessungen nicht viel größer als der alte Grill
 * eher nicht: Seitenbrenner
 
-### Option Aldi - Boston Pro 4 R Turbo II
+### Option Aldi - Enders Boston Pro 4 R Turbo II
 
 * 229 Euro - TOP PREIS
 * Grillfläche 74 x 43 cm
@@ -68,3 +68,48 @@ Der Rost nagt an dem alten Grill und deshalb bin ich auf der Suche nach Ersatz m
 * inkl. Wetterschutzhülle
 * geschlossen - man sieht die Gasflasche nicht
 * [Test von Familie Schardt](http://familietestet.de/gassgrill-enders-boston-pro-4-turbo-ii-von-aldi-sued/)
+
+---
+
+## Enders Boston Pro 4 R Turbo II
+
+Den Grill habe ich im April 2020 bei Aldi-Süd gekauft ... ziemlich schwer, wenn man den alleine im Laden in den Wagen hievt ;-)
+
+Zusammen mit meinem Sohn habe ich ihn in 2 Stunden (ohne Eile und Hektik aufgebaut). Die Anletung ist sehr gut ... bis auf die Beschreibung der Seitenteile ... hier mußte ich erstmal die Konstruktion verstehen und aus Fehlern lernen.
+
+> ACHTUNG: prinzipiell sehr gut verarbeitet - an einer Stelle am Seitenteil habe ich mich dennoch geschnitten.
+
+Ich war schon beim Aufbau begeistert:
+
+* vollständig
+* Brenner und Aufhängungen aus Edelstahl ... bye-bye-Rost
+* alles geschraubt
+* sauber verarbeitet
+* auch im Außenbereich viel Edelstahl
+* durchdachte Konstruktion
+  * einklappbare Seitenteile ... sehr platzsparend
+  * Türen mit Magnet
+  * Haken an den Seitenteilen (Mülltüte)
+  * Bierflaschenöffner
+* mitgelieferte Schutzhaube ... wenn auch nicht besonders dick (bin gespannt wie lange die hält)
+
+Was mir nicht so gefällt
+
+* 4 Rollen mit Feststellbremse
+  * rollen nicht besonders gut
+  * man muß die Bremsen feststellen, um zu verhindern, daß er auf meiner leicht abschüssigen Terrasse wegrollt
+    * mein vorhericher Grill hatte nur 2 Rollen ohne Feststellbremse - das war einfacher und sicherer
+
+Die erste Grillerung lief schon sehr gut ... an die Turbozone muß ich mich noch gewöhnen. Beim Einbrennen bin ich auf fast 350° C gekommen ... mein alter bleib deutlich unter 200° C. Die Hitze ist gleichmäßig verteilt.
+
+### Bilder
+
+![außen](images/enders-boston.jpg)
+
+![Schutzhülle](images/enders-boston-hülle.jpg)
+
+![Innenraum](images/enders-boston-innenraum.jpg)
+
+![Grillrost](images/enders-boston-grillrost.jpg)
+
+![von hinten](images/enders-boston-hinten.jpg)

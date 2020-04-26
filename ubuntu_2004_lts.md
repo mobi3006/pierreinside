@@ -18,11 +18,16 @@ Kein Problem war, der Unity-Desktop in der Virtualbox recht zäh war, da ich mit
 
 ---
 
-## Pre-Test - Ubuntu 20.04 LTS
+## Inbetriebnahme
 
-Eine Woche vor dem offiziellen Release habe ich die Distribution einem ersten Test unterzogen.
+### Pre-Test - Ubuntu 20.04 LTS
+
+Eine Woche vor dem offiziellen Release habe ich die Distribution einem ersten Test unterzogen. Auf meinem privaten Laptop.
 
 Installation in der VirtualBox (8 GB RAM, 4 CPUs, 50 GB static Storage) lief wie erwartet einwandfrei ... inklusive zähem Download der ISO-Datei habe ich für die Erstinstallation mit Updates deutlich unter einer Stunde gebraucht.
+
+> **WICHTIGE EINSTELLUNG:**
+> Für effizientes Arbeiten ist die VirtualBox-Einstellung "View - Auto-resize Guest Display" erforderlich, denn ansonsten muß man i. a. im Gast-Fenster scrollen, um Teile des Screens zu erreichen. Diese Einstellung ist per Default nicht eingeschaltet und ich vergesse es immer wieder :-(
 
 Welche Software muß ich anschließend noch installieren und - was aufwendiger ist - konfigurieren:
 
@@ -74,3 +79,42 @@ Einfacher gehts ja wohl nicht :-)
 Innerhalb von 2 Stunden waren die meisten meiner genutzten Anwendungen installiert ... jetzt fehlt nur noch meine spezifische Konfiguration. Da die allerdings in Konfigurationsdateien auf meinem alten System abliegt (oder teilweise schon in einem Git-Repository abliegt), sollte das nur noch Fleißarbeit sein.
 
 Ich bin begeistert :-)
+
+### Integration meiner Daten und Konfiguration
+
+Nachdem der erste Test von Focal Fossa so positiv verlaufen ist und ich die Software problemlos installieren konnte, möchte ich nun mein Home-Verzeichnis (inkl. aller Konfigurationen) aus einem Ubuntu 18.04 LTS System in ein Ubuntu 20.04 LTS übernehmen. Darin befinden sich nicht nur meine Git-Repositories, sondern auch meine ssh-Keys und die ganzen Konfigurationsdateien der Tools, mit denen ich arbeite. Im besten Fall kann ich danach einfach loslegen ... in der Theorie, mal sehen wie gut es klappt (einige Tools haben nun natürlich eine höhere Version und dann könnten die Konfigurationsdateien inkompatibel sein).
+
+Prinzipiell gefällt mir mittlerweile die Idee gut, die Home-Verzeichnisse in eine eigene Partition zu legen, weil mir das zukünftig solche Migrationen erleichtert. Außerdem kann ich auf diese Weise auch viel leichter meine Home-Partition erweitern, indem ich einfach eine neue Festplatte anlege, sie in mein System einbinde, alle Daten per `rsync` kopiere und dann die alte Home-Partition aus meinem System entferne. Das erscheint mir deutlich einfacher als meine [bisherigen Resize-Versuche - siehe hier](virtualbox.md).
+
+Ich erzeuge einen Festplatten-Clon meiner alten Festplatte per `VBoxManage.exe clonevdi ubuntu-18.04.vdi ubuntu-20.04-home.vdi`. Das dauert auch nicht lang - je nach Größe der Datei und der GEschwindigkeit der Festplatte ... eine 50 GB Datei war bei mir in unter 60 Minuten durch.
+
+* ACHTUNG: ein Clonen einer kopierten `vdi`-Datei, deren Original aber in meinem VirtualBox eingebunden war, ist mit der Fehlermeldung "already exists" fehlgeschlagen ... auf dem Original hat es funktioniert :-)
+
+> Ein einfaches Kopieren der `*.vdi` Datei ist nicht ausreichend, da die Platte dann weiterhin die gleiche UUID hat und das beim Einbinden in VirtualBox (parallel zum Original) zu einer Fehlermeldung "already exists" kommt ([wie hier beschrieben](https://tecadmin.net/change-the-uuid-of-virtual-disk/)). Deshalb verwenden wir `clonevdi`.
+
+Anschließend verschiebe ich die Festplatte in das Verzeichnis, in dem sich auf die System-Platte von Ubuntu-20.04 befindet und binde die Festplatte per VirtualBox-UI als weitere SATA-Controlled-Platte in meine Ubuntu 20.04 System ein:
+
+... BILD PENDING ...
+
+Anschließend starte ich das System und kann die neue Festplatte mit
+
+```bash
+mkdir ~/otherStorage
+sudo mount /dev/sdb1 ~/otherStorage
+```
+
+einbinden und auf alle Daten zugreifen.
+
+So soll das natürlich nicht bleiben - stattdessen will ich alles unter `/home` (nahezu leer, denn ich habe Ubuntu 20.04 ja neu aufgesetzt) löschen und stattdessen die Partition der neuen Festplatte als `/home` einbinden. Das mache ich so:
+
+```bash
+sudo rm -rf /home
+sudo mount /dev/sdb1 /home
+```
+
+Damit ich das nicht immer wieder nach einem Reboot machen muß, ermittle ich per `blkid /dev/sdb1` die UUID der Partition und hänge an `/etc/fstab` folgende Zeile an:
+
+UUID=<UUID_ERMITTELT_PER_BLKID>   /home   ext4   defaults   0   2
+```
+
+Dann nochmal restarten - Voila :-)
