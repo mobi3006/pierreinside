@@ -1,6 +1,6 @@
 # Gasgrilll
 
-Ich besitze schon seit 10 Jahren einen Gasgrill - vielleicht weniger Abenteuer, aber ist Holzkohlegrillen wirklich männlicher?
+Ich besitze schon seit 15 Jahren einen Gasgrill - vielleicht weniger Abenteuer, aber ist Holzkohlegrillen wirklich männlicher? Auf dem damaligen Balkon war das aber der beste Kompromiss und seitdem bin ich ein echter Gasgrill-Fan. Einige meiner Freunde grillen mit Gas und Kohle ... ich brauch aber gar keine Kohle mehr.
 
 Ist mir eigentlich egal - wir nutzen den Grill auch im Winter und nicht nur mal gelegentlich zum Barbecue. Da möchte ich nicht stundenlang in der Kälte stehen und den Grill anheizen.
 
