@@ -170,9 +170,9 @@ Man unterscheidet zwei Arten von Pipeline Definitionen:
     * Kontrollstrukturen (`if`, ...)
   * es existiert sogar ein eigenes Ökosystem, um die Effizienz durch Reuse zu erhöhen - [Nutzung/Erstellung von Shared Libraries](https://jenkins.io/doc/book/pipeline/shared-libraries/)
 
-Am besten startet man einen lokaken Jenkins und legt einen Pipeline-Job an. Dann kann man sich Pipeline-Code über "Pipeline Syntax" generieren lassen.
+Am besten startet man einen lokaken Jenkins und legt einen Pipeline-Job an. Dann kann man sich Pipeline-Code über "Pipeline Syntax" generieren lassen ... das ist besser als garnix ... aber gut ist das noch lang nicht :-( Ich bekomme regelmäßig einen Nervenzusammenbruch, wenn ich Erweiterungen an den Pipelines vornehmen muß.
 
-> Leider ist das kein schöner Entwicklungszyklus ... eher Trial-and-Error.
+> Leider ist das kein schöner Entwicklungsprozess mit einer IDE-Integration (Code-Completion), Debugging ... eher aufwendiges Trial-and-Error.
 
 #### Trigger
 
@@ -490,6 +490,8 @@ Die Jobs (inkl. History) werden in `/var/jenkins_home` abgelegt, das in obigem B
   * [Jenkins Configuration as Code 1](https://www.praqma.com/stories/jenkins-configuration-as-code/)
   * [Jenkins Configuration as Code 2](https://www.praqma.com/stories/start-jenkins-config-as-code/)
 * Option 2: Jenkins-as-Code Reference-Server
+
+Das Configuration-as-Code-Plugin funktioniert sehr gut.
 
 ### Development Environment
 

@@ -3,11 +3,11 @@
 
 * [Homepage by HashiCorp](https://www.terraform.io/)
 
-Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Landschaften für ein Applikationsdeployment vorzubereiten. Auf dieser Umgebung können die Applikationen dann aufsetzen.
+Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Infrastruktur- und Applikations-Landschaften aufzubauen.
 
 > "terraform is used for the environment/server provisioning part [...], but not so often for app deployment." ([StackOverflow](https://stackoverflow.com/questions/37297355/how-to-deploy-and-redeploy-applications-with-terraform))
 
- Terraform ist KEIN Konfigurationsmanagement-Tool, es baut die Infrastruktur auf (z. B. virtuelle Maschinen, Datenbank-Server-Instanz) und delegiert die Konfiguration an entsprechende Konfiguration-Management Tools ([Ansible](ansible.md), Chef, Puppet, ...).
+ Terraform ist KEIN Konfigurationsmanagement-Tool, es baut die Infrastruktur auf (z. B. virtuelle Maschinen, Datenbank-Server-Instanz, Datenbank-User) und delegiert die Konfiguration an entsprechende Konfiguration-Management Tools ([Ansible](ansible.md), Chef, Puppet, ...).
 
 > BTW: Terraform verwendet sehr ähnliche Konzepte wie bei [Nomad](nomad.md) ... auch ein HashiCorp Produkt.
 
@@ -22,7 +22,7 @@ Man beschreibt einen Zielzustand und Terraform berechnet daraus einen Execution 
 > ACHTUNG: Terraform berücksichtigt bei der Planung nur den State (gespeichert in einer Datei - abgelegt auf der lokalen Platte oder auf einem shared Bereich). Der tatsächliche Zustand der Runtime-Umgebung wird nicht berücksichtigt (wäre auch sehr schwierig). Das bedeutet im Umkehrschluß, daß manuelle Änderungen an der Runtime-Umgebung verloren gehen oder vielleicht sogar zu später fehlschlagenden `terraform apply` Kommandos führen können. Infrastructure-as-Code bedeutet auch,, daß man es konsequent anwendet!!!
 >> "Once you start using Terraform, you should only use Terraform" (Buch: *Terraform - Up and Running: Writing Infrastructure as Code*)
 
-Im Gegensatz dazu werden in Ansible imperativ die durchzuführenden Schritte angegeben ... der DevOps muß also immer genau wissen welchen Zustand die Umgebung hat und welche Schritte auszuführen sind. Das ist natürlich deutlich fehleranfälliger als wenn dies - wie bei Terraform - aus der Beschreibung des Zielzustands und dem aktuellen Zustand berechnet wird. Zudem zeigt Terrform die durchführenden Aktionen nach einem `terraform plan` übersichtlich an (kann man sogar als Input für einen Approval im Vier-Augen-Prinzip verwenden). Im Gegensatz Bash-Skripting hat Ansible aber zumindest auf ganz niederiger Ebene etwas wie die Beschreibung des Zielzustands:
+Im Gegensatz dazu werden in Ansible imperativ die durchzuführenden Schritte angegeben ... der DevOps muß also immer genau wissen welchen Zustand die Umgebung hat und welche Schritte auszuführen sind. Das ist natürlich deutlich fehleranfälliger (und benötigt viel Detailwissen - das zwischen allen DevOps-Mitarbeitern geteilt werden muß) als wenn dies - wie bei Terraform - aus der Beschreibung des Zielzustands und dem aktuellen Zustand berechnet wird. Zudem zeigt Terrform die durchführenden Aktionen nach einem `terraform plan` halbwegs übersichtlich an (kann man sogar als Input für einen Approval im Vier-Augen-Prinzip verwenden). Im Gegensatz zu Bash-Skripting hat Ansible aber zumindest auf ganz niederiger Ebene etwas wie die Beschreibung des Zielzustands:
 
 ```
 - name: Instana Agent | ensure packages present
@@ -37,6 +37,8 @@ Im Gegensatz dazu werden in Ansible imperativ die durchzuführenden Schritte ang
 ```
 
 In diesem Beispiel muß man sich als Ansible-Entwickler nicht mehr prüfen, ob der Agent bereits nicht mehr darum kümmern, ob der Instana-Agent evtl. schon gestartet ist. Aber dennoch beschreibt man nicht nur einfach, daß man einen gestarteten Agent haben möchte, sondern muß auch die Schritte dahin ("ensure packages present", "ensure Agent started"). Insofern ist Ansible schon mal einen Schritt weiter als bash-Skripting (ist es das wert?), aber noch weit vom Terraform-Komfort entfernt.
+
+Idempotenz ist bei Ansible aber deutlich besser umgesetzt als bei Bash-Scripting.
 
 ---
 
@@ -70,8 +72,15 @@ Diese Konfiguration (z. B. `main.tf`)
 
 ```json
 provider "aws" {
+  /*
+    eigentlich ein NO-GO, denn diesen Code stellt man unter Versionskontrolle ... da will man die
+    Credentials nicht haben
+    => besser man gibt hier das AWS-"profile" an, das in "~/.aws/credentials" von jedem Benutzer
+       selbst gepflegt wird
+  */
   access_key = "ACCESS_KEY_HERE"
   secret_key = "SECRET_KEY_HERE"
+  
   region     = "us-east-1"
 }
 
@@ -115,25 +124,25 @@ Eine Best-Practice ist die Aufteilung des Codes auf mehrere Dateien mit diesem N
 
 Bei `terraform plan` wird angezeigt, was bei `terraform apply` geschehen wird. Beachte hierbei, daß die Konfiguration das Ziel beschreibt. Abhängig vom aktuellen Zustand (gespeichert in einer `*.tfstate` Datei) werden dann die notwendigen Aktionen berechnet. Der Plan ist natürlich nur gültig solange keine Änderung erfolgt. Ändert jemand anschließend die Umgebung, dann muß der Plan natürlich anders aussehen ... Terraform hat hier optimistisches Locking implementiert.
 
-Mit `terraform destroy` wird die Infrastruktur wieder abgebaut.
+Mit `terraform destroy` wird die Infrastruktur wieder abgebaut. Das verwendet man in der Produktion aber quasi nie ... in Testumgebungen tut man dies um die Infrastruktur (i. a. bei einem Cloud-Provider) wieder runterzufahren und nicht weiter bezahlen zu müssen.
 
 Die Definition des Providers (`provider "aws"`) ist notwendig, weil die Ressourcen teilweise doch anbieterabhängig sind.
 
 > Von wegen _providerunabhängig_? hab ich dann überhapt etwas gewonnen?
 > sicherlich kann ich dann keinen provider-unabhängen IaC-Code schreiben, aber ich kann mit Terraform zumindest ein Multi-Cloud-Szenario abbilden. In diesem Beispiel sieht man aber, daß Teile des Code (`dnsimple_record.example`) durchaus provider-unabhängig sind:
 
-    ```json
-    resource "aws_instance" "example" {
-      ami = "ami-40d28157"
-      instance_type = "t2.micro"
-    }
-    resource "dnsimple_record" "example" {
-      domain = "example.com"
-      name = "test"
-      value = "${aws_instance.example.public_ip}"
-      type
-    }
-    ```
+```json
+resource "aws_instance" "example" {
+  ami = "ami-40d28157"
+  instance_type = "t2.micro"
+}
+resource "dnsimple_record" "example" {
+  domain = "example.com"
+  name = "test"
+  value = "${aws_instance.example.public_ip}"
+  type
+}
+```
 
 ### Resource
 
@@ -160,6 +169,12 @@ variable "instance_type" {
   default = "t2.micro"
 }
 ```
+
+### Dependencies
+
+Durch die Referenzierung von Ressourcen ergibt sich eine implizite Abhängigkeit, die Terraform erkennt und entsprechend auflöst, so daß - unabhängig von der Definition in der `.tf`-Datei - eine valide Reihenfolge bei der Anlage/Löschung von Ressourcen abgeleitet wird. Alles, was voneinander unabhängig ist, kann parallel ausgeführt werden, um die Zeit bis zur Bereitstellung der Ziel-Umgebung zu verringern.
+
+Manchmal muß man allerdings Abhängigkeiten explzit über `depends_on` definieren, wenn Terraform keine Chance zur Ableitung hat. Beispielsweise kann eine Applikation, die in einer anzulegenden EC2-Instanz läuft, einen S3-Bucket voraussetzen. Eine solche Abhängigkeit könnte eine explizite Abhängigkeitsdefinition erfordern.
 
 ### Data
 
@@ -201,7 +216,7 @@ module "use-my-terraform-module" {
 }
 ```
 
-In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `/home/pfh/my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert.
+In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `/home/pfh/my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert. Es handelt sich hier also im wesentlichen, um einen Template-Mechanismus.
 
 Praktisch ist, daß man bei `source` auch eine Sammlung von Terraform Scripten in Form einer `zip`-Datei angeben kann. In dem Fall wird die Zip-Datei bei `terraform apply` entpackt und die Platzhalter werden ersetzt. Auf diese Weise kann man eine Sammlung von Konfigurationsdateien in einem `zip`-File bereitstellen und dann mit Werten belegen.
 
@@ -267,17 +282,17 @@ Man kann auch seinen eigenen Provider `terraform-provider-<NAME>_vX.Y.Z` contrib
 
 * [Supported Provisioning-Ansätze](https://www.terraform.io/docs/provisioners/index.html)
 
-Verwendet man bereits vorkonfigurierte Images (z. B. mit [Packer](packer.md)), dann ist man evtl. nicht mehr auf Konfiguration Management Tools (wie Ansible, Puppet, Chef, ...) angewiesen. Hat man sich allerdings gegen diesen sehr statischen Ansatz entschieden, so kann man über die Provisioners entsprechende Veränderungen am System über Skripte triggern. Hierbei stehen typische Configuration-Management-Tools (z. B. Chef, Salt)
+Verwendet man bereits vorkonfigurierte Images (z. B. mit [Packer](packer.md)), dann ist man evtl. nicht mehr auf Konfiguration Management Tools (wie Ansible, Puppet, Chef, ...) angewiesen. Hat man sich allerdings gegen diesen sehr statischen Ansatz entschieden, so kann man über die Provisioners entsprechende Veränderungen am System über Skripte triggern. Hierbei stehen typische Configuration-Management-Tools (z. B. Chef, Salt).
 
 ---
 
 ## State
 
-Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3) abgelegt werden kann. Dieser State bestimmt die zu triggernden Aktionen bei einem `terraform apply`, indem ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht wird. Per Default wir der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
+Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3) abgelegt werden kann. Dieser State beschreibt den aktuellen Zustand der Umgebung und ist die Basis, um aus der Ziel-Definition die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Per Default wir der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
 
 > ACHTUNG: sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken.
 
-Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann es zu Fehlermeldungen wie diesen führen, wenn die Aktionen durchgeführt werden:
+Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann das zu großen Problemen führen. Typisch sind dann Fehlermeldungen wie diese:
 
 ```
 keys already exist under service/petclinic/; delete them before managing this prefix with Terraform
@@ -286,6 +301,8 @@ keys already exist under service/petclinic/; delete them before managing this pr
 Das liegt daran, daß Terraform eine Resource anlegen will, die aber schon vorhanden ist. Über den State hätte Terraform gewußt, daß die Resource schon existiert und hätte die Aktion gar nicht erst ausführen wollen.
 
 > ERGO: Terraform liest den aktuellen State nicht aus der deployten Landschaft (wäre recht aufwendig und fehlerträchtig), sondern aus der State-Datei. Das hat zudem zur Konsequenz, daß Änderungen, die nicht in der zentralen State-Datei erfolgt sind (z. B. manuelle Änderungen, Änderungen über andere Wege als Terraform) nicht berücksichtigt werden können. Diese Änderungen werden dann überschrieben!!!
+
+Über `terraform show` kann man den aktuellen State auf der Console ausgeben. Das hilft bei der Fehlersuche ungemein.
 
 ### Workspaces
 
@@ -322,3 +339,44 @@ Ein Workspace referenziert ein VCS ... hier gibt es unterschiedliche Organisatio
 * [UI/VCS-driven run workflow (DEFAULT)](https://www.terraform.io/docs/enterprise/run/ui.html)
 * [API-driven run workflow](https://www.terraform.io/docs/enterprise/run/api.html)
 * [CLI-driven run workflow](https://www.terraform.io/docs/enterprise/run/cli.html)
+
+---
+
+## Best Practices
+
+### Loops
+
+* [Gruntwork-Blog](https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
+
+Häufig will man Listen verarbeiten und nicht für jedes Element eine eigene Variable anlegen. Also statt
+
+```terraform
+variable "user_name_1" {
+    type = string
+}
+variable "user_name_2" {
+    type = string
+}
+variable "user_name_3" {
+    type = string
+}
+```
+
+lieber
+
+```terraform
+variable "user_names" {
+    type = list(string)
+}
+```
+
+um dann den Wert einfach per `["pierre", "jonas", "robin"]` setzen zu können.
+
+Im Terraform-Code muß man dann über diese Werte loopen können, um getrennte Ressourcen anlegen zu können ... in dem Fall User:
+
+```terraform
+resource "aws_iam_user" "example" {
+  count = length(var.user_names)
+  name  = var.user_names[count.index]
+}
+```

@@ -203,7 +203,7 @@ Pool 1.0 hatte einen Durchmesser von 366 cm (Brutto knapp 400 cm) und eine Tiefe
 
 Der [Intex Ultra XTR Frame Pool](https://www.intexcorp.com/ultraxtr/) mit einer Größe von 549 x 274 x 132cm (17.200 Liter ... doppelt so viel wie Version 1.0) einer grauen Außenhaut hat uns gut gefallen. Der Platzbedarf ist aufgrund der herausragenden Träger (4 auf der langen Seite, 2 auf der kurzen) allerdings größer:
 
-Mit ca. 700 Euro ist er natürlich deutlich teurer als die Version 1.0, doch immer 
+Mit ca. 700 Euro ist er natürlich deutlich teurer als die Version 1.0, doch immer
 
 [Aufbau](https://www.youtube.com/watch?v=tAkJzNG35qs)
 
@@ -219,7 +219,8 @@ Der [Bestway Power Steel](https://www.bestwaystore.de/pools/power-steel-pools/ov
 ### Rund-Pool - 366
 
 * 366 cm Durchmesser
-* 99 cm Tiefe - 23cm mehr als Pool 1.0
+* 122 cm Tiefe
+  * den hatte ich ursprünglich übersehen - wurde in den meisten Shops nicht angeboten ... bis dann ein Freund von seiner Bestellung erzählte
 * 8500 Liter
 * ca. 200 Euro
 
@@ -239,12 +240,12 @@ Ich hatte mal über einen Austausch-Poo "ohne Zubehör" nachgedacht, allerdings 
 ### Tips
 
 * bei der Größe ist ein gerader Untergrund noch wichtiger
-  * bisher habe ich immer Styropor (2cm) ausgelegt, um Unebeneheiten auszugleichen und ein angenehmes Fußgefühl zu haben
-    * vielleicht ist Styrodur besser als Styropor - weniger druckempfindlich ... bei mir hat bisher das druckempfindliche Stypropor die Unebenheiten ausgeglichen ... muß man abwägen  
+  * bei Stahlrahmenpool sollte das Gefälle auf 5m nicht größer sein als 3cm ... im schlimmsten Fall kippt der Pool um
+  * bisher habe ich immer Styropor (3 cm) ausgelegt, um Unebeneheiten auszugleichen (ich habe kleine (8 x 8 x 8 cm Pflastersetine dort verlegt - eine gerade Fläche ist das nicht) und ein angenehmes Fußgefühl zu haben
+    * vielleicht ist Styrodur besser als Styropor - weniger druckempfindlich ... bei mir hat bisher das druckempfindliche Stypropor die Unebenheiten super ausgeglichen ... deshalb gibt es für mich keinen Grund zur Änderung
     * zudem sollte man eine Folie zwischen Rasen und Pool legen, um zu verhindern, daß Feuchtigkeit zwischen Rasen und Pool kommt und das Rasen fault/stinkt
   * vielleicht sollte ich diesmal außerdem noch feinen Sand (Fugensand) ausbringen
     * am besten befeuchten vor dem drüberlegen der Folie damit der Sand bleibt wo er ist
-  * bei Stahlrahmenpool sollte das Gefälle auf 5m nicht größer sein als 3cm ... im schlimmsten Fall kippt der Pool um
 * nach 2-3 Jahren waren die Stangen des ersten Pool stark verrostet - evtl. sollten man ihnen vor der Erstmontage Hohlraumversiegelung gönnen?!?
 
 ### Entscheidung

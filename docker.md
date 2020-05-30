@@ -141,7 +141,13 @@ Man kann aber auch beides definieren ... hä? Wann verwendet man was und warum?
 
 ### Docker Host Filesystem
 
-Die Docker-Container verwenden das Filesystem des Docker-Host. Unter ``/var/lib/docker`` des Docker-Hosts findet man allerlei Dateien.
+Die Docker-Container verwenden das Filesystem des Docker-Host. Unter ``/var/lib/docker`` des Docker-Hosts findet man allerlei Dateien. Einige wichtiges Verzeichnisse (abhängig von der Docker-Konfiguration, d. h. nicht alle müssen immer existieren):
+
+* `containers`
+  * hier befinden sich u. a. die log-files, die der Docker-Container beim Schreiben auf die Console erzeugt
+* `overlay2`
+  * hier befindet sich das Filesystem des Docker-Containers ... will man sich also mal die Datei auf dem Docker-Container ansehen, dann muß man sich nicht per `docker exec -it ...` eine Terminal-Console aufmachen
+* `devicemapper`
 
 ---
 
@@ -156,7 +162,6 @@ Häufig will man ein Image wiederverwenden, muß aber Anpassungen vornehmen, dam
 ### Entrypoint
 
 * [Docker - Control startup order](https://docs.docker.com/compose/startup-order/)
-
 
 ---
 

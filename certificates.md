@@ -166,3 +166,5 @@ GUI-Tool zum Aufbau einer eigenen CA.
 ## Debugging SSL-Verbindungen
 
 Mit ``openssl s_client`` (siehe oben, z. B. `openssl s_client -connect localhost:58443 -debug`) kann man sich den SSL-Handshake ansehen.
+
+Zudem kann man die Verarbeitung (inkl. SSL-Handshake) bei einem `curl -vvv` sehr schön beobachten.

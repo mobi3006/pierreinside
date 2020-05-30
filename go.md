@@ -2,7 +2,19 @@
 
 Ich bin zu Go gekommen, weil es derzeit hip ist, viele der von mir verwendeten Tools (HashiCorp-Stack) auf Go basieren und ich die Idee eines einzelnen Executables (Cross-Compiled auf meiner Linux-Maschine auch für Windows und MacOS) einfach genial finde. Außerdem möchte ich CLI's für meine Tools anbieten und einige meiner Shellskripte ablösen. Die Syntax und Konzepte haben mir bei Go auf Anhieb sehr gut gefallen.
 
-Alternativ hierzu habe ich mir [Python](python.md) angeschaut, das ich in einem Raspberry Pi Projekt ausprobieren durfte. Das fand ich auch nicht schlecht, aber das ewige Nachinstallieren von Packages nervt ... das will ich meinen Kunden nicht zumuten. Für mein eigenes Scripting würde ich Python aber nicht ausschließen.
+Alternativ hierzu habe ich mir [Python](python.md) angeschaut, das ich in einem Raspberry Pi Projekt ausprobieren durfte. Das fand ich auch nicht schlecht, aber das ewige Nachinstallieren von Packages nervt - dann noch der Unterschied zwischen Python 3 und 4 ... das will ich meinen Kunden nicht zumuten. Für mein eigenes Scripting würde ich Python aber nicht ausschließen.
+
+---
+
+## Vorteile von GO
+
+* schnell
+* in der Sprache gut eingebaute Concurrency
+* Cross-Compiler für unterschiedliche CPU-Architekturen ... wie geil ist das denn :-)
+  * auch [ARM für Raspberry PI wird unterstützt ... allerdings nicht auf einer Raspbian-Distribution, sondern Ubuntu-Server](https://medium.com/@eduard.iskandarov/golang-development-for-raspberry-pi-3-getting-started-c6d5a97850d1)
+* Garbage Collection
+* vereinfachte Objektorientierung
+* durch die gute CLI-Unterstützung und der Nutzung eines einfachen Editors fühlt es sich fast wie eine interpretierte Sprache an
 
 ---
 
@@ -11,7 +23,7 @@ Alternativ hierzu habe ich mir [Python](python.md) angeschaut, das ich in einem 
 ### Ohne Installation
 
 * [Online Playground](http://play.golang.org)
-  * [Tutorial](http://tour.golang.org)
+* [Tutorial](http://tour.golang.org)
 
 ### Lokale Installation
 
@@ -40,7 +52,7 @@ mkdir -p de.cachaca.learn.go/src/hello
 cd de.cachaca.learn.go/src/hello
 ```
 
-mit folgendem Code
+mit folgendem Code `cat HelloWorld.go`
 
 ```Go
 package main
@@ -52,16 +64,22 @@ func main() {
 }
 ```
 
-per `go build` compilieren (hierbei wird ein plattformabhängiges Executable erzeugt) und per `./hello` ausführen.
+per `go build` compilieren (hierbei wird ein plattformabhängiges Executable erzeugt) und per `./hello` ausführen (bei `go run HelloWorld.go` erfolgt beides in einem Schritt). Erstaunlich ist an dieser Stelle, daß das Executable dieses Mini-Programms schon 2 MB groß ist - wow ;-)
+
+> Der Name des erzeugten Executables leitet sich aus dem Verzeichnisnamen ab ... `hello` in diesem Fall.
 
 Um zuküntige Probleme zu vermeiden ergänze ich meine Shellkonfiguration zudem um
 
-```
+```bash
 export GOBIN=$(go env GOPATH)/bin
 export PATH=${PATH}:${GOBIN}
 ```
 
 Danach funktioniert auch `go install`, um das Binary unter `~/go/bin/hello` abzulegen und aufrund der `PATH`-Anpassung kann ich dann `cd ~ && hello` ausführen.
+
+Die Go-Sourcen befinden sich in `${GOPATH}/src`, so daß man auch mal bei echten Go-Profis in den Code schauen kann, um zu lernen.
+
+Weitere Tools werden nicht im Go-Installationsverzeichnis installiert, sondern in `$GOPATH/bin`, so daß sie auch nach einem Go-Upgrade noch zur Verfügung stehen ... aber evtl. ein upgrade brauchen (Visual-Studio-Code macht das automatisch).
 
 ### Tutorial Installation
 
@@ -88,12 +106,27 @@ Anschließend liegt unter `~/go/bin/tour` (gemäß des Defaultwerts von `GOBIN=~
 
 ## Konzepte
 
+* [MUST-HAVE-READ](https://golang.org/doc/effective_go.html)
+
 ### Konventionen
 
 * Verzeichnisstruktur
 * Variablen, Konstanten und Funktionen mit Großbuchstaben werden exportiert
+* Code-Formatierung
+  * endlich haben die Streitigkeiten über Code-Formatierung (Tabs vs. Spaces, wieviel Einrücken, wß `{ ... }`, ...) ein Ende => `gofmt` bringt den Code DIE gewünschte Form (es gibt aber im Gegensatz zu daenren Programmiersprachen keinen Error, wenn der Code anders formatiert ist). Am besten konfiguriert man die IDE so, daß der Code beim Speichern immer automatische formatiert wird.
 
-### Verzeichnisstruktur
+### Umgebungsvariablen
+
+Go verwendet einige Umgebungsvariablen, um die Tools anzupassen. Über `go env` bekommt man alle aufgelistet.
+
+Hier die wichtigsten:
+
+* `GOPATH`
+* `GOBIN`
+* `GOROOT`
+* `GOARCH`
+
+### Sourcecode Verzeichnisstruktur
 
 Go-Sourcecode basiert auf einer festen Verzeichnisstruktur, die folgendermaßen aussieht:
 
@@ -107,12 +140,15 @@ Go-Sourcecode basiert auf einer festen Verzeichnisstruktur, die folgendermaßen 
       * module-2/
       * ...
 
+### Workspace Verzeichnisstruktur (`GOPATH`)
+
 Go verwendet neben dem Source-Code Verzeichnissen ein lokales Repository mit Binaries und Modulen. Standardmäßig befindet sich das in `~/go` - konfigurierbar über die Umgebungsvariable `export GOPATH`:
 
 * ~/go/
   * bin/
   * pkg/
   * src/
+    * hier kommen per `go get` installierte 3rd Party Module rein
 
 Am besten fügt man `export PATH=${PATH}:$(go env GOPATH)/bin` zur Shellkonfiguration hinzu, denn dann liegen alle mit
 
@@ -278,15 +314,35 @@ func main() {
 
 ## Visual Studio Code
 
-Ich bin seit Monaten ein großer Fan [dieses Editors](visualStudioCode.md) und natürlich möchte ich ihn auch für Go-Code verwenden. Da ich noch keine Go-Extensions kenne verwende ich zunächst mal die offizielle Extension von Microsoft `ms-vscode.go`.
+Ich bin seit Monaten ein großer Fan [dieses Editors](visualStudioCode.md) und natürlich möchte ich ihn auch für Go-Code verwenden. Da ich noch keine Go-Extensions kenne verwende ich zunächst mal die offizielle Extension von Microsoft [`ms-vscode.go`](https://code.visualstudio.com/docs/languages/go).
+
+Nach der Installation sollte man noch die VSC-Konfiguration anpassen wie [hier beschrieben](https://github.com/golang/tools/blob/master/gopls/doc/vscode.md).
+
+> Hintergrund: der Support von Auto-Completion, Refactoring-Tools, ... erfordert Spezialwissen über die Semantik der Sprache. Die ist natürlich nicht in Visual-Studio-Code verbaut. Hierzu werden sog. [Language-Server](https://code.visualstudio.com/api/language-extensions/language-server-extension-guide) entwickelt, die in Editoren wie VSC, Atom, Vim, Emacs, ... integriert werden. Die Extension `ms-vscode.go` bringt den Language-Server mit, muß aber in den Settings explizit enabled werden (`"go.useLanguageServer": true).
 
 Nun habe ich schon mal
 
 * Syntax-Highlightning
 * Auto-Vervollständigung
+* Refactoring-Tools (z. B. Funktion umbenennen)
 * ordentliche Fehlermeldungen im Editorfenster (mit Hovering)
 * im "Output"-Fenster detailierte Informationen über die im Hintergrund ausgeführten Aktionen (z. B. "Finished running tool: /home/pfh/programs/go/bin/go vet .")
   * sollte es fehlen ... den Output erhält man über "View - Output"
+  * nach einem Go-Update auf dem Host werden automatisch Updates in VSC nachgezogen (und in `$GOPATH/bin` installiert)... das funktioniert schon sehr komfortabel
+
+Da ich die Eclipse-Keybindings installiert habe, funktionieren viele gewohnte Java-Shortcuts (F3 - Open Definition, F6 -Schritt weiter, Ctrl-1 Quick Fix, Ctrl-Shif-R Rename Function, ...) auch im Go-Code sofort :-)
+
+### Run Application
+
+Über "Run - Run without Debugging" oder F5 wird das Programm im Editor gestartet. In der "Debug Console" sieht man die Ausgaben.
+
+> Bei Benutzereingaben (z. B. bei einem `fmt.Scan(&inputValue))`) streikt die Ausführung in VSC ... keine Fehlermeldung ... aber auch kein Progress in der Programmausführung ...
+
+### Debugging
+
+Das kommt wohl nicht out-of-the Box ... ich muß zunächst mal über "Run - Go: Install/Update Tools" das Tool `dlv` installieren ... [mehr hierzu](https://github.com/Microsoft/vscode-go/wiki/Debugging-Go-code-using-VS-Code).
+
+Breakpoint setzen, Program über "Run - Start Debugging" starten - automatisch wird in die Debugging-Perspektive gewechselt.
 
 ---
 
@@ -294,14 +350,17 @@ Nun habe ich schon mal
 
 Frage 1: wie die compilierten Go-Binaries von Git excluden?
 
-Antwort 1: beispielsweise folgendes in `.gitignore` eintragen:
+Antwort 1: beispielsweise folgendes in `.gitignore` eintragen (muß das so schwer sein ... unter Windows wäre es einfacher, da die Executables auf `.exe` enden):
 
 ```
 # we ignore all files
-**/*
+*
 
 # ... except ...
-!**/*.go
-!**/*.md
+!*.go
+!*.md
 !.gitignore
+
+# also in all subdirectories
+!*/
 ```

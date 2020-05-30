@@ -364,3 +364,9 @@ nutzen, um Informationen über alle Jobs runterzuladen.
 Jeder Nomad-Agent (auf Server und Client) bietet ein WEB-UI, das für Gelegenheitsnutzer zur Informationsbeschaffung ganz nützlich ist. Leider ist die Web-UI stark limitiert - für die High-Level-Anwendungsfälle ist sie ganz brauchbar. Für tiefere Informationen und zur Administration wird man dennoch zur CLI greifen ;-)
 
 Man sollte die UI allerdings auch nicht unterschätzen - ich habe mal die Jobs über HTTP-API (download, edit, upload) angepaßt ... bis ich dann festgestellt habe, daß sich die Jobs auch über die Web-UI editieren lassen :-)
+
+Interessante Infos:
+
+* Änderungen am Nomad-Job
+* mounted Filesystems - mit Blick auf die Dateien (sehr praktisch)
+* Logs ... auch wenn man die natürlich besser zentral speichert (Services sind i. a. geclustered)
