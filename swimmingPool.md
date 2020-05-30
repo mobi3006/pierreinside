@@ -189,7 +189,7 @@ Es hat sich gelohnt ... der Garten ist nun zwar zu etwas anderem kaum noch zu ge
 
 ---
 
-## Swimming-Pool 2.0
+## Swimming-Pool 2.0 - Recherche
 
 Nach 4 Saisons hatte der erste Pool einige kleine Löcher und die Stangen waren schon sehr verrostet - deshalb haben wir ihn nach der Saison 2019 entsorgt.
 
@@ -233,9 +233,9 @@ Der [Bestway Power Steel](https://www.bestwaystore.de/pools/power-steel-pools/ov
 
 ### Mitgelieferte Pumpen
 
-Die mitgelieferten Pumpen taugen i. a. nicht viel ... am liebsten wäre mir eine Lieferung ohne Pumpe. Unsere Steinbach-Pumpe Speed Clean Comfort 50 ist auf 33.000 Liter ausgelegt - schafft 6.600 Liter/h ... braucht also 5 Stunden (kein Problem nachts), um das Wasser zweimal zu filtern.
+Die mitgelieferten Pumpen taugen i. a. nicht viel. Unsere Steinbach-Pumpe Speed Clean Comfort 50 ist auf 33.000 Liter ausgelegt - schafft 6.600 Liter/h ... braucht also 5 Stunden (kein Problem nachts), um das Wasser zweimal zu filtern. Keine neue Pumpe erforderlich.
 
-Keine neue Pumpe erforderlich.
+Ich hatte mal über einen Austausch-Poo "ohne Zubehör" nachgedacht, allerdings fehlen dann auch sinnvolle Zuhehörs wie Unterlegplane, Abdeckplane und Leiter.
 
 ### Tips
 
@@ -247,3 +247,27 @@ Keine neue Pumpe erforderlich.
   * vielleicht sollte ich diesmal außerdem noch feinen Sand (Fugensand) ausbringen
     * am besten befeuchten vor dem drüberlegen der Folie damit der Sand bleibt wo er ist
 * nach 2-3 Jahren waren die Stangen des ersten Pool stark verrostet - evtl. sollten man ihnen vor der Erstmontage Hohlraumversiegelung gönnen?!?
+
+### Entscheidung
+
+Wir haben uns wegen des Rasens (der dann für immer hinüber wäre) gegen den großen Rechteck-Pool entschieden. Stattdessen nehmen wir den Intex 457 mit 122 Tiefe. Ein guter Kompromiss. Beinahe hätten wir einen Austausch-Pool gekauft, weil wir die mitgelieferte Pumpe eh nicht verwenden, soch letztlich braucht man bei der Tiefe einen Pool mit Leiter und auch die Abdeckplane. Das wäre dann auf den gleichen Preis rausgelaufen wie ein Komplett-Set.
+
+In der Corona-Krise sind die Preise in den letzten Tagen (20. April 2020) explodiert und die Pools kosten 30-70% mehr als noch vor einer Woche. Wir hatten Glück und konnten den Intex für 400 Euro ergattern ... immer noch 30% mehr.
+
+Die Chemie ist glücklicherweise nicht teurer geworden. Schnell noch mal auf Vorrat bestellt.
+
+---
+
+## Swimming-Pool 2.0 - Inbetriebnahme
+
+### Vorbereitung
+
+Um möglichst viel Rasenfläche zu erhalten, wollen wir den Pool ganz nah an den Zaun zum Nachbarn stellen. Das kleine Beet davor muß dementsprechend befestigt werden, um 2 Ständer des Pools zu tragen.
+
+In diesem Jahr möchte ich auch gerne eine Box um die Pumpe bauen, um die Geräuschbelästigung in Grenzen zu halten. Die Pumpe ist nicht wahnsinnig laut, aber auf Dauer (ich gehe davon aus, daß die Pumpe 4-6 Stunden pro Tag laufen muß) kann das schon störend sein - wir werden versuchen, sie nachts laufen zu lassen.
+
+### Filter-Balls
+
+Mit den Balls waren wir prinzipiell zufrieden - allerdings haben sie nun 3 Jahre hinter sich und sind nicht mehr so flauschig. Ich gehe davon aus, daß die Filterleistung dementsprechend nicht mehr optimal ist und bevor ich dann tagelang mit Chemie experimentiere, gehe ich auch Nummer sicher und gönne mir für 30 Euro neue.
+
+Vielleicht sollte ich doch häufiger rückspülen.

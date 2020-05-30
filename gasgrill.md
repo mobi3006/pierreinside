@@ -1,12 +1,24 @@
 # Gasgrilll
 
-Ich besitze schon seit 10 Jahren einen Gasgrill - vielleicht weniger Abenteuer, aber ist Holzkohlegrillen wirklich männlicher?
+Ich besitze schon seit 15 Jahren einen Gasgrill - vielleicht weniger Abenteuer, aber ist Holzkohlegrillen wirklich männlicher? Auf dem damaligen Balkon war das aber der beste Kompromiss und seitdem bin ich ein echter Gasgrill-Fan. Einige meiner Freunde grillen mit Gas und Kohle ... ich brauch aber gar keine Kohle mehr.
 
 Ist mir eigentlich egal - wir nutzen den Grill auch im Winter und nicht nur mal gelegentlich zum Barbecue. Da möchte ich nicht stundenlang in der Kälte stehen und den Grill anheizen.
 
 Ein Gasgrill ist perfekt.
 
 Dennoch bin ich nicht bereit, über 1000 Euro für einen Weber-Grill zu bezahlen - da zahle ich lieber 4 x 300 Euro und komme damit auch 12-15 Jahre über die Runden. Meistens ist Rost das Problem bei den Billig-Grills ... auch wenn man eine Schutzhaube gegen direkten Niederschlag - dennoch steht der Grill die ganze Zeit im Freien und somit natürlich immer der Feuchtigkeit ausgesetzt.
+
+---
+
+## Mein erster Gasgrill
+
+Es ist ewige Zeit her ... es war ein Gasgrill mit Lava-Steinen.
+
+---
+
+## Mein zweiter Gasgrill
+
+... rostete dann irgendwann an den Brennern durch - das ist die Schwachstelle der Billig-Grills - keine Ahnung, ob die teuren Grills hier besser sind ... vielleicht wird hier mehr Edelstahl verbaut, so daß sie länger halten.
 
 ---
 
@@ -41,7 +53,7 @@ Der Rost nagt an dem alten Grill und deshalb bin ich auf der Suche nach Ersatz m
 * Außenabmessungen nicht viel größer als der alte Grill
 * eher nicht: Seitenbrenner
 
-### Option Aldi - Boston Pro 4 R Turbo II
+### Option Aldi - Enders Boston Pro 4 R Turbo II
 
 * 229 Euro - TOP PREIS
 * Grillfläche 74 x 43 cm
@@ -55,3 +67,49 @@ Der Rost nagt an dem alten Grill und deshalb bin ich auf der Suche nach Ersatz m
   * sehr gut für Steaks
 * inkl. Wetterschutzhülle
 * geschlossen - man sieht die Gasflasche nicht
+* [Test von Familie Schardt](http://familietestet.de/gassgrill-enders-boston-pro-4-turbo-ii-von-aldi-sued/)
+
+---
+
+## Enders Boston Pro 4 R Turbo II
+
+Den Grill habe ich im April 2020 bei Aldi-Süd gekauft ... ziemlich schwer, wenn man den alleine im Laden in den Wagen hievt ;-)
+
+Zusammen mit meinem Sohn habe ich ihn in 2 Stunden (ohne Eile und Hektik aufgebaut). Die Anletung ist sehr gut ... bis auf die Beschreibung der Seitenteile ... hier mußte ich erstmal die Konstruktion verstehen und aus Fehlern lernen.
+
+> ACHTUNG: prinzipiell sehr gut verarbeitet - an einer Stelle am Seitenteil habe ich mich dennoch geschnitten.
+
+Ich war schon beim Aufbau begeistert:
+
+* vollständig
+* Brenner und Aufhängungen aus Edelstahl ... bye-bye-Rost
+* alles geschraubt
+* sauber verarbeitet
+* auch im Außenbereich viel Edelstahl
+* durchdachte Konstruktion
+  * einklappbare Seitenteile ... sehr platzsparend
+  * Türen mit Magnet
+  * Haken an den Seitenteilen (Mülltüte)
+  * Bierflaschenöffner
+* mitgelieferte Schutzhaube ... wenn auch nicht besonders dick (bin gespannt wie lange die hält)
+
+Was mir nicht so gefällt
+
+* 4 Rollen mit Feststellbremse
+  * rollen nicht besonders gut
+  * man muß die Bremsen feststellen, um zu verhindern, daß er auf meiner leicht abschüssigen Terrasse wegrollt
+    * mein vorhericher Grill hatte nur 2 Rollen ohne Feststellbremse - das war einfacher und sicherer
+
+Die erste Grillerung lief schon sehr gut ... an die Turbozone muß ich mich noch gewöhnen. Beim Einbrennen bin ich auf fast 350° C gekommen ... mein alter bleib deutlich unter 200° C. Die Hitze ist gleichmäßig verteilt.
+
+### Bilder
+
+![außen](images/enders-boston.jpg)
+
+![Schutzhülle](images/enders-boston-hülle.jpg)
+
+![Innenraum](images/enders-boston-innenraum.jpg)
+
+![Grillrost](images/enders-boston-grillrost.jpg)
+
+![von hinten](images/enders-boston-hinten.jpg)
