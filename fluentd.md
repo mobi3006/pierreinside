@@ -305,6 +305,17 @@ Das Fluentd-Log-File ist immer ein guter Anlaufpunkt, um
 * die Syntax der Konfigurationsdateien zu prüfen
 * nach einem `pattern not matched` Ausschau zu halten - ein Indikator, daß ein Log-Event keinem Pattern entspricht und somit sehr wahrscheinlich ignoriert wurde
 
+Gerade wenn man mit asynchroner Prozessierung arbeitet (z. B. GELF-Messages werden nach Graylog geschickt oder lokale Logs wurden noch nicht prozessiert), dann passiert es gelegentlich, daß die Nachrichten im Ziel verspätet eintreffen. Deshalb habe ich mir angewöhnt, immer Timestamps (z. B. aktuelle Uhrzeit 1340) in die Nachricht zu packen, um den Zeitpunkt zu identifizieren. Das verhindert, daß man denkt "jetzt funktioniert" es ... man sieht aber um 17:28 Uhr eigentlich die Nachricht von 13:40 Uhr.
+
+Statt komplizierte Output-Plugins (zu Graylog, ElasticSearch) zu verwenden, kann man übergangsweise auch einfach mal eine Umleitung in eine lokale Datei machen - auf diese Weise kann man eine komplizierte/asynchrone und damit verzögerte Prozessierung im Endsystem als Fehlerquelle ausschließen:
+
+```
+<match **>
+  @type file
+  path /tmp/pierre/1340
+</match>
+```
+
 ---
 
 ## Getting Started

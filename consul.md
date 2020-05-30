@@ -5,6 +5,8 @@ Consul bietet folgende Services
 * Key-Value-Store
 * Service Discovery
 
+---
+
 ## Architektur
 
 Consul besteht aus
@@ -21,6 +23,8 @@ Das sind die Standardports von Consul Client und Server:
 
 * 8500:
   * WEB UI (http://myserver:8500/ui/dev/services)
+
+---
 
 ## Getting Started
 

@@ -74,6 +74,8 @@ Diese Plattform hat auch die Berufsschule (für HTML, CSS) eingesetzt.
           * die Berechnung der Wochen basiert auf der Annahme 4-8 Stunden/Woche investieren zu können
             * in der Übersicht kann man sehen wieviel Zeit für die Wochen geplant sind und wieviel Material noch nicht bearbeitet wurde
     * Projekt
+    * teilweise werden Peer-Reviews von den eigenen Arbeiten gemacht - das machen dann scheinbar andere Kursteilnehmer ... man muß dann auch selbst andere Lösungen reviewen
+      * bei den reviewten Lösungen wird klar angegeben wofür es Punkte gibt - sehr gut
 * Beispiel (nicht vollständig):
   * Spezialisierung: Java Programming and Software Engineering Fundamentals (44 Euro/Monat)
   * Kurse:
