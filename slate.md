@@ -41,7 +41,9 @@ Durch drücken des Reset-Buttons (neben dem Mode-Button) für 10 Sekunden wird d
 
 ## Betrieb an der Powerbank
 
-Der Normal-Betrieb an einer Powerbank hat problemlos funktioniert. Ich bin gespannt, ob das unter Last mehrerer Clients mit VPN-Verschlüsselung auch noch funktioniert.
+Der Normal-Betrieb an einer Powerbank hat problemlos funktioniert. Meine Powerbank (Anker Power Core II 20000 mAh) lief damit 10 Stunden und der Ladezustand hat sich nicht einmal verändert (allerdings war 8 Stunden auch keinerlei Traffic). Ich bin gespannt, ob das unter Last mehrerer Clients mit VPN-Verschlüsselung auch noch funktioniert.
+
+Auf diese Weise kann ich leicht mal mein WLAN erweitern (im Repeater-Modus), um am Ende des Gartens die WLAN-Situation zu verbessern.
 
 ---
 
@@ -49,7 +51,7 @@ Der Normal-Betrieb an einer Powerbank hat problemlos funktioniert. Ich bin gespa
 
 ### Router
 
-Das ist der Default-Mode - der Slate verbindet die beiden getrennten Netzwerke (Internet und internes Netzwerk) miteinander. Zwischendrin kümmert er sich bei Bedarf um die VPN-Verschlüsselung
+Das ist der Default-Mode - der Slate verbindet die beiden getrennten Netzwerke (Internet und internes Netzwerk) miteinander. Zwischendrin kümmert er sich bei Bedarf um die VPN-Verschlüsselung.
 
 ### Access Point
 
