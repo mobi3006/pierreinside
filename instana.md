@@ -57,6 +57,99 @@ Ein Service hat 1-n Endpoints.
 
 Instana versucht, den Servicenamen nach technologieabhängigen Algorithmen festzulegen. Die Regeln sind hier dokumentiert, so daß man durch Einhaltung gewisser sinnvoller Konventionen den Namen "selbst" bestimmen kann. Man kann andernfalls auch die environment Variable `INSTANA_SERVICE_NAME` setzen oder in Instana ein entsprechendes Custom-Mapping definieren (das ist dann aber auf jeder Instana Instanz zu tun :-(
 
+### Integrationsmöglichkeiten
+
+Instana funktioniert i. a. nur durch Installation des Agent schon sehr gut, doch in manchen Situationen möchte man
+
+* nicht unterstützte Technologien verwenden
+* Metriken mit Daten anreichern
+
+Hierzu bietet Instana einige [SDKs und APIs](https://www.instana.com/docs/integrations) ([statsd ist hier nicht aufgeführt](https://www.instana.com/docs/ecosystem/statsd/)), die wirklich einfach zu nutzen sind und teilweise - wenn man eine Schnittstelle über den Instana-Agent nutzt - nicht einmal Authentifizierung benötigt.
+
+#### Instana REST API
+
+* [Beispiele aus dem Grafana-Instana-Plugin](https://github.com/instana/instana-grafana-datasource) => praktisch, um sich ein paar Einblicke zu verschaffen
+
+#### Instana-Agent-Rest-Event-API
+
+* https://www.instana.com/docs/api/agent/#event-sdk-web-service
+
+```bash
+curl -XPOST \
+      http://localhost:42699/com.instana.plugin.generic.event \
+      -H "Content-Type: application/json" \
+      -d '{\
+            "title":"Custom API Events ", \
+            "text": "pierretest", \
+            "duration": 5000, \
+            "severity": 5\
+          }'
+```
+
+sorgt für ein _Warning Issue_ im Instana ... schon richtig getaggt (mit den Tags aus dem Instana-Agent). Keine Authentifizierung notwendig.
+
+#### Rest-Trace-API
+
+* https://www.instana.com/docs/api/agent/#trace-sdk-web-service
+
+... REST-Calls an den Instana-Agent
+
+#### Statsd
+
+Der Instana-Agent kann als Statsd-Proxy konfiguriert werden:
+
+```yaml
+com.instana.plugin.statsd:
+  enabled: true
+  ports:
+    udp: 8125
+    mgmt: 8126
+  bind-ip: "0.0.0.0" # all ips by default
+  flush-interval: 10 # in seconds
+```
+
+Auf diese Weise kann man Messwerte per `echo "pierreinside:30|ms" | nc -u -w1 127.0.0.1 8125` an den Instana-Agent schicken. Die sind dann in der _INfrastructure - Dashboard View_ am Host hängend (und mit den entsprechenden Tags ausgestattet, die im Instana-Agent konfiguriert sind) unter _Custom Metrics_ zu finden:
+
+![Instana Custom Metrics](images/instana-customMetrics.png)
+
+Der Instana-Agent spricht das [Statsd-Protokoll](https://github.com/b/statsd_spec) mit dem Messwerte (z. B. `foo:1|c` - `foo` ist der Metrik-Identfikator, `1` der Wert und `c` der Metrik-Typ ... hier ein Counter) gesammelt und zu Metriken aggregiert werden.
+
+Folgende [Metrik-Typen](https://github.com/statsd/statsd/blob/master/docs/metric_types.md) werden unterstützt:
+
+* `c`: counter - Zähler auf Server-Seite
+  * hier wird nur die Differenz (bei `foo:1|c` ist die Different `1`) mitgeteilt
+* `g`: Gauge - Zähler auf Client-Seite
+  * hier wird nur die Differenz (bei `foo:1|g` ist die Different `1`) mitgeteilt
+* `ms`: Timer
+* `h`: Histogramm
+* `m`: Meters
+
+Zur Verarbeitung dieser Messwerte stehen zwei Möglichkeiten zur Verfügung:
+
+* Events
+  * aus den Messwerten lassen sich Events erzeugen und aus Events lassen sich Alerts erzeugen
+  * was ist der Unterschied zur Event-API?
+    * bei der Generierung von Events aus Messwerten beobachtet Instana die Messwerte und entscheidet dann irgendwann aus den Daten eine Information zu machen - diese Information ist das Event
+      * Metriken => Event => Alert
+    * Events, die über die Event-API kommen, werden bereits an der Quelle zu einer Information (z. B. es wurde ein neuer Heapdump erzeugt) - Instana muß dann keinen Hirnschmalz investieren
+      * Event => Alert
+    * kann aus dem Kontext bereits ein Event erzeugt werden, dann ist das auf jeden Fall eine höherwertige Information als aus Messwerten (= Metriken = Daten) durch mehr-oder-weniger intelligente Logik eine Information (= Event) zu generieren - die Kontextinformation liefert die besseren Ergebnisse
+* Grafana-Dashboard
+  * hier werden keine Events unterstützt, sondern nur Metriken
+
+> Kann es sein, daß???
+>
+> * Grafana (Reporting/Statistiken ist das Ziel) berücksichtigt ausschließlich Metriken - keine Events
+> * Instana (Alerting ist das Ziel) berücksichtigt ausschließlich Events (deshalb müssen aus Metriken Events gemacht werden) - keine Metriken
+
+**Event:**
+
+Hierzu legt man ein neues Event an und darauf aufsetzend lassen sich dann auch Alerts anlegen, die beispielsweisse per MS Teams, Slack, PagerDuty ... verschickt werden können.
+
+**Grafana:**
+
+siehe eigener Abschnitt
+
 ### Traces, Calls, Spans
 
 * [Instana Dokumentation](https://docs.instana.io/core_concepts/tracing/)
@@ -172,6 +265,7 @@ so daß immer die relevanten Metriken gezogen und dargestellt werden können. Da
 Im UI wird hierzu für jede Ebene spezifische Informationen geliefert. Beispiel:
 
 > Bei einer Spring-Boot Anwendung, die in einem Docker-Container auf einem Linux-System läuft, gibt es die folgenden Ebenen und Informationen:
+>
 > * Host: CPU, Betriebssystem, Hostname, Netzwerkschnittstellen, ...
 > * Docker Container: Image, Start-Kommando, Startzeitpunkt, Ports, Container Labels, Scheduler (Docker-Compose, Nomad, ...)
 > * Prozess: Umgebungsvariablen, Startparameter
@@ -196,7 +290,11 @@ Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann
 
 ### Metriken
 
-* eigene Metriken können angeboten werden (z. B. Dropwizard Metrics) - zusätzlich zu den Standardmetriken wie CPU, Memory, Heap, ...
+* Built-In-Metrics
+  * Metriken, die von Sensoren des Instana-Agents gesammelt werden
+* Custom-Metrics
+  * eigene Metriken, die beispielsweise über Instana-API's zur Verfügung gestellt werden (z. B. über Statsd-Protocol)
+  * auch von 3rd Parties genutzt, z. B. DropWizard-Metrics
 
 ### Open-Approach
 
@@ -325,6 +423,43 @@ services:
 > BTW: `instana/config/thisIsAnAdditionalConfig.yaml` ist optional ... man benötigt sie, wenn man Instana Annotation in den Services des Hosts verwendet hat.
 
 Nach dem Start (`docker-compose up instana-agent`) sollte der Host im [Portal](http://instana.io) auftauchen.
+
+---
+
+## Konfiguration
+
+Auch wenn Instana den Anspruch von Zero-Configuration hat, sind einiger Konfigurationen sehr sinnvoll und erfolgen in der `configuration.yml` des Agents:
+
+* Meta-Daten
+** beispielsweise Identifikation der Umgebung (wenn man mehrere Umgebungen in einem Instana-Account monitored)
+*** `com.instana.plugin.generic.hardware`
+**** `availability-zone`
+*** `com.instana.plugin.host`
+**** `tags`
+* Secrets will man i. a. nicht nach Instana transferieren
+** `com.instana.secrets`
+* wenn man seinen Java-Code mit dem Instana-SDK angereichert hat
+** `com.instana.plugin.javatrace`
+*** `instrumentation/sdk/packages`
+
+---
+
+## Mein Eindruck
+
+Instana ist super ... wenn man ohne großen Aufwand Built-In-Metriken, den Fluß eines Calls durch die Layer und Performance untersuchen will. Das hilft bei der Analyse von Problemen extrem weiter. Mit der Application Perspective lassen sich die Daten auch besser einer Subkomponente zuordnen.
+
+Möchte man allerdings mehr Semantik in die Überwachung integrieren, dann habe ich noch nicht die richtigen Wege gefunden. Wenn man gezieltes End-to-End-Monitoring, das die Integration von Custom-Daten erfordert (ist die Infrastruktur so wie definiert - daß nämlich 3 Instanzen des Srevice A laufen?), fehlen mir die Integrationsmöglichkeiten ... wie bringe ich meine Logik in Instana ein? Muß ich mir einen eigenen Sensor schreiben? Es kommt mir derzeit (mag an fehlendem KnowHow liegen) so vor als sei Instana sehr gut, um die Detail-Analyse durchzuführen ... bei dem Thema End-to-End-Monitoring aber nicht so gut aufgestellt, weil die Integration von Custom-Semantik nicht vorgesehen ist oder (noch) nicht gut unterstützt wird.
+
+Beispiel:
+
+Ich wollte gerne ein Alert erzeugen, wenn eine unserer Services einen Heap-Dump wegen Speichermangel erzeugt. In diesem Fall stehen mir (vom Instana-Support bestätigt) zwei Möglichkeiten zur Verfügung
+
+* Instana-Agent Event-API
+* Instana-Agent Statsd-Proxy für Metriken
+
+Die Event-API ist sehr rudimentär was die Bereitstellung von Meta-Daten betrifft. Hier steht eigentlich nur ein Textfeld zur Verfügung, das dann später verwendet werden kann, um einen Filter für das Alerting zu definieren. Ich hätte mir hier eher ein Tagging gewünscht, um gezielter (statt mit String-Wildcards) Selektionen vorzunehmen.
+
+Andererseits unterstützt Grafana keine Events - ausschließlich Metriken können in den Dashboard-Panels verwendet werden. Ich möchte allerdings historische Daten sammeln, um meine SLOs abzubilden und Probleme in der Anwendung zu entdecken. Meine derzeitige Lösung besteht darin, ein Event und eine Metrik nach Instana zu schreiben ... schon irgendwie redundant.
 
 ---
 
