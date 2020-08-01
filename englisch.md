@@ -169,4 +169,10 @@ Ich habe Quizlet durch meinen Sohn kennengelernt, der das in der Schule eingeset
 * advice
 * attend
 * proper
-
+* finalize
+* delay
+* lag
+* favor
+* favorite
+* famous
+* penalty
