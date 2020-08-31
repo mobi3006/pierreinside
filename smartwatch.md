@@ -4,6 +4,17 @@ Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die 
 
 ---
 
+## Nice to know
+
+* bei Android gibt es extrem viele verwendete (teilweise proprietäre) Betriebssysteme:
+  * Google Wear OS
+    * scheinbar ein Akku-Fresser
+  * Tizen (Samsung)
+  * RTOS (Huawai)
+  * Fitbit OS
+
+---
+
 ## Anforderungen
 
 ### MUST-HAVE
@@ -20,11 +31,11 @@ Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die 
 * iPhone-Kompatibilität
 * Mehrbenutzerbetrieb - bei einem Preis von 150 Euro ist das aber nicht unbedingt erforderlich
   * evtl. reicht dann eine Uhr für 3 Benutzer
-* Deezer-Support
+* Deezer-Support ... zumindest für die Steuerung der auf dem gekoppelten Handy befindlichen Musik
 * Intervall-Timer ... für Workouts
 * Standard-Betriebssystem ... nichts proprietäres
-* Musik für mind. 100 Songs ... vom Streaminganbieter Deezer
 * Navigation ... bei Städtetouren sehr praktisch
+* Musik für mind. 100 Songs ... vom Streaminganbieter Deezer
 
 ### KEINE RELEVANZ
 
@@ -37,6 +48,10 @@ Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die 
 ---
 
 ## Produkte
+
+* [notebookcheck - Juli 2020 - Beste Smartwatches](https://www.notebookcheck.com/Die-besten-Smartwatches-im-Test.476777.0.html)
+  * Huawei Watch GT
+  * Honor Magic Watch 2
 
 ### Fitbit Versa 3
 
@@ -80,6 +95,10 @@ Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die 
 
 * Blocker: fürchterliches Design
 
+### Samsung Galaxy Watch 3
+
+* kleiner Akku
+
 ### Samsung Galaxy Watch
 
 * 190 Euro
@@ -88,6 +107,11 @@ Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die 
 * kein ordentlicher iOS Support
 
 ### Samsung Galaxy Watch Active 2
+
+* 40mm und 44mm
+* Lünette
+* (+) EKG - noch nicht aktiviert (soll in 3/2020 kommen)
+* (-) schlechte Akkuleistung von 2 Tagen
 
 ### Huawei Watch GT 2
 
@@ -98,7 +122,10 @@ Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die 
 * zur Kopplung mit dem Handy Huawei Health App erforderlich
 * (+) Schlaftracking
 
-### HUAWEI Watch GT 2 Sport
+### HUAWEI Watch GT 2e
+
+* es lassen sich keine zusätzlichen Apps installieren
+* sieht sprotlicher aus als Huawei Watch GT 2
 
 ### Garmin Vivoactive 3 Music
 
@@ -117,6 +144,13 @@ Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die 
 
 * 130 Euro
 * 42mm und 46mm
+* optisch sehr ähnlich zur Huawei Watch GT 2 allerdings
+  * mit Lünette (vereinfacht die Bedienung)
+
+### Motorola Moto 360 (2020)
+
+* (-) schlechte Akkuleistung - 1,5 Tage
+* (+) sehr schöne Optik
 
 ### Billiguhren für unter 50 Euro
 
