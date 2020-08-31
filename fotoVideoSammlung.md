@@ -214,9 +214,26 @@ Hierfür benötigt es auf dem Synology einen Cloud Station Server.
 
 ## Algorithmus
 
+![Lösung](images/photo-synology.png)
+
+Ich führe diese Sammlung auf der Synology nur alle 6-18 Monate aus. Deshalb merke ich mir den letzten Stand der Sicherung mit einem Trick im Dateisystem. Im Backup-Verzeichnis lege ich eine leere Datei `foo______syncpoint.jpg` an:
+
+![syncpoint](images/syncpoint.png)
+
+Für den Upload auf die Synology verwende ich das Windows-Tool _Synolofy Photo Station Uploader_, das auf meinem leistungsstarken Laptop schon die Thumbnails und weitere Konvertierungen durchführt. Auf der Synology würde das ewig dauern. Es integriert sich in den Windows Explorer und kann dann mit der rechten Maustaste gestartet werden ... anschliedßend öffnet sich folgender Dialog (das sind die Einstellungen, die ich verwende):
+
+![Photo Station Uploader](images/photoStationUploader.png)
+![Photo Station Uploader](images/photoStationUploader2.png)
+
+Achtung: scheinbar funktioniert der Zugriff nur, wenn man die IP-Adresse der Synology verwendet (anstatt des FQDN) ... ansonsten gibt es beim Upload diese falsche Meldung:
+
+> "Photo Station is not installed. Please install the package at Package Center to upload photos."
+
+### Verworfene Lösungen
+
 > ACHTUNG - PROBLEM - ACHTUNG: anfangs habe ich versucht, die Fotos/Videos per USB-Kabel vom iPhone auf meinen Windows-Rechner zu kopieren. Hierbei hatte ich am iPhone "Einstellungen - Fotos - Auf MAC oder PC übertragen - Automatisch" eingestellt, um die Multimedia-Dateien beim Kopieren automatisch in kompatible (Stichwort HEIC) Formate umzuwandeln. Das klappte leider mehr schlecht als recht. Die Synchronisierung brach immer wieder mit dem gleichen Fehler "Device is unreachable" ab ... gelegentlich funktionierte es aber auch. Bei iOS 11 konnte ich das Problem mit der Umstellung auf die Einstellung "Originale beibehalten" lösen (anschließend mußte ich die Fotos manuell per XnView von HEIC nach JPG konvertieren), doch bei iOS 13 klappte auch das nicht mehr.
 
-Meine Lösung 2019 besteht nun aus einem [Lightning-USB-Adapter mit 64 GB Speicher von HooToo (28 Euro)](https://www.amazon.de/HooToo-Laufwerk-Zertifiziert-Lightning-Computer/dp/B01HEHXF3A/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=hootoo&qid=1574608249&smid=A2X2NO3429IQ5W&sr=8-5), über den ich die Multuimedia-Dateien auf meinen Windows-Rechner bekomme. Allerdings muß ich sie anschließend in Windows-kompatible Formate umwandeln ... zumindest die Bilder - die Videos sind Synology-kompatibel.
+2019 habe ich mir den [Lightning-USB-Adapter mit 64 GB Speicher von HooToo (28 Euro)](https://www.amazon.de/HooToo-Laufwerk-Zertifiziert-Lightning-Computer/dp/B01HEHXF3A/ref=sr_1_5?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=hootoo&qid=1574608249&smid=A2X2NO3429IQ5W&sr=8-5) gekauft, über den ich die Multimedia-Dateien auf meinen Windows-Rechner bekomme. Allerdings muß ich sie anschließend in Windows-kompatible Formate umwandeln ... zumindest die Bilder - die Videos sind Synology-kompatibel. Schade nur, daß die Timestamps kaputtgehen und die Jpegs keine Exif-Header haben.
 
 > Alternative für die Zukunft: Kopieren der Multimedia-Daten in die Cloud - bei OneDrive habe ich genügend Speicher. Derzeit habe ich mich aus Sicherheitsgründen noch nicht zu einer solchen Lösung durchringen können.
 

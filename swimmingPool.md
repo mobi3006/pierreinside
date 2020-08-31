@@ -64,6 +64,7 @@ Meine gesammelten Tipps aus verschiedenen Quellen:
     * Schockchlorierung mit Granulat, das wir in Wasser vorher auflösen
   * bei grünlichem Wasser Algicid reingeben und Pumpe länger laufen lassen
     * Filterballs vorher überprüfen ... evtl. rückspülen
+      * in der Bedienungsanleitung der Filterballs steht allerdings "Bei herkömmlichen Filteranlagen reicht die Leistung der Filterpumpe nicht aus, die Verschmutzung auszuwaschen. Daher empfehlen wir nicht das Rückspülenmit der Filteranlage, sondern das Waschen per Hand oder in der Waschmaschine." (bei 30° C)
     * VORHER: PH-Wert auf den richtigen Wert bringen
   * bei bräunlichem Wasser ... und Pumpe länger laufen lassen
   * bei milchigem Wasser ... und Pumpe länger laufen lassen
@@ -76,6 +77,7 @@ Meine gesammelten Tipps aus verschiedenen Quellen:
   * Filterreinigung:
     * Kartusche: regelmäßig entnehmen und abspritzen
     * einmal wöchentlich rückspülen - gelegentlich die Filterballs prüfen (häufig setzen sich auch Algen ab)
+      * bei Filterballs soll das Rückspülen wenig bringen, weil der Dreck recht fest in den Bällen sitzt => besser in die Waschmaschine
     * Sand und Filter Balls: Rückspülen und Nachspülen sobald der Druck in den gelben Bereich wechselt (siehe Manometer), um den Dreck aus dem Sand zu waschen und abzulassen
 * Wintereinlagerung:
   * Pool gründlich waschen (Putzmittel für Pools) und dann ausgiebig trocknen
@@ -139,22 +141,32 @@ Gut, daß ich mich für die leistungsfähiger Pumpe entschieden habe.
 
 * https://www.amazon.de/Steinbach-Filter-Balls-handels%C3%BCblichen-Sandfilteranlagen/dp/B01BVF66EG/ref=sr_1_1?s=garden&ie=UTF8&qid=1472486586&sr=1-1&keywords=filter+balls
 
-Statt für Sand habe ich mich für sog. Filter-Balls entschieden. Vorteile:
+Ich mich für Filter-Balls statt Sand entschieden. Vorteile:
 
 * feinere Filterung (Filter Balls filtern viel kleinere Teilchen, so daß man sich auch Zusatzstoffe wie Flockfix sparen kann, die man einsetzt, um die Teilchen größer zu machen)
 * geringes Gewicht (vielleicht muß man die Pumpe auch mal bewegen)
 * Wiederverwendung - am Ende der Saison (oder auch mal mittendrin) kann man sie in die Waschmachiene stecken, trocknen lassen und im nächsten Jahr wiederverwenden. Sand müßte man jedes Jahr erneuern.
 * kein Sand im Pool
 
-Soweit die Theorie ... mal sehen wie es in der Praxis aussieht
+Meine Steinbach Speedclean Comfort 50 ist 15 kg Sand ausgelegt. In der Bedienungsanleitung steht, daß meine 700gr Filterballs 25kg Sand ersetzen => 700 gr * 15/25 = 420 gr ... im Behälter sieht das dann so aus, d. h. einfach vollmachen ohne zu drücken:
+
+![Filter-Balls](images/filterballs.jpg)
+
+Mit den Filter Balls war ich sehr zufrieden ... nach 4 Jahren habe ich sie allerdings mal ausgetauscht - sie waren nicht mehr flauschig.
 
 #### Startwerte
 
-Der Druck lag zu Beginn bei 0,5 bar ... wenn er in den gelben Bereich steigt, dann ist eine Rückspülung erforderlich
+Der Druck lag zu Beginn bei 0,5 bar ... wenn er in den gelben Bereich steigt, dann ist eine Rückspülung bzw. Tausch der Filter-Balls erforderlich.
 
 #### Bewertung
 
-Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe).
+Die Pumpe war gar kein Vergleich zur Intex-Standardpumpe ... hat ja auch den 5-fachen Preis gekostet (die Pumpe war teurer als der ganze Pool inkl. Standardpumpe). Mein grüner Pool
+
+![Pool grün](images/pool-gruen.jpg)
+
+wurde innerhalb von 2 Tagen wieder glasklar:
+
+![Pool grün](images/pool-klar.jpg)
 
 Ersatzteile scheinen kein Problem zu sein - [siehe hier](http://www.steinbach.at/info/detail.php?viewID=16344).
 
@@ -266,8 +278,62 @@ Um möglichst viel Rasenfläche zu erhalten, wollen wir den Pool ganz nah an den
 
 In diesem Jahr möchte ich auch gerne eine Box um die Pumpe bauen, um die Geräuschbelästigung in Grenzen zu halten. Die Pumpe ist nicht wahnsinnig laut, aber auf Dauer (ich gehe davon aus, daß die Pumpe 4-6 Stunden pro Tag laufen muß) kann das schon störend sein - wir werden versuchen, sie nachts laufen zu lassen.
 
+### Styropor Unterbau
+
+Ich habe mich für 3 cm Stypropor-Platten entschieden ... statt der 2 cm Platten ein wenig teurer (ca. 50 Euro), aber dafür recht stabil.
+
+![Styropor-Unterbau](images/pool-styropor.jpg)
+
+> Im nachhinein die richtige Entscheidung, da die Höhenunterschiede meines Untergrunds relativ hoch sind und die 3cm Platten gar nicht brechen. Nächstes Jahr wieder ...
+
+Wir verbinden die Platten punktuell mit günstigem Klebeband, um zwischen den Platten keine Lücken entstehen zu lassen (die würden zu unangenhmen Spalten führen ... für die Füße und für die Pool-Folie). Das verhindert eine Verschiebung der Platten, wenn der Pool später nochmals auf dem Styropor bewegt werden muß.
+
+> Wir haben zudem noch eine Folie (sogar beim Pool mitgeliefert) auf die Platten gelegt. Anschließend haben wir die Folie gewässert (der Regen hat uns hier in die Karten gespielt), um den Pool leichter ausrichten zu können (läßt sich leichter drehen/schieben).
+
+### Groß ...
+
+Der Pool ist im Durchmesser kleiner als erwartet (zumindest ist der Durchgang zum hinteren Teil unseres Garten größer als erwartet), aber in der Höhe ein Biest. Wenn ich mit 1,80 m Körpergröße auf der Leiter stehe sind meine Augen auf ca. 3,00 m ... 1,22 m Poolhöhe wirken in unserem Garten echt riesig - auf der Couch sitzend kann ich unsere Gartenhütte kaum noch sehen.
+
+![Biest](images/pool_2.0.jpg)
+
+Bei der Bestellung hätte ich beinahe einen Ersatzpool bestellt, der 100 Euro günstiger gewesen wären ... gefehlt hätte u. a. eine Leiter, die aber absolut erforderlich ist.
+
+![Treppe](images/treppe.jpg)
+
+Meine 1.0-Treppe hätte nicht beim Rauskommen geholfen.
+
 ### Filter-Balls
 
-Mit den Balls waren wir prinzipiell zufrieden - allerdings haben sie nun 3 Jahre hinter sich und sind nicht mehr so flauschig. Ich gehe davon aus, daß die Filterleistung dementsprechend nicht mehr optimal ist und bevor ich dann tagelang mit Chemie experimentiere, gehe ich auch Nummer sicher und gönne mir für 30 Euro neue.
+Mit den Balls waren wir prinzipiell zufrieden - allerdings haben sie nun 3 Jahre hinter sich und sind nicht mehr so flauschig.
+
+![Filterballs alt vs. neu](images/filterballs-alt-neu.jpg)
+
+Ich gehe davon aus, daß die Filterleistung dementsprechend nicht mehr optimal ist und bevor ich dann tagelang mit Chemie experimentiere, gehe ich auch Nummer sicher und gönne mir für 30 Euro neue.
 
 Vielleicht sollte ich doch häufiger rückspülen.
+
+> statt Rückspülen soll man wohl eher die Waschamschine anwerfen - der Dreck hängt wirklich fest.
+
+### Erstbefüllung
+
+Bei einer Fließgeschwindigkeit von 500 Litern/Stunde dauert die Befüllung ca. 34 Stunden ... es dauert ewig.
+
+> Das kam mir doch sehr langsam vor und deshalb habe ich ein paar Messungen gemacht. Meine Nachbarin hat einen Durchlauf am Außen-Wasserhahn von 1800 Litern/Stunde. Ich habe zwei Probleme entdeckt:
+>
+> - mein Schlauch (auf einer Rolle) hat einen kleineren Durchmesser als der meiner zweiten Schlauchrolle
+> - mein Durchlaßventil im Keller für den Garten läßt sich nicht voll aufdrehen ... Kalk/Rost?
+>
+> Das erste konnte ich mit der anderen Schlauchrolle lösen und habe nun beide verwendet. Somit konnte ich auf 700 Liter/Stunde kommen. Das zweite Problem muß sicht mal ein Fachmann ansehen ...
+
+Während der ersten 3.000 Liter wird der Boden immer wieder ausgestrichen, so daß der Boden ganz glatt ist.
+
+> Die Unterfolie hat durch das nachträgliche Verschieben des Pools leichte Überlappungen, die man spürt ... aber das ist kein Problem.
+
+Die Platten weisen keinerlei Spalte auf ... ein angenehmes Fußgefühl.
+
+### Außenwasserzähler
+
+Bei 17.000 Litern könnte man über einen Außenwasserzähler nachdenken, um die Kosten fürs Wasser zu halbieren (die Kosten fürs Abwasser fallen dann weg).
+
+* [Lohnt sich das?](https://www.bauen.de/rechner/gartenwasserrechner.html)
+  * [wohl nur in den seltensten Fällen](https://www.wn.de/Muensterland/Kreis-Steinfurt/Greven/2015/02/1892106-Gartenwasserzaehler-Die-Rechnung-rechnet-sich-nicht)
