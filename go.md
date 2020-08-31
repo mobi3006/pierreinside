@@ -364,3 +364,15 @@ Antwort 1: beispielsweise folgendes in `.gitignore` eintragen (muß das so schwe
 # also in all subdirectories
 !*/
 ```
+
+oder war es so?
+
+```
+# we ignore all files
+**/*
+
+# ... except ...
+!**/*.go
+!**/*.md
+!.gitignore
+```

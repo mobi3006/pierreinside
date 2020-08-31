@@ -176,3 +176,5 @@ Ich habe Quizlet durch meinen Sohn kennengelernt, der das in der Schule eingeset
 * favorite
 * famous
 * penalty
+* deserve
+* attend

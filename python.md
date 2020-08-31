@@ -87,6 +87,7 @@ store(name="Pierre", age=27)
 * List Comprehensions: `squares = [x**2 for x in range(10)]`
 
 ---
+
 ## Python in Kombination mit Shell
 
 ### Python executes Shell-Commands
