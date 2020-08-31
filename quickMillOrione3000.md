@@ -57,6 +57,7 @@ Glücklicherweise haben wir mit der Firma Kudlek (seit 2018 mit Hausgeräte Beck
     * mit dem Schraubenzieher und einer Nadel gesäubert (Entfetter funktioniert auch ganz gut - 2 Tage eingeweicht)
   * läuft wieder ... aber nach ein paar Bezügen wieder Probleme
     * ich habe den Kaffee nicht gewechselt - auch nicht den Mahlgrad geändert ... aber es bleibt nach dem Bezug immer sehr viel Pulver an diesem Sieb hängen. Ich werde mir das Sieb erneut anschauen.
+  * nun hatte ich es satt und die Maschine ging zum lokalen Händler - die Pumpe wurde ausgetauscht und seitdem schmeckt der Kaffee endlich wieder richtig gut
 
 ---
 
