@@ -18,6 +18,7 @@ Im übrigen wird beim `docker build` nichts anderes gamacht als einzelne Contain
 
 ## Dockerfile
 
+* [MUST-READ - Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 * [MUST-READ - Dockerfile Best practices](https://docs.docker.com/v17.09/engine/userguide/eng-image/dockerfile_best-practices/#expose)
 * [MUST-READ - 9 Common Dockerfile Mistakes](https://runnable.com/blog/9-common-dockerfile-mistakes)
 * [MUST READ - 10 things to avoid in docker containers](https://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/)
