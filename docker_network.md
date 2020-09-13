@@ -46,7 +46,7 @@ DOCKER_NETWORK_OPTIONS=-ip=0.0.0.0
 
 Docker bringt Ünterstützung für folgende Netzwerktypen ... jeder Netzwerktyp ist einem sog. *Diver* zugeordnet, hat einen Namen, eine ID :
 
-* ~~docker0~~ ... veraltet
+* docker0 ... veraltet
 * Bridge
   * ausreichend für kleine Netzwerke, die nur auf einem einzigen Host laufen
 * Overlay
@@ -57,15 +57,19 @@ Nach der Installation von Docker sind bereits folgende Netzwerk-Interfaces im Sy
 
 * `docker0`: Default Bridge-Network - veraltet
 
-Zudem existieren schon folgende Docker-Netzwerke (`docker network ls`):
+Zudem existieren schon folgende Docker-Netzwerke:
 
 * bridge
+  * Details zum Treiber findet man per `docker inspect bridge`
 * host
+  * Details zum Treiber findet man per `docker inspect host`
 * none
+
+Welche Netzwerke die Docker Container verwendet ermittelt man per `docker network ls`. Details erhält man über die Netzwerk-ID (z. B. `94d431c39280`) per `docker network inspect 94d431c39280`.
 
 ### Netzwerkinterfaces
 
-Netzwerkkommunikation läuft IMMER über ein Netzwerkinterface - eine Übersicht über alle vorhanden Netzwerkinterfaces erhält man per `ifconfig`
+Netzwerkkommunikation läuft IMMER über ein Netzwerkinterface ... der Docker-Container hat welche und der Docker-Host auch. Eine Übersicht über alle vorhanden Netzwerkinterfaces erhält man per `ifconfig`
 
 ```bash
 ╰─➤  ifconfig
@@ -210,7 +214,7 @@ Bei einem Host-Netzwerk (`docker run --net=host`) verhält sich der Container ne
 * `localhost` im Container ist der Docker Host
 * alle Ports, die der Container öffnet sind auch auf dem Docker-Host geöffnet - ACHTUNG: wenn der Container seinen Service an alle Netzwerkinterfaces bindet (`0.0.0.0`), dann sind die für alle erreichbar (evtl. sind Firewall-Regeln notwendig)
 
-> ACHTUNG: braucht man nur den Zugriff auf den Docker Host aus einem Docker COntainer, dann kann man vielleicht auch ein Bridged Netzwerk verwenden und einen Alias auf das Loopback Device erstellen - [siehe Dokumentation](https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5/com.ibm.websphere.edge.doc/lb/tcfg_aliasloopback.html). In den neueren Docker-Versionen gibt es meines Wissens FQDN, die richtig geroutet werden ... allerdings ist das dann nur eine Option, die vom Container zum Host funktioniert ... allerdings nicht vom Host zum Container.
+> ACHTUNG: braucht man nur den Zugriff auf den Docker Host aus einem Docker Container, dann kann man vielleicht auch ein Bridged Netzwerk verwenden und einen Alias auf das Loopback Device erstellen - [siehe Dokumentation](https://www.ibm.com/support/knowledgecenter/en/SSAW57_8.5.5/com.ibm.websphere.edge.doc/lb/tcfg_aliasloopback.html). In den neueren Docker-Versionen gibt es meines Wissens FQDN, die richtig geroutet werden ... allerdings ist das dann nur eine Option, die vom Container zum Host funktioniert ... allerdings nicht vom Host zum Container.
 
 ### bridge Netzwerk
 
@@ -221,6 +225,10 @@ Beim Bridge-Netzwerk erhalten beide Enden der Brücke eine eigene IP-Adresse, d.
 ### Iptables
 
 Diese Einstellung auf dem Docker Host regelt Kommunikation auf unterster Ebene. Docker legt hier slebständig eigene Einträge ein, die über abstraktere Konfigurationen (z. B. in `docker run` oder `docker-compose.yml`) beschrieben werden. Deshalkb muß man selten in diese Konfiguration schauen, wenn man aber Fehler beheben will, dann kommt man hier nicht herum.
+
+### Anpassung /etc/hosts im Docker-Container
+
+Beim Start eines Docker-Containers kann man per `docker run --add-host host.docker.internal:172.22.0.1 ...` eine Anpassung der `/etc/hosts`-Datei im Docker-Container vornehmen.
 
 ## Docker-Network-Subsystem
 

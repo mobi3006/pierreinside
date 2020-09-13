@@ -444,6 +444,35 @@ git config --global --edit
 
 Dadurch wird die Datei `~/.gitconfig` um die Properties erweitert.
 
+### Repositoryspezifische Konfiguration
+
+Jedes Git-Repository hat ein Verzeichnis .git (im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
+
+* `.gitconfig`
+ * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` benutzerspezifisch zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen (GitHub, BitBucket, lokales Synology, ...)
+* `.gitattributes`
+* `.gitignore`
+
+Änderungen daran lassen sich beispielsweise per
+
+```bash
+git config user.name "Your Name Here"
+git config user.email your@email.com
+```
+
+durchführen ... BEACHTE: ``--global`` fehlt hier!!!
+
+### Passwort-Cache
+
+Wenn man kein `https` statt `ssh` für den Zugriff verwendet (entschieden beim Cloning), dann werden die `~/.gitconfig`-Setting des Users scheinbar nicht verwendet. Bei jedem `git push` müssen Username und Password erneut eingegeben werden. Über
+
+```bash
+git config credential.helper store
+git config --global credential.helper 'cache --timeout 7200'
+```
+
+kann man das ein wenig komfortabler gestalten und die Credentials cachen.
+
 ### Line-Endings
 
 * [http://help.github.com/line-endings/](http://help.github.com/line-endings/)
@@ -477,24 +506,6 @@ git reset --hard
 ```
 
 getriggert werden.
-
-### Repositoryspezifische Konfiguration
-
-Jedes Git-Repository hat ein Verzeichnis .git (im Gegensatz zu Subversion, bei dem jedes Verzeichnis einen .svn Folder hat). In diesem Verzeichnis befinden sich die Verwaltungsdateien dieses Repositories:
-
-* `.gitconfig`
- * statt Einstellungen für jedes Repository durchzuführen kann das in der `~/.gitconfig` benutzerspezifisch zentralisiert werden. Manche Einstellungen wie z. B. der Username sind allerdings Repository-spezifisch, weil nicht alle Repositories auf der gleichen Platform liegen (GitHub, BitBucket, lokales Synology, ...)
-* `.gitattributes`
-* `.gitignore`
-
-Änderungen daran lassen sich beispielsweise per
-
-```bash
-git config user.name "Your Name Here"
-git config user.email your@email.com
-```
-
-durchführen ... BEACHTE: ``--global`` fehlt hier!!!
 
 ### Alias
 

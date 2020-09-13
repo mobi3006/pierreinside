@@ -1,4 +1,5 @@
 # Docker Ressources
+
 * https://dzone.com/articles/java-inside-docker-what-you-must-know-to-not-fail?edition=286882&utm_source=weekly%20digest&utm_medium=email&utm_campaign=wd%202017-03-22
 
 Man kann die für Docker-Container bereitgestellten Ressourcen über Betriebssystem `ulimits` oder Docker-Parameter (`docker run --it -m=100M --memory-swap=100M ubuntu free -h`) einschränken. Wenn ein Container dann allerdings diese Grenze überschreitet, dann wird er vom Betriebssystem hart abgeschossen.
