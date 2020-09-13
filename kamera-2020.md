@@ -120,3 +120,28 @@ Die RX10-M4 ist natürlich schon besser als die RX10-M3, aber auch deutlich teur
 ### Fazit
 
 Die FZ1000ii gibt es neu günstiger als die RX10-M3 gebraucht ... der größere Zoom-Bereich (480 vs 400mm) wäre schon nicht schlecht, aber auf dem Fußballplatz sollten 400mm reichen.
+
+---
+
+## Entscheidung FZ1000-ii
+
+### Erster Eindruck
+
+Der erste Eindruck nach einmaliger Nutzung ist sehr gut ... auf jeden Fall kein Fehlkauf.
+
+* positiv
+  * Größe ist sehr gut (paßt gut in die Tasche) ... wenn man den Brennweitenbereich berücksichtigt
+  * Zoom ist klasse und ausreichend für Fußballfotografie auf dem Großfeld
+    * von Seitenine zu Seitenline (quer über den Platz) kann man gute Bilder machen
+    * für Grundlinie zu Grundlinie wären 500-600mm passend
+    * mir reicht es aus
+  * viele Einstellungsmöglichkeiten ... klar, muß man sich erstmal zurechtfinden, aber durch die Fn-Tasten kann man sich die Kamera an die eigenen Bedürfnisse anpassen
+    * allerdings schien mir die Anordnung sehr sinnvoll und intuitiv
+  * Akku hat locker 400 Bilder durchgehalten - Kamera war ca. 3-4 Stunden in Gebrauch ... und ich habe auch noch viel im Menü nachgeschaut
+    * Laden per Powerbank hat ordentlich funktioniert
+  * Bilder können gleichzeitig in RAW- und JPG-Format aufgenommen werden
+  * Bildstabilisierung scheint gut zu funktionieren - selbst ohne Stativ konnte ich bei 400mm gute Bilder machen (allerdings bei optimalen Lichtverhältnissen)
+* negativ
+  * Haptik: ist halt Plastik, aber ok
+  * nach dem Auslösen hat man für ca. 1 Sekunde kein Sucherbild ... das war ich so von meiner Spiegelreflexkamera nicht gewohnt. Leider verliert man dadurch die Möglichkeit schnell mehrere Bilder hintereinander zu machen. Für diesen Use-Case kann man allerdings die 4k-Foto-Funktion verwenden. Vielleicht ist das auch eine eine Frage der Gewohnheit.
+  * beim Filmen hört man den Zoom-Motor ... aber das wußte ich vorher - für mich ist das i. a. kein Problem

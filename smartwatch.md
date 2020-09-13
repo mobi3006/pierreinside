@@ -1,6 +1,6 @@
 # Smartwatch
 
-Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die Anschaffung einer Smartwatch oder einer Laufuhr.
+Im Zuge der Leistungsdatenerfassung meiner Kinder beim Joggen überlege ich die Anschaffung einer Smartwatch oder einer Laufuhr. Test.
 
 ---
 
