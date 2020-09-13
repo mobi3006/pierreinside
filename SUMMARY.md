@@ -198,6 +198,7 @@
   * [Plant UML](plantuml.md)
   * [Chromium](chromium.md)
   * [iPad Pro](ipadPro.md)
+  * [Panasonic FZ1000 ii](panasonic-fz1000ii.md)
   * Handy
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
@@ -213,6 +214,7 @@
   * Spielekonsole
     * [2017](spielekonsole_2017.md)
       * [Playstation 4](playstation.md)
+    * [Pico Spielekonsole](pico.md)
   * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
   * [AV Receiver](avReceiver.md)
   * [Musik Streaming](musicStreaming.md)
