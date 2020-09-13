@@ -191,6 +191,7 @@
 * IT mit Kindern
   * [Projekt Sportstracker](projekt_sportstracker.md)
   * [Scratch](scratch.md)
+  * [Pico Spielekonsole](pico.md)
 * Misc
   * [Command Line Interface](cli.md)
   * [Google API](google-api.md)
