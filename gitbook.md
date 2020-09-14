@@ -81,7 +81,7 @@ Das ist schnell gemacht.
 
 * Anmeldung bei GitHub und GitBook
 * Repository bei GitHub anlegen
-* Buch bei GitBook anlegen und mit dem GitHub-Repository verbinden (so daß später mal das Buch automatisch gebaut wird, wenn ein Commit ins GitHub-Repository erfolgen kann) 
+* Buch bei GitBook anlegen und mit dem GitHub-Repository verbinden (so daß später mal das Buch automatisch gebaut wird, wenn ein Commit ins GitHub-Repository erfolgen kann)
 
 ### Installation
 
@@ -232,7 +232,7 @@ Hier möchte[^1] ich die Fußnote demonstrieren[^fadsg].
 
 * http://jinlaixu.net/books/gitbook-documentation/book/chapters.html
 
-Diese Datei ist das Inhaltsverzeichnis, das später auf in der linken Seite angezeigt wird.
+Diese Datei ist das Inhaltsverzeichnis, das später auf in der linken Seite angezeigt wird. Da ich nicht mehr den Gitbook-Editor, sondern einen einfachen Editor (VisualStudioCode) zum Editieren verwende, muß ich allerdings auch auf den Komfort verzichten, daß die `SUMMARY.md` gepflegt wird. Wenn ich also eine neue Markdown-Datei anlege, so fehlt diese grundsätzlich erstmal in `SUMMARY.md`. Ich habe mir ein Tool `scripts/missing-in-summary.sh` geschrieben, mit dem die fehlenden Seiten ausgegeben werden können, um sie dann manuell an der richtigen Stelle im Inhaltsverzeichnis zu platzieren.
 
 #### README.md
 
