@@ -14,8 +14,8 @@ Ursprünglich wollte ich meine Seiten nicht bei GitHub hosten, da ich aber mit H
 
 * sehr gute Toolchain, die eher schon ein Publishing-System ist ... darauf gehe ich noch detaillierter ein
 * kein/geringer Tool-Lock-in-Effekt ... später kann man sich vielleicht für einen anderen Deployment-Ansatz entscheiden ... den Markdown-Content wird man dann zumindest man nicht mehr anpassen müssen.
-* Git-Features: 
-  * verteiltes offline Arbeiten möglich 
+* Git-Features:
+  * verteiltes offline Arbeiten möglich
   * Versionskontrolle für Dokumentation ... diffs möglich
 * GitHub-Features: [siehe hier](github.md)
 * GitBook-Features:

@@ -189,9 +189,6 @@
 * Collaboration
   * [Übersicht](kollaboration.md)
   * [Microsoft Teams](microsoft_teams.md)
-* [Hausautomatisierung](homeAutomation.md)
-  * [Raspberry Pi](raspberrypi.md)
-  * [Heimnetzwerk](heimnetzwerk.md)
 * Konferenzen
   * [Velocity Berlin 2019](velocoty-berlin-2019.md)
 * IT mit Kindern
@@ -204,6 +201,7 @@
     * [Panasonic FZ1000 ii](panasonic-fz1000ii.md)
     * [AV Receiver](avReceiver.md)
     * [Videos schneiden](video-produktion.md)
+    * [Kameratasche](kameratasche.md)
   * Handy
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
@@ -237,6 +235,9 @@
     * [Quick Mill Orione 3000](quickMillOrione3000.md)
     * [Hebe-Schiebetür](hebeSchiebetuer.md)
     * [Gasgrill](gasgrill.md)
+    * [Hausautomatisierung](homeAutomation.md)
+      * [Raspberry Pi](raspberrypi.md)
+      * [Heimnetzwerk](heimnetzwerk.md)
   * Freizeit
     * [Musik Streaming](musicStreaming.md)
     * [Sky](sky.md)
@@ -246,6 +247,5 @@
     * [Meine Arbeit als Fußball-Trainer](fussball-trainer.md)
     * [Fußball Tools](fussball.md)
     * [DFB Talentförderung](dfb_talentförderung.md)
-  * Misc
-    * [Google Impact Challenge](googleImpactChallengeDeutschland.md)
+  * [Google Impact Challenge](googleImpactChallengeDeutschland.md)
 * [Englisch](englisch.md)
