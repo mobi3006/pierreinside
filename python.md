@@ -201,8 +201,56 @@ Sequences sind die Datentypen
 * Tupel: `('n', 'no', 'nop', 'nope')`
   * Elemente müssen nicht vom gleichen Datentyp sein: `((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))`
   * im Gegensatz zu `list` ist ein Tuppel immutable und hat i. a. unterschiedliche Datentypen - Tupel werden in anderen Use-Cases verwendet
+
+### Dictionary
+
 * Dictionary: `tel = {'jack': 4098, 'sape': 4139}`
   * `tel['pierre']=3006` => `{'jack': 4098, 'sape': 4139, 'pierre': 3006}`
+* Dictionaries sind Key-Value-Maps und werden mit geschweiften Klammern definiert:
+* ungeordnet
+* der Zugriff ist aber wie bei den Squenzen über eckige Klammern
+
+```python
+# Creation at initialization time
+dictAlt = { "one":"eins", "two":"zwei", "three":"drei" }
+print(dictAlt)
+
+# Creation after creation
+dict = {}
+dict["one"] = "eins"
+dict["two"] = "zwei"
+dict["three"] = "drei"
+dict["wasauchimmer] = ["pierre", "feldbusch", 1972]
+print(dict)
+
+del dict["wasauchimmer"]
+
+# dict.keys() erzeugt nur ein Iterable, aber keine list ... aber wird können es per cast transformieren
+for key in dict.keys():
+  print(key, ":", dict[key])
+
+for value in dict.values():
+  print(value)
+
+# hier wird eine List erstellt und ist damit ein Iterator
+for item in dict.item():
+  print(value)
+
+# dict implementiert einen Iterator ... wie list/tupel
+for key in dict:
+  print(key, ":", dict[key])
+
+if "two" in dict:
+  print("two ist drin")
+
+# wenn man auf einen Key per Indexing zugreift, der nicht existiert, gibt es einen Fehler
+# Wenn man also nicht genau weiß, ob der Key drin ist, dann sollte man es vorher
+# prüfen (um den Runtime-Error zu vermeiden) oder die get-Methode verwenden
+print(dict.get(value))              # liefert None
+print(dict.get(value, "default"))   # liefert default
+if value in dict:
+  print(dict[two])
+```
 
 ### Wichtige Funktionen
 
