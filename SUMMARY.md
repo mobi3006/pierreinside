@@ -78,6 +78,7 @@
     * [MySQL](mysql.md)
       * [MySQL Performance](mysql_performance.md)
       * [Docker MySQL](docker_mysql.md)
+    * [Hazelcast](hazelcast.md)
   * [Glassfish](glassfish.md)
   * [YAML](yaml.md)
   * [Angular](angular.md)
@@ -136,6 +137,7 @@
       * [windowsContainer](windowsContainer.md)
     * [Cloud Deployment Provider](cloudDeployment_provider.md)
       * [AWS](aws.md)
+        * [AWS RDS](aws_rds.md)
       * [Google Cloud Platform](gcp.md)
     * [Docker Orchestrierung](docker_orchestration.md)
       * [CoreOS](coreos.md)
@@ -152,12 +154,14 @@
     * [Graylog](graylog.md)
     * [Fluentd](fluentd.md)
   * [Monitoring](monitoring.md)
+    * [Grafana](grafana.md)
   * Infrastructure-as-Code
     * [Terraform](terraform.md)
     * [Packer](packer.md)
   * Deployment
     * [Vault](vault.md)
     * [Consul](consul.md)
+      * [Consul Template](consul-template.md)
     * [Fabio](fabio.md)
 * Rechtliches
   * [Software-Lizenzen](license.md)
@@ -166,6 +170,7 @@
   * [GitHub](github.md)
   * [GitHub Pages](githubPages.md)
   * [GitBook](gitbook.md)
+  * [GitLab](gitlab.md)
   * [Bitbucket/Stash](bitbucket.md)
 * Publishing
   * [WordPress](wordpress.md)
@@ -182,10 +187,8 @@
   * [Foto/Video Sammlung](fotoVideoSammlung.md)
     * [Handbrake](handbrake.md)
 * Collaboration
+  * [Übersicht](kollaboration.md)
   * [Microsoft Teams](microsoft_teams.md)
-* [Hausautomatisierung](homeAutomation.md)
-  * [Raspberry Pi](raspberrypi.md)
-  * [Heimnetzwerk](heimnetzwerk.md)
 * Konferenzen
   * [Velocity Berlin 2019](velocoty-berlin-2019.md)
 * IT mit Kindern
@@ -193,40 +196,56 @@
   * [Scratch](scratch.md)
   * [Pico Spielekonsole](pico.md)
 * Misc
-  * [Command Line Interface](cli.md)
-  * [Google API](google-api.md)
-  * [Plant UML](plantuml.md)
-  * [Chromium](chromium.md)
-  * [iPad Pro](ipadPro.md)
-  * [Panasonic FZ1000 ii](panasonic-fz1000ii.md)
+  * Foto/Video
+    * [Gopro](gopro.md)
+    * [Panasonic FZ1000 ii](panasonic-fz1000ii.md)
+    * [AV Receiver](avReceiver.md)
+    * [Videos schneiden](video-produktion.md)
+    * [Kameratasche](kameratasche.md)
   * Handy
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
     * [2019](handy_2019.md)
-  * Laptop
-    * [2018](laptop_2018.md)
-    * [Chromebook](chromebook.md)
-  * Monitor
-    * [4k](monitor_4k.md)
-  * Fahrrad
-    * [Jonas 2018](mountainbike_2018.md)
-    * [SQLab](sqlab.md)
+  * Computer
+    * Laptop
+      * [2018](laptop_2018.md)
+      * [Chromebook](chromebook.md)
+    * Monitor
+      * [4k](monitor_4k.md)
+    * Software
+      * [Command Line Interface](cli.md)
+      * [Google API](google-api.md)
+      * [Plant UML](plantuml.md)
+      * [Chromium](chromium.md)
+    * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
   * Spielekonsole
     * [2017](spielekonsole_2017.md)
       * [Playstation 4](playstation.md)
     * [Pico Spielekonsole](pico.md)
-  * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
-  * [AV Receiver](avReceiver.md)
-  * [Musik Streaming](musicStreaming.md)
-  * [Sky](sky.md)
-  * [Hebe-Schiebetür](hebeSchiebetuer.md)
-  * [Swimming Pool](swimmingPool.md)
-  * [DFB Talentförderung](dfb_talentförderung.md)
+  * Gadgets
+    * [iPad Pro](ipadPro.md)
+    * [Smartwatch](smartwatch.md)
+    * [Slate](slate.md)
+  * Fahrrad
+    * [Jonas 2018](mountainbike_2018.md)
+    * [SQLab](sqlab.md)
+  * Haus
+    * [Klimaanlage](klimaanlage.md)
+    * [Swimming Pool](swimmingPool.md)
+    * [Quick Mill Orione 3000](quickMillOrione3000.md)
+    * [Hebe-Schiebetür](hebeSchiebetuer.md)
+    * [Gasgrill](gasgrill.md)
+    * [Hausautomatisierung](homeAutomation.md)
+      * [Raspberry Pi](raspberrypi.md)
+      * [Heimnetzwerk](heimnetzwerk.md)
+  * Freizeit
+    * [Musik Streaming](musicStreaming.md)
+    * [Sky](sky.md)
+    * [Camper](camper.md)
+    * [Online Lernplattformen](online-lern-plattformen.md)
+  * Fußball
+    * [Meine Arbeit als Fußball-Trainer](fussball-trainer.md)
+    * [Fußball Tools](fussball.md)
+    * [DFB Talentförderung](dfb_talentförderung.md)
   * [Google Impact Challenge](googleImpactChallengeDeutschland.md)
-  * [Camper](camper.md)
-  * [Quick Mill Orione 3000](quickMillOrione3000.md)
-  * [Gasgrill](gasgrill.md)
-  * [Fußball Tools](fussball.md)
-  * [Online Lernplattformen](online-lern-plattformen.md)
-  * [Slate](slate.md)
 * [Englisch](englisch.md)
