@@ -141,7 +141,12 @@ Der erste Eindruck nach einmaliger Nutzung ist sehr gut ... auf jeden Fall kein 
     * Laden per Powerbank hat ordentlich funktioniert
   * Bilder können gleichzeitig in RAW- und JPG-Format aufgenommen werden
   * Bildstabilisierung scheint gut zu funktionieren - selbst ohne Stativ konnte ich bei 400mm gute Bilder machen (allerdings bei optimalen Lichtverhältnissen)
+* neutral
+  * nach dem Auslösen hat man für ca. 1 Sekunde kein Sucherbild ... das nervte mich vollends, weil ich dann beim Fußball wichtige Anschlußszenen verpaßte. Nachdem ich mir das Menu mal genauer angesehen habe, war das eine Voreinstellung des Previews - abgestellt :-)
 * negativ
   * Haptik: ist halt Plastik, aber ok
-  * nach dem Auslösen hat man für ca. 1 Sekunde kein Sucherbild ... das war ich so von meiner Spiegelreflexkamera nicht gewohnt. Leider verliert man dadurch die Möglichkeit schnell mehrere Bilder hintereinander zu machen. Für diesen Use-Case kann man allerdings die 4k-Foto-Funktion verwenden. Vielleicht ist das auch eine eine Frage der Gewohnheit.
-  * beim Filmen hört man den Zoom-Motor ... aber das wußte ich vorher - für mich ist das i. a. kein Problem
+  * man hört ständiges Brummen im Gerät (vielleicht der Motor vom Bildstabilisator) und beim Filmen hört man den Zoom-Motor ... aber das wußte ich vorher - für mich ist das i. a. kein Problem
+
+### Verbindung zu Handy
+
+Einer der Gründe warum ich meine Spiegelreflexkamera nicht mehr verwendet habe bestand darin, daß ich die Bilder nicht mal eben verschicken konnte. Die Lumix hat - im Jahr 2020 natürlich - eine Kopplungsmöglichkeit per Wifi/Bluetooth. Auf diese Weise kann man einzelne Fotos/Videos austauschen (sehr zufrieden) oder aber die Speicherung der Bilder komplett auf das Handy verlagern. Letztere Variante hat mich nicht überzeugt - erstens manchmal war die Queue voll und es dauerte ewig bis die nächsten Bilder kamen und zweitens mußte ich ständig irgendwelche Rückfragen auf dem Touchscreen betätigen.
