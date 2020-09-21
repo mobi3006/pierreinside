@@ -82,6 +82,31 @@ and execute the command "Run Selection/Line in Python Terminal" :-)
   * `"Pierre".split("e")`
   * `"".join(["P", "i", "e", "r", "r". "e"])`
 
+### Variablen
+
+Global-Namespace vs. Local-Namespace:
+
+```python
+def anyFunction(x):
+  m = 8
+  z = m + 6
+  w = y + 1
+  y = x * x + k
+  return y
+
+y = 5
+k = 3
+m = 1
+```
+
+In diesem Fall ist `y` im globalen Namespace definiert - innerhalb der Funktion `anyFunction` wird `y` allerdings als lokale Variable behandelt, weil sie eine Zuweisung (`y = x * x + k`) erhält. Im lokalen Kontext hat die Variable aber keinen Wert und es wird zu einem Fehler kommen.
+
+Im Gegensatz dazu hat die globale Variable `k` in `anyFuntion` keine Zuweisung, sodaß innerhalb `anyFuntion` der globale Wert `k = 3` verwendet wird.
+
+`m` hingegen ist sowohl im globalen Namensraum als auch im lokalen Namensraum von `anyFuntion`. Der lokale Namensraum hat höhere Priorität.
+
+> Absurd ist in PYthon, daß man `global m` definieren könnte und dann würde innerhalb `anyFuntion` der Wert aus dem globalen Namensraum verwendet. Wer ist das denn für ein Quatsch???
+
 ### Einrückung
 
 Einrückungen sind bei Python wichtig. Bei Kontrollstrukturen ist das gleich offensichtlich. Bei folgendem Code nicht sofort ... dieser Code ist syntaktisch falsch wegen der Einrückung:
@@ -129,7 +154,21 @@ def store(**kvargs):
 store(name="Pierre", age=27)
 ```
 
-### Sequences
+Als eingefleischter Nutzer typisierter Sprachen finde ich es relativ schwierig eine Funktion aus dem Kontext heraus zu verstehen, weil ich bei der Funktion
+
+```python
+def best_key(x):
+  # irgendein komplexer code
+```
+
+gar nicht weiß, welchen Datentyp `x` repräsentiert. Der Code innerhalb der Funktion funktioniert aber nur basierend auf einem nicht sichtbaren Kontrakt. Ich muß also den Code der Funktion erstmal halbwegs verstehen, um dann daraus den erwarteten Input-Typ abzulesen.
+
+Das finde ich sehr gewöhnungsbedürftig ... aber konsistent, wenn man berücksichtigt, daß Variablen keinen Typ haben, nur die Werte. Was ich aus dem Code häufig noch schwieriger rauslesen kann ist, ob es sich um eine Liste (mutable) oder ein Tupel (immutable) handelt. Das ist auch für den Entwickler schwierig, der die Methode `best_key` refactoren will und eigentlich nicht weiß, ob dort immer Listen oder manchmal auch Tupel reinwandern ... das bestimmt nämlich der Aufrufer??? 
+
+> Sollte man das dann in die Dokumentation schreiben oder die Variable `x` in `personenDictionary` umbenennen?
+
+### Sequenc
+es
 
 Sequences sind die Datentypen
 
@@ -233,7 +272,7 @@ for value in dict.values():
   print(value)
 
 # hier wird eine List erstellt und ist damit ein Iterator
-for item in dict.item():
+for item in dict.items():
   print(value)
 
 # dict implementiert einen Iterator ... wie list/tupel
@@ -246,10 +285,17 @@ if "two" in dict:
 # wenn man auf einen Key per Indexing zugreift, der nicht existiert, gibt es einen Fehler
 # Wenn man also nicht genau weiß, ob der Key drin ist, dann sollte man es vorher
 # prüfen (um den Runtime-Error zu vermeiden) oder die get-Methode verwenden
-print(dict.get(value))              # liefert None
+value = dict.get("Pierre")          # liefert None
+if value is None:
+  print("nicht gefunden")
+else:
+  print(value)
 print(dict.get(value, "default"))   # liefert default
 if value in dict:
   print(dict[two])
+
+feldbusch = { "Pierre" : 48, "Pierre": 76 }
+print(feldbusch["Pierre"])        # liefert 76
 ```
 
 ### Wichtige Funktionen
