@@ -2,6 +2,8 @@
 
 Da ich mit meinen Kindern immer viel auf den Sportplätzen der näheren und weiteren Region, versuche ich die Wartezeit sinnvoll zu nutzen.
 
+Ich liebe es, meine Erlebnisse, Gedanken und Wissen in Form eines Blogs in Markdown festzuhalten oder auch mal einen Instagram Post zu verfassen oder mit Freunden zu chatten. All das auf später aufzuschieben, wenn ich wieder am Rechner sitze funktioniert nicht. Da würde die Liste immer länger.
+
 Mein iPad ist klein genug, um IMMER dabei zu sein und der Akku hält auch deutlich länger als bei meinem Laptop. Sollte der Akku doch mal zur Neige gehen, die Powerbank mit 3 Anschlüssen ist jederzeit bereit.
 
 ---
@@ -26,7 +28,9 @@ Mein nächstes iPad wird vermutlich mit SIM-Karte sein ... always-on ist die Dev
 
 ## Tastatur
 
-Ich liebe es, meine Erlebnisse, Gedanken und Wissen in Form eines Blogs in Markdown festzuhalten oder auch mal einen Instagram Post zu verfassen. Mit der virtuallen Tastatur des iPads ist das eher Krampf als Freude. Deshalb habe ich mir eine kleine Bluetooth Tastatur zugelegt, mit der das deutlich angenehmer ist. Sollte sich das bewähren, kann ich auch mal über eine ins Cover integrierte Tasatur nachdenken, bei der ich dann vielleicht nicht mal einen Tisch benötige, sondern die Tastatur auch mal auf die Beine stellen.
+Lesen, Musik, Videos, ... alles grandios auf dem iPad. Aber schnelles komfortables Schreiben ist mit der virtuellen Tastatur nicht möglich. Für ein paar Zeilen ist es ok, aber nicht für mehr.
+
+Deshalb habe ich mir eine kleine Bluetooth Tastatur zugelegt, mit der das deutlich angenehmer ist. Sollte sich das iPad für diesen Einsatzzweck bewähren, kann ich auch mal über eine ins Cover integrierte Tasatur nachdenken, bei der ich dann vielleicht nicht mal einen Tisch benötige, sondern die Tastatur auch mal auf die Beine stellen.
 
 ---
 
@@ -70,11 +74,48 @@ Ich habe eine Coursera-Flatrate und das ist sehr praktisch. Die Videos lassen si
 
 Leider sind die integrierten IDE's (auch wenn es Webapplikationen sind) häufig nicht nutzbar auf dem iPad ... schade, vielleicht verbessert sich das noch.
 
+### Nachhaltigkeit
+
+Wenn ich lerne, dann gehören Notizen für mich einfach dazu. Ich sammel meine Notizen zumeist in Markdown, angereichert mit Skizzen handschriftlich (Apple Pencil ist genial) oder elektronische (DrawExpress ist mein Favorit).
+
+Aus diesem Grund ist ein guter Git–Client und Markdown Editor absolut erforderlich.
+
 ---
 
-## Use-Case Softwareentwicklung
+## Git–Client
+
+Working Copy ist ein toller Git–Client, der auch die Editerung von Textfiles (Markdown) und hinzufügen von Dateien (Screenshots) unterstützt.
+
+Er liefert zwar kein Markdown Preview, aber darauf kann ich unterwegs eh verzichten. Ausserdem erhalte ich nach einem Push ja sowieso eine schön gerenderte Seite auf Github. Der Markdown View ist also Online möglich.
+
+---
+
+## Markdown
+
+Ich benötige keinen speziellen Markdown Editor, da ich Markdown Syntax lesen und schreiben kann.
+
+---
+
+## Python IDE
 
 Früher habe ich hauptsächlich Java verwendet ... das wäre auf dem iPad vielleicht nicht so gut gegangen, weil es relativ viele Ressourcen benötigt.
+
+Ein grundsätzliches Problem:
+
+	> "Due to its closed nature, iOS data exchange between apps is still somewhat cumbersome, but gladly, Anders knows all the tricks of the trade: Working Copy registers itself as iOS Document Provider, has a built-in WebDAV server, and offers a pretty extensive URL schema. Yes, you can really integrate your Git work flow with iOS editors like Coda or Textastic. Sadly, there’s no such integration yet with Pythonista, but you can get really far with just using Working Copy’s URL scheme."
+	
+Scheinbar kann man die mit App A geclonten Repos nicht in eine andere App B integrieren, da die Apps getrennt sind und nicht wie bei einem typischen Desktop Betriebssystem über ein geteiltes Dateisystem verfügen. Sicherheitstechnisch eine gute Idee, aber wie so oft bleibt dann der Komfort auf der Strecke und verhindert eine sinnvolle Nutzung. Denn die möglichen Lösungen hören sich nach Frickelei an:
+
+* [Lösungsmöglichkeiten](http://codenugget.co/2016/11/20/working-with-git-from-ios.html)
+
+Vielleicht ist es dann besser, auf lokales Entwickeln zu verzichten und den Code online in der Cloud zu schreiben?
+
+* Option 1: Cloud–Server
+* Option 2: Online IDE
+
+---
+
+## Python IDE auf iPad
 
 ### Visual Studio Code
 
@@ -82,7 +123,7 @@ Auf dem Laptop ist Visual Studio Code meine präferierte Entwicklungsumgebung f�
 
 Allerdings bietet Coder (https://github.com/cdr/code-server) eine Möglichkeit VisualStudioCode auf einer Cloud-Umgebung zu hosten und dann im Browser zu nutzen. Naja, brauch ich nicht unbedingt ... aber auf jeden Fall eine Option.
 
-### IDE Pythonista
+### Pythonista
 
 Zur Zeit ich mehr Python und das läßt sich ganz gut per Pythonista verwenden. Darin sind schon einige Libraries integriert.
 
@@ -91,17 +132,9 @@ ein paar Verbesserungswünsche
 * Markdown-Preview-Ansicht
 * Git Integration ... wie soll man seinen Code sonst mit anderen Devices sharen?
 
-### Git Integration
+---
 
-Working Copy ist ein toller Git Client, doch scheinbar kann man die geclonten Repos nicht in andere Apps integrieren, da die Apps scheinbar in einer Sandbox laufen.
-
-Ein Grund mehr für einen schlanken Cloud–Server, auf dem man dann die Git Repos cloned ... genutzt per ssh client. Doch wie editiert man den Code dann in einer IDE seiner Wahl? 
-
-* [Lösungsmöglichkeiten](http://codenugget.co/2016/11/20/working-with-git-from-ios.html)
-
-	> "Due to its closed nature, iOS data exchange between apps is still somewhat cumbersome, but gladly, Anders knows all the tricks of the trade: Working Copy registers itself as iOS Document Provider, has a built-in WebDAV server, and offers a pretty extensive URL schema. Yes, you can really integrate your Git work flow with iOS editors like Coda or Textastic. Sadly, there’s no such integration yet with Pythonista, but you can get really far with just using Working Copy’s URL scheme."
-
-* per Web–IDE?
+## Python IDE auf self–hosted Cloudserver
 
 ### Cloudserver
 
@@ -112,6 +145,25 @@ Natürlich ist das iPad hinsichtlich Betriebssystem und Ressourcen eingeschränk
 Ein kleiner Server kostet gerade mal 5 Euro im Monat.
 
 ### ssh
+
+---
+
+## Python Online–IDE
+
+### Gitpod
+
+* sieht vielversprechend aus
+* auf Basis von Visual Studio Code
+
+### Github Codespaces mit Visual Studio Code
+
+* von Microsoft gepusht
+
+### PythonAnywhere
+
+---
+
+## PWeitere Werkzeuge
 
 ### Drawexpress
 
