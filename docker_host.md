@@ -1,4 +1,4 @@
-# Docker Host chamged
+# Docker Host
 
 Dieses Kapital betrachtet eher die Docker Internas.
 
