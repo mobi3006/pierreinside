@@ -24,9 +24,13 @@ Derzeit bin ich bei Telefonica ... leider ist die Netzabdeckung nicht immer so b
 
 Mein nächstes iPad wird vermutlich mit SIM-Karte sein ... always-on ist die Devise 2020 ... das war bei meinem ersten iPad Pro vor 5 Jahren noch nicht so.
 
+Über den OpenVPN Client kann ich aber schön sehen wieviele Daten transportiert wurden und so die notwendige Bandbreite und Datenmenge besser abschätzen. Für den nächsten Mobil-Telefonvertrag ist das sicher hilfreich.
+
 ### Öffentliche Hotspots
 
-... sind natürlich auch immer eine Option ... vielleicht sollte man hier aber auch über eine zusätziche Absicherung per VPN nachdenken. Allerdings verwenden Business-Anwendungen vermutlich in sich verschlüsselte Verbindungen (HTTPS), so daß man hier auf der sicheren Seite sein sollte.
+... sind natürlich auch immer eine Option ... 
+
+Eine Absicherung über VPN kann ich einschalten. Allerdings verwenden Business-Anwendungen vermutlich in sich verschlüsselte Verbindungen (HTTPS), so daß man hier auf der sicheren Seite sein sollte.
 
 Semi-professionellen oder gar privaten Apps würde ich hier allerdings nicht vertrauen ... hier stehen die Features eher im Vordergrund und die Sicherheit wird nachrangig behandelt.
 
@@ -38,6 +42,12 @@ Lesen, Musik, Videos, ... alles grandios auf dem iPad. Aber schnelles komfortabl
 
 Deshalb habe ich mir eine kleine Bluetooth Tastatur zugelegt, mit der das deutlich angenehmer ist. Sollte sich das iPad für diesen Einsatzzweck bewähren, kann ich auch mal über eine ins Cover integrierte Tasatur nachdenken, bei der ich dann vielleicht nicht mal einen Tisch benötige, sondern die Tastatur auch mal auf die Beine stellen.
 
+> Die Kopplung der Tastatur könnte nahtloser sein - eine iPad spezifische Tastatur könnte das Problem beseitigen. Ansonsten ist das Schreibgefühl auf der Non-Name Tastatur von CSL aber exzellent. Schnick-Schnacks wie Backlight fehlen hier allerdings.
+
+Ich versuche grundsätzlich weitestgehend auf eine Maus zu verzichten und stattdesen Shortcuts zu verwenden. Das ist insbes. bei Apps nicht immer möglich, weil die Unterstützung fehlt - außerdem kenne ich die Shortcuts auch nur bei Anwendungen, die ich täglich nutze. Deshalb versuche ich die Anzahl der Apps/Anwendungen klein zu halten und präferiere Tools, die es auf allen von mir genutzten Plattformen (Linux, Windows, iOS, Android) gibt.
+
+Durch das Touch-Displays am iPad hat man aber keine Notwendigkeit für eine Maus. Außerdem würde die auch zuviel Platz wegnehmen und einen Tisch erfordern ... und genau darauf möchte ich verzichten.
+ 
 ---
 
 ## Kopfhörer
@@ -56,9 +66,9 @@ Kabel benötige ich eigentlich nur für die Stromversorgung der Geräteakkus - i
 
 ## Use-Case Office
 
-Mein iPad verfügt über Office 365, mit dem ich die üblichen Office-Tools (Word, Excel, Powerpoint) nutze, aber auch MS Team für Chat und Videotelefonie.
+Mein iPad verfügt über Office 365, mit dem ich die üblichen Office-Tools (Word, Excel, Powerpoint, eMail) nutze (wenn auch recht selten im Edit-Mode, da ich andere Tools bevorzuge), aber auch MS Team für Chat und Videotelefonie.
 
-WhatsApp wird per Web-UI im Browser verwendet.
+Für private Dinge wie WhatsApp und eMail verwende ich Web-UIs im Browser. Mir fehlt hier eigentlich nichts.
 
 ---
 
@@ -148,6 +158,14 @@ ein paar Verbesserungswünsche
 
 Natürlich ist das iPad hinsichtlich Betriebssystem und Ressourcen eingeschränkt und nicht alles ist damit machbar. Nicht jede Software ist hierfür verfügbar (z. B. Docker) ... muß es aber auch nicht - ich liebe es ja gerade, weil es so klein und leicht ist - brauche ich ein richtiges Betriebssystem, dann gehe ich per ssh und Webbrowser auf eine Cloud-Instanz (AWS, Digital-Ocean, ...), auf der ich dann auch meine Anwendungen starten und für die ganze Welt verfügbar machen kann.
 
+### Cloudserver - AWS
+
+AWS bietet mit der kostenlosen Free-Tier mit einer T2.micro EC2 Instanz eine tolle Möglichkeit, sich mit der Technologie vertraut zu machen. Kleinere Anwendungen wie Python-Servers oder auch Serverless Computing sind damit auf jeden Fall nutzbar.
+
+Über die Web-UI ist alles sehr komfortabel steuerbar, auch wenn ich im Business-Alltag die `aws-cli` bevorzuge, doch ein solcher Komfort bedarf auch entsprechender Unterstützung durch Apps, die meines Wissens derzeit nicht existiert.
+
+> Ein vollwertiger Ersatz meiner aktuellen entwicklungsumgebung ist damit vielleicht nicht möglich - evtl. muß ich meine Arbeitsweise aber auch leicht adaptieren oder muß mit einem akzeptablen Kompromiss leben. Ich gehe eh nicht davon aus, daß das mobile Büro meinen Arbeitsplatzrechner ersetzt, aber gut ergänzt.
+
 ### Cloudserver - DigitalOcean
 
 Ein kleiner Server kostet gerade mal 5 Euro im Monat.
@@ -169,7 +187,10 @@ Hiermit ist man natürlich komplett auf eine Internetverbindung angewiesen. Soll
 ### Gitpod
 
 * sieht vielversprechend aus
-* auf Basis von Visual Studio Code
+* auf Basis von
+  * Visual Studio Code
+  * Docker
+  * Kubernetes
 * auf meinem 11 Zoll iPad im Browser recht klein
 * ich schätze die Shortcuts funktionieren auch anders
 
