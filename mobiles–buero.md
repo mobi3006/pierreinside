@@ -24,6 +24,12 @@ Derzeit bin ich bei Telefonica ... leider ist die Netzabdeckung nicht immer so b
 
 Mein nächstes iPad wird vermutlich mit SIM-Karte sein ... always-on ist die Devise 2020 ... das war bei meinem ersten iPad Pro vor 5 Jahren noch nicht so.
 
+### Öffentliche Hotspots
+
+... sind natürlich auch immer eine Option ... vielleicht sollte man hier aber auch über eine zusätziche Absicherung per VPN nachdenken. Allerdings verwenden Business-Anwendungen vermutlich in sich verschlüsselte Verbindungen (HTTPS), so daß man hier auf der sicheren Seite sein sollte.
+
+Semi-professionellen oder gar privaten Apps würde ich hier allerdings nicht vertrauen ... hier stehen die Features eher im Vordergrund und die Sicherheit wird nachrangig behandelt.
+
 ---
 
 ## Tastatur
@@ -113,6 +119,8 @@ Vielleicht ist es dann besser, auf lokales Entwickeln zu verzichten und den Code
 * Option 1: Cloud–Server
 * Option 2: Online IDE
 
+Sollte eine Always–On Lösung (kein Internet, zuviel Bandbreite) müsste man auf Komfort verzichten und Code zwischen den App kopieren bzw. andere Frickeleien in Kauf nehmen. Aber erstmal suche ich natūrlich eine komfortable Lösung, die höchste Effizienz verspricht. Erst anschliessend nehme ich erforderliche Kompromisse in kauf.
+
 ---
 
 ## Python IDE auf iPad
@@ -144,16 +152,26 @@ Natürlich ist das iPad hinsichtlich Betriebssystem und Ressourcen eingeschränk
 
 Ein kleiner Server kostet gerade mal 5 Euro im Monat.
 
-### ssh
+### ssh–Client
+
+Die entwickelte Software muss ja auch irgendwo laufen, damit sie von Usern genutzt eerden kann ... ich schreibe meine Software ja nicht nur zum Selbstzweck.
+
+Hostet man einen Server selbst oder hat einen managed Host, so benötigt man doch gelegentlich Zugriff aufs Betriebssystem.
+
+Alternativ könnte man Platform–as–a–Service machen ... wie ich es schon mal mit Google App Engine verwendet habe oder [Serverless Computing](https://realpython.com/aws-chalice-serverless-python/).
 
 ---
 
 ## Python Online–IDE
 
+Hiermit ist man natürlich komplett auf eine Internetverbindung angewiesen. Sollte im Jahre 2020 selbst in Deutschland i. a. kein Problem sein.
+
 ### Gitpod
 
 * sieht vielversprechend aus
 * auf Basis von Visual Studio Code
+* auf meinem 11 Zoll iPad im Browser recht klein
+* ich schätze die Shortcuts funktionieren auch anders
 
 ### Github Codespaces mit Visual Studio Code
 
@@ -163,7 +181,7 @@ Ein kleiner Server kostet gerade mal 5 Euro im Monat.
 
 ---
 
-## PWeitere Werkzeuge
+## Weitere Werkzeuge
 
 ### Drawexpress
 
