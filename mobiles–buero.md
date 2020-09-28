@@ -1,4 +1,4 @@
-# iPad als mobiles Büro
+# ipad als mobiles Büro
 
 Da ich mit meinen Kindern immer viel auf den Sportplätzen der näheren und weiteren Region, versuche ich die Wartezeit sinnvoll zu nutzen.
 
