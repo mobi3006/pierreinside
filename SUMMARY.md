@@ -224,7 +224,7 @@
     * [Pico Spielekonsole](pico.md)
   * Gadgets
     * [iPad Pro](ipadPro.md)
-      * [Mobiles Büro](mobiles–buero.md)
+      * [iPad als mobiles Büro](mobiles–buero-ipad.md)
     * [Smartwatch](smartwatch.md)
     * [Slate](slate.md)
   * Fahrrad
