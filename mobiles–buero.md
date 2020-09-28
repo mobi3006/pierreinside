@@ -1,10 +1,10 @@
 # ipad als mobiles Büro
 
-Da ich mit meinen Kindern immer viel auf den Sportplätzen der näheren und weiteren Region, versuche ich die Wartezeit sinnvoll zu nutzen.
+Da ich mit meinen Kindern immer viel auf den Sportplätzen der näheren und weiteren Region unterwegs bin, versuche ich die Wartezeit zwischen den Wettkämpfen sinnvoll zu nutzen.
 
-Ich liebe es, meine Erlebnisse, Gedanken und Wissen in Form eines Blogs in Markdown festzuhalten oder auch mal einen Instagram Post zu verfassen oder mit Freunden zu chatten. All das auf später aufzuschieben, wenn ich wieder am Rechner sitze funktioniert nicht. Da würde die Liste immer länger.
+Ich liebe es, meine Erlebnisse, Gedanken und Wissen in Form eines Blogs in Markdown festzuhalten oder auch mal einen Instagram Post zu verfassen oder mich per Chat mit Freunden auszutauschen, die ich nicht eben mal besuchen kann. All das immer auf später aufzuschieben, wenn ich wieder am Rechner sitze funktioniert nicht. Da würde die Liste immer länger.
 
-Mein iPad ist klein genug, um IMMER dabei zu sein und der Akku hält auch deutlich länger als bei meinem Laptop. Sollte der Akku doch mal zur Neige gehen, die Powerbank mit 3 Anschlüssen ist jederzeit bereit.
+Mein iPad ist klein genug, um IMMER dabei zu sein und der Akku hält auch deutlich länger als bei meinem Laptop. Der ideale Begleiter auf meinen Reisen.
 
 ---
 
