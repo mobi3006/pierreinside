@@ -107,7 +107,7 @@ Ich halte Tablets mit GSM-Modul für Quatsch ... normalerweise hat man keine Zwe
 
 Mein Handy habe ich IMMER dabei ... dort brauche ich die Internetverbindung und die Telefonverbidung.
 
-Dem erhöhten Stromverbrauch fürs Handy werde ich gerecht mit einem externen Akku-Ladegerät. Da ich für das Tablet eh immer eine Tasche dabei habe (z. B. http://www.crumpler.eu), Anker 
+Dem erhöhten Stromverbrauch fürs Handy werde ich gerecht mit einem externen Akku-Ladegerät.
 
 Tethering funktioniert problemlos :-)
 
