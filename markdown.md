@@ -1,22 +1,26 @@
 # Markdown
+
 Markdown ist eine sehr einfache Beschreibungssprache von Dokumenten. Sie eignet sich besonders gut, um mit einem Standard-Editor wie vi (ohne WYSIWYG-Editor) komfortabel ansprechende professionelle Dokumentation zu schreiben. 
 
 Auf Plattformen wie GitHub gehört sie zum Standard.
 
 ---
 
-# Alternativen
+## Alternativen
+
 * [reStructuredText](https://de.wikipedia.org/wiki/ReStructuredText)
 
 ---
 
-# Syntax
+## Syntax
+
 * http://jinlaixu.net/books/gitbook-documentation/book/markdown.html
 * https://help.github.com/articles/basic-writing-and-formatting-syntax/
 * https://daringfireball.net/projects/markdown/syntax
 * GitHub/GitBook:  http://toolchain.gitbook.com/syntax/markdown.html
 
-## YouTube-Videos einbetten
+### YouTube-Videos einbetten
+
 Am besten verwendet man pure-HTML ... das ist mächtiger (z. B. Größe) als die Markdown-Anweisung. 
 
 Folgender Code
@@ -42,7 +46,8 @@ sieht dann so aus:
 
 I like :-)
 
-## Emojis
+### Emojis
+
 * Emoji-Liste: http://www.emoji-cheat-sheet.com/
 
 Folgendes funktioniert nicht:
@@ -53,10 +58,12 @@ Folgendes funktioniert nicht:
 
 ---
 
-# Nicht-Standardisierte Erweiterungen
+## Nicht-Standardisierte Erweiterungen
+
 Der GitHub-Renderer unterstützt GitHub-spezifische Erweiterungen, die dann allerdings bei anderen Renderern zu Problemen führen können bzw. ignoriert werden.
 
-## GitHub: Syntax-Highlightning
+### GitHub: Syntax-Highlightning
+
 Code-Blöcke kann man auf zwei Arten formatieren:
 
 * Einrückungen mit mehr als 4 Spaces
@@ -79,6 +86,7 @@ Folgende Sprachen werden unterstützt:
 
 ---
 
-# Präsentationen
+## Präsentationen
+
 * RemarkJS: http://remarkjs.com/#1
 * Slidify: http://slidify.org/

@@ -188,8 +188,6 @@
 * Storage
   * [Synology 2012](synology-2012.md)
   * [Synology 2020](synology-2020.md)
-  * [Foto/Video Sammlung](fotoVideoSammlung.md)
-    * [Handbrake](handbrake.md)
 * Collaboration
   * [Übersicht](kollaboration.md)
   * [Microsoft Teams](microsoft_teams.md)
@@ -201,6 +199,8 @@
   * [Pico Spielekonsole](pico.md)
 * Misc
   * Foto/Video
+    * [Foto/Video Sammlung](fotoVideoSammlung.md)
+      * [Handbrake](handbrake.md)
     * [Gopro](gopro.md)
     * [Panasonic FZ1000 ii](panasonic-fz1000ii.md)
     * [AV Receiver](avReceiver.md)
@@ -228,6 +228,7 @@
     * [Pico Spielekonsole](pico.md)
   * Gadgets
     * [iPad Pro](ipadPro.md)
+      * [iPad als mobiles Büro](mobiles–buero-ipad.md)
     * [Smartwatch](smartwatch.md)
     * [Slate](slate.md)
   * Fahrrad

@@ -76,9 +76,14 @@ and execute the command "Run Selection/Line in Python Terminal" :-)
 
 ## Sprache
 
+Man sollte sich an die typischen Idiome/Patterns halten und auch den [Styleguide](https://google.github.io/styleguide/pyguide.html) berücksichtigen. Bestenfalls unterstützt die IDE hierbei und gibt Warnungen aus, wenn sie nicht eingehalten werden (Stickwort Linting).
+
+### Besonderheiten
+
 * Variables don’t have types in Python; values do. That means that it is acceptable in Python to have a variable name refer to an integer and later have the same variable name refer to a string.
-* Python hat Built-In wie `type`, `len`, `input`, `range` ... diese können ohne `import` genutzt werden
-* Datentypen wie `int`, `string`, Listen, Tupel haben eingebaute funktionen, die man nutzen kann ... (`print("Pierre".count("r"))`
+* Python unterstützt viele Programmier-Paradigmen ... prozedural, objektorientiert, funktional. Für mich als Java-Entwickler war die Mischung am Anfang etwas befremdlich, d. h. man schreibt sein Hauptprogramm `main.py` und darin sind dann prozedurale Element (Initialisierung), aber auch schon gleich erste Klassen. Eine Mixtur aus Klassen und Initialisierung globaler Variablen. Geht sicher auch anders oder ist das ein gängiges Idiom? Vielleicht habe ich nur keinen Çlean-Code gesehen ...
+* Python hat Built-In-Funktionen wie `type`, `len`, `input`, `range` ... diese können ohne `import` genutzt werden
+* Datentypen wie `int`, `string`, Listen, Tupel haben eingebaute Funktionen, die man nutzen kann ... (`print("Pierre".count("r"))`
   * `"Pierre".split("e")`
   * `"".join(["P", "i", "e", "r", "r". "e"])`
 
@@ -132,9 +137,281 @@ print(fruit)
 
 Man kann den Type eines Wertes per "Casting" verändern `int5 = int("5")`.
 
+### Sequences
+
+Sequences sind die Datentypen
+
+* String (immutable)
+* List (mutable) ... mit eckigen Klammern definiert
+  * ändern `names[1] = "Pierre"`n
+  * einfügen `names[1:1] = ["Jonas", "Robin"]`
+  * anhängen `names += ["Jonas", "Robin"]`
+  * löschen
+    * `names[1:3] = []`
+    * `del names[1:3]`
+  * clone by Slice-Operator: `namesClone = names[:]`
+  * der Operator `+=` hat ein spezielles Handling bei (mutable) List: "obj = obj + object_two is different than obj += object_two ... The first version makes a new object entirely and reassigns to obj. The second version changes the original object so that the contents of object_two are added to the end of the first."
+    * Empfehlung: den `+=` Operatior nicht bei Listen - oder besser - gar nicht verwenden
+* Tuple (immutable) ... mit runden Klammern definiert
+  * die runden Klammern können weggelassen werden ... die beiden folgenden Tupel sind semantisch gleich
+
+      ```python
+      tupelA = ( "Banane", "Apfel", "Pfirsich" )
+      tupelB = "Banane", "Apfel", "Pfirsich"
+      ```
+
+Besonderheiten von Sequenzen
+
+* bei immutable Datenstrukturen nimmt Python eine Speicheroptimierung vor und speichert den gleichen Wert nur ein einziges mal (Aliasing) - bei mutable Datentypen ist das nicht der Fall!!!
+* `list = ["hello", 2.0, 5, [10, 20]]` ist in Sprache wie Java nicht erlaubt, weil die Werte unterschiedlichen Typs sind ... in Python ist das erlaubt wegen der Regel "Variablen haben keinen Typ - Werte haben einen Typ"
+  * mit Listen funktionieren auch typische Operatoren wie `+` und `*`
+    * `blist = alist * 2`
+* `tupel = ("hello", 2.0, 5, [10,20])` ist ein Tupel ... sieht einer List `list = ["hello", 2.0, 5, [10,20]]` sehr ähnlich ist aber immutable
+* Sequenzen unterstützen Slicing ... List-Slices sind Listen, Tupel-Slices sind Tupel, String-Slices sind Strings:
+  * `name = Pierre; inBetween = name[1:len(name)-2]`
+* `map`
+* `set`: `myset={"Pierre", "Silke", "Jonas"}`
+  * mit comprehensions: `a = {x for x in 'abracadabra' if x not in 'abc'}`
+  * Operationen: `myset - { "Pierre" }` liefert `{"Silke", "Jonas"}`
+* Tupel: `('n', 'no', 'nop', 'nope')`
+  * Elemente müssen nicht vom gleichen Datentyp sein: `((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))`
+  * im Gegensatz zu `list` ist ein Tuppel immutable und hat i. a. unterschiedliche Datentypen - Tupel werden in anderen Use-Cases verwendet
+
+### Sequence - String
+
+Speicheroptimierung:
+
+```python
+fruitA = "Banane"
+fruitB = "Banane"
+print("expected True", fruitA is fruitB)
+print("expected True", fruitA == fruitB)
+```
+
+* mit String kann man "rechnen"
+
+    ```python
+    def multiply(s, mult_int):
+        return s * mult_int
+    print(multiply("Hello", 3))      # HelloHelloHello
+    ```
+
+* immutable Functions:
+  * `nameUpper = "Pierre".upper()`
+  * `nameLower = "Pierre".lower()`
+  * `stripped = "    Das ist ein Test      ".strip()`
+    * `strip` entfernt auch Zeilenumbrüche
+  * `replaced = "Das ist ein Test".replace("a", "b")`
+  * `print("Hallo {}, ich bin {} Jahre alt und ich habe {} Euro in der Brieftasche".format("Pierre", 13))`
+    * hier kann man den Wert noch formatieren (z B. `print("Hallo {}, ich bin {} Jahre alt und ich habe {:.2f} Euro in der Brieftasche".format("Pierre", 13, 100))`)
+    * noch schöner ist, wenn man den Platzhaltern Namen geben kann
+      * das vereinfacht Refactorings am String, weil die Reihenfolge der Variablenwerte keine Rolle spielt:
+        * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche".format(name="Pierre", alter=13, betrag=100))`
+      * wiederholte Strings müssen nicht als Werte wiederholt angegeben werden:
+        * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche. Bis bald, {name}".format(name="Pierre", alter=13, betrag=100))`
+
+### Sequence - List
+
+mit mutating Functions:
+
+* `list.append("banana")`
+  * im Gegansatz zu `list = list + ["banana"]`, das zwischenzeitlich eine neue Liste erzeugt, dann die `list`aber auf die neue Liste zeigen läßt. Im Endergebnis gleich, aber technisch anders
+* `list.count("banana")`
+* `list.insert(1, "banana")`
+* `list.index("banana")`
+* `list.remove("banana")`
+* `list.reverse()`
+* `list.sort()`
+  * mutating Method => funtioniert nicht auf Tupels
+  * alternativ (und auch funktionaler, da immutable) kann man die Built-In-Funktion `sorted(list)` verwenden, die dann auch auf immutable Sequences funktioniert
+* `list.sort(key=None, reverse=False)`
+* `list.pop()`
+  * auf diese Weise lassen sich mit `append` und `pop` Stacks implementieren
+* `list.popleft()`
+  * auf diese Weise lassen sich Queues mit `list.append()`/`list.popleft()` implementieren
+    * nicht performant - besser `queue` aus dem `collections`-Paket verwenden
+
+### Sequence - Tupel
+
+Speicheroptimierung:
+
+```python
+fruitsA = [ "Banane", "Apfel", "Pfirsich" ]
+fruitsB = [ "Banane", "Apfel", "Pfirsich" ]
+print("expected False (compare identical object)", fruitsA is fruitsB)
+print("expected True (compare content!!!)", fruitsA == fruitsB)
+print("expected False", id(fruitsA) == id(fruitsB))
+```
+
+Mit Tupel-Assignment läßt sich das Tauschen von Variablenwerten sehr elegant beschreiben:
+
+```python
+a = 3
+b = 5
+print(a, b)
+a, b = b, a
+print(a, b)
+```
+
+Auf Tupeln kann man per `sorted` sortieren (Breaking Ties Eigenschaft):
+
+```python
+list = [(3, 5), (1,4), (1, 3)]
+print(sorted(list)    # [(1, 3), (1, 4), (3, 5)]
+```
+
+Diese Eigenschaft kann man gut verwenden, um komlexe Sortierkriterien zu definieren:
+
+```python
+list = ["Anton", "Zorro", "Nathan", "12345", "Robin"]
+print(sorted(list, key=lambda name: (len(name), name))    # ["12345", "Anton", "Robin", "Zorro", "Nathan"]
+```
+
+### Dictionary
+
+* Dictionary (Key-Value-Maps) ... mit geschweiften Klammern:
+  * `tel = {'jack': 4098, 'sape': 4139}`
+  * `tel['pierre']=3006` => `{'jack': 4098, 'sape': 4139, 'pierre': 3006}`
+* ungeordnet
+* der Zugriff ist aber - wie bei den Squenzen - über eckige Klammern
+
+```python
+# Creation at initialization time
+dictAlt = { "one":"eins", "two":"zwei", "three":"drei" }
+print(dictAlt)
+
+# Creation after creation
+dict = {}
+dict["one"] = "eins"
+dict["two"] = "zwei"
+dict["three"] = "drei"
+dict["wasauchimmer] = ["pierre", "feldbusch", 1972]
+print(dict)
+
+del dict["wasauchimmer"]
+
+# dict.keys() erzeugt nur ein Iterable, aber keine list ... aber wird können es per cast transformieren
+for key in dict.keys():
+  print(key, ":", dict[key])
+
+for value in dict.values():
+  print(value)
+
+# hier wird eine List erstellt und ist damit ein Iterator
+for item in dict.items():
+  print("key: ", item[0], "value", item[1])
+# ... aber VIIIIEL eleganter <==== IDIOM
+for k, v in dict.items():
+  print("key: ", k, "value", v)
+
+# dict implementiert einen Iterator ... wie list/tupel
+for key in dict:
+  print(key, ":", dict[key])
+
+if "two" in dict:
+  print("two ist drin")
+
+# wenn man auf einen Key per Indexing zugreift, der nicht existiert, gibt es einen Fehler
+# Wenn man also nicht genau weiß, ob der Key drin ist, dann sollte man es vorher
+# prüfen (um den Runtime-Error zu vermeiden) oder die get-Methode verwenden
+value = dict.get("Pierre")          # liefert None
+if value is None:
+  print("nicht gefunden")
+else:
+  print(value)
+print(dict.get(value, "default"))   # liefert default
+if value in dict:
+  print(dict[two])
+
+feldbusch = { "Pierre" : 48, "Pierre": 76 }
+print(feldbusch["Pierre"])        # liefert 76
+
+# dictionary sortieren nach values
+dict = { "Pierre" : 48, "a": 76, "b": 14, "c": 100 }
+for k in sorted(dict.keys(), key=lambda k: dict[k]):
+  print(k, dict[k])
+# ... oder noch kürzer ... das sieht doch schon fast wie eine DSL aus :-)
+for k in sorted(dict, key=lambda k: dict[k]):
+  print(k, dict[k])
+```
+
 ### Funktionen
 
-* Funktionen liefern IMMER einen Returnwert ... wenn nicht explizit mit `return bla`, dann ist der Returnwert immer `None`
+* in Python verwendet man für Funktionsnamen (und Variablennamen) Snake-Case (`get_value()`) anstatt Camel-Case (`getValue()`)
+* Funktionen liefern IMMER genau EINEN Returnwert ... wenn nicht explizit mit `return bla`, dann ist der Returnwert immer `None` und kann dann beispielsweise per `if myFunc() == None:` abgefragt werden
+  * ein Idiom in Python ist die Verwendung von Tupels als Rückgabewert - damit lassen sich sehr schön mehrere Rückgabewerte definieren und die Formulierung sieht dabei sehr elegant aus (ganz ähnlich wie in [Golang](go.md)):
+
+    ```python
+    def getSchwerpunkt(whatever):
+      # Berechnung
+      return x, y
+    xAxis, yAxis= getSchwerpunkt(quadrat)
+    ```
+
+* Parameter können auch über Tupel übergeben werden ... allerdings mit einer sehr speziellen Star-Notation:
+
+    ```python
+    def setMittelpunkt(x, y):
+        print("(x, y) = (", x, ",", y, ")")
+
+    x = 3
+    y = 5
+
+    setMittelpunkt(x, y)
+
+    mittelpunkt = x, y
+    setMittelpunkt(mittelpunkt[0], mittelpunkt[1])
+
+    setMittelpunkt(*mittelpunkt)
+    ```
+
+* Parameter können Default-Werte haben und sind dann optional ... aber ACHTUNG bei mutable Parameters (z. B. Lists), denn der Default-Wert bleibt erhalten!!!
+  * mandatory Parameter müssen zuerst aufgeführt werden
+
+    ```python
+    def doit(value, list=[]):
+      list.append(value)
+      return list
+    print(doit(1))              # [1]
+    print(doit(2))              # [1, 2]
+    print(doit(3))              # [1, 2, 3]
+    print(doit(4), ["Pierre"])  # [Pierre, 4]
+    ```
+
+  * der Default-Wert wird zum Zeitpunkt der Funktionsdefinition festgelegt - nicht zum Zeitpunkt der Asuführung:
+
+      ```python
+      initial = 3
+      def doit(value=initial):
+        return value
+      initial = 7
+      print(doit())              # 3
+      ```
+
+    > man kann hier eine Menge Schindluder betreiben ... das sollte man vermeiden - CleanCode!!! man schreibt den Code für den Leser (Code wird 10x häufiger gelesen als geschrieben) ... irgendwelche Spitzfindigkeiten sollte man vermeiden
+
+* Keyword-Parameter machen den Code sehr lesbar und sind in Kombination mit optionalen Parametern häufig absolut notwendig
+
+    ```python
+    def doit(x, y=2, z=3):
+      return x * y + z
+    print(doit(1))
+    print(doit(1, z=5))         # ausgelassener Parameter "y" 
+    print(doit(1, z=5, y=7))    # Reihenfolge y, z geändert
+    print(doit(z=5, y=7, x=1))  # Reihenfolge x, y, z geändert
+    ```
+
+* Dokumentation einer Funktion sollte man mit einen sog. "docstring" machen, denn es gibt Tools, die daraus eine Dokumentation erzeugen
+
+  ```python
+  def hello():
+    """Gibt "Hallo" aus"""
+    print("Hallo")
+  hello()
+  ```
+
+  * übrigens: die Dokumentation ist zur Laufzeit per `print(hello.__doc__)` lesbar
+    * beachte: Funktionen sind ganz normale Objekte `print(type(hello))` liefert `<class 'function'>`
 * Funktionsparameter können Defaultwerte haben und sind dann optional: `def ask_ok(prompt, retries=4)`
 * mit `*args` gibt es eine spezielle Variante von Übergabeparameter: Argumentliste
 
@@ -167,149 +444,101 @@ Das finde ich sehr gewöhnungsbedürftig ... aber konsistent, wenn man berücksi
 
 > Sollte man das dann in die Dokumentation schreiben oder die Variable `x` in `personenDictionary` umbenennen?
 
-### Sequenc
-es
-
-Sequences sind die Datentypen
-
-* String (immutable)
-* List (mutable)
-  * ändern `names[1] = "Pierre"`n
-  * einfügen `names[1:1] = ["Jonas", "Robin"]`
-  * anhängen `names += ["Jonas", "Robin"]`
-  * löschen
-    * `names[1:3] = []`
-    * `del names[1:3]`
-  * clone by Slice-Operator: `namesClone = names[:]`
-  * der Operator `+=` hat ein spezielles Handling bei (mutable) List: "obj = obj + object_two is different than obj += object_two ... The first version makes a new object entirely and reassigns to obj. The second version changes the original object so that the contents of object_two are added to the end of the first."
-    * Empfehlung: den `+=` Operatior nicht bei Listen - oder besser - gar nicht verwenden
-* Tuple (immutable)
-
-* bei immutable Datenstrukturen nimmt Python eine Speicheroptimierung vor und speichert den gleichen Wert nur ein einziges mal (Aliasing)
-
-    ```python
-    fruitA = "Banane"
-    fruitB = "Banane"
-    print("expected True", fruitA is fruitB)
-    print("expected True", fruitA == fruitB)
-    ```
-
-  * bei muatble Datentypen ist das nicht der Fall!!!
-
-    ```python
-    fruitsA = [ "Banane", "Apfel", "Pfirsich" ]
-    fruitsB = [ "Banane", "Apfel", "Pfirsich" ]
-    print("expected False (compare identical object)", fruitsA is fruitsB)
-    print("expected True (compare content!!!)", fruitsA == fruitsB)
-    print("expected False", id(fruitsA) == id(fruitsB))
-    ```
-
-* `list = ["hello", 2.0, 5, [10, 20]]` ist in Sprache wie Java nicht erlaubt, weil die Werte unterschiedlichen Typs sind ... in Python ist das erlaubt wegen der Regel "Variablen haben keinen Typ - Werte haben einen Typ"
-  * mit Listen funktionieren auch typische Operatoren wie `+` und `*`
-    * `blist = alist * 2`
-* `tupel = ("hello", 2.0, 5, [10,20])` ist ein Tupel ... sieht einer List sehr ähnlich ist aber immutable
-* `list` mit mutating Functions:
-  * `list.append("banana")`
-    * im Gegansatz zu `list = list + ["banana"]`, das zwischenzeitlich eine neue Liste erzeugt, dann die `list`aber auf die neue Liste zeigen läßt. Im Endergebnis gleich, aber technisch anders
-  * `list,count("banana")`
-  * `list.insert(1, "banana")`
-  * `list.index("banana")`
-  * `list.remove("banana")`
-  * `list.reverse()`
-  * `list.sort()`
-  * `list.sort(key=None, reverse=false)`
-  * `list.pop()`
-    * auf diese Weise lassen sich mit `append` und `pop` Stacks implementieren
-  * `list.popleft()`
-    * auf diese Weise lassen sich Queues mit `list.append()`/`list.popleft()` implementieren
-      * nicht performant - besser `queue` aus dem `collections`-Paket verwenden
-* `Strings` mit immutable Functions:
-  * `nameUpper = "Pierre".upper()`
-  * `nameLower = "Pierre".lower()`
-  * `stripped = "    Das ist ein Test      ".strip()`
-    * `strip` entfernt auch Zeilenumbrüche
-  * `replaced = "Das ist ein Test".replace("a", "b")`
-  * `print("Hallo {}, ich bin {} Jahre alt und ich habe {} Euro in der Brieftasche".format("Pierre", 13))`
-    * hier kann man den Wert noch formatieren (z B. `print("Hallo {}, ich bin {} Jahre alt und ich habe {:.2f} Euro in der Brieftasche".format("Pierre", 13, 100))`)
-* Sequenzen unterstützen Slicing ... List-Slices sind Listen, Tupel-Slices sind Tupel, String-Slices sind Strings:
-  * `name = Pierre; inBetween = name[1:len(name)-2]`
-* `map`
-* `set`: `myset={"Pierre", "Silke", "Jonas"}`
-  * mit comprehensions: `a = {x for x in 'abracadabra' if x not in 'abc'}`
-  * Operationen: `myset - { "Pierre" }` liefert `{"Silke", "Jonas"}`
-* Tupel: `('n', 'no', 'nop', 'nope')`
-  * Elemente müssen nicht vom gleichen Datentyp sein: `((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))`
-  * im Gegensatz zu `list` ist ein Tuppel immutable und hat i. a. unterschiedliche Datentypen - Tupel werden in anderen Use-Cases verwendet
-
-### Dictionary
-
-* Dictionary: `tel = {'jack': 4098, 'sape': 4139}`
-  * `tel['pierre']=3006` => `{'jack': 4098, 'sape': 4139, 'pierre': 3006}`
-* Dictionaries sind Key-Value-Maps und werden mit geschweiften Klammern definiert:
-* ungeordnet
-* der Zugriff ist aber wie bei den Squenzen über eckige Klammern
+Durch die fehlende Typisierung kann eine Funktion sogar ganz unterschiedliche Datentypen zuürckliefern:
 
 ```python
-# Creation at initialization time
-dictAlt = { "one":"eins", "two":"zwei", "three":"drei" }
-print(dictAlt)
-
-# Creation after creation
-dict = {}
-dict["one"] = "eins"
-dict["two"] = "zwei"
-dict["three"] = "drei"
-dict["wasauchimmer] = ["pierre", "feldbusch", 1972]
-print(dict)
-
-del dict["wasauchimmer"]
-
-# dict.keys() erzeugt nur ein Iterable, aber keine list ... aber wird können es per cast transformieren
-for key in dict.keys():
-  print(key, ":", dict[key])
-
-for value in dict.values():
-  print(value)
-
-# hier wird eine List erstellt und ist damit ein Iterator
-for item in dict.items():
-  print(value)
-
-# dict implementiert einen Iterator ... wie list/tupel
-for key in dict:
-  print(key, ":", dict[key])
-
-if "two" in dict:
-  print("two ist drin")
-
-# wenn man auf einen Key per Indexing zugreift, der nicht existiert, gibt es einen Fehler
-# Wenn man also nicht genau weiß, ob der Key drin ist, dann sollte man es vorher
-# prüfen (um den Runtime-Error zu vermeiden) oder die get-Methode verwenden
-value = dict.get("Pierre")          # liefert None
-if value is None:
-  print("nicht gefunden")
-else:
-  print(value)
-print(dict.get(value, "default"))   # liefert default
-if value in dict:
-  print(dict[two])
-
-feldbusch = { "Pierre" : 48, "Pierre": 76 }
-print(feldbusch["Pierre"])        # liefert 76
+def hello(name):
+  if "Pierre" == name:
+    return "Hallo Pierre"
+  else:
+    return 42
+name = input("wie ist dein name")
+print(type(hello(name)))
 ```
 
-### Wichtige Funktionen
+Sicherlich kein Best-Practice, aber prinzipiell möglich. Typisierter Sprachen würden das verhindern ... um so wichtiger die losen Best-Practices zu kennen und einzuhalten. ABER: es zeigt sich, daß man damit extremen Spaghetticode schreiben kann :-(
 
-* `age=int(input("How old are you? "))`
-* `l=range(3,6)   # l=[3,4,5]`
-* Lambdafunktionen
+### Built-In-Funktionen
 
-  ```python
-  >>> pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
-  >>> pairs.sort(key=lambda pair: pair[1])
-  >>> pairs
-  [(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]
-  ```
+...  können ohne `import` genutzt werden
+
+* `print`
+* `type`
+* `len`
+* `input`
+  * `age=int(input("How old are you? "))`
+* `range`
+  * `l=range(3,6)   # l=(3,4,5)`
+* `sorted`
+  * `listB = sorted(listA)`
+  * `listB = sorted(listA, reverse = True)` ... `reverse` ist ein optionaler Parameter
+  * `listB = sorted(listA, key = absolute)` mit folgender `absolute`-Funktion (ACHTUNG: `absolute` ist ein Functionpointer!!!):
+
+      ```python
+      def absolute(x):
+        if x >= 0:
+          return x
+        else:
+          return -x
+      ```
+
+  * `listB = sorted(listA, key = lambda x: absolute(x))` mit einer Lambda-Function
+
+* `enumerate` erhält eine Sequence als Parameter und liefert ein Iterable von `(index, value)` - IDIOM
+  * statt
+
+      ```python
+      fruits = ['apple', 'pear', 'apricot', 'cherry', 'peach']
+      for n in range(len(fruits)):
+          print(n, fruits[n])
+      ```
+
+  * verwendet man
+
+      ```python
+      fruits = ['apple', 'pear', 'apricot', 'cherry', 'peach']
+      for index, fruit in enumerate(fruits):
+          print(index, fruit)
+      ```
+
+### Anonyme Funktionen - Lambda Functions
+
+In meiner Zeit als C-Entwickler nannte man das Functionpointer. Viele Jahre später wurde daraus der Begriff Lambda-Function. Auf diese Art und Weise läßt sich ein Algorithmus als Parameter übergeben, um so das Strategy-Pattern zu implementieren und den Code sehr schön lesbar zu halten. Die Funktionsbeschreibung wird schlanker und erinnert an eine mathematische Funktionsdefinition im Stil von `f(x) = x * x` häufig auch per `x -> x * x` ausgedrückt.
+
+Eine Funktion
+
+```python
+def func(args):
+  return value
+```
+
+wird ganz schematisch (und deshalb können IDEs auch eine automatische Transformation anbieten) folgendermaßen in eine Lambda-Funktion transformiert:
+
+```python
+lambda args: value
+```
+
+Ein Beispiel:
+
+```python
+def square(n):
+  return n * n
+print(square(2))
+```
+
+wird zu
+
+```python
+sq = lambda n: n*n
+print(sq(2))
+```
+
+In diesem Beispiel habe ich eigentlich nicht viel gewonnen, weil ich ja doch eine benannte (Lambda-) Funktion `sq` erstellt habe. Doch in folgendem Beispiel wird die Mächtigkeit deutlich ... ein Sortierkriterium wird über eine Lambda-Funktion definiert:
+
+```python
+pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+pairs.sort(key=lambda pair: pair[1])
+```
 
 ### Bibliotheken / Module
 
@@ -321,6 +550,15 @@ Die Stärke einer Sprache liegt häufig in den Bibliotheken, die man verwenden k
   * in diesem Fall kann man auf den Modulnamen verzichten, was sich natürlicher anfühlen kann.`diceValue = randrange(1, 7)`
 
 ### Idiome
+
+* Werte ignorieren mit `_` als Variablenname
+
+    ```python
+    track_medal_counts = {'long jump': 3, '100 meters': 2, '400 meters': 1}
+    track_events = []
+    for event, _ in track_medal_counts.items():
+        track_events.append(event)
+    ```
 
 * List Comprehensions: `squares = [x**2 for x in range(10)]`
 
