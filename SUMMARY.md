@@ -197,6 +197,8 @@
   * [Projekt Sportstracker](projekt_sportstracker.md)
   * [Scratch](scratch.md)
   * [Pico Spielekonsole](pico.md)
+* Schule
+  * [Mathematik](mathematik.md)
 * Misc
   * Foto/Video
     * [Foto/Video Sammlung](fotoVideoSammlung.md)
