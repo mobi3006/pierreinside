@@ -23,6 +23,14 @@ Glücklicherweise lassen sich beide Versionen parallel betreiben.
 
 > Python 2 ist hat am 1.1.2020 sein End-of-Life erreicht.
 
+### Linux - switch to Python 3 default
+
+Ich hatte ein realtiv altes Ubuntu-System, das noch Python 2 als default verwendete. Python 3 war schon installiert, doch ich wollte nicht immer `python3` eingeben müssen, um den "richtigen" Interpreter zu starten. Leider besteht Python nicht nur aus dem Interpreter, sondern auch aus dem Paketmanager `pip` und noch weiteren Tools (`pipenv`, ...), die dann alle zueinander passen müssen. Das kann ganz schön nerven.
+
+Es gibt verschiedene Lösungen
+
+* [siehe hier](https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux)
+
 ---
 
 ## Getting started - Command Line
@@ -71,6 +79,10 @@ print(msg)
 ```
 
 and execute the command "Run Selection/Line in Python Terminal" :-)
+
+Nichtsdestotrotz funktioniert das Navigieren in importierte Module (auch meine eigenen, die sich direkt im gleichen Git-Repository befinden) nicht. Hierzu finde ich diesen Beitrag:
+
+* https://stackoverflow.com/questions/53939751/pylint-unresolved-import-error-in-visual-studio-code
 
 ---
 
@@ -849,11 +861,13 @@ Module, die Python nicht mitliefert müssen per `pip install MODULE_NAME` instal
 
 > Noch besser finde ich allerdings die Ausführung von Python-Code in einem Docker-Container. Auf diese Weise wird die lokale (Entwicklungs-) Umgebung nicht mit Paketen verschmutzt. Das hilft auch beim Fail-Fast-Prinzip ... vergißt man eine notwendige Bibliothek in `requirements.txt` zu erwähnen, so fällt das in einem Docker-Container sofort auf ... bei der lokalen Nutzung wurde die Bibliothek evtl. einmalig installiert und niemandem ist bewußt, daß die Software in einer anderen Umgebung (bei meinem Kollegen) gar nicht funktioniert. In diesem Zusammenhang gibt es auch [Python Virtual Environments](https://docs.python.org/3/library/venv.html), bei denen die Bibliotheken und Interpreter in einem applikationsspezifischen Verzeichnis installiert werden. Ich würde dennoch die Docker-Container bevorzugen ... ein einmalig erstelltes Docker-Image als Ausführungsumgebung läßt sich einfach mit den Kollegen teilen und sieht WIRKLICH bei allen gleich aus!!!
 
+### Python Virtual Environments
+
+* [Getting Started](https://docs.python-guide.org/dev/virtualenvs/)
+
 ### FastAPI
 
-* [Homepage](https://fastapi.tiangolo.com/)
-
-Das Framework basiert auf der [OpenAPI Spezifikation](https://github.com/OAI/OpenAPI-Specification). REST-Services werden per `@`- Annotation definiert. Zusätzlich bekommt man eine API-Dokumentation und Ausführungsumgebung als WebUI ([Swagger UI](https://github.com/swagger-api/swagger-ui)) geschenkt. Diese Dokumentation/Ausführungsumgebung ist - weil aus dem Source-Code generiert - immer aktuell.
+* [siehe separate Seite](fastapi.md)
 
 ---
 
