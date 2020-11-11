@@ -85,7 +85,7 @@ Man sollte sich an die typischen Idiome/Patterns halten und auch den [Styleguide
 * Python hat Built-In-Funktionen wie `type`, `len`, `input`, `range` ... diese können ohne `import` genutzt werden
 * Datentypen wie `int`, `string`, Listen, Tupel haben eingebaute Funktionen, die man nutzen kann ... (`print("Pierre".count("r"))`
   * `"Pierre".split("e")`
-  * `"".join(["P", "i", "e", "r", "r". "e"])`
+* `"_".join(["P", "i", "e", "r", "r". "e"])`
 
 ### Variablen
 
@@ -149,7 +149,7 @@ Sequences sind die Datentypen
   * löschen
     * `names[1:3] = []`
     * `del names[1:3]`
-  * clone by Slice-Operator: `namesClone = names[:]`
+  * Liste clonen by Slice-Operator: `namesClone = names[:]`
   * der Operator `+=` hat ein spezielles Handling bei (mutable) List: "obj = obj + object_two is different than obj += object_two ... The first version makes a new object entirely and reassigns to obj. The second version changes the original object so that the contents of object_two are added to the end of the first."
     * Empfehlung: den `+=` Operatior nicht bei Listen - oder besser - gar nicht verwenden
 * Tuple (immutable) ... mit runden Klammern definiert
@@ -203,13 +203,15 @@ print("expected True", fruitA == fruitB)
     * `strip` entfernt auch Zeilenumbrüche
   * `replaced = "Das ist ein Test".replace("a", "b")`
   * `print("Hallo {}, ich bin {} Jahre alt und ich habe {} Euro in der Brieftasche".format("Pierre", 13))`
+    * [String-Formatierungsvarianten]()
     * hier kann man den Wert noch formatieren (z B. `print("Hallo {}, ich bin {} Jahre alt und ich habe {:.2f} Euro in der Brieftasche".format("Pierre", 13, 100))`)
     * noch schöner ist, wenn man den Platzhaltern Namen geben kann
       * das vereinfacht Refactorings am String, weil die Reihenfolge der Variablenwerte keine Rolle spielt:
         * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche".format(name="Pierre", alter=13, betrag=100))`
       * wiederholte Strings müssen nicht als Werte wiederholt angegeben werden:
         * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche. Bis bald, {name}".format(name="Pierre", alter=13, betrag=100))`
-
+    * mittlerweile hat sich der f-String durchgesetzt, der noch leichter lesbar ist
+      * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche")`
 ### Sequence - List
 
 mit mutating Functions:
@@ -335,6 +337,87 @@ for k in sorted(dict, key=lambda k: dict[k]):
   print(k, dict[k])
 ```
 
+### Exceptions
+
+Exceptions dienen der Behandlung von Ausnahme-Situationen. Sie sollen verhindern, daß das Programm komplett abbricht und man stattdessen eine weitere Chance erhält (Stichwort Resilience).
+
+Der Exception-Typ (im Beispiel `ZeroDivisionError`) ist optional ... läßt man ihn weg, wird jegliche Exception vom `except`-Block "gefangen".
+
+```python
+vornamen = [ "pierre", "hans", "patrick" ]
+try:
+    x = 5/0
+    vorname = vornamen[3]
+    myvar = doesNotExist
+except ZeroDivisionError as e:
+    print("got an ZeroDivisionError")
+    print(e)
+except IndexError as e:
+    print("got an IndexError")
+    print(e)
+except:
+    print("got any other error")
+    print(e)
+```
+
+Man sollte Exceptions aber nicht mißbrauchen, um den Programmfluß für typische Use-Cases zu steuern:
+
+```python
+vornamen = [ "pierre", "hans", "patrick" ]
+i = 0
+while True:
+  try:
+      print(vornamen[i])
+      i += 1
+  except IndexError:
+      break
+```
+
+Exceptions sind Klassen und haben eine Vererbungshierarchie. Ein `except ArithmeticError:` fängt alle von `ArithmeticError` abgeleiteten Exceptions, also `ZeroDivisionError`, `FloatingPointError` und `OverflowError`. Auf diese Weise kann man mit EINEM except-Statements gleich eine ganze Familie von Fehlern fangen.
+
+Mit einem `KeyboardInterrupt`-Exception-Handler lassen sich beispielsweise Server-Prozesse sauber beenden:
+
+```python
+def createServer():
+  serversocket = socket(AF_INET, DOCK_STREAM)
+  try:
+      serversocket.bind(("localhost", 5000))
+      serversocket.listen(5)
+      while True:
+        (clientsocket, address) = serversocket.accept()
+        receivedData = clientsocket.recv(5000).decode()
+
+        # interpret received data
+        # ...
+
+        # prepare response
+        data = "HTTP/1.1 200OK\r\n"
+        data += "Content-Type: text/html; charset=utf-8\r\n"
+        data += "\r\n"
+        data += "<html><body>hello world</body></html>\r\n\r\n"
+
+        # send response
+        clientsocket.sendall(data.encode())
+        clientsocker.shutdown(SHUT_WR)
+  except KeyboardInterrupt:
+    print("Server shutdown initiated")
+  except Exception as e:
+    print("error")
+    print(e)
+  
+  serversocket.close()
+
+createServer()
+```
+
+Exceptions kann man über
+
+```python
+raise Myexception()
+```
+
+auslösen.
+
 ### Funktionen
 
 * in Python verwendet man für Funktionsnamen (und Variablennamen) Snake-Case (`get_value()`) anstatt Camel-Case (`getValue()`)
@@ -442,7 +525,12 @@ gar nicht weiß, welchen Datentyp `x` repräsentiert. Der Code innerhalb der Fun
 
 Das finde ich sehr gewöhnungsbedürftig ... aber konsistent, wenn man berücksichtigt, daß Variablen keinen Typ haben, nur die Werte. Was ich aus dem Code häufig noch schwieriger rauslesen kann ist, ob es sich um eine Liste (mutable) oder ein Tupel (immutable) handelt. Das ist auch für den Entwickler schwierig, der die Methode `best_key` refactoren will und eigentlich nicht weiß, ob dort immer Listen oder manchmal auch Tupel reinwandern ... das bestimmt nämlich der Aufrufer??? 
 
-> Sollte man das dann in die Dokumentation schreiben oder die Variable `x` in `personenDictionary` umbenennen?
+> In Python 2 hat man das in die Dokumentation geschrieben. In Python 3 verwendet man hierfür Annotationen ... das wird allerdings von Python nicht ausgewertet, sondern komplett ignoriert:
+
+    ```python
+    def floatToInt(x: float) -> int:
+      return int(x)
+    ```
 
 Durch die fehlende Typisierung kann eine Funktion sogar ganz unterschiedliche Datentypen zuürckliefern:
 
@@ -464,7 +552,8 @@ Sicherlich kein Best-Practice, aber prinzipiell möglich. Typisierter Sprachen w
 
 * `print`
 * `type`
-* `len`
+* `len(list)`
+* `max(a, b)`
 * `input`
   * `age=int(input("How old are you? "))`
 * `range`
@@ -583,10 +672,6 @@ for i in range(5):
 
 ACHTUNG: in erwartet ein Iterable ... eine Sequenz ist ein Iterable. `range(5)` erzeugt eine List (einfach mal ausprobieren: `print(type(range(5)))`).
 
-### Klassen
-
-* man kann auch außerhalb der Klassendefinition weitere Attribute on-the-fly hinzufügen ... seltsam für einen Compiler-gewöhnten Java-Entwickler ;-)
-
 ### Files
 
 ```python
@@ -629,9 +714,121 @@ with open("../data/mydata.csv", "r") as fileref:
 
 Das ist Kontextmanager um das Filehandling, der sich auch gleich um das Schließen kümmert :-)
 
-### Fallstricke
+---
 
-Ein wesentlicher Nachteil untypisierter Sprachen besteht darin, daß Typfehler häufig erst entdeckt werden können, wenn der Code auch ausgeführt wird. In folgendem Beispiel
+## Objektorientierung
+
+### Klassen
+
+```python
+class Point():
+  pass
+
+point1 = Point()
+point2 = Point()
+
+point1.x = 5
+```
+
+### Instanzvariablen vs Klassenvariablen
+
+Klassenvariablen sind instanzübergreifend und existieren nur ein einziges mal (entspricht `static` Properties in Java). Deshalb werden sie auch innerhalb der Klasse definiert.
+
+> Das paßt konzeptionell zu dem Ansatz die Instanz an alle Methoden explizit zu übergeben. Für mich als Java-Entwickler zunächst mal eine Umstellung.
+
+Instanzvariablen haben höhere Priorität ... bei `print(point1.x)` wird also zunächst mal nach einer Instanzvariablen `x` geschaut und wenn es keine gibt, dann wird nach einer Klassenvariablen geschaut.
+
+Nichtsdestotrotz greift man auf eine Klassenvariable auch über die Instanz zu (`self.classVariable`). Man könnte auf die Klassenvariable aber auch per `Point.classVariable = 3` zugreifen.
+
+```python
+class Point():
+  classVariable = 0
+  def methodA(self):
+    if self.classVariable == 0:
+      return "null"
+
+point1 = Point()
+point1.instanceVariable = 5
+```
+
+> Eine Sache, die mir hier nicht gefällt ist, daß ich als Leser der Klasse `Point` nicht weiß, daß es ein Property `instanceVariable` hat ... das taucht irgendwann im Code auf - vielleicht sogar in einer anderen Datei. Zudem werden die Instanzvariablen erst zur Laufzeit angelegt ... nur, daß sie im Code erscheinen bedeutet nicht, daß sie auch existieren:
+
+```python
+class Point():
+  def initialization(self):
+    self.x = 0
+    self.y = 0
+  def __str__(self):
+    return "({}, {})".format(x, y)
+
+print(Point())
+```
+
+führt zu einem Laufzeitfehler `NameError: name 'x' is not defined`, da die Instanzvariable `x` (und auch `y`) zum Zeitpunkt der Ausführung der `__str__`-Methode noch gar nicht existiert. Erst durch expliziten Aufruf der Methode `initialization()` erfolgt die Anlage und danach funktioniert auch `__str__` fehlerfrei. Typischerweisse sollte man diese Initialisierung im Konstruktor `__init__(self)` machen.
+
+> Um Spaghetti-Code zu vermeiden, sollte man im Konstruktore ALLE Instanzvariablen anlegen!!!
+
+Jetzt wird es sehr technisch - aber es lohnt sich, darüber nachzudenken:
+
+* Methoden werden in Python als Klassenvariablen behandelt
+
+Das bedeutet, daß ein Aufuf von `point1.methodA()` folgendermaßen abgearbeitet wird:
+
+* gibt es in der Instanz `point1` eine Instanzvariable `methodA` => NEIN
+* gibt es in der Klasse `Point` eine Klassenvariable `methodA` => JA
+* da nach `methodA` eine `()` folgt wird die Funktion `methodA()` mit `point1` als Parameter aufgerufen
+
+Das Wissen hierüber ist für die tägliche Arbeit nicht entscheidend, gibt aber Einblicke wie das objektorierte Konzept in Python implementiert ist.
+
+### Methoden
+
+Die Funktionen in Klassen werden Methoden genannt. Alle Methoden haben als ersten Parameter IMMER das Objekt `self`, das die Instanz repräsentiert. Python verwendet also einen Delegationsansatz, um Klassen mit Instanzen zu verknüpfen.
+
+> Da ich aus einer anderen Welt (Java, C++, Eiffel) komme, mutet das zunächst mal komisch an.
+
+### Dunderscore-Methoden
+
+* [guter Überblick](http://www.siafoo.net/article/57)
+
+Die Lifecycle-Methoden (Konstruktor, String-Repräsentation, ...) sind in speziellen `__init__(self)` (den Parameternamen `self` zu verwenden ist ein Idiom - man kann jeden anderen verwenden ... macht aber niemand) Methoden verpackt ... können überschrieben werden, müssen aber nicht.
+
+* `__init__(self, x, y)`
+  * Konstruktor
+* `__str__(self)`
+* `__add__(self, other)`
+  * `point1 + point2`
+* `__sub__(self, other)`
+
+### Vererbung
+
+Die `__init__(self)` Methode kann, muß aber nicht in der erbenden Klasse überschrieben werden. Wenn keine definiert ist, wird die aus der Superklasse automatisch verwendet.
+
+Beim erweitern des geerbten Konstruktors muß dieser explizit per `super()` aufgerufen werden:
+
+```python
+class SubClass(SuperClass):
+  def __init__(self, name, size):
+    super().__init__(name)
+    self.size = size
+```
+
+---
+
+## Fallstricke
+
+### Best-Practices
+
+Grundsätzlich erlauben solche Sprachen i. a. mehr als compilierte Sprachen ... es ist schwierig Best-Practices vor der Laufzeit zu prüfen. Hierzu bedarf es einer IDE, die das unterstützt und die Best-Practices überprüft. Deshalb werden
+
+* Linter
+* Auto-Formatter wie [yapf](https://github.com/google/yapf/)
+* Styleguides wie der von [Google](https://google.github.io/styleguide/pyguide.html)
+
+empfohlen.
+
+### Testabdeckung
+
+Zudem sollte man eine hohe Testabdeckung haben, denn ein wesentlicher Nachteil untypisierter Sprachen besteht darin, daß Typfehler häufig erst entdeckt werden können, wenn der Code auch ausgeführt wird. In folgendem Beispiel
 
 ```python
 name = input("Wie ist dein name?")
@@ -702,3 +899,55 @@ Interessante Variante, um interaktive Dokumentationen mit Markdown, HTML-iFrames
 Im Hintergrund wird ein Webserver gestartet - die Dokumentation ist eigentlich Code, der in einer JSON-Datei gespeichert werden. Diese kann man mit anderen teilen und unter Versionskontrolle stellen. Visual-Studio-Code unterstützt das auch ... da ist die Integration noch weniger sichtbar.
 
 Das Dateiformat `ipynb` wir beispielsweise auch direkt von Github unterstützt, so daß die Datei unter Versionskontrolle gestellt, geteilt und komfortabel im Browser angezeigt werden kann.
+
+---
+
+## Python Web-Development
+
+### Django
+
+[siehe eigenes Kapitel](django.md)
+
+### Python Web Server Gateway Interface (WSGI)
+
+* [Spezifikation - PEP 3333](https://www.python.org/dev/peps/pep-3333/)
+* [konkretere Details](https://www.fullstackpython.com/wsgi-servers.html)
+
+Dieses Interface ermöglicht die standardisierte Integration von Python-Backends in Webserver wie Apache-Http, NGINX, ... und trägt damit bei, daß sich das Python-Ecosystem (z. B. weitere Python-Web-Application-Frameworks) weiterentwickeln kann.
+
+Die Spezifikation allein ist aber nur die Grundlage, auf der sich dann Implementierungen entwickelt haben:
+
+* [gunicorn](https://gunicorn.org/)
+* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)
+* [mod_wsgi - Apache Modul](https://github.com/GrahamDumpleton/mod_wsgi)
+* [cherrypy - Python Webserver acting as WSGI](https://github.com/cherrypy/cherrypy)
+
+---
+
+## Fazit
+
+TL;DR ... ich mag Python und halte es auch für eine sehr gute Sprache zum Lernen von Softwareentwicklung.
+
+### Mein Bedarf
+
+Für meinen Bedarf ist es eine tolle Sprache, weil
+
+* Scripting möglich ... ich muß nicht erst einen Compiler anwerfen, um einen Einzeiler zu programmieren
+  * hierzu verwendet man i. a. funktionale oder prozedurale Programmierung
+* komplexere Software läßt sich gut mit objektorientierten Konzepten umsetzen
+
+Manche Dinge (z. B. der vorgesehene Variablentyp) wünsche ich mir in der Schnittstellenspezifikation. Aus meiner Sicht ist es keine gute Idee, den intendierten Parametertyp aus dem Funktionscode ableiten zu müssen. Insbesondere bei der Verwendung von Bibliotheken ist das unter Umständen nicht mal möglich. Auch hier helfen Best-Practices (Beschreibung des Parameter-Typs in der Doku).
+
+### Lern-Sprache
+
+Das schöne an Python ist die nahtlose Integration unterschiedlicher Programmier-Paradigmen (prozedural, funktional, objektorientiert). Dadurch entsteht eine schöne Varianz, so daß man auch leicht die verschiedenen Paradigmen vergleichen kann und ihre Vor- und Nachteile kennenlernt. Konzepte wie Lambda und Comprehensions helfen, sehr eleganten und leserlichen Code zu produzieren.
+
+Insbesondere die gute [Raspberry Pi](raspberrypi.md) Unterstützung macht Python zu **DER** Lernsprache.
+
+Ein Nachteil ist aus meiner sicht, daß durch den Interpreter-Ansatz Best-Practices schwieriger einzuhalten sind. Eine Variable kann an Zeile 23 einen String repräsentieren und an Zeile 24 einen Integer ... das wird einfach nicht verhindert. Während erfahrene Softwareentwickler das automatisch vermeiden, sind Anfänger vielleicht geneigt, solche "Abkürzungen" zu nehmen und Spaghetti-Code zu schreiben, der kaum lesebar und fehlerträchtig ist. Allerdings - wenn man es positiv sieht - lassen sich zumindest solche Ansätze direkt nebeneinanderstellen und die Vorteile schön rausarbeiten ... zum Lernen vielleicht sogar NOCH besser.
+
+### Bibliotheken
+
+Die Masse an Bibliotheken ist überwältigend.
+
+> Das kann natürlich auch ein Problem sein ...

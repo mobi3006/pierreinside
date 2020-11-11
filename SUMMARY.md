@@ -138,6 +138,7 @@
     * [Cloud Deployment Provider](cloudDeployment_provider.md)
       * [AWS](aws.md)
         * [AWS RDS](aws_rds.md)
+        * [Static Website Hosting](aws_staticWebsiteHosting.md)
       * [Google Cloud Platform](gcp.md)
     * [Docker Orchestrierung](docker_orchestration.md)
       * [CoreOS](coreos.md)
