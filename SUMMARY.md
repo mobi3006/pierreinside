@@ -68,6 +68,12 @@
     * [Thymeleaf](thymeleaf.md)
     * [ionic](ionic.md)
     * [Web Fonts](webfonts.md)
+    * [Jinja Templates](jinja2.md)
+    * [Twitter Bootstrap](bootstrap.md)
+  * [Python Ecosystem](python.md)
+    * [Kivy UI](kivy.md)
+    * [FastAPI](fastapi.md)
+    * [Typer CLI](typer.md)
   * Persistenz
     * Transactions
       * [Java TX](java_transactions.md)
@@ -145,8 +151,6 @@
       * [Kubernetes](kubernetes.md)
       * [Nomad](nomad.md)
   * [PHP](php.md)
-  * [Python](python.md)
-    * [Kivy UI](kivy.md)
 * Operations
   * [Proxy](proxy.md)
     * [NGINX](nginx.md)
@@ -194,6 +198,8 @@
   * [Projekt Sportstracker](projekt_sportstracker.md)
   * [Scratch](scratch.md)
   * [Pico Spielekonsole](pico.md)
+* Schule
+  * [Mathematik](mathematik.md)
 * Misc
   * Foto/Video
     * [Foto/Video Sammlung](fotoVideoSammlung.md)
