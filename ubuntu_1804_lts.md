@@ -54,9 +54,9 @@ Eine permanente Änderung erfolgt in Grub als Kernel Parameter:
 
 ## FAQ
 
-Frage 1: Ich verwende NAT und im Homeoffice über VPN habe ich immer wieder Probleme Hostnamen aus dem Private Network aufzulösen. Nicht immer, aber irgendwann passiert es dann mal und dann muß ich die Netzwerkverbindung neu initialisieren (`sudo systemctl stop systemd-resolved && sudo systemctl start systemd-resolved`). Was ist das Problem?
+**Frage 1:** Ich verwende NAT und im Homeoffice über VPN habe ich immer wieder Probleme Hostnamen aus dem Private Network aufzulösen. Nicht immer, aber irgendwann passiert es dann mal und dann muß ich die Netzwerkverbindung neu initialisieren (`sudo systemctl stop systemd-resolved && sudo systemctl start systemd-resolved`). Was ist das Problem?
 
-Antwort 1: Der `systemd-resolved` ist ein DNS-Cache, den Ubuntu verwendet ... deshalb ist der Prozess auch an den Port `53` auf Deinem System gebunden. Bei einem `netstat -taupen | grep 53` bekomme ich folgende Ausgabe:
+**Antwort 1:** Der `systemd-resolved` ist ein DNS-Cache, den Ubuntu verwendet ... deshalb ist der Prozess auch an den Port `53` auf Deinem System gebunden. Bei einem `netstat -taupen | grep 53` bekomme ich folgende Ausgabe:
 
 ```
 3:tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      102        410742     28695/systemd-resol
@@ -129,3 +129,9 @@ Jan 14 11:50:08 workbench kernel: [10946.514551] 03:01:35.931323 timesync vgsvcT
 Jan 14 11:50:08 workbench systemd-resolved[7909]: Grace period over, resuming full feature set (UDP+EDNS0) for DNS server 10.....
 Jan 14 11:50:08 workbench systemd[1]: Starting Daily apt download activities...
 ```
+
+**Frage 2:** Nach der Deinstallation von Python (der Default war noch Python 2 und ich wollte nur noch Python 3 haben) stellte mein "Gnome Terminal" nicht mehr die Optionen "Split Horizontally" und "Split Vertically" zur Verfügung. Natürlich konnte ich das nicht direkt auf die Deinstallation (`apt-get remove python`) zurückführen, sondern zweifelte an meinem Verstand. Jedenfalls war das meine gewohnte Terminalwelt und plötzlich funktionierte es nicht mehr. Letztlich griff ich auf ein Backup meiner VirtualBox zurück (glücklicherweise nur eine Woche alt), um die Funktion zumindest mal wieder zu sehen. Scheinbar war ich doch nicht verrückt geworden. Was war passiert?
+
+**Antwort 2:** So genau hatte ich mich bisher nicht damit auseinandergesetzt wie mein Terminal funktionierte. Ich kann mich auch nicht erinnern, daß ich das mal so konfiguriert hatte. Vielleicht war das eine Default-Konfiguration, die der Windowmanager `awesome` mitbrachte. Jedenfalls fand ich raus, daß auf meinem System der Prozess `/usr/bin/python /usr/bin/x-terminal-emulator` lief. Scheinbar ist der `x-terminal-emulator` ([ein paar weitere Informationen](https://techpiezo.com/linux/change-default-terminal-emulator-in-ubuntu/)) für diese beiden Features zuständig. Da ich aber leider `python` deinstalliert hatte, konnte das wohl nicht mehr funktionieren. Leider bekam ich beim Start meines Terminal mit "CMD-RETURN" keine Fehlermeldung, sondern einfach ein anderes Terminal, das diese Features nicht hatte :-(
+
+Auf meinem Ubuntu 20.04 LTS (das ich vor Wochen schon mal installiert hatte - ohne es wirklich zu benutzen) war auch schon `awesome` installiert, aber der `x-terminal-emulator` ... dementsprechend fehlten dort auch die Features :-(

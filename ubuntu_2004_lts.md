@@ -35,6 +35,7 @@ Welche Software muß ich anschließend noch installieren und - was aufwendiger i
   * für 20.04-LTS gibt es bereits Pakete, so daß es sich leicht installieren läßt
   * `sudo apt install awesome`
   * anschließend abmelden und bei der Anmeldung `awesome` als Window-Manager (statt Ubuntu bzw. Ubuntu on Wayland)
+  * habe ich jetzt auch den `x-terminal-emulator`, um bei meinem Terminal "Split Horizontally" und "Split Vertically" durchzuführen oder muß ich diese Erweiterung noch explizit installieren ([siehe hier](https://techpiezo.com/linux/change-default-terminal-emulator-in-ubuntu/))
 * zsh
   * `sudo apt install zsh`
   * dann noch in `/etc/password` die `/bin/zsh` als Default-Shell einstellen
