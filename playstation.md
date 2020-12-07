@@ -1,5 +1,7 @@
 # Playstation
 
+---
+
 ## Basics
 
 ### Ein-/Ausschalten
@@ -15,28 +17,39 @@ In der Playstation können beliebig viele Benutzer angelegt werden. Daneben kön
 
 Auf diese Weise kann jeder Benutzer mit seinen eigenen Einstellungen und seinem personalisierten Menü arbeiten. Drückt ein Benutzer die  Playstation-Taste am Controller, so wird dessen Home-Screen angezeigt.
 
+---
+
 ## Playstation Network Account (aka PSN Account)
 
 * mit einem Account beim Playstation Network erhält man Zugriff auf weitere Features (z. B. PS-Community) und erhält auch Spiele kostenlos (nicht unbedingt die neuesten)
 * für einige Features (z. B. EA-Sports Account für Fifa 18) ist ein solcher Account Grundvoraussetzung
 * jeder Benutzer kann seinen eigenen PSN Account haben, muß aber nicht. Es genügt evtl. auch, wenn der primäre Benutzer einen PSN-Account hat.
 
+---
+
 ## Playstation Plus
 
 * dies eröffnet die Welt des Online-Spielens ... Fifa zocken gegen irgendwelche Gegner weltweit
 * Spiele kostenlos (nicht unbedingt die neuesten)
 
+---
+
 ## Spiele
 
 * zum Spielen braucht man meistens die DVD ... insofern ist das Spieletauschen eingeschränkt möglich
+  * mit der PS5 ist nun auch eine erste Playstation auf dem Markt, die es auch ohne DVD-Player gibt ... dann werden die Spiele nun noch online gezogen
 * gelegentlich kann man bei Amazon auch Importe aus England kaufen, die in deutsch gespielt werden können, aber teilweise deutlich günstiger sind
 * gebraucht kaufen: https://www.rebuy.de/kaufen/videospiele-playstation-4
+
+---
 
 ## FIFA 18
 
 ### EA Sports Account
 
 Hier benötigt man dann wieder einen Account und muß zusätzlich mit dem PSN Account angemeldet sein. Nur mit dem kommt man an Updates für dieses Spiel.
+
+---
 
 ## Auto-Rennspiele
 
@@ -62,14 +75,21 @@ Formel 1 finde ich generell recht langweilig ... Rallye macht da doch schon deut
 
 * Force Feedback weltklasse
 
-### Lenkrad Pedale
+---
 
-* http://www.spieleule.de/ps4-gaming-lenkrad/
+## Lenkräder
 
-#### Lenkrad/Pedale Logitech G29
+Ich habe mal ein Auto-Spiel am Controller gespielt - zugegeben ich bin kein Controller-Freak und spiele auch nur selten. Für mich war die Feinjustierung kaum möglich und es hat einfach keinen Spaß gemacht - obwohl das Spiel vielversprechend aussah. Meinen Controller-gewöhnten Söhnen ging es aber ähnlich. Da Rennspiele das einzige sind, das MICH wirklich an einer PS4 reizt (derzeit), habe ich mich mal in die Recherche begeben.
+
+Natürlich werden auch im Racecar-Bereich (semi-) professionelle Ligen gespielt und es gibt dann auch immer das passende Lenkrad-Hersteller, aber diese Geräte spielen dann auch preislich in einer anderen Liga (> 500 Euro).
+
+Ich bin auf der Suche nach einem Einsteigermodell, das aber dennoch schon mal Spaß macht. Die Erfahrung zeigt, daß man mit Schrott keinen Spaß haben kann ... dann sollte man es einfach lassen. Mein Preissegment liegt bei 200-300 Euro.
+
+### Lenkrad/Pedale Logitech G29
 
 * neu: 250 Euro
 * sehr gute Bewertungen
+* mittelmäßiges aber brauchbares Force-Feedback (aber: es knarzt)
 
 #### Lenkrad/Pedale Thrustmaster TM T300 RS
 
@@ -78,6 +98,13 @@ Formel 1 finde ich generell recht langweilig ... Rallye macht da doch schon deut
   * Lenkrad soll verschleißarmer sein
   * Pedale besser/realsitischer
   * Force-Feedback sehr gut (jede Unebenheit wird weitergegeben)
+  * fühlt sich weniger wertig an (unter Berücksichtigung des Preises)
+
+#### Lenkrad/Pedale Thrustmaster TM T300 RS GT
+
+* Preise: 370 Euro
+* wie Thrustmaster TM T300 RS, aber
+  * mit den T3PA-Pedalen, die viel besseres Gefühl vermitteln - AUF JEDEN FALL (habe ich mal in einem Bewertungsvideo gesehen)
 
 #### Lenkrad/Pedale Thrustmaster T150 RS
 

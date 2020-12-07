@@ -143,6 +143,14 @@ Der Tisch ist klasse - extrem stabil (im Vergleich zu meinem högenverstellbaren
 
 ---
 
+## Bürostuhl
+
+Mein 10 Jahre alter Bürostuhl im Home-Office löst sich langsam auf - noch ist er gut genug, aber bald vielleicht nicht mehr.
+
+Im Büro habe ich seit 2 Jahren den "Ergo Line II Pro" und bin damit zufrieden. Abgesehen von der Kopfstütze, die sich schnell löste. Für mich ist das kein No-Go, da ich die Kopfstütze eigentlich nicht brauche. Der Stuhl ist sehr bequem und mit 300 Euro noch bezahlbar.
+
+---
+
 ## Schreibtisch-Organisation
 
 Ich hasse Kabel und ihre Unordnung ...
@@ -223,6 +231,13 @@ Ein Kabelnetz oder Schacht unterhalb des Schreibtisches wird benötigt, da beisp
 * [Hersteller Infos - SDK](https://developer.elgato.com/documentation/stream-deck/sdk/overview/)
 
 Dieses Stream-Deck könnte meine Steckdosen und Geräte schalten. Neben meinem Arbeits-Laptop habe ich auch noch einen privaten Laptop, den ich auch gelegentlich mal mit einem großen Bildschirm nutzen will. Zudem habe ich noch einen Raspberry-Pi für kleinere Hardware/Software-Projekte.
+
+Es gibt dieses Feature auch als reine Software, die auf einem Rechner läuft und von einer App (Handy, Mobile Phone) gesteuert wird.
+
+### Touch Portal
+
+* [Website](https://www.touch-portal.com/)
+* [YouTube Video](https://www.youtube.com/watch?v=mSQIST-rdSY)
 
 ### Novation Launchpad
 
