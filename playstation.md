@@ -1,5 +1,7 @@
 # Playstation
 
+---
+
 ## Basics
 
 ### Ein-/Ausschalten
@@ -9,11 +11,15 @@
 * niemals die Stromzufuhr einfach trennen, sondern die PS4 immer sauber herunterfahren (bis die Leuchte aus ist) - ansonsten läuft man Gefahr (bzw. das ist ziemlich wahrscheinlich), daß beim nächsten Start ein schwerwiegender Fehler festgestellt wird und das Starten der PS4 länger dauert. Ich weiß nicht, ob man die PS4 dadurch auch beschädigen kann.
 * es gibt auch einen Ruhemodus - dann ist die Leuchte gelb
 
+---
+
 ## Benutzerkonten
 
 In der Playstation können beliebig viele Benutzer angelegt werden. Daneben können bis zu 4 Controller (oder mehr?) verwendet werden. Beim Start der PS4 werden die Controller dann den Benutzern zugeordnet. Es kann so eingestellt werden, daß der startende Controller (man startet die PS4 durch Drücken des Playstation-Buttons auf dem Controller) immer einem bestimmten (aka primären) Benutzer zugeordnet wird. So habe ich es gemacht, da ich nur einen Playstation Network Account nutzen will und der ist diesem primären Benutzer zugeordnet. Man kann aber auch jedem Benutzer einen eigenen Playstation Network Account spendieren.
 
 Auf diese Weise kann jeder Benutzer mit seinen eigenen Einstellungen und seinem personalisierten Menü arbeiten. Drückt ein Benutzer die  Playstation-Taste am Controller, so wird dessen Home-Screen angezeigt.
+
+---
 
 ## Playstation Network Account (aka PSN Account)
 
@@ -21,10 +27,30 @@ Auf diese Weise kann jeder Benutzer mit seinen eigenen Einstellungen und seinem 
 * für einige Features (z. B. EA-Sports Account für Fifa 18) ist ein solcher Account Grundvoraussetzung
 * jeder Benutzer kann seinen eigenen PSN Account haben, muß aber nicht. Es genügt evtl. auch, wenn der primäre Benutzer einen PSN-Account hat.
 
+---
+
 ## Playstation Plus
 
 * dies eröffnet die Welt des Online-Spielens ... Fifa zocken gegen irgendwelche Gegner weltweit
 * Spiele kostenlos (nicht unbedingt die neuesten)
+
+---
+
+## Support
+
+### PS4
+
+Meine Kinder hatten mal den Nick-Name unsere Accounts geändert. Das Zurücksetzen auf den alten Namen gestaltete sich sehr aufwendig. 2 Stunden Recherche habe ich investiert, um dann in der Hotline zu landen, die von mir die Seriennummer des Geräts wissen wollte. Leider ist die ausschlielich auf dem Gerät mini-klein zu finden - nach 20 Minuten in der Hotline und immer in der Gefahr, daß man die Seriennummer nicht findet ... Streß. Letztlich hat es geklappt, aber besser nicht wieder.
+
+Ein Help-Chate hätte ich angenehmer empfunden, aber das kostet natürlich Geld und eine Playstation kauft man nur alle paar Jahre... da fällt solch ein Service für Bestandskunden spartanischer aus
+
+Aus diesem Grund habe ich auch gar nicht versucht, die Hotline anzurufen, als ein PS4-Voucher mal nicht gutgeschrieben wurde. Ich hatte die 20 Euro schon abgeschrieben als ich den Windows-Trick ausprobierte ... Fifa-21 neu starten - voila Fifa Points gutgeschrieben :-)
+
+### EA-Sports
+
+Noch schlechter als die Erfahrung mit dem Sony-Support waren die Erfahrungen mit EA-Sports. Da gibt es scheinbar gar keinen Support. Wir wollten dort mal einen Fut-Zugang einrichten ... eine PIN sollte an die eingerichtete EA-Sports-Konto geschickt werden. kam an, aber immer mit 20 Minuten Verspätung ... da war die PIN schon wieder ungültig. Da gibt es einfach niemanden, der sich zuständig fühlt.
+
+---
 
 ## Spiele
 
@@ -32,7 +58,7 @@ Auf diese Weise kann jeder Benutzer mit seinen eigenen Einstellungen und seinem 
 * gelegentlich kann man bei Amazon auch Importe aus England kaufen, die in deutsch gespielt werden können, aber teilweise deutlich günstiger sind
 * gebraucht kaufen: https://www.rebuy.de/kaufen/videospiele-playstation-4
 
-## FIFA 18
+### FIFA 18
 
 ### EA Sports Account
 
@@ -62,24 +88,71 @@ Formel 1 finde ich generell recht langweilig ... Rallye macht da doch schon deut
 
 * Force Feedback weltklasse
 
-### Lenkrad Pedale
+---
+
+## Lenkrad und Pedale
 
 * http://www.spieleule.de/ps4-gaming-lenkrad/
+* [Guter Vergleich von 150 - 1500 Euro](https://www.youtube.com/watch?v=avF065e2z6U)
 
-#### Lenkrad/Pedale Logitech G29
+Ich selbst spiele wenig an der PS4 ... mir fehlt einfach die Zeit, um gut zu werden und gegen nen totalen Anfänger haben meine Kinder keine Lust zu spielen. Jump and Run Spiele sind recht einfach, das klappt noch ... aber bei Fifa bin ich einfach chancenlos.
 
-* neu: 250 Euro
+Autorennen finde ich sehr attraktiv und wir haben auch schon ein Renspiel, doch mit dem Controller ist das für mich (und auch für die Kinder) kaum zu beherrschen und macht dann auch kein Spaß. Ein Lenkrad mit Force-Feedback würde die Sache interessanter machen.
+
+Spielehersteller fokussieren sich auf den breiten Markt, d. h. ein günstiger Elektroschrott und die exorbitant teuren Lenkräder haben häufig eine schlechtere Unterstützung als die Mainstream-Lenkräder. Es gibt halt sehr viele Rennsimulationen. Für manche Rennspiele gibt es dann auch meisterschaften und ein dazu abgestimmtes Lenkrad ... wechselt man das Spiel ist die Unterstützung nicht garantiert ... wobei sich viele dieser lenkräder in einen G29 Kompatibiliätsmodus schalten lassen.
+
+### Lenkrad/Pedale Logitech G29
+
+* neu: 230 Euro
 * sehr gute Bewertungen
+* tolle Haptik
+  * besser als T300
+* veraltetes Force-Feedback aber dennoch gut
+  * T300 ist da aber besser
 
-#### Lenkrad/Pedale Thrustmaster TM T300 RS
+### Lenkrad/Pedale Logitech G923
+
+* 360 Euro
+* Nachfolger von G29
+* gibt es für Playstation und XBox
+  * kompatibel zu PS5 und XBox dieser Generation
+* kompatibel zu PC
+* Vergleich zu  G29
+  * äußerlich fast identisch
+  * gleiche Motoren ... alte Zahnradtechnik
+  * weniger farbig
+  * Unterschied:
+    * Trueforce ... Motorenvibrationen am Lenkrad
+      *
+       bisher von wenigen Spielen unterstützt
+* im Vergleich zum G29 lohnen sich 130 Euro Aufpreis nicht ([Vergleich](https://www.youtube.com/watch?v=_fwNb5pf7QE))
+
+### Lenkrad/Pedale Thrustmaster TM T300 RS GT
 
 * neu: 320 Euro
+* gibt es mit verschiedenen Lenkrädern (austauschbar)
+* gibt es mit 2 und 3 Pedalen
+* modularer Aufbau
 * Vergleich zum Logitech G29
   * Lenkrad soll verschleißarmer sein
   * Pedale besser/realsitischer
+    * ACHTUNG: die GT_pedale nehmen ... die standardpedale sich nicht gut
   * Force-Feedback sehr gut (jede Unebenheit wird weitergegeben)
 
-#### Lenkrad/Pedale Thrustmaster T150 RS
+### Lenkrad/Pedale Thrustmaster T150 RS
 
 * neu: 170 Euro
 * Force-Feedback sehr gut (jede Unebenheit wird weitergegeben)
+
+### Vergleich G29 vs. T300
+
+* [Vergleichsvideo](https://www.youtube.com/watch?v=gksjUjpNvus)
+* 100 Euro Preisunterschied
+* Force-Feedback beim T300 besser ... viel realistischer - mehr Spaß
+  * alte Technik im G29/G923 ist auch laut
+
+---
+
+## Playseat
+
+* [Playseat Challenge Test](https://www.youtube.com/watch?v=k2FpTjEWc5s)
