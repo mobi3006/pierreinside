@@ -186,6 +186,33 @@ laufen lassen will. Die ASG sorgt dann aufgrund von Lastmetriken und Healthcheck
 
 Dieser Dienst bietet einen File-Server in Form von sog. S3-Buckets. Der Names des Buckets muß global eindeutig sein.
 
+### Minio
+
+* [Verwendung der aws-CLI](https://docs.minio.io/docs/aws-cli-with-minio.html)
+
+Minio ist eine S3 kompatible Implementierung, die man beispielsweise in Hybrid-Szenarien (in denen sowohl AWS als auch Onprem supported werden muß) einsetzen kann. Minio kann über die `aws`-CLI mit der gleichen Konfiguration (in `~/.aws`) verwendet werden. Man muß nur per Parameter den Parameter `--endpoint-url`-Parameter verwenden, um den "S3"-Server zu definieren.
+
+```bash
+aws --profile play.min.io --endpoint-url https://play.min.io:9000 s3 ls
+```
+
+Bei dieser Verwendung werden weitere Konfigurationen (AWS-Credentials, Region des Buckets, ...) aus `~/.aws/config`
+
+```ini
+[play.min.io]
+region = us-east-1
+```
+
+und `~/.aws/credentials`
+
+```ini
+[play.min.io]
+aws_access_key_id = Q3AM3UQ867SPQQA4AAAA
+aws_secret_access_key = zuf+tfteSlswRu7BJ86wekitnifILAaBbZbb
+```
+
+beigesteuert.
+
 ---
 
 ## Elastic Load Balancer (ELB)

@@ -299,7 +299,7 @@ dict = {}
 dict["one"] = "eins"
 dict["two"] = "zwei"
 dict["three"] = "drei"
-dict["wasauchimmer] = ["pierre", "feldbusch", 1972]
+dict["wasauchimmer"] = ["pierre", "feldbusch", 1972]
 print(dict)
 
 del dict["wasauchimmer"]

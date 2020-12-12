@@ -243,7 +243,7 @@
     * [Quick Mill Orione 3000](quickMillOrione3000.md)
     * [Hebe-Schiebetür](hebeSchiebetuer.md)
     * [Gasgrill](gasgrill.md)
-    * [Hausautomatisierung](homeAutomation.md)
+    * [Smart-Home](smartHome.md)
       * [Raspberry Pi](raspberrypi.md)
       * [Heimnetzwerk](heimnetzwerk.md)
   * Freizeit

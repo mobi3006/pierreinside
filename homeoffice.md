@@ -107,6 +107,54 @@ Wird über Bluetooth gesteuert - Amazon-Alexa-Integration.
 
 ---
 
+## Webcam
+
+Meine Webcam am Laptop reicht für gelegentliche Videokonferenzen, doch normalerweise nutze ich den Laptop nicht als zentralen Bildschirm, sondern meinen großen 32 Toll 4k Bildschirm. Das hat dann allerdings zur Folge, daß meine Konferenzpartner immer den Eindruck haben ich spreche gar nicht mit ihnen oder mache was ganz anderes.
+
+### Externe Webcam
+
+Eine externe USB-Kamera, die ich oberhalb meines 32-Zoll Bildschirms positioniere, wäre sicherlich die beste Lösung. Mit ca. 50 - 150 Euro sollte das erledigt sein.
+
+### DSLR als Webcam
+
+* [Anleitung von Digisaurier](https://www.digisaurier.de/praxis-die-digitalkamera-im-einsatz-als-webcam/)
+* [Clean HDMI Panasonic Lumix FZ 1000 ii](https://www.imaging-resource.com/news/2014/07/31/the-panasonic-fz1000-can-output-clean-hdmi-video)
+  * diese Anleitung funktioniert auch bei Lumix FZ 1000 ii
+
+Während für normale Videokonferenzen die Bilder einer günstigen Webcam genügen, sollte die Qualität für Schulungsvideos oder professionelle Präsentationen sicherlich höher sein. Was liegt da näher als die schon vorhandene [Panasonic Lumix DC-FZ1000 II (Bridge-Camera)](panasonic-fz1000ii.md) zu verwenden.
+
+**HDMI-USB-Capture-Device:**
+
+Die Kamera hat einen Mini-HDMI-Ausgang, der üblicherweise für den Anschluß an einen Fernseher gedacht ist. Diesen kann man allerdings auch in eine HDMI-USB-Capture-Device anschließen und so kommt das Sucher-Monitor-Signal in den Laptop ... im gleichen Format wie bei einer Webcam. Einziges Manko ist allerdings, daß tatsächlich der gesamte Bildschirm - inklusive der sichtbaren Menüs und Einstellungen (On-Screen Info) - übertragen wird. Die Kamera muß den sog. [Clean HDMI out](https://www.dpreview.com/forums/post/42462762) unterstützen, bei der das Signal direkt vom Sensor abgegriffen wird.
+
+Bei der Lumix FZ 1000 ii funktioniert das ... die Default-Einstellungen geben allerdings die OnScreen-Infos aus. Über *Settings - TV Anschluß - HDMI Info anzeigen - Off* kann man das aber abstellen.
+
+>Unterstützt die Kamera das nicht, bleibt nur die Möglichkeit, die On-Screen Info weitestgehend abzuschalten.
+
+**Stromversorgung:**
+
+Man will den Akku natürlich im Dauerbetrieb nicht nutzen - auch wenn der beim Laden im Gerät verbleiben kann und somit gleichzeitige Nutzung und Ladung möglich ist. Die bessere Variante wäre ein DC-Koppler.
+
+* die Leica V-Lux 5 ist ein Derivat der FZ1000 ii und somit sollte [dieses Netzteil](https://www.ebay.de/itm/Netzteil-fur-Panasonic-Lumix-DC-FZ1000-II-Leica-V-LUX-Typ-114-Netzadapter/324143566603?_trkparms=aid%3D1110006%26algo%3DHOMESPLICE.SIM%26ao%3D1%26asc%3D20200520130149%26meid%3D871b44c384c84e90b3c7890dc2b46653%26pid%3D100012%26rk%3D1%26rkt%3D12%26sd%3D223476354290%26itm%3D324143566603%26pmt%3D1%26noa%3D0%26pg%3D2047675%26algv%3DSimplAMLCvipPairwiseWebWithBBEV2bDemotion%26brand%3DSubtel&_trksid=p2047675.c100012.m1985) für 25 Euro funktionieren.
+
+**Speicherung oder Streaming:**
+
+Mit Tools wie [Open Broadcaster Software - OBS](https://obsproject.com/de) läßt sich das Video als Datei speichern oder direkt auf Youtube und co streamen.
+
+**Nutzung in Videokonferenzen:**
+
+geht das?
+
+**Befestigung:**
+
+Die Kamera verfügt über ein Stativ-Gewinde und läßt sich somit an einem
+
+**Steuerung:**
+
+Was soll man denn da steuern können. Auto-Fokus funktioniert ja vielleicht out-of-the-box ... aber Weißabgleich oder Zoom - dazu will man ja nicht hinter den Schreibtisch zur Befestigung klettern müssen.
+
+---
+
 ## Höhenverstellbarer Schreibtisch
 
 ### Anforderungen
@@ -141,6 +189,10 @@ Erstes Fait:
 
 Der Tisch ist klasse - extrem stabil (im Vergleich zu meinem högenverstellbaren IKEA-Schreibtisch).
 
+### Monitorbefestigung
+
+Prinzipiell ist der Monitor-Standfuß meiens 32 Zoll Bildschirms akzeptabel. In einem Video habe ich allerdings eine "schwebende" und schwenbare Befestigung an der Tischplatte gesehen. Das wäre vielleicht mal eine Idee.
+
 ---
 
 ## Bürostuhl
@@ -153,9 +205,9 @@ Im Büro habe ich seit 2 Jahren den "Ergo Line II Pro" und bin damit zufrieden. 
 
 ## Schreibtisch-Organisation
 
-Ich hasse Kabel und ihre Unordnung ...
-
 ### Verkabelung
+
+Ich hasse Kabel und ihre Unordnung ... und ich will auch keinen Standby-Strom verbraten - mechanische Schalter für potentialle Energiefresser sind schon praktisch.
 
 Genutzt werden 4 Computer, eine Playstation und zwei externe Bildschirme
 

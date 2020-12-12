@@ -178,3 +178,4 @@ Ich habe Quizlet durch meinen Sohn kennengelernt, der das in der Schule eingeset
 * penalty
 * deserve
 * attend
+* notice
