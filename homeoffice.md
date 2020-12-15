@@ -111,9 +111,11 @@ Wird über Bluetooth gesteuert - Amazon-Alexa-Integration.
 
 Meine Webcam am Laptop reicht für gelegentliche Videokonferenzen, doch normalerweise nutze ich den Laptop nicht als zentralen Bildschirm, sondern meinen großen 32 Toll 4k Bildschirm. Das hat dann allerdings zur Folge, daß meine Konferenzpartner immer den Eindruck haben ich spreche gar nicht mit ihnen oder mache was ganz anderes.
 
+Das Mcirofon meines Laptop ist nahezu unbrauchbar ... auch, weil ich unter meinem Laptop noch einen [Klim-Cooler](https://klimtechs.com/shop/coolers/klim-wind/) habe. Der ist zwar nicht sehr laut, aber dafür nahe am Microfon. Deshalb brauche ich in jedem Fall ein anderes Mikrofon. Ich habe mich mit einem Microsoft Life-Chat LX 3000 Headset angefreundet.
+
 ### Externe Webcam
 
-Eine externe USB-Kamera, die ich oberhalb meines 32-Zoll Bildschirms positioniere, wäre sicherlich die beste Lösung. Mit ca. 50 - 150 Euro sollte das erledigt sein.
+Eine externe USB-Webcam, die ich oberhalb meines 32-Zoll Bildschirms positioniere, wäre sicherlich die beste Lösung. Mit ca. 50 - 150 Euro sollte das erledigt sein. Für den täglichen Gebrauch sollte die Qualität ausreichen ... für professionellere Full-Face-Videos würde ich einen DSLR-Ansatz wählen.
 
 ### DSLR als Webcam
 
@@ -152,6 +154,34 @@ Die Kamera verfügt über ein Stativ-Gewinde und läßt sich somit an einem
 **Steuerung:**
 
 Was soll man denn da steuern können. Auto-Fokus funktioniert ja vielleicht out-of-the-box ... aber Weißabgleich oder Zoom - dazu will man ja nicht hinter den Schreibtisch zur Befestigung klettern müssen.
+
+---
+
+## Mikrofon
+
+Ich verwende derzeit am liebsten das *Microsoft Life-Chat LX 3000 Headset* (30 Euro).
+
+### Airpods
+
+Super angenehm zu tragen. Die Audio-Qualität ist super, doch das Mikrofon taugt an meinem Laptop nicht. Am iPad und am iPhone ist die Qualität deutlich besser.
+
+Ich mag sie, benutzte sie aber nur an iPad und iPhone.
+
+### Microsoft Life-Chat LX 3000 Headset
+
+Dieses kabelgebundene Headset ist sehr angenehm zu tragen, selbst nach Stunden ist es nicht unangenehm (wobei vom Tragekomfort meine AirPods noch angenehmer sind). Ich mag eine Kabelverbindung lieber, da sie einfach immer zuverlässig funktioniert ... ganz im Gegensatz zu den OneOdio-Headset.
+
+Zudem hat das Headset Hardwaretasten, um das Mikrophon abzuschalten und die Lautstärke zu verändern.
+
+Ich stehe nicht auf Noise-Cancelling-Kopfhörer - zumindest nicht, wenn ich es selbst schaffe in einen Flow zu kommen. Ich bekomme doch noch gerne was von meiner Umwelt mit.
+
+### OneOdio A9
+
+Dieses Bluetooth-Headset hat Noise-Cancelling. Ich habe sie geschenkt bekommen und habe schon bald gemerkt, daß ich kein Freund des Noise-Cancellings bin.
+
+Für laute Umgebungen ist es sicherlich eine Alternative, aber im normalen (ruhigen) Büro mag ich es einfach nicht.
+
+Meine Kollegen im Büro wurden auch mit diesen Kopfhörern ausgestattet und es hat einfach nicht funktioniert. Die Kanäle haben sich überlagert und dann war der Akku immer dann leer, wenn ich sie mal gerne benutzt hätte.
 
 ---
 
