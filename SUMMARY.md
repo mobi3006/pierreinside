@@ -206,6 +206,7 @@
       * [Handbrake](handbrake.md)
     * [Gopro](gopro.md)
     * [Panasonic FZ1000 ii](panasonic-fz1000ii.md)
+      * [als Webcam](panasonic-fz1000ii-webcam.md)
     * [AV Receiver](avReceiver.md)
     * [Videos schneiden](video-produktion.md)
     * [Kameratasche](kameratasche.md)
