@@ -250,6 +250,7 @@ Das schöne der meisten smarten Lampen ist die eingebaute Dimmer-Funktion und be
   * 50 Geräte an einer Bridge möglich
 * für eine Fernsteuerung außerhalb des eigenen Netzes benötigt man einen Hue-Internet-Account
   * aus Sicherheitsgründen würde ich auf diesem Luxus grundsätzlich verzichten ... es gibt nicht unbedingt viele sinnvolle Use-Cases aus meiner Sicht
+* [Touch Portal](touchPortal.md) liefert eine Möglichkeit, seine eigene Oberfläche zu designen
 
 ### Phillips Hue Bluetooth
 
@@ -267,6 +268,3 @@ Das schöne der meisten smarten Lampen ist die eingebaute Dimmer-Funktion und be
 ### Innr
 
 * kompatibel mit Hue aber deutlich günstiger ... funktioniert also auch mit der Hue App
-
----
-
