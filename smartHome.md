@@ -221,9 +221,13 @@ Basierend auf der REST-API.
 
 ---
 
-## Amazon Echo
+## Amazon Echo - die Sprach-Steuerzentrale
 
-Amazon Echo ist EIN bietet (wie Google Home, Apple ...) eine komfortable Möglichkeit, um Smart-Home-Geräte per Sprache zu steuern und komplexere Routinen zu "programmieren". Letztlich bietet Echo aber zunächst man nur die Sprachintegration ... eine Steuerung der Geräte muß in vielen Fällen über sog. WLAN-Bridges erfolgen, die per WLAN mit dem Echo gekoppelt sind. Die Bridge stellt also per WLAN die Verbidnung zum Echo her und per Funkprotokoll die Verbindung zum Endgerät. Einzige Bedingung ist, daß die Bridge zu Echo kompatibel ist.
+Amazon Echo bietet (wie Google Home, Apple ...) eine komfortable Möglichkeit, um Smart-Home-Geräte per Sprache zu steuern und komplexere Routinen zu "programmieren".
+
+> Im Vergleich zu *Home Assistant* sind die Möglichkeiten eingeschränkt, aber dafür muß man auch nur einen Bruchteil der Zeit investieren.
+
+Letztlich bietet Echo aber zunächst man nur die Sprachintegration ... eine Steuerung der Geräte muß in vielen Fällen über sog. WLAN-Bridges erfolgen, die per WLAN mit dem Echo gekoppelt sind. Die Bridge stellt also per WLAN die Verbidnung zum Echo her und per Funkprotokoll die Verbindung zum Endgerät. Einzige Bedingung ist, daß die Bridge zu Echo kompatibel ist.
 
 Amazon Echo Plus 2020 enthält bereits eine Zigbee-Bridge und kann somit out-of-the-box zur Steuerung verwendet werden.
 
@@ -233,7 +237,7 @@ Das war mein Einstieg in die Smart-Home-Welt ... Echo Plus + Hue Bluetooth war f
 
 Da Zigbee allerdings kein richtiger Standard ist, sondern viele Inkompatibilitäten hat, sind [Ende 2020 nur relativ wenige Endgeräte Amazon-Echo-Plus-kompatibel](https://www.haus.de/smart-home/amazon-echo-als-smart-home-zentrale). Die Lichtsysteme von Hue, Osram Lightify, Ikea Tradfri, Nanoleaf, Innr gehören dazu ... aber das war es dann auch schon ... klingt eher nach einer enttäuschenden Marketingmaßnahme.
 
-Die Phillips Hue Bridge (40 Euro) ist zu deutlich mehr Zigbee-Endgeräten kompatibel.
+Die Phillips Hue Bridge (40 Euro) ist zu deutlich mehr Zigbee-Endgeräten kompatibel. Für den Einstieg reicht das aber erstmal - und war bei meiner Alexa "kostenlos" dabei.
 
 ---
 
@@ -264,9 +268,28 @@ Das schöne der meisten smarten Lampen ist die eingebaute Dimmer-Funktion und be
   * Bluetooth-Reichweite ist auf 9m eingeschränkt
     * Steuerung von unterwegs nicht möglich
 
+Das war mein Einstieg in die Smart-Home-Welt ... Echo Plus + Hue Bluetooth war für 60 Euro ein echtes Schnäppchen.
+
 ### Innr
 
 * kompatibel mit Hue aber deutlich günstiger ... funktioniert also auch mit der Hue App
 
 ---
 
+## Steckdosen
+
+Ich habe einen alten (hässlichen) Powermanager, der derzeit noch auf meinem Schreibtisch steht und mich stört. Mittlerweile brauche ich auch gar keine 7 verschiedenen Gerätegruppen mehr. Ich komme mit 1-3 gut aus.
+
+Ich habe noch ein paar 15 Jahre alte Funksteckdosen, die mit einem propritären Handsender bedient werden. Leider funktioniert der Funksender nicht so zuverlässig ... manchmal reagiert es gar nicht, manchmal nur nach nur nachdem ich meine Position verändere und manchmal klappt es auch mehrfach hintereinander. Kurz: ich bin genervt.
+
+### Ledvance Smart+Plug
+
+Ledvance bietet Produkte basierend aif Wifi, Bluetooth und Zigbee. Nachdem ich nun Hue Bluetooth erfolgreich an meinen Echo Plus koppeln konnte und das einwandfrei und zuverlässig funktioniert, habe ich mich nun für eine Zigbee-Steckdose entschieden.
+
+Die Erstinbetriebnahme gestaltete sich seltsam, aber nicht problematisch - evtl. weil es das erste mal war. Nach dem Einstecken forderte ich "Alexa, suche Geräte", aber es wurde kein neues Gerät gefunden. Ich fand auch keinen Pairing-Schalter an der Steckdose ... also versuchte ich es mit dem Power-Schalter, den ich länger drückte und dann erneut "Alexa, suche Geräte". Kein Erfolg. Nach Abstöpseln und erneutem Anstöpseln, drückte ich den Power-Button nur 5 Sekunden und erneut "Alexa, suche Geräte" ... diesmal mit Erfolg. Alexa meldete, "Steckdose 1 gefunden".
+
+> Beim nächsten mal werde ich erst die Suche starten und dann die Steckdose einstecken. Übrigens: 10 Sekunden auf den Power-Button drücken führt zu einem Reset.
+
+In der Alexa-App am iPhone konnte ich die Steckdose nun auch sehen und ihr einen anderen Namen "Arbeitsplatz" geben. Sogleich wollte ich die Steckdose mit einer Routine verknüpfen, doch die Steckdose war innerhalb der Routinen als Gerät nicht aufzufinden. Also versuchte ich einfach mal "Alexa, Arbeitsplatz an" - ERFOLG.
+
+Noch habe ich nicht herausgefunden, warum ich die Smart+Plug nicht in Routinen verwenden kann. Vielleicht brauche ich noch einen Alexa-Skill?
