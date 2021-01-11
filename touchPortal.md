@@ -4,6 +4,16 @@ Das Touch Portal ist ein Open-Source Projekt, das ähnliche Funktionalität biet
 
 ---
 
+## Alternative
+
+### Deckboard
+
+* [Homepage](https://github.com/rivafarabi/deckboard)
+
+Wenn man kein externes Steuergerät verwenden will, dann ist das vielleicht eine brauchbare Alternative. Funktioniert allerdings auch mit einem Android-Handy/Tablet zur Steuerung.
+
+---
+
 ## Server
 
 * [Einführung](https://www.youtube.com/watch?v=dtI81N-YQT8)
