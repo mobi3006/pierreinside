@@ -17,7 +17,7 @@ Terrform ist Cloud-Provider unabhängig ... damit verhindert es im Gegensatz zu 
 
 ## Konzept
 
-Man beschreibt einen Zielzustand und Terraform berechnet daraus einen Execution Plan für verschiedene Deploy-Platformen - die Beschreibung ist unabhängig von der Ziel-Platform (geringer/kein Vendor-Lockin), der Execution Plan ist platform-spezifisch. Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans.
+Man beschreibt einen Zielzustand und Terraform berechnet aus dem aktuellen Zustand einen Execution Plan (die tatsächlichen Aktionen) für verschiedene Deploy-Platformen - die Beschreibung ist unabhängig von der Ziel-Platform (geringer/kein Vendor-Lockin), der Execution Plan ist plattform-spezifisch. Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans.
 
 > ACHTUNG: Terraform berücksichtigt bei der Planung nur den State (gespeichert in einer Datei - abgelegt auf der lokalen Platte oder auf einem shared Bereich). Der tatsächliche Zustand der Runtime-Umgebung wird nicht berücksichtigt (wäre auch sehr schwierig). Das bedeutet im Umkehrschluß, daß manuelle Änderungen an der Runtime-Umgebung verloren gehen oder vielleicht sogar zu später fehlschlagenden `terraform apply` Kommandos führen können. Infrastructure-as-Code bedeutet auch,, daß man es konsequent anwendet!!!
 >> "Once you start using Terraform, you should only use Terraform" (Buch: *Terraform - Up and Running: Writing Infrastructure as Code*)
@@ -201,7 +201,7 @@ Hier sieht man auch sehr schön die übergreifende Adressierung (von `nomad_job.
 
 ### Module
 
-Auf diese Weise lassen sich Teile der Konfiguration wiederverwenden. Jede Sammlung von `*.tf` Dateien ist ein Modul.
+Auf diese Weise lassen sich Teile der Konfiguration wiederverwenden. Jede Sammlung von `*.tf` Dateien ist ein Modul ... man verwendet Module dementsprechend IMMER automatisch.
 
 So sieht die Wiederverwendung eines Moduls aus:
 
@@ -216,7 +216,7 @@ module "use-my-terraform-module" {
 }
 ```
 
-In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `/home/pfh/my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert. Es handelt sich hier also im wesentlichen, um einen Template-Mechanismus.
+In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `/home/pfh/my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert. Module stellen einen Template-Mechanismus zur Verfügung.
 
 Praktisch ist, daß man bei `source` auch eine Sammlung von Terraform Scripten in Form einer `zip`-Datei angeben kann. In dem Fall wird die Zip-Datei bei `terraform apply` entpackt und die Platzhalter werden ersetzt. Auf diese Weise kann man eine Sammlung von Konfigurationsdateien in einem `zip`-File bereitstellen und dann mit Werten belegen.
 
@@ -233,14 +233,16 @@ Provider sind das eigentliche Salz in der Suppe ... sie stellen die Implementier
 Viele Infrastrukturanbieter stellen Provider in Form von Modulen (werden bei `terraform init` aus dem Internet gezogen) für Terraform zur Verfügung:
 
 * [AWS](https://www.terraform.io/docs/providers/aws/index.html)
-* [Google]()
+* Google
 * [Nomad](https://www.terraform.io/docs/providers/nomad/index.html)
 * [Consul](https://www.terraform.io/docs/providers/consul/index.html)
 * [Vault](https://www.terraform.io/docs/providers/vault/index.html)
 * [Terraform Enterprise](https://www.terraform.io/docs/providers/tfe/index.html)
 * ...
 
-Beim `terraform init` werden diese Module i. a. dynamisch aus dem Internet gezogen (in diesem Beispiel werden die `latest` Versions gezogen, weil keine Versionen explizit angegeben wurden):
+Beim `terraform init` werden diese Module i. a. dynamisch aus dem Internet gezogen ... es werden dabei immer die zur terraform-Version passenden Versionen verwendet.
+
+> In diesem Beispiel werden die `latest` Versions gezogen, weil keine Versionen explizit angegeben wurden. Im Produktivbetrieb sollte man aber explizite Versionen verwenden, da man einen Rollout i. a. über verschiedene Stages zieht (DEV, TEST, LIVE) und nach einem erfolgreichen Abnahmetest auf der TEST-Stage nicht plötzlich eine ganz andere `latest`-Version (nicht abgenommen) beim Rollout auf LIVE nutzen möchte.
 
 ```
 pfh@workbench terraform init
@@ -290,9 +292,9 @@ Verwendet man bereits vorkonfigurierte Images (z. B. mit [Packer](packer.md)), d
 
 Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3) abgelegt werden kann. Dieser State beschreibt den aktuellen Zustand der Umgebung und ist die Basis, um aus der Ziel-Definition die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Per Default wir der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
 
-> ACHTUNG: sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken.
+> ACHTUNG: sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken. In keinem Fall sollte man den State in einem Version-Control-System halten.
 
-Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann das zu großen Problemen führen. Typisch sind dann Fehlermeldungen wie diese:
+Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann das zu großen Problemen führen, weil falsche Aktionen "berechnet" werden. Typisch sind dann Fehlermeldungen wie diese:
 
 ```
 keys already exist under service/petclinic/; delete them before managing this prefix with Terraform
@@ -304,9 +306,32 @@ Das liegt daran, daß Terraform eine Resource anlegen will, die aber schon vorha
 
 Über `terraform show` kann man den aktuellen State auf der Console ausgeben. Das hilft bei der Fehlersuche ungemein.
 
-### Workspaces
+### Locking
+
+Alle Aktionen, die innerhalb eines `terraform apply` vollzogen werden, führen zu Updates an der Runtime-Umgebung und zu Updates an dem State. Man muß verhindern, daß mehr als ein `terraform apply` auf EINEM State-File parallel ausgeführt werden, denn ansonsten schleichen sich Inkonsistenten (im State-File oder in der Runtime-Umgebung) durch Concurrent Updates ein. Man kann das beispielweise durch Ausführung der Updates auf einem zentralen (serialisierenden) Server (z. B. [Jenkins-Server](jenkins.md)) umsetzen oder man verwendet Locks. Für den Lock-Ansatz gibt es verschiedene Lösungen
+
+* Terraform Pro
+* Terraform Enterprise
+* [Terragrunt](https://github.com/gruntwork-io/terragrunt)
+
+### Isolation Best Practices
+
+Packt man die Beschreibung der gesamten Infrastruktur (für alle Stages) in ein einziges Deployment-Modul, so ist das Risiko etwas kaputtzumachen (es wird dann auch nur ein einziges State-File verwendet) vergleichsweise hoch. Wenn man nur eine kleine Änderung an den Edge-Proxies vornehmen will, dann ist es vielleicht besser nur das oberste Layer der Infrastruktur auszurollen und nicht die tieferen Schichten. Das hat auch etwas mit der Änderungshäufigkeit der verschiedenen Layer zu tun ... je tiefer desto seltener.
+
+Welches Level der Isolation verwendet wird, liegt in der Entscheidung des Nutzers - Terraform kann hier keine Vorgaben machen ... dennoch gibt es Best-Practices:
+
+* Separierung von Stages (DEV, TEST, LIVE)
+* Layering ... alles was man typischerweise gemeinsam deployed (weil es konsistent zueinander sein muß)
+
+### Isolation über Workspaces
 
 Über Workspaces lassen sich State-Files separieren, um so beispielsweise unterschiedliche Landschaften (Live-Environment, Test-Environment, DEV-Environment) voneinander trennen.
+
+### Terraform Versionen
+
+Man muß in jedem Fall sicherstellen, immer die richtige Version von Terraform zu verwenden. Das hört sich einfacher an als es in Wirklichkeit ist - keine Rocket-Science, aber es erfordert Disziplin, wenn man beispielsweise verschiedene Deploy-Stages hat, die absichtlich mit unterschiedichen Terraform-Versionen betrieben werden. Terraform wird nämich das State-File auf die höchste Version migrieren und damit ist der State für ältere Versionen evtl. nicht mehr zu gebrauchen. Das kann man beispielsweise mit einem [Jenkins-Server](jenkins.md) umsetzen, der IMMER das richtige `terraform`-Binary verwendet!!!
+
+> schon allein aus diesem Grund sollten man die State-Files der Stages (DEV, TEST, LIVE) separieren
 
 ---
 

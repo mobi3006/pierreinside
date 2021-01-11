@@ -228,6 +228,7 @@
       * [Plant UML](plantuml.md)
       * [Chromium](chromium.md)
     * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
+  * [Beamer Benq W1000+](beamer_benq_w1000plus.md)
   * Spielekonsole
     * [2017](spielekonsole_2017.md)
       * [Playstation 4](playstation.md)
@@ -244,6 +245,7 @@
     * [Klimaanlage](klimaanlage.md)
     * [Swimming Pool](swimmingPool.md)
     * [Quick Mill Orione 3000](quickMillOrione3000.md)
+    * [Spülmaschine 2021](spuelmaschine_2021.md)
     * [Hebe-Schiebetür](hebeSchiebetuer.md)
     * [Gasgrill](gasgrill.md)
     * [Smart-Home](smartHome.md)
