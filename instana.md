@@ -30,7 +30,28 @@ Aus diesem Grund sind bezahlbare fertige (gut supportete) Lösungen eine gute Sa
 
 ---
 
+## Architektur
+
+* ein sog. Agent-Prozess (z. B. auch als Docker Container - macht die Nutzung extrem komfortabel) wird auf dem System gestartet ( sehr klein - ca. 50MB Memory) und dann läuft die Auto-Discovery-Maschinerie an
+  * enthält komponentenspezifische Sensoren für (Abtastrate: 1 Sekunde)
+    * Betriebssystem
+    * Java-VM
+      * ganz wichtig: man muß den Java-Prozess NICHT mit einem Java-Agent (auf JVM Level) ausstatten. Stattdessen werden die Daten von einem Port abgegriffen, der von der JVM standardmäßig bereitgestellt wird
+    * Appserver (z. B. Tomcat)
+    * ElasticSearch
+    * ...
+  * schickt Daten ans Backend (On-Premise vs. Cloud)
+    * ACHTUNG: die gesendeten Daten lassen sich einschränken - auf diese Weise ist es beispielsweise möglich bei SQL-Queries keine Werte der `WHERE-clauses zu übermitteln, so daß im Instana-UI keine "Geheimnisse" sichtbar sind
+* Backend (Cloud oder On-Premise)
+  * sammelt die Daten der Agents
+  * basierend auf Cassandra, Kafka, ElasticSearch ... scale-out possible with these technologies
+* Web-User-Interface
+
+---
+
 ## Konzepte und Features
+
+![Konzepte](images/instana.png)
 
 ### SaaS oder On-Premise
 
@@ -327,33 +348,6 @@ Zur Verarbeitung dieser Messwerte stehen zwei Möglichkeiten zur Verfügung:
 > * Grafana (Reporting/Statistiken ist das Ziel) berücksichtigt ausschließlich Metriken - keine Events
 > * Instana (Alerting ist das Ziel) berücksichtigt ausschließlich Events (deshalb müssen aus Metriken Events gemacht werden) - keine Metriken
 
-**Event:**
-
-Hierzu legt man ein neues Event an und darauf aufsetzend lassen sich dann auch Alerts anlegen, die beispielsweisse per MS Teams, Slack, PagerDuty ... verschickt werden können.
-
-**Grafana:**
-
-siehe eigener Abschnitt
-
----
-
-## Architektur
-
-* ein sog. Agent-Prozess (z. B. auch als Docker Container - macht die Nutzung extrem komfortabel) wird auf dem System gestartet ( sehr klein - ca. 50MB Memory) und dann läuft die Auto-Discovery-Maschinerie an
-  * enthält komponentenspezifische Sensoren für (Abtastrate: 1 Sekunde)
-    * Betriebssystem
-    * Java-VM
-      * ganz wichtig: man muß den Java-Prozess NICHT mit einem Java-Agent (auf JVM Level) ausstatten. Stattdessen werden die Daten von einem Port abgegriffen, der von der JVM standardmäßig bereitgestellt wird
-    * Appserver (z. B. Tomcat)
-    * ElasticSearch
-    * ...
-  * schickt Daten ans Backend (On-Premise vs. Cloud)
-    * ACHTUNG: die gesendeten Daten lassen sich einschränken - auf diese Weise ist es beispielsweise möglich bei SQL-Queries keine Werte der `WHERE-clauses zu übermitteln, so daß im Instana-UI keine "Geheimnisse" sichtbar sind
-* Backend (Cloud oder On-Premise)
-  * sammelt die Daten der Agents
-  * basierend auf Cassandra, Kafka, ElasticSearch ... scale-out possible with these technologies
-* Web-User-Interface
-
 ---
 
 ## User-Interface
@@ -368,12 +362,6 @@ siehe eigener Abschnitt
 
 * [Grafana-Integration](https://grafana.com/)
   * Instana läßt sich als Data-Source in Grafana nutzen (siehe [Instana Plugin](https://grafana.com/plugins/instana-datasource))
-
----
-
-## Konzepte
-
-![Konzepte](images/instana.png)
 
 ---
 
@@ -443,9 +431,11 @@ Ich wollte gerne ein Alert erzeugen, wenn eine unserer Services einen Heap-Dump 
 * Instana-Agent Event-API
 * Instana-Agent Statsd-Proxy für Metriken
 
-Die Event-API ist sehr rudimentär was die Bereitstellung von Meta-Daten betrifft. Hier steht eigentlich nur ein Textfeld zur Verfügung, das dann später verwendet werden kann, um einen Filter für das Alerting zu definieren. Ich hätte mir hier eher ein Tagging gewünscht, um gezielter (statt mit String-Wildcards) Selektionen vorzunehmen.
+In einem solchen Fall erschien mir ein Alert das passende Konzept, da Metriken eine sehr hohe Abtastrate haben (im Sekundenbereich) - mein Heapdump entsteht nur alle paar Stunden, Tage oder sogar Wochen. Die Event-API ist sehr rudimentär was die Bereitstellung von Meta-Daten betrifft. Hier steht eigentlich nur ein Textfeld zur Verfügung, das dann später verwendet werden kann, um einen Filter für das Alerting zu definieren. Ich hätte mir hier eher ein Tagging gewünscht, um gezielter (statt mit String-Wildcards) Selektionen vorzunehmen.
 
-Andererseits unterstützt Grafana keine Events - ausschließlich Metriken können in den Dashboard-Panels verwendet werden. Ich möchte allerdings historische Daten sammeln, um meine SLOs abzubilden und Probleme in der Anwendung zu entdecken. Meine derzeitige Lösung besteht darin, ein Event und eine Metrik nach Instana zu schreiben ... schon irgendwie redundant.
+Events haben einen Start und ein Ende ... hat man eine zu geringe Abtastrate beendet Instana ein erstelltes Event selbst. Das führt dazu, daß bei entsprechendem Alerting über Start und Ende informiert wird und die Nitification-Queue vollmüllt, wenn man eine kleinere Abtastrate hat. Man kann sich hier mit einer längeren `duration` als der Abtastrate behelfen, dann bleibt der Event zumindest für diese Zeit offen und wird dann bei der nächste Abtastung verlängert. Auf diese Weise kann ein Event bei geringer Abtastrate vorm pulieren geschützt werden.
+
+Zudem unterstützt Grafana keine Events und auch SLI/SLO-Dashboards lassen sich nicht auf Basis von Events definieren - ausschließlich Metriken können in den Dashboard-Panels verwendet werden. Meine derzeitige Lösung besteht darin, ein Event und eine Metrik nach Instana zu schreiben ... schon irgendwie redundant.
 
 ---
 
