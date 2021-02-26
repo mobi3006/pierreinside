@@ -10,7 +10,8 @@ Ich habe Quizlet durch meinen Sohn kennengelernt, der das in der Schule eingeset
 
 ## Bibliothek
 
-* encounter;
+* retire
+* encounter
 * challenge
 * problem
 * elasticity
@@ -179,3 +180,5 @@ Ich habe Quizlet durch meinen Sohn kennengelernt, der das in der Schule eingeset
 * deserve
 * attend
 * notice
+* emphasize
+* accomplish

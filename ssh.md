@@ -73,21 +73,40 @@ Host yournas
 
 Danach kann man sich geschmeidig mit ``ssh mynas`` und ``ssh yournas`` einloggen (hier findet man weitere Details: http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/)
 
-### SSH-Agent - Passphraseabfrage umgehen
+### SSH-Agent
 
-In manchen Fällen (z. B. [automatisiertes Scripting mit Ansible](ansible.md)) möchte man die Passphrase des Private-Keys nicht eingeben müssen. Hierzu kann man den SSH-Agent starten
+Der SSH-Agent ist ein Identity Store für Private Keys.
+
+Anwendungsfälle:
+
+* anderen Prozessen (z. B. einem Docker Container) Zugriff auf die Private Keys geben ohne den Prozess mit diesem User laufen zu lassen (Background: die files in `~/.ssh/` sind i. a. nur für den Benutzer selbst lesbar)
+* Private Keys mit Passphrase erwarten beim (jedem?!?) Zugriff auf den Key die interaktive Eingabe der Passphrase. Das ist nicht nur nervig, sondern auch nicht immer möglich.
+
+Der SSH-Agent wird folgendermaßen gestartet:
 
 ```bash
-    eval $(ssh-agent -s)
+eval $(ssh-agent -s)
 ```
 
-und diesem den SSH-Private-Key übergeben.
+Anschließend sind die beiden Umgebungsvariablen
 
-    ssh-add ~/.ssh/id_rsa
+* `SSH_AGENT_PID`
+  * Agent-Prozess-ID
+* `SSH_AUTH_SOCK`
+  * Socker (File), das man an (vertrauswürdige) Prozesse zum Teilen der Identities übergeben kann
 
-Dabei wird die Passphrase einmalig interaktiv vom Benutzer abgefragt. Danach liegt der Key entsperrt im Memory des Systems.
+und diesem den SSH-Private-Key übergeben
 
-Liste hinterlegter Private-Keys anzeigen: ``ssh-add -l``
+```bash
+ssh-add ~/.ssh/id_rsa
+```
+
+Hierbei wird man ein letztes mal nach der Passphrase gefragt. Wenn die paßt, dann wird der private Key ohne Passphrase im Identity Store (Memory) gespeichert.
+
+Ein paar nützliche Kommandos:
+
+* Liste hinterlegter Private-Keys anzeigen: `ssh-add -l`
+* Private-Key löschen
 
 ---
 

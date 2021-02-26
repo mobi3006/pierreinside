@@ -30,6 +30,10 @@ Ich habe bereits eine Heizungssteuerung - zumindest im Wohnzimmer und im Bad, di
 
 Ein [Netatmo-Heizkörper-Thermostat](https://www.homeandsmart.de/netatmo-smarte-heizkoerperthermostate-sprachsteuerung-homekit) könnte hier helfen.
 
+### Gartenbeleuchtung
+
+Will man im Garten dimmbare und farbige Lampen verbauen, so kommt man an Smart-Home Zigbee-Lampen fast nicht vorbei. Es gibt auch andere unterstützte Protokolle, doch Zigbee scheint die meiste Unterstützung zu haben. Die Wahrscheinlichkeit einer langfristigen Unterstützung ist einfach höher als bei einer weniger beliebten Lösung oder gar bei einer propritären Lösung eines Herstellers.
+
 ### Fazit
 
 Ich gebe zu, daß ich derzeit noch keine ganz klaren Use-Cases habe - ich will einfach mal damit rumspielen, um zu erfahren, ob das wirklich alles Sinn macht. Deshalb habe ich mir im Haus ein Smart-Home-Zimmer eingerichtet, in dem ich rumspielen kann.
@@ -274,6 +278,12 @@ Das war mein Einstieg in die Smart-Home-Welt ... Echo Plus + Hue Bluetooth war f
 ### Innr
 
 * kompatibel mit Hue aber deutlich günstiger ... funktioniert also auch mit der Hue App
+
+### Paulmann Plug & Shine
+
+Ich habe für mich das Paulmann Plug & Shine System entdeckt, das auf 24V Basis funktioniert - sicher und komfortabel. Die Kabel müssen nicht 60cm verbuddelt werden und das System läßt sich aufgrund des (proprietären) Bussystems leicht erweitern. Außerdem steht eine Vielzahl verschiedenener Lampen zur Verfügung, so daß jeder etwas finden sollte. Mit jedem Zigbee 3.0 kompatiblen Controller lassen sich die Lampen steuern. Nicht alle Lampen haben eine Zigbee-Unterstützung (zumeist aber die dimmbaren und farbigen), die in den Lampen verbaut ist. Es gibt auch Zigbee-Controller, die sich im Bus zwischenschalten lassen, um alle nachfolgenden Lampen einheitlich steuern zu können (gibt es auch mit zwischengeschaltetem Dimmer ... vielleicht ist dies aber sogar teurer als Lampen mit integriertem Zigbee-Controller).
+
+Die Lampen sind im Paulmann-Shop deutlich teurer als beim Wiederverkäufer (30-50%).
 
 ---
 

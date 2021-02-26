@@ -167,9 +167,13 @@ Hier kann man den aktuellen Verbrauch, den historischen und einen Forecast sehen
 
 ### Availability Zones
 
+* [AWS Regions and Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+
 Amazon muß natürlich auch selbst mal Wartungsarbeiten durchführen (oder hat auch mal ungeplante Ausfälle, z. B. durch Brand) und damit Infrastruktur vom Netz nehmen. Amazon empfiehlt die Verwendung von drei sog. Availability Zones und garantiert, daß IMMER mind. eine verfügbar ist. Bei der Verteilung der Microservices auf die verschiedenen Zones sollte man also **darauf achten, daß in jeder Zone mind. ein Knoten jedes Services deployed ist**.
 
-Der Elastic Load Balancer (ELB), der häufig der einzige öffentliche Zugangspunkt für Requests ist, sorgt dafür, daß die Requests aus dem Internet in die tatsächlich verfügbare Availability Zones delegiert werden.
+Der Elastic Load Balancer (ELB), der häufig der einzige öffentliche Zugangspunkt für Requests ist, sorgt dafür, daß die Requests aus dem Internet in die tatsächlich verfügbare Availability Zones delegiert werden und so keine Requests verlorengehen.
+
+Eine Region (z. B. eu-central-1) hat mehrere Availability-Zones (z. B. eu-central-1a, eu-central-1b, eu-central-1c) - Regionen und Availability Zones sind voneinander isoliert, so daß der Ausfall einer Region/Zone keinen Einfluß auf andere hat. Die Entfernung zwischen Client und Server entscheidet letztendlich über die Signallaufzeit und hat somit entscheidenden Einfluß auf die zu erwartende Latenz. Deshalb wird man versuchen, die Nutzer aus verschiedenen Regionen (z. B. eu-central-1, eu-west-1, us-east-1) zu bedienen.
 
 ### Auto-Scaling-Group (ASG)
 
