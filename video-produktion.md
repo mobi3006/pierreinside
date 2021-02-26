@@ -21,7 +21,7 @@ Durch die teilweise kostenlos angebotene Musik, Intros, ... kann man schon mit w
 ### Open Broadcaster Software
 
 * [Homepage](https://obsproject.com/de)
-* [meine Seite](obs.md)
+* [meine Seite](obs-studio.md)
 
 Hier lassen sich sehr individuelle Bildschirm-Aufbauten realisieren. Beispielsweise ein shared Screen plus Presenter-Video plus Bilder (Logos, Headlines, ...).
 
