@@ -209,7 +209,7 @@
       * [als Webcam](panasonic-fz1000ii-webcam.md)
     * [AV Receiver](avReceiver.md)
     * [Videos erstellen](video-produktion.md)
-      * [Open Broadcaster Software - OBS](obs.md)
+      * [OBS Studio](obs-studio.md)
       * [Touch Portal](touchPortal.md)
       * [Game-Streaming](streaming.md)
     * [Kameratasche](kameratasche.md)

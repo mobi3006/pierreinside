@@ -1,6 +1,33 @@
-# Open Broadcaster Software - OBS
+# OBS Studio
 
 * [Homepage](https://obsproject.com/de)
+
+---
+
+## OBS Studio vs. Streamlabs OBS
+
+Es gibt zwei unterschiedliche OBS Lösungen
+
+* OBS Studio (OPen Source)
+* [Streamlabs OBS](https://streamlabs.com/) ... mit OBS Studio als Platform
+
+OBS Studio ist die kostenloase Variante. [Streamlabs OBS](https://www.videokamera-streaming-studio.de/obs-studio-oder-streamlabs-obs-welche-streaming-software-ist-besser/) bietet - gegen Bezahlung (Abo-Modell):
+
+*  vorgefertigte Overlays
+* Multisream (zu verschiedenen Streaming-Platformen)
+* Website-Erstellung
+* Merchandising
+* Chat-Integration
+
+Für den Start ins Streaming ist OBS Studio also eine gute Lösung - zudem wenn es nur um die Erstellung von Videos geht.
+
+---
+
+## Alternative Streaming Software
+
+* XSplit
+* Wirecast
+* Lightsstream
 
 ---
 
@@ -41,6 +68,10 @@ Tatsächlich ist das YouTube-Streamin nur ein Anwendungsfall, auch in meinem Arb
 * [Offizielle Hompage - Pluginübersicht](https://obsproject.com/forum/resources/categories/obs-studio-plugins.6/)
 
 Am besten verwendet man die (evtl. bereitgestellten) Installer - ansonsten werden die Plugins einfach in das Installationsverzeichnis von OBS entpackt, also beispielsweise `C:\Program Files\obs-studio`
+
+### Touch Portal
+
+siehe [Streaming](streaming.md)
 
 ---
 

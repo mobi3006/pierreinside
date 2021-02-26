@@ -41,7 +41,7 @@ Die Elgato-Produkte haben mir schon gut gefallen, doch die Preise sind auch rech
 
 ## Verarbeitung des Signals
 
-Mit Tools wie [Open Broadcaster Software - OBS](obs.md) läßt sich das Video als Datei speichern oder direkt auf Youtube und Co streamen.
+Mit Tools wie [Open Broadcaster Software - OBS](obs-studio.md) läßt sich das Video als Datei speichern oder direkt auf Youtube und Co streamen.
 
 Ich bin gespannt wie es mit der Latenz aussieht ... insbesondere, wenn man Video und Audio aus unterschiedlichen Quellen verwendet.
 

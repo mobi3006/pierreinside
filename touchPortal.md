@@ -44,9 +44,13 @@ Man hat eine `main`-Page, die die Root-Seite repräsentiert. Mit der Aktion `Go 
 
 ## Page OBS Free
 
-Hiermit kann man [OBS](obs.md) fernsteuern, um so beispielsweise per Knopfdruck, die Szene zu wechseln. Aus meiners sicht ist das deutlich professioneller (aus Content-Consumer-Sicht) und deutlich einfacher (aus Content-Producer-Sicht) als Umkonfigurationen per Maus vorzunehmen.
+Hiermit kann man [OBS](obs-studio.md) fernsteuern, um so beispielsweise per Knopfdruck, die Szene zu wechseln. Aus meiners sicht ist das deutlich professioneller (aus Content-Consumer-Sicht) und deutlich einfacher (aus Content-Producer-Sicht) als Umkonfigurationen per Maus vorzunehmen.
 
-In OBS muß das [Palakis Websocket Plugin für OBS](https://obsproject.com/forum/resources/obs-websocket-remote-control-obs-studio-from-websockets.466/) installiert werden. Anschließend kann man im Tocuh Portal Menü "Einstellungen - OBS" die Verbindung zum OBS-Programm herstellen.
+In OBS muß das [Palakis Websocket Plugin für OBS](https://obsproject.com/forum/resources/obs-websocket-remote-control-obs-studio-from-websockets.466/) installiert werden. Anschließend kann man im Tocuh Portal Menü "Einstellungen - OBS" die Verbindung zum OBS-Programm herstellen. Am besten verwendet man die Option "Automatisch verbinden" ... ansonsten muß man die Verbindung über
+
+![OBS Verbindung](images/touchPortal-verbindenObs.png)
+
+manuell herstellen.
 
 Anschließend wird die Page "OBS Free" [runtergeladen](https://www.touch-portal.com/#section_createandshare) und ins eigene Touch Portal importiert.
 
