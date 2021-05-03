@@ -231,7 +231,7 @@ Amazon Echo bietet (wie Google Home, Apple ...) eine komfortable Möglichkeit, u
 
 > Im Vergleich zu *Home Assistant* sind die Möglichkeiten eingeschränkt, aber dafür muß man auch nur einen Bruchteil der Zeit investieren.
 
-Letztlich bietet Echo aber zunächst man nur die Sprachintegration ... eine Steuerung der Geräte muß in vielen Fällen über sog. WLAN-Bridges erfolgen, die per WLAN mit dem Echo gekoppelt sind. Die Bridge stellt also per WLAN die Verbidnung zum Echo her und per Funkprotokoll die Verbindung zum Endgerät. Einzige Bedingung ist, daß die Bridge zu Echo kompatibel ist.
+Letztlich bietet Echo aber zunächst mal nur die Sprachintegration ... eine Steuerung der Geräte muß in vielen Fällen über sog. WLAN-Bridges erfolgen, die per WLAN mit dem Echo gekoppelt sind. Die Bridge stellt also per WLAN die Verbidnung zum Echo her und per Funkprotokoll die Verbindung zum Endgerät. Einzige Bedingung ist, daß die Bridge zu Echo kompatibel ist.
 
 Amazon Echo Plus 2020 enthält bereits eine Zigbee-Bridge und kann somit out-of-the-box zur Steuerung verwendet werden.
 
@@ -242,6 +242,14 @@ Das war mein Einstieg in die Smart-Home-Welt ... Echo Plus + Hue Bluetooth war f
 Da Zigbee allerdings kein richtiger Standard ist, sondern viele Inkompatibilitäten hat, sind [Ende 2020 nur relativ wenige Endgeräte Amazon-Echo-Plus-kompatibel](https://www.haus.de/smart-home/amazon-echo-als-smart-home-zentrale). Die Lichtsysteme von Hue, Osram Lightify, Ikea Tradfri, Nanoleaf, Innr gehören dazu ... aber das war es dann auch schon ... klingt eher nach einer enttäuschenden Marketingmaßnahme.
 
 Die Phillips Hue Bridge (40 Euro) ist zu deutlich mehr Zigbee-Endgeräten kompatibel. Für den Einstieg reicht das aber erstmal - und war bei meiner Alexa "kostenlos" dabei.
+
+### Integration neuer Geräte
+
+Ich verwende die Hue App, um meine Zigbee-Geräte zu steuern. Es geht zwar auch mit der Alexa App, aber nur sehr eingeschränkt ... bei den RGB-Lampen kann ich nur einige vordefinierte Farben auswählen - die Hue App bietet alle Farben an. Zudem können Timer 
+
+Sowohl Alexa-App als auch Hue-App bieten Gruppen bzw. Szenen an, mit denen sich Geräte in einer Gruppe zusammenfassen lassen und mit einem Knopfdruck ein-/ausgeschaltet werden.
+
+Verwendet man nicht die Alexa-App zur Steuerung, will aber dennoch die Alexa-Sprachsteuerung verwenden, so muß müssen die Geräte und Szenen (z. B. "Terrasse an") sowohl in der Hue App als auch in der Alexa-App sichtbar bzw. gepflegt werden.
 
 ---
 
@@ -284,6 +292,10 @@ Das war mein Einstieg in die Smart-Home-Welt ... Echo Plus + Hue Bluetooth war f
 Ich habe für mich das Paulmann Plug & Shine System entdeckt, das auf 24V Basis funktioniert - sicher und komfortabel. Die Kabel müssen nicht 60cm verbuddelt werden und das System läßt sich aufgrund des (proprietären) Bussystems leicht erweitern. Außerdem steht eine Vielzahl verschiedenener Lampen zur Verfügung, so daß jeder etwas finden sollte. Mit jedem Zigbee 3.0 kompatiblen Controller lassen sich die Lampen steuern. Nicht alle Lampen haben eine Zigbee-Unterstützung (zumeist aber die dimmbaren und farbigen), die in den Lampen verbaut ist. Es gibt auch Zigbee-Controller, die sich im Bus zwischenschalten lassen, um alle nachfolgenden Lampen einheitlich steuern zu können (gibt es auch mit zwischengeschaltetem Dimmer ... vielleicht ist dies aber sogar teurer als Lampen mit integriertem Zigbee-Controller).
 
 Die Lampen sind im Paulmann-Shop deutlich teurer als beim Wiederverkäufer (30-50%).
+
+Die RGB-Farben sind bei 3,5 Watt Lampen sehr dunkel. Vor einer weißen Wand bekommen man schon recht wenig raus ... die Beleuchtung einer Pflanze kann man vergessen. Die weiße Beleuchtung der RGB-Lampen ist aber gut. Ich habe mich aus diesem Grund entschieden einfache weiße Lampen im hinteren Teil meines Gartens zu verwenden. Diese haben allerdings keinen Zigbee Controller integriert, weshalb ich mich entschlossen habe einen Paulmann Plug & Shine Zigbee Controller ins System zu integrieren.
+
+Der Paulmann Plug & Shine Zigbee Controller wurde aber von der Hue App nicht automatisch gefunden. In einem [Forum](https://community.hom.ee/t/paulmann-plug-shine-zigbeecontroller-ip68-fuer-gartenbeleuchtung/21304/13) habe ich gelesen, daß fünfmaliges ein- (für mind. 3 Sekunden) und ausschalten zu einem Reset führt. Leider hat das auch nicht geklappt.
 
 ---
 

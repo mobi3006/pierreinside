@@ -85,6 +85,7 @@ Ich habe Quizlet durch meinen Sohn kennengelernt, der das in der Schule eingeset
 * publish
 * provide
 * affect
+* afford
 * promise
 * propose
 * proposal
