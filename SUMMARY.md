@@ -74,6 +74,8 @@
     * [Kivy UI](kivy.md)
     * [FastAPI](fastapi.md)
     * [Typer CLI](typer.md)
+    * [Django](django.md)
+  * [Groovy](groovy.md)
   * Persistenz
     * Transactions
       * [Java TX](java_transactions.md)
@@ -114,6 +116,10 @@
   * [Maven](maven.md)
   * [Bamboo](bamboo.md)
   * [Jenkins](jenkins.md)
+    * [Jenkins Pipelines](jenkins_pipeline.md)
+    * [Jenkins Pipelines Tips und Tricks](jenkins_pipeline_implementation.md)
+    * [Jenkins-configuration-as-Code](jenkins_configurationAsCode.md)
+    * [Jenkins IDE](jenkins_ide.md)
   * [Travis CI](travis.md)
   * [Shellprogrammierung](shellprogramming.md)
   * [Konfiguration Management](configurationManagement.md)
@@ -145,6 +151,7 @@
       * [AWS](aws.md)
         * [AWS RDS](aws_rds.md)
         * [Static Website Hosting](aws_staticWebsiteHosting.md)
+        * [Serverless](aws_serverless.md)
       * [Google Cloud Platform](gcp.md)
     * [Docker Orchestrierung](docker_orchestration.md)
       * [CoreOS](coreos.md)
@@ -213,6 +220,7 @@
       * [Touch Portal](touchPortal.md)
       * [Game-Streaming](streaming.md)
     * [Kameratasche](kameratasche.md)
+    * [Kamera 2020](kamera-2020.md)
   * Handy
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
@@ -229,6 +237,7 @@
       * [Plant UML](plantuml.md)
       * [Chromium](chromium.md)
     * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
+    * [Dockingstation](dockingstation.md)
   * [Beamer Benq W1000+](beamer_benq_w1000plus.md)
   * Spielekonsole
     * [2017](spielekonsole_2017.md)
@@ -252,6 +261,8 @@
     * [Smart-Home](smartHome.md)
       * [Raspberry Pi](raspberrypi.md)
       * [Heimnetzwerk](heimnetzwerk.md)
+    * [Homeoffice](homeoffice.md)
+      * [Mobiles Büro mit dem iPad](mobiles-buero-ipad.md)
   * Freizeit
     * [Musik Streaming](musicStreaming.md)
     * [Sky](sky.md)
