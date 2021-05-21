@@ -296,7 +296,7 @@ Andere Elemente (z. B. `stage`, GString-Support, Nutzung von Shared-Libraries) s
 
 Besonders schwierig ist die Verwendung von geschweiften Klammern (`{ ... }`). Während die in einer scripted Pipeline eine Groovy-Closure kennzeichnet, handelt es sich in einer declarative Pipeline um syntactic Sugar (man weiß nicht genau, ob das tatsächlich als Closure gehandhabt wird). Stattdessen werden in Declarative Pipelines bei Funktionsaufrufen die runde Klammer verwendet.
 
-Mein Fazit: Selbst nach Jahren der Nutzung fällt es mir nach einer Pause nicht leicht, die Konzepte auseinanderzuhalten und genau zu wissen wie ein Snippet verarbeitet wird.
+Mein Fazit: Selbst nach Jahren der Nutzung fällt es mir nach einer Pause nicht leicht, die Konzepte auseinanderzuhalten und genau zu wissen wie ein Snippet verarbeitet wird (auch in [diesem Artikel](https://bmuschko.com/blog/jenkins-shared-libraries/) angedeutet). Manchmal scheinen Dinge wie Magie ... obwohl man sie doch eigentlich verstehen sollte.
 
 ### Motivation
 
@@ -309,7 +309,73 @@ TLDR:
 
 > "Unlike Declarative, Scripted Pipeline is effectively a general-purpose DSL built with Groovy. Most functionality provided by the Groovy language is made available to users of Scripted Pipeline, which means it can be a very expressive and flexible tool with which one can author continuous delivery pipelines [...] Scripted Pipeline is serially executed from the top of a Jenkinsfile downwards, like most traditional scripts in Groovy or other languages. Providing flow control, therefore, rests on Groovy expressions, such as the if/else conditionals [...] Another way Scripted Pipeline flow control can be managed is with Groovy’s exception handling support. When Steps fail for whatever reason they throw an exception. Handling behaviors on-error must make use of the try/catch/finally blocks in Groovy [...] The Groovy learning-curve isn’t typically desirable for all members of a given team, so Declarative Pipeline was created to offer a simpler and more opinionated syntax for authoring Jenkins Pipeline. [...] Where they differ however is in syntax and flexibility. Declarative limits what is available to the user with a more strict and pre-defined structure, making it an ideal choice for simpler continuous delivery pipelines. Scripted provides very few limits, insofar that the only limits on structure and syntax tend to be defined by Groovy itself, rather than any Pipeline-specific systems, making it an ideal choice for power-users and those with more complex requirements. As the name implies, Declarative Pipeline encourages a declarative programming model. Whereas Scripted Pipelines follow a more imperative programming model.
 
-"
+---
+
+## Pipeline Tips and Tricks
+
+* [MUST-HAVE](https://code-maven.com/jenkins)
+
+### Declarative Pipeline
+
+Auch hier lassen sich Shell-Skripte per `sh` einbinden ... an vielen Stellen - auch in den `environment`-Abschnitten. Für kleine Snippets geht das so:
+
+```
+sh "echo ${BRANCH_NAME}"
+```
+
+> Umgebungsvariablen von Jenkins (z. B. `BRANCH_NAME`) lassen sich hier einfach per Shell-Resolving auflösen.
+
+Verwendet man in dieser einfachen Form Anführungszeichen in der Payload, so muß man diese quoten:
+
+```
+sh "git tag -a 4711 -m \"New version 4771 tagged\" && git push origin 4711"
+```
+
+Bei größeren/komplexeren Skripten kann man es auch per
+
+```
+sh """
+   echo "Hallo Pierre"
+   echo "Du willst jetzt den branch ${BRANCH_NAME} bauen"
+   echo 'Du willst jetzt den branch ${BRANCH_NAME} bauen'
+"""
+```
+
+>ACHTUNG: in obigem Beispiel gibt es Anführungszeichen auf zwei Ebenen (auf der Ebene 2 muß das Anführungszeichen NICHT gequotet werden). Ebene 1: `sh """` - hierbei handelt es sich um die [Groovy-Triple-Double-Quotes](https://groovy-lang.org/syntax.html#_triple_double_quoted_string). Ebene 2: `echo "Du willst jetzt den branch ${BRANCH_NAME} bauen"` - hierbei handelt es sich um die Shell-Double-Quotes. Auch mit den einfachen Anführungszeichen funktioniert die Ersetzung von `BRANCH_NAME` in `echo 'Du willst jetzt den branch ${BRANCH_NAME} bauen'` ... aber nur wenn man die Groovy-Triple-Double-Quotes verwendet. Verwendet man hingegen die [Groovy-Triple-Single-Quotes](https://groovy-lang.org/syntax.html#_triple_single_quoted_string), so funktioniert die Ersetzung von `BRANCH_NAME` nicht.
+
+Sollen die Skripte auch noch einen Rückgabewert haben (im folgenden Beispiel die Anzahl der `*.log` Dateien), so kann das so erfolgen (hier sogar mit der Kennzeichnung des Shell-Typs "Bash"):
+
+```
+numberLogFiles = sh (
+    script: """#!/bin/bash
+               _pwd=`pwd`
+               find . -name "*.log" | wc -l
+            """,
+    returnStdout: true
+).trim()
+```
+
+> ACHTUNG: alles, was auf stdout geschrieben wird kommt dann in die Variable `numberLogFiles` (inkl. Zeilenumbrüche). Per Default ist der Datentyp ein String ... kann man aber auch noch per `as Integer` anpassen, so daß die Groovy Variable `numberLogFiles` ein Integer ist.
+
+Macht man hingegen folgendes (Verwendung der Shell-Variable `_counter`):
+
+```
+numberLogFiles = sh (
+    script: """#!/bin/bash
+               _pwd=`pwd`
+               _counter= `find . -name "*.log" | wc -l`
+               echo \${_counter}
+            """,
+    returnStdout: true
+).trim()
+```
+
+dann muß man das Dollar quoten - bei einer Groovy-Variablen oder einer Umgebungsvariablen hingegen nicht. Das macht es recht tricky, wenn man sich die Fallstricke mühsam erarbeiten muß :-(
+
+**REGEL:**
+
+* in Shell-Skripten können Groovy-Variablen und Umgebungsvariablen mit einfachem `${variable}` resolved werden ... Shell-Variablen müssen gequoted werden `\${variable}`.
+
 ---
 
 ## Modularisierung
@@ -319,6 +385,7 @@ Eine Pipeline, bei der alles nacheinander weg in den Pipeline-Code geschrieben w
 ### Deklarative Pipeline
 
 * [gutes Beispiel](https://www.jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/)
+  * in diesem Beispiel werden sogar deklarative Anteile (`pipeline`) und Groovy-Code (mit Closures) gemischt (ganz am Ende)
 
 In referenzierten Beispiel wird die Function `deploy(developmentServer, serverPort)` aufgerufen, die in einer separaten Datei `deploy.goovy` abgebildet ist. Hier wird deutlich, daß die DSL-Sprache eine Verzweigung in Groovy-Code erlaubt. Der Groovy-Code muß folgende Schnittstelle haben:
 
@@ -385,11 +452,11 @@ pipeline_build {                          // Variable pipeline_build wird mit de
 
 > Das `_` bedeutet, daß die gesamte Library importiert wird - hier könnte man restriktiver sein. Man kann in "Manage Jenkins - Global Pipeline Libraries" einen Default-Branch definieren, der verwendet wird, wenn keiner explizit (in obigem Beispiel `development`) angegeben ist.
 
-Es handelt sich bei `{ analyzeCode = true }` um eine [Groovy-Closure](https://groovy-lang.org/closures.html) (kann auch leer sein - `{}`), die als Parameter an die Variable `pipeline_build` übergeben und ausgeführt wird.
+Es handelt sich bei `{ analyzeCode = true }` um eine [Groovy-Closure](https://groovy-lang.org/closures.html) (kann auch leer sein - `{}`), die als Parameter an die Variable `pipeline_build` übergeben und ausgeführt wird. Insofern sieht man hier eine scripted Pipeline.
 
 > HÄÄÄÄÄÄ ... was ist da denn los - einen Parameter an eine Variable übergeben??? Letztlich beinhaltet die Variable `pipeline_build` eine Funktion (dafür hat Jenkins gesorgt - Integrationsmagic). Das Statement `pipeline_build { analyzeCode = true }` sorgt dann für die Ausführung der Funktion mit dem Closure-Parameter ... technisch über `call`. Wollte man das explizit tun wollen, so würden man `pipeline_build()` programmieren.
 
-Die Datei `vars/pipeline_build.groovy` könnte dann so aussehen:
+Die Datei `vars/pipeline_build.groovy` könnte dann so aussehen (Scripted Pipeline, da Closures verwendet wird):
 
 ```groovy
 def call(body) {
@@ -403,20 +470,34 @@ def call(body) {
 
 Die Zeilen in der Function `call` sorgen dafür, daß das übergebene Closure-Objekt konfiguriert wird (`resolveStrategy`, `delegate`) und der Closure-Code ausgeführt wird. Damit werden letztlich die übergebenen Parameter (`analyzeCode=true`) und die Default-Werte (`branch: master`) gegeneinander abgemischt und übrig bleibt `params = [branch: "master", analyzeCode: true]`.
 
-Variablen-Code `var/schedule.groovy` kann aber auch so aussehen:
+Variablen-Code `var/schedule.groovy` kann aber auch so aussehen (deklarative Pipeline):
 
 ```groovy
 import de.cachaca.Scheduler
 
 def call(Map config) {
-  def scheduler = new Scheduler()
-  if (config.when_day) {
+  pipeline {
+    stages {
+      stage('AAAA') {
+        agent any
+        steps {
+          // only a GString
+          echo "when_day: ${config.when_day}"
 
-  }
+          script {
+            // Groovy Code
+            def scheduler = new Scheduler()
+            if (config.when_day) {
+            }
+          }
+        }
+      }
+    }
+ }
 }
 ```
 
-In dem Fall hat der Parameter auch einen Datentyp (`Map`) ... im vorigen Beispiel war der formale Parameter untypisiert (`body`) und bekam zur Laufzeit eine Closure übergeben. Die Map wird dann folgendermaßen übergeben:
+In dem Fall hat der Parameter auch einen Datentyp (`Map`) ... im vorigen Beispiel war der formale Parameter untypisiert (`body`) und bekam zur Laufzeit eine Closure übergeben. Die Map wird dann folgendermaßen übergeben a:
 
 ```groovy
 schedule when_day: "Saturday"

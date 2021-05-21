@@ -864,6 +864,19 @@ Module, die Python nicht mitliefert müssen per `pip install MODULE_NAME` instal
 ### Python Virtual Environments
 
 * [Getting Started](https://docs.python-guide.org/dev/virtualenvs/)
+* [Tutorial](https://docs.python.org/3/tutorial/venv.html)
+
+Bei diesem Ansatz werden Bibliotheken und Interpreter in einem applikationsspezifischen Verzeichnis installiert, so daß verschiedene Ausführungsumgebungen voneinander getrennt werden können. Auf diese Weise werden Konflikte vermieden und man kann sich nicht auf Bibliotheken stützen, die im Zusammenhang mit einem anderen Projekt installiert wurden ... das verbessert die Qualität in den projektspezifischen Dependencies (`requirements.txt` Datei).
+
+Das Paket zum Management dieser virtuellen Umgebungen wird per `sudo apt install virtualenv` installiert. Per (z. B.) `virtualenv ~/ideWorkspaces/venv/jenkins-stats` wird ein virtuelles Environment im Ordner `~/ideWorkspaces/venv/jenkins-stats` angelegt. Anschließend befinden sich in diesem Verzeichnis einige Shell-Skripte. Um diese Umgebung zu aktivieren wird `source ~/ideWorkspaces/venv/jenkins-stats/bin/activate` ausgeführt. In meiner zsh-Shell ändert sich dadurch der Command-Prompt ... der Name der aktuell aktiven  virtuellen Umgebung ist erkennbar:
+
+```
+╭─pfh@workbench ~/src/com.github  
+╰─➤  source ~/ideWorkspaces/venv/jenkins-stats/bin/activate
+(jenkins-stats) ╭─pfh@workbench ~/src/com.github  
+```
+
+Anschließend sind die typischen Python Kommandos (`python`, `pip`, ...) auf die Skripte in der virtuellen Umgebung (`~/ideWorkspaces/venv/jenkins-stats/bin/python`) umgebogen. Die Installation von Libraries per `pip install Jinja2` oder `pip install -r requirements.txt` führen zur Installation der Pakete im virtuellen Environment (`~/ideWorkspaces/venv/jenkins-stats/lib`)
 
 ### FastAPI
 
