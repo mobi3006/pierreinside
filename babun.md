@@ -1,5 +1,6 @@
 # Babun
-* http://babun.github.io/
+
+* [Homepage](http://babun.github.io/)
   * übrigens eine [GitHub-Page](githubPages.md)
 
 Babun ist ein Tool, das [cygwin](cygwin.md) enthält ... aber zudem noch ein paar nette Features mitbringt. 
@@ -8,7 +9,7 @@ Babun ist ein Tool, das [cygwin](cygwin.md) enthält ... aber zudem noch ein paa
 
 ---
 
-# Features
+## Features
 
 * CLI-Paketmanager (``pact``) - unter cygwin kann die Installation von Paketen nur über den GUI-Installer erfolgen. Ich mag diesen GUI-Installer nicht - außerdem ist mit einem CLI-Paketmanager scripten möglich.
 * Auto-Update
@@ -17,7 +18,8 @@ Babun ist ein Tool, das [cygwin](cygwin.md) enthält ... aber zudem noch ein paa
 
 ---
 
-# Installation
+## Installation
+
 > Die Installation von Babun beeinflußt eine evtl. vohandene Cygwin-Installation nicht.
 
 * zip-File downloaden
@@ -36,12 +38,14 @@ Babun ist ein Tool, das [cygwin](cygwin.md) enthält ... aber zudem noch ein paa
 
 ---
 
-# Babun-Admin-Tool babun
-## babun check
+## Babun-Admin-Tool babun
+
+### babun check
+
 Mittels
 
     babun check
-    
+
 wird die Konfiguration überprüft ... bei einem Proxy-Problem sieht das Ergbenis dann beispielsweise so aus:
 
     { ~ }  » babun check                                                                            
@@ -54,7 +58,8 @@ wird die Konfiguration überprüft ... bei einem Proxy-Problem sieht das Ergbeni
     Hint: adjust proxy settings in 
       ~/.babunrc and execute 'source ~/.babunrc'
 
-## babun update
+### babun update
+
 Beim ``babun check`` erfolgt auch eine Prüfung auf Babun-Updates. Sollte
 
     Cygwin check      [OUTDATED]
@@ -63,37 +68,42 @@ erscheinen, dann erfolgt der Update von Babun und dem darunterliegenden Cygwin p
 
     babun update
 
-## babun shell
+### babun shell
+
 Die [zsh mit oh-my-zsh](zsh.md) ist die Default-Shell. Will man eine andere verwenden, dann geht das per 
 
     babun shell /bin/bash 
-    
-oder über die Anpassung der ``/etc/passwd`` per 
+
+oder über die Anpassung der ``/etc/passwd`` per
 
     chsh -s ${which zsh}
 
-## HTTP-Proxy Konfiguration
+### HTTP-Proxy Konfiguration
+
 ... erfolgt in ``~/.babunrc`` ... dort sind die notwendigen Einstellungen auch schon dokumentiert :-)
 
 ---
 
-# Paketmanager pact
+### Paketmanager pact
+
 * ``pact --help``: Anzeiger aller Kommandos
 * ``pact install openssh``: Paket ``openssh`` installieren
 
 ---
 
-# Probleme
-## Verwendung von Cygwin-Pfaden
-Ein 
+## Probleme
+
+### Verwendung von Cygwin-Pfaden
+
+Ein
 
 ``java -jar /cygdrive/c/libs/MyComponent.jar``
 
-und 
+und
 
 ``java -jar /c/libs/MyComponent.jar``
 
-schlägt unter einer zsh-Shell mit 
+schlägt unter einer zsh-Shell mit
 
 ```
 Error: Unable to access jarfile /cygdrive/c/libs/MyComponent.jar
@@ -101,11 +111,11 @@ Error: Unable to access jarfile /cygdrive/c/libs/MyComponent.jar
 
 fehl, obwohl die Datein bei ``ls /cygdrive/c/libs/MyComponent.jar`` bzw. ``ls /c/libs/MyComponent.jar`` problemlos gefunden wird.
 
-Ein 
+Ein
 
-``
+```
 java -jar /c/libs/MyComponent.jar
-`` 
+```
 
 hingegen funktioniert.
 
