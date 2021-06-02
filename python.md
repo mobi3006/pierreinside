@@ -18,12 +18,17 @@ Ich denke, man sollte das Rad nicht neu erfinden und sich an einen weit akzeptie
 Solche Prüfungen sollte die IDE auch unterstützen und überprüfen. Hierzu verwendet man sog. Linter. [Visual Studio Code unterstützt verschiedene Linter](https://code.visualstudio.com/docs/python/linting), der Default is Pylint, doch verwende ich für die Auto-Formatierung schon PEP8 und deshalb möchte ich auch diesen Coding Style verwenden:
 
 * ich selektiere über die Command Palette "Python: Select Linter / pycodestyle"
+  * laut Doku ist der PEP8 kompatibel
 * die Aufforderung zur Installation nehme ich an
 * anschließend enable ich Linting über Command Palette "Python: Enable/Disable Linting"
 
 Danach sehe ich die Style-Abweichungen in der Status-Leiste und dem Problems Tab:
 
 ![Pylinter](images/vscode-pylinter-pep8.png)
+
+Die Linter lassen sich über die VSCode `settings.json` den eigenen Ansprüchen entsprechend konfigurieren:
+
+> "python.linting.pycodestyleArgs": ["--ignore=E303"]
 
 Mit `yapf` kann ich die Formatierungsprobleme automatisch lösen - sehr praktisch.
 
@@ -41,14 +46,14 @@ yapf --in-place --recursive --style="{based_on_style: google, indent_width: 3}" 
 
 ```ini
 [style]
-based_on_style=google
-indent_width=3
+based_on_style=pep8
+indent_width=4
 ```
 
 Ich habe diesen Alias in meiner Shell definiert:
 
 ```bash
-alias yapf="yapf --in-place --recursive --exclude '**/venv/**' **/*.py"
+alias yapf="yapf --in-place --recursive --exclude 'venv/**' **/*.py"
 ```
 
 Mit einem einfachen `yapf` kann ich somit eine Formatierung vornehmen.
