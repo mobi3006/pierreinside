@@ -185,6 +185,7 @@ wird dann die Zahl `42` ausgegeben :-)
 
 ## Visual Studio Code
 
+* [Tutorial](https://code.visualstudio.com/docs/python/python-tutorial)
 * prepare System - see above
 
 Starte Visual Studio Code and installiere [Visual-Studio-Code Python Extension von Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-python.python). Create a file `hello.py`:
@@ -986,6 +987,8 @@ dann erfolgt die Ausgabe nur, wenn die Ausführung als Main-Modul gestartet wurd
 
 ### Paketmanager Pip
 
+[siehe eigenes Kapitel für mehr Details](python-libraries.md)
+
 * `pip install jinja2`
 * `pip install -r requirements.txt`
 * `pip list`
@@ -1196,7 +1199,7 @@ tritt der Fehler `int(name)` erst in Erscheinung, wenn ich den Namen `Pierre` ei
 
 ---
 
-## Bibliotheken
+## Bibliotheken / Pakete
 
 [siehe eigenes Kapitel](python-libraries.md)
 
