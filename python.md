@@ -1,14 +1,76 @@
 # Python
 
+<<<<<<< HEAD
 * [Referenzdoku realpython.com](https://realpython.com/)
 
 Python unterstützt verschiedene Paradigmen (Strukturierte Programmierung gleichermaßen wie Objektorientierte Programmierung). Es handelt sich hier um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
+=======
+Python unterstützt verschiedene Paradigmen (prozedurale, funktionale, objektorientierte). Es handelt sich um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
+
+---
+
+## Best Practices
+
+Als Newbe sollte man sich strikt an Best-Practices halten. Das gilt auch für erfahrene Software-Entwickler, die nun Python neu entdecken. Jede Sprache hat ihre Idiome, die es erfahrenen Python-Entwicklern einfachen machen, den Code zu lesen und zu verstehen. Wenn man sich selbst dann für Python-erfahren genug hält kann man sicher das ein oder andere anders machen.
+
+### Coding Style
+
+* [Official Python Code Style - PEP8]
+* [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)
+
+Ich denke, man sollte das Rad nicht neu erfinden und sich an einen weit akzeptierten Styleguide halten - einen Custom-Styleguide zu entwerfen halte ich für Zeitverschwendung. Zur Not muss man seinen Style halt leicht modifizieren (fällt mir als Python Newbe vielleicht auch besonders leicht, da ich noch keinen eigenen Style habe).
+
+Solche Prüfungen sollte die IDE auch unterstützen und überprüfen. Hierzu verwendet man sog. Linter. [Visual Studio Code unterstützt verschiedene Linter](https://code.visualstudio.com/docs/python/linting), der Default is Pylint, doch verwende ich für die Auto-Formatierung schon PEP8 und deshalb möchte ich auch diesen Coding Style verwenden:
+
+* ich selektiere über die Command Palette "Python: Select Linter / pycodestyle"
+  * laut Doku ist der PEP8 kompatibel
+* die Aufforderung zur Installation nehme ich an
+* anschließend enable ich Linting über Command Palette "Python: Enable/Disable Linting"
+
+Danach sehe ich die Style-Abweichungen in der Status-Leiste und dem Problems Tab:
+
+![Pylinter](images/vscode-pylinter-pep8.png)
+
+Die Linter lassen sich über die VSCode `settings.json` den eigenen Ansprüchen entsprechend konfigurieren:
+
+> "python.linting.pycodestyleArgs": ["--ignore=E303"]
+
+Mit `yapf` kann ich die Formatierungsprobleme automatisch lösen - sehr praktisch.
+
+### Formatting
+
+Immer wieder ein Streitpunkt unter Entwicklern ... Tabs oder Spaces, Einrückungen, ... blablabla. Ich mag den Ansatz von Golang, daß der Code immer automatisch formatiert wird und somit bei JEDEM Entwickler gleich aussieht. Ende der Diskussion.
+
+Meine Empfehlung ist die Verwendung von [yapf](https://github.com/google/yapf/). Hierbei handelt es sich um ein Python-Package (`pip install yapf`), das den Code auto-formatiert. Ich verwende es i. a. so (`venv` ist der Ordner meiner virtuellen Python Umgebung ... den Python-Source-Code der Distribution möchte ich nicht umformatieren):
+
+```bash
+yapf --in-place --recursive --style="{based_on_style: google, indent_width: 3}" --exclude "venv/**" **/*.py
+```
+
+`yapf` ist über ein `.style.yapf` (beispielsweise im Root-Folder eines Projekts) konfigurierbar, so daß man dort obige CLI-Options auch so abbilden kann
+
+```ini
+[style]
+based_on_style=pep8
+indent_width=4
+```
+
+Ich habe diesen Alias in meiner Shell definiert:
+
+```bash
+alias yapf="yapf --in-place --recursive --exclude 'venv/**' **/*.py"
+```
+
+Mit einem einfachen `yapf` kann ich somit eine Formatierung vornehmen.
+
+> Wenn man Bulk-Formatierungen vornimmt, sollte man das in einem eigenen Commit von anderen Änderungen separieren und in der Commit-Message entsprechend kennzeichnen. Am besten ist, wenn diese Formatierung IMMER vor einem Commit abläuft.
+>>>>>>> a75bc03e357efac034ea3aea51dc3e1938473602
 
 ---
 
 ## Versionen
 
-Python gibt es in verschiedenen Versionen. Version 2 und 3 sind zueinander inkompatibel. Dieser Code
+Python gibt es in verschiedenen Versionen. Version 2 (hat am 1.1.2020 sein End-of-Life erreicht) und 3 sind zueinander inkompatibel. Dieser Code
 
 ```python
 stadt = input("In welcher Stadt wohnst Du?")
@@ -21,9 +83,7 @@ else:
 
 läuft in Python 3 aber nicht in 2.
 
-Glücklicherweise lassen sich beide Versionen parallel betreiben.
-
-> Python 2 ist hat am 1.1.2020 sein End-of-Life erreicht.
+Glücklicherweise lassen sich beide Versionen parallel betreiben, da die Binaries dann `python`, `python2` oder `python3` heißen (es gibt noch weitere Binaries, die dieses Konzept dann auch verwenden). Am besten funktioniert das mit virtuellen Environments (siehe unten), so daß man unabhängig von der Version immer mit `python` arbeiten kann.
 
 ### Linux - switch to Python 3 default
 
@@ -33,8 +93,11 @@ Es gibt verschiedene Lösungen
 
 * [siehe hier](https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux)
 
+Aus meiner Sicht sollte man IMMER virtuelle Environements verwenden.
+
 ---
 
+<<<<<<< HEAD
 ## Getting started
 
 ### Python im Browser
@@ -42,8 +105,69 @@ Es gibt verschiedene Lösungen
 Um mal eben schnell was auszuprobieren (während des Lernen der Sprache) hat sich [ReplIt](https://replit.com/) etabliert. Deutlich besser als Python in Shell Mode.
 
 ### Lokale Installation - Command Line
+=======
+## Installation
+
+### Ubuntu via APT
+>>>>>>> a75bc03e357efac034ea3aea51dc3e1938473602
 
 Install Python `sudo apt-get install python3-pip` and create a file `hello.py`
+
+### Ubuntu tarball
+
+* [so gehts](https://realpython.com/installing-python/)
+
+Über einen tarball (z. B. `Python-3.9.5.tgz`) ist es häufig einfacher eine bestimmte Version oder die neuesten Versionen zu installieren. Evtl. hat die verwendete Linux-Distribution kein Paket für die relevante Version.
+
+Über einen tarball compiliert man Python aus den Sourcen selber innerhalb weniger Sekunden. Man braucht allerdings auch ein paar Development Packages (siehe offizielle Dokumentation). Leider führen fehlende Developer Packages nicht sofort bei `configure`, `make` oder `altinstall` (siehe unten) zu einem Fehler. Stattdessen können die Fehler später (z. B. `pip install -r requirements.txt`) zu einem Abbruch führen. Das ist leider recht frustrierend :-(
+
+> DESHALB: der abschließende Test der Installation per `python -m test` ist **absolut erforderlich**, um spätere Probleme zu vermeiden, die man dann nicht so einfach einer unvollständigen/fehlerhaften Installation zuordnen kann. Nichtsdestotrotz kann man den Test natürich jederzeit durchführen.
+
+Danach gehts per
+
+```bash
+wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
+tar xvf Python-3.8.10.tar.xz
+cd Python-3.8.10
+./configure --enable-optimizations --with-ensurepip=install
+make -j 8
+
+sudo make altinstall
+```
+
+> ACHTUNG: das Scripting scheint das Fail-Fast-Prinzip zu ignorieren ... so brach `make` bei mir nicht beim ersten Fehler ab. Glücklicherweise war der Fehler auffällig in rot im Consolen-Output zu sehen ... sonst wäre mir das nie aufgefallen.
+
+Der letzte Befehl ist entscheidend und wird unbedingt empfohlen. Hierdurch wird die neue Version parallel zu den bereits existierenden installiert und ersetzt diese nicht.
+
+> In obigem Beispiel wurde eine Version `/usr/local/bin/python3.8` installiert, die sich übrigens nicht neben den per APT installierten Versionen `/usr/bin/python` (Python 2) und `/usr/bin/python3` (Python 3).
+
+Anschließend teste ich die Version über eine virtuelle Umgebung:
+
+```bash
+cd my-project
+virtualenv --python=/usr/local/bin/python3.8 venv
+source ./venv/bin/activate
+
+python --version
+
+python -m test
+```
+
+Wenn alle Tests (dauernn schon ein paar Minuten) erfolgreich waren, dann kanns losgehen :-)
+
+### iOS Pythonista
+
+Auf meinem iPad habe ich die App Pythoista installiert, mit der sich kleinere Programme auch unterwegs implementieren lassen. Die vorhandenen Bibliotheken sind natürlich eingeschränkt (es ist aber mehr als die Python-Standardinstallation), doch für Algorithmen reicht es allemal.
+
+### Online Entwicklungsumgebungen
+
+* [Repl.it](https://replit.com/)
+* [Python anywhere](https://www.pythonanywhere.com/)
+* ...
+
+---
+
+## Nutzungsmodi
 
 ### Python Shell Mode
 
@@ -64,7 +188,7 @@ Dieser Modus wird per `python` gestartet ... es ist anschließend kein Editor no
 
 ### In File-Mode
 
-In diesem Modus muß man dem Python-Interpreter eine Datei vorwerfen, die er dann interpretiert/ausführt:
+In diesem Modus muß man dem Python-Interpreter eine Datei (= Modul) vorwerfen, die er dann interpretiert/ausführt:
 
 ```bash
 echo "print(42)" > main.py
@@ -93,22 +217,82 @@ Python Code läßt sich als Lambda Function in AWS ausführen.
 
 ---
 
-## Getting started - Visual Studio Code
+## Visual Studio Code
 
+* [Tutorial](https://code.visualstudio.com/docs/python/python-tutorial)
 * prepare System - see above
 
-Start Visual Studio Code and install the [Visual-Studio-Code Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python). Create a file `hello.py`:
+Starte Visual Studio Code and installiere [Visual-Studio-Code Python Extension von Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-python.python). Create a file `hello.py`:
 
 ```python
 msg = "Hello World, Pierre"
 print(msg)
 ```
 
-and execute the command "Run Selection/Line in Python Terminal" :-)
+Führe anschließend den Code per "Run Selection/Line in Python Terminal" aus :-)
 
-Nichtsdestotrotz funktioniert das Navigieren in importierte Module (auch meine eigenen, die sich direkt im gleichen Git-Repository befinden) nicht. Hierzu finde ich diesen Beitrag:
+In der unteren blauen Statusleiste ist die verwendete Python-Version zu erkennen. Hier kann man die Version auch umschalten ... beispielsweise auf ein Virtuelles Environment.
 
-* https://stackoverflow.com/questions/53939751/pylint-unresolved-import-error-in-visual-studio-code
+Nichtsdestotrotz hatte ich mit den Default-Einstellungen der Python-Extension einige Probleme:
+
+* Navigieren in importierte Module (auch meine eigenen, die sich direkt im gleichen Git-Repository befinden) funktioniert nicht. Hierzu finde ich diesen Beitrag:
+  * [Stackoverflo](https://stackoverflow.com/questions/53939751/pylint-unresolved-import-error-in-visual-studio-code)
+* der Wechsel des Python-Interpreters funktioniert nicht zuverlässig. Ich muß dann immer mal die Datei wechseln, um den neuen Interpreter auch tatsächlich in der Statusleiste angezeigt zu bekommen
+* nach Installation eines Moduls per `pip install module` (über meine Console oder auch das VSCode Terminal) steht das Modul scheinbar noch nicht zur Verfügung. Ein `import module` sorgt für einen Fehler, der erst durch einen VSCode-Neustart verschwindet
+
+Nach Umstellen vom Microsoft Language-Server auf Pylance hat alles schon viel besser funktioniert:
+
+![Pylance Language Server](images/python-languageServer-pylance.png)
+
+Enthält ein Projekt eine Virtuelle Umgebung z. B. in `PROJEKT/venv-myproject` so erkennt das VSCode und verwendet den darin befindlichen Interpreter und deren Libraries. In der unteren blauen Statusleiste ist das zu erkennen - hierüber kann man au
+
+---
+
+## Python Virtual Environments
+
+* [Getting Started](https://docs.python-guide.org/dev/virtualenvs/)
+* [Tutorial](https://docs.python.org/3/tutorial/venv.html)
+
+> ACHTUNG: virtuelle Environments erfordern die Bereitstellung von Python-Versionen auf dem System ... das virtuelle Environment bringt diese nicht mit.
+
+Bei diesem Ansatz werden Bibliotheken und Interpreter in einem applikationsspezifischen Verzeichnis installiert, so daß verschiedene Ausführungsumgebungen voneinander getrennt werden können. Auf diese Weise werden Konflikte vermieden und man kann sich nicht auf Bibliotheken stützen, die im Zusammenhang mit einem anderen Projekt installiert wurden ... das verbessert die Qualität in den projektspezifischen Dependencies (`requirements.txt` Datei).
+
+Das Paket zum Management dieser virtuellen Umgebungen wird per `sudo apt install virtualenv` installiert (unter Windows habe ich `pip install venv` verwendet und das Installationsverzeichnis anschließend in den `PATH` gepackt). Per (z. B.) `virtualenv ~/ideWorkspaces/venv/jenkins-stats` wird ein virtuelles Environment im Ordner `~/ideWorkspaces/venv/jenkins-stats` angelegt.
+
+> Ich präferiere, das virtuelle Environment in einen Subfolder (z. B. `~/src/jenkins-stats/venv`) des Git-Repo's zu packen, das den Source-Code enthält. Zumindest, wenn ich den Source-Code selbst unter Kontrolle habe, denn dann füge ich `venv` zur `.gitignore` des Repos hinzu. Aus meiner Sicht erhöht das die Übersichtlichkeit ... das virtuelle Environment liegt nicht mehr irgendwo, sondern direkt im Python-Projekt.
+
+So sieht der ganze Prozess dann aus:
+
+```bash
+git clone https://github.com/HewlettPackard/Jenkins-stats.git jenkins-stats
+cd jenkins-stats
+mkdir venv
+echo venv >> .gitignore
+virtualenv venv
+source venv/bin/activate
+```
+
+ Anschließend befinden sich in diesem Verzeichnis einige Shell-Skripte. Um diese Umgebung zu aktivieren wird `source ~/src/jenkins-stats/venv/bin/activate` ausgeführt. In meiner zsh-Shell ändert sich dadurch der Command-Prompt ... der Name der aktuell aktiven  virtuellen Umgebung ist erkennbar:
+
+```log
+╭─pfh@workbench ~/src/com.github  
+╰─➤  source ~/ideWorkspaces/venv/jenkins-stats/bin/activate
+(jenkins-stats) ╭─pfh@workbench ~/src/com.github
+```
+
+Die typischen Python Kommandos (`python`, `pip`, ...) sind nun auf die Skripte in der virtuellen Umgebung (`~/src/jenkins-stats/venv/bin/python`) umgebogen. Die Installation von Libraries per `pip install Jinja2` oder `pip install -r requirements.txt` führen zur Installation der Pakete im virtuellen Environment (`~/src/jenkins-stats/venv/lib`) ... nicht im System-Installationsverzeichnis für Python-Module.
+
+`virtualenv` verwendet dabei die auf dem System verfügbare Default-Python-Version (die per `python` verfügbar ist)... kopiert dabei aber die Executables in die virtuelle Umgebung. Hat man noch eine andere Python-Version (z. B. `python3`) installiert (aber Python 2 war der Default bei `python --version`), so kann man diese per
+
+```bash
+virtualenv --python=/usr/bin/python3 venv
+```
+
+Ist dies die erste Python Version in dem virtuellen Environment, dann wird sie per `python --version` verfügbar sein ... es muß kein `python3 --version` verwendet werden.
+
+> ich habe lange überlegt, ob ich meinen virtuellen Environments einen kontextabhängigen Namen geben soll, damit ich in meiner ZSH-Shell immer weiß welche virtuelle Umgebung (wird dort angezeigt) aktiviert ist. Letztlich habe ich mich dagegen entschieden und verwende IMMER `venv`. Erstens scheint das der Standardname zu sein und zweitens kann ich so einfach `venv` in jedes meiner `.gitignore` packen. Vor der Python-Nutzung initialisiere ich dann immer die virtuelle Umgebung ... hierzu verwende ich einen `alias venv=./venv/bin/activate`. Für die Erzeugung habe ich einen anderen `venv-create='virtualenv --python=/usr/bin/python3 venv`. Das macht das Handling komfortabler ... ich könnte auch ein Shellscript als Decorator um `python` bauen, um eine  automatische Aktivierung durchzuführen (aber natürlich müßte ich dann auf der Konsole immer im Python-Projekt stehen, um die passende Umgebung zu finden).
+
+Das Umschalten auf eine neue virtuelle Umgebung ist in VSCode ein bisschen umständlich, wenn ich einen Workspace verwende, der ganz viele Projekte (auch mit unterschiedlichen virtuellen Umgebungen) enthält. Starte ich hingegen einen VSCode-Worspace mit nur einem Projekt/Verzeichnis, unter dem sich dann auch gleich der Ordner `venv` befindet, dann ist das super komfortabel, da meine `venv`-Umgebung sofort zur Auswahl steht.
 
 ---
 
@@ -116,11 +300,20 @@ Nichtsdestotrotz funktioniert das Navigieren in importierte Module (auch meine e
 
 Man sollte sich an die typischen Idiome/Patterns halten und auch den [Styleguide](https://google.github.io/styleguide/pyguide.html) berücksichtigen. Bestenfalls unterstützt die IDE hierbei und gibt Warnungen aus, wenn sie nicht eingehalten werden (Stickwort Linting).
 
+Ganz wichtig:
+
+* eine Python-Datei (`foo.py`) repräsentiert ein Modul, das wiederum ... wild gemischt enthalten kann
+  * ausführbaren Code (`print("pierre")`)
+  * Funktionsdefinitionen (`def foo():`)
+  * Klassendefinitionen (`class Foo:`)
+  * Meta-Daten (`import random`)
+
 ### Besonderheiten
 
 * Variables don’t have types in Python; values do. That means that it is acceptable in Python to have a variable name refer to an integer and later have the same variable name refer to a string.
 * Python unterstützt viele Programmier-Paradigmen ... prozedural, objektorientiert, funktional. Für mich als Java-Entwickler war die Mischung am Anfang etwas befremdlich, d. h. man schreibt sein Hauptprogramm `main.py` und darin sind dann prozedurale Element (Initialisierung), aber auch schon gleich erste Klassen. Eine Mixtur aus Klassen und Initialisierung globaler Variablen. Geht sicher auch anders oder ist das ein gängiges Idiom? Vielleicht habe ich nur keinen Çlean-Code gesehen ...
 * Python hat Built-In-Funktionen wie `type`, `len`, `input`, `range` ... diese können ohne `import` genutzt werden
+  * [vollständige Liste](https://docs.python.org/3/library/functions.html)
 * Datentypen wie `int`, `string`, Listen, Tupel haben eingebaute Funktionen, die man nutzen kann ... (`print("Pierre".count("r"))`
   * `"Pierre".split("e")`
 * `"_".join(["P", "i", "e", "r", "r". "e"])`
@@ -181,7 +374,7 @@ Sequences sind die Datentypen
 
 * String (immutable)
 * List (mutable) ... mit eckigen Klammern definiert
-  * ändern `names[1] = "Pierre"`n
+  * ändern `names[1] = "Pierre"`
   * einfügen `names[1:1] = ["Jonas", "Robin"]`
   * anhängen `names += ["Jonas", "Robin"]`
   * löschen
@@ -401,6 +594,62 @@ for k in sorted(dict, key=lambda k: dict[k]):
   print(k, dict[k])
 ```
 
+### Type Hints
+
+* [Guide](https://realpython.com/python-type-checking/)
+
+Python ist eine untypisierte Sprache ... Variablen haben keine Datentypen ... Werte haben Datentypen. Deshalb ist folgendes problemlos möglich:
+
+```python
+var = "Pierre"
+print(var)
+var = 42
+print(var)
+```
+
+Die Variable ändert seinen Typ zur Laufzeit. Bei kleineren Skripten und wenigen Datentypen ist das ganz ok, doch hinsichtlich der Lesbarkeit des Code ist schwierig. Hier weiß man nicht, ob das Ergebnis ein String ist oder eine Liste oder gar ein Set:
+
+```python
+def getServices(category):
+  if category == "backend":
+    return [ "a", "b", "c" ]
+  else:
+    return [ "d", "e", "f" ]
+```
+
+Erst in der Implementierung erkennt man den zurückgegebenen Datentyp Liste. Bei komplexeren Methoden mit evtl. mehreren `return` Statements kann das problematisch werden - die Folge sind Fehler ... zudem will niemand unleserlichen Code refactorn (der Anfang vom Ende).
+
+Aus diesem Grund hat Python aus Type Checking eingführt, so daß man dem Code mit
+
+```python
+from typing import List
+
+def get_services(category:str) -> List[str]:
+  if category == "backend":
+    return [ "a", "b", "c" ]
+  else:
+    return [ "d", "e", "f" ]
+
+services = get_services("backend")
+```
+
+mehr Semantik verleihen kann. Das verhindert erstens Fehler und ermöglicht zudem eine bessere Code-Navigation in der IDE mit Auto-Completion-Support (bei Eingabe von `service.` in der IDE werden nur die Funktionen/Methoden einer `List` zur Auswahl gestellt). So klappt das Tippen doch gleich viel schneller und mit weniger Fehlern.
+
+Type checking zur Compile-Zeit bzw. vor der Ausführung hat man damit aber noch nicht ... zumindest nicht mit `python` von der Console. Eine gute Python-IDE kann hier helfen.
+
+### Alias Types
+
+Mehrfach geschachtelte Typen wie z. B. `List[Tuple[str, str]]` sind i. a. recht schwer zu lesen. Hier kann es helfen einen Alias zu definieren, der einen semantischen Namen verwendet, so daß man dann
+
+```python
+Card = Tuple[str, str]
+Deck = List[Card]
+```
+
+verwendet. Aus meiner Sicht deutlich besser zu lesen.
+
+> An dieser Stelle kann man allerdings auch eine Klasse `Card` definieren. Das hätte den Vorteil, daß man dann auch noch Methoden reinpacken kann. Aus meiner Sicht sind Alias ein guter Mittelweg zwischen nichtssagenden Datentypen und Klassen mit Daten und Methoden.
+
 ### Exceptions
 
 Exceptions dienen der Behandlung von Ausnahme-Situationen. Sie sollen verhindern, daß das Programm komplett abbricht und man stattdessen eine weitere Chance erhält (Stichwort Resilience).
@@ -590,11 +839,11 @@ gar nicht weiß, welchen Datentyp `x` repräsentiert. Der Code innerhalb der Fun
 Das finde ich sehr gewöhnungsbedürftig ... aber konsistent, wenn man berücksichtigt, daß Variablen keinen Typ haben, nur die Werte. Was ich aus dem Code häufig noch schwieriger rauslesen kann ist, ob es sich um eine Liste (mutable) oder ein Tupel (immutable) handelt. Das ist auch für den Entwickler schwierig, der die Methode `best_key` refactoren will und eigentlich nicht weiß, ob dort immer Listen oder manchmal auch Tupel reinwandern ... das bestimmt nämlich der Aufrufer??? 
 
 > In Python 2 hat man das in die Dokumentation geschrieben. In Python 3 verwendet man hierfür Annotationen ... das wird allerdings von Python nicht ausgewertet, sondern komplett ignoriert:
-
-    ```python
-    def floatToInt(x: float) -> int:
-      return int(x)
-    ```
+>
+>```python
+>def floatToInt(x: float) -> int:
+>  return int(x)
+>```
 
 Durch die fehlende Typisierung kann eine Funktion sogar ganz unterschiedliche Datentypen zuürckliefern:
 
@@ -693,14 +942,118 @@ pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 pairs.sort(key=lambda pair: pair[1])
 ```
 
-### Bibliotheken / Module
+### Bibliotheken / Pakete / Module
 
-Die Stärke einer Sprache liegt häufig in den Bibliotheken, die man verwenden kann. In Python nennt man dies Bibliotheken Module - sie müssen lokal installiert werden (mit dem Python Package Manager `pip`) und dann im Code importiert werden. Für den Import gibt es zwei Varianten
+* [sehr schön erklärt](https://realpython.com/python-modules-packages/)
+* [Dokumentation](https://docs.python.org/3/reference/import.html)
+* [siehe separates Kapitel für mehr Details](python-libraries.md)
+
+> "It’s important to keep in mind that all packages are modules, but not all modules are packages. Or put another way, packages are just a special kind of module." ([siehe Dokumentation](https://docs.python.org/3/reference/import.html))
+
+Die Stärke einer Sprache liegt häufig in den Bibliotheken, die man verwenden kann. In Python nennt man dies Bibliotheken Packages (sie enthalten ein oder mehrere Module) - sie müssen lokal vorhanden sein. Entweder sind sie bereits in der verwendeten Python-Distribution oder müssen mit dem Python Package Manager (`pip`) installiert werden. Der Python-Interpreter sucht in folgender Reihenfolge nach Modulen (kann man auch zur Laufzeit über `sys.path` rausbekommen):
+
+* aktuelles Verzeichnis
+* `PATHONPATH` Umgebungsvariable
+* Python Installation (hierüber werden die Python-Basis-Bibliotheken eingebunden)
+
+> Ein Paket (auf dem Filesystem ein Verzeichnis) ist eine Sammlung von Modulen (auf dem Filesystem eine einzelne `foo.py` Datei). Jedes Modul kann ausführbaren Code enthalten, der beim Import eines Moduls ausgeführt wird. Die Definition einer Funktion/Klasse (`def`) wird auch "ausgeführt", resultiert aber nicht Ausführung des Bodies, sondern nur in die Aufnahme der Funktionen in die Symboltabelle, so daß sie gefunden werden können.
+
+Für den Import gibt es zwei Varianten:
 
 * `import random`
-  * in diesem Fall muß man Funktionen oder Klassen der Bibliothek mit dem Modulnamen vorangestellt referenzieren `diceValue = random.randrange(1, 7)`
-* `from random import random, randrange`
-  * in diesem Fall kann man auf den Modulnamen verzichten, was sich natürlicher anfühlen kann.`diceValue = randrange(1, 7)`
+  * hiermit wird das Modul `random` gesucht (`random.py`), initialisiert (Ausführung `random/__init__.py` sofern vorhanden) und `random` wird in die lokale Symboltabelle aufgenommen (damit ist das Paket erst nutzbar), doch die Funktionen/Klassen des Moduls müssen mit vorangestelltem Paketnamen (`diceValue = random.randrange(1, 7)`) referenziert werden.
+* `import jinja2.environment`
+  * hier wird das Package `jinja2` verwendet
+  * durch den `import` eines Moduls aus diesem Package wird das Package (beim ersten mal) über `jinja2/__init__py` initialisiert - anschließend wird das Modul `jinja2/environment` eingelesen
+  * nun stehen Funktionionen/Klassen über `jinja2.environment.Template()` zur Nutzung zur Verfügung
+* `from random import randrange`
+  * hiermit wird das Modul `random.py` gesucht und - wenn noch nicht geschehen - initialisiert. Zudem wird die Funktion `randrange` aus dem Modul `random` in die lokale Symboltabelle des aktuellen Moduls aufgenommen. Beim Aufruf kann man auf den Modulnamen verzichten und die Funktion verwenden als wäre sie im aktuellen Python-File implementiert. Das sieht auf den ersten Blick einfacher aus (`diceValue = randrange(1, 7)` liest sich angenehmer), doch es geht die Information verloren aus welchem Paket die Komponente stammt.
+* `from jinja2.environment import Template`
+  * hier wird das Package `jinja2` verwendet
+  * durch den `import` eines Moduls aus diesem Package wird das Package (beim ersten mal) über `jinja2/__init__py` initialisiert - anschließend wird das Modul `jinja2/environment` eingelesen und die Klasse `Template` wird in der lokalen Symboltabelle hinterlegt => ist also per `Template()` (ohne Paket/Modul-Prefix) nutzbar
+
+> Packages wie `jinja2` vereinfachen den Import ... es reicht hier aus `from jinja2 import Template` anzugeben. Hier fehlt die Information über das Modul `environment`.
+>
+> Die Erklärung warum das funktioniert findet sich im `jinja2/__init__.py` Modul (zu finden unter `venv/lib/python3.6/site-packages/jinja2/__init__.py`), das u. a. folgendes macht:
+>
+> ```python
+>from .environment import Template as Template
+> ```
+>
+> Die Klasse wird also bei der Initialisierung des `jinja2`-Packages als `Template` zur Verfügung gestellt. Und genau diesen "Alias" verwendet man dann bei `from jinja2 import Template`.
+>
+> **Es ist tatsächlich Best-Practice das Public-Interface eines Packages (das der Anbieter unbedingt stabil halten wird (Backward-Compatible)) auf diesem Weg zu definieren!!!**
+>
+> Es wird nicht verhindert auch Funktionen/Klassen aus den Modulen zu nutzen, die nicht public sind (z. B. `from jinja2.environment import get_spontaneous_environment`), doch können die jederzeit refactored werden (u. a. gelöscht werden). Auf diesen Funktionen/Klassen sollte man den eigenen Code nicht aufbauen!!!
+
+Funktionen, die in einem anderen Module (= Python-File) innerhalb eines Verzeichnisses liegen, müssen genauso importiert werden wie Funktionen aus Libraries, die man per `pip` installiert hat.
+
+> Unter VSCode hatte ich das Problem, daß meine importierten Custom-Python-Files nicht gefunden werden konnten. Es fehlte die Information über den Root, von dem aus die in Unterordnern befindlichen `foo.py` Module gefunden werden konnten. Wenn mein VSCode Workspace allerdings den Root-Folder enthielt (`code ./my-project`), dann war der Root vorhanden und der Import der Klasse `Settings` per `from package.helper import Settings` wurde korrekt über das Verzeichnis `./my-project/package/helper.py` aufgelöst.
+
+Wenn man ein Paket importiert, so wird immer die sich darin befindliche Datei `__init__py` ausgeführt (ich spreche hier von "Regular Packages" ... nicht von "Namespace Packages")
+
+Man muß Pakete aber nicht statisch importieren. Das kann auch dynamisch per `__import()__`-BuiltIn-Funktion geschehen. Python kann damit sehr generischen Code bereitstellen. Das Paket [`importlib`](https://docs.python.org/3/library/importlib.html#module-importlib) bietet noch viel mehr Optionen.
+
+### Bibliotheken - Main
+
+Importiert man ein Modul, so wird dieses Modul (`greetings.py`) ausgeführt, d. h. der gesamte ausführbare Code kommt tatsächlich zur Ausführung:
+
+```python
+def greet(name="World"):
+  print(f"Hello {name}")
+```
+
+In diesem Fall besteht die "Ausführung" in der Definition der Funktion `greet` ... dadurch erfolgt keine Ausgabe.
+
+Als Entwickler möchte man seinen Code allerdings auch selbst nutzen, beispielsweise um ihn zu testen, d. h. in `greetings.py` würde man gerne auch sowas machen:
+
+```python
+def greet(name="World"):
+  print(f"Hello {name}")
+
+greet()
+greet(name="Pierre")
+greet("Python")
+```
+
+so dass ein `python greetings.py` zur Ausgabe
+
+```python
+Hello World
+Hello Pierre
+Hello Python
+```
+
+führt.
+
+> Klar, man kann den Testcode in ein anderes Modul verlagern ... hält den Code aber nicht so schlank wie ein einziges File, d. h. ein Modul, das seine Tests enthält (finde ich ganz charmant).
+
+Das hat aber den Nachteil, daß diese Ausgabe auch erscheinen würde, wenn man ein `import greetings` ausführt ... und das will man i. d. R. nicht.
+
+In Python löst man das Problem i. a. mit
+
+```python
+def greet(name="World"):
+  print(f"Hello {name}")
+
+if __name__ == "__main__"
+  greet()
+  greet(name="Pierre")
+  greet("Python")
+```
+
+dann erfolgt die Ausgabe nur, wenn die Ausführung als Main-Modul gestartet wurde. Bei einem `import greetings` ist der `__name__` zur Laufzeit `greetings` => die Ausgabe erfolgt nicht.
+
+### Paketmanager Pip
+
+[siehe eigenes Kapitel für mehr Details](python-libraries.md)
+
+* `pip install jinja2`
+* `pip install -r requirements.txt`
+* `pip list`
+  * welche Packages sind installiert
+* `pip check`
+  * Dependency check der installierten Packages
 
 ### Idiome
 
@@ -963,6 +1316,10 @@ Bei diesem Ansatz würde man
 
 * [siehe separate Seite](fastapi.md)
 
+## Bibliotheken / Pakete
+
+[siehe eigenes Kapitel](python-libraries.md)
+
 ---
 
 ## Python in Kombination mit Shell
@@ -1016,14 +1373,9 @@ Ein Beispiel:
 
 Im Github-Repository [python-course](https://github.com/nilsleiffischer/python-course) befindet sich das Jupyter-Notebook
 
-
 ---
 
 ## Python Web-Development
-
-### Django
-
-[siehe eigenes Kapitel](django.md)
 
 ### Python Web Server Gateway Interface (WSGI)
 
@@ -1062,9 +1414,3 @@ Das schöne an Python ist die nahtlose Integration unterschiedlicher Programmier
 Insbesondere die gute [Raspberry Pi](raspberrypi.md) Unterstützung macht Python zu **DER** Lernsprache.
 
 Ein Nachteil ist aus meiner sicht, daß durch den Interpreter-Ansatz Best-Practices schwieriger einzuhalten sind. Eine Variable kann an Zeile 23 einen String repräsentieren und an Zeile 24 einen Integer ... das wird einfach nicht verhindert. Während erfahrene Softwareentwickler das automatisch vermeiden, sind Anfänger vielleicht geneigt, solche "Abkürzungen" zu nehmen und Spaghetti-Code zu schreiben, der kaum lesebar und fehlerträchtig ist. Allerdings - wenn man es positiv sieht - lassen sich zumindest solche Ansätze direkt nebeneinanderstellen und die Vorteile schön rausarbeiten ... zum Lernen vielleicht sogar NOCH besser.
-
-### Bibliotheken
-
-Die Masse an Bibliotheken ist überwältigend.
-
-> Das kann natürlich auch ein Problem sein ...

@@ -16,7 +16,9 @@ Ich habe den Beamer gebraucht von einem Freund bekommen ... für einen sehr gün
 
 * [so gehts Video](https://www.benq.eu/de-de/support/downloads-faq/faq/product/application/projector-faq-k-00125.html)
 
-Im Handbuch wird die Lampe mit einer Betriebszeit von 4500 - 5000 Stunden angegeben (im Eco-Modus sicherlich noch ein bisschen länger).
+Im Handbuch wird die Lampe mit einer Betriebszeit von 4500 - 5000 Stunden angegeben (im Eco-Modus sicherlich noch ein bisschen länger). Nach exakt 4500 Stunden kam die erste Meldung, daß ich eine neue Lampe bestellen soll. Das Bild flackerte auch ein wenig. Nach max. 1,5 Stunden (mal 15 Minuten, mal 5, mal 30, mal 60 Minuten) schaltete sich der Beamer immer wieder selbständig ab und der Lüfter drehte mehrere Minuten hoch. Einzig neu starten oder ein Trennen vom Strom halfen den Lüfter zu beruhigen.
+
+Ich tippte auf einen Zusammenhang mit der Lampenwarnung und bestellte eine neue Lampe.
 
 > Handbuch: "Die Lampe ist ein Verschleißteil. Die Helligkeit der Lampe nimmt mit der Zeit ab. Dieses Verhalten ist normal. Die Lampe kann ausgetauscht werden, wann immer die Leistung merkbar nachlässt."
 
@@ -46,6 +48,24 @@ Bei [beamerlampe-guenstiger.de](https://www.beamerlampe-guenstiger.de/Polari-Pro
 
 Bei [hcinema.de](https://www.hcinema.de/lampen/shop.php?id=d19922) gibts die Ruby Lampe mit Modul für 90 Euro.
 
+Ich habe mich für beamerlampe-guenstiger.de entschieden. Die kam schnell und war schnell eingebaut ... ACHTUNG: darauf achten, daß die 4 Dornen und die vorgesehenen Löcher gehen - ansonsten ist die Lampe schräg drin. Den Lampencounter habe ich zurückgesetzt. Leider schloß die Schließklappe nicht mehr richtig ... das Gerät ist nun 10 Jahre alt, da ist das Plastik vielleicht
+
+Leider ist das automatische Ausschalten geblieben ... zusammen mit dem Flackern.
+
+Ich habe folgende Fehler ausgeschlossen
+
+* AV-Receiver - Beamer direkt am Laptop angeschlossen
+* HDMI-Kabel - ausgetauscht
+* Stromzufuhr - Strom aus einem entfernten Raum
+* HDMI-Quelle - verschiedene Quellen (PS4, FireTV) verwendet
+* Staub - mit einem Pinsel groben Staub entfernt und ausgesaugt (auf niedrigster Stufe)
+
+Ich habe auch die alte Lampe wieder eingebaut, doch die hielt (gefühlt) noch weniger lange (eher im 2-5 Minuten Bereich).
+
+So ratlos war ich zuletzt vor 6 Jahren als der Wäschetrockner sich immer wieder nach 20 Minuten abschaltete. Jetzt steht er seitdem rum, weil ich nicht glaube, daß es ein größeres Problem ist - aber die Geräte stecken ja heutzutage voller Elektronik und da reicht ja ein kleiner Riss in der Leiterbahn oder eine schlechte Lötstelle ... das findet man nie.
+
+Nach einer weiteren Recherche glaube ich, daß es am Farbrad oder dem Farbrad-Syncronisierungssensor liegt ... vielleicht muß nicht mal was ausgetauscht werden, sondern nur gesäubert werden. Keine teuren Ersatzteile (wenn man sie denn mal bekommt und verlöten kann), aber hierzu muß das gesamte Gerät auseinandergenommen werden. Klingt nach einer langen Prozedur und die Aussicht auf Erfolg ist ... wenn man es noch nie gemacht hat.
+
 ---
 
 ## Farbrad-Sensor säubern - 2021
@@ -64,5 +84,3 @@ Irgendwann stieß ich auf dieses Video:
 Das [zweite Video zeigt an Position 6:00 Minuten](https://youtu.be/zaJtaWxuMQ4?t=360) meine Hoffnung ... hier würde ich ohne Ersatzteil auskommen ... einfach nur ein wenig Staub beseitigen.
 
 Also baute ich das Ding auseinander ... nicht ganz einfach, wenn man es noch nie gemacht hat - aber mit den beiden Videos kam ich auch bei meinem Beamer ganz gut zurecht. Ich dokumentierte alle meine Schritte und markierte auch alle Anschlüsse:
-
-

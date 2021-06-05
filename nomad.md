@@ -294,6 +294,47 @@ Ein Restart der Allokation wird nicht beliebig häufig versucht (`restart/mode=f
 
 ---
 
+## Auto-Scaling
+
+* [Youtube Video](https://www.youtube.com/watch?v=qfsn6F01jcc)
+
+Auf elastischen Umgebungen wie beispielsweise typischen Cloud-Infrastructuren ist das automatische Scaling in beide Richtungen (wachsen und schrumpfen) wichtig, um auf Lastspitzen reagieren zu können aber auch bei wenig Last nicht unnötig viel Geld für nicht-genutzte Ressourcen zu verbraten ... Cloudanbieter hoffen vermutlich darauf, daß das Schrumpfen eher stiefmütterlich behandelt wird.
+
+Auto-Scaling ist allerdings nicht nur auf das Nomad-Layer (Allokationen = Prozesse/Docker Container starten und stoppen) beschränkt. Verwendet man Server (z. B. EC2 Instanzen), so müssen hier ganze Server - und nicht nur Nomad-Allocationen - hinzugefügt bzw. abgebaut werden. Hierzu bietet Hashicorp auch eine Lösung an: [AWS ASG Autoscaling](https://www.nomadproject.io/docs/autoscaling/plugins/target#aws-autoscaling-group-target), das dann später mal als Blueprint für andere Cloud-Provider dient (Cloud Provider Autoscaling).
+
+In Nomad steht das Auto-Scaler Feature seit 0.12 zur Verfügung, der horizontale Applikationsskalierung anbietet.
+
+### Autoscaler Agent
+
+* [Dokumentation](https://www.nomadproject.io/docs/autoscaling/agent)
+
+Der Agent liefert Daten an den Nomad-Server, der dann seinerseit Allokationen stoppt oder startet. Hierfür gibt es Binaries und Docker-Images.
+
+### Job-Definition
+
+Es wird eine `scaling`-Stanza im Nomad-Job benötigt, in der die Sacling-Policy definiert wird (basierend auf welchen Metriken wird skaliert?). Es wird definiert welche Metrik für eine Skalierungsentscheidung herangezogen wird (z. B. APM Daten).
+
+### Customization
+
+Einerseits über die Scaling-Policy ... grundsätzlich andere Ansätze lassen sich über Autoscaler-Plugins implementieren.
+
+### Auto-Scaling basierend auf Schedule
+
+Wenn Du weißt, daß morgens um 7:00 Uhr 5 Instanzen mehr benötigt werden, weil die Amerikaner aufwachen, dann ist das ein einfacher Ansatz.
+
+### Auto-Scaling basierend auf Metriken
+
+Die Königsdisziplin des Scalings.
+
+Nomad kann nur CPU und Memory als Metrik bereitstellen ... sehr eingeschränkt, aber besser als nichts.
+
+Nomad Autoscaler unterstützt außerdem folgende Metrikquellen:
+
+* Prometheus
+* ...
+
+---
+
 ## Nomad CLI
 
 * [Dokumentation](https://www.nomadproject.io/docs/commands/index.html)

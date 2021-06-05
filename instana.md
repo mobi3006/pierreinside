@@ -63,6 +63,8 @@ Gegen eine Saas-Lösung könnte die Geheimhaltung der Daten sprechen ... per Def
 
 ![Zusammenhang](images/instana-events.png)
 
+* [Root Cause Analysis](https://www.instana.com/docs/root_cause_analysis/)
+
 Incidents sind spezielle Events, die mit großer Wahrscheinlichkeit Auswirkungen auf die Edge-Services der Anwendung haben ... das sind Services, die vom Endanwender genutzt werden. Instana nutzt hier die sein ganzes Wissen über kennt die Zusammenhänge der Services/Layer und der verwendeten Technologien, um aus Issues, Changes und Metriken potentielle Incidents zu machen. Die große Stärke ist dabei die Korrelation von Incidents mit Issues, Changes und Metriken. Auf diese Weise liefern Incidents häufig schon die Root-Cause oder liefern zumindest wichtige Informationen, um die Root-Cause schneller zu finden.
 
 Instana mißt verschiedene Indikatoren (Durchsatz, Latenz, Fehlerrate, Ausnutzung) und bietet ab einem bestimmten Threshold automatische Issue-Erzeugung (Auffälligkeiten) und - bei entsprechender Konfiguration - Alerting. Für eine Root-Cause Analyse läßt sich in einer Zeitmaschine reisen (Time-Shift).
@@ -87,9 +89,13 @@ Instana unterstützt Deep-Links, um bei Notifications direkt in den Scope einzut
 
 Application Perspective ist eine gefilterte Ansicht für selektierte Services/Endpoints - Definition durch den Benutzer (Subset aus Services, Endpoints). Unterschiedliche Rollen (DEV, DEVOPS, SRE) haben unterschiedliche Interessen und sollten sich dementsprechend ad-hoc ihre Application Perspective zusammenstellen können.
 
+> Eine Application besteht aus mehreren Services, die wiederum mehrere Endpoints haben können
+
 Alle Requests, die über nicht ausgewählte (= irrelevante, d. h. applikationsfremde) Services/Endpoints getriggert werden, bleiben unberücksichtigt. Bei der Definition einer Application Perspective kann man einfach einen oder mehrere Services selektieren und dann alle Downstream-Services automatisch selektieren lassen.
 
 Das praktische an dieser Application Perspective ist, daß sie automatisch erweitert wird, z. B. wenn ein neuer Service hinzukommt, der zu den Filterkriterien paßt.
+
+Applications werden allerdings nicht nur in der Application Perspective verwendet, sondern eignen sich grundsätzlich als Data Source. So kann man beispielsweise SLI/SLO's und Instana Dashboards auf Applications definieren.
 
 ### Services und Endpoints
 
@@ -214,34 +220,6 @@ Da Instana Technology-aware ist (d. h. die eingesetzten Technologien kennt) kann
 
 Instana plant die Sensorentwicklung offen zu gestalten, so daß man für nicht unterstützte Technologien auch eigene Sensoren schreiben kann.
 
-### SDK
-
-* [SDK Dokumentation](https://github.com/instana/instana-java-sdk)
-* [Beispiele auf GitHub](https://github.com/instana/instana-java-sdk/tree/master/instana-java-sdk-sample)
-
-Sollte Instana wichtige Strukturen/Zusammenhänge in der Anwendung nicht selbständig erkennen, so lassen sich im Code Metainformationen über Annotationen hinterlegen:
-
-```java
-@Span(type = Span.Type.INTERMEDIATE, value = "myService.methodExecution")
-```
-
-In der _Analyze Trace_ View kann man dann eine Filter `sdk.myService.methodExecution` definieren, um die Daten zu sehen.
-
-### API
-
-* [API Dokumentation](https://docs.instana.io/quick_start/api/)
-  * u. a. genutzt von [Grafana Instana Plugin](https://grafana.com/plugins/instana-datasource)
-
-Instana bietet eine REST-API, um die Daten automatisiert in die eigenen Workflows einzubinden. Aber auch, um eigene Informationen über die Instana-Agent-REST-API ins Monitoring zu bekommen, z. B. bei neuen Deployments.
-
-Die [Rest-APIs basieren auf OpenAPI v3 (formerly known as Swagger)](https://instana.github.io/openapi/openapi.yaml). Diese Schnittstellenbeschreibung läßt sich einfach in Postman importieren und dann können komfortabel Requests abgesetzt werden. Alternativ kann man sich aus der REST-OpenAPI per [OpenAPI Client Generator](https://github.com/OpenAPITools/openapi-generator) Client-Libs (Java, Go, Python, ...) erzeugen lassen.
-
-Hierzu benötigt man einen API-Key, den man über die Instana UI im Bereich Access Control erzeugen kann. An diesem API-Key hängen die entsprechenden Berechtigungen.
-
-### API mit Postman
-
-Den API-Key definiert man am besten auf höchster Ebene (am Instana-Paket) und referenziert ihn in den einzelnen Requests nur mit "Inherit from Parent". Als Key verwendet man `authorization`, als Value `apiToken {{instanaApiToken}}` - wobei man die Variable `instanaApiToken` dann noch definieren und setzen muß.
-
 ### Dynamic Focus Queries - Auswertungen über Kategorisierung und Filter
 
 Es stehen folgende Kategorisierungsmöglichkeiten zur Verfügung:
@@ -263,7 +241,9 @@ Im Gegensatz zu On-Premise-Hosting gibt man beim Cloud-Hosting durch Instana die
 
 > Instana ist SOX-compliant und sichert zu, daß kein Content in Form von URL-Parametern oder Post-Request-Pasyloads auf den Servern
 
-### Integrationsmöglichkeiten
+---
+
+## Integrationsmöglichkeiten
 
 Instana funktioniert i. a. nur durch Installation des Agent schon sehr gut, doch in manchen Situationen möchte man
 
@@ -272,11 +252,39 @@ Instana funktioniert i. a. nur durch Installation des Agent schon sehr gut, doch
 
 Hierzu bietet Instana einige [SDKs und APIs](https://www.instana.com/docs/integrations) ([statsd ist hier nicht aufgeführt](https://www.instana.com/docs/ecosystem/statsd/)), die wirklich einfach zu nutzen sind und teilweise - wenn man eine Schnittstelle über den Instana-Agent nutzt - nicht einmal Authentifizierung benötigt.
 
-#### Instana REST API
+### Instana Backend REST API
 
+* [API](https://instana.github.io/openapi/#section/Backend-REST-API)
 * [Beispiele aus dem Grafana-Instana-Plugin](https://github.com/instana/instana-grafana-datasource) => praktisch, um sich ein paar Einblicke zu verschaffen
 
-#### Instana-Agent-Rest-Event-API
+Instana bietet eine REST-API, um die Daten automatisiert in die eigenen Workflows einzubinden. Aber auch, um eigene Informationen über die Instana-Agent-REST-API ins Monitoring zu bekommen, z. B. bei neuen Deployments.
+
+Die [Rest-APIs basieren auf OpenAPI v3 (formerly known as Swagger)](https://instana.github.io/openapi/openapi.yaml). Diese Schnittstellenbeschreibung läßt sich einfach in Postman importieren und dann können komfortabel Requests abgesetzt werden. Alternativ kann man sich aus der REST-OpenAPI per [OpenAPI Client Generator](https://github.com/OpenAPITools/openapi-generator) Client-Libs (Java, Go, Python, ...) erzeugen lassen.
+
+Hierzu benötigt man einen API-Key, den man über die Instana UI im Bereich Access Control erzeugen kann. An diesem API-Key hängen die entsprechenden Berechtigungen.
+
+Im Zusammenhang mit der REST API ist das Konzept des Snapshots relevant:
+
+* [Understanding SnapshotIDs](https://support.instana.com/hc/en-us/articles/360008820312?input_string=rest+api+-+query+for+events)
+
+Alle Bewegungsdaten sind einem Snapshot - die Bewegungsdaten selbst sind allerdings nicht darin gespeichert. Unter Verwendung der Snapshot-Ressource lassen sich auch Dynamic Focus Queries verwenden, um die relevanten Daten besser eingrenzen zu können. Folgende Query
+
+> https://tenant-id.instana.io/api/snapshots?q=event.text:version_status
+
+liefert alle SnapshotIDs, die Events mit `event.text:version_status` enthalten. Fügt man anschließend eine SnapshotID hinzu, so kann man tatsächlich an die Daten kommen:
+
+### API mit Postman
+
+Den API-Key definiert man am besten auf höchster Ebene (am Instana-Paket) und referenziert ihn in den einzelnen Requests nur mit "Inherit from Parent". Als Key verwendet man `authorization`, als Value `apiToken {{instanaApiToken}}` - wobei man die Variable `instanaApiToken` dann noch definieren und setzen muß.
+
+### Grafana
+
+* [Grafana-Integration](https://grafana.com/)
+  * Instana läßt sich als Data-Source in Grafana nutzen (siehe [Instana Plugin](https://grafana.com/plugins/instana-datasource))
+
+Das Grafana-Instana-Plugin verwendet die Backend REST API. Es ist Open Source und somit eine guter Blueprint für die Verwendung der Backend-REST-API.
+
+### Instana-Agent-Rest-Event-API
 
 * https://www.instana.com/docs/api/agent/#event-sdk-web-service
 
@@ -294,13 +302,19 @@ curl -XPOST \
 
 sorgt für ein _Warning Issue_ im Instana ... schon richtig getaggt (mit den Tags aus dem Instana-Agent). Keine Authentifizierung notwendig.
 
-#### Rest-Trace-API
+Man kann per `"incident": true` auch Incidents statt Issues erzeugen.
+
+Unter Verwendung des `path` lassen sich Events mehrfach verlängern, um zu verhindern, daß sie als getrennte Events interpretiert werden. Das ist in Fällen interessant bei denen die Abtastrate zu gering ist.
+
+> Hintergrund: Instana ist eigentlich auf Metriken ausgelegt, die im Millisekundenbereich abgetastet werden. Bei Events, die evtl. nur alle paar Sekunden abgetastet (= geprüft) werden, würden ansonsten Einzelevents entstehen, obwohl das Problem in der Zwischenzeit nicht weg war.
+
+### Rest-Trace-API
 
 * https://www.instana.com/docs/api/agent/#trace-sdk-web-service
 
 ... REST-Calls an den Instana-Agent
 
-#### Statsd
+### Statsd
 
 Der Instana-Agent kann als Statsd-Proxy konfiguriert werden:
 
@@ -348,6 +362,19 @@ Zur Verarbeitung dieser Messwerte stehen zwei Möglichkeiten zur Verfügung:
 > * Grafana (Reporting/Statistiken ist das Ziel) berücksichtigt ausschließlich Metriken - keine Events
 > * Instana (Alerting ist das Ziel) berücksichtigt ausschließlich Events (deshalb müssen aus Metriken Events gemacht werden) - keine Metriken
 
+### SDK
+
+* [SDK Dokumentation](https://github.com/instana/instana-java-sdk)
+* [Beispiele auf GitHub](https://github.com/instana/instana-java-sdk/tree/master/instana-java-sdk-sample)
+
+Sollte Instana wichtige Strukturen/Zusammenhänge in der Anwendung nicht selbständig erkennen, so lassen sich im Code Metainformationen über Annotationen hinterlegen:
+
+```java
+@Span(type = Span.Type.INTERMEDIATE, value = "myService.methodExecution")
+```
+
+In der _Analyze Trace_ View kann man dann eine Filter `sdk.myService.methodExecution` definieren, um die Daten zu sehen.
+
 ---
 
 ## User-Interface
@@ -355,13 +382,6 @@ Zur Verarbeitung dieser Messwerte stehen zwei Möglichkeiten zur Verfügung:
 * physikalische Sicht auf Hosts, Container, Prozesse
 * logische Sicht auf Services
 * Traces - einzelne Messpunkte, die bis in den Code (wird decompiliert) runtergehen
-
----
-
-## Integrationsmöglichkeiten
-
-* [Grafana-Integration](https://grafana.com/)
-  * Instana läßt sich als Data-Source in Grafana nutzen (siehe [Instana Plugin](https://grafana.com/plugins/instana-datasource))
 
 ---
 

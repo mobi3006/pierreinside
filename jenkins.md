@@ -1,27 +1,29 @@
 # Jenkins
 
-Einsortieren:
-
-* http://wiki.jenkins-ci.org/display/JENKINS/Git+Parameter+Plugin
-
-
 * [Dokumentation](https://jenkins.io/doc/)
 * [Handbuch](https://jenkins.io/doc/book/)
+* [Source-Code](https://github.com/jenkinsci/jenkins)
 
-Jenkins wird zur Automatisierung von Builds und Deployments verwendet.
+Jenkins wird zur Automatisierung von Builds (hiermit hat alles begonnen) und Deployments verwendet.
+
+Jenkins ist in Java geschrieben und bietet innerhalb der Pipelines und Web-UI Groovy zum Scripten (ohne compilieren zu müssen) an.
 
 ---
 
-## TLDR;
+## TLDR
 
-Die Idee von Jenkins ist prinzipiell gut ... aber ob ich wirklich Jenkins nehmen würde, wenn ich die freie Wahl hätte - ich denke nicht.
+Die Idee von Jenkins ist prinzipiell gut ... aber ob ich wirklich Jenkins nehmen würde, wenn ich die freie Wahl hätte - ich bin mir nicht sicher ... es ist auf jeden Fall Luft nach oben.
 
-Das gute zuerst: Es gibt unzählige Plugins für Jenkins und eine große Community - insofern schießt man sich nicht ins Abseits, wenn man sich dafür entscheidet. Groovy macht die Möglichkeiten THEORETISCH grenzenlos, praktisch setzt das fehlende Tooling feste Grenzen.
+Das Gute zuerst:
+
+* Jenkins ist offen ... über Shell- und Groovy-Skripte läßt nich nahezu jeder Use-Case integrieren und Custom-Solutions nach Belieben bauen
+* es gibt unzählige Plugins für Jenkins und eine große Community - insofern schießt man sich nicht ins Abseits, wenn man sich dafür entscheidet
 
 ABER:
 
 * die Web-UI ist fürchterlich - unintuitiv und buggy
-* die Pipline-Sprache existiert als declarative und scripted Variante - schaut man in Foren, um das eigene Problem zu lösen ist es Laien anfangs meist nicht klar welche Variante in der Lösung beschrieben ist. Zudem ist die Developer Experience sehr bescheiden - wie soll man vernünftig an den Pipelines arbeiten, wenn
+  * aber das Problem haben scheinbar auch andere Lösungen (z. B. AWS-Toolchain)
+* die Pipline-Sprache existiert als deklarative und scripted Variante - schaut man in Foren, um das eigene Problem zu lösen ist es Laien anfangs meist nicht klar welche Variante in der Lösung beschrieben ist. Zudem ist die Developer Experience sehr bescheiden - wie soll man vernünftig an den Pipelines arbeiten, wenn
   * es keine ordentliche Entwicklungsumgebung (Auto-Vervollständigung, Debugging) gibt. Die Pipelines müssen aufgrund der fehlenden Entwicklungsumgebung immer erst mal ins Remote-Git-Repository gebracht werden (commit, push), um dann den Job zu triggern
   * die Fehlermeldungen sehr kryptisch sind
 
@@ -55,10 +57,11 @@ gestartet. Selbst mit Docker ist es aufwendiger (zumindest, wenn man Docker erst
 
 * [Start Jenkins via Docker](https://jenkins.io/doc/book/installing/#downloading-and-running-jenkins-in-docker)
 
-> Diese Variante ist die schnellste, wenn man bereits Java 9 oder höher installiert hat, denn
->> "You will need to explicitly install a Java runtime environment, because Jenkins does not work with Java 9" ([Doku](https://pkg.jenkins.io/debian/))
+Diese Variante ist die schnellste, wenn man bereits Java 9 oder höher installiert hat, denn
 
-> [Docker Jenkins Agents](https://jenkins.io/doc/book/pipeline/docker/) können in dieser Variante evtl. auch verwendet werden ... mit dem [Docker-in-Docker Ansatz](https://blog.docker.com/2013/09/docker-can-now-run-within-docker/).
+> "You will need to explicitly install a Java runtime environment, because Jenkins does not work with Java 9" ([Doku](https://pkg.jenkins.io/debian/))
+
+[Docker Jenkins Agents](https://jenkins.io/doc/book/pipeline/docker/) können in dieser Variante auch verwendet werden ... mit dem [Docker-in-Docker Ansatz](https://blog.docker.com/2013/09/docker-can-now-run-within-docker/).
 
 ```bash
 docker run \
@@ -88,6 +91,7 @@ Es gibt verschiedene Docker Images:
 * `jenkins`: Raw Installation
 * `jenkinsci/blueocean`: Long-Term-Support Jenkins Version mit einigen vorinstallierten Blue-Ocean Plugins ... über http://localhost:8080/blue/ kann man ohne die übliche Plugin-Selektion direkt loslegen
   * [in diesem Buch](https://jenkins.io/doc/book/installing/#downloading-and-running-jenkins-in-docker) als _recommended_ eingestuft und detailliert beschrieben
+  * ich habe das quasi nie benutzt ... allerdings sah der Pipeline Editor in den Videos ganz brauchbar aus
 
 ### Installation via Ubuntu Package Manager
 
@@ -132,11 +136,35 @@ Mein Java befindet sich aber in `/usr/lib/jvm/java`. Als Workaround habe ich ein
 
 ![Konzepte einer Jenkins-Pipeline](images/jenkins-concepts.png)
 
+### LTS vs. Weekly
+
+Jeninks unterstützt zwei Linien:
+
+* Weekly
+* LTS
+  * hier sollten alle 3 Monate neue Major-Versionen (z. B. 2.235) kommen ... war in 2020 aber noch nicht stabil
+  * wie lange werden alte LTS gepflegt?
+
+Hersteller wie CloudBees (CloudBees Jenkins Enterprise) bieten Lösungen basierend auf dem OpenSource Stack. Hier gibt es dann AWS-Templates, um ein skalierbares Jenkins-Cluster zu erhalten. Jenkins kommt out-of-the-box vielleicht nicht mit voller Vielfalt daher, aber es scheint genug Potential zu haben, daß es bekannte Unternehmen als Basis für ihre Produkte verwenden.
+
+Jenkins bietet Tooling ([jenkins-plugin-cli](https://github.com/jenkinsci/plugin-installation-manager-tool)), um alle Plugin-Anhängigkeiten innerhalb einer Major-Version basierend auf einer Liste von Plugins automatisch aufzulösen, zu installieren oder evtl. Konflikte zu entdecken.
+
+> Dieses Tool funktioniert tatsächlich sehr gut.
+
 ### Jobs
 
-Jobs stellen den Trigger zur Ausführung von Pipelines zur Verfügung. Jobs werden entweder manuell oder automatisch (z. B. beim Commit in einen Source-Branch - aka "SCM polling trigger") gestartet. Sehr praktisch ist, daß man Jobs auch mit einem API-Token per HTTP-Request triggern kann. Auf diese Weise kann man jederzeit bequem einen Jublauf triggern.
+Jobs werden in Jenkins entweder manuell angelegt oder durch einen sog. Seed-Job. Letzteres ist natürlich erforderlich, wenn man automatisieren will. Ein Job kann eine Pipeline in Form eines `Jenkinsfile` referenzieren, in dem die einzelnen Schritte definiert sind. In einem solchen `Jenkinsfile` sind allerdings keine Informationen über den Pipeline-Typ (z. B. Multibranch) und deren Konfiguration (z. B. Branch Filter). Das sind typische Job-Typen (ich vermute je nach Jenkins-Version und installierten Plugins gibt mehr oder weniger):
 
-Es gibt verschiedene Job-Typen:
+* Freestyle Project
+* Maven Project
+* Pipeline
+* Multibranch Pipeline
+
+> Die Grenze zwischen Job und Pipeline (oder dem was man in einemm `Jenkinsfile` machen kann) scheinen nicht so klar definiert zu sein. Man kann beispielsweise den Trigger im Job aber auch im `Jenkinsfile` definieren. Dadurch entsteht ein konzeptionelles Henne-Ei-Problem, denn Pipeline-Parameter (oder auch Trigger-Informationen), die im `Jenkinsfile` definiert werden (aber auch im Job), stehen bei der Ausführung des Jobs erst dann zur Verfügung, wenn der Job einmalig gestartet wurde ... man muß den Job also zweimal starten - das sorgt immer wieder für Verwirrung und Probleme (vergißt man schnell) :-(
+
+Jobs stellen den Trigger zur Ausführung von Pipelines zur Verfügung. Jobs werden entweder manuell oder automatisch (z. B. beim Commit in einen Source-Branch - aka "SCM polling trigger") gestartet. Sehr praktisch ist, daß man Jobs auch mit einem API-Token per HTTP-Request triggern kann. Auf diese Weise kann man jederzeit bequem einen Joblauf triggern.
+
+Es gibt verschiedene Job-Typen ... auch beim Wording in Jenkins-Server verschwimmen die Grenzen zwischen Pipeline und Job:
 
 * Maven Projekt
 * Pipeline
@@ -147,57 +175,66 @@ Es gibt verschiedene Job-Typen:
 
 ### Pipeline
 
-* [JAX - Der Praxischeck: Pipeline as Code mit Jenkins 2](https://jaxenter.de/pipeline-jenkins-2-61568)
-* [Jenkins Doku](https://jenkins.io/doc/book/pipeline/)
-* [Jenkins-Pipelines Dokumentation](https://jenkins.io/pipeline/getting-started-pipelines/)
-* [Syntax](https://jenkins.io/doc/book/pipeline/syntax/)
-
 Eine Pipeline beschreibt eine Vielzahl von Schritten ... im Extremfall vom VCS checkout, über Bauen der Artefakte, über das Deployent auf verschiedenen Stages bis zum Smoke-Test auf dem Live-Deployment im Stile eines Canary Releases.
 
-Das semantische Konzept existiert in Jenkins schon von Anfang an, aber erst in 2.0 wurde die Pipeline explizit als Beschreibungsform eingeführt.
+Details finden sich [hier](jenkins_pipeline.md).
 
-Groovy war von Beginn an DIE Scriptsprache für Jenkins, um Entwicklern mehr Freiheiten zu geben. Deshalb ist Groovy auch die Basis für die Definition von Pipelines in einem Textfile (z. B. `Jenkinsfile`). Dieser Code ("Infrastructure-as-Code) wird genauso behandelt wie Source-Code (unter Versionskontrolle). Damit ist das Git-Repository eines Services noch weiter self-contained, denn es enthält auch seinen eigenen Build-Job (ähnlich kann man das bei anderen Build-Tools wie beispielsweise [Travis](travis.md)). In Jenkins muß dann nur noch ein Job angelegt werden, in dem die Location des Git-Repositories definiert wird, und angegeben wird, daß das Repository ein Jenkinsfile enthält.
+### Executors
 
-Man unterscheidet zwei Arten von Pipeline Definitionen:
+In Jenkins muß man keine Agents konfigurieren, wenn man das nicht will (z. B. Remote Agents). Es reicht Executors zu definieren und das ist die Anzahl der Prozesse, die Jenkins maximal mit der Durchführung von Aufgaben beauftragt. Diese Executors laufen dann als separate Prozesse auf dem Jenkins Server ... und sie laufen auch gelegentlich mal weiter, obwohl der Jenkins Server schon gestoppt wurde.
 
-* [Declarative Pipeline](https://jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline)
-  * durch eine abstrakte DSL (Groovy-basiert) einfacher zu nutzen
-  * der Blue Ocean Pipeline Editor hilft bei der Erstellung einer Pipeline
-  * dieser Pipeline Typ wurde nach den Scripted Pipelines zur Vereinfachung eingeführt
-* [Scriped Pipeline](https://jenkins.io/doc/book/pipeline/syntax/#scripted-pipeline)
-  * mächtiger als die deklarative Pipeline, da hier richtig programmiert werden kann
-    * Exception Handling
-    * Kontrollstrukturen (`if`, ...)
-  * es existiert sogar ein eigenes Ökosystem, um die Effizienz durch Reuse zu erhöhen - [Nutzung/Erstellung von Shared Libraries](https://jenkins.io/doc/book/pipeline/shared-libraries/)
+> Ich habe das mal erlebt, daß der Linux-Kernel Prozesse wegen Speichermangel (Stichwort Overprovisioning) hart (`kill -9`) abgeschossen hat. Darunter auch den Jenkins-Server Prozess (mit der UI). Die Executor-Prozesse liefen aber weiter und haben weiter hohe Last erzeugt.
 
-Am besten startet man einen lokaken Jenkins und legt einen Pipeline-Job an. Dann kann man sich Pipeline-Code über "Pipeline Syntax" generieren lassen ... das ist besser als garnix ... aber gut ist das noch lang nicht :-( Ich bekomme regelmäßig einen Nervenzusammenbruch, wenn ich Erweiterungen an den Pipelines vornehmen muß.
+### Filesystem-Struktur
 
-> Leider ist das kein schöner Entwicklungsprozess mit einer IDE-Integration (Code-Completion), Debugging ... eher aufwendiges Trial-and-Error.
+Man muß selten auf das Filesystem runter ... bei hartnäckigen Problemen muß das aber einfach sein.
 
-#### Trigger
+```
+JENKINS_HOME/
+  fingerprints/
+  jobs/
+    - Jobdefinitionen (`config.xml`, `indexing.xml`)
+    - Job-Ausführungen (pro Branch)
+      - Ergebnisse von JUnit Tests
+      - hier wird der komplette Kontext des Ausführungsscope gehalten (`build.xml`, Pipeline-Bibliotheken)
+      - inkl. History mit Links auf "Last Succesful", "Last Failed", ...)
+  nodes/
+  plugins/
+  secrets/
+  tools/
+  updates/
+  users/
+  workspace/
+    in diesem Bereich befinden sich die temporären Verzeichnisse der Jobs
+    hier wird der code ausgecheckt und gebaut. Es befinden sich auch die
+    referenzierten Libraries darin.
+```
 
-Typischerweise triggert man einen Build nach einem SCM-Commit - hierzu muß man bei Jenkins *Build Triggers - Poll SCM* konfigurieren.
+### Security
 
-Sehr praktisch sind allerdings auch Web-Hooks (*Build Triggers - Trigger builds remotely*), so daß man Build von außen explizit triggern kann. Auf diese Weise kann auch eine Integration anderen Tools erfolgen.
+Jenkins braucht zur Abbildung natürlich Zugriff auf den Source-Code ... hierfür werden üblicherweise Credentials (= Secrets) benötigt. Je nach Komplexität der Pipelines werden viele Secrets benötigt (z. B. um ein Deployment anzustoßen oder Notifications zu versenden). Jenkins wird somit zu einer zentralen Komponente für Angriffe auf die Security ... hier lassen sich Secrets abgreifen oder in die Builds eingreifen, um so die Artefakte zu manipulieren.
 
-Außerdem gibt es in einem Jenkins-Job auch _Post-Build Actions_.
+Jenkins hat einen Secret-Store, in dem die Secrets abgelegt werden und nur Jenkins hat Zugriff im Klartext. Jedes Secret bekommt eine ID und kann in den Jobs/Pipelines referenziert werden. Wenn der Job eine eine Pipeline als `Jenkinsfile` eines GIT-Repositories referenziert, so wird der GIT-Access schon im Job benötigt. Hierzu muß das Repo und die Credential konfiguriert werden:
 
-### Agent
+![Jenkins-Job-Git-Credentials](images/jenkins-job-git-credentials.png)
 
-Jenkins startet Aufgaben (Projekte, Pipelines) und braucht hierzu eine Laufzeitumgebung. Die Laufzeitumgebung nennt man Agent ... es werden verschiedene Typen unterstützt:
+Hier kann entweder ein Credential aus dem Secret-Store (im Beispiel `jenkins`) referenziert werden oder `- none -`. Im letzteren Fall fällt Jenkins - wenn nicht noch in der Jenkins-Konfiguration global überschrieben - auf die ssh-Konfiguration (im Beispiel wird eine ssh-Url verwendet!!!) zurück, die zum User gehört, mit dem Jenkins ausgeführt wird. Diese findet man wie üblich auf dem Filesystem unter `~/.ssh/config`. In beide Fällen findet man die Konfiguration auf dem Filesystem `JENKINS_HOME/jobs/JOBNAME/config.xml` - das kann gelegentlich mal hiflreich sein, um die UI-Konfigruation mit der tatsächlich genutzten (persistierten) Konfiguration abzugleichen.
 
-* Docker
-* Jenkins-Knoten
+Aus diesem Grund MUSS der Zugriff auf Jenkins komplett abgesichert werden, d. h.
 
-Man kann den Agent an verschiedenen Stellen definieren:
-
-* Pipeline
-* Stage einer Pipeline
-* ...
+* Authentifizierung und Authorisierung
+  * im besten Fall verwendet man kein lokales User-Management, sondern ein unternehmensweites Active-Directory (LDAP Security Realm), so daß man sein typische Passwort verwenden kann und auch Rollen zentral managen kann
+    * ein scheidender Mitarbeiter verliert somit automatisch seinen Zugriff
+* nicht jeder darf alles ... Matrix-Based Security oder Project-based Matrix Authorization Strategy
+* Audit-Logs
+* Nachvollziehbarkeit ... wer hat wann welche Jobs gestartet
+* Secrets müssen im Secure Store des Jenkins aufbewahrt werden
+  * wenn man den Server from-scratch per Code aufsetzen will ist eine Challenge, die Secrets hier reinzubekommen
+    * verwendet man einen Docker-Jenkins mit `docker-compose`, so kann man die Secrets in der `secrets` section angeben und somit bereitstellen. Unter Verwendung des [JCasC-Plugins](jenkins_configurationAsCode.md) kann man die Secrets dann im Secret-Store anlegen
 
 ---
 
-## Classic UI vs. Blue Ocean
+## Classic UI vs. Blue Ocean UI
 
 [Blue Ocean](https://www.youtube.com/watch?time_continue=1&v=mn61VFdScuk) ist das neuere User-Interface, das parallel zur Classic UI existiert.
 
@@ -220,7 +257,7 @@ werden über "Jenkins - Global Tool Configuration" konfiguriert.
 
 ---
 
-## Benutzer
+## Benutzer und Berechtigungen
 
 Es stehen verschiedene Möglichkeiten der Userverwaltung zur Verfügung (konfiguriert in "Jenkins - Configure Global Security"):
 
@@ -237,29 +274,276 @@ Berechtigung können auf verschiedenen Granularitätsstufen vergeben werden
 
 ---
 
-## Shared Libraries
+## Pipeline Typen - Skripted vs Deklarativ
 
-* [Jenkins Doku](https://jenkins.io/doc/book/pipeline/shared-libraries/)
-* [Tutorial mit Beispielen](https://cleverbuilder.com/articles/jenkins-shared-library/)
+In einer Scripted Pipeline handelt es sich um reinen Groovy-Code, der genau so integretiert wird wie er da steht. Unter Verwendung von Closures, GStrings, ... hat Groovy an sich schon einen DSL-Touch und kann leicht mit einer deklarativen Pipeline verwechselt werden.
 
-Jenkinsfiles werden aufgrund des Ansatzes einen Service als Single-Source-of-Responsibility zu betrachten, der alle Aspekte seines Lifecycles selbst managed, in das Microservice Repository gepackt. Wenn die Pipelines dann allerdings komplexer werden, dann kann die Pflege (Bugfixing, Extensions) aufwendig werden, wenn die `Jenkinsfile` der Services i. a. sehr ähnlich aussehen.
+In einer deklarativen Pipeline hingegen hält man sich an die Syntax der DSL, kann aber per `script { // groovy code }` auch Groovy-Code einflechten.
 
-In diesem Fall kann man Groovy Shared Libraries verwenden, um die Pflege zu zentralisieren. Das `Jenkinsfile` sieht dann so aus:
+Zentrales Element der
 
-```bash
-#!/usr/bin/env groovy
-@Library('my-jenkins-library') _
-microservice-pipeline('docker')
+* [skripted Pipeline](https://www.jenkins.io/doc/book/pipeline/#scripted-pipeline-fundamentals) ist `node`
+  * [Details](https://www.jenkins.io/doc/book/pipeline/syntax/#scripted-pipeline)
+  * ein Executor/Agent führt einen `node` aus - es Handelt sich beim `node` also um eine Ausführungseinheit
+  * eine Unterteilung in `stage`-Abschnitte ist - im Gegensatz zu skripted Pipelines - optional
+  * eine Skripted Pipeline kennt das Schlüsselwort `steps` nicht
+* [deklarativen Pipeline](https://www.jenkins.io/doc/book/pipeline/#declarative-pipeline-fundamentals) ist `pipeline`
+  * [Details](https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline)
+  * Statements dürfen NICHT durch Semikolons getrennt werden
+    * Semikolons sind in Groovy optional ... in deklarativen Pipelines sind sie verboten => hieraus läßt sich ableiten, daß der Code nicht einfach vom Groovy-Interpreter verarbeitet wird, sondern vermutlich noch eine Transformation in Groovy-Code erfolgt
+
+Andere Elemente (z. B. `stage`, GString-Support, Nutzung von Shared-Libraries) sind in beiden enthalten. Das macht es für den Newbie echt schwer. Beide Pipeline-Typen verwenden das gleiche Subsystem und verwenden deshalb auch gleiche Sprachelemente.
+
+Besonders schwierig ist die Verwendung von geschweiften Klammern (`{ ... }`). Während die in einer scripted Pipeline eine Groovy-Closure kennzeichnet, handelt es sich in einer declarative Pipeline um syntactic Sugar (man weiß nicht genau, ob das tatsächlich als Closure gehandhabt wird). Stattdessen werden in Declarative Pipelines bei Funktionsaufrufen die runde Klammer verwendet.
+
+Mein Fazit: Selbst nach Jahren der Nutzung fällt es mir nach einer Pause nicht leicht, die Konzepte auseinanderzuhalten und genau zu wissen wie ein Snippet verarbeitet wird (auch in [diesem Artikel](https://bmuschko.com/blog/jenkins-shared-libraries/) angedeutet). Manchmal scheinen Dinge wie Magie ... obwohl man sie doch eigentlich verstehen sollte.
+
+### Motivation
+
+Aus der [Dokumentation](https://www.jenkins.io/doc/book/pipeline/syntax/#scripted-pipeline):
+
+TLDR:
+
+* "Declarative Pipeline encourages a declarative programming model."
+* "Scripted Pipelines follow a more imperative programming model."
+
+> "Unlike Declarative, Scripted Pipeline is effectively a general-purpose DSL built with Groovy. Most functionality provided by the Groovy language is made available to users of Scripted Pipeline, which means it can be a very expressive and flexible tool with which one can author continuous delivery pipelines [...] Scripted Pipeline is serially executed from the top of a Jenkinsfile downwards, like most traditional scripts in Groovy or other languages. Providing flow control, therefore, rests on Groovy expressions, such as the if/else conditionals [...] Another way Scripted Pipeline flow control can be managed is with Groovy’s exception handling support. When Steps fail for whatever reason they throw an exception. Handling behaviors on-error must make use of the try/catch/finally blocks in Groovy [...] The Groovy learning-curve isn’t typically desirable for all members of a given team, so Declarative Pipeline was created to offer a simpler and more opinionated syntax for authoring Jenkins Pipeline. [...] Where they differ however is in syntax and flexibility. Declarative limits what is available to the user with a more strict and pre-defined structure, making it an ideal choice for simpler continuous delivery pipelines. Scripted provides very few limits, insofar that the only limits on structure and syntax tend to be defined by Groovy itself, rather than any Pipeline-specific systems, making it an ideal choice for power-users and those with more complex requirements. As the name implies, Declarative Pipeline encourages a declarative programming model. Whereas Scripted Pipelines follow a more imperative programming model.
+
+---
+
+## Pipeline Tips and Tricks
+
+* [MUST-HAVE](https://code-maven.com/jenkins)
+
+### Declarative Pipeline
+
+Auch hier lassen sich Shell-Skripte per `sh` einbinden ... an vielen Stellen - auch in den `environment`-Abschnitten. Für kleine Snippets geht das so:
+
+```
+sh "echo ${BRANCH_NAME}"
 ```
 
-Über Parameter können verschiedene Ausprägungen adressiert werden.
+> Umgebungsvariablen von Jenkins (z. B. `BRANCH_NAME`) lassen sich hier einfach per Shell-Resolving auflösen.
 
-In der Jenkins-Server Konfiguration muß die `my-jenkins-library` unter [_Manage Jenkins - Configure System - Global Pipeline Libraries_](http://localhost:8080/configure) eingebunden werden. Hier gibt man beispielsweise ein Git-Repository an und kann eine Default-Version definieren, die je nach Konfiguration im `Jenkinsfile` überschrieben werden kann:
+Verwendet man in dieser einfachen Form Anführungszeichen in der Payload, so muß man diese quoten:
 
-* Tag referenzieren: `@Library('my-jenkins-library@1.0.3`
-* Branches referenzieren: `@Library('my-jenkins-library@feature/my-first-scripted-pipeline')`
+```
+sh "git tag -a 4711 -m \"New version 4771 tagged\" && git push origin 4711"
+```
 
-> **ACHTUNG:** das _override_ muß in der Konfiguration hierzu explizit erlaubt werden (_Allow default version to be overridden_)!!! Ist das nicht erlaubt und es wird eine spezielle Version referenziert, dann schlägt die Ausführung fehlt (kein Failover).
+Bei größeren/komplexeren Skripten kann man es auch per
+
+```
+sh """
+   echo "Hallo Pierre"
+   echo "Du willst jetzt den branch ${BRANCH_NAME} bauen"
+   echo 'Du willst jetzt den branch ${BRANCH_NAME} bauen'
+"""
+```
+
+>ACHTUNG: in obigem Beispiel gibt es Anführungszeichen auf zwei Ebenen (auf der Ebene 2 muß das Anführungszeichen NICHT gequotet werden). Ebene 1: `sh """` - hierbei handelt es sich um die [Groovy-Triple-Double-Quotes](https://groovy-lang.org/syntax.html#_triple_double_quoted_string). Ebene 2: `echo "Du willst jetzt den branch ${BRANCH_NAME} bauen"` - hierbei handelt es sich um die Shell-Double-Quotes. Auch mit den einfachen Anführungszeichen funktioniert die Ersetzung von `BRANCH_NAME` in `echo 'Du willst jetzt den branch ${BRANCH_NAME} bauen'` ... aber nur wenn man die Groovy-Triple-Double-Quotes verwendet. Verwendet man hingegen die [Groovy-Triple-Single-Quotes](https://groovy-lang.org/syntax.html#_triple_single_quoted_string), so funktioniert die Ersetzung von `BRANCH_NAME` nicht.
+
+Sollen die Skripte auch noch einen Rückgabewert haben (im folgenden Beispiel die Anzahl der `*.log` Dateien), so kann das so erfolgen (hier sogar mit der Kennzeichnung des Shell-Typs "Bash"):
+
+```
+numberLogFiles = sh (
+    script: """#!/bin/bash
+               _pwd=`pwd`
+               find . -name "*.log" | wc -l
+            """,
+    returnStdout: true
+).trim()
+```
+
+> ACHTUNG: alles, was auf stdout geschrieben wird kommt dann in die Variable `numberLogFiles` (inkl. Zeilenumbrüche). Per Default ist der Datentyp ein String ... kann man aber auch noch per `as Integer` anpassen, so daß die Groovy Variable `numberLogFiles` ein Integer ist.
+
+Macht man hingegen folgendes (Verwendung der Shell-Variable `_counter`):
+
+```
+numberLogFiles = sh (
+    script: """#!/bin/bash
+               _pwd=`pwd`
+               _counter= `find . -name "*.log" | wc -l`
+               echo \${_counter}
+            """,
+    returnStdout: true
+).trim()
+```
+
+dann muß man das Dollar quoten - bei einer Groovy-Variablen oder einer Umgebungsvariablen hingegen nicht. Das macht es recht tricky, wenn man sich die Fallstricke mühsam erarbeiten muß :-(
+
+**REGEL:**
+
+* in Shell-Skripten können Groovy-Variablen und Umgebungsvariablen mit einfachem `${variable}` resolved werden ... Shell-Variablen müssen gequoted werden `\${variable}`.
+
+---
+
+## Modularisierung
+
+Eine Pipeline, bei der alles nacheinander weg in den Pipeline-Code geschrieben wird ist relativ schlecht lesbar, weil unterschiedliche Abstraktionslevel verwendet werden. Es macht mehr Sinn Untermodule/Funktionen zu verwenden, die einen Teilaspekt (z. B. `build`, `deploy`, `checkCodeQuality`) implementieren. Insbesondere bei komplexen Pipelines verbirgt das recht viel Komplexität und macht die Pipeline viel verständlicher.
+
+### Deklarative Pipeline
+
+* [gutes Beispiel](https://www.jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/)
+  * in diesem Beispiel werden sogar deklarative Anteile (`pipeline`) und Groovy-Code (mit Closures) gemischt (ganz am Ende)
+
+In referenzierten Beispiel wird die Function `deploy(developmentServer, serverPort)` aufgerufen, die in einer separaten Datei `deploy.goovy` abgebildet ist. Hier wird deutlich, daß die DSL-Sprache eine Verzweigung in Groovy-Code erlaubt. Der Groovy-Code muß folgende Schnittstelle haben:
+
+```groovy
+def call(def server, def port) {
+  // your groovy code
+}
+```
+
+---
+
+## Shared Pipeline Libraries
+
+* [Konfiguration](https://www.jenkins.io/blog/2017/06/27/speaker-blog-SAS-jenkins-world/)
+* [Video](https://www.youtube.com/watch?v=Wj-weFEsTb0)
+* [mehr Details](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
+* [Best Practices und Insights - MUST READ](https://bmuschko.com/blog/jenkins-shared-libraries/)
+
+Shared Libraries bieten der Vorteil von Code-Reuse über Groovy-Functions, die aus der Pipeline aufgerufen werden können. Auf diese Weise können Build-Jobs einer Microservice-Architektur den gleichen Build-Code verwenden oder auch nur Teile davon.
+
+Man kann Shared Libraries auf Global- und Folder-Level definieren. Der große Unterschied ist, daß Folder-Libraries NICHT vertrauenswürdig sind. Sie laufen in der Sandbox ab und bestimmte Aufrufe (z. B. `Jenkins.getInstance()`) sind dann nicht erlaubt und müssen zunächste explizit per "Manage Jenkins - In-process Script Approval" erlaubt werden. Global Shared Libraries sind per Default trusted ... aller Code innerhalb der Shared Libraries ist trusted und es bedarf keines Approvals für den Code `Jenkins.getInstance()`.
+
+Zudem läßt solch pipeline-externer Code leichter testen.
+
+> *ACHTUNG:* Als unerfahrener Groovy-Entwickler ist mir nicht immer bewußt was nun Core-Groovy-Sprachaspekte sind und was nun zur Jenkins-Integration und Jenkins-Magic gehört. Deshalb habe ich mich zunächst sehr schwer damit getan.
+
+### Details
+
+Während der Ausführungszeit werden shared Libraries in den Workspace des Jobs geclont. Dadurch sind die Jobs voneinander isoliert.
+
+### Struktur
+
+```text
+(root)
++- src                     # Groovy source files
+|                          # ... werden zum Classpath hinzugefügt, wenn die Pipeline ausgeführt wird
+|   +- org
+|       +- foo
+|           +- Bar.groovy  # class org.foo.Bar
++- vars
+|   +- foo.groovy          # 'foo' variable ... Functions darin können einfach per "foo.funcA()" in der
+|                          # Pipeline genutzt werden es ist keine Instanziierung notwendig
+|   +- foo.txt             # help for 'foo' variable
++- resources               # resource files (external libraries only)
+|   +- org
+|       +- foo
+|           +- bar.json    # static helper data for org.foo.Bar
+```
+
+In `vars` verwendet man entweder kleinere Helper-Scripte oder Entrypoints, die man direkt aus der Pipeline in einer DSL-like-Syntax aufrufen will. Beispielsweise kann man eine Datei `pipeline_build.groovy` dort ablegen und im Jenkinsfile verwendet man dann einfach `pipeline_build`.
+
+> Das schaut sehr elegant aus, hat mich anfangs aber total verwirrt, weil die Bereitstellung dieser Variable `pipeline_build` Jenkins-Magic ist. [Dieser Artikel]() hat mich erhellt.
+
+### Integration in das Jenkinsfile
+
+Eine Shared Library muß im Jenkins ("Manage Jenkins - Global Pipeline Libraries") konfiguriert werden bevor sie in der Pipeline per `@Library` Annotation (Groovy-Annotation, die von Jenkins ausgewertet wird) zur Nutzung vorbereitet.
+
+```groovy
+@Library('my-pipeline@development') _     // alles wird importiert
+pipeline_build {                          // Variable pipeline_build wird mit der Closure
+  analyzeCode = true                      //    { analyzeCode = true }
+}                                         // aufgerufen
+```
+
+> Das `_` bedeutet, daß die gesamte Library importiert wird - hier könnte man restriktiver sein. Man kann in "Manage Jenkins - Global Pipeline Libraries" einen Default-Branch definieren, der verwendet wird, wenn keiner explizit (in obigem Beispiel `development`) angegeben ist.
+
+Es handelt sich bei `{ analyzeCode = true }` um eine [Groovy-Closure](https://groovy-lang.org/closures.html) (kann auch leer sein - `{}`), die als Parameter an die Variable `pipeline_build` übergeben und ausgeführt wird. Insofern sieht man hier eine scripted Pipeline.
+
+> HÄÄÄÄÄÄ ... was ist da denn los - einen Parameter an eine Variable übergeben??? Letztlich beinhaltet die Variable `pipeline_build` eine Funktion (dafür hat Jenkins gesorgt - Integrationsmagic). Das Statement `pipeline_build { analyzeCode = true }` sorgt dann für die Ausführung der Funktion mit dem Closure-Parameter ... technisch über `call`. Wollte man das explizit tun wollen, so würden man `pipeline_build()` programmieren.
+
+Die Datei `vars/pipeline_build.groovy` könnte dann so aussehen (Scripted Pipeline, da Closures verwendet wird):
+
+```groovy
+def call(body) {
+    // Auswertung des Body Blocks
+    def params = [branch: "master", analyzeCode: false]   // default values
+    body.resolveStrategy = Closure.DELEGATE_FIRST         // Closure-Konfiguration
+    body.delegate = params                                // Closure-Konfiguration
+    body()                                                // Closure "body" ausführen
+}
+```
+
+Die Zeilen in der Function `call` sorgen dafür, daß das übergebene Closure-Objekt konfiguriert wird (`resolveStrategy`, `delegate`) und der Closure-Code ausgeführt wird. Damit werden letztlich die übergebenen Parameter (`analyzeCode=true`) und die Default-Werte (`branch: master`) gegeneinander abgemischt und übrig bleibt `params = [branch: "master", analyzeCode: true]`.
+
+Variablen-Code `var/schedule.groovy` kann aber auch so aussehen (deklarative Pipeline):
+
+```groovy
+import de.cachaca.Scheduler
+
+def call(Map config) {
+  pipeline {
+    stages {
+      stage('AAAA') {
+        agent any
+        steps {
+          // only a GString
+          echo "when_day: ${config.when_day}"
+
+          script {
+            // Groovy Code
+            def scheduler = new Scheduler()
+            if (config.when_day) {
+            }
+          }
+        }
+      }
+    }
+ }
+}
+```
+
+In dem Fall hat der Parameter auch einen Datentyp (`Map`) ... im vorigen Beispiel war der formale Parameter untypisiert (`body`) und bekam zur Laufzeit eine Closure übergeben. Die Map wird dann folgendermaßen übergeben a:
+
+```groovy
+schedule when_day: "Saturday"
+```
+
+Auch das sieht irgendwie nicht wie Code aus, sondern wie eine DSL. Nur dadurch erreicht, daß man die Klammern (`schedule(when_day: "Saturday")`) beim Aufruf einer Funktion in Groovy weglassen kann. Ein weiteres Indiz dafür, daß man mit Groovy nette DSLs implementieren kann, bei denen die Grenze zwischen Code und Konfiguration verschwimmt.
+
+Außerdem verwendet der Funktionskörper sogar eine Groovy-Klasse aus `src/de/cachaca/Scheduler` - der Einstieg in die Objektorientierung innerhalb von Jenkins-Libraries.
+
+In diesem Fall kann der Code in einer Scripted Pipeline (`Jenkinsfile`) so aussehen (`when_day` und `when_time` sind Funktionsparameter ... in Groovy können die Klammern weggelassen werden - ein Zugeständnis an das Ziel leserliche DSLs schreiben zu können)
+
+```groovy
+@Library('my-pipeline@development') _
+schedule when_day: "today", when_time: "08:00"
+```
+
+aufgerufen werden. Das sind doch schon richtig nett aus und hat gar nicht mehr den Antlitz von Code ... eine der großen Stärken von Groovy: [DSL](https://en.wikipedia.org/wiki/Domain-specific_language)
+
+---
+
+## Jenkins Development Environment
+
+Pipleline-Development ist entweder reines Groovy-Coding (Scripted Pipelines) oder zumindest die Verwendung einer spezialisierten DSL (Declarative Pipelines). Insofern wüde man sich wünschen eine IDE zu benutzen, um den Code zu schreiben ... Auto-Vervollständigung, Debugging - die typischen Dinge aus dem 21. Jahrhundert der Softwareentwicklung.
+
+Das Tooling um Jenkins ist hier leider ein wenig rückständig. Aber dennoch gibt es ein paar Tools, die angeboten werden.
+
+### Jenkins Server
+
+Wer Pipeline-Development machen will braucht unbedingt einen laufenden Jenkins-Server. Darin stehen dann einige Tools zur Verfügung:
+
+* https://JENKINS_SERVER/script
+  * Ausführungsumgebung für Scripts
+* https://JENKINS_SERVER/pipeline-syntax
+  * Code-Snippet Generator
+* https://JENKINS_SERVER/directive-generator/
+  * Declarative Pipeline Generator
+* Job Replay
+  * bei jedem ausgeführten Job-Lauf kann man anschließend ein Replay triggern und dabei den Code einmalig anpassen, auch wenn die Pipeline über ein `Jenkinsfile` definiert wurde
+
+### IntelliJ Code Completion
+
+* [Plugin](https://www.triology.de/blog/jenkins-pipeline-plugin-code-vervollstaendigung)
+
+### Pipeline Unit Testing Framework
+
+...
 
 ---
 
@@ -294,6 +578,12 @@ so daß man es dann bequem von überall per `jenkins version` aufrufen kann.
 
 Jenkins zeichnet sich gegenüber anderen Build-Tools dadurch aus, daß es eine Fülle an Plugins gibt.
 
+### Update-Prozess
+
+Plugins erfahren während der Maintenance einer Minor Version (z. B. 2.235) Updates. Alle Patchversionen (z. B. 2.235.5) werden bei der Installation mit den `latest` Plugins zu dieser Minorversion ausgestattet (z. B. [von hier](https://updates.jenkins.io/2.235/latest/)). Auf diese Weise ist das Ergebnis vom Zeitpunkt des Updates abhängig, d. h. ein Update der Version 2.235.5 im Januar kann zu einem anderen Endergebnis führen wie das Update der gleichen Version im März - höchstwahrscheinlich sogar, wenn die Version noch gut maintained ist.
+
+[Jenkins Plugin-Installation-Manager-Tool](https://github.com/jenkinsci/plugin-installation-manager-tool) kümmert sich bei einem Update der Plugings auch um die Abhängigkeiten, so daß am Ende eine zueinander passende Plugin-Kollektion stehen sollte.
+
 ### AnsiColor Plugin
 
 * so sind die Logfiles leichter zu lesen
@@ -304,222 +594,113 @@ Mit diesem Plugin klappen auch Microsoft Teams Notifications aus Jenkins Pipelin
 
 ---
 
-## Meine erste Pipeline from-scratch
+## Integrationsmöglichkeiten
 
-Ich habe bereits eine Jenkins Infrastruktur und dort laufen auch schon Builds basierend auf einer Scripted Shared Library. Das will ich lokal mit einem frisch installierten Jenkins nachbauen.
+### REST-API
 
-Mein erster Service, den ich bauen will stellt im GIT-Repository ein `Jenkinsfile` bereit (da ich meinen Code und meine Deployment-Scripte beisammen und unter Versionskontrolle stellen möchte). Ich erstelle eine erste Pipeline und benötige dazu:
+* [Dokumentation](https://www.jenkins.io/doc/book/using/remote-access-api/)
 
-* Repository URL
-* Repository Credentials: hierzu verwende ich den _Jenkins Credentials Provider_, der im Dialog angeboten wird. Hierzu hat mir der GIT-Repo-Admin einen User und dessen private Key mitgeteilt (Login-Option: _SSH Username with private key_)
-  * nach der erstmaligen Konfiguration finde ich diese Credentials unter: http://localhost:8080/credentials/
-* Jenkins Library: in meinem `Jenkinsfile` verwende ich eine Custom-Pipeline-Bibliothek (zwecks Wiederverwendung in verschiedenen Komponenten), die Jenkins noch nicht kennt. Deshalb muß ich die Bibliothek zunächst unter [_Global Pipeline Libraries_](http://localhost:8080/configure) als GIT-Repository bekanntmachen ... [hier kann man auch den zu verwendenden Branch konfigurieren (statisch oder dynamisch)](https://jenkins.io/doc/book/pipeline/shared-libraries/#using-libraries). Später wird in meinen Builds immer `Loading library ...` stehen - ACHTUNG: hier wird dann auch der Branch erwähnt, denn man kann verschiedene Branches
-* ich benötige noch Maven, dessen Konfiguration und ein Plugin
-  * über [_Global Tool Configuration_](http://localhost:8080/configureTools/) (**ACHTUNG:** dieser Dialog ist sehr verwirrend ... man kann hier die Maven/JDK Installationen des Systems wiederverwenden und muß keine Neuinstallation machen - _Install automatically_ darf nicht ausgewählt sein)!!!) integriere ich die auf meinem System bereits installierte Version, die ich `M3` nenne (weil ich Maven 3.5.2 installiert habe):
+Im einfachsten Fall verwendet man `curl` als Client ... es wird aber auch eine [Python Library](https://pypi.org/project/jenkinsapi/) angeboten.
 
-    ![Maven Global Tool Config](images/jenkins-globalToolConfig-maven.png)
-  
-    in meiner Pipeline werde ich dieses Tool [folgendermaßen referenzieren](https://wiki.jenkins.io/display/JENKINS/Pipeline+Maven+Plugin):
+### API-Token
 
-    ```groovy
-    stage('Compile') {
-      withMaven(
-        // named Maven installation declared in the Jenkins "Global Tool Configuration"
-        maven: 'M3'
-      ) {
-        sh "mvn clean compile -U"
-      }
-    }
+Will man beispielsweise Jobs remote starten, um so beispielsweise einen Jenkins Build Server mit einem Jenkins Deploy Server zu koppeln, so benötigt man dazu natürlich (Jenkins ist der Hochsicherheitstrackt) Credentials. Jenkins unterstützt hierzu API-Tokens, die an einem User hängen und dessen Berechtigungen verwenden.
 
-    > ich präferiere Docker Container, um diese Tools on-the-fly in der richtigen Version bereitzustellen - jetzt arbeite ich erstmal mit den bereits installierten Tools
-  * die Konfiguration wird über [_Global Tool Configuration_](http://localhost:8080/configureTools/) durchgeführt ... ich verwende meine lokale `/home/pfh/.m2/settings.xml`
-  * das Plugin _Pipeline Maven Integration_ wird über die [UI](http://localhost:8080/pluginManager/) installiert
-  * in meiner Pipeline-Library verwende ich das Plugin [_Pipeline Utility Steps_](https://github.com/jenkinsci/pipeline-utility-steps-plugin/blob/master/docs/STEPS.md), um die POM zu lesen (`readMavenPom`) - wird über die [UI](http://localhost:8080/pluginManager/) installiert
+---
 
-* statt der Wiederverwedung von Maven/JDK von meinem Host-System möchte ich Docker-Container verwenden. Deshalb schreibe ich die Scripted Pipeline folgendermaßen um ([siehe Dokumentation](https://jenkins.io/doc/book/pipeline/docker/):
+## Groovy-Scripts
 
-  ```json
-  docker
-    .image('maven:3.3.9-jdk-8-alpine')
-    .inside('-v /tmp/maven:/usr/share/maven/ref/ -u root') {
-    stage('Compile') {
-        sh "mvn clean compile -U"
-    }
-  }
-  ```
+Jenkins in Java geschrieben ist und bietet die [API](https://javadoc.jenkins.io/) für die Verwendung in Pipelines und in der Script Console (https://JENKINS/script) in Form von Groovy-Code an. Groovy wird gerne für solche Custom-Extensions verwendet, da der Code zur Laufzeit interpretiert wird (und nicht erst umständlich compilert werden muss).
 
-### Optimierung 1: JDK und Maven Builds im Docker Agent
-
-Builds in Docker Agents abzubilden hat den Charme, daß die Builds komplett separiert werden. Es kann nicht mehr vorkommen, daß ein Test einen Port öffnen will, der schon von einem parallel laufenden Test geöffnet wurde.
-
-> "As a side note, I would suggest attaching agents to that master. It is not recommended to run jobs inside a master." ([Automating Jenkins Docker Setup](https://technologyconversations.com/2017/06/16/automating-jenkins-docker-setup/))
-
-Da der User `jenkins` keine `docker` Kommandos ohne `sudo` ausführen kann, füge ich ihn zur Gruppe `docker` hinzu: `usermod -aG docker jenkins`. Anschließend muß ich noch den Jenkins-Service restarten, damit die neuen Gruppenzuordnungen auch ziehen.
-
-> Die ersten Versuche waren leider wenig erquickend und ich muß gestehen, daß sich die Fehlersuche sehr schwierig gestaltet. Docker selbst ist bei nicht startbaren Docker COntainern ja schon recht schwierig zu analysieren. Dadurch, daß der Docker Container unter dem `jenkins` user gestartet wurde ist die Fehlersuche noch mal schwieriger. Ich hatte beispielsweise das Problem, daß die gemounteten Volumes (mit Maven `settings.xml`) nicht sofort zur Verfügung standen ... ich mußte per `sleep 5` ein paar Sekunden warten. Solche Fehler sind natürlcih die Hölle.  Irgendwann schaffe ich es dann aber doch, meinen Code über den Docker Container zu bauen und zu testen.
-
-So sah meine funktionsfähige Pipeline dann aus:
+Allerdings sind viele Library-Calls defaultmäßig aus Sicherheitsgründen verboten. So führt
 
 ```groovy
-node {
-  docker
-    .image('maven:3.3.9-jdk-8-alpine')
-    .inside(
-        // provide shared Maven Repository => performance
-            '-v /tmp/.m2:/tmp/.m2 '
-
-        // provide Maven configuration => put it into customized Docker Image
-        + '-v /tmp/maven:/usr/share/maven/ref/ '
-
-        // -u root ... https://github.com/carlossg/docker-maven/issues/63
-        + '-u root '
-
-        + '--env MAVEN_OPTS="'
-
-        //                  share Maven Repository => performance
-        +                   '-Dmaven.repo.local=/tmp/.m2"') {
-
-        stage('Checkout') {
-            checkout scm
-        }
-        stage('Build') {
-            sleep 5
-            sh 'mvn clean compile -U'
-        }
-        stage('Test') {
-            // workaround for surefire problem
-            // ... https://stackoverflow.com/questions/46670582/docker-maven-failsafe-surefire-starting-fork-fails-with-the-forked-vm-termin
-            // ... https://issues.apache.org/jira/browse/SUREFIRE-1422
-            sh 'apk add --no-cache procps'
-
-            sh "mvn verify"
-        }
-  }
-}
+#!/usr/bin/env groovy
+Jenkins.instance.getAllItems(AbstractItem.class).each {
+    println it.fullName + " - " + it.class
+};
 ```
 
-### Automatisierung einer Jenkins Installation - auf die harte Tour
+in einer Pipeline zur Fehlermeldung (in der Script-Console "https://JENKINS/script" ist das hingegen erlaubt!!!)
 
-* [Jenkins Startup Hooks](https://wiki.jenkins.io/display/JENKINS/Groovy+Hook+Script)
-* [Breaking the Jenkins Monolith](https://medium.com/buildit/breaking-the-jenkins-monolith-52c47799ddb0)
-  * mit guten Beispielen wie die Konfiguration automatisiert werden kann (mit Tests)
-  * inkl. automatischer Jobkonfiguration
+> staticMethod jenkins.model.Jenkins getInstance Approving this signature may introduce a security vulnerability! You are advised to deny it.
 
-Ich konnte nun zwar die Konfiguration von JDK und Maven über Docker Container loswerden, doch die Installation von
+![Script Approval](images/jenkins-scriptApproval.png)
 
-* Plugins
+Durch clicken innerhalb der Fehlermeldung kann das Approval erteilt werden. Innerhalb von "Manage Jenkins - In-process Script Approval" kann man sich alle Approvals ansehen (https://JENKINS/scriptApproval/).
 
-und die Konfiguration von
+> ACHTUNG: Script-Approvals bürgen Security-Issues
 
-* Admin Password
-* GIT Credentials
-* Shared Libraries
-* Jobs
-* Usern
+### Script Beispiele
 
-ist weiterhin manuell durchzuführen.
+```groovy
+Jenkins.instance.getAllItems(AbstractItem.class).each {
+    println it.fullName + " - " + it.class
+};
+```
 
-Jenkins verwaltet diese Konfiguration in XML Dateien (`/var/lib/jenkins/credentials.xml`), die mir schwierig migrierbar erscheinen (`plugin="credentials@2.1.18"`). Die Pflege dieser Dateien bei Updates scheint mir keine Freude zu sein.
+```groovy
+Jenkins.instance.getAllItems(org.jenkinsci.plugins.workflow.job.WorkflowJob.class).each {
+    println it.fullName + " - " + it.class
+};
+```
 
-Welche Alternativen sind möglich?
+---
 
-* Installation per Ansible
-* Dockerisierung eines vorkonfigurierten Jenkins
-* REST API nutzen
-* Groovy Schnittstelle nutzen ... alle -Skripte in `${JENKINS_HOME}/init.groovy.d` werden beim Start idempotent ausgeführt.
+## Entwicklungsumgebung
 
-#### Optimierung 2: Jenkins als Docker Container
+* [VSCode - Jenkins Doc](https://marketplace.visualstudio.com/items?itemName=Maarti.jenkins-doc)
 
-* [Docker in Docker? - Can you run Docker inside a Docker container?](https://itnext.io/docker-in-docker-521958d34efd)
+### Syntaxcheck des Jenkinsfiles - manuell
 
-Diese Option hätte den Charme, daß man alles vorkonfigurieren könnte, komplett ohne weitere Infrastruktur auf dem Jenkins-Host (Ansible hat auch Anforderungen). Jeder, der Docker nutzen kann, könnte dann auch einen fertig konfigurierten Jenkins-Server starten.
+Mit dem "Replay"-Button auf der Web-UI kann kann schon ganz gut agieren ... ist dann halt immer copy-paste aus dem Editor.
 
-**Option 1:**
+### Syntaxcheck des Jenkinsfiles - CLI
 
-Im Docker Container läuft ein eigener Docker Host (Parent-Mode).
-
-> "The answer is yes, but it is not recommended because it causes many low-level technical problems, which have to do with the way Docker is implemented on the operating system, and which are explained in detail in [Jérôme Petazzoni’s post](https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/)." ([Can you run Docker inside a Docker container?](https://itnext.io/docker-in-docker-521958d34efd))
-
-**Option 2:**
-
-In dem Fall sind die Docker Container
-
-> "The good news is that there is another, recommended, way to use Docker inside a Docker container, with which the two Docker instances are not independent from each other, but which bypasses these problems. With this approach, a container, with Docker installed, does not run its own Docker daemon, but connects to the Docker daemon of the host system. That means, you will have a Docker CLI in the container, as well as on the host system, but they both connect to one and the same Docker daemon. At any time, there is only one Docker daemon running in your machine, the one running on the host system. To achieve this, you can start a Docker container, that has Docker installed, with the following bind mount option: `-v /var/run/docker.sock:/var/run/docker.sock`" ([Can you run Docker inside a Docker container?](https://itnext.io/docker-in-docker-521958d34efd))
-
-Genau das habe ich mal ausprobiert. Jenkins per
+Ein Jenkins-Server bietet den  [Endpunkt "pipeline-model-converter/validate"](https://www.jenkins.io/doc/book/pipeline/development/#linter) an, mit dem sich die Syntax eines `Jenkinsfiles` überprüfen läßt. Mit einem `JENKINS_CRUMP` läßt sich das auch per `curl` durchführen:
 
 ```bash
-docker run \
-    -u root \
-    --rm \
-    --name jenkins \
-    -d \
-    -p 9090:8080 \
-    -p 50000:50000 \
-    -v /tmp/jenkins-data:/var/jenkins_home \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    jenkinsci/blueocean
+_serverUrl=
+_user=
+_password=
+_apiToken=
+_pathToJenkinsfile=
+JENKINS_CRUMB=`curl --insecure --user ${_user}:${_apiToken} "${_serverUrl}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,\":\",//crumb)"`
+curl --insecure --user --user ${_user}:${_apiToken} -X POST -H $JENKINS_CRUMB -F "jenkinsfile=<${_pathToJenkinsfile}" ${_serverUrl}/pipeline-model-converter/validate
 ```
 
-gestartet und dann über [Blue Ocean URL](http://localhost:9090/blue/) in die _Classic UI_ gewechselt (Blue Ocean erlaubt keine Pipelines über die UI zu definieren), um diese Jenkins-Pipeline anzulegen:
+läßt sich das automatisieren ... allerdings kann man die Pipeline dann nicht einfach ausführen. Das geht in der Web-UI natürlich sehr komfortabel.
 
-```json
+> ACHTUNG: man sollte sich gut überlegen, ob man das `_password` tatsächlich preisgeben will (Command History) - ich empfehle, einen API-Token zu generieren und zu verwenden.
+
+Einige Editoren (Eclipse, Visual Studio Code) bieten eine [Linter-Integration](https://www.jenkins.io/doc/book/pipeline/development/#ide-integrations). Dabei werden die Curl-Requests im Hintergrund ausgeführt ... für manche User ein wenig komfortabler, aber das gleiche Prinzip.
+
+### Jenkinsfile lokal ausführen
+
+Mit dem [Plugin "Jenkins Runner"](https://marketplace.visualstudio.com/items?itemName=dave-hagedorn.jenkins-runner) habe ich versucht, eine komplette Integration von `Jenkinsfile`-Dateien in Visual Studio Code abzubilden.
+
+Mein Ziel war `Jenkinsfile` editieren und danach das Kommando "Jenkins Runner - Run Pipeline Script on Default Job" in Visual Studio Code auszuführen. In der Hoffnung, daß dann der in `settings.json` konfigurierte (und manuell in Jenkins angelegt) Job angepaßt wird und ich so meine Änderungen testen kann.
+
+Die ersten Schwierigkeiten mit https (mein Server-Zertifikat wurde nicht akzeptiert => http erlaubt) und Authentifizierung (ich habe einen API-Token verwendet) konnte ich noch umschiffen.
+
+An der Meldung
+
+> "ERROR ... does not have the envinject plugin installed - cannot use set environment variables for this job"
+
+bin ich dann allerdings gescheitert. Nach Installation des Plugins und Jenkins Restart blieb die Fehlermdelung hartnäckig ... selbst bei dieser minimalen Pipeline:
+
+```Jenkinsfile
 pipeline {
-    agent none
+    agent any
+
     stages {
-        stage('Example Build') {
-            agent {
-              docker 'maven:3-alpine'
-            }
+        stage('Hello') {
             steps {
-                echo 'Hello, Maven'
-                sh 'mvn --version'
+                echo 'Hello World'
             }
         }
     }
 }
 ```
 
-Job ausgeführt ... funktioniert - per `watch docker ps` sehe ich während der Jobausführung auch den Docker-Agent :-)
-
-Die Jobs (inkl. History) werden in `/var/jenkins_home` abgelegt, das in obigem Beispiel auf dem Docker Host (`-v /tmp/jenkins-data:/var/jenkins_home`) abgelegt wird. Auf diese Weise verliert man nichts, wenn man den Container löschen muß.
-
-### Automatisierung einer Jenkins Installation - auf die komfortable Tour
-
-* Option 1: Jenkins Plugin
-  * [Jenkins Configuration as Code 1](https://www.praqma.com/stories/jenkins-configuration-as-code/)
-  * [Jenkins Configuration as Code 2](https://www.praqma.com/stories/start-jenkins-config-as-code/)
-* Option 2: Jenkins-as-Code Reference-Server
-
-Das Configuration-as-Code-Plugin funktioniert sehr gut.
-
-### Development Environment
-
-* [Pipeline Development Environment](https://jenkins.io/doc/book/pipeline/development/)
-
-Eine lokale Jenkins Installation hat meine Developer Experience auf jeden fall schon mal verbessert - im Vergleich zu einem Shared-Jenkins-Installation. Doch leider muß ich immer noch immer committen, pushen und dann den Jenkins Job triggern. Um dann festzustellen, daß die Syntax im `Jenkinsfile` oder einer Shared-Library nicht stimmt. Das ist nicht besonders effizient :-(
-
-Wie geht es besser?
-
-* Jenkins bietet auf einem gestarteten Jenkins Server ... leider nur Tooling für Declarative Pipelines
-  * [Snippet Generator](http://localhost:8080/pipeline-syntax/)
-  * [Declarative Directive Generator](http://localhost:8080/directive-generator/)
-  * [Global Variable Reference](http://localhost:8080/pipeline-syntax/globals)
-* Blue Ocean Pipeline Editor unterstützt die Editierung von Jenkins Pipelines, doch will ich meine üblichen Editoren und Tools (Visual Studio Code, Git) verwenden, um die Dateien zu editieren.
-* Command-line Pipeline Linter
-  * damit bin ich nicht zurecht gekommen
-* Visual Studio Code stellt folgende Plugins bereit:
-  * Jenkins Pipeline Linter Connector
-    * **unterstützt nur deklarative Pipelines**
-    * muß folgendermaßen konfiguriert werden:
-      ```json
-      "jenkins.pipeline.linter.connector.url": "http://localhost:8080/pipeline-model-converter/validate",
-      "jenkins.pipeline.linter.connector.user": "pfh",
-      "jenkins.pipeline.linter.connector.pass": "112a010e3c1408a97e38fb5d50fd79d0bf"
-      ```
-* [Pipeline Unit Testing Framework](https://github.com/jenkinsci/JenkinsPipelineUnit)
-  * das sollte man auf jeden Fall verwenden, um die Build-Infrastruktur zu testen!!!
-
-Fazit:
-
-> "I hate to be the bearer of bad news, but the documentation is lacking (and often unspecific as to whether or not its examples are for scripted or declarative pipelines), the book barely grazes the subject (if you’ve found one that has better information please share), and piecing together bits of other peoples’ Github examples and Stack Overflow answers is nothing short of a painful slog. Even then, you’re just as likely (if not more!) to find declarative pipeline examples which, of course, have different syntax and abilities." ([Hacky Hacker’s Guide To Hacking Together Jenkins Scripted Pipelines and Getting Them To Do Things](https://medium.com/devopslinks/a-hacky-hackers-guide-to-hacking-together-jenkins-scripted-pipelines-and-getting-them-to-do-things-a1e943cb8d11))
+Ich habe diese Idee nicht weiter verfolgt - kein Blocker ... wäre nur nice-to-have gewesen.

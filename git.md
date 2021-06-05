@@ -2,12 +2,11 @@
 
 Sehr gute Quellen:
 
-* SUPER: [https://git-scm.com\/book\/de\/v1](https://git-scm.com/book/de/v1)
+* [Pro Git - Buch - SUPER](https://git-scm.com/book/en/v2)
 * Refcardz: [https://dzone.com\/refcardz\/getting-started-git](https://dzone.com/refcardz/getting-started-git)
 * Interaktives Tutorial: https://learngitbranching.js.org/
 * [http://www.eecs.harvard.edu\/~cduan\/technical\/git\/](http://www.eecs.harvard.edu/~cduan/technical/git/)
 * [http://book.git-scm.com\/](http://book.git-scm.com/)
-* https://git-scm.com/book/en/v2
 * Ultra-Kurzeinführung: [http://rogerdudler.github.io\/git-guide\/](http://rogerdudler.github.io/git-guide/)
 * \[1\]: [https:\/\/www.youtube.com\/watch?v=0fKg7e37bQE](https://www.youtube.com/watch?v=0fKg7e37bQE)
 
@@ -30,7 +29,7 @@ Diese _Integration Manager_-Modell  Arbeitsweise paßt zu den wenigstens Standar
 
 Einer der größten Vorteile dieses Modells ist, daß es den Entwicklern große Freiheitsgrade (Branching, Tagging, Push, Pull, Verteilung, Zentralisierung) bei der Arbeitsorganisation läßt. Je nach Aufgabe kann man sich jedes mal neu entscheiden wie man sich organisiert ... man wählt den besten Ansatz für die jeweilige Problemstellung.
 
-Diese Freiheitsgrade erfordern aber auch Vertrauen und gute Entwickler. Und genau das könnte vielen  Verantwortlichen in den Projekten\/Unternehmen Angst machen ...
+Diese Freiheitsgrade erfordern aber auch Vertrauen und gute Entwickler - mit einem guten Verständnis dieses Tools. Und genau das könnte vielen Verantwortlichen in den Projekten/Unternehmen Angst machen ...
 
 > Aus meiner Sicht ist diese Angst vollkommen unbegründet, denn ein Unternehmen MUSS Vertrauen in seine Mitarbeiter haben, um überhaupt Software entwickeln zu können. Warum sollte es darauf vertrauen, daß qualitativ hochwertige Software entsteht, wenn es seinen Entwicklern nicht einmal zutraut ein Versionsverwaltungssystem sinnvoll zu nutzen? Solche Firmen sind zum Scheitern verurteilt.
 
@@ -96,11 +95,13 @@ Dieses Modell wird häufig von OpenSource-Projekten verwendet. Es gibt dabei ein
 
 ## Basis-Konzepte
 
-Linux Torvalds sagte in einer [Präsentation](2) mal, daß Git Content-based ist und Subversion File-based. Ich habe es noch nicht so ganz verstanden, aber als Beispiel führte er folgendes an:
+Linux Torvalds sagte in einer [Präsentation](2) mal, daß Git Content-based ist und Subversion File-based ... als Beispiel führte er folgendes an:
 
 > Eine Datei A beherbergt zum Zeitpunkt t1 eine Methode `calculatePrice()`. Diese Methode wird zum Zeitpunkt t2 in die Datei B verschoben. Wenn der Entwickler nun die Historie zu `calculatePrice()` ansehen möchte, dann ist es bei Git kein Problem, den gesamten Lebenszyklus zu berücksichtigt, d. h. das Verschieben von A nach B ist transparent. Bei Subversion ist das schwierig, weil es File-based ist.
 
 Eventuell ist das auch der Grund warum Merging mit Git so gut (automatisiert und zuverlässig) funktioniert. Bei SVN ist das aufwendiger und viele versuchen, es zu vermeiden. Diese Schwäche sorgt dafür, daß Subversion-User in der Wahl ihrer Arbeistweisen eingeschränkt sind.
+
+Git verwendet das `.git`-Verzeichnis zur persistenten Speicherung seiner Verwaltungsdaten.
 
 **Repository:**
 
@@ -109,9 +110,9 @@ Eventuell ist das auch der Grund warum Merging mit Git so gut (automatisiert und
 
 **Remote Repository:**
 
-Entferntes Repository, das über den Origin-Parameter in Verbindung mit dem lokalen Repository steht (z. B. weil es das geclonte Repository ist, aus dem das lokale Repository entstanden ist)
+Ein anderes Repository (es kann auch lokal und remote sein), das über den Origin-Parameter in Verbindung mit dem lokalen Repository steht (z. B. weil es das geclonte Repository ist, aus dem das lokale Repository entstanden ist)
 
-**Index\/Stage:**
+**Index/Stage:**
 
 Container, den der Entwickler bewusst explizit mit geänderten\/gelöschten\/hinzugefügten Ressourcen befüllt (z. B. `git add bla.txt`). Dieser Container wird später committed ... die geänderten Ressourcen bilden zusammen mit den Änderungen das CommitObject
 
@@ -124,17 +125,9 @@ Container, den der Entwickler bewusst explizit mit geänderten\/gelöschten\/hin
 
 Der aktuelle Zustand eines Branches ergibt sich aus den CommitObjects (repräsentieren die Diffs) von der Wurzel bis zum aktuellen Head-CommitObject
 
-**Head:**
-
-* benanntes CommitObject (Teilmenge aller CommitObjects) - durch Branching wird ein neuer Head erzeugt, der dann eine eigene Historie entwickeln kann und irgendwann evtl. mal wieder mit dem anderen Zweig zusammengeführt wird
-* jeder separate Branch hat einen eigenen Head
-* es gibt immer mindestens einen Head, den sog. MASTER (der Head vom Hauptzweig)
-* der aktuell selektierte Head wird mit HEAD bezeichnet, wenn es der Hauptzweig ist gilt HEAD == MASTER
-* neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
-
 **Clone:**
 
-Ein `git clone` erzeugt eine 1:1 Kopie eines Repositories. Dabei werden ALLE CommitObjects aller Branches ins neue Repository übernommen, d. h. die gesamte Historie ist im geclonten Repository vorhanden. Über das Origin-Attribut ist die Verbindung zur Quelle weiterhin vorhanden und per `git push` oder Pull-Requests kann eine Integration in das Origin-Repository erfolgen.
+Ein `git clone` erzeugt eine 1:1 Kopie eines Repositories (abgesehen von Git-Hooks ist es ein komplettes Backup). Dabei werden ALLE CommitObjects aller Branches ins neue Repository übernommen, d. h. die gesamte Historie ist im geclonten Repository (offline) vorhanden. Über das Origin-Attribut ist die Verbindung zur Quelle weiterhin vorhanden und per `git push` oder Pull-Requests kann eine Integration in das Origin-Repository erfolgen.
 
 **Clone vs. Fork:**
 
@@ -144,16 +137,26 @@ Ein `git clone` erzeugt eine 1:1 Kopie eines Repositories. Dabei werden ALLE Com
 
 **Branch:**
 
-Ein Branch repräsentiert alle CommitObjects eines Commit-Threads. Man kann zwischen Branches beliebig hin- und herwechseln und bekommt den im jeweiligen Branch gültigen Stand auf dem Filesystem wiederhergestellt. Das erscheint auf den ersten Blick magisch, weil sich u. U. das gesamte Filesystem ändert.
+Ein Branch ist nur ein Pointer auf ein CommitObject. Man kann zwischen Branches beliebig hin- und herwechseln und bekommt den im jeweiligen Branch gültigen Stand auf dem Filesystem wiederhergestellt. Das erscheint auf den ersten Blick magisch, weil sich u. U. das gesamte Filesystem ändert.
 Hat man eine nicht commitete Änderung an einer Ressource, die bereits unter Version-Control steht, in dem zu verlassenden Branch, dann wird das unterbunden. Man muß erst entscheiden, ob man die Änderung committet oder rückgängig macht.
-Hat man eine nicht commitete Änderung an einer Ressource, die nocht nicht unter Version-Control steht, in
+
+**Head:**
+
+* benanntes CommitObject (Teilmenge aller CommitObjects) - durch Branching wird ein neuer Head erzeugt, der dann eine eigene Historie entwickeln kann und irgendwann evtl. mal wieder mit dem anderen Zweig zusammengeführt wird
+* jeder separate Branch hat einen eigenen Head
+* es gibt immer mindestens einen Head, den sog. `MASTER` (der Head vom Hauptzweig)
+* neben Heads innerhalb eines Repositories gibt es Heads auf andere Repositories (entstehen durch clonen eines Repositories) = Remote-Head
+
+**HEAD:**
+
+* der aktuell selektierte Head (eines Branches) wird mit `HEAD` bezeichnet, wenn es der Hauptzweig ist gilt HEAD == MASTER
 
 **Zugriffsprotokoll:**
 Git-Repository-Server erlauben i. a. einen Zugriff per
 
 * HTTPS
 * SSH
-  * hiermit ist auch passwortlose Authentifizierung per [SSH-Key über den SSH-Mechanismus](ssh.md) möglich 
+  * hiermit ist auch passwortlose Authentifizierung per [SSH-Key über den SSH-Mechanismus](ssh.md) möglich
 
 ---
 
