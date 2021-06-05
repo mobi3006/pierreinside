@@ -1,5 +1,7 @@
 # Python
 
+* [Referenzdoku realpython.com](https://realpython.com/)
+
 Python unterstützt verschiedene Paradigmen (Strukturierte Programmierung gleichermaßen wie Objektorientierte Programmierung). Es handelt sich hier um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
 
 ---
@@ -25,7 +27,7 @@ Glücklicherweise lassen sich beide Versionen parallel betreiben.
 
 ### Linux - switch to Python 3 default
 
-Ich hatte ein realtiv altes Ubuntu-System, das noch Python 2 als default verwendete. Python 3 war schon installiert, doch ich wollte nicht immer `python3` eingeben müssen, um den "richtigen" Interpreter zu starten. Leider besteht Python nicht nur aus dem Interpreter, sondern auch aus dem Paketmanager `pip` und noch weiteren Tools (`pipenv`, ...), die dann alle zueinander passen müssen. Das kann ganz schön nerven.
+Ich hatte ein realtiv altes Ubuntu-System, das noch Python 2 als default verwendete. Python 3 war schon installiert, doch ich wollte nicht immer `python3` eingeben müssen, um den "richtigen" Interpreter zu starten. Leider besteht Python nicht nur aus dem Interpreter, sondern auch aus dem Paketmanager `pip` und noch weiteren Tools (`pipenv`, ...), die dann alle zueinander passen müssen. Das kann ganz schön nerven und unter Umständen sogar das System zerschießen, wenn andere Systemtools evtl. dauaruf aufbauen.
 
 Es gibt verschiedene Lösungen
 
@@ -33,7 +35,13 @@ Es gibt verschiedene Lösungen
 
 ---
 
-## Getting started - Command Line
+## Getting started
+
+### Python im Browser
+
+Um mal eben schnell was auszuprobieren (während des Lernen der Sprache) hat sich [ReplIt](https://replit.com/) etabliert. Deutlich besser als Python in Shell Mode.
+
+### Lokale Installation - Command Line
 
 Install Python `sudo apt-get install python3-pip` and create a file `hello.py`
 
@@ -64,6 +72,24 @@ python main.py
 ```
 
 wird dann die Zahl `42` ausgegeben :-)
+
+### Browser-Mode
+
+Python läßt sich auch im Browser ausführen - insbes. für Einsteiger ist das eine angenehme Option:
+
+* [Replit](https://replit.com)
+  * Auto-Formatting
+  * Syntax-Highlightning
+  * Funktionsdoku
+  * Code Intelligence
+
+> Evtl. lassen sich nicht alle Bibliotheken und Features (Multi-Threading) nutzen. Für den Anfang bzw. kleinere Skripte könnte das aber ausreichen.
+
+### AWS Serverless
+
+* [AWS Lambda](https://aws.amazon.com/de/getting-started/hands-on/run-serverless-code/)
+
+Python Code läßt sich als Lambda Function in AWS ausführen.
 
 ---
 
@@ -122,7 +148,7 @@ Im Gegensatz dazu hat die globale Variable `k` in `anyFuntion` keine Zuweisung, 
 
 `m` hingegen ist sowohl im globalen Namensraum als auch im lokalen Namensraum von `anyFuntion`. Der lokale Namensraum hat höhere Priorität.
 
-> Absurd ist in PYthon, daß man `global m` definieren könnte und dann würde innerhalb `anyFuntion` der Wert aus dem globalen Namensraum verwendet. Wer ist das denn für ein Quatsch???
+> Absurd ist in Python, daß man `global m` definieren könnte und dann würde innerhalb `anyFuntion` der Wert aus dem globalen Namensraum verwendet. Wer ist das denn für ein Quatsch???
 
 ### Einrückung
 
@@ -165,7 +191,7 @@ Sequences sind die Datentypen
   * der Operator `+=` hat ein spezielles Handling bei (mutable) List: "obj = obj + object_two is different than obj += object_two ... The first version makes a new object entirely and reassigns to obj. The second version changes the original object so that the contents of object_two are added to the end of the first."
     * Empfehlung: den `+=` Operatior nicht bei Listen - oder besser - gar nicht verwenden
 * Tuple (immutable) ... mit runden Klammern definiert
-  * die runden Klammern können weggelassen werden ... die beiden folgenden Tupel sind semantisch gleich
+  * die runden Klammern können weggelassen werden (weil dieser Sequenz-Typ der typische ist - Stichwort funktionale Programmierung) ... die beiden folgenden Tupel sind semantisch gleich
 
       ```python
       tupelA = ( "Banane", "Apfel", "Pfirsich" )
@@ -181,10 +207,6 @@ Besonderheiten von Sequenzen
 * `tupel = ("hello", 2.0, 5, [10,20])` ist ein Tupel ... sieht einer List `list = ["hello", 2.0, 5, [10,20]]` sehr ähnlich ist aber immutable
 * Sequenzen unterstützen Slicing ... List-Slices sind Listen, Tupel-Slices sind Tupel, String-Slices sind Strings:
   * `name = Pierre; inBetween = name[1:len(name)-2]`
-* `map`
-* `set`: `myset={"Pierre", "Silke", "Jonas"}`
-  * mit comprehensions: `a = {x for x in 'abracadabra' if x not in 'abc'}`
-  * Operationen: `myset - { "Pierre" }` liefert `{"Silke", "Jonas"}`
 * Tupel: `('n', 'no', 'nop', 'nope')`
   * Elemente müssen nicht vom gleichen Datentyp sein: `((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))`
   * im Gegensatz zu `list` ist ein Tuppel immutable und hat i. a. unterschiedliche Datentypen - Tupel werden in anderen Use-Cases verwendet
@@ -196,8 +218,8 @@ Speicheroptimierung:
 ```python
 fruitA = "Banane"
 fruitB = "Banane"
-print("expected True", fruitA is fruitB)
-print("expected True", fruitA == fruitB)
+print("compare identity - expected True", fruitA is fruitB)
+print("compare content - expected True:", fruitA == fruitB)
 ```
 
 * mit String kann man "rechnen"
@@ -215,35 +237,41 @@ print("expected True", fruitA == fruitB)
     * `strip` entfernt auch Zeilenumbrüche
   * `replaced = "Das ist ein Test".replace("a", "b")`
   * `print("Hallo {}, ich bin {} Jahre alt und ich habe {} Euro in der Brieftasche".format("Pierre", 13))`
-    * [String-Formatierungsvarianten]()
+    * String-Formatierungsvarianten
     * hier kann man den Wert noch formatieren (z B. `print("Hallo {}, ich bin {} Jahre alt und ich habe {:.2f} Euro in der Brieftasche".format("Pierre", 13, 100))`)
     * noch schöner ist, wenn man den Platzhaltern Namen geben kann
       * das vereinfacht Refactorings am String, weil die Reihenfolge der Variablenwerte keine Rolle spielt:
         * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche".format(name="Pierre", alter=13, betrag=100))`
       * wiederholte Strings müssen nicht als Werte wiederholt angegeben werden:
         * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche. Bis bald, {name}".format(name="Pierre", alter=13, betrag=100))`
-    * mittlerweile hat sich der f-String durchgesetzt, der noch leichter lesbar ist
-      * `print("Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche")`
+    * mittlerweile hat sich der f-String durchgesetzt, der noch leichter lesbar ist. Es erlaubt Formatierungen und Rechenoperationen innerhalb des Strings
+      * `print(f"Hallo {name}, ich bin {alter} Jahre alt und ich habe {betrag:.2f} Euro in der Brieftasche")`
+      * `print(f"a + b = {a+b}")`
+
+Interessante Built-In Functions:
+
+* `l = list("Pierre")` liefert `l = ["P", "i", "e", "r", "r", "e"]`
+* `s = set("Pierre")` liefert `s = {"P", "i", "e", "r"}` (oder eine andere Reihenfolge)
+
 ### Sequence - List
 
-mit mutating Functions:
+mit mutating Object-Functions (funktioniert natürlich nicht auf immutable Tuples) - es werden keine neuen Objekte erstellt, d. h. `list = list + ["banana"]` erstellt ein neues `list` Objekt ... was bei `list.append("banana")` nicht der Fall ist:
 
 * `list.append("banana")`
-  * im Gegansatz zu `list = list + ["banana"]`, das zwischenzeitlich eine neue Liste erzeugt, dann die `list`aber auf die neue Liste zeigen läßt. Im Endergebnis gleich, aber technisch anders
 * `list.count("banana")`
 * `list.insert(1, "banana")`
 * `list.index("banana")`
 * `list.remove("banana")`
 * `list.reverse()`
 * `list.sort()`
-  * mutating Method => funtioniert nicht auf Tupels
-  * alternativ (und auch funktionaler, da immutable) kann man die Built-In-Funktion `sorted(list)` verwenden, die dann auch auf immutable Sequences funktioniert
 * `list.sort(key=None, reverse=False)`
 * `list.pop()`
   * auf diese Weise lassen sich mit `append` und `pop` Stacks implementieren
 * `list.popleft()`
   * auf diese Weise lassen sich Queues mit `list.append()`/`list.popleft()` implementieren
     * nicht performant - besser `queue` aus dem `collections`-Paket verwenden
+
+Alternativ zu den Object-Functions (z. B. `list.sort()`) kann man die Built-In-Funktion `sorted(list)` verwenden, die immutable (= funktional) ist und somit auch auf immutable Sequences (z. B. Tupels).
 
 ### Sequence - Tupel
 
@@ -257,21 +285,23 @@ print("expected True (compare content!!!)", fruitsA == fruitsB)
 print("expected False", id(fruitsA) == id(fruitsB))
 ```
 
-Mit Tupel-Assignment läßt sich das Tauschen von Variablenwerten sehr elegant beschreiben:
+Mit [Tupel-Assignment](https://realpython.com/lessons/tuple-assignment-packing-unpacking/) läßt sich das Tauschen von Variablenwerten sehr elegant beschreiben:
 
 ```python
 a = 3
 b = 5
 print(a, b)
-a, b = b, a
+a, b = b, a   # siehe Anmerkung
 print(a, b)
 ```
+
+> In `a, b = b, a` zeigt sich die Eleganz von Python. Im Prinzip handelt es sich um diese Zuweisung: `(a, b) = (b, a)`. Dadurch, daß die Klammern bei Tupeln optional sind, wirkt `a, b = b, a` wie ein neues Sprachkonstrukt.
 
 Auf Tupeln kann man per `sorted` sortieren (Breaking Ties Eigenschaft):
 
 ```python
 list = [(3, 5), (1,4), (1, 3)]
-print(sorted(list)    # [(1, 3), (1, 4), (3, 5)]
+print(sorted(list))    # [(1, 3), (1, 4), (3, 5)]
 ```
 
 Diese Eigenschaft kann man gut verwenden, um komlexe Sortierkriterien zu definieren:
@@ -281,6 +311,21 @@ list = ["Anton", "Zorro", "Nathan", "12345", "Robin"]
 print(sorted(list, key=lambda name: (len(name), name))    # ["12345", "Anton", "Robin", "Zorro", "Nathan"]
 ```
 
+### Sets
+
+* geschweifte Klammern (wie in der Mathematik)
+* `set`: `myset = {"Pierre", "Silke", "Jonas"}`
+  * mit comprehensions: `a = {x for x in 'abracadabra' if x not in 'abc'}`
+  * Operationen: `myset - { "Pierre" }` liefert `{"Silke", "Jonas"}`
+* Functions:
+  * `myset.add("Pierre")`
+  * `myset.pop()`
+  * `myset.discard("Pierre")`
+  * `myset.remove("Pierre")`
+  * `myset.clear()`
+
+> Auch für Dictionaries werden geschweifte Klammern verwendet. Das führt dazu, daß leere Sets und leere Dictionaries die gleiche Definition `x = {}` verwenden würden. Python macht daraus ein Dictionary. Ein leeres set könnte man über `x = set()` definieren.
+
 ### Dictionary
 
 * Dictionary (Key-Value-Maps) ... mit geschweiften Klammern:
@@ -288,6 +333,13 @@ print(sorted(list, key=lambda name: (len(name), name))    # ["12345", "Anton", "
   * `tel['pierre']=3006` => `{'jack': 4098, 'sape': 4139, 'pierre': 3006}`
 * ungeordnet
 * der Zugriff ist aber - wie bei den Squenzen - über eckige Klammern
+* wichtige Object-Functions
+  * `dict.keys()` - liefert ein Iterable (`for k in tel.keys():`)
+  * `dict.values()` - liefert ein Iterable (`for k in tel.values():`
+  * `dict.items()` - liefert ein Tupel
+    * `for k in tel.items(): print(k[0], k[1])`
+    * mit Tupel-Assignment kann das aber eleganter geschrieben werden
+      * `for (key, value) in tel.items(): print(key, value)`
 
 ```python
 # Creation at initialization time
@@ -855,15 +907,57 @@ tritt der Fehler `int(name)` erst in Erscheinung, wenn ich den Namen `Pierre` ei
 
 ## Bibliotheken
 
-### Konzept
+Module, die Python nicht mitliefert, müssen per `pip install MODULE_NAME` installiert werden. Für die Automatisierung dieses Prozesses ist es hilfreich, alle notwendigen Module in einer Datei (z. B. `requirements.txt`) zu sammeln (die i. a. unter Versionskontrolle steht) und dann per `pip3 install -r requirements.txt` auf einen Schlag zu installieren. Das vereinfacht die Nutzung einer (unbekannten) Anwendung ungemein.
 
-Module, die Python nicht mitliefert müssen per `pip install MODULE_NAME` installiert werden. Für die Automatisierung dieses Prozesses ist es hilfreich, alle notwendigen Module in einer Datei (z. B. `requirements.txt`) zu sammeln (die i. a. unter Versionskontrolle steht) und dann per `pip3 install -r requirements.txt` auf einen Schlag zu installieren. Das vereinfacht die Nutzung einer (unbekannten) Anwendung ungemein.
+Dies hat allerdings den Nachteil, daß dieses Paket in der zentralen gemeinsam genutzten Python-Installation installiert wird. Dabei werden verschiedene Versionen einer Bibliothek nicht unterstützt. Das führt dazu, daß evtl. andere Python Projekte nicht mehr ausführbar sind.
 
-> Noch besser finde ich allerdings die Ausführung von Python-Code in einem Docker-Container. Auf diese Weise wird die lokale (Entwicklungs-) Umgebung nicht mit Paketen verschmutzt. Das hilft auch beim Fail-Fast-Prinzip ... vergißt man eine notwendige Bibliothek in `requirements.txt` zu erwähnen, so fällt das in einem Docker-Container sofort auf ... bei der lokalen Nutzung wurde die Bibliothek evtl. einmalig installiert und niemandem ist bewußt, daß die Software in einer anderen Umgebung (bei meinem Kollegen) gar nicht funktioniert. In diesem Zusammenhang gibt es auch [Python Virtual Environments](https://docs.python.org/3/library/venv.html), bei denen die Bibliotheken und Interpreter in einem applikationsspezifischen Verzeichnis installiert werden. Ich würde dennoch die Docker-Container bevorzugen ... ein einmalig erstelltes Docker-Image als Ausführungsumgebung läßt sich einfach mit den Kollegen teilen und sieht WIRKLICH bei allen gleich aus!!!
+Hierfür gibt es verschiedene Lösungen
+
+* Python Virtual Environments
+* Python Docker Environment
+
+TLDR ... Während ich als Entwickler die Verwendung von virtuellen Environments auf meiner lokalen Entwickler-Maschine präferiere, halte ich das Deployment für Enduser in Form eines Docker Images für die bessere Variante. Beide Ansätze haben also ihre Berechtigung.
 
 ### Python Virtual Environments
 
 * [Getting Started](https://docs.python-guide.org/dev/virtualenvs/)
+
+Diese Variante wird man bei der lokalen Entwicklung verwenden, weil der Ansatz sehr schlank ist und für den Entwickler transparent ist.  
+
+Die Nutzung ist abhängig von der Python-Version ... ich beschreibe hier Python 3.8 ...
+
+Manche Python 3 kommen bereits mit dem Modul `venv` vorinstalliert - bei anderen muß man es erst installieren (z. B. `apt-get install python3-venv`). Anschließend kann per `python -m venv myenv` eine virtuelle Umgebung angelegt werden kann. Es wird ein Verzeichnis `myenv` erstellt, das einige Verzeichnisse enthält. Das wichtigste Verzeichnis ist `bin` (unter Windows heißt das Verzeichnis `Scripts`), das u. a. folgende Skripte enthält:
+
+* `activate`
+* `deactvate`
+* `python`
+* `pip`
+
+Anschließend muß dieses Environment per `source myenv/bin/activate` aktiviert werden.
+
+> ACHTUNG: unter Cygwin hat das nicht besonders gut funktioniert. Erstens mußte ich die Linebreaks von `activate` von Windows (CRLF) auf Linux (LF) umstellen. Zweitens wurden teilweise Batch Dateien statt Shell-Skripte erstellt ... es fehlte `deactivate` (stattdessen existierte `deactivate.bat`).
+
+Nun ist nicht mehr die zentrale Python Installation des Systems konfiguriert, sondern die des virtuellen Environments. Das ist an folgendermaßen erkennbar:
+
+* Prompt enthält den Namen des virtuellen Environments (z. B. `(myenv) ubuntu2004beta%`)
+* `which python` liefert `myenv/Scripts/python` statt einer zentralen Python Installation (z. B. `/usr/bin/python3`) - erreicht durch eine Anpassung der `PATH` Umgebungsvariable
+  * allerdings ist das nur ein symbolischer Link auf die zentrale Python-Installation
+  * erreicht wird damit aber eine environment-spezifische Bibliothek-Konfiguration, da
+
+    > "When Python is starting up, it looks at the path of its binary. In a virtual environment, it is actually just a copy of, or symlink to, your system’s Python binary. It then sets the location of sys.prefix and sys.exec_prefix based on this location, omitting the bin portion of the path. The path located in sys.prefix is then used for locating the site-packages directory by searching the relative path lib/pythonX.X/site-packages/, where X.X is the version of Python you’re using." ([realpython](https://realpython.com/python-virtual-environments-a-primer/))
+
+Aus der Location des Executables wird auch die Location für Bibliotheken (`site-packages`) abgeleitet
+
+Es sollten nicht gleichzeitig mehrere virtuelle Environments aktiviert sein (Seiteneffekte, seltsame Fehlermeldungen). Deshalb startet man besser eine neue Konsole!!!
+
+### Python Docker Environment
+
+Python Services/Code in einen Docker Container zu packen vereinfacht die Ausführung von Python-Code, weil die Laufzeitumgebung (Python 2 vs 3, Bibliotheken) gleich mitgeliefert wird. Der Ausführende braucht nur eine Docker-Installation und kann den Code starten.
+
+Bei diesem Ansatz würde man
+
+* Python im `Dockerfile` installieren
+* eine `requirements.txt` definieren und im `Dockerfile` installieren
 
 ### FastAPI
 
@@ -898,7 +992,7 @@ In der [Dokumentation](http://docs.fabfile.org/en/2.5/) findet man erste Program
 
 ## Kinder lernen programmieren
 
-* [Buch: Programmieren mit Python - supereasy](https://www.amazon.de/Programmieren-mit-Python-supereasy/dp/3831034575/ref=pd_sim_4?_encoding=UTF8&pd_rd_i=3831034575&pd_rd_r=0671b0b2-b66b-11e8-b7b1-1f841b9564db&pd_rd_w=soYkA&pd_rd_wg=aTAco&pf_rd_i=desktop-dp-sims&pf_rd_m=A3JWKAKR8XB7XF&pf_rd_p=a1f1e800-ed31-44e7-8f29-5b327ba0187a&pf_rd_r=WCJX42PT49VD9KM4WVX6&pf_rd_s=desktop-dp-sims&pf_rd_t=40701&psc=1&refRID=WCJX42PT49VD9KM4WVX6)
+[siehe hier](kinder_programmieren.md)
 
 ---
 
@@ -913,6 +1007,15 @@ Interessante Variante, um interaktive Dokumentationen mit Markdown, HTML-iFrames
 Im Hintergrund wird ein Webserver gestartet - die Dokumentation ist eigentlich Code, der in einer JSON-Datei gespeichert werden. Diese kann man mit anderen teilen und unter Versionskontrolle stellen. Visual-Studio-Code unterstützt das auch ... da ist die Integration noch weniger sichtbar.
 
 Das Dateiformat `ipynb` wir beispielsweise auch direkt von Github unterstützt, so daß die Datei unter Versionskontrolle gestellt, geteilt und komfortabel im Browser angezeigt werden kann.
+
+### Mybinder Deployment
+
+Über [mybinder](https://mybinder.org/) können Jupyter-Notebooks aus Github-Repositories deployed werden, um sie interaktiv zu nutzen.
+
+Ein Beispiel:
+
+Im Github-Repository [python-course](https://github.com/nilsleiffischer/python-course) befindet sich das Jupyter-Notebook
+
 
 ---
 

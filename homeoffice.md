@@ -20,7 +20,7 @@ Obwohl alle meine Kollegen sehr kollaborativ und freundlich sind, bemerke ich ge
 
 ### Maßnahme 1: Pausenzeiten
 
-* geplante feste Kaffeezeiten mit meiner Frau
+* geplante feste Pausenzeiten (am besten an der frischen Luft)
 
 ### Maßnahme 2: Flexibilität nutzen
 
@@ -46,7 +46,11 @@ Hinzu kommt, daß ich bei Sonnenschein meine Außenrolläden komplett schließen
 
 In Videokonferenzen habe ich häufig eine schlechte Ausleuchtung ... das ist nicht unbedingt professionell und trägt nicht zu einem natürlichen kollaborieren bei. Auf jeden Fall etwas, das verbessert werden könnte - auch wenn es derzeit kein Blocker ist ... aber es sind ja die vielen kleinen Dinge, die große Wirkung erzeilen können.
 
-### Maßnahme 3: Sport
+### Maßnahme 3: Bewegung
+
+Einmal pro Stunde aufstehen und rumlaufen ... vielleicht sogar mal im Meeting, wenn man es auf dem Tablet macht. Das kann einer gefährlichen Thrombose vorbeugen.
+
+### Maßnahme 3a: Sport
 
 * tagsüber regelmäßig Outdoor-Sport (glücklicherweise wohne ich am Feldrand)
 
@@ -68,6 +72,12 @@ In Videokonferenzen habe ich häufig eine schlechte Ausleuchtung ... das ist nic
     * Kabelkanäle unterm Tisch
   * Kabel im Raum reduzieren
     * Kabelkanal in der Fußleiste
+
+---
+
+## Nach 12 Monaten
+
+Das Arbeitszimmer ist umgebaut, so daß ich jetzt auch bei vollem Sonnenschein ohne Rolladen vor dem Dachfenster arbeiten kann. Ein höhenverstellbarer Tisch und gutes Kabelmanagement haben inheränte die Unordnung beseitigt.
 
 ---
 
@@ -99,11 +109,7 @@ Derzeit habe ich dort eine [URail-Paulmann-Schiene](https://de.paulmann.com/inne
 
 ### Hue
 
-Mit [White & Color Ambiance Lampen](https://www.philips-hue.com/de-de/bulbs) (gibt es auch für meine GU10 Paulmann-URail-Sockel) könnte ich sogar farbige Stimmungen erzeugen. Ein nettes aber nicht ganz kostengünstiges (Doppelpack nur Leuchtmittel: 70 Euro) Gimmick.
-
-> soll ausgeschaltet schrecklich fiepen ...
-
-Wird über Bluetooth gesteuert - Amazon-Alexa-Integration.
+Mit [White & Color Ambiance Lampen](https://www.philips-hue.com/de-de/bulbs) (gibt es auch für meine GU10 Paulmann-URail-Sockel) könnte ich sogar farbige Stimmungen erzeugen. Ein nettes aber nicht ganz kostengünstiges (Doppelpack nur Leuchtmittel: 70 Euro) Gimmick. Brauche ich im Arbeitszimmer aber eigentlich nicht. Ich habe mich für eine einzige RGB-Bluetooth-Lampe in meiner Stehlampe entschieden - genug, um eine andere Athmosphäre zu erzeugen.
 
 ---
 
@@ -111,11 +117,15 @@ Wird über Bluetooth gesteuert - Amazon-Alexa-Integration.
 
 Meine Webcam am Laptop reicht für gelegentliche Videokonferenzen, doch normalerweise nutze ich den Laptop nicht als zentralen Bildschirm, sondern meinen großen 32 Toll 4k Bildschirm. Das hat dann allerdings zur Folge, daß meine Konferenzpartner immer den Eindruck haben ich spreche gar nicht mit ihnen oder mache was ganz anderes.
 
-Das Mcirofon meines Laptop ist nahezu unbrauchbar ... auch, weil ich unter meinem Laptop noch einen [Klim-Cooler](https://klimtechs.com/shop/coolers/klim-wind/) habe. Der ist zwar nicht sehr laut, aber dafür nahe am Microfon. Deshalb brauche ich in jedem Fall ein anderes Mikrofon. Ich habe mich mit einem Microsoft Life-Chat LX 3000 Headset angefreundet.
+Das Microfon meines Laptop ist nahezu unbrauchbar ... auch, weil ich unter meinem Laptop noch einen [Klim-Cooler](https://klimtechs.com/shop/coolers/klim-wind/) habe. Der ist zwar nicht sehr laut, aber dafür nahe am Microfon. Deshalb brauche ich in jedem Fall ein anderes Mikrofon. Ich habe mich mit einem Microsoft Life-Chat LX 3000 Headset angefreundet.
 
 ### Externe Webcam
 
 Eine externe USB-Webcam, die ich oberhalb meines 32-Zoll Bildschirms positioniere, wäre sicherlich die beste Lösung. Mit ca. 50 - 150 Euro sollte das erledigt sein. Für den täglichen Gebrauch sollte die Qualität ausreichen ... für professionellere Full-Face-Videos würde ich einen DSLR-Ansatz wählen.
+
+### Externe Webcam - Logitech C920 HD
+
+Eine gute Webcam, die mein Problem bei Videokonferenzen gelöst hat. Ich kann die Videokonferenz-Session auf meinem 4k-Hauptmonitor direkt unter der Webcam platzieren und so unterhalb noch weitere Fenster positionieren, die ich während der Konferenz benötige (und gelegentlich in der Konferenz teile).
 
 ### DSLR als Webcam
 
@@ -125,7 +135,7 @@ Eine externe USB-Webcam, die ich oberhalb meines 32-Zoll Bildschirms positionier
 
 ## Mikrofon
 
-Ich verwende derzeit am liebsten das *Microsoft Life-Chat LX 3000 Headset* (30 Euro).
+Ich verwende derzeit am liebsten das *Microsoft Life-Chat LX 3000 Headset* (30 Euro - siehe unten), mit dem ich sehr zufrieden bin. Ich mag die Noise-Cancelling-Kopfhörer nicht besonders, da ich mich hier vollkommen abgekapselt fühle (vielleicht nur eine Sache der Gewöhnung).
 
 ### Airpods
 
@@ -181,9 +191,13 @@ Die Aufbauanleitung hätte ein wenig mehr über die Konzeption verraten dürfen 
 
 Am nächsten Tag ein Anruf bei der Hotline und WIEDER sofort durchgekommen. Scheinbar ein Fehler, der durch den Kollisionsschutz ausgelöst wurde. Hmmm, der ist bei mir immer noch nicht angeschraubt, aber jetzt funktioniert es - mal beobachten.
 
-Erstes Fait:
+Erstes Fazit:
 
 Der Tisch ist klasse - extrem stabil (im Vergleich zu meinem högenverstellbaren IKEA-Schreibtisch).
+
+Fazit nach 2 Monten Nutzung:
+
+Klasse Qualität ... ich nutze die Höhenverstellung regelmäßig.
 
 ### Monitorbefestigung
 
@@ -254,11 +268,11 @@ Stromversorgung
 
 * Was wird noch benötigt?
   * 4-facher manueller HDMI-Umschalter
-  * Laptop-Ständer
+  * Laptop-Ständer ... ich verwende hier einen KLIM Wind Laptop Kühler, da der Lüften meines Dell XPS (Intel i9) ansonsten irgendwann zu laut wird (wer kommt eigentlich auf die Idee, Lüftungsschlitze von Laptops am Boden zu positionieren? sicherlich, weil die Geräte mittlerweile dünn sein müssen und dann kein Platz mehr ist ... Form follows Function ist scheinbar outdated)
 
-Es zeigt sich, daß der Powermanager mit 4-5 Schaltern in schreibtischnähe (somit beweglich) benötigt wird. Die Kabel würde ich gerne bestmöglich unsichtbar verstauen.
+Es zeigt sich, daß der Powermanager mit 4-5 Schaltern in Schreibtischnähe (somit beweglich) benötigt wird. Die Kabel würde ich gerne bestmöglich unsichtbar verstauen.
 
-Ein Kabelnetz oder Schacht unterhalb des Schreibtisches wird benötigt, da beispielsweise der Monitor mit einem der größten je produzierten Netzadapter betrieben wird.
+> Ich möchte aber keinen häßlichen Powermanager auf meinem Schreibtisch stehen haben. Beim Boho-Schreibtisch habe ich mir eine Kabelwanne gegönnt. Darin befindet sich als zentrales Element eine Mehrfachsteckdose, die über Alexa per "Arbeitsplatz an/aus" gesteuert wird. Das genügt mir derzeit.
 
 ### Befestigung Powermanager
 
@@ -271,6 +285,7 @@ Ein Kabelnetz oder Schacht unterhalb des Schreibtisches wird benötigt, da beisp
 
 * [Stageek](https://www.amazon.de/Kabelkanal-Stageek-selbstklebend-39x4x2cm-Installationskanal/dp/B07C9ZWH1H/ref=pd_rhf_dp_p_img_2?_encoding=UTF8&psc=1&refRID=S0KYS3T3399AKS3JB793)
 * [Boho Kabelwanne](https://www.boho-moebel.de/produkte/zubehoer/klappbare-kabelwanne)
+  * diese verwende ich - SUPER
 
 ### Elgato Stream Deck
 
