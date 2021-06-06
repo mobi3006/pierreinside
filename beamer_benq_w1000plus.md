@@ -60,12 +60,27 @@ Ich habe folgende Fehler ausgeschlossen
 * HDMI-Quelle - verschiedene Quellen (PS4, FireTV) verwendet
 * Staub - mit einem Pinsel groben Staub entfernt und ausgesaugt (auf niedrigster Stufe)
 
-Ich habe auch die alte Lampe wieder eingebaut, doch die hielt (gefühlt) noch weniger lange (eher im 2-5 Minuten Bereich). Danach wieder die neue und die hielScheinbar hat die neue Lampe eine Verbesserung gebracht, aber noch kein perfektes Ergebnis. 
+Ich habe auch die alte Lampe wieder eingebaut, doch die hielt (gefühlt) noch weniger lange (eher im 2-5 Minuten Bereich).
 
 So ratlos war ich zuletzt vor 6 Jahren als der Wäschetrockner sich immer wieder nach 20 Minuten abschaltete. Jetzt steht er seitdem rum, weil ich nicht glaube, daß es ein größeres Problem ist - aber die Geräte stecken ja heutzutage voller Elektronik und da reicht ja ein kleiner Riss in der Leiterbahn oder eine schlechte Lötstelle ... das findet man nie.
 
 Nach einer weiteren Recherche glaube ich, daß es am Farbrad oder dem Farbrad-Syncronisierungssensor liegt ... vielleicht muß nicht mal was ausgetauscht werden, sondern nur gesäubert werden. Keine teuren Ersatzteile (wenn man sie denn mal bekommt und verlöten kann), aber hierzu muß das gesamte Gerät auseinandergenommen werden. Klingt nach einer langen Prozedur und die Aussicht auf Erfolg ist ... wenn man es noch nie gemacht hat.
 
-### Deep-Dive 2021
+---
 
+## Farbrad-Sensor säubern - 2021
 
+Plötzlich funktionierte der Beamer nach 2, 5, 10, 30, 60 Minuten Nutzung nicht mehr. Der Beamer ging nicht sofort aus, sondern flackerte wenige Sekunden bis er sich dann selbständig abschaltete und der Lüfter dauerhaft laut aufdrehte. Man konnte ihn sofort wieder starten und er lief dann wieder ein paar Minuten. Es war also kein Problem der Überhitzung.
+
+Da wir schon mehrfach ausgefordert wurden, eine neue Lampe nach 4500 Betriebsstunden einzusetzen, bestellte ich kurzerhand eine neue Lampe. Die war schnell eingebaut (und der Lampencounter zurückgesetzt), doch der Fehler verschwand nicht. Scheinbar immer noch das gleiche Verhalten.
+
+Ich habe keine Beamer-Erfahrung und hatte überhaupt keinen Plan, was das Problem sein könnte. Die meisten Hinweise gingen in Richtung Farbrad ... ich wußte nicht mal was das ist. Manche berichteten von Ersatzteilen, die es kaum gab und wenn eingelötet werden mußten. Klang nicht nach erfolgversprechenden Reparaturversuchen.
+
+Irgendwann stieß ich auf dieses Video:
+
+* [Fixit Frank W1080ST DLP Projector Cleaning - Part 1](https://www.youtube.com/watch?v=_xBGZ_V9Jp8)
+* [Fixit Frank W1080ST DLP Projector Cleaning - Part 2](https://www.youtube.com/watch?v=zaJtaWxuMQ4)
+
+Das [zweite Video zeigt an Position 6:00 Minuten](https://youtu.be/zaJtaWxuMQ4?t=360) meine Hoffnung ... hier würde ich ohne Ersatzteil auskommen ... einfach nur ein wenig Staub beseitigen.
+
+Also baute ich das Ding auseinander ... nicht ganz einfach, wenn man es noch nie gemacht hat - aber mit den beiden Videos kam ich auch bei meinem Beamer ganz gut zurecht. Ich dokumentierte alle meine Schritte und markierte auch alle Anschlüsse:
