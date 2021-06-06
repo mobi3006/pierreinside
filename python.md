@@ -53,10 +53,10 @@ indent_width=4
 Ich habe diesen Alias in meiner Shell definiert:
 
 ```bash
-alias yapf="yapf --in-place --recursive --exclude 'venv/**' **/*.py"
+alias yapfify="yapf --in-place --recursive --exclude 'venv/**' **/*.py"
 ```
 
-Mit einem einfachen `yapf` kann ich somit eine Formatierung vornehmen.
+Mit einem einfachen `yapfify` kann ich somit eine Formatierung vornehmen.
 
 > Wenn man Bulk-Formatierungen vornimmt, sollte man das in einem eigenen Commit von anderen Änderungen separieren und in der Commit-Message entsprechend kennzeichnen. Am besten ist, wenn diese Formatierung IMMER vor einem Commit abläuft.
 
@@ -137,6 +137,8 @@ python --version
 python -m test
 ```
 
+> für newbe's: `python -m test` startet das Modul `test` ... das wiederum einen Test der Python-Installation durchführt.
+
 Wenn alle Tests (dauernn schon ein paar Minuten) erfolgreich waren, dann kanns losgehen :-)
 
 ### iOS Pythonista
@@ -212,6 +214,12 @@ Nach Umstellen vom Microsoft Language-Server auf Pylance hat alles schon viel be
 
 Enthält ein Projekt eine Virtuelle Umgebung z. B. in `PROJEKT/venv-myproject` so erkennt das VSCode und verwendet den darin befindlichen Interpreter und deren Libraries. In der unteren blauen Statusleiste ist das zu erkennen - hierüber kann man au
 
+### Best Practices
+
+Ich verwende normalerweise einen VSCode Workspace, der 30 oder mehr Projekte enthält (das funktioniert, weil VSCode wirklich super schnell ist). Für die Nutzung in einem Python-Projekt ist das allerdings nicht die beste Lösung, da relative Module (in lokalen Packages) nicht aufgelöst werden können. Das sorgt für angezeigte Fehler und reduziert VSCode von einer Python-IDE zu einem reinen Editor.
+
+Deshalb öffne ich mein Python Projekt in einer separaten VSCode-Instanz, das nur diese eine Projekt im Root enthält.
+
 ---
 
 ## Python Virtual Environments
@@ -223,9 +231,21 @@ Enthält ein Projekt eine Virtuelle Umgebung z. B. in `PROJEKT/venv-myproject` s
 
 Bei diesem Ansatz werden Bibliotheken und Interpreter in einem applikationsspezifischen Verzeichnis installiert, so daß verschiedene Ausführungsumgebungen voneinander getrennt werden können. Auf diese Weise werden Konflikte vermieden und man kann sich nicht auf Bibliotheken stützen, die im Zusammenhang mit einem anderen Projekt installiert wurden ... das verbessert die Qualität in den projektspezifischen Dependencies (`requirements.txt` Datei).
 
-Das Paket zum Management dieser virtuellen Umgebungen wird per `sudo apt install virtualenv` installiert (unter Windows habe ich `pip install venv` verwendet und das Installationsverzeichnis anschließend in den `PATH` gepackt). Per (z. B.) `virtualenv ~/ideWorkspaces/venv/jenkins-stats` wird ein virtuelles Environment im Ordner `~/ideWorkspaces/venv/jenkins-stats` angelegt.
+### Installation per Linux-Package
 
-> Ich präferiere, das virtuelle Environment in einen Subfolder (z. B. `~/src/jenkins-stats/venv`) des Git-Repo's zu packen, das den Source-Code enthält. Zumindest, wenn ich den Source-Code selbst unter Kontrolle habe, denn dann füge ich `venv` zur `.gitignore` des Repos hinzu. Aus meiner Sicht erhöht das die Übersichtlichkeit ... das virtuelle Environment liegt nicht mehr irgendwo, sondern direkt im Python-Projekt.
+* [Ubuntu-Installation](https://wiki.ubuntuusers.de/virtualenv/)
+
+Das Paket zum Management dieser virtuellen Umgebungen wird per `sudo apt install virtualenv` installiert.
+
+Per (z. B.) `virtualenv my-venv` wird ein virtuelles Environment im Ordner `./my-venv` angelegt.
+
+### Installation per pip
+
+`venv` ist auch ein Python Modul und kann per `pip install venv` installiert werden. Die Erzeugung einer virtuellen Umgebung erfolg dann per `python -m venv my-venv`
+
+### Best-Practice
+
+Ich präferiere, das virtuelle Environment in einen Subfolder (z. B. `~/src/jenkins-stats/venv`) des Git-Repo's zu packen, das den Source-Code enthält. Zumindest, wenn ich den Source-Code selbst unter Kontrolle habe, denn dann füge ich `venv` zur `.gitignore` des Repos hinzu. Aus meiner Sicht erhöht das die Übersichtlichkeit ... das virtuelle Environment liegt nicht mehr irgendwo, sondern direkt im Python-Projekt.
 
 So sieht der ganze Prozess dann aus:
 
@@ -246,7 +266,9 @@ source venv/bin/activate
 (jenkins-stats) ╭─pfh@workbench ~/src/com.github
 ```
 
-Die typischen Python Kommandos (`python`, `pip`, ...) sind nun auf die Skripte in der virtuellen Umgebung (`~/src/jenkins-stats/venv/bin/python`) umgebogen. Die Installation von Libraries per `pip install Jinja2` oder `pip install -r requirements.txt` führen zur Installation der Pakete im virtuellen Environment (`~/src/jenkins-stats/venv/lib`) ... nicht im System-Installationsverzeichnis für Python-Module.
+### Background Info
+
+Die typischen Python Kommandos (`python`, `pip`, ...) sind in einem virtuellen Environment auf die Skripte in der virtuellen Umgebung (`~/src/jenkins-stats/venv/bin/python`) umgebogen. Die Installation von Libraries per `pip install Jinja2` oder `pip install -r requirements.txt` führen zur Installation der Pakete im virtuellen Environment (`~/src/jenkins-stats/venv/lib`) ... nicht im System-Installationsverzeichnis für Python-Module.
 
 `virtualenv` verwendet dabei die auf dem System verfügbare Default-Python-Version (die per `python` verfügbar ist)... kopiert dabei aber die Executables in die virtuelle Umgebung. Hat man noch eine andere Python-Version (z. B. `python3`) installiert (aber Python 2 war der Default bei `python --version`), so kann man diese per
 

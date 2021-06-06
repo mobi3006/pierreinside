@@ -201,7 +201,7 @@ Hier sieht man auch sehr schön die übergreifende Adressierung (von `nomad_job.
 
 ### Module
 
-Auf diese Weise lassen sich Teile der Konfiguration wiederverwenden. Jede Sammlung von `*.tf` Dateien ist ein Modul ... man verwendet Module dementsprechend IMMER automatisch.
+Auf diese Weise lassen sich Teile der Konfiguration wiederverwenden. Jede Sammlung von `*.tf` Dateien ist ein Modul ... man verwendet Module dementsprechend IMMER automatisch. Deshalb referenziert man in `source = "/home/pfh/my-terraform-module"` auch ein Verzeichnis und nicht eine einzelne Datei.
 
 So sieht die Wiederverwendung eines Moduls aus:
 
