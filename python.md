@@ -39,6 +39,10 @@ Mit `yapf` kann ich die Formatierungsprobleme automatisch lösen - sehr praktisc
 
 ### Formatting
 
+In Python steht das `autopep8`-Package zur Verfügung, das sich bei Ausführung des Befehls "Format Document" automatisch installiert.
+
+### Bulk-Formatting
+
 Immer wieder ein Streitpunkt unter Entwicklern ... Tabs oder Spaces, Einrückungen, ... blablabla. Ich mag den Ansatz von Golang, daß der Code immer automatisch formatiert wird und somit bei JEDEM Entwickler gleich aussieht. Ende der Diskussion.
 
 Meine Empfehlung ist die Verwendung von [yapf](https://github.com/google/yapf/). Hierbei handelt es sich um ein Python-Package (`pip install yapf`), das den Code auto-formatiert. Ich verwende es i. a. so (`venv` ist der Ordner meiner virtuellen Python Umgebung ... den Python-Source-Code der Distribution möchte ich nicht umformatieren):
@@ -1266,6 +1270,8 @@ Grundsätzlich erlauben solche Sprachen i. a. mehr als compilierte Sprachen ... 
 empfohlen.
 
 ### Testabdeckung
+
+* [Abschnitt Python Testing](python-testing.md)
 
 Zudem sollte man eine hohe Testabdeckung haben, denn ein wesentlicher Nachteil untypisierter Sprachen besteht darin, daß Typfehler häufig erst entdeckt werden können, wenn der Code auch ausgeführt wird. In folgendem Beispiel
 
