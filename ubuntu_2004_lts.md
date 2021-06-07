@@ -18,7 +18,7 @@ Kein Problem war, der Unity-Desktop in der Virtualbox recht zäh war, da ich mit
 
 ---
 
-## Inbetriebnahme
+## Inbetriebnahme from-scratch
 
 ### Pre-Test - Ubuntu 20.04 LTS
 
@@ -115,6 +115,7 @@ sudo mount /dev/sdb1 /home
 
 Damit ich das nicht immer wieder nach einem Reboot machen muß, ermittle ich per `blkid /dev/sdb1` die UUID der Partition und hänge an `/etc/fstab` folgende Zeile an:
 
+```
 UUID=<UUID_ERMITTELT_PER_BLKID>   /home   ext4   defaults   0   2
 ```
 
