@@ -115,8 +115,15 @@ sudo mount /dev/sdb1 /home
 
 Damit ich das nicht immer wieder nach einem Reboot machen muß, ermittle ich per `blkid /dev/sdb1` die UUID der Partition und hänge an `/etc/fstab` folgende Zeile an:
 
-```
+```properties
 UUID=<UUID_ERMITTELT_PER_BLKID>   /home   ext4   defaults   0   2
 ```
 
 Dann nochmal restarten - Voila :-)
+
+---
+
+## Upgrade 18.04.3 LTS nach 20.04.2 LTS
+
+* [Anleitung](https://ubuntu.com/blog/how-to-upgrade-from-ubuntu-18-04-lts-to-20-04-lts-today)
+

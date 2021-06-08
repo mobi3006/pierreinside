@@ -1,10 +1,5 @@
 # Python
 
-<<<<<<< HEAD
-* [Referenzdoku realpython.com](https://realpython.com/)
-
-Python unterstützt verschiedene Paradigmen (Strukturierte Programmierung gleichermaßen wie Objektorientierte Programmierung). Es handelt sich hier um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
-=======
 Python unterstützt verschiedene Paradigmen (prozedurale, funktionale, objektorientierte). Es handelt sich um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
 
 ---
@@ -68,7 +63,6 @@ alias yapfify="yapf --in-place --recursive --exclude 'venv/**' **/*.py"
 Mit einem einfachen `yapfify` kann ich somit eine Formatierung vornehmen.
 
 > Wenn man Bulk-Formatierungen vornimmt, sollte man das in einem eigenen Commit von anderen Änderungen separieren und in der Commit-Message entsprechend kennzeichnen. Am besten ist, wenn diese Formatierung IMMER vor einem Commit abläuft.
->>>>>>> a75bc03e357efac034ea3aea51dc3e1938473602
 
 ---
 
@@ -101,7 +95,6 @@ Aus meiner Sicht sollte man IMMER virtuelle Environements verwenden.
 
 ---
 
-<<<<<<< HEAD
 ## Getting started
 
 ### Python im Browser
@@ -109,11 +102,8 @@ Aus meiner Sicht sollte man IMMER virtuelle Environements verwenden.
 Um mal eben schnell was auszuprobieren (während des Lernen der Sprache) hat sich [ReplIt](https://replit.com/) etabliert. Deutlich besser als Python in Shell Mode.
 
 ### Lokale Installation - Command Line
-=======
-## Installation
 
 ### Ubuntu via APT
->>>>>>> a75bc03e357efac034ea3aea51dc3e1938473602
 
 Install Python `sudo apt-get install python3-pip` and create a file `hello.py`
 
