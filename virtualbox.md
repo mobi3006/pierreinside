@@ -187,7 +187,7 @@ vom Browser des Hostsystems auf den Webserver innerhalb meines Gastbetriebsystem
 
 So wurden die Ports freigeschaltet (ACHTUNG: in Abhängigkeit der eingerichteten Netzwerkkarte muss "pcnet" durch "e1000" oder "e100" ersetzt werden):
 
-```
+```bash
 VBoxManage setextradata "MY_VM_NAME" "VBoxInternal/Devices/pcnet/0/LUN#0/Config/mysql/Protocol" TCP
 VBoxManage setextradata "MY_VM_NAME" "VBoxInternal/Devices/pcnet/0/LUN#0/Config/mysql/HostPort" 3306
 VBoxManage setextradata "MY_VM_NAME" "VBoxInternal/Devices/pcnet/0/LUN#0/Config/mysql/GuestPort" 3306
@@ -234,7 +234,7 @@ Jetzt können alle Images miteinander kommunizieren, die das gleiche Host-Only-N
 
 > BTW: Host-Only-Netzwerke verwendet man häufig auch zusammen mit NAT-Netzwerken. Während man aus dem Gast über NAT ins Internet kommt, ermöglicht das Host-Only-Netzwerk eine Kommunikation vom Host in den Gast. Man spart sich somit das pflegeintensive Port-Forwarding - allerdings kommt man von außen (einem anderen Rechner) nicht an die Dienste innerlhalb des Images ... was bei Port-Forwarding geht. Im Linux-Image sieht das bei einem NAT und einem Host-Only-Netzwerk dann beispielsweise folgendermaßen aus:
 
-```
+```bash
 ╭─pfh@workbench ~/src  ‹master› 
 ╰─➤  route
 Kernel IP routing table
@@ -271,129 +271,92 @@ Ich habe das bisher in der Variante "Bridge-Mode über Ethernet/WLAN" in einem U
 
 Am einfachste ist, wenn man NAT verwendet, dann muß man VPN nur im HOST System konfigurieren.
 
-### Resizing der Festplatte
+---
 
-#### Resizing mit Bordmitteln: FEHLGESCHLAGEN
+## Resizing der Festplatte
 
-Ich hatte gerade ein Problem in meinem Haupt-Image ... es lief immer wieder voll und ich konnte nur mit Mühe immer mal wieder ein bisschen Platz freigeben, um die Updates einzuspielen. Früher oder später müsste ich mich mit der Vergößerung beschäftigen, aber alles was ich bisher darüber gelesen hatte schien mir aufwendig (z. B. http://www.dedoimedo.com/computers/virtualbox-shrink-expand-disks.html). Leider hatte ich auch kein LVM auf diesem Linux-System verwendet, sonst hätte ich einfach eine weitere virtuelle Festplatte eingehangen und die Partition vergrößert :-(
+Es ist wirklich nervig und ineffizient, wenn man ständig Platzprobleme hat und aufräumen muss. Ist mir regelmäßig passiert und immer wieder ist es zu Problemen gekommen, weil man es eben recht selten machen muß ... ich scheue mich immer wider davor und deshalb habe ich es hier aufgeschrieben ... mit ein paar Background-Infos.
 
-Glücklich las ich von VirtualBox 4.0, das angeblich eine Resize-Funktion out-of-the-box besaß ...
+### Strategien
 
-Nach der Installation (sicherheitshalber fertigte ich mir eine Kopie des Festplattenfiles an) musste ich allerdings erst mal ein paar Probleme aus dem Weg räumen:
+LVMs sind dafür designed Erweiterungen des Speicherplatzes zu ermöglichen, ohne bestehende Filesysteme zu verändern. Das ist die absolut sichere Variante. Hierzu wird eine neue Partition angelegt und dazu ein Volume erzeugt, das wiederum zur existierenden Volume-Group hinzugefügt wird.
 
-- in der Konfigurtaion per GUI wurde mir immer wieder angezeigt, daß die MAC-Adresse ungültig sei (ich verwendete NAT). Die automatische Generierung einer neuen hat nicht funktioniert. Ich konnte den Konfigurationsdialog nicht mal normal beenden - kill process war die einzige Lösung. Ich stellte auf andere Netzwerkkonfigurationen um (nicht NAT), das funktionierte, aber Netzwerk hatte ich dennoch keins :-( Nach einem Neustart des VirtualBox-Launchers (das Programm, das alle VMs anzeigt), konnte ich dann auch irgendwann mal NAT einstellen. Das Netzwerk in meinem VM-Image funktionierte aber trotzdem nicht. In meinem Suse-System zeigte ein rcnetwork restart, daß die vorhandene Netzwerkkarte (eth1) im System nicht konfiguriert sei. tatsächlich war bei mir nur eth0 konfiguriert. Ich hatte zwar die erste Netzwerkkarte im VirtualBox konfiguriert, doch das war scheinbar nicht mehr eth0, sondern eht1. Also schnell mal per Yast konfiguriert und schon klappts mit dem Nachbarn. Meine Port-Freigaben musste ich dann allerdings auch umkonfigurieren ... ich änderte (in der XML-Konfigurationsdatei)
+Bei physischen Festplatten ist das besonders hilfreich, da auf diese Weise eine neue Festplatte hinzugefügt werden kann, ohne die Filesystemstruktur zu verändern, d. h. das `/home`-Filesystem kann einfach um Speicherplatz erweitert werden, der aber auf einem anderen physischen Device liegt.
 
-```bash
-VBoxManage setextradata "MY_VM_NAME" "VBoxInternal/Devices/pcnet/0/LUN#0/Config/httpd/Protocol" TCP
-```
+Verwendet man virtuelle Festplatten, die i. d. R. in einer einzigen Datei (`my-virtual-disk.vdi`) liegen (zumindest bei meinen persönlichen Virtuellen Images ... im Enterprise Bereich ist das vielleicht anders) sieht die Sache evtl. anders aus. Diese Datei wird von der Virtualisierungslösung verwaltet und kann mit Bordmitteln leicht vergrößert werden (Virtualbox: `VBoxManage.exe modifyhd my-virtual-disk.vdi --resize 75000`). Auf diese Weise entsteht mehr Speicherplatz, der anschließend aber noch zugeteilt werden muß. Entweder tut man das durch Hinzufügen eines Logical-Volumes oder man erweitert die vorhandene Partition und das Filesystem über (GParted und `resize2fs`).
 
-nach
+> Ich schätze die Änderung einer Partition und Vergößerung des Filesystems risikoreicher im Vergleich zum LVM-Ansatz ein. Durch die einfache Backup-Möglichkeit von virtuellen Festplatten (es muß nur eine einzige Datei kopiert werden) ist dieses Risiko nicht vorhanden (zumindest wenn man genügend Speicherplatz hat) und es stellt sich die Frage, ob bei diesem Setup eine LVM-Ansatz überhaupt Vorteile hat.
 
-```bash
-VBoxManage setextradata "MY_VM_NAME" "VBoxInternal/Devices/pcnet/1/LUN#1/Config/httpd//Protocol" TCP
-```
+Es ist auch möglich, eine Partition eines LVM-Volumes mit `resize2fs` zu erweitern ... das funktioniert. Dann nutzt man allerdings nicht die Bordmittel des LVM, sondern behandelt es wie ein Nicht-LVM-System, indem man das Filesystem vergrößert.
 
-Das erhoffte Disk-Extending blieb jedoch aus ... ein
+> Dieser Ansatz funktioniert allerdings nur, wenn die vorhandene Partition und der nicht-allokierte Bereich zusammenhängen und verschmolzen werden können.
 
-```bash
-VBoxManage modifyhd myHardDiskFile.vdi --resize 2000
-```
+## Erweiterung über ein neues LVM-Volume
 
-zeigte mir die lange Nase mit der Fehlermeldung
+- [LVM Grundkonfiguration](https://www.thomas-krenn.com/de/wiki/LVM_Grundkonfiguration)
+- [LVM Erweiterung](https://www.thomas-krenn.com/de/wiki/LVM_vergr%C3%B6%C3%9Fern)
 
-```bash
-Progress state: VBOX_E_NOT_SUPPORTED
-VBoxManage.exe: error: Resize hard disk operation for this format is not implemented yet!
-```
+Wenn man das Linux-System mit einem Logical-Volume-Manager aufgesetzt hat, dann kann man auch eine weitere Festplatte (= Partition) hinzufügen und in den LVM einhängen.
 
-Tja, eigentlich sollte es seit 4.0 supported sein, aber nur für dynamisch wachsende VDI-Formate. Ich bin mir zwar sicher, dass ich eine dynamisch wachsende Platte habe, aber ...
+> habe ich noch nicht oft gemacht
 
-Vorerst komme ich noch mit dem bisschen Platz aus ... vielleicht klappt es ja dann irgendwann auch mit meiner VirtualMachine :-)
+### Erweiterung über Vergrößerung eines Filesystems
 
-Die neue Version startet deutlich schneller aus dem Suspend-Mode ... ich bin jedenfalls bisher sehr zufrieden.
+- [Anleitung 1](https://askubuntu.com/questions/101715/resizing-virtual-drive)
+- [Anleitung 2](https://askubuntu.com/questions/88647/how-do-i-increase-the-hard-disk-size-of-the-virtual-machine)
 
-#### Resizing über Cloning: ERFOLGREICH
+> **Achtung:** Bei meinem Ubuntu 18.04 habe ich ein LVM-System installiert. Dennoch habe ich mich gegen den LVM-Ansatz (Anlage eines neuen Volumes, das zur Volume-Group hinzugefügt wird) entschieden ... ich arbeite selten mit den LVM-Tools und finde ein einziges Volume weniger verwirrend. Ich verwende Virtualbox und dementsprechend das Tool `VBoxManage`
 
-Meine Platte war mal wieder voll und modifyhd resize funktionierte wieder nicht (siehe oben). Deshalb probierte ich ein clonehd, um anschließend ein modifyhd zu machen ([siehe hier](http://brainwreckedtech.wordpress.com/2012/01/08/howto-convert-vdis-between-fixed-sized-and-dynamic-in-virtualbox/)). Vielleicht besaß ich ja tatsächlich ein Image fester statt dynamischer Größe.
-
-Das folgende ``clonehd`` sorgt dafür, daß eine Disk mit dynamisch wachsender Größe erzeugt wird ... solche lassen sich dann per ``modifyhd``-resize vergrößern.
-
-**clonehd:**
+Ich werde im folgenden meine Root-Partition/Filesystem erweitern. Um Datenverlust zu verhindern clone ich meine existierende Virtualbox-Festplatte (**GANZ WICHTIG:** vorher das Image runterfahren)
 
 ```bash
-$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe clonehd
-      OpenSuseIcw_20130517.vdi suseIcw.vdi --variant Standard
-    0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-    Clone hard disk created in format 'VDI'. 
-    UUID: b6462b06-3e89-496f-aa6f-009977a75e1c
+/cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe clonehd my-workbench.vdi my-workbench-new.vdi --variant Standard
 ```
 
-Ich habe hier schon mal folgende Fehlermeldung bekommen:
+und überprüfe sie per
 
 ```bash
-VBoxManage.exe: error: Cannot register the hard disk 
-  '...UbuntuIncreased.vdi' {f9030452-7e4c-4eef-b833-2d86dad01111}
-because a hard disk 'C:\Dev\UbuntuIcwIncreased.vdi' with 
-  UUID {f9030452-7e4c-4eef-b833-2d86dad01111} already exists
-VBoxManage.exe: error: Details: code E_INVALIDARG (0x80070057), 
-  component VirtualBox, interface IVirtualBox, callee IUnknown
-VBoxManage.exe: error: Context: "OpenMedium(Bstr(pszFilenameOrUuid).raw(),
-  enmDevType, enmAccessMode, fForceNewUuidOnOpen, pMedium.asOutParam())"
-        at line 178 of file VBoxManageDisk.cpp
+/cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe showhdinfo my-workbench-new.vdi
 ```
 
-Das lag daran, daß die zu erweiternde Festplatte noch als Virtuelles Medium eingetragen war und keine neue Platte mit der gleichen UUID hinterlegt werden kann. Ich habe die alte Platte dann einfach vom Image abgemeldet und aus den virtuellen Medien gelöscht. Dann hat der clonehd-Befehl funktioniert.
-
-**modifyhd:**
+Anschließend vergrößere ich die Storage-Datei
 
 ```bash
-pfh@WDF-LAP-1103 /cygdrive/c/Dev
-$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe modifyhd 
-    suseIcw.vdi --resize 30000
-    0%...
-Progress state: VBOX_E_NOT_SUPPORTED
-VBoxManage.exe: error: 
-  Resize hard disk operation for this format is not implemented yet!
+/cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe modifyhd my-workbench-new.vdi --resize 75000
 ```
 
-Also auch net ... und das obwohl es sich um ein dynamisches VDI-Format handelt:
+, überprüfe die neue Größe per
 
 ```bash
-pfh@WDF-LAP-1103 /cygdrive/c/Dev
-$/cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe showhdinfo suseForIcw.vdi
-UUID:                 c0e044f8-44ce-4cb5-b423-40695b1cafc4
-Accessible:           yes
-Logical size:         30985 MBytes
-Current size on disk: 21856 MBytes
-Type:                 normal (base)
-Storage format:       VDI                       <------
-Format variant:       dynamic default           <------
-Location:             C:\Dev\suseForIcw.vdi
+/cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe showhdinfo my-workbench-new.vdi
 ```
 
-Was ist da los?
+und tausche in VirtualBox-Image die alte Storage-Datei durch die neue aus.
 
-Komisch ... ich hab jetzt an die neue Größe einfach mal eine 0 drangehangen und jetzt hats geklappt (vorher war die Platte logisch 21856 MB groß - 30720 wäre also auch schon größer gewesen):
+> Somit ist die alte Storage Datei mein Backup - es ist vor Veränderungen geschützt.
+
+Problem ist nun, daß man eine gemountetes Filesystem/Partition nicht verändern kann. Unmounten der Root Partition eines laufenden Systems ist nicht möglich. Ich kann also nicht mein System einfach starten und dann Veränderungen am Filesystem vornehmen. Aus diesem Grund starte ich eine Live-CD und erweitert damit die Partition Filesystem des eigentlichen Systems.
+
+> Ich habe ext4 als Filesystem ... das läßt sich im laufenden Betrieb erweitern - für die Erweiterung des Filesystems brauche ich das Live-System somit nicht.
+
+Ich habe mich für [GParted-Live-CD](https://gparted.org/livecd.php) entschieden, da hier ein intuitives GUI bereitgestellt wird. 
+
+Ich lade die GParted-Live-CD als ISO-Datei runter und binde sie in mein VirtualBox-Image als weitere Live-CD ein. Dann boote ich das Image und statt meines Systems startet dadurch das GParted-Live-System. Nach dem Bootvorgang `GParted` starten, um die vorhandene Root-Partition um den nicht-allokierten Platz des Virtualbox-Storage zu erweitern:
+
+- zu erweiternde Partition deaktivieren (wird evtl. per default gemounted)
+- Device erweitern
+- Partition erweitern
+- Aktionen (zwei) ausführen
+
+GParted beenden und die Live-CD wieder als CD entfernen, so daß beim nächsten Boot mein System (anstatt GParted) startet. Booten des Images.
+
+Nach dem Bootvorgang muß das Filesystem erweitert werden (die Partition wurde in GParted erweitert):
 
 ```bash
-pfh@WDF-LAP-1103 /cygdrive/c/Dev
-$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe modifyhd suseForIcw.vdi --resize 30720
-0%...
-Progress state: VBOX_E_NOT_SUPPORTED
-VBoxManage.exe: error: Resize hard disk operation for this format is not implemented yet!
+lvextend --resizefs -l +100%FREE /dev/mapper/ubuntu--vg-root
 ```
 
-```bash
-pfh@WDF-LAP-1103 /cygdrive/c/Dev
-$ /cygdrive/c/Program\ Files/VirtualBox/VBoxManage.exe modifyhd suseForIcw.vdi --resize 307200
-0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-```
-
-Mir scheint Sun ... eh Oracle müsste mal das ExceptionHandling überarbeiten - die Fehlermeldungen scheinen echt keine große Hilfe zu sein :-(
-
-Ich schätze, daß der Erfolg jetzt nicht unbedingt am Cloning lag, sondern an der deutlich erhöhten Größe - vielleicht interpretiert er die Zahl in einer anderen Einheit ...
-
-### Resizing auf die harte Tour: ERFOLGREICH
+## Resizing auf die harte Tour (dd)
 
 Im groben:
 
@@ -428,10 +391,6 @@ Im Detail:
 - alte virtuelle Festplatte entfernen
 - System neu starten
 - Prüfung, ob nun mehr Platz frei ist: df -h
-
-### Resizing ausserhalb von VirtualBox-Features
-
-Wenn man das Linux-Gastsystem mit einem Logical-Volume-Manager aufgesetzt hat, dann kann man auch eine weitere Festplatte zum virtuallen Image hinzufügen und in den LVM einhängen.
 
 ---
 

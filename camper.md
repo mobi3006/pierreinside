@@ -104,13 +104,6 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
   * bei Kurzaufenthalten (1-2 Tage ... insbesondere bei Dauerregen - quasi als Vordach, um die Schuhe zumindest mal abstellen zu können) könnte ich mir sie recht nützlich vorstellen
   * bei längeren Aufenthalten wird man ein Zelt aufbauen und dann braucht man die Markise maximal für eine Überdachung zum Zelt
 
-### Problemlösungen
-
-* mobiler Kühlschrank
-  * Kompressorkühlbox zwischen Fahrer und Beifahrer
-* keine Einbauschränke - eher rausnehmbare Kisten/Einbauschränke
-* separates Zelt, so daß man mit dem Auto noch wegfahren kann
-
 ### Fazit
 
 Die typischen vollausgestatteter Camper ist für uns nicht interessant, da er mit Ausbau nicht den notwendigen Platz für 5-6 Erwachsenen bietet ... eher einen spartanischer Bus mit Hochstelldach.
@@ -514,57 +507,3 @@ Für 40.000 Euro will ja keiner die Katze im Sack kaufen ...
 * [Paul Camper](https://paulcamper.de/)
 * [Roadsurfer](https://roadsurfer.com/de/)
   * nicht in unserer Gegend
-
----
-
-## Tour de Benelux
-
-Über Pfingsten wollten wir eigentlich einen VW-Bus mieten und über Belgien nach Holland touren. Leider hat uns Corona einen Strich durch die Rechnung gemacht.
-
-## Tour de France
-
-Für 2021 haben wir definitiv eine Tour in Europa geplant ... 2-3 Wochen, um das Der-Weg-ist-das-Ziel zu testen. Die Kinder sind schon Feuer und Flamme und wir wollen - nach einigen Jahren auf einem festen Stellplatz auf dem Campingplatz - mal was neues ausprobieren.
-
-> Auf einer kleineren Vorab-Tour (verlängertes Wochenende) sollte wir erste Erfahrungen sammeln, um die Tour vorab zu optimieren. Vielleicht über Pfingsten 2021.
-
-Die Planung startet im Sommer 2020 ... viel Zeit, um sich entsprechend vorzubereiten.
-
-Ich bin ein Freund der Reduktion und Optimierung ... leben auf kleinsten Raum begeistert mich deshalb. Eine Art Entschlackung des Lebens. Zudem möchte ich meinen Kindern gern auch das echte Leben in fremden Ländern näherbringen ... und das geht eben nicht in einem 4-Sterne-Touristen-Bunker mit All-Inklusive. Stattdessen möchte ich morgens auf den Markt gehen, einen Espresso trinken, die Leute kennenlernen und lokale Spezialitäten auszuprobieren ... selber kochen spielt dabei eine wichtige Rolle. Kulturoffen. Diese Werte möchte ich meinen Kindern vermitteln.
-
-### Fahrzeug
-
-Ein VW-Bus ohne Küche mit Aufstelldach wäre unsere erste Wahl. Den Kauf eines solchen Fahrzeugs hatten wir ja schon mal erwogen.
-
-> Ich könnte mir auch vorstellen, mal länger mit der Familie unterwegs zu sein - entweder mit Arbeiten als digitaler Nomade oder eben mit Sonderurlaub.
-
-Das ermöglicht uns auch mal mit einem kleinen 3-Mann-Zelt (2 schlafen im Bus) eine Nacht zu verbringen, um dann am nächsten Tag schnell weiter zu fahren. Normalerweise würden wir sicher ein großes Zelt aufbauen, um den Bus dann vor Ort auch als Auto nutzen zu können.
-
-### Zelt
-
-Mit unserem 3-Mann-Zelt von Quechua sind wir sehr zufrieden, doch für eine VW-Bus-Tour ist ein größeres Zelt sicherlich´erforderlich.
-
-Wir haben zwar ein ALDI-Zelt, doch hier sind schon einige Stangen gesplittert ... vielleicht können wir im SSV-2020 ein Schnäppchen machen.
-
-### Luftmatratzen
-
-Unser Luftmatratzen müssen auf jeden Fall ausgetauscht werden ... zumindest meine. Ich fühle mich beim Aufstehen wie ein 70jähriger. Die Oberschenkel schmerzen nach jeder Nacht.
-
-Vielleicht ist ein Luftbett eine Alternative ... oder ein Feldbett, das aber mehr Platz verbraucht und vielleicht auch nicht so bequem ist.
-
-### Internet
-
-Die meisten Campingplätze bieten WLAN an ... Glücksache, ob das gut funktioniert - zudem sollte man über VPN nachdenken.
-
-Vielleicht braucht es auch eine mobile Lösung ... lokale Prepaid-Karten, Roaming, ...
-
-Mein [Slate](slate.md) könnte hier eine Rolle als Router spielen.
-
-### Gepäck
-
-Unser Ford Galaxy hat schon einen großen Kofferraum und wir sind in den letzten Jahren in einen vollausgestatteten Wohnwagen (mit Geschirr, 2 fertigen Schlafplätzen, volleingerichtete Küche) eingezogen. Das müssen wir dann selbst mitnehmen ... der Kofferraum war trotzdem schon voll.
-
-Hier müssen wir sicher effizienter werden oder einen Dachgepäckträger verwenden.
-
-### Navigation
-
-Hier sind wir mit Online-Navigation (Google Maps, Waze) sehr gut bedient.

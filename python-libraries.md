@@ -94,3 +94,10 @@ Was wäre die Welt ohne Webservices ...
 
 * [siehe separate Seite](fastapi.md)
 
+---
+
+## Jenkins - api4jenkins
+
+* [Dokumentation](https://api4jenkins.readthedocs.io/en/latest/)
+* [PyPi Site](https://pypi.org/project/api4jenkins/)
+

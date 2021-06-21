@@ -72,6 +72,8 @@
     * [Twitter Bootstrap](bootstrap.md)
   * [Python Ecosystem](python.md)
     * [Python Libraries](python-libraries.md)
+    * [Python Testing](python-testing.md)
+    * [Python Best-Practices](python-best-practices.md)
     * [Python Snippets](python-snippets.md)
     * [Python Selenium](python-selenium.md)
     * [Kivy UI](kivy.md)
@@ -241,6 +243,7 @@
       * [Chromium](chromium.md)
     * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
     * [Dockingstation](dockingstation.md)
+    * [Gaming PC 2021](gaming-pc.md)
   * [Beamer Benq W1000+](beamer_benq_w1000plus.md)
   * Spielekonsole
     * [2017](spielekonsole_2017.md)
@@ -270,6 +273,7 @@
     * [Musik Streaming](musicStreaming.md)
     * [Sky](sky.md)
     * [Camper](camper.md)
+      * [Camping 2021](camping-2021.md)
     * [Online Lernplattformen](online-lern-plattformen.md)
   * Fußball
     * [Meine Arbeit als Fußball-Trainer](fussball-trainer.md)
