@@ -269,7 +269,13 @@
   * Freizeit
     * [Musik Streaming](musicStreaming.md)
     * [Sky](sky.md)
-    * [Camper](camper.md)
+    * Camping
+      * [Camping Touren](camping_touren.md)
+      * [Camper](camper.md)
+        * VW Bus
+          * [VW Bus Recherche](camper_vwbus_recherche.md)
+          * [VW Bus Erfahrungen](camper_vwbus_erfahrungen.md)
+        * [Kastenwagen](camper_kastenwagen.md)
     * [Online Lernplattformen](online-lern-plattformen.md)
   * Fußball
     * [Meine Arbeit als Fußball-Trainer](fussball-trainer.md)
