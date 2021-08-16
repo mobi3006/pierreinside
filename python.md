@@ -1,70 +1,6 @@
 # Python
 
-<<<<<<< HEAD
-* [Referenzdoku realpython.com](https://realpython.com/)
-
-Python unterstützt verschiedene Paradigmen (Strukturierte Programmierung gleichermaßen wie Objektorientierte Programmierung). Es handelt sich hier um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
-=======
 Python unterstützt verschiedene Paradigmen (prozedurale, funktionale, objektorientierte). Es handelt sich um eine interpretierte Sprache - somit entfällt das lästige Erstellen compilieren (man kann aber auch Just-In-Time-Compiler wie [PyPy](https://de.wikipedia.org/wiki/PyPy) verwenden) ... einfach Editor auf und coden - was man eben von einer Skriptsprache erwartet. Auf diese Weise kann man es auch sehr praktisch mit [Shellprogrammierung](shellprogramming.md) mixen oder die [Shellskripte vielleicht sogar ablösen](https://medium.com/capital-one-developers/bashing-the-bash-replacing-shell-scripts-with-python-d8d201bc0989).
-
----
-
-## Best Practices
-
-Als Newbe sollte man sich strikt an Best-Practices halten. Das gilt auch für erfahrene Software-Entwickler, die nun Python neu entdecken. Jede Sprache hat ihre Idiome, die es erfahrenen Python-Entwicklern einfachen machen, den Code zu lesen und zu verstehen. Wenn man sich selbst dann für Python-erfahren genug hält kann man sicher das ein oder andere anders machen.
-
-### Coding Style
-
-* [Official Python Code Style - PEP8]
-* [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)
-
-Ich denke, man sollte das Rad nicht neu erfinden und sich an einen weit akzeptierten Styleguide halten - einen Custom-Styleguide zu entwerfen halte ich für Zeitverschwendung. Zur Not muss man seinen Style halt leicht modifizieren (fällt mir als Python Newbe vielleicht auch besonders leicht, da ich noch keinen eigenen Style habe).
-
-Solche Prüfungen sollte die IDE auch unterstützen und überprüfen. Hierzu verwendet man sog. Linter. [Visual Studio Code unterstützt verschiedene Linter](https://code.visualstudio.com/docs/python/linting), der Default is Pylint, doch verwende ich für die Auto-Formatierung schon PEP8 und deshalb möchte ich auch diesen Coding Style verwenden:
-
-* ich selektiere über die Command Palette "Python: Select Linter / pycodestyle"
-  * laut Doku ist der PEP8 kompatibel
-* die Aufforderung zur Installation nehme ich an
-* anschließend enable ich Linting über Command Palette "Python: Enable/Disable Linting"
-
-Danach sehe ich die Style-Abweichungen in der Status-Leiste und dem Problems Tab:
-
-![Pylinter](images/vscode-pylinter-pep8.png)
-
-Die Linter lassen sich über die VSCode `settings.json` den eigenen Ansprüchen entsprechend konfigurieren:
-
-> "python.linting.pycodestyleArgs": ["--ignore=E303"]
-
-Mit `yapf` kann ich die Formatierungsprobleme automatisch lösen - sehr praktisch.
-
-### Formatting
-
-Immer wieder ein Streitpunkt unter Entwicklern ... Tabs oder Spaces, Einrückungen, ... blablabla. Ich mag den Ansatz von Golang, daß der Code immer automatisch formatiert wird und somit bei JEDEM Entwickler gleich aussieht. Ende der Diskussion.
-
-Meine Empfehlung ist die Verwendung von [yapf](https://github.com/google/yapf/). Hierbei handelt es sich um ein Python-Package (`pip install yapf`), das den Code auto-formatiert. Ich verwende es i. a. so (`venv` ist der Ordner meiner virtuellen Python Umgebung ... den Python-Source-Code der Distribution möchte ich nicht umformatieren):
-
-```bash
-yapf --in-place --recursive --style="{based_on_style: google, indent_width: 3}" --exclude "venv/**" **/*.py
-```
-
-`yapf` ist über ein `.style.yapf` (beispielsweise im Root-Folder eines Projekts) konfigurierbar, so daß man dort obige CLI-Options auch so abbilden kann
-
-```ini
-[style]
-based_on_style=pep8
-indent_width=4
-```
-
-Ich habe diesen Alias in meiner Shell definiert:
-
-```bash
-alias yapf="yapf --in-place --recursive --exclude 'venv/**' **/*.py"
-```
-
-Mit einem einfachen `yapf` kann ich somit eine Formatierung vornehmen.
-
-> Wenn man Bulk-Formatierungen vornimmt, sollte man das in einem eigenen Commit von anderen Änderungen separieren und in der Commit-Message entsprechend kennzeichnen. Am besten ist, wenn diese Formatierung IMMER vor einem Commit abläuft.
->>>>>>> a75bc03e357efac034ea3aea51dc3e1938473602
 
 ---
 
@@ -97,7 +33,6 @@ Aus meiner Sicht sollte man IMMER virtuelle Environements verwenden.
 
 ---
 
-<<<<<<< HEAD
 ## Getting started
 
 ### Python im Browser
@@ -105,11 +40,8 @@ Aus meiner Sicht sollte man IMMER virtuelle Environements verwenden.
 Um mal eben schnell was auszuprobieren (während des Lernen der Sprache) hat sich [ReplIt](https://replit.com/) etabliert. Deutlich besser als Python in Shell Mode.
 
 ### Lokale Installation - Command Line
-=======
-## Installation
 
 ### Ubuntu via APT
->>>>>>> a75bc03e357efac034ea3aea51dc3e1938473602
 
 Install Python `sudo apt-get install python3-pip` and create a file `hello.py`
 
@@ -152,6 +84,8 @@ python --version
 
 python -m test
 ```
+
+> für newbe's: `python -m test` startet das Modul `test` ... das wiederum einen Test der Python-Installation durchführt.
 
 Wenn alle Tests (dauernn schon ein paar Minuten) erfolgreich waren, dann kanns losgehen :-)
 
@@ -246,6 +180,12 @@ Nach Umstellen vom Microsoft Language-Server auf Pylance hat alles schon viel be
 
 Enthält ein Projekt eine Virtuelle Umgebung z. B. in `PROJEKT/venv-myproject` so erkennt das VSCode und verwendet den darin befindlichen Interpreter und deren Libraries. In der unteren blauen Statusleiste ist das zu erkennen - hierüber kann man au
 
+### Best Practices
+
+Ich verwende normalerweise einen VSCode Workspace, der 30 oder mehr Projekte enthält (das funktioniert, weil VSCode wirklich super schnell ist). Für die Nutzung in einem Python-Projekt ist das allerdings nicht die beste Lösung, da relative Module (in lokalen Packages) nicht aufgelöst werden können. Das sorgt für angezeigte Fehler und reduziert VSCode von einer Python-IDE zu einem reinen Editor.
+
+Deshalb öffne ich mein Python Projekt in einer separaten VSCode-Instanz, das nur diese eine Projekt im Root enthält.
+
 ---
 
 ## Python Virtual Environments
@@ -257,9 +197,21 @@ Enthält ein Projekt eine Virtuelle Umgebung z. B. in `PROJEKT/venv-myproject` s
 
 Bei diesem Ansatz werden Bibliotheken und Interpreter in einem applikationsspezifischen Verzeichnis installiert, so daß verschiedene Ausführungsumgebungen voneinander getrennt werden können. Auf diese Weise werden Konflikte vermieden und man kann sich nicht auf Bibliotheken stützen, die im Zusammenhang mit einem anderen Projekt installiert wurden ... das verbessert die Qualität in den projektspezifischen Dependencies (`requirements.txt` Datei).
 
-Das Paket zum Management dieser virtuellen Umgebungen wird per `sudo apt install virtualenv` installiert (unter Windows habe ich `pip install venv` verwendet und das Installationsverzeichnis anschließend in den `PATH` gepackt). Per (z. B.) `virtualenv ~/ideWorkspaces/venv/jenkins-stats` wird ein virtuelles Environment im Ordner `~/ideWorkspaces/venv/jenkins-stats` angelegt.
+### Installation per Linux-Package
 
-> Ich präferiere, das virtuelle Environment in einen Subfolder (z. B. `~/src/jenkins-stats/venv`) des Git-Repo's zu packen, das den Source-Code enthält. Zumindest, wenn ich den Source-Code selbst unter Kontrolle habe, denn dann füge ich `venv` zur `.gitignore` des Repos hinzu. Aus meiner Sicht erhöht das die Übersichtlichkeit ... das virtuelle Environment liegt nicht mehr irgendwo, sondern direkt im Python-Projekt.
+* [Ubuntu-Installation](https://wiki.ubuntuusers.de/virtualenv/)
+
+Das Paket zum Management dieser virtuellen Umgebungen wird per `sudo apt install virtualenv` installiert.
+
+Per (z. B.) `virtualenv my-venv` wird ein virtuelles Environment im Ordner `./my-venv` angelegt.
+
+### Installation per pip
+
+`venv` ist auch ein Python Modul und kann per `pip install venv` installiert werden. Die Erzeugung einer virtuellen Umgebung erfolg dann per `python -m venv my-venv`
+
+### Best-Practice
+
+Ich präferiere, das virtuelle Environment in einen Subfolder (z. B. `~/src/jenkins-stats/venv`) des Git-Repo's zu packen, das den Source-Code enthält. Zumindest, wenn ich den Source-Code selbst unter Kontrolle habe, denn dann füge ich `venv` zur `.gitignore` des Repos hinzu. Aus meiner Sicht erhöht das die Übersichtlichkeit ... das virtuelle Environment liegt nicht mehr irgendwo, sondern direkt im Python-Projekt.
 
 So sieht der ganze Prozess dann aus:
 
@@ -280,7 +232,9 @@ source venv/bin/activate
 (jenkins-stats) ╭─pfh@workbench ~/src/com.github
 ```
 
-Die typischen Python Kommandos (`python`, `pip`, ...) sind nun auf die Skripte in der virtuellen Umgebung (`~/src/jenkins-stats/venv/bin/python`) umgebogen. Die Installation von Libraries per `pip install Jinja2` oder `pip install -r requirements.txt` führen zur Installation der Pakete im virtuellen Environment (`~/src/jenkins-stats/venv/lib`) ... nicht im System-Installationsverzeichnis für Python-Module.
+### Background Info
+
+Die typischen Python Kommandos (`python`, `pip`, ...) sind in einem virtuellen Environment auf die Skripte in der virtuellen Umgebung (`~/src/jenkins-stats/venv/bin/python`) umgebogen. Die Installation von Libraries per `pip install Jinja2` oder `pip install -r requirements.txt` führen zur Installation der Pakete im virtuellen Environment (`~/src/jenkins-stats/venv/lib`) ... nicht im System-Installationsverzeichnis für Python-Module.
 
 `virtualenv` verwendet dabei die auf dem System verfügbare Default-Python-Version (die per `python` verfügbar ist)... kopiert dabei aber die Executables in die virtuelle Umgebung. Hat man noch eine andere Python-Version (z. B. `python3`) installiert (aber Python 2 war der Default bei `python --version`), so kann man diese per
 
@@ -633,7 +587,7 @@ def get_services(category:str) -> List[str]:
 services = get_services("backend")
 ```
 
-mehr Semantik verleihen kann. Das verhindert erstens Fehler und ermöglicht zudem eine bessere Code-Navigation in der IDE mit Auto-Completion-Support (bei Eingabe von `service.` in der IDE werden nur die Funktionen/Methoden einer `List` zur Auswahl gestellt). So klappt das Tippen doch gleich viel schneller und mit weniger Fehlern.
+mehr Semantik verleihen kann. Das verhindert erstens Fehler und ermöglicht zudem eine bessere Code-Navigation in der IDE mit Auto-Completion-Support (bei Eingabe von `service.` in der IDE werden nur die Funktionen/Methoden einer `List` zur Auswahl gestellt). So klappt das Tippen doch gleich viel schneller und mit weniger Fehlern. Wer schon mal versucht hat, eine unbekannte API (ich hatte das Vergnügen mit [api4jenkins](https://api4jenkins.readthedocs.io/en/latest/index.html)) ohne Type Hints zu verwenden, weiß wovon ich spreche. Das endet in frustrierendem Trial-and-Error ... wer Glück hat findet zumindest eine gute Dokumentation. Da greife ich doch lieber gleich zur REST-API und der requests-API ... da bin ich wahrscheinlich schneller - obwohl ich davon überzeugt bin, daß api4jenkins die bessere Abstraktionsebene bietet.
 
 Type checking zur Compile-Zeit bzw. vor der Ausführung hat man damit aber noch nicht ... zumindest nicht mit `python` von der Console. Eine gute Python-IDE kann hier helfen.
 
@@ -1244,6 +1198,8 @@ Grundsätzlich erlauben solche Sprachen i. a. mehr als compilierte Sprachen ... 
 empfohlen.
 
 ### Testabdeckung
+
+* [Abschnitt Python Testing](python-testing.md)
 
 Zudem sollte man eine hohe Testabdeckung haben, denn ein wesentlicher Nachteil untypisierter Sprachen besteht darin, daß Typfehler häufig erst entdeckt werden können, wenn der Code auch ausgeführt wird. In folgendem Beispiel
 

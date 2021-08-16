@@ -72,6 +72,8 @@
     * [Twitter Bootstrap](bootstrap.md)
   * [Python Ecosystem](python.md)
     * [Python Libraries](python-libraries.md)
+    * [Python Testing](python-testing.md)
+    * [Python Best-Practices](python-best-practices.md)
     * [Python Snippets](python-snippets.md)
     * [Python Selenium](python-selenium.md)
     * [Kivy UI](kivy.md)
@@ -241,6 +243,7 @@
       * [Chromium](chromium.md)
     * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
     * [Dockingstation](dockingstation.md)
+    * [Gaming PC 2021](gaming-pc.md)
   * [Beamer Benq W1000+](beamer_benq_w1000plus.md)
   * Spielekonsole
     * [2017](spielekonsole_2017.md)
@@ -270,7 +273,8 @@
     * [Musik Streaming](musicStreaming.md)
     * [Sky](sky.md)
     * Camping
-      * [Camping Touren](camping_touren.md)
+      * [Camping Touren Ideen](camping_touren.md)
+        * [Camping Tour - Gardasee 2021](camping-2021.md)
       * [Camper](camper.md)
         * VW Bus
           * [VW Bus Recherche](camper_vwbus_recherche.md)

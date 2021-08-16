@@ -105,13 +105,6 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
   * bei Kurzaufenthalten (1-2 Tage ... insbesondere bei Dauerregen - quasi als Vordach, um die Schuhe zumindest mal abstellen zu können) könnte ich mir sie recht nützlich vorstellen
   * bei längeren Aufenthalten wird man ein Zelt aufbauen und dann braucht man die Markise maximal für eine Überdachung zum Zelt
 
-### Problemlösungen
-
-* mobiler Kühlschrank
-  * Kompressorkühlbox zwischen Fahrer und Beifahrer
-* keine Einbauschränke - eher rausnehmbare Kisten/Einbauschränke
-* separates Zelt, so daß man mit dem Auto noch wegfahren kann
-
 ### Fazit
 
 Die typischen vollausgestatteter Camper ist für uns nicht interessant, da er mit Ausbau nicht den notwendigen Platz für 5-6 Erwachsenen bietet ... eher einen spartanischer Bus mit Hochstelldach.
@@ -197,6 +190,14 @@ Bei [leasingmarkt.de](https://www.leasingmarkt.de) habe ich mir einen sehr gut a
 
 Bei [multicamper.de](https://multicamper.com/) kann man einen Camper für ca. 100 Euro/Tag mieten - die Firma ist gerade mal 10km von uns entfernt ... das wäre also sehr unproblematisch. Bei einer Nutzung von 4 Wochen im Jahr kommt man da auf 3000 Euro Miete. Im Vergleich zu einem Leasing mit 30.000 Euro in 4 Jahren könnten wir zum gleichen Preis 10 Jahre mieten.
 
+Weitere Anbieter:
+
+* [Multicamper](https://multicamper.com/)
+* https://www.mieten-testen-kaufen.de
+* [Paul Camper](https://paulcamper.de/)
+* [Roadsurfer](https://roadsurfer.com/de/)
+  * nicht in unserer Gegend
+
 ### Fazit
 
 In Anbetracht der aktuellen Diesel-Diskussion mit angedrohten/geplanten Fahrverboten und einer unsicher Zukunft macht ein Kauf keinen großen Sinn, weil
@@ -232,17 +233,44 @@ Das ermöglicht uns auch mal mit einem kleinen 3-Mann-Zelt (2 schlafen im Bus) e
 
 ## Infrastruktur
 
-### Zelt
+### Kleines Zelt
 
 Mit unserem 3-Mann-Zelt von Quechua sind wir sehr zufrieden, doch für eine VW-Bus-Tour ist ein größeres Zelt sicherlich´erforderlich.
 
-Wir haben zwar ein ALDI-Zelt, doch hier sind schon einige Stangen gesplittert ... vielleicht können wir im SSV-2020 ein Schnäppchen machen.
+### Großes Zelt
 
-### Luftmatratzen
+Das große Zelt sollte folgende Features haben:
 
-Unser Luftmatratzen müssen auf jeden Fall ausgetauscht werden ... zumindest meine. Ich fühle mich beim Aufstehen wie ein 70jähriger. Die Oberschenkel schmerzen nach jeder Nacht.
+* 3 Bereiche
+  * Schlafbereich mit Moskitonetz
+  * Staubereich
+  * Wohnbereich/Vordach
+* Stehhöhe
 
-Vielleicht ist ein Luftbett eine Alternative ... oder ein Feldbett, das aber mehr Platz verbraucht und vielleicht auch nicht so bequem ist.
+Es sollte Platz bieten, um an Regentagen auch im Zelt sitzen zu können.
+
+### Luftmatratze
+
+Ich bin kein Fan mehr von selbstaufblasenden Isomatten (auch bei 10cm Dicke). Meisten halten sie nicht lange, sind teuer und meistens auch nicht dick genug.
+
+Wir haben beim Aufräumen im Keller zufällig zwei BestWay "Comfort Quest" Luftmatratzen gefunden ([bei Amazon für 13 Euro](https://www.amazon.de/Pavillo-aufblasbares-Single-Luftbett-Person-Horizon/dp/B00F0B5ILK/ref=sr_1_5?dchild=1&keywords=Bestway%2BComfort%2BQuest&qid=1623573734&sr=8-5&th=1) zu bekommen). Mit 76cm Breite ist es gut 10 cm breiter als die bisherigen Isomatten, mit 185cm Länge könnte sie 5cm länger sein (gibt es auch mit 191cm, dann aber 137cm breit). Sie sind 22cm dick und mit Beflockung auf der Liegeseite (nicht rutschig). Superbequem ... die ganze Nacht (8 Stunden) ... ich habe noch nie so gut geschlafen beim Camping. Über Nacht hat sie - obwohl 7 Jahre alt - nicht spürbar Luft verloren. Der Schließmechanismus ist auch perfekt. Mit voller Matratze kann keine Luft nach rausziehen der Pumpe entweichen und wenn man abbaut, dann kann man das komplette Ventil rausdrehen und bekommt die Luft auch ganz ohne Pumpe wieder raus.
+
+Einziger Nachteil ist der Geruch, doch der wird sicher durch Lüften verfliegen.
+
+Zudem ist das Packmaß klasse, deutlich kleiner als unsere Isomatten. Außerdem kann man sie notfalls auch im Wasser als Luftmatratze nutzen.
+
+Unser 3-Mann-Wurfzelt hat die Abmessungen 180 × 210 ... da passen leider nur zwei rein, aber das nehmen wir in Kauf. Wenn die Luftmatratzen eine langfristige Lösung sind, dann könnten wir auch mal ein größeres kaufen (dann vielleicht in einer Black-Edition).
+
+### Übernachtungen - Luftmatratzen - Pumpe
+
+Die üblichen mechanischen Blasebalgs sind meistens recht groß. Wir müssen im Campingurlaub mit dem VW-Bus platzeffizient sein. Nimmt man Mini-Blasebalgs, ist mal bei 3 x 200 = 600 Litern ewig am pumpen. Deshalb scheidet das aus.
+
+Elektrische Pumpen haben den Nachteil, daß man 220V Strom braucht. Ich habe allerdings einen 12V (Auto) auf 220V Konverter (kontinuierlich 150W ... 300W Peak) - so daß es auch ohne richtigen Stromanschluß möglich sein sollte, mal eben eine Luftmatratze auszublasen.
+
+* [Deeplee - 15 Euro](https://www.amazon.de/Deeplee-Elektrische-Elektropumpe-aufblasbare-Schwimmring/dp/B07VZ44ZW6/ref=sr_1_3_sspa?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=elektrische%2BPumpe&qid=1623576089&sr=8-3-spons&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUE3Uks3OUM5VUhQUTYmZW5jcnlwdGVkSWQ9QTEwMDIyNDIyWDY1MlBUM1FDNlE5JmVuY3J5cHRlZEFkSWQ9QTAxMDk5ODUxQlpENUZROEU5RVpNJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ&th=1)
+  * zieht 130 Watt ... das schafft auch mein Spannungswandler (12V => 220V), der kontinuierlich 150W liefert
+
+Daneben gibt es noch Pumpen mit Akku, der zudem per USB geladen wird. Davon halte ich wenig ... hebt vielleicht für einen Sommer, dann ist der Akku sicher nicht mehr zu gebrauchen und die Pumpe muß entsorgt werden.
 
 ### Internet
 

@@ -18,7 +18,7 @@ Kein Problem war, der Unity-Desktop in der Virtualbox recht zäh war, da ich mit
 
 ---
 
-## Inbetriebnahme
+## Inbetriebnahme from-scratch
 
 ### Pre-Test - Ubuntu 20.04 LTS
 
@@ -115,7 +115,47 @@ sudo mount /dev/sdb1 /home
 
 Damit ich das nicht immer wieder nach einem Reboot machen muß, ermittle ich per `blkid /dev/sdb1` die UUID der Partition und hänge an `/etc/fstab` folgende Zeile an:
 
+```properties
 UUID=<UUID_ERMITTELT_PER_BLKID>   /home   ext4   defaults   0   2
 ```
 
 Dann nochmal restarten - Voila :-)
+
+---
+
+## Upgrade 18.04.3 LTS nach 20.04.2 LTS
+
+* [Anleitung](https://ubuntu.com/blog/how-to-upgrade-from-ubuntu-18-04-lts-to-20-04-lts-today)
+
+Ich habe das Upgrade im Juni 2021 durchgeführt. Obowhl ich normalerweise `awesome` als Window-Manager verwende, habe ich in diesem Fall die Ubuntu-UI gestartet und die grafische Variante des Updates verwendet.
+
+> Ich wurde sogar automatisch gefragt, ob ich das Upgrade durchführen möchte ... nachdem ich mich seit langer Zeit mal wieder über die Ubuntu-UI angemeldet hatte
+
+* Schritt 0: sind die Vorbedingungen
+* Schritt 1: aktuelles System updaten
+  * über die Anwendung "Software Update"
+  * System Reboot
+* Schritt 2: Backup
+  * System Shutdown
+  * da ich eine Virtualbox-Umgebung verwende, habe ich nur eine Kopie der Storage-Datei gemacht
+* Schritt 3: Upgrade durchführen
+  * System Boot
+  * über die Anwendung "Software Update" das Upgrade triggern (wird das evtl. nur angeboten, wenn das System auf dem neuesten Stand der alten LTS Version ist?)
+    * "Some third party entries in your sources.list were disabled. You can re-enable them after the upgrade with the 'software-properties' tool or your package manager"
+  * System Reboot
+  * Guest-Extensions für Virtualbox installieren
+
+    ```bash
+    sudo bash
+    cd /media/pfh/VBox_GAs_6.1.22
+    ./VBoxLinuxAdditions.run
+    ```
+
+  * System Reboot
+  * Testen
+* Schritt 4: Backup
+  * siehe Schritt 2
+
+Bei ein paar Konfigurationsdateien wurde ich gefragt, ob ich meine aktuelle behalten will oder die vom Paket mitgelieferte. Nach einer knappen Stunde war alles durch und das System startete problemlos in das Ubuntu-GUI. Leider funktionierte mein schlanker `awesome`-Fenstermanager nicht out-of-the-box. Aber vielleicht dauerte die Initialisierung nur einfach länger ... nach 2 Minuten funktionierten die üblichen Shortcuts wieder.
+
+Ein paar Kleinigkeiten meines eigenen Shell-Scripting Toolings musste ich anpassen, aber das waren nur kleinere Hygiene-Maßnahmen ... bisher kein größeres Problem.

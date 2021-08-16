@@ -22,7 +22,7 @@ Will man ein installiertes Paket, das eine Anwendung repräsentiert, starten, so
 
 > Im Source-Code dieses `readers` erkennt man in der [`setup.py`](https://github.com/realpython/reader/blob/master/setup.py), daß die Anwendung bei der Installation als `realpython` zum Aufruf per Console zur Verfügung gestellt wird:
 >
-> ```
+> ```properties
 > entry_points={"console_scripts": ["realpython=reader.__main__:main"]},
 > ```
 >
@@ -35,7 +35,7 @@ Der Source-Code eines Python-Pakets muß folgende Struktur haben und entsprechen
 ```text
 your-package/
     __init__.py
-    __main__.py
+    __main__.py     # support for python -m
     foo.py
 test/
 setup.py
@@ -43,8 +43,6 @@ README
 LICENSE
 MANIFEST
 ```
-
-
 
 ### PyPI
 
@@ -95,4 +93,11 @@ Was wäre die Welt ohne Webservices ...
 ## FastAPI
 
 * [siehe separate Seite](fastapi.md)
+
+---
+
+## Jenkins - api4jenkins
+
+* [Dokumentation](https://api4jenkins.readthedocs.io/en/latest/)
+* [PyPi Site](https://pypi.org/project/api4jenkins/)
 
