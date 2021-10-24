@@ -230,6 +230,7 @@
     * [2016](handy_2016.md)
     * [2018](handy_2018.md)
     * [2019](handy_2019.md)
+    * [2021](handy_2021.md)
   * Computer
     * Laptop
       * [2018](laptop_2018.md)
@@ -252,6 +253,7 @@
   * Gadgets
     * [iPad Pro](ipadPro.md)
       * [iPad als mobiles Büro](mobiles–buero-ipad.md)
+    * [Macbook Pro](macbook.md)
     * [Smartwatch](smartwatch.md)
     * [Slate](slate.md)
   * Fahrrad

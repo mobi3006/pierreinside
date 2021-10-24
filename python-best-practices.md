@@ -67,3 +67,20 @@ Mit einem einfachen `yapfify` kann ich somit eine Formatierung vornehmen.
 > Wenn man Bulk-Formatierungen vornimmt, sollte man das in einem eigenen Commit von anderen Änderungen separieren und in der Commit-Message entsprechend kennzeichnen. Am besten ist, wenn diese Formatierung IMMER vor einem Commit abläuft.
 
 Eine Option ist die Verwendung eines Git-Commit-Hooks, um den Code beim Commit automatisch zu formatieren.
+
+---
+
+## Testabdeckung
+
+* [Abschnitt Python Testing](python-testing.md)
+
+Eine hohe Testabdeckung (mit zumindest 100% Line-Coverage) verhindert, daß der Code sogar noch gravierende Fehler enthält.Ein wesentlicher Nachteil untypisierter Sprachen besteht darin, daß Typfehler häufig erst entdeckt werden können, wenn der Code auch ausgeführt wird (IDEs helfen hier ... verhindern es aber nicht). In folgendem Beispiel
+
+```python
+name = input("Wie ist dein name?")
+if name == "Pierre":
+    name_int=int(name)
+print(name)
+```
+
+tritt der Fehler `int(name)` erst in Erscheinung, wenn ich den Namen `Pierre` eingebe. Um dieses Problem zu lösen benötigt man viele Tests ... oder einen intelligenten Editor, der Python-Wissen hat und diese Probleme erkennen kann.

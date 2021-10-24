@@ -48,7 +48,7 @@ Docker basiert auf Linux Containers. Linux Containers sind - wie der Name vermut
 Docker stellt komfortable Tools bereit, um
 
 * Linux Images aus einem Dockerfile zu erzeugen - siehe [docker build](docker_build.md)
-* basierend auf einem DockerImage lauffähige Instanzen (= DockerContainer) zu erzeugen - siehe [docker run](docker_run.md) 
+* basierend auf einem DockerImage lauffähige Instanzen (= DockerContainer) zu erzeugen - siehe [docker run](docker_run.md)
 * DockerContainer wieder zu einem Linux Image zu verpacken
 * Docker Images zu teilen, um Docker-Container auf anderen Maschinen zu starten
 
@@ -99,7 +99,7 @@ Docker speichert alle jemals erstellten Container ... d. h. auch auf die nicht m
 docker ps -a
 ```
 
-wird die Liste ALLER Container angezeigt (im Gegensatz dazu liefert ``docker ps`` nur die laufenden Container). 
+wird die Liste ALLER Container angezeigt (im Gegensatz dazu liefert ``docker ps`` nur die laufenden Container).
 
 ### Container-Zwischenstände
 
@@ -218,6 +218,11 @@ Für GitHub User hat es den Charme, daß Builds über einen Hook automatisch ges
 
 * Docker Hub und GitHub hier vernetzen: https://docs.docker.com/docker-hub/github/
 * im Docker-Projekt auf GitHub einchecken und direkt ein Docker-Image bauen lassen, das für jeden verfügbar ist
+
+### tecnickcom/alldev - Schweizer Taschenmesser
+
+* [Github](https://github.com/tecnickcom/alldev)
+* [Docker Hub](https://hub.docker.com/r/tecnickcom/alldev)
 
 ---
 

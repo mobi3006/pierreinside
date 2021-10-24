@@ -19,9 +19,26 @@ Unter Windows gibt es zwei Ansätze:
 
 * https://docs.docker.com/machine/drivers/hyper-v/
 
->ACHTUNG: das basiert auf Microsofts Hypervisor-Technologie, die nicht gemeinsam mit Virtualbox nutzbar ist ... es kann nur einen Hypervisor geben!!!
+> ACHTUNG: Docker Desktop für Windows basiert auf Microsofts Hypervisor-Technologie (Hyper-V, Virtualization Platform, ...).
 
-Bei diesem Ansatz muß man berücksichtigen, daß man im Hintergrund eine Linux-VM laufen hat. Diese Tatsache ist meistens transparent und nicht wichtig - will man allerdings die nicht seltenen Probleme verstehen, dann **MUSS man daran denken!!!**
+Bei diesem Ansatz muß man berücksichtigen, daß man im Hintergrund eine Linux-VM laufen hat ... auf die die Docker-Kommandos "umgebogen" werden. Docker Desktop kann
+
+* Hyper-V
+* WSL 2
+
+als Hypervisor verwenden (wobei WSL 2 auch Hyper-V benötigt).
+
+ die Diese Tatsache ist meistens transparent und nicht wichtig - will man allerdings die nicht seltenen Probleme verstehen, dann **MUSS man daran denken!!!**
+
+### Ko-Existenz Hyper-V und anderen Hypervisors
+
+Ich kenne keinen Windows Hypervisors (VMWare Workstation, Virtualbox, ...), der zuverlässig und performant mit Hyper-V koexistieren kann. Bis zum Windows Update im Mai 2020 (Version 2004 Build 19041 - Windows 10 20H1) war das unmöglich - [siehe hier](https://techjourney.net/how-to-run-vmware-workstation-with-hyper-v-enabled-together-in-windows-10/). Seitdem funktioniert es einigermaßen, doch die Performance ist nicht gut. Bei meiner Virtualbox fror die VM bei einem Maven-Build wegen "slow system" ein, unter VMWare Workstation 16 dauerte der Build 50 Minten statt der üblichen 10 Minuten ... die Shared Folders waren zudem sehr langsam und somit unbrauchbar.
+
+Ja, man kann nun eine VM in Virtualbox/VMWare starten ... aber die Performance ist so schlecht, daß es unbrauchbar ist.
+
+Technisch verwendet Virtualbox/VMWare dann die Windows Hypervisor Platform, das ein Interface für Virtualbox/VMWare bereitstellt und als Backend aber Microsoft Hyper-V verwendet. Dieses Layer sorgt für entsprechende Performance-Einbußen.
+
+VMWare nennt diesen Ansatz ["Host VBS Mode"](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/16.0/com.vmware.player.win.using.doc/GUID-177F1E77-BFFD-485F-90BB-2E45B6B88678.html). In Virtualbox kann man unter "VM - Settings - System - Acceleration - Paravirtualization Interface - Hyper-V" verwenden ... ich glaube allerdings, daß das automatisch geschieht, wenn die Windows Virtualization Features enabled sind. Im VM-Log kann man dann Nachrichten wie
 
 ### MobyVM - Restart über Docker Desktop
 
@@ -48,7 +65,7 @@ Dort kann man
 
 ### Linux-Container
 
-Docker for Windows benötigt Microsofts Hyper-V-Technologie, die ganz ähnlich zu Oracles VirtualBox Lösung ist (und leider nicht parallel zu dieser laufen kann). Auf dieser Hypervisor-Technology wird ein Linux-Image (sog. `MobyLinuxVM`) erstellt und gestartet. In diesem Linux-Image läuft der Docker-Daemon und die Docker-Container. Der Docker-Client zum Absetzen von Kommandos (z. B. `docker ps`) läuft in einer beliebigen Terminal-Konsole (z. B. Powershell, Command Shell, Babun). Seine Kommandos werden auf das Moby-Image umgebogen (ganz ähnlich wie man unter Linux seine Kommandos auf einen anderen Docker-Host per `export DOCKER_HOST=...` umbiegen kann - [siehe hier](docker_host.md)).
+Docker for Windows benötigt Microsofts Hyper-V-Technologie, die ganz ähnlich zu Oracles VirtualBox Lösung ist (und leider nicht problemlos parallel zu dieser laufen kann). Auf dieser Hypervisor-Technology wird ein Linux-Image (sog. `MobyLinuxVM`) erstellt und gestartet. In diesem Linux-Image läuft der Docker-Daemon und die Docker-Container. Der Docker-Client zum Absetzen von Kommandos (z. B. `docker ps`) läuft in einer beliebigen Terminal-Konsole (z. B. Powershell, Command Shell, Babun). Seine Kommandos werden auf das Moby-Image umgebogen (ganz ähnlich wie man unter Linux seine Kommandos auf einen anderen Docker-Host per `export DOCKER_HOST=...` umbiegen kann - [siehe hier](docker_host.md)).
 
 Bei der Installation von Docker-for-Windows wird bei Bedarf Hyper-V auf dem System eingeschaltet (hier werden eine Reihe von Services gestartet) und dann die `MobyLinuxVM` erstellt und gestartet. Sobald man die Docker-Einstellungen verändert, muß die `MobyLinuxVM` restarted werden. Wenn man Docker auf Werkseinstellungen zurücksetzt wird die Moby-VM gelöscht und neu erstellt - alles was auf dem Image lief (Docker Container, Persistenz über Container-Volumes) ist dann natürlich weg.
 

@@ -144,3 +144,13 @@ Man kann Fixtures in eine Datei mit dem Namen `conftest.py` auslagern und die st
 ### Plugins
 
 `pytest` läßt sich über Plugins erweitern ... beispielsweise um Helper für bestimmte Frameworks (z. B. Django)
+
+---
+
+## tox.ini
+
+* [verschiedene Python versionen testen](https://tox.readthedocs.io/en/latest/)
+
+Auf diese Weise kann man testen, ob sich ein Package auf verschiedenen Python-Versionen installieren läßt - zudem laufen die Tests auch alle auf den definierten Python-Versionen.
+
+sehr zu empfehlen ... hab ich gelesen ...
