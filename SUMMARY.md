@@ -266,6 +266,7 @@
     * [Spülmaschine 2021](spuelmaschine_2021.md)
     * [Hebe-Schiebetür](hebeSchiebetuer.md)
     * [Gasgrill](gasgrill.md)
+    * [Minibar / Mini-Kühlschrank](mini-kuehlschrank.md)
     * [Smart-Home](smartHome.md)
       * [Raspberry Pi](raspberrypi.md)
       * [Heimnetzwerk](heimnetzwerk.md)
