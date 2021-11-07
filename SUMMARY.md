@@ -200,7 +200,7 @@
   * [Animationsfilme](animationsfilme.md)
 * Storage
   * [Synology 2012](synology-2012.md)
-  * [Synology 2020](synology-2020.md)
+  * [Synology 2021](synology-2021.md)
 * Collaboration
   * [Übersicht](kollaboration.md)
   * [Microsoft Teams](microsoft_teams.md)
