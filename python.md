@@ -1014,7 +1014,11 @@ dann erfolgt die Ausgabe nur, wenn die Ausführung als Main-Modul gestartet wurd
 * Werte ignorieren mit `_` als Variablenname
 
     ```python
-    track_medal_counts = {'long jump': 3, '100 meters': 2, '400 meters': 1}
+    track_medal_counts = {
+      'long jump': 3,
+      '100 meters': 2,
+      '400 meters': 1
+    }
     track_events = []
     for event, _ in track_medal_counts.items():
         track_events.append(event)
@@ -1185,35 +1189,6 @@ class SubClass(SuperClass):
 
 ---
 
-## Fallstricke
-
-### Best-Practices
-
-Grundsätzlich erlauben solche Sprachen i. a. mehr als compilierte Sprachen ... es ist schwierig Best-Practices vor der Laufzeit zu prüfen. Hierzu bedarf es einer IDE, die das unterstützt und die Best-Practices überprüft. Deshalb werden
-
-* Linter
-* Auto-Formatter wie [yapf](https://github.com/google/yapf/)
-* Styleguides wie der von [Google](https://google.github.io/styleguide/pyguide.html)
-
-empfohlen.
-
-### Testabdeckung
-
-* [Abschnitt Python Testing](python-testing.md)
-
-Zudem sollte man eine hohe Testabdeckung haben, denn ein wesentlicher Nachteil untypisierter Sprachen besteht darin, daß Typfehler häufig erst entdeckt werden können, wenn der Code auch ausgeführt wird. In folgendem Beispiel
-
-```python
-name = input("Wie ist dein name?")
-if name == "Pierre":
-    name_int=int(name)
-print(name)
-```
-
-tritt der Fehler `int(name)` erst in Erscheinung, wenn ich den Namen `Pierre` eingebe. Um dieses Problem zu lösen benötigt man viele Tests ... oder einen intelligenten Editor, der Python-Wissen hat und diese Probleme erkennen kann.
-
----
-
 ## Bibliotheken
 
 Module, die Python nicht mitliefert, müssen per `pip install MODULE_NAME` installiert werden. Für die Automatisierung dieses Prozesses ist es hilfreich, alle notwendigen Module in einer Datei (z. B. `requirements.txt`) zu sammeln (die i. a. unter Versionskontrolle steht) und dann per `pip3 install -r requirements.txt` auf einen Schlag zu installieren. Das vereinfacht die Nutzung einer (unbekannten) Anwendung ungemein.
@@ -1235,21 +1210,26 @@ Diese Variante wird man bei der lokalen Entwicklung verwenden, weil der Ansatz s
 
 Die Nutzung ist abhängig von der Python-Version ... ich beschreibe hier Python 3.8 ...
 
-Manche Python 3 kommen bereits mit dem Modul `venv` vorinstalliert - bei anderen muß man es erst installieren (z. B. `apt-get install python3-venv`). Anschließend kann per `python -m venv myenv` eine virtuelle Umgebung angelegt werden kann. Es wird ein Verzeichnis `myenv` erstellt, das einige Verzeichnisse enthält. Das wichtigste Verzeichnis ist `bin` (unter Windows heißt das Verzeichnis `Scripts`), das u. a. folgende Skripte enthält:
+Manche Python 3 kommen bereits mit dem Modul `venv` vorinstalliert - bei anderen muß man es erst installieren. Zur Installation gibt es folgende Varianten:
+
+* als Linux Binary `apt install virtualenv` ... eine virtuelle Umgebung wird per `virtualenv --python=/usr/bin/python3 venv` unter dem Verzeichnis `venv` angelegt
+* als Python-Package (in der Python-System-Installation) per `pip install virtualenv`. Anschließend kann per `python -m virtualenv venv` eine virtuelle Umgebung unter dem Verzeichnis `venv` angelegt werden.
+
+Das wichtigste Verzeichnis einer virtuellen Umgebung ist `bin` (unter Windows heißt das Verzeichnis `Scripts`), das u. a. folgende Skripte enthält:
 
 * `activate`
 * `deactvate`
 * `python`
 * `pip`
 
-Anschließend muß dieses Environment per `source myenv/bin/activate` aktiviert werden.
+Anschließend muß dieses Environment per `source venv/bin/activate` aktiviert werden.
 
 > ACHTUNG: unter Cygwin hat das nicht besonders gut funktioniert. Erstens mußte ich die Linebreaks von `activate` von Windows (CRLF) auf Linux (LF) umstellen. Zweitens wurden teilweise Batch Dateien statt Shell-Skripte erstellt ... es fehlte `deactivate` (stattdessen existierte `deactivate.bat`).
 
 Nun ist nicht mehr die zentrale Python Installation des Systems konfiguriert, sondern die des virtuellen Environments. Das ist an folgendermaßen erkennbar:
 
 * Prompt enthält den Namen des virtuellen Environments (z. B. `(myenv) ubuntu2004beta%`)
-* `which python` liefert `myenv/Scripts/python` statt einer zentralen Python Installation (z. B. `/usr/bin/python3`) - erreicht durch eine Anpassung der `PATH` Umgebungsvariable
+* `which python` liefert `venv/Scripts/python` statt einer zentralen Python Installation (z. B. `/usr/bin/python3`) - erreicht durch eine Anpassung der `PATH` Umgebungsvariable
   * allerdings ist das nur ein symbolischer Link auf die zentrale Python-Installation
   * erreicht wird damit aber eine environment-spezifische Bibliothek-Konfiguration, da
 

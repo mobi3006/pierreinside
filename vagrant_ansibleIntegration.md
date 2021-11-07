@@ -1,4 +1,5 @@
 # Vagrant-Ansible-Integration
+
 Vagrant erlaubt das Provisioning von Maschinen über die Provider
 
 * ``ansible``: das ist der typische Remote-Ansatz
@@ -6,21 +7,23 @@ Vagrant erlaubt das Provisioning von Maschinen über die Provider
 
 ---
 
-# Windows-Host
+## Windows-Host
+
 Für eine komplette Automatisierung meiner [Workbench (VirtualBox-Linux-Image)](workbench.md) hatte ich die Idee, mittels Vagrant und Ansible ein komplett automatisiertes Setup zu scripten.
 
-## Remote Ansible Provider ... funktioniert nicht
+### Remote Ansible Provider ... funktioniert nicht
+
 * http://docs.ansible.com/ansible/guide_vagrant.html
 
-Der typische Ansible-Ansatz ermöglicht die Ausführung von Kommandos via ssh. Insofern paßt es perfekt in ein Vagrant-Host/Guest-Szenario - der Host sendet via ssh (wird von Vagrant eh schon konfiguriert) die entsprechenden Shell-Kommandos zum Guest. 
+Der typische Ansible-Ansatz ermöglicht die Ausführung von Kommandos via ssh. Insofern paßt es perfekt in ein Vagrant-Host/Guest-Szenario - der Host sendet via ssh (wird von Vagrant eh schon konfiguriert) die entsprechenden Shell-Kommandos zum Guest.
 
 Einzige Voraussetzung ist die Installation von Ansible auf dem Host-System. Leider wird diese Einschränkung für Windows-Host-Systeme zum Ausschlußkriterium, denn Ansible wird für Windows nicht unterstützt. Für mein Workbench-Szenario kam diese Lösung demnach nicht in Frage.
 
-## Local Ansible Provider
+### Local Ansible Provider
+
 In diesem Fall muß Ansible nicht auf dem Host-System, sondern auf dem Guest-System (= Linux-System) installiert werden. Das erfolgt ...
 
 * entweder automatisch durch die Option ``install`` (ACHTUNG: funktioniert nicht mit Vagrant 1.8.1, wohl aber mit 1.8.4 ... https://github.com/mitchellh/vagrant/issues/6858):
-
 
     config.vm.provision "ansible_local" do |ansible|
        ansible.playbook = "playbook.yml"
@@ -28,7 +31,6 @@ In diesem Fall muß Ansible nicht auf dem Host-System, sondern auf dem Guest-Sys
     end
 
 * oder per Shellscript-Provisioning im Vagrantfile - vorher muß natürlich das entsprechende Repository im Guest-System eingetragen sein (beim ``install_mode = default``) oder Ansible wird über den Python-Paketmanager installiert (beim ``install_mode = pip``):
-
 
     config.vm.provision "shell", inline: <<-SHELL
         sudo apt-get install -y ansible
@@ -42,7 +44,8 @@ Die ``ansible_local`` Variante hat den Charme, daß Ansible auf dem Host-System 
 
 Das abzuspielende Playbook wird vom Guest über den den Shared-Folder. Die Location ist über ``provisioning_path`` konfigurierbar. Die Defaulteinstellung gilt ``provisioning_path=.``, d. h. das Playbook liegt parallel zum ``Vagrantfile`` und ist dann unter ``/vagrant/`` ins Gast-System eingebunden.
 
-### Blue-Print: zentraler Ansible-Controller
+#### Blue-Print: zentraler Ansible-Controller
+
 Ich halte den Aufbau eines zentralen Ansible-Managment-Knotens für empfehlenswert. Dieser Management-Knoten wird per ``ansible_local`` mit ``ansible.install = true`` komfortabel aufgebaut. Von dort aus wird das Playbook wie üblich gegen die Zielsysteme (per ssh-Kommando) abgespielt.
 
 So könnte das dazu passende Vagrantfile aussehen (https://www.vagrantup.com/docs/provisioning/ansible_local.html):
@@ -86,11 +89,14 @@ Aus meiner Sicht ist das eh die beste Konfiguration, denn niemand soll den Share
 
 ---
 
-# Fehlersuche
-## vagrant up --debug
+## Fehlersuche
+
+### vagrant up --debug
+
 Der Standard Vagrant-Mechanismus.
 
-## ansible.verbose = true
+### ansible.verbose = true
+
 Das leidige Thema ... auf jeden Fall sollte man den Schalter ``ansible.verbose = true`` im Vagrantfile setzen:
 
     machine.vm.provision "ansible_local" do |ansible|
@@ -126,5 +132,5 @@ Mit diesen Informationen lässt sich die Suche fortsetzen. Per ``vagrant ssh`` a
       -v 
       playbook.yml
       -vvvv
-      
+
 Das erspart zumindest mal das teure Neuaufsetzen des gesamten Deployments.

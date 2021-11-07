@@ -55,6 +55,14 @@ Ich bin kein Spieler - deshalb sollten mir 60 Hz Bildwiederholrate ausreichen, m
 
 Ich habe mich für diesen Monitor entschieden ... toller Monitor, aber die betriebssystemseitige Unterstützung (Microsoft Windows) bzw. für meinen Use-Case (Virtualbox mit Linux VM) ist es noch nicht optimal.
 
+> Ein wenig störend - aber kein Grund für einen weiteren 4k Monitor - ist die Bewegung der Maus. Die funktioniert auf meinen beiden existierenden 4k Monitoren (Laptop, LG) einwandfrei. Wenn man dann aber auf der Full-HD 24 Zoll Display wechselt, dann muß man mit der Maus in der oberen Hälfte rübergehen. Versucht man es in der unteren Hälfte, dann kommt die Maus nicht rüber.
+
+### Daisy Chain
+
+Ich verwende das Disply nun seit 3 Jahren und es ist immer noch ein Traum. Da ich jetzt dauerhaft im Homeoffice arbeite, überlege ich noch ein zweites zu kaufen. Derzeit verwende ich als zweiten externen Bildschirm ein 24 Zoll Display - auch gut, aber zwei gleiche und große Displays wäre hilfreich, da ich nun häufiger mit Windows/MacOS als Host arbeite und dann noch 2 virtualle Maschinen am laufen habe, auf denen ich tatsächlich auch grafisch arbeite. Da ist es zur einfachen Orientierung schon praktisch, wenn die einzelnen "Computer" eigene Bereiche haben. Das müßte ich dann aber nochmals mit der Leistung meines Dell XPS abklären (60 Hz sollten es schon sein, die auf beiden ankommen).
+
+Um weitere Displays in Reihe zu schalten und so die Verkabelung einfach zu halten, bietet sich Daisy-Chain an. Dann gehts vom Laptop in den ersten Monitor und dann von dort in den zweiten Monitor. Der LG 32UD99-W unterstützt das noch nicht. Allerdings der Nachfolger LG 32UL950-W.
+
 ### DPI-Skalierung
 
 Unter Windows habe ich die Skalierung auf 125% geändert, das ist gut. Doch unter Virtualbox sind die Menüs manchmal doch recht klein:

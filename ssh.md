@@ -93,15 +93,21 @@ Anschließend sind die beiden Umgebungsvariablen
 * `SSH_AGENT_PID`
   * Agent-Prozess-ID
 * `SSH_AUTH_SOCK`
-  * Socker (File), das man an (vertrauswürdige) Prozesse zum Teilen der Identities übergeben kann
+  * Socket (File), das man an (vertrauswürdige) Prozesse zum Teilen der Identities übergeben kann
 
-und diesem den SSH-Private-Key übergeben
+gesetzt.
+
+> Im Detail: `ssh-agent -s` gibt die Werte der Umgebungsvariblen aus und das `eval` sorgt für das Setzen in der aktuellen Shell.
+
+Per
 
 ```bash
 ssh-add ~/.ssh/id_rsa
 ```
 
-Hierbei wird man ein letztes mal nach der Passphrase gefragt. Wenn die paßt, dann wird der private Key ohne Passphrase im Identity Store (Memory) gespeichert.
+wird der SSH-Private-Key im Identity Store in-memory gespeichert. Hierbei wird man ein letztes mal nach der Passphrase gefragt.
+
+Möchte man den ssh-agent in einer anderen Shell wiederverwenden, so müssen die beiden Umgebungsvariablen `SSH_AGENT_PID` und `SSH_AUTH_SOCK` gesetzt werden.
 
 Ein paar nützliche Kommandos:
 
