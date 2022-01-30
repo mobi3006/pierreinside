@@ -114,6 +114,7 @@ Hier wird nicht mehr grafisch programmiert, sondern tatsächlich textuell (Sprac
 ## Hacker School
 
 * [Website](https://hacker-school.de/)
+* Kurse für wenig Geld (z. B. 8h Python für 30 Euro) ... Preise lassen sich selbständig festlegen
 
 ---
 

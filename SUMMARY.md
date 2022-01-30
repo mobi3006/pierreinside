@@ -185,6 +185,7 @@
 * Git Ecosystem
   * [Git](git.md)
   * [GitHub](github.md)
+    * [GitHub Organizations](github-organizations.md)
   * [GitHub Pages](githubPages.md)
   * [GitBook](gitbook.md)
   * [GitLab](gitlab.md)
@@ -231,6 +232,7 @@
     * [2018](handy_2018.md)
     * [2019](handy_2019.md)
     * [2021](handy_2021.md)
+    * [2022](handy_2022.md)
   * Computer
     * Laptop
       * [2018](laptop_2018.md)

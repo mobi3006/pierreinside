@@ -565,6 +565,7 @@ Die Variable ändert seinen Typ zur Laufzeit. Bei kleineren Skripten und wenigen
 
 ```python
 def getServices(category):
+  my_name = "Pierre"
   if category == "backend":
     return [ "a", "b", "c" ]
   else:
@@ -579,6 +580,7 @@ Aus diesem Grund hat Python aus Type Checking eingführt, so daß man dem Code m
 from typing import List
 
 def get_services(category:str) -> List[str]:
+  my_name: str = "Pierre"                   # sieht gewöhnungsbedürftig aus
   if category == "backend":
     return [ "a", "b", "c" ]
   else:
@@ -1088,6 +1090,14 @@ with open("../data/mydata.csv", "r") as fileref:
 ```
 
 Das ist Kontextmanager um das Filehandling, der sich auch gleich um das Schließen kümmert :-)
+
+### Garbage Collector
+
+In Python muss man keinen Speicher freigeben ... das geschieht automatisch, indem Python die Anzahl der Referenzen auf eine Speicherstelle zählt und den Speicher bei erreichen von 0 freigibt.
+
+Dieser Ansatz basiert allerdings auf einem [Global-Interpreter-Lock (GIL)](https://realpython.com/python-gil/), der Multithreading schwierig macht.
+
+> "The GIL has long been seen as an obstacle to better multithreaded performance in CPython (and thus Python generally). Many efforts have been made to remove it over the years, but at the cost of hurting single-threaded performance—in other words, by making the vast majority of existing Python applications slower." ([infoworld.com](https://www.infoworld.com/article/3637073/python-stands-to-lose-its-gil-and-gain-a-lot-of-speed.html))
 
 ---
 

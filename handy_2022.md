@@ -77,13 +77,49 @@ Samsung hat sich ganz den Smartphone >= 6 Zoll verschrieben ... das XCover 4 ist
 * Bad:
   * nur 16 GB Speicher
 
-### Samsung Galaxy A22
+### Samsung Galaxy A22 (4G)
+
+* pros
+  * knapp über 200 Euro
+  * OLED Display - sehr hell + guter Blickwinkel
+  * 90 Hz ... fühl sich flüssiger an
+  * USB-C
+  * sehr guter Akku
+  * ordentliche Kamera für Bilder (schlechte Videos)
+* cons
+  * nur 1600 x 720 ... aber das ist nur ein Nachteil, wenn man nah reinzoomt - sollte kein Problem im Alltag sein
+* 6,4 Zoll
+
+### Samsung Galaxy A22 5G
 
 * pros
   * knapp über 200 Euro
   * USB-C
+  * 2408 x 1080
+  * sehr guter Akku
+  * Kopfhörer Klinkenbuchse
+  * guter Fingerabdrucksensor
+  * Kopfhörer Klinkenbuchse
+  * ordentliche Kamera für Bilder (schlechte Videos)
 * cons
-  * schlechte Kamera
+  * nur TFT Display - relativ dunkel und Blickwinkelabhängig
+* 6,6 Zoll
+
+### Samsung Galaxy A32 5G
+
+* knapp unter 300 Euro
+* pros
+  * USB-C
+  * sehr guter Lautsprecher
+  * guter Fingerabdrucksensor
+  * Kopfhörer Klinkenbuchse
+  * sehr guter Akku
+  * gute Kamera
+* cons
+  * nur TFT Display - relativ dunkel und Blickwinkelabhängig
+  * 1600 x 720
+  * breite Brezel
+* 6,5 Zoll
 
 ### Samsung Galaxy A21s
 
@@ -92,6 +128,8 @@ Samsung hat sich ganz den Smartphone >= 6 Zoll verschrieben ... das XCover 4 ist
 * cons
   * 6,4 Zoll
   * schlechte Kamera
+
+### Redme Note 10S
 
 ---
 
