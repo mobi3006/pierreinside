@@ -261,6 +261,16 @@
   * Fahrrad
     * [Jonas 2018](mountainbike_2018.md)
     * [SQLab](sqlab.md)
+  * Auto
+    * [Auto 2022](auto-2022.md)
+    * Camping
+      * [Camping Touren Ideen](camping_touren.md)
+        * [Camping Tour - Gardasee 2021](camping-2021.md)
+      * [Camper](camper.md)
+        * VW Bus
+          * [VW Bus Recherche](camper_vwbus_recherche.md)
+          * [VW Bus Erfahrungen](camper_vwbus_erfahrungen.md)
+        * [Kastenwagen](camper_kastenwagen.md)
   * Haus
     * [Klimaanlage](klimaanlage.md)
     * [Swimming Pool](swimmingPool.md)
@@ -274,17 +284,12 @@
       * [Heimnetzwerk](heimnetzwerk.md)
     * [Homeoffice](homeoffice.md)
       * [Mobiles Büro mit dem iPad](mobiles-buero-ipad.md)
+    * Energie
+      * [Solar](solar.md)
+      * [Wärmepumpe](waermepumpe.md)
   * Freizeit
     * [Musik Streaming](musicStreaming.md)
     * [Sky](sky.md)
-    * Camping
-      * [Camping Touren Ideen](camping_touren.md)
-        * [Camping Tour - Gardasee 2021](camping-2021.md)
-      * [Camper](camper.md)
-        * VW Bus
-          * [VW Bus Recherche](camper_vwbus_recherche.md)
-          * [VW Bus Erfahrungen](camper_vwbus_erfahrungen.md)
-        * [Kastenwagen](camper_kastenwagen.md)
     * [Online Lernplattformen](online-lern-plattformen.md)
   * Fußball
     * [Meine Arbeit als Fußball-Trainer](fussball-trainer.md)

@@ -107,7 +107,7 @@ Hackerangriffe (z. B. Tür kann von Unberechtigten geöffnet werden) sind immer 
 * [guter Überblick](https://www.homeandsmart.de/zigbee-funkprotokoll-hausautomation)
 
 * Standard IEEE 802.15.4
-  * allerdings gibt es einige Sonderimplementierungen, so daß die Kompatibilität nicht immer gewährleistet ist ... TOLLER Standard
+  * allerdings gibt es einige Sonderimplementierungen (sog. Profile wie ZLL, ZHA), so daß die Kompatibilität nicht immer gewährleistet ist ... TOLLER Standard. Ikea-Lampen Tradfri sprechen ZHA, doch die Hue Bridge kann nur ZLL.
   * Zigbee 3.0 hat das wohl verbessert
 * Allianz aus 250 Herstellern
 * Leistungsaufnahme sehr gering - für den Batteriebetrieb geeignet und dadurch über Jahre wartungsfrei (verbessert durch den sog. Schalfmodus)
