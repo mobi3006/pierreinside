@@ -167,23 +167,25 @@ Das Gastbetriebssystem
 - kann DHCP verwenden (der DHCP-Server wird dann von VirtualBox bereitgestellt)
 - kann vom VirtualBox-Software-Router eine statische IP-Adresse erhalten ... dann sollte man aber [private IP-Adressen](http://de.wikipedia.org/wiki/Private_IP-Adresse) verwenden (keine öffentlichen)
 
-In beiden Fällen sind die Gastbetriebssysteme und deren Services nicht von aussen nutzbar - Antworten auf vom Gastsystem initiierten Requests kommen aber an - über NetworkAddressTranslation. Über Port-Forwarding kann man Ports des Gastbetriebssystems (z. B. Port 80) an das Host-Betriebssystem (z. B. Port 8080) weiterleiten, so daß der Service des Gastbetriebssystems per ``localhost:8080`` (oder ip_address_host_machine:8080) erreichbar ist.
+In beiden Fällen sind die Gastbetriebssysteme und deren Services über diese IP-Adressen nicht von aussen nutzbar - Antworten auf vom Gastsystem initiierten Requests kommen aber an - über NetworkAddressTranslation. Über Port-Forwarding kann man Ports des Gastbetriebssystems (z. B. Port 80) an das Host-Betriebssystem (z. B. Port 8080) weiterleiten, so daß der Service des Gastbetriebssystems per ``localhost:8080`` (oder ip_address_host_machine:8080) erreichbar ist. Auf diese Weise kommt man auch von anderen Rechnern im Host-Netzwerk auf das Gastbetriebssystem ... zumindest wenn das keine Firewalleinstellungen auf dem Hostsystem verhindern.
 
-#### Port-Forwarding mit NAT
+#### Port-Forwarding bei NAT
 
-Da bei NAT die Services des Gastbetriebssystems für den Host und auch andere Rechner im Netz nicht sichtbar sind (weil eben das Gastbetriebssystem nicht direkt adressiert werden kann - keine eigene IP-Adresse!!!), kann man sich per Port-Forwarding behelfen, um einzelne Services freizugeben.
+Bei einer NAT-Einbindung des Gastbetriebssystems sind die Gastsystem-Services andere Rechner im Netzwerk, in das das Hostsystem eingebunden ist, nicht sichtbar/erreichbar, da die IP-Adresse des Gastbetriebssystems nur dem Host bekannt ist (entweder eine dynamische oder eine statische). Mit Port-Forwarding behelfen werden Ports aus dem Gastsystem an Ports des Host-Betriebssystems gebunden, so daß die Services über die IP-Adresse des Host-Systems auch von außen erreichbar sind.
 
-Besonders interessant für meine Bedürfnisse ist das Port-Forwarding vom Wirtssystem an das Gastsystem, wenn kein richtiges Netzwerk vorhanden ist. Ich nutze ein Linux-Gastsystem in einem Windows-Wirtssystem und gebe den ssh-Server, den Webserver (mit diesem CMS-System) und die Datenbank meines Linux-Gastsystems an das Windows-System weiter. Auf diese Weise kann ich dann per
+Besonders interessant für meine Bedürfnisse ist das Port-Forwarding vom Wirtssystem an das Gastsystem, wenn kein richtiges Netzwerk vorhanden ist. Ich nutze ein Linux-Gastsystem in einem Windows-Wirtssystem und gebe ein paar Ports (von ssh-Server, Webserver, Datenbank) meines Linux-Gastsystems an das Windows-System weiter. Auf diese Weise kann ich dann per
 
+```bash
 http://localhost:1701/exponent-0.96.3/index.php
+```
 
 vom Browser des Hostsystems auf den Webserver innerhalb meines Gastbetriebsystems zugreifen.
 
-**Version 4:**
+**Virtualbox Version 4:**
 
 Über die Administrationsoberfläche von VirtualBox lässt sich die Portweiterleitung komfortabel konfigurieren. In Version 3.x war das noch ein bisschen umstädnlicher (s. u.)
 
-**Version 3:**
+**Virtualbox Version 3:**
 
 So wurden die Ports freigeschaltet (ACHTUNG: in Abhängigkeit der eingerichteten Netzwerkkarte muss "pcnet" durch "e1000" oder "e100" ersetzt werden):
 
@@ -207,7 +209,7 @@ VBoxManage setextradata "MY_VM_NAME" "VBoxInternal/Devices/pcnet/0/LUN#0/Config/
 - die Parameter von VBoxManage sind hier dokumentiert: http://www.virtualbox.org/manual/UserManual.html#vboxmanage
 - die Änderungen an der VM per VBoxManage-Tool wirken sich erst nach einem Neustart bzw. Warmstart (Aufwachen aus dem Suspend-Modus) aus.
 - Will man die aktuellen Einstellungen der VM erfahren: ``VBoxManage getextradata "MY_VM_NAME" enumerate``
-  - ACHTUNG: VirtualBox sollte bei Eingabe dieser Befehle nicht laufen (und dementsprechend soll auch das Image MY_VM_NAME nicht laufen - es muss nicht komplett runtergefahren sein, der Suspend-Mode genügt). Bei VirtualBox 3.1.2 hatte ich einen BlueScreen nach Eingabe obiger Befehle und Neustart von VirtualBox. Nach dem Rechner-Restart klappte der Start von VirtualBox allerdings und auch das Port-Forwarding funktionierte. 
+  - ACHTUNG: VirtualBox sollte bei Eingabe dieser Befehle nicht laufen (und dementsprechend soll auch das Image MY_VM_NAME nicht laufen - es muss nicht komplett runtergefahren sein, der Suspend-Mode genügt). Bei VirtualBox 3.1.2 hatte ich einen BlueScreen nach Eingabe obiger Befehle und Neustart von VirtualBox. Nach dem Rechner-Restart klappte der Start von VirtualBox allerdings und auch das Port-Forwarding funktionierte.
 
 ### Netzwerkbrücke aka Bridged-Mode
 
