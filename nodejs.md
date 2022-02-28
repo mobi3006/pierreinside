@@ -1,5 +1,7 @@
 # NodedJS
 
+---
+
 ## Installation
 
 * NodeJS
@@ -19,9 +21,36 @@ sudo apt-get install nodejs
 
 Danach sollte `nodejs --version` eine 7er Version ausgeben.
 
+---
+
 ## Motivation
 
 NodeJS ist JavaScript for the Server - hiermit lassen sich Serveranwendungen und Command-Line-Tools mit JavaScript erstellen. Ein Command-Line Tool für meine Docker-basierte Entwicklungsumgebung sollte der erste Anwendungsfall sein.
+
+---
+
+## Hello World from Scratch
+
+```bash
+mkdir hello-world
+cd hello-world
+npm init
+```
+
+Anschließend landet man in einem interaktiven Terminal-Script, das ein NPM-Skeleton erzeugt, das bereits alles notwendige enthält (ich gehe davon aus das Entry-Skript wurde in der interaktiven Session `hello-world.js` genannt):
+
+```txt
+package.json
+hello-world.js
+```
+
+Kurzerhand steuern wir den Hellor-World Code per `echo 'console.log("Hello world")' > hello-world.js` bei (mit einem Editor geht es natürlich auch).
+
+Der Code kann anschließend per `node hello-world.js` ausgeführt werden.
+
+> Dieser Code ist so einfach, daß wir nicht einmal ein `npm install` brauchen
+
+---
 
 ## Aufbau einer Node Anwendung
 

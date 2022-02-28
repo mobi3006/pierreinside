@@ -70,3 +70,69 @@ Aus diesem Grund habe ich mich für einen Fork der [Spring Petclinic](https://gi
 ### Syncing a Fork
 
 * https://help.github.com/articles/syncing-a-fork/
+
+---
+
+## REST API
+
+Für die Automatisierung von Prozessen bietet sich die [REST-API](https://docs.github.com/en/rest) an. Sie liegt als [Open-API](https://github.com/github/rest-api-description) Beschreibung vor und kann somit leicht in [Postman](postman.md) importiert werden.
+
+Solche Open-API sind dann häufig folgendermaßen strukturiert:
+
+![Postman Open-API collection](images/postman-github.png)
+
+Folder stellen Parameter zur Verfügung (hier `owner`, `repo`, `path`), die dann in den URLS per `:owner`, `:repo` und `:path` verwendet werden können. Auf diese Weise reduziert man die Redundanzen. So kann man den ganzen Baum - ab einer bestimmten Stelle - im Kontext dieser Parameter nutzen.
+
+Bei der Nutzung eines anderen Repos muss man dann allerdings die oberen Folder kopieren ... das erfordert eine gewisse Disziplin.
+
+### Authentifizierung
+
+* [Vergleich verschiedener Methoden](https://dev.to/dtinth/authenticating-as-a-github-app-in-a-github-actions-workflow-27co)
+  * mit dem Ergebnis ... **verwende GitHub-Apps**
+
+Prinzipiell stehen folgende Varianten zur Verfügung:
+
+* Personal-Access-Token
+* Deploy-Keys
+* OAuth-Token ... um beispielsweise anderen Diensten Zugriff zu gewähren
+* GitHub-App-Access-Token
+
+Seit [Ende 2020](https://docs.github.com/en/rest/overview/other-authentication-methods#basic-authentication) kann man sich nicht mehr per Username-Passwort authentifizieren.
+
+> Ich denke das hängt auch damit zusammen, daß Two-Factor-Authentication der neue Standard ist, der bei Username-Passwort noch einen weiteren Faktor in Form des Tokens bräuchte.
+
+**ACHTUNG:**
+
+> bei einer fehlschlagenden Authentifizierung liefert die GitHub REST API kein HTTP 401 oder 403, sondern ein 404 ([siehe hier](https://docs.github.com/en/rest/overview/other-authentication-methods)). Das macht aus Sicherheitsgründen Sinn, denn mit einer 404 weiß man nicht mal ob es eine nicht-existierende Ressource ist oder ein Authentifizierungsproblem.
+
+### Authentifizierung per Personal-Access-Token (PAT)
+
+Über
+
+> curl --location -u mobi3006 --request GET 'https://api.github.com/repos/mobi3006/trash-private/contents/README.md'
+
+kann ich auf mein privates Repository zugreifen ... ich werde interaktiv nach einem Token gefragt - ich kann ein Personal-Access-Token oder ein von der GitHub-App ausgestelltes Ticken verwenden. Durch Verwendung von `-u mobi3006::${GITHUB_MOBI3006_PAT}` kann ich auch eine Umgebungsvariable verwenden.
+
+Alternativ kann man auch
+
+> curl --location --request GET 'https://api.github.com/repos/mobi3006/trash-private/contents/README.md' \
+--header 'Authorization: Basic thiscouldbeyourbase64encodedsecret
+
+verwenden.
+
+### Authentifizierung per GitHub App
+
+GitHub Apps werden im Account oder der Organisation konfiguriert (hauptsächlich Permissions) und installiert. Sie stehen öffentlich zur Verfügung und werden genutzt, um `GITHUB_TOKEN` für die Nutzung der REST-API auszustellen. Die Zugriff ist abgesichert über einen Private-Key, so daß nur der Inhaber diese Keys einen Token erhalten kann.
+
+> Der Name GitHub-App suggeriert, daß dies Anwendungen sind, die etwas für den Client tun. Das ist irreführend ... GitHub-Apps stellen ausschießlich Tokens aus, die der Client dann nutzen kann, um Aktionen per REST-API durchzuführen.
+
+![github-apps.PNG](images/github-apps.PNG)
+
+Dieser Ansatz hat im Gegensatz zu allen anderen viele Vorteile:
+
+* nicht User-gebunden (wenn der User mal nicht mehr im Unternehmen ist brechen die Prozesse nicht zusammen)
+  * es wird keine Lizenz (= Seat) benötigt => keine Kosten
+  * niemand muß Angst haben, daß SEIN Token für igendwelche Aktionen "missbraucht" wird - letztlich steht bei einem Personal-Access-Token immer der Inhaber als ändernder User in der Historie.
+* die Quota der erlaubten Aufrufe ist deutlich höher als bei einem Nutzergebunden Token (PAT)
+* die Berechtigungen können sehr fein-granular gesetzt werden
+* die Gültigkeit des Tokens kann auf weniger Minuten/Stunden gesetzt werden ... bei Personal-Access-Tokens ist das Minimum 7 Tage
