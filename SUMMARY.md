@@ -246,6 +246,7 @@
       * [Google API](google-api.md)
       * [Plant UML](plantuml.md)
       * [Chromium](chromium.md)
+      * [Passwort-Manager](password-manager.md)
     * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
     * [Dockingstation](dockingstation.md)
     * [Gaming PC 2021](gaming-pc.md)

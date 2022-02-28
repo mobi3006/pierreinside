@@ -59,12 +59,22 @@ Das Tools stellt allerdings nur das Tooling bereit, um die Credentials in Form v
 
 Letzteres ist besonders interessant auf reinen Linux-Headless Systemen.
 
-> aws-vault ist in der Funktion vergleichbar mit einem ssh-Agent, allerdings ist der Scope größer
+> `aws-vault` ist in der Funktion vergleichbar mit einem ssh-Agent, allerdings ist der ssh-Agent direkt transparent in den `ssh` Workflow integriert ... wohingegen `aws-vault` dem Kommando vorangestellt werden muss.
 
-### pass Backend
+### pass als aws-vault Backend
 
 Dieser Command-Line Password Store verwendet GPG, um die Credentials sicher in einer Datei `~/.password-store` abzuspeichern, die man beispielsweise auch in einem Git Repository zur Verfügung stellen kann.
 
-> pass bietet komfortable Migrationsmöglichkeiten, um Passwörter aus anderen Passwortmanagern (z. B. 1Password, Keypass) zu exportieren.
+[mehr Details über `pass`](password-manager.md)
 
-`pass` ist nicht das Default Backend von `aws-vault` und dementsprechend muss es im Kommando `aws-vault --backend=pass exec mobi3006 -- aws s3 ls` angegeben werden. Durch Setzen der Umgebungsvariable `export AWS_VAULT_BACKEND=pass` kann man komfortabler gestalten.
+`pass` ist nicht das Default Backend von `aws-vault` und dementsprechend muss es im Kommando `aws-vault --backend=pass exec mobi3006 -- aws s3 ls` angegeben werden. Durch Setzen der Umgebungsvariable `export AWS_VAULT_BACKEND=pass` und `export AWS_ASSUME_ROLE_TTL=12h` kann man den Zugriff komfortabler gestalten.
+
+### gpg
+
+* Key-Pair erzeugen und im GPG store speichern: `gpg --full-generate-key`
+* aktuelle public GPG keys anzeigen: `gpg --list-keys`
+  * exportieren: `gpg --output foo-bar.pub --armor --export foo-bar@example.com`
+    * beispielsweise zur Weitergabe
+* aktuelle private GPG keys anzeigen: `gpg --list-secret-keys`
+  * [exportieren](https://makandracards.com/makandra-orga/37763-gpg-extract-private-key-and-import-on-different-machine): `gpg --export-secret-keys foo-bar@example.com > foo-bar.priv`
+    * beispielsweise zur Speicherung in einem Passwort Manager
