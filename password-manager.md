@@ -42,6 +42,10 @@ Perfekt aus meiner Sicht ... ja is sich der Hersteller überlegte daraus einen S
 
 Ein Tool, zu dem ich gar kein Vertrauen habe ... zu häufig habe ich es erlebt, daß Passwörter einfach verschwunden waren. Mein Eindruck ist, daß die Nutzung per App und Webbrowser-Plugin zu Schiefständen führt.
 
+Ich führe Änderungen an Passwörtern grundsätzlich nur noch mit der Bitwarden App durch (nicht mehr mit dem Chrome-Plugin) ... beim letzten mal musste ich alle Browser-Fenster schließen, um das neue Passwort zu bekommen. Da hatte ich mich aber schon 3 mal mit dem alten Passwort angemeldet und war kurz vor der Sperrung meines Account.
+
+**FINGER WEG von diesem Tool.**
+
 ---
 
 ## Pass

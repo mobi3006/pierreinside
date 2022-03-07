@@ -1,18 +1,96 @@
 # AWS CLI
 
+* [Udemy-Kurs *AWS Certified Solution Architect Associate*](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/26098170#overview)
+
+* [Tutorial: Using the AWS CLI to Deploy an Amazon EC2 Development Environment](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-tutorial.html)
+* [Install `awscli` auf Ubuntu 18.04 LTS - verschiedene Varianten](https://linuxhint.com/install_aws_cli_ubuntu/)
+
 Mit der AWS CLI kann man all die Dinge machen, die man auch über die AWS Console per UI tun kann.
 
 ---
 
 ## Getting Started
 
-Nach der Installation des Binary (übrigens ist die CLI in [Python](python.md) programmiert und hat deshalb auch perfekte Python Libraries via [Boto3](https://aws.amazon.com/de/sdk-for-python/)) muss die Console noch konfiguriert werden.
+Nach der Installation des Binary (übrigens ist die CLI in [Python](python.md) programmiert und hat deshalb auch perfekte Python Libraries via [Boto3](https://aws.amazon.com/de/sdk-for-python/)) muss die Shell noch mit Credentials bestückt werden.
 
-Für den Zugriff benötigt man Security-Credetials (Access Keys = Tokens), die man beispielsweise manuell per AWS Console erzeugen kann. `aws configure` führt interaktiv durch die Konfiguration, an dessen Ende eine Datei `~/.aws/config` geschrieben wird => damit ist die Konfiguration persistent.
+Für den Zugriff benötigt man Security-Credentials (Access Keys = Tokens), die man beispielsweise manuell per AWS Console (Web-UI) manuell erzeugen kann. Ein `aws configure` führt interaktiv durch die Konfiguration - hier werden die Credentials abgefragt und am Ende eine Datei `~/.aws/config` geschrieben => damit ist die Konfiguration persistent.
 
-Je nach bereitgestellten Permissions sind dann Kommandos wie `aws s3 ls` möglich.
+### Installation per Python Paket Manager
 
-Es kann sinnvoll sein, unterschiedeliche Konfigurationen (= Profile) zu verwenden ... je nach Nutzungskontext. Das läßt sich ganz einfach per `aws configure --profile foo-bar` umsetzen oder durch manuelle Editierung der `~/.aws/config` Datei. Das Default-Profile kann per `export AWS_PROFILE=foo-bar` gesetzt werden.
+Ich habe die Command-Line Tools von AWS über `pip` (Python Paket Manager) installiert wie [hier beschrieben](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-instaRll.html):
+
+> Ich hatte den `pip` schon installiert - [so hätte ich ihn installieren können](https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html)
+
+```bash
+pip install awscli --upgrade --user
+```
+
+So bin ich an die aktuelle Version 1.16.96 gekommen (über diesen Weg werden auch Updates installiert) - auf diese Weise kann man auch ein Update machen.
+
+> Die Option `--user` sorgte dafür, daß die Installation nur in meinem Home-Verzeichnis erfolgte (`~/.local/bin/aws`). Ich habe dieses Python Script in meinen `$PATH` gelegt, so daß ich es von überall aufrufen kann.
+
+### Installation per Ubuntu Package Manager
+
+> ACHTUNG: nicht zu empfehlen - alte Version!!!
+
+Über meinen Ubuntu Package-Manager (auf Ubuntu 18.04 LTS)
+
+```bash
+sudo apt-get update
+sudo apt-get install awscli
+```
+
+habe ich nur eine awscli-1.14.xxx bekommen.
+
+### Konfiguration
+
+Anschließend muß man die Credentials `~/.aws/credentials` noch einbinden.
+
+Die Kommandos hängen davon ab, ob man die Python Installation verwendet hat oder die Package-Installation - [siehe Dokumentation](https://linuxhint.com/install_aws_cli_ubuntu/)):
+
+```bash
+# Option A
+aws configure
+
+# Option B
+python -m awscli configure
+```
+
+> Als erfahrener AWSler kann man die dabei angelegten Dateien in `~/.aws` aber auch manuell anlegen.
+
+Hier wird man interaktiv nach den Crentials (AWS Access Key ID, AWS Secret Access Key, Default region). Aus den Angaben werden die Dateien `~/.aws/credentials` und `~/.aws/config` erzeugt. Diese Credentials kann man sich in der AWS Console (Web UI) im Bereich "IAM - Access Management - Users - <USER> - Security Credentials - Access Keys" erzeugen lassen. Kein Problem, wenn man ihn mal vergißt - einfach neu erzeugen und in `~/.aws/credentials` eintragen. Hat man mehrere AWS Accounts, dann kann man die im [INI File Format](https://en.wikipedia.org/wiki/INI_file) konfigurieren
+
+```ini
+[default]
+aws_access_key_id = bla
+aws_secret_access_key = blubb
+
+[mySecondAccount]
+aws_access_key_id = what
+aws_secret_access_key = isthat
+```
+
+Es kann sinnvoll sein, unterschiedeliche Konfigurationen (= Profile) zu verwenden ... je nach Nutzungskontext. Das läßt sich ganz einfach per `aws configure --profile foo-bar` umsetzen oder durch manuelle Editierung der `~/.aws/config` Datei. Das Default-Profile kann per `export AWS_PROFILE=foo-bar` gesetzt werden oder man [überschreibt](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) es für ein einziges Kommando: `aws iam get-user --user-name your_username@example.com --profile mySecondAccount`.
+
+
+> AWS Roles verwendet man, wenn man seine Credentials nicht auf der Instanz hinterlegen möchte. Auf diese Weise kann man eine Role mit Permissions auf ein S3-Bucket anlegen und einer EC2-Instanz zuweisen. Dadurch hat die EC2-Instanz automatisch Zugriff auf das S3. Bucket. Mit [Terraform](terraform.md) läßt sich das auch schön automatosieren.
+
+Der Python-Aws-CLI-Installer bringt auch gleich die passende [Shell-Auto-Completion](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html) mit. Unter `~/.local/bin/aws_completer.` sind die notwendigen Quellen abgelegt. Durch hinzufügen folgender Zeilen zur `~/.zshrc` wird die AWS-Auto-Completion automatisch aktiviert:
+
+```bash
+autoload bashcompinit && bashcompinit
+complete -C '/home/pfh/.local/bin/aws_completer' aws
+```
+
+### Test
+
+Anschließend sollte man Zugriff haben und folgenden Befehl ausführen können:
+
+```bash
+aws iam get-user --user-name your_username@example.com
+```
+
+> Will man verschiedene Konfigurationen verwenden, [dann kann man sog. Profile nutzen](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
 ---
 
