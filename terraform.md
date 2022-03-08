@@ -3,7 +3,7 @@
 
 * [Homepage by HashiCorp](https://www.terraform.io/)
 
-Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Infrastruktur- und Applikations-Landschaften aufzubauen.
+Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Infrastruktur- und Applikations-Landschaften aufzubauen. Wer schon mal versucht hat in AWS eine Infrastruktur aus EC2, Security-Groups, Route Tables, Router, Internet Gateway, ... zusammenzuklicken und dann auch zu warten (Komponenten hinzufügen/wegnehmen/umkonfigurieren ... ohne DOWNTIME und im 4-Augen-Prinzip), der wird schnell zu Tools wie terraform greifen, um das zu maintainen. Die Gefahr stundenlang die Fehler in einem Setup zu suchen ist recht hoch ... Fehler passieren schnell.
 
 > "terraform is used for the environment/server provisioning part [...], but not so often for app deployment." ([StackOverflow](https://stackoverflow.com/questions/37297355/how-to-deploy-and-redeploy-applications-with-terraform))
 
@@ -11,13 +11,18 @@ Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.t
 
 > BTW: Terraform verwendet sehr ähnliche Konzepte wie bei [Nomad](nomad.md) ... auch ein HashiCorp Produkt.
 
-Terrform ist Cloud-Provider unabhängig ... damit verhindert es im Gegensatz zu den Cloud Pendants Amazon AWS CloudFormation oder Microsoft Azure-Resource-Manager den Vendor-Lock-In. Gelegentlich will/muß man sogar Multi-Cloud-Architekturen (Amazon-, Google-, Microsoft-Cloud in **EINER** Landschaft) abbilden.
+Terraform ist Cloud-Provider unabhängig ... damit verhindert es im Gegensatz zu den Cloud Pendants Amazon AWS CloudFormation oder Microsoft Azure-Resource-Manager den Vendor-Lock-In. Gelegentlich will/muß man sogar Multi-Cloud-Architekturen (Amazon-, Google-, Microsoft-Cloud in **EINER** Landschaft) abbilden.
 
 ---
 
 ## Konzept
 
-Man beschreibt einen Zielzustand und Terraform berechnet aus dem aktuellen Zustand einen Execution Plan (die tatsächlichen Aktionen) für verschiedene Deploy-Platformen - die Beschreibung ist unabhängig von der Ziel-Platform (geringer/kein Vendor-Lockin), der Execution Plan ist plattform-spezifisch. Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans.
+Man beschreibt einen Zielzustand (deklarativer Ansatz) und Terraform berechnet aus dem aktuellen Zustand (abgebildet in einer `terraform.tfstate` Datei) einen Execution Plan (die tatsächlichen Aktionen) für verschiedene Deploy-Platformen. Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans. Hierzu ist entsprechendes Wissen im Terraform Code notwendig. Ein Beispiel:
+
+* eine Änderung eines EC2 Tags ist ohne Downtime möglich
+* eine Änderung des EC2-AMI ist nur durch Terminierung und Neuanlage einer EC2-Instanz möglich
+
+Terraform weiß was es in der jeweiligen Situation am besten tut.
 
 > ACHTUNG: Terraform berücksichtigt bei der Planung nur den State (gespeichert in einer Datei - abgelegt auf der lokalen Platte oder auf einem shared Bereich). Der tatsächliche Zustand der Runtime-Umgebung wird nicht berücksichtigt (wäre auch sehr schwierig). Das bedeutet im Umkehrschluß, daß manuelle Änderungen an der Runtime-Umgebung verloren gehen oder vielleicht sogar zu später fehlschlagenden `terraform apply` Kommandos führen können. Infrastructure-as-Code bedeutet auch,, daß man es konsequent anwendet!!!
 >> "Once you start using Terraform, you should only use Terraform" (Buch: *Terraform - Up and Running: Writing Infrastructure as Code*)
@@ -39,6 +44,8 @@ Im Gegensatz dazu werden in Ansible imperativ die durchzuführenden Schritte ang
 In diesem Beispiel muß man sich als Ansible-Entwickler nicht mehr prüfen, ob der Agent bereits nicht mehr darum kümmern, ob der Instana-Agent evtl. schon gestartet ist. Aber dennoch beschreibt man nicht nur einfach, daß man einen gestarteten Agent haben möchte, sondern muß auch die Schritte dahin ("ensure packages present", "ensure Agent started"). Insofern ist Ansible schon mal einen Schritt weiter als bash-Skripting (ist es das wert?), aber noch weit vom Terraform-Komfort entfernt.
 
 Idempotenz ist bei Ansible aber deutlich besser umgesetzt als bei Bash-Scripting.
+
+Besonders praktisch ist `terraform destroy`, bei dem Terraform ALLE gemanagten Ressourcen löscht ... das verhindert auch unnötige Kosten.
 
 ---
 
@@ -67,21 +74,30 @@ chmod 755 terraform
 ## Getting Started
 
 * [Terraform Doku](https://www.terraform.io/intro/getting-started/build.html)
+* [mein eigenes Terraform Projekt](https://github.com/mobi3006/terraform-fls15)
 
 Diese Konfiguration (z. B. `main.tf`)
 
 ```json
 provider "aws" {
   /*
-    eigentlich ein NO-GO, denn diesen Code stellt man unter Versionskontrolle ... da will man die
-    Credentials nicht haben
-    => besser man gibt hier das AWS-"profile" an, das in "~/.aws/credentials" von jedem Benutzer
-       selbst gepflegt wird
+    ACHTUNG: man sollte NIEMALS credentials in einer Terraform-Datei hinterlegen. Diese Dateien stehen 
+             unter Versionskontrolle.
+  access_key = "0123456789"
+  secret_key = "9876543210"
+
+  ... Stattdessen sollte man Variablen verwenden, die entweder aus einer anderen Quelle (z. B. S3)
+      gelesen werden oder interaktiv eingegeben werden müssen.
+  access_key = "${var.aws_access_id}"
+  secret_key = "${var.aws_secret_key}"
+
+  ... alternativ kann man auch ein profile in ~/.aws/config verwenden, das dann alle relevanten Infos
+      enthält. Entweder stellt man das zu nutzdende Profil bei terraform plan -var default bereit oder
+      man gibt es interaktiv ein.
+      BTW: den Profilnamen möchte ich hier auch nicht hardcoden ... da andere User andere Profilnamen
+      verwenden (handlet sich um eine lokale Konfiguration).
   */
-  access_key = "ACCESS_KEY_HERE"
-  secret_key = "SECRET_KEY_HERE"
-  
-  region     = "us-east-1"
+  profile = "${var.aws_profile}"  
 }
 
 resource "aws_instance" "example" {
@@ -101,16 +117,20 @@ terraform verify                            # Syntaxprüfung
 terraform init                              # hierdurch wird ein Verzeichnis .terraform im aktuellen Verzeichnis angelegt
                                             # providerspezifische Informationen werden nachgeladen
 terraform plan -var instance_type=t2.micro  # hier sieht man was geschehen wird
+                                            # ... aws_access_id, aws_secret_key und instance_type werden interaktiv abgefragt
+                                            # ... oder können per -var-file foo.tfvar contributed werden
 terraform apply                             # erzeugt den Execution Plan
 ```
 
 ausgeführt. Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration). Anschließend ist die Maschine auf AWS nutzbar.
 
+> Ich verwende statt `terraform plan && terraform apply` lieber `terraform plan -out=tfplan && terraform apply tfplan` (`tfplan` ist eine Binärdatei), da hier in diesem Fall sicher sein kann, daß tatsächlich auch der von mir erstellte Plan umgesetzt wird und nichts anderes. Insbesondere wenn ich noch interaktiv Variablenwerte bereitstellen muss ist das die bessere Variante.
+
 Eine Best-Practice ist die Aufteilung des Codes auf mehrere Dateien mit diesem Namensschema:
 
 * `vars.tf`
-* `outputs.tf`
 * `main.tf`
+* `outputs.tf`
 
 ... das verbessert die Übersicht und durch die Konvention findet man sich in fremden Projekten auch schneller zurecht. Eine Wiederverwendung läßt sich Module erreichen.
 
@@ -126,10 +146,9 @@ Bei `terraform plan` wird angezeigt, was bei `terraform apply` geschehen wird. B
 
 Mit `terraform destroy` wird die Infrastruktur wieder abgebaut. Das verwendet man in der Produktion aber quasi nie ... in Testumgebungen tut man dies um die Infrastruktur (i. a. bei einem Cloud-Provider) wieder runterzufahren und nicht weiter bezahlen zu müssen.
 
-Die Definition des Providers (`provider "aws"`) ist notwendig, weil die Ressourcen teilweise doch anbieterabhängig sind.
+Die Definition des Providers (`provider "aws"`) ist notwendig, weil die Ressourcen (z. B. `aws_instance`) und deren Konfiguration (z. B. `ami`) natürlich vom Kontext abhängig sind ... ein Deployment auf AWS wird anders beschrieben (steuert der Nutzer per Terraform-Beschriebung bei) und auch implementiert (steuert Terraform bei) ist anderes als auf Azure - die Konzepte sind einfach zu unterschiedlich.
 
-> Von wegen _providerunabhängig_? hab ich dann überhapt etwas gewonnen?
-> sicherlich kann ich dann keinen provider-unabhängen IaC-Code schreiben, aber ich kann mit Terraform zumindest ein Multi-Cloud-Szenario abbilden. In diesem Beispiel sieht man aber, daß Teile des Code (`dnsimple_record.example`) durchaus provider-unabhängig sind:
+Sicherlich kann ich dann keinen vollständig provider-unabhängen IaC-Code schreiben, aber ich kann mit Terraform zumindest ein Multi-Cloud-Szenario abbilden. In diesem Beispiel sieht man aber, daß Teile des Code (`dnsimple_record.example`) durchaus provider-unabhängig sind:
 
 ```json
 resource "aws_instance" "example" {
@@ -155,7 +174,7 @@ resource "aws_instance" "application_server" {
 }
 ```
 
-referenziert den Ressource-Type (hier `aws_instance` - [Dokumentation](https://www.terraform.io/docs/providers/aws/r/instance.html)), der ressource-type-spezifische Properties akzeptiert/benötigt (z. B. `ami`). Der erste Teil des Ressource-Types (hier `aws`) ist zumeist ein Indiz auf den Provider (hier [AWS](https://www.terraform.io/docs/providers/aws/index.html)). Zudem hat die Ressource einen Namen (hier `application_server`), über den die Properties per `resource.aws_instance.application_server.instance_type` referenziert werden können.
+referenziert den Ressource-Type (hier `aws_instance` - [Dokumentation](https://www.terraform.io/docs/providers/aws/r/instance.html)), der ressource-type-spezifische Properties akzeptiert/benötigt (z. B. `ami`). Der erste Teil des Ressource-Types (hier `aws`) ist referenziert i. a. den Provider (hier [aws](https://www.terraform.io/docs/providers/aws/index.html)). Zudem hat die Ressource einen Namen (hier `application_server`), über den die Properties per `resource.aws_instance.application_server.instance_type` referenziert werden können.
 
 Zudem gibt es weitere Meta-Properties wie z. B. `depends_on`, `lifecycle`, `count`, die providerunabhängig sind.
 
@@ -218,7 +237,7 @@ module "use-my-terraform-module" {
 
 In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `/home/pfh/my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert. Module stellen einen Template-Mechanismus zur Verfügung.
 
-Praktisch ist, daß man bei `source` auch eine Sammlung von Terraform Scripten in Form einer `zip`-Datei angeben kann. In dem Fall wird die Zip-Datei bei `terraform apply` entpackt und die Platzhalter werden ersetzt. Auf diese Weise kann man eine Sammlung von Konfigurationsdateien in einem `zip`-File bereitstellen und dann mit Werten belegen.
+Praktisch ist, daß man bei `source` auch eine Sammlung von Terraform Scripten in Form einer `zip`-Datei angeben kann (um sie beispielsweise über einen Artifakt-Repository beizusteuern). In dem Fall wird die Zip-Datei bei `terraform apply` entpackt und die Platzhalter werden ersetzt. Auf diese Weise kann man eine Sammlung von Konfigurationsdateien in einem `zip`-File bereitstellen und dann mit Werten belegen.
 
 > vor einer solchen Aufgabe steht man häufig, wenn man Software stage-abhängig konfigurieren muß.
 
@@ -228,7 +247,7 @@ Praktisch ist, daß man bei `source` auch eine Sammlung von Terraform Scripten i
 
 * [Übersicht über alle Provider](https://www.terraform.io/docs/providers/index.html)
 
-Provider sind das eigentliche Salz in der Suppe ... sie stellen die Implementierung der Terraform-Beschreibung zur Verfügung und machen das eigentlich Doing. Ein Provider bietet dem Nutzer die Möglichkeiten Services (oder allgemeiner Ressourcen) in `HCL`-Sprache zu definieren und bei Ausführung des Terraform-Skripts (`terraform apply`) anzulegen/konfigurieren.
+Provider sind das eigentliche Salz in der Suppe ... sie stellen die Implementierung der Terraform-Beschreibung zur Verfügung und machen das eigentliche Doing. Ähnlich wie das Wissen eines Entwicklers häufig bei Programmiersprachen (i. a. recht einfach zu erlernen) im Wissen über die verwendeten Libraries/Frameworkds steckt, steckt das Wissen eines Terraform-Engineers in den Providern.
 
 Viele Infrastrukturanbieter stellen Provider in Form von Modulen (werden bei `terraform init` aus dem Internet gezogen) für Terraform zur Verfügung:
 
@@ -272,7 +291,7 @@ suggested below.
 * provider.vault: version = "~> 1.8"
 ```
 
-Zudem gibt es Provider (z. B. [MySQL](https://www.terraform.io/docs/providers/mysql/index.html), die Ihre Services mit denen andere kombinieren (z. B. eine MySQL-Datenbank auf einem AWS-MySQL-Cluster anlegen).
+Zudem gibt es Provider (z. B. [MySQL](https://www.terraform.io/docs/providers/mysql/index.html), die Ihre Services mit denen anderer kombinieren (z. B. eine MySQL-Datenbank auf einem AWS-MySQL-Cluster anlegen).
 
 ### Custom-Provider
 
@@ -280,19 +299,23 @@ Man kann auch seinen eigenen Provider `terraform-provider-<NAME>_vX.Y.Z` contrib
 
 ---
 
-## Provisioning
+## Provisioning von Servern
 
 * [Supported Provisioning-Ansätze](https://www.terraform.io/docs/provisioners/index.html)
 
-Verwendet man bereits vorkonfigurierte Images (z. B. mit [Packer](packer.md)), dann ist man evtl. nicht mehr auf Konfiguration Management Tools (wie Ansible, Puppet, Chef, ...) angewiesen. Hat man sich allerdings gegen diesen sehr statischen Ansatz entschieden, so kann man über die Provisioners entsprechende Veränderungen am System über Skripte triggern. Hierbei stehen typische Configuration-Management-Tools (z. B. Chef, Salt).
+Terraform ist geeignet, um die Infrastruktur bereitzustellen und verschiedene Infrastrukturkomponenten ineinander zu stöpseln. Software-Installationen und -Konfigurationen werden i. a. nicht mit Terraform abgebildet, sondern per
+
+* [Packer](packer.md) (vorkonfigurierte Images)
+* Konfiguration-Management-Tools wie Ansible, Puppet, Chef, ...
+* Cloud-Init-, User-data-Skripte
 
 ---
 
 ## State
 
-Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3) abgelegt werden kann. Dieser State beschreibt den aktuellen Zustand der Umgebung und ist die Basis, um aus der Ziel-Definition die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Per Default wir der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
+Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3, Terraform Cloud) abgelegt werden kann. Dieser State beschreibt den aktuellen Zustand der Umgebung und ist die Basis, um aus der Ziel-Definition (Terraform-Dateien) die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Per Default wird der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
 
-> ACHTUNG: sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken. In keinem Fall sollte man den State in einem Version-Control-System halten.
+> **ACHTUNG:** sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken. In keinem Fall sollte man den State in einem Version-Control-System halten.
 
 Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann das zu großen Problemen führen, weil falsche Aktionen "berechnet" werden. Typisch sind dann Fehlermeldungen wie diese:
 
@@ -308,7 +331,11 @@ Das liegt daran, daß Terraform eine Resource anlegen will, die aber schon vorha
 
 ### Locking
 
-Alle Aktionen, die innerhalb eines `terraform apply` vollzogen werden, führen zu Updates an der Runtime-Umgebung und zu Updates an dem State. Man muß verhindern, daß mehr als ein `terraform apply` auf EINEM State-File parallel ausgeführt werden, denn ansonsten schleichen sich Inkonsistenten (im State-File oder in der Runtime-Umgebung) durch Concurrent Updates ein. Man kann das beispielweise durch Ausführung der Updates auf einem zentralen (serialisierenden) Server (z. B. [Jenkins-Server](jenkins.md)) umsetzen oder man verwendet Locks. Für den Lock-Ansatz gibt es verschiedene Lösungen
+Alle Aktionen, die innerhalb eines `terraform apply` vollzogen werden, führen zu Updates an der Runtime-Umgebung und zu Updates an dem State. Man muß verhindern, daß mehr als ein `terraform apply` auf EINEM State-File parallel ausgeführt werden, denn ansonsten schleichen sich Inkonsistenten (im State-File oder in der Runtime-Umgebung) durch Concurrent Updates ein.
+
+> Man stelle sich nur mal vor, daß ein `terraform destroy` gar nicht alles zerstört, weil ein Teil der Infrastruktur durch ein `terraform apply` auf einem anderen Server ausgeführt wurde. Infrastruktur läuft dann einfach weiter und wir zahlen dafür. Noch schlimmer sind natürlich Fehlkonfigurationen von kritischen Systemen, die dann zu Datenverlust, Downtime oder Unzuverlässigkeit führen.
+
+ Man kann das beispielweise durch Ausführung der Updates auf einem zentralen (serialisierenden) Server (z. B. [Jenkins-Server](jenkins.md)) umsetzen oder man verwendet Locks. Für den Lock-Ansatz gibt es verschiedene Lösungen
 
 * Terraform Pro
 * Terraform Enterprise
@@ -329,9 +356,9 @@ Welches Level der Isolation verwendet wird, liegt in der Entscheidung des Nutzer
 
 ### Terraform Versionen
 
-Man muß in jedem Fall sicherstellen, immer die richtige Version von Terraform zu verwenden. Das hört sich einfacher an als es in Wirklichkeit ist - keine Rocket-Science, aber es erfordert Disziplin, wenn man beispielsweise verschiedene Deploy-Stages hat, die absichtlich mit unterschiedichen Terraform-Versionen betrieben werden. Terraform wird nämich das State-File auf die höchste Version migrieren und damit ist der State für ältere Versionen evtl. nicht mehr zu gebrauchen. Das kann man beispielsweise mit einem [Jenkins-Server](jenkins.md) umsetzen, der IMMER das richtige `terraform`-Binary verwendet!!!
+Man muß in jedem Fall sicherstellen, immer die zum State passende Terraform-Version zu verwenden ... man kann nicht einfach Version 0.13.1 verwenden, um beim nächsten mal 0.12.7 zu verwenden - das führt unweigerlich zu Problemen.
 
-> schon allein aus diesem Grund sollten man die State-Files der Stages (DEV, TEST, LIVE) separieren
+Das hört sich einfacher an als es in Wirklichkeit ist - keine Rocket-Science, aber es erfordert Disziplin, wenn man beispielsweise verschiedene Deploy-Stages hat, die absichtlich mit unterschiedichen Terraform-Versionen betrieben werden. Terraform wird nämich das State-File auf die höchste Version migrieren und damit ist der State für ältere Versionen evtl. nicht mehr zu gebrauchen. Am besten führt man die Terraform-Kommandos nicht von einem frei-konfigurierbaren Rechner aus, sondern von einem CI/CD-Server wie beispielsweise einem [Jenkins-Server](jenkins.md). Der stellt sicher, daß alle Schritte in Code gegossen sind und somit in der richtigen reihenfolge und mit dem richtigen `terraform`-Binary ausgeführt werden!!!
 
 ---
 

@@ -155,7 +155,7 @@
     * [Cloud Deployment Provider](cloudDeployment_provider.md)
       * [AWS](aws.md)
         * [IAM](aws-iam.md)
-        * [Security Groups](aws-securityGroup.md)
+        * [Netzwerke](aws-network.md)
         * [AWS CLI](aws-cli.md)
         * [RDS](aws_rds.md)
         * [Static Website Hosting](aws_staticWebsiteHosting.md)
