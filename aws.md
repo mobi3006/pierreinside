@@ -14,7 +14,7 @@ Während man früher nur als Großunternehmen relevante Software bereitstellen k
 * [AWS Account anlegen](https://aws.amazon.com)
   * 12 Monate kostenlos, wenn man nur `t2.micro` Instanzen startet
     * man muß aber AUF JEDEN FALL eine Kreditkarte hinterlegen
-    * man kann [Billing Alerts](https://console.aws.amazon.com/billing/home?#/preferences) konfigurieren
+  * auf jeden Fall sollte man ein [Budget und Notifications](https://console.aws.amazon.com/billing/home?#/preferences) definieren, um keine bösen Überraschungen zu erleben
 * Image aussuchen
 * Instanz `t2.micro` (ist im kostenlosen Paket enthalten) starten (z. B. `ubuntu-xenial-16.04-amd64-server-20180814`)
   * hierbei kann man einen SSH-Schlüssel generieren lassen bzw. einen schon vorhandenen Schlüssel verwenden

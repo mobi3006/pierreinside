@@ -170,7 +170,7 @@ In der unteren blauen Statusleiste ist die verwendete Python-Version zu erkennen
 Nichtsdestotrotz hatte ich mit den Default-Einstellungen der Python-Extension einige Probleme:
 
 * Navigieren in importierte Module (auch meine eigenen, die sich direkt im gleichen Git-Repository befinden) funktioniert nicht. Hierzu finde ich diesen Beitrag:
-  * [Stackoverflo](https://stackoverflow.com/questions/53939751/pylint-unresolved-import-error-in-visual-studio-code)
+  * [Stackoverflow](https://stackoverflow.com/questions/53939751/pylint-unresolved-import-error-in-visual-studio-code)
 * der Wechsel des Python-Interpreters funktioniert nicht zuverlässig. Ich muß dann immer mal die Datei wechseln, um den neuen Interpreter auch tatsächlich in der Statusleiste angezeigt zu bekommen
 * nach Installation eines Moduls per `pip install module` (über meine Console oder auch das VSCode Terminal) steht das Modul scheinbar noch nicht zur Verfügung. Ein `import module` sorgt für einen Fehler, der erst durch einen VSCode-Neustart verschwindet
 

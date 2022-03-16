@@ -1,6 +1,7 @@
 # AWS Netzwerk Knowhow
 
 * [Stephane Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528534#overview)
+* [Digital Cloud Training](https://www.youtube.com/channel/UCZGGwqjk5jfO4vN1SOCJ2ew)
 
 Wenn man eine neue EC2 Instanz startet, so kann man das **OHNE** all die Sachen zu wissen, da die Default-Konfiguration (angelegt bei der Account Erstellung) schon so ausgelegt ist, daß das alles reibungslos funktioniert. Will man allerdings eine halbwegs professionelle (= sicher, performant) anbieten, dann **MUSS** man sich damit beschäftigen.
 

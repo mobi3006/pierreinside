@@ -1,6 +1,7 @@
 
 # Terraform
 
+* [eine tolle Einführung](https://www.mineiros.io/blog/how-to-manage-your-github-organization-with-terraform)
 * [Homepage by HashiCorp](https://www.terraform.io/)
 
 Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Infrastruktur- und Applikations-Landschaften aufzubauen. Wer schon mal versucht hat in AWS eine Infrastruktur aus EC2, Security-Groups, Route Tables, Router, Internet Gateway, ... zusammenzuklicken und dann auch zu warten (Komponenten hinzufügen/wegnehmen/umkonfigurieren ... ohne DOWNTIME und im 4-Augen-Prinzip), der wird schnell zu Tools wie terraform greifen, um das zu maintainen. Die Gefahr stundenlang die Fehler in einem Setup zu suchen ist recht hoch ... Fehler passieren schnell.
@@ -122,7 +123,11 @@ terraform plan -var instance_type=t2.micro  # hier sieht man was geschehen wird
 terraform apply                             # erzeugt den Execution Plan
 ```
 
-ausgeführt. Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration). Anschließend ist die Maschine auf AWS nutzbar.
+ausgeführt. Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration).
+
+> Ich halte diese Freiräume in der Benennung der Datei für einen guten Schachzug. Es ermöglicht eine freie semantische Benennung, ohne den Nutzer zu gängeln und dadurch dann wiederum Verstöße überprüfen zu müssen. Dennoch gibt es Best-Practices (`main.tf`, `output.tf`, `variables.tf`, ...), an die man sich halten sollte. Es verbleiben dennoch viele Freiheiten.
+
+Anschließend ist die Maschine auf AWS nutzbar.
 
 > Ich verwende statt `terraform plan && terraform apply` lieber `terraform plan -out=tfplan && terraform apply tfplan` (`tfplan` ist eine Binärdatei), da hier in diesem Fall sicher sein kann, daß tatsächlich auch der von mir erstellte Plan umgesetzt wird und nichts anderes. Insbesondere wenn ich noch interaktiv Variablenwerte bereitstellen muss ist das die bessere Variante.
 
@@ -162,6 +167,24 @@ resource "dnsimple_record" "example" {
   type
 }
 ```
+
+### VSCode Integration
+
+Visual Studio Code ist DER Editor meiner Wahl und natürlich editiert man heutzutage keinen Code ohne
+
+* Auto-Vervollständigung
+* Syntax-Highlightning
+* Syntax-Check
+
+### Code Formatierung
+
+Ich hasse diese elenden Diskussionen zur Codeformatierung. Das will jeder anders haben und letztlich spielt es keine Rolle solange die Formatierung brauchbar ist. Einheitlichkeit ist mir lieber als persönliche Vorlieben. Deshalb verwende ich `terraform fmt` zur Formatierung ... keinen anderen Schnick-Schnack.
+
+### Automatisierung
+
+Am besten verwendet man [Git-Pre-Commit-Hooks](https://githooks.com/), um den Terraform-Code (am besten grundsätzlich alle Codes) zu validieren und formatieren.
+
+> ACHTUNG: wenn nicht alle Entiwckler die gleichen Pre-Commit-Hooks verwenden, dann kann das zu großen Problemen führen, weil sich Formatierungsänderungen mit Refactorings mischen.
 
 ### Resource
 
@@ -220,26 +243,90 @@ Hier sieht man auch sehr schön die übergreifende Adressierung (von `nomad_job.
 
 ### Module
 
-Auf diese Weise lassen sich Teile der Konfiguration wiederverwenden. Jede Sammlung von `*.tf` Dateien ist ein Modul ... man verwendet Module dementsprechend IMMER automatisch. Deshalb referenziert man in `source = "/home/pfh/my-terraform-module"` auch ein Verzeichnis und nicht eine einzelne Datei.
+* [terraform docu](https://learn.hashicorp.com/tutorials/terraform/module?in=terraform/modules)
+* [terraform docu - lokale Module](https://learn.hashicorp.com/tutorials/terraform/module-create?in=terraform/modules)
+
+Auf diese Weise lassen sich Teile der Konfiguration wiederverwenden und es entstehen aus atomaren `resourcen` komplexe Komponenten, die ein parametrisiertes Template darstellen. Die Endstufe eines Moduls sieht man bei [mineiros-io](https://github.com/mineiros-io/terraform-github-repository/blob/main/examples/public-repository/main.tf), die eine DSL in Terraform-Code um ein Modul bereitstellen. So kann Terraform-Code aussehen.
+Diese Art von Wrapper-Modul ist ganz typische, um komplexere Strukturen wiederzuverwenden ... so ist es [auch bei AWS (beispielsweise beim Modul "terraform-aws-modules/security-group/aws")](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/main.tf).
+
+> Letztlich ist ein Modul nicht mehr als eine impliziete Kopieranleitung, die man explizit auch mit Codegenerierung erreichen könnte.
+
+ Jede Sammlung von `*.tf` Dateien in einem Verzeichnis ist ein Modul ... man verwendet Module dementsprechend IMMER automatisch. Deshalb referenziert man in `source = "/home/pfh/my-terraform-module"` auch ein Verzeichnis und nicht eine einzelne Datei.
 
 So sieht die Wiederverwendung eines Moduls aus:
 
 ```json
 module "use-my-terraform-module" {
-  source = "/home/pfh/my-terraform-module"
+  source = "./my-terraform-module"
   // verschiedene Quellen sind möglich
-  // source = "https://mvnrepository.com/artifact/.../config-2.3.5.zip"
-  // source = "git://"
+  //    source = "/home/pfh/my-terraform-module"
+  //    source = "https://mvnrepository.com/artifact/.../config-2.3.5.zip"
+  //    source = "git://"
   
   variable1 = "value1"
 }
 ```
 
-In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `/home/pfh/my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert. Module stellen einen Template-Mechanismus zur Verfügung.
+In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `./my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert. Module stellen einen Template-Mechanismus zur Verfügung.
+
+Die Verwendung eines (lokalen) relativen Moduls (`./my-terraform-module`) ermöglicht die Modularisierung in einem einzelnen Git-Repository (fungiert dann als sog. Root-Module), ohne daß der Code verstreut ist. Auf diese Weise lassen sich komplette Systeme kompakt beschreiben, ohne dabei Redundanzen einbauen zu müssen.
+
+```
+.
+├── README.md
+├── main.tf
+├── variables.tf
+├── my-terraform-module
+├──── main.tf
+├──── variables.tf
+├── my-seconds-terraform-module
+├──── main.tf
+├──── variables.tf
+```
 
 Praktisch ist, daß man bei `source` auch eine Sammlung von Terraform Scripten in Form einer `zip`-Datei angeben kann (um sie beispielsweise über einen Artifakt-Repository beizusteuern). In dem Fall wird die Zip-Datei bei `terraform apply` entpackt und die Platzhalter werden ersetzt. Auf diese Weise kann man eine Sammlung von Konfigurationsdateien in einem `zip`-File bereitstellen und dann mit Werten belegen.
 
 > vor einer solchen Aufgabe steht man häufig, wenn man Software stage-abhängig konfigurieren muß.
+
+Module können selbst wieder Variablen (`variables.tf`) und Output (`output.tf`) definieren. Dieser Mechanismus definiert den Contract eines Callers zum Module und enthält gleichzeitig die Dokumentation dieser Schnittstelle durch `description`. Auch alle anderen typischen Konzepte (`main.tf`, ...) stehen einem Module zur Verfügung ... genauso wie dem Root-Module (das ohne weitere Module verwendet wird). So einfach und doch so mächtig.
+
+Und natürlich können Modules wieder weitere Module verwenden.
+
+> **ALLERDINGS:** einen `provider` Block sollte ein - zur Wiederverwendung entworfenes Modul - nicht haben - es erbt diesen vom Caller, denn hier erfolgt häufig die Konfiguration des Nutzungskontextes und den kennt ein wiederverwendbares Modul natürlicherweise nicht. Allerdings muß das Modul einen `required_providers` Block enthalten, um die Version des Providers zu spezifizieren. Es macht durchaus Sinn, daß jedes Modul die Version eines Providers eigenständig definiert, denn es enthält "Code", der sich von der Version des Providers abhängig ist (Contract).
+
+Verwendet man externe Module (von der Hashicorp-Cloud, git-repository oder aus einem zip-Artefakt), dann müssen die durch ein `terraform init` (oder `terraform get`) zunächst runtergeladen und lokal (in `.terraform`) abgespeichert werden.
+
+Auf diese Weise lassen sich auch Layer (z. B. Backend, Middleware, Frontend) implementieren. Benötigt man Daten aus einem Modul (= Layer) in einem anderen, dann muß man in Daten explizit übergeben:
+
+```
+├── main.tf
+├── middleware
+├──── main.tf
+├──── variables.tf
+├──── output.tf
+├── frontend
+├──── main.tf
+├──── variables.tf
+├──── output.tf
+```
+
+Die `./main.tf` agiert als Controller, um die Daten aus `./middleware/output.tf` and `./frontend/main.tf` zu übergeben - ein direkter Zugriff von `./frontend/main.tf` auf `./middleware/output.tf` ist nicht möglich. Außerdem ist es nicht erwünscht, da `frontend` und `middleware` nichts voneinander wissen sollten (Dependency Injection).
+
+### Functions
+
+* [Dokumentation](https://www.terraform.io/language/functions)
+
+Terraform bietet kleine Helferfunktionen, denn auch eine deklarative Sprache kommt nicht ohne aus.
+
+### Refactorings
+
+Nach einem refactoring sollte man immer ein `terraform get` machen, da beispielsweise ein Umbenennen eines lokalen Moduls im `.terraform/modules/modules.json` repräsentiert werden muss. Ansonsten scheitern `terraform plan` und/oder `terraform apply`.
+
+Man sollte sich angewöhnen, vor dem `terraform apply` ein Backup vom State zu machen. Legt man den State auf S3, dann hat man automatisch eine Versionierung.
+
+### Monolithen-Module refactorn
+
+* [howto](https://learn.hashicorp.com/tutorials/terraform/organize-configuration?in=terraform/modules)
 
 ---
 
@@ -257,13 +344,36 @@ Viele Infrastrukturanbieter stellen Provider in Form von Modulen (werden bei `te
 * [Consul](https://www.terraform.io/docs/providers/consul/index.html)
 * [Vault](https://www.terraform.io/docs/providers/vault/index.html)
 * [Terraform Enterprise](https://www.terraform.io/docs/providers/tfe/index.html)
+* GitHub
 * ...
+
+Zur Einbindung eines Providers fügt man folgende Zeilen seinem Terraform Code hinzu:
+
+```tf
+terraform {
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 4.0"
+    }
+  }
+}
+```
+
+Anschließend müssen die meisten Provider noch konfiguriert werden:
+
+```tf
+provider "github" {
+    organization = var.github_organization
+    token = var.github_token
+}
+```
 
 Beim `terraform init` werden diese Module i. a. dynamisch aus dem Internet gezogen ... es werden dabei immer die zur terraform-Version passenden Versionen verwendet.
 
 > In diesem Beispiel werden die `latest` Versions gezogen, weil keine Versionen explizit angegeben wurden. Im Produktivbetrieb sollte man aber explizite Versionen verwenden, da man einen Rollout i. a. über verschiedene Stages zieht (DEV, TEST, LIVE) und nach einem erfolgreichen Abnahmetest auf der TEST-Stage nicht plötzlich eine ganz andere `latest`-Version (nicht abgenommen) beim Rollout auf LIVE nutzen möchte.
 
-```
+```log
 pfh@workbench terraform init
 
 Initializing modules...
@@ -315,7 +425,17 @@ Terraform ist geeignet, um die Infrastruktur bereitzustellen und verschiedene In
 
 Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3, Terraform Cloud) abgelegt werden kann. Dieser State beschreibt den aktuellen Zustand der Umgebung und ist die Basis, um aus der Ziel-Definition (Terraform-Dateien) die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Per Default wird der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
 
-> **ACHTUNG:** sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken. In keinem Fall sollte man den State in einem Version-Control-System halten.
+Per Default wird der State in einer Datei im aktuellen Verzeichnis gespeichert ... was man explizit auch so konfigurieren kann:
+
+```hcl
+terraform {
+  backend "local" {
+    path = "terraform.tfstate"
+  }
+}
+```
+
+> **ACHTUNG:** sind Secrets in dem State enthalten, dann enthält der State diese Werte im Klartext (!!!) => evtl. sollte man über eine Verschlüsselung des States (z. B. [mit S3-Backend](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)) nachdenken. In keinem Fall sollte man den State in einem Version-Control-System halten - am besten gleich `*.tfstate*` in die `.gitignore` aufnehmen.
 
 Wenn der State verloren geht (wird gelöscht oder `terraform apply` wird von einem anderen Rechner ausgeführt, der keinen Zugriff auf den State hat), dann kann das zu großen Problemen führen, weil falsche Aktionen "berechnet" werden. Typisch sind dann Fehlermeldungen wie diese:
 
@@ -328,6 +448,16 @@ Das liegt daran, daß Terraform eine Resource anlegen will, die aber schon vorha
 > ERGO: Terraform liest den aktuellen State nicht aus der deployten Landschaft (wäre recht aufwendig und fehlerträchtig), sondern aus der State-Datei. Das hat zudem zur Konsequenz, daß Änderungen, die nicht in der zentralen State-Datei erfolgt sind (z. B. manuelle Änderungen, Änderungen über andere Wege als Terraform) nicht berücksichtigt werden können. Diese Änderungen werden dann überschrieben!!!
 
 Über `terraform show` kann man den aktuellen State auf der Console ausgeben. Das hilft bei der Fehlersuche ungemein.
+
+### Import
+
+* [import Kommando](https://www.terraform.io/cli/import)
+
+In Migrationsprojekten (oder wenn Terraform nun eine Ressource unterstützt) kann es erforderlich sein eine bisher nicht über Terraform gemanagte Ressource per `terraform import` in den State zu übernehmen, um sie nicht löschen und neu anlegen zu müssen.
+
+```
+terraform import module.repositories.github_repository.football football
+```
 
 ### Locking
 
@@ -396,6 +526,33 @@ Ein Workspace referenziert ein VCS ... hier gibt es unterschiedliche Organisatio
 
 ## Best Practices
 
+### Use Modules
+
+"[...] to limit the scope of potential changes" ([Terraform Doku](https://learn.hashicorp.com/tutorials/terraform/move-config?in=terraform/modules))
+
+### No Nested Modules
+
+"We started nesting modules inside other smaller modules. Updating code or resolving conflicts in the matryoshka doll structure became a nightmare." [Regis Wilson](https://medium.com/driven-by-code/the-terrors-and-joys-of-terraform-88bbd1aa4359)
+
+### terraform state mv
+
+* [Dokumentation](https://www.terraform.io/cli/commands/state/mv)
+
+Wenn man interne Refactorings an Terraform-Code vornimmt, dann sollte man verhindern, daß Ressourcen gelöscht und neu angelegt werden ... nur weil man den Code restrukturiert hat.
+
+> "When you create modules from already existing infrastructure, your resource's IDs will change. Because of this, you must let Terraform know that you intend to move resources rather than replace them, or Terraform will destroy and recreate your resources with the new ID. In previous versions of Terraform, you would use the terraform state mv command to individually move your resources to their new module address so Terraform can correctly track the infrastructure." ([Terraform Doku](https://learn.hashicorp.com/tutorials/terraform/move-config?in=terraform/modules))
+
+Diese Refactoring-Hints kann man auch [in Code packen](https://learn.hashicorp.com/tutorials/terraform/move-config?in=terraform/modules#move-your-resources-with-the-moved-configuration-block):
+
+```hcl
+moved {
+  from = aws_instance.example
+  to = module.ec2_instance.aws_instance.example
+}
+```
+
+Hierfür sollte es aber eigentlich Support von einer IDE geben!!! ... da Änderungen am State im Desaster enden können.
+
 ### Loops
 
 * [Gruntwork-Blog](https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9)
@@ -432,3 +589,48 @@ resource "aws_iam_user" "example" {
   name  = var.user_names[count.index]
 }
 ```
+
+---
+
+## GitHub Organization Management - GitHub Provider
+
+* [intro](https://www.mineiros.io/blog/how-to-manage-your-github-organization-with-terraform)
+* [mineiros-io  terraform-github-organization](https://github.com/mineiros-io/terraform-github-organization)
+
+---
+
+## Kritische Betrachtung
+
+[Dieser Artikel](https://medium.com/driven-by-code/the-terrors-and-joys-of-terraform-88bbd1aa4359) drückt meine Schmerzen/Erfahrungen ganz gut aus (die nachfolgenden Zitate sind alle aus diesem Artikel):
+
+> "Suddenly, Terraform appeared out of the chaos and stood on a hill in the sunlight, posing dramatically with its curly hair blowing gently in the wind. Our hero comes to save the day! The promise of Terraform was too much to resist: We could abstract our infrastructure into text files and check them into our version control system (VCS). We could keep track of which infrastructure pieces were created and when (the so-called state file), we could automatically (in most cases) keep a dependency-graph of all the interconnected “fiddly bits” and glue together in one place, and we could run so-called plans to verify drift or to test changes to infrastructure before applying them. We thought we were entering a new golden age by choosing Terraform as the base on which to deploy our automation platform."
+
+ABER in Real-Life (in komplexen Projekten):
+
+> "Changing the order of dependencies, updating resource names, refactoring code into modules: all of these caused massive headaches and slowed down our building and deployments. This made manual changes to our infrastructure increasingly tempting, which made updating the code harder to maintain, and so on. This vicious cycle was difficult to get out of."
+
+Terraform wirkt so einfach und gnadenlos besser als alles was wir vorher benutzten. Doch der Teufel steckt im Detail und man sollte die Best-Practices schon beherzigen und das Tool auch wirklich gut kennen bevor man sich davon abhängig macht. Es besteht ein großes Risiko, daß ein Fehler im eigenen "Coding" oder in den terraform-Providern zu einem Desaster führt. Wenn man Terraform als Black-Box benutzt und nur die Spitze des Eisbergs kennt, dann ist das zu blauäugig:
+
+> "We should not pray for easier tooling - We should pray to be stronger engineers"
+
+Außerdem ist auch nicht jede Komponente für eine Verwaltung mit Terraform geeignet:
+
+> "This is a difficult statement for us to make, and it was a tough and bitter pill to swallow. In our zeal to “AUTOMATE ALL THE THINGS,” we forgot to stop and think whether that was practical or even useful. One general example is the Relational Database Service (RDS). While it is true that you can build RDS instances from a terraform module, the question is whether you should."
+
+Die Einfachheit ist verlockend ... einfach mal das AMI einer EC2 Instanz ändern bedeutet nur eine String im Textfile auszutauschen. Die Konsequenz ist allerdings, daß die Instanz gelöscht und from Scratch neu angelegt wird. Tut man das über die AWS Admin Console, dann werden uns die Konsequenzen während dieser 2 Minuten Aktion vielleicht noch klar und vielleicht werden wir sogar gewarnt. In Terraform muss man den Plan schon intensiv studieren, um die Konsequenzen eines schnellen `terraform apply` abschätzen zu können.
+
+> "The overarching theme of this section is that Terraform is really good at managing resources that are generic, repeatable, and resilient to downtime. Resources in your cloud that are unique unicorns, long-lived stable infrastructure that can’t tolerate downtime, or resources that are created once and never updated again are a bad fit."
+
+### Refactorings
+
+Nach einem refactoring sollte man immer ein `terraform get` machen, da beispielsweise ein Umbenennen eines lokalen Moduls im `.terraform/modules/modules.json` repräsentiert werden muss. Ansonsten scheitern `terraform plan` und/oder `terraform apply`.
+
+Mit dem GitHub-Provider hatte ich lokale Modules verwendet, um das Usermanagement in einer GitHub-Organization abzubilden. Eine Umbenennung (ein internes Refactoring) des Moduls `organization` nach `usermanagement` führte allerdings dazu, daß die User gelöscht und neu angelegt wurden. Leider ist diese Aktion nicht Seiteneffektfrei:
+
+* die wurden nicht einfach neu angelegt, sondern erhielten neue Einladungen, die sie erst explizit bestätigen mußten, um wieder Teil der Organisation zu werden
+* mein Skript lief nicht fehlerfrei durch (ich hatte nach dem Refactoring `terraform get` vergessen) und so was das Löschen ausgeführt, aber das Anlegen nicht - im worst-case hätte das zu Downtimes für einzelne User geführt
+
+Wer weiß welche Seiteneffekte ich nicht bemerkt habe ...
+
+Refactorings sind in Infrastruktur häufig nicht Seiteneffektfrei wie [in diesem humorvollen Terraform-Artikel beschrieben](https://medium.com/driven-by-code/the-terrors-and-joys-of-terraform-88bbd1aa4359).
+
