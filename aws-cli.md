@@ -124,20 +124,47 @@ Mit dem [Amazon STS service](https://docs.aws.amazon.com/STS/latest/APIReference
 
 * [Homepage](https://github.com/99designs/aws-vault)
 
-Mit diesem Tool lassen sich AWS Credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) sicher speichern und im `aws`-CLI verwenden:
+Mit diesem Tool lassen sich AWS Credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) sicher speichern (es kann nicht mehr passieren, dass man unerwünscht seine `.aws/credentials` Datei nach GitHub pusht) und im `aws`-CLI in dieser Art und Weise verwenden:
 
 > aws-vault exec mobi3006 -- aws s3 ls
 
-Das Tools stellt allerdings nur das Tooling bereit, um die Credentials in Form von Umgebungsvariablen bereitzustellen. Die Credentials werden in einem separaten Storage (sog. Vaulting Backend) gespeichert. Typische Backends sind:
+Am Kommando kann man schon erkennen, daß `aws-vault` ein Decorator ist, um mit der (frei-wählbaren) Profil-ID (hier: `mobi3006`) ein `aws` Kommando auszuführen.
 
-* macOS Keychain
-* Windows Credential Manager
-* Gnome Keyring, KWallet
-* [pass](https://www.passwordstore.org/)
+> Diese Profil-ID muss mit der AWS-Konfiguration `~/.aws/config` matchen!!!
 
-Letzteres ist besonders interessant auf reinen Linux-Headless Systemen.
+![aws-vault.png](images/aws-vault.png)
 
-> `aws-vault` ist in der Funktion vergleichbar mit einem ssh-Agent, allerdings ist der ssh-Agent direkt transparent in den `ssh` Workflow integriert ... wohingegen `aws-vault` dem Kommando vorangestellt werden muss.
+Der Decorator holt die Credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) zur Profil-ID aus dem `aws-vault` Passwort-Store, erzeugt über den AWS-Tokenstore einen **kurzlebigen** Token und stellt diese Informationen als Umgebungsvariablen im Ausführungskontext des Kommandos bereit. Das kann man sehr schön sehen, wenn man folgenden Befehl ausführt:
+
+> aws-vault exec mobi3006 -- env | grep AWS
+
+Hier wird man erkennen, daß folgende Umgebungsvariablen gesetzt sind:
+
+* `AWS_ACCESS_KEY_ID`
+* `AWS_SECRET_ACCESS_KEY`
+* `AWS_SECURITY_TOKEN`
+* `AWS_SESSION_EXPIRATION`
+* `AWS_SESSION_TOKEN`
+* `AWS_VAULT`
+
+Doch wie kommen die Credentials in den `aws-vault`?
+
+* man muss sie einmalig per `aws-vault add mobi3006` hinzufügen ... im interaktiven Modus werden dann `AWS_ACCESS_KEY_ID` und `AWS_SECRET_ACCESS_KEY` abgefragt und in `aws-vault`-Passwortstore gespeichert
+* anschließend kann man die Einträge per `aws-vault list` sichtbar machen
+
+Den Content der Einträge kann man allerdings nicht per `aws-vault` sehen - warum?
+
+* aws-vault stellt nur den Wrapper bereit, um kurzlebige Tokens zu erzeugen
+* die Speicherung der Basis-Credentials erfolgt in einem separaten Backend (sog. Vaulting Backend)
+  * unter Linux ist das Default Backend Gnore-Keyring oder KWallet
+    * man kann aber auch [`pass`](https://www.passwordstore.org) verwenden
+  * unter MacOS ist es Keychain
+
+Da das Vaulting-Backend allerdings auch mit einem Passwort geschützt ist, das `aws-vault` nicht kennt, muss man es interaktiv eingeben. Deshalb poppt gelegentlich auch ein Fenster hoch und man muss ein Passwort eingeben. Es handelt sich dabei um das Keyring-Passwort.
+
+`pass` ist besonders interessant auf reinen Linux-Headless Systemen, da der Core ein reines CLI-Tool ist ... Gnome/KWallet könnte man aufgrund der fehlenden UI nicht verwenden. Bei der Verwendung von `pass` muß man dem Kommando allerdings noch den Parameter `--backend=pass` mitgeben (z. B. `aws-vault --backend=pass exec mobi3006 -- aws s3 ls`) oder man setzt die Umgebungsvariable `export AWS_VAULT_BACKEND=pass`, dann kann man sich den zusätzlichen Parameter sparen.
+
+> `aws-vault` ist in der Funktion vergleichbar mit einem ssh-Agent. Dieser ist allerdings tief in den `ssh` Workflow integriert und somit unsichtbar ... wohingegen `aws-vault` dem Kommando vorangestellt werden muss.
 
 ### pass als aws-vault Backend
 
