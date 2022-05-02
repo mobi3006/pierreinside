@@ -11,7 +11,7 @@ In den letzten zwei Jahren habe ich mit einem von 16.04 LTS upgegradeten System 
 Am meisten hat mich genervt, daß
 
 * der Startup relativ lange gedauert hat wegen einem Scan am Anfang des Bootens
-* dem `network-resolved`-Problem
+* dem `network-resolved`-Problem, das ich auch schon in [Ubuntu 18.04](ubuntu_1804_lts.md) hatte
 * in meinem VirtualBox-Image war der Chromium-Browser sehr ressourcenhungrig - letztlich habe ich Internet-Browsing in meinen Office-Bereich (den Windows-Host) ausgelagert, da mein Linux-System mit mehreren geöffneten Fenstern (ich liebe die Chrome-Extension "Spaces") teilweise unbenutzbar war
 
 Kein Problem war, der Unity-Desktop in der Virtualbox recht zäh war, da ich mit dem awesome-Windowmanager sehr zurfieden bin. Der lief einwandfrei :-)

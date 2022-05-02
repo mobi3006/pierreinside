@@ -15,6 +15,8 @@ Nach der Installation des Binary (übrigens ist die CLI in [Python](python.md) p
 
 Für den Zugriff benötigt man Security-Credentials (Access Keys = Tokens), die man beispielsweise manuell per AWS Console (Web-UI) manuell erzeugen kann. Ein `aws configure` führt interaktiv durch die Konfiguration - hier werden die Credentials abgefragt und am Ende eine Datei `~/.aws/config` geschrieben => damit ist die Konfiguration persistent.
 
+> **ABER ACHTUNG:** Die Credentials sind in Plaintext abgespeichert ... große Gefahr, daß sie gestohlen oder sogar von Dir selbst versehentlich veröffentlicht werden (z. B. bei einem `git push`). Aus diesem Grund empfiehlt sich die Verwendung von `aws-vault`.
+
 ### Installation per Python Paket Manager
 
 Ich habe die Command-Line Tools von AWS über `pip` (Python Paket Manager) installiert wie [hier beschrieben](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-instaRll.html):
@@ -72,7 +74,6 @@ aws_secret_access_key = isthat
 
 Es kann sinnvoll sein, unterschiedeliche Konfigurationen (= Profile) zu verwenden ... je nach Nutzungskontext. Das läßt sich ganz einfach per `aws configure --profile foo-bar` umsetzen oder durch manuelle Editierung der `~/.aws/config` Datei. Das Default-Profile kann per `export AWS_PROFILE=foo-bar` gesetzt werden oder man [überschreibt](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) es für ein einziges Kommando: `aws iam get-user --user-name your_username@example.com --profile mySecondAccount`.
 
-
 > AWS Roles verwendet man, wenn man seine Credentials nicht auf der Instanz hinterlegen möchte. Auf diese Weise kann man eine Role mit Permissions auf ein S3-Bucket anlegen und einer EC2-Instanz zuweisen. Dadurch hat die EC2-Instanz automatisch Zugriff auf das S3. Bucket. Mit [Terraform](terraform.md) läßt sich das auch schön automatosieren.
 
 Der Python-Aws-CLI-Installer bringt auch gleich die passende [Shell-Auto-Completion](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html) mit. Unter `~/.local/bin/aws_completer.` sind die notwendigen Quellen abgelegt. Durch hinzufügen folgender Zeilen zur `~/.zshrc` wird die AWS-Auto-Completion automatisch aktiviert:
@@ -81,6 +82,10 @@ Der Python-Aws-CLI-Installer bringt auch gleich die passende [Shell-Auto-Complet
 autoload bashcompinit && bashcompinit
 complete -C '/home/pfh/.local/bin/aws_completer' aws
 ```
+
+### Multi-Factor-Authentifaction (2FA)
+
+* [documentation](https://github.com/99designs/aws-vault#roles-and-mfa)
 
 ### Test
 

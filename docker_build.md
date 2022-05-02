@@ -2,7 +2,7 @@
 
 Für die Erzeugung eigener Docker-Images gibt es zwei Möglichkeiten:
 
-1. basierend auf einem existierenden Docker-Image (z. B. von DockerHub) einen Container instanziieren. Am laufenden Container Änderungen vornehmen und vom Endergebnis ein neues Image ziehen. siehe https://docs.docker.com/engine/tutorials/dockerimages/#/creating-our-own-images
+1. basierend auf einem existierenden Docker-Image (z. B. von DockerHub) einen Container instanziieren. Am laufenden Container Änderungen vornehmen und vom Endergebnis ein neues Image ziehen (`docker commit 62832asdaskjks7i username/my-image:latest`). siehe https://docs.docker.com/engine/tutorials/dockerimages/#/creating-our-own-images
 
 2. ein ``Dockerfile`` erzeugen, das die Bauanleitung für das Image darstellt - siehe https://docs.docker.com/engine/tutorials/dockerimages/#/building-an-image-from-a-dockerfile
 
@@ -104,6 +104,24 @@ ae1b8d879bad: Download complete
 
 Jedes gecachte Layer muß dann nicht mehr runtergeladen werden. ALLERDINGS: gecachte Layer können ganz schön viel Platz verbrauchen. deshalb sollte man gelegentlich mal aufräumen!!!
 
+### docker push
+
+* [gutes Tutorial](https://www.youtube.com/watch?v=fdQ7MmQNTa0)
+
+Nach einem Build steht das Docker Image lokale zur Verfügung und kann lokal instanziiert werden. Will man es anderen Usern zur Verfügung stellen, so muss man es in eine Docker-Registry pushen - die Default Registry ist [docker.io](https://hub.docker.com/).
+
+Hierzu muss man sich vorher in der Docker-Registry registrieren, um Credentials zu erhalten. Über die Konsole loggt man sich per
+
+```bash
+docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+```
+
+ein. **BE AWARE:** Das `docker login` speichert das Password in `~/.docker/config.json`
+
+Nach dem Build (z. B. `docker build -t docker_hub_user/test:latest .`) wird das image per `docker push docker_hub_user/test:latest` auf die Registry gepusht. Anschließend steht das Image per `docker pull docker_hub_user/test:latest` zur Nutzung zur Verfügung.
+
+> Will man eine andere Registry als docker.io verwenden, dann muss man das im Imagenamen konfigurieren. In diesem Fall verwendet packt man den Registrynamen zum Imagenamen dazu: `docker push docker.io/docker_hub_user/test:latest`
+
 ### Use multi-stage builds
 
 * [Docker-Dokumentation - Multi-Stage Builds](https://docs.docker.com/develop/develop-images/multistage-build/)
@@ -123,6 +141,60 @@ Manchmal paketiert man nicht nur die Artefakte im Build, sondern stößt auch ta
          && apt-get clean \
          && rm -rf /var/lib/apt/lists/*
   ```
+
+---
+
+## Multi-Platform Builds
+
+* [gute Einführung](https://www.inovex.de/de/blog/multi-architecture-docker-images/)
+
+Spätestens seit dem Wechsel von Apple zu ARM-Prozessoren (Apple Silicon) und des AWS-Supports (Graviton) für diese Architektur mit signifikant günstigeren Preisen (40%) ist im Docker-Bereich Mult-Platform-Support angesagt.
+
+Auf einem Build-Server hat man i. d. R. keine unterschiedlichen Architekturtypen verbaut, um die für die jeweilige Architektur passenden Docker-Images zu bauen. Deshalb bietet Docker sog. Multi-Platform Builds per `buildx` an.
+
+### buildx
+
+* [Installationsdoku](https://docs.docker.com/buildx/working-with-buildx/)
+
+Nach der Installation steht `buildx` als Plugin unter `~/.docker/cli-plugins/docker-buildx` zur Verfügung.
+
+Hierbei handelt es sich um ein Plugin der Docker-CLI, das nur bei Setzen des Experimental Flags (`export DOCKER_CLI_EXPERIMENTAL=enabled` oder durch Setzen von
+
+```json
+{
+  "experimental": "enabled"
+}
+```
+
+in `~/.docker/config.json` oder `/etc/docker/daemon.json` (je nach Linux-Distribution - hier Ubuntu) zur Verfügung steht (z. B. `docker buildx ls`). Nach dieser Konfiguration kann eine Docker-Daemon restart nicht schaden (z. B. `sudo systemctl restart docker`).
+
+Ich empfehle `build` als Default-Docker-Build-Variante per [`docker buildx install`](https://docs.docker.com/engine/reference/commandline/buildx_install/) zu setzen. Dadurch wird `docker build` ein Alias für `docker buildx build`.
+
+Best-Practice ist die Erzeugung einer neuen Builder Instanz per `docker buildx create --use --name my-docker-builder` - dadurch verkonfiguriert man schon nicht den Default Builder ( `docker buildx ls`).
+
+> Durch `--use` wird diese Instanz direkt als Builder-Default konfiguriert. Ansonsten kann man das per `docker buildx use my-docker-builder` auch nachholen.
+
+Anschließend kann man per
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t my-image:latest . --load
+```
+
+für die beiden angegebenen Platformen bauen. Dabei wird ein `manifest` file erzeugt, das alles Notwendige enthält, um später komfortabel von einer der beiden Plattformen mit dem gleichen Befehl einen Container zu starten (`docker run -rm my-image:latest`)... durch das Manifest-File wird die richtige Version gewählt.
+
+Per `docker manifest inspect golang:latest` kann man sich ein solches `manifest` beispielhaft anschauen.
+
+Durch `--load` wird das gebaute Docker-Image in der lokalen Docker-Registry verfügbar gemacht (scheinbar ist das nicht immer der Default ... unter einem CentOS 8 musste ich das nicht machen - unter Ubuntu 20.04 hingegen schon), so daß ein `docker inspect my-image:latest` funktioniert.
+
+> Wenn das `--load` zu einem `error: docker exporter does not currently support exporting manifest lists` führt, könnte das daran liegen, daß der lokale Docker Daemon nicht mit `--platform` Listen umgehen kann. Dann nur eine Platform verwenden.
+
+Verwendet man stattdessen `--push` (ohne Parameter) so kann man es zu einer Remote-Docker-Registry (z. B. docker.io) pushen. In dem Fall muss man sich aber vorher einloggen (`docker login`) und das Image muss mit dem passenden Accountnamen benant werden (im Beispiel `docker_hub_user`):
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t docker_hub_user/my-image:latest . --push
+```
+
+so daß man anschließend ein `docker pull docker_hub_user/my-image:latest` oder `docker manifest inspect docker_hub_user/my-image:latest` machen kann.
 
 ---
 

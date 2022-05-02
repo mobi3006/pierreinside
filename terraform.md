@@ -369,6 +369,8 @@ provider "github" {
 }
 ```
 
+> Secrets übergebe ich während des Testens ungern als `-var token=my-secret` (weil in der Command History sichtbar) - stattdessen lasse ich mich interaktiv danach fragen.
+
 Beim `terraform init` werden diese Module i. a. dynamisch aus dem Internet gezogen ... es werden dabei immer die zur terraform-Version passenden Versionen verwendet.
 
 > In diesem Beispiel werden die `latest` Versions gezogen, weil keine Versionen explizit angegeben wurden. Im Produktivbetrieb sollte man aber explizite Versionen verwenden, da man einen Rollout i. a. über verschiedene Stages zieht (DEV, TEST, LIVE) und nach einem erfolgreichen Abnahmetest auf der TEST-Stage nicht plötzlich eine ganz andere `latest`-Version (nicht abgenommen) beim Rollout auf LIVE nutzen möchte.
@@ -423,7 +425,13 @@ Terraform ist geeignet, um die Infrastruktur bereitzustellen und verschiedene In
 
 ## State
 
-Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3, Terraform Cloud) abgelegt werden kann. Dieser State beschreibt den aktuellen Zustand der Umgebung und ist die Basis, um aus der Ziel-Definition (Terraform-Dateien) die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Per Default wird der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
+Terraform verwaltet einen State (z. B. `terraform.tfstate`), der aufs Filesystem (Local - das ist der Default) oder remote (z. B. S3, Terraform Cloud) als Textdatei abgelegt wird.
+
+> **ACHTUNG:** der State enthält Secrets in Plaintext - sollte also am besten verschlüsselt werden. Hier eignet sich S3 besonders gut, denn hier kann man am Bucket die Verschlüsselung aktiviert und kann das so schon mal nicht vergessen.
+
+Dieser State beschreibt den aktuellen Zustand der unter Terraform stehenden Umgebung und ist die Basis, um aus der Ziel-Definition (Terraform-Dateien) die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Hinzu kommt - wenn das möglich ist - noch der tatsächliche Zustand auf dem Zielsystem ... das ist aber nur bei relativ einfachen Abweichungen möglich ... hilft aber sehr, wenn man doch mal das Zielsystem manuell verändert hat bzw. es verändert wurde. Das ist sehr wichtig, denn ansonsten würde man bei manuellen Änderungen (ohne terraform) häufiger in Problemsituationen kommen ... auf diese Weise wird die Situation häufig durch das nächste `terraform apply` repariert (die manuellen Änderungen sind dann weg :-).
+
+Per Default wird der State lokal abgelegt - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3) speichern. Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
 
 Per Default wird der State in einer Datei im aktuellen Verzeichnis gespeichert ... was man explizit auch so konfigurieren kann:
 
@@ -449,15 +457,47 @@ Das liegt daran, daß Terraform eine Resource anlegen will, die aber schon vorha
 
 Über `terraform show` kann man den aktuellen State auf der Console ausgeben. Das hilft bei der Fehlersuche ungemein.
 
+Manche Probleme kann Terraform nicht beim `terraform plan` finden, da sie von der tatsächlichen Ausführung während des `terraform apply` abhängig sind (z. B. aufeinander aufbauende Ressourcen oder wenn diese mit dem aktuellen Setup in Konflikt stehen). In diesen Fällen bricht `terraform apply` an einer beliebigen Stelle ab, hat dann den Terraform State aber teilweise schon angepaßt. Aufgrund der typischen Idempotenz von Terraform Code beseitigt man i. d. R. nur das Problem und führt dann `terraform apply` erneut aus. Letztlich beschreibt der Terraform Code das Endergebnis und Terraform sorgt für die Umsetzung.
+
+### Remote State
+
+Mit einer Konfiguration wie dieser
+
+```hcl
+terraform {
+  backend "s3" {
+    bucket = "my-bucket"
+    key = "terraform.tfstate"
+    region = "eu-central-1"
+    encrypt = true
+  }
+}
+```
+
+kann man den State verschlüsselt in S3 ablegen ... für die Arbeit im Team ist es unabdingbar, den State zu teilen.
+
+Hatte man vorher den State lokal, dann "migriert" man ihn nach obiger Konfiguration per `terraform init -migrate-state` in den Bucket übertragen.
+
+> letztlich ist das nur ein Copy-Kommando wie `aws s3 cp terraform.tfstate s3://my-bucket/terraform.tfstate`
+
 ### Import
 
 * [import Kommando](https://www.terraform.io/cli/import)
 
 In Migrationsprojekten (oder wenn Terraform nun eine Ressource unterstützt) kann es erforderlich sein eine bisher nicht über Terraform gemanagte Ressource per `terraform import` in den State zu übernehmen, um sie nicht löschen und neu anlegen zu müssen.
 
-```
+### Import am Beispiel GitHub
+
+* [Beispiel 1](https://wahlnetwork.com/2020/09/01/using-terraform-to-manage-git-repositories/)
+* [Beispiel 2](https://nakamasato.medium.com/how-to-start-managing-github-repository-and-branch-protection-by-terraform-a7a1ae24d8b)
+
+Zunächst legt man die Resource `module.repositories.github_repository.football` im Terraform-Code an . Anschließend kann man das Repository `football` (https://github.com/football) per
+
+```bash
 terraform import module.repositories.github_repository.football football
 ```
+
+importieren. Damit hat man das Repo und seine Metadaten unter Terraform-Control ... nicht aber die Branches, die per `terraform import github_branch.football terraform:feature-branch:master` importiert werden müssen. I. a. will man nur einzelne Branches unter Terraform-Control stellen, um dort die Permissions (über Teams), Branch-Protection für eine handvoll langlebiger Branches (`master`, `development`, ...), ... zu pflegen. Feature/Bugfix-Branches werden von den Entwicklern selbst maintained (angelegt/gelöscht).
 
 ### Locking
 
@@ -470,6 +510,8 @@ Alle Aktionen, die innerhalb eines `terraform apply` vollzogen werden, führen z
 * Terraform Pro
 * Terraform Enterprise
 * [Terragrunt](https://github.com/gruntwork-io/terragrunt)
+
+Verwendet man AWS, dann kann man für ein Terraform-Lock auch eine DynamoDB verwenden.
 
 ### Isolation Best Practices
 
@@ -489,6 +531,21 @@ Welches Level der Isolation verwendet wird, liegt in der Entscheidung des Nutzer
 Man muß in jedem Fall sicherstellen, immer die zum State passende Terraform-Version zu verwenden ... man kann nicht einfach Version 0.13.1 verwenden, um beim nächsten mal 0.12.7 zu verwenden - das führt unweigerlich zu Problemen.
 
 Das hört sich einfacher an als es in Wirklichkeit ist - keine Rocket-Science, aber es erfordert Disziplin, wenn man beispielsweise verschiedene Deploy-Stages hat, die absichtlich mit unterschiedichen Terraform-Versionen betrieben werden. Terraform wird nämich das State-File auf die höchste Version migrieren und damit ist der State für ältere Versionen evtl. nicht mehr zu gebrauchen. Am besten führt man die Terraform-Kommandos nicht von einem frei-konfigurierbaren Rechner aus, sondern von einem CI/CD-Server wie beispielsweise einem [Jenkins-Server](jenkins.md). Der stellt sicher, daß alle Schritte in Code gegossen sind und somit in der richtigen reihenfolge und mit dem richtigen `terraform`-Binary ausgeführt werden!!!
+
+---
+
+## Terraform CLI
+
+* `terraform show` bzw. `terraform show tfstate.backup`
+  * detailierte Anzeige des States
+* `terraform state list`
+  * welche Resourcen sind unter Terraform-Control
+* `terraform import`
+  * Importieren eines Resource in den State ... hiermit bringt man eine vorher manuell gemanagte Resource unter Terraform-Control
+* `terraform validate`
+  * syntaktische Überprüfung des Terraform Codes
+* `terraform fmt`
+  * Formatierung des Terraform Codes
 
 ---
 

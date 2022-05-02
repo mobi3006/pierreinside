@@ -10,11 +10,30 @@ Will man GitHub aber im Unternehmen oder in einem Open-Source-Projekt mit andere
 
 ### Github Oranization
 
-Jeder Account kann in eine Organisation umgewandelt werden und das ist sogar kostenlos. Einzelne Features oder Quotas benütigen dann allerdings häufig höherwertige Billing Plans.
+Jeder Account kann in eine Organisation umgewandelt werden und das ist sogar kostenlos.
 
-Aus meiner Erfahrung würde ich empfehlen, für jedes Projekt eine separate Organisation anzulegen.
+> Man sollte für jede Unternehmung (in dessen Kontext man mit anderen Personen als Member oder Outside-Collaborator zusammenarbeitet) einen separaten Accounts anlegen und diesen dann in eine Organisation umwandeln. Der Account selber unterliegt anschließend nämlich einigen Restriktionen. Den eigenen GitHub Account fügt man anschließend als Member (oder in der Admin Rolle als Owner) hinzu ... und natürlich seine Kollaborateure.
 
-**ACHTUNG:** Ein Account, der Member anderer Organisationen ist, kann nicht in eine Organisation umgewandelt werden. Insofern bietet es sich vielleicht an, verschiedene Account je nach Nutzungskontext zu verwenden. Ist man mit einem Account nur Outside Collaborator, dann kann man den Account in eine Organisation umwandeln.
+### GitHub Enterprise
+
+Es gibt den sog. *GitHub Enterprise Server* und die *Github Enterprise Cloud* ... eine SaaS Lösung.
+
+Der Begriff GitHub Enterprise wird neben den Software-Produkten allerdings auch bei den Billing Plans benutzt. Es bezeichnet hier ein sehr umfangreiches Feature-Set.
+
+Zudem gibt es den sog. GitHub-Enterprise-Account, den man benötigt, um verschiedene GitHub-Organisationen zu managen und Enterprise-Managed-Users einzusetzen.
+
+> Der Begriff *GitHub Enterprise* ist also ein wenig überstrapaziert, was hier und da zu Verwirrung führt.
+
+### Usermanagement
+
+Hier gibt es zwei disjunkte Ansätze, die nicht vermischt werden können:
+
+* **Open-Source-Ansatz:** In diesem Fall verwenden die Member/Outside Collaborators Personal GitHub Accounts und werden zu einer Organisation/Enterprise eingeladen. Über SSO ist es sogar möglich den Personal Account mit einer Enterprise Identity zu linken, um so nur Usern den Zugriff auf Ressourcen der Organisation zu gewähren, die sich zusätzlich zum GitHub Account auch an einem Active Directory eines Unternehmens authentifiziert und damit identifiziert haben.
+* **Closed-Source-Ansatz:** In diesem Fall erstellt/löscht das Active Directory des Unternehmens die GitHub-User-Accounts (sog. Enterprise-Managed-Users (EMU)) und bestimmt über deren Settings/Policies. Es sind User-Accounts, die im GitHub-Ecosystem nur eingeschränkt funktionieren. Man kann hier keine Public-Repos anlegen oder bei anderen GitHub-Organisationen mitarbeiten. Diese Accounts sind einzig und allein im Kontext des Unternehmens nutzbar (ok ... man kann auch Public Repos lesen). [Hier erfährt](https://docs.github.com/en/enterprise-cloud@latest/admin/identity-and-access-management/managing-iam-with-enterprise-managed-users/about-enterprise-managed-users#abilities-and-restrictions-of-managed-users) man mehr über die Limitierungen.
+  * für diesen Ansatz benötigt man einen speziellen GitHub Enterprise Account, bei dem dann das EMU Feature aktiviert ist
+  * [Konfigurieren von GitHub Enterprise Managed User](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/active-directory/saas-apps/github-enterprise-managed-user-tutorial.md)
+
+Aus meiner Sicht ist der Closed-Source-Ansatz sehr sicher für Unternehmen, um ihre Assets (Source-Code) zu schützen und dennoch auf einer der besten Plattformen unterwegs zu sein. Allerdings kann man sich dann schon fragen warum man nicht GitLab verwendet, das im Unternehmensbereich zusätzlich Features im Bereich Sicherheit mitbringt.
 
 ### GitHub Members
 

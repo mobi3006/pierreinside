@@ -52,11 +52,50 @@ Eine permanente Änderung erfolgt in Grub als Kernel Parameter:
 
 ---
 
+## Netzwerk-Konfiguration
+
+Ubuntu verwendet per Default in einem Ubuntu-Server [`systemd-networkd`](https://wiki.ubuntuusers.de/systemd/networkd/) als Netzwerkmanager - die dazu passende CLI ist `networkctl`. In einem Ubuntu-Desktop-System ist es hingegen der [`network-manager`](). Daneben kann man sich aber auch für andere DNS-Resolver bzw. -Server wie [dnsmqsq](https://wiki.ubuntuusers.de/Dnsmasq/) oder [bind](https://wiki.ubuntuusers.de/DNS-Server_Bind/) entscheiden.
+
+systemd-networkd und network-manager bilden das Backend für [`netplan`](https://wiki.ubuntuusers.de/Netplan/) ... in der Konfiguration (`/etc/netplan/foo.yaml`) wählt man `renderer: NetworkManager` oder `renderer: networkd` aus. Als Alternative zu `netplan` kann man [`/etc/network/interfaces`](https://wiki.ubuntuusers.de/interfaces/) verwenden ... hierzu muss man [netplan deaktivieren](https://wiki.ubuntuusers.de/Netplan/Deaktivieren/).
+
+Wegen der Seiteneffekte kann ist diese Konfiguration mit gewissen Hürden verbunden.
+
+### systemd-networkd
+
+Neben `systemd-networkd` wird auch noch der `systemd-resolved` Dienst gestartet, der auf der IP-Adresse `127.0.0.53` und Port 53 lauscht. Er ist für die Namensauflösung zuständig.
+
+### systemd-networkd -Dummy-Interface einrichten
+
+- [askubuntu - How to create a persistent dummy network interface](https://askubuntu.com/questions/1050353/ubuntu-18-04-how-to-create-a-persistent-dummy-network-interface)
+
+### network-manager
+
+### Wechsel von networkd zu network-manager
+
+- disable und stop von `systemd-networkd` durch
+
+```bash
+systemctl disable systemd-networkd.service
+systemctl stop systemd-networkd.service
+```
+
+- disable und stop von `systemd-resolved` durch ... wenn dadurch der Port 53 nicht freigegeben wird hilf vielleicht [dieser Link](https://www.linuxuprising.com/2020/07/ubuntu-how-to-free-up-port-53-used-by.html)
+
+```bash
+systemctl disable systemd-resolved.service
+systemctl stop systemd-resolved.service
+```
+
+- install `network-manager` (`apt install network-manager`)
+- configure `netplan` to use `NetworkManager`
+
+---
+
 ## FAQ
 
 **Frage 1:** Ich verwende NAT und im Homeoffice über VPN habe ich immer wieder Probleme Hostnamen aus dem Private Network aufzulösen. Nicht immer, aber irgendwann passiert es dann mal und dann muß ich die Netzwerkverbindung neu initialisieren (`sudo systemctl stop systemd-resolved && sudo systemctl start systemd-resolved`). Was ist das Problem?
 
-**Antwort 1:** Der `systemd-resolved` ist ein DNS-Cache, den Ubuntu verwendet ... deshalb ist der Prozess auch an den Port `53` auf Deinem System gebunden. Bei einem `netstat -taupen | grep 53` bekomme ich folgende Ausgabe:
+**Antwort 1:** Der `systemd-resolved` ist ein DNS-Cache, den Ubuntu im Zusammenhang mit `systemd-networkd` verwendet. Deshalb ist der Prozess auch an den Port `53` (IANA-Port für DNS) auf Deinem System gebunden. Bei einem `netstat -taupen | grep 53` bekomme ich folgende Ausgabe:
 
 ```
 3:tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      102        410742     28695/systemd-resol

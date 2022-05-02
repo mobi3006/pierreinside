@@ -680,3 +680,7 @@ Die Frage ist also warum die Maschine nicht unter MachineRegistry registriert wi
 * per ``vagrant/vagrant`` anmelden
 * zum root werden per ``sudo bash``
 * ``shutdown -r 0``
+
+**Frage 10:** Ein `vagrant provision` funktioniert nicht. Es dauerte ewig und gibt dann die Meldung "Vagrant gathered an unknown Ansible versionand falls back on the compatibility mode '1.8'"
+
+**Antwort 10:** Mit einem `vagrant provision --debug` konnte ich den Output schon mal geschwätziger machen und sah dann, daß dort scheinbar das `/home/vagrant/.zshrc` ausgeführt wurde ... doch scheinbar leider nicht in einer ZSH Shell ... `bindkey: command not found`. Es hatte den Anschein als würde das Ansible Skript unter dem User `vagrant` ausgeführt (paßt auch zur Ausgabe von `vagrant ssh-config` passen) und dabei wurden das `/home/vagrant/.zshrc` Skript gezogen (der `vagrant` User hat `zsh` als Default-Shell). Dabei wurde das Kommando `bindkey` (verwendet in `.zshrc`) nicht gefunden.
