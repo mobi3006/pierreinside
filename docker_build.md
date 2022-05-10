@@ -147,6 +147,7 @@ Manchmal paketiert man nicht nur die Artefakte im Build, sondern stößt auch ta
 ## Multi-Platform Builds
 
 * [gute Einführung](https://www.inovex.de/de/blog/multi-architecture-docker-images/)
+* [mehr technische Internals (insbes. QEMU und `binfmt`)](https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408)
 
 Spätestens seit dem Wechsel von Apple zu ARM-Prozessoren (Apple Silicon) und des AWS-Supports (Graviton) für diese Architektur mit signifikant günstigeren Preisen (40%) ist im Docker-Bereich Mult-Platform-Support angesagt.
 
@@ -169,6 +170,25 @@ Hierbei handelt es sich um ein Plugin der Docker-CLI, das nur bei Setzen des Exp
 in `~/.docker/config.json` oder `/etc/docker/daemon.json` (je nach Linux-Distribution - hier Ubuntu) zur Verfügung steht (z. B. `docker buildx ls`). Nach dieser Konfiguration kann eine Docker-Daemon restart nicht schaden (z. B. `sudo systemctl restart docker`).
 
 Ich empfehle `build` als Default-Docker-Build-Variante per [`docker buildx install`](https://docs.docker.com/engine/reference/commandline/buildx_install/) zu setzen. Dadurch wird `docker build` ein Alias für `docker buildx build`.
+
+Unter Ubuntu werden die folgenden Packages benötigt:
+
+```bash
+# QEMU ist die Emulationssoftware (statisch gelinkt, um Dependency Probleme zu vermeiden)
+qemu-user-static
+
+# hierdurch wird das Kernel Modul "binfmt_misc" geladen
+binfmt-support
+```
+
+Auf dem Host-System (auch wenn man den Multiarch-Build später in einem Docker-Images macht) werden Handler für die verschiedenen Executable-Files der verschiedenen Architekturen benötigt. Am einfachsten installiert man die per `docker run --privileged --rm tonistiigi/binfmt --install all` (ist man nur an bestimmten Architekturen interessiert verwendet man beispielsweise `docker run --privileged --rm tonistiigi/binfmt --install arm64,riscv64,arm`). Danach sollten sich Handler in `/proc/sys/fs/binfmt_misc` befinden und die nachfolgenden Kommandos sollten (je nach ausgewählten Architekturen) funktionieren:
+
+```bash
+docker run --rm arm64v8/alpine uname -a
+docker run --rm arm32v7/alpine uname -a
+docker run --rm ppc64le/alpine uname -a
+docker run --rm s390x/alpine uname -a
+```
 
 Best-Practice ist die Erzeugung einer neuen Builder Instanz per `docker buildx create --use --name my-docker-builder` - dadurch verkonfiguriert man schon nicht den Default Builder ( `docker buildx ls`).
 

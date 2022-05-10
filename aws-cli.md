@@ -129,13 +129,13 @@ Mit dem [Amazon STS service](https://docs.aws.amazon.com/STS/latest/APIReference
 
 * [Homepage](https://github.com/99designs/aws-vault)
 
-Mit diesem Tool lassen sich AWS Credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) sicher speichern (es kann nicht mehr passieren, dass man unerwünscht seine `.aws/credentials` Datei nach GitHub pusht) und im `aws`-CLI in dieser Art und Weise verwenden:
+Mit diesem Tool lassen sich AWS Credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) sicher speichern (es kann nicht mehr passieren, dass man unerwünscht seine `.aws/credentials` Datei nach GitHub pusht - das wird GANZ schnell entdeckt und ausgenutzt ... ich habe das schon mal miterlebt) und im `aws`-CLI in dieser Art und Weise verwenden:
 
 > aws-vault exec mobi3006 -- aws s3 ls
 
 Am Kommando kann man schon erkennen, daß `aws-vault` ein Decorator ist, um mit der (frei-wählbaren) Profil-ID (hier: `mobi3006`) ein `aws` Kommando auszuführen.
 
-> Diese Profil-ID muss mit der AWS-Konfiguration `~/.aws/config` matchen!!!
+> Diese Profil-ID (hier: `mobi3006`) muss mit der AWS-Konfiguration `~/.aws/config` matchen!!!
 
 ![aws-vault.png](images/aws-vault.png)
 
@@ -161,7 +161,7 @@ Den Content der Einträge kann man allerdings nicht per `aws-vault` sehen - waru
 
 * aws-vault stellt nur den Wrapper bereit, um kurzlebige Tokens zu erzeugen
 * die Speicherung der Basis-Credentials erfolgt in einem separaten Backend (sog. Vaulting Backend)
-  * unter Linux ist das Default Backend Gnore-Keyring oder KWallet
+  * unter Linux ist das Default Backend Gnome-Keyring oder KWallet
     * man kann aber auch [`pass`](https://www.passwordstore.org) verwenden
   * unter MacOS ist es Keychain
 
