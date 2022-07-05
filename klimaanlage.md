@@ -71,10 +71,15 @@ Einige Bekannte habe solche Geräte und sind durchaus zufrieden. In meinem Fall 
   * von Velux soll es einen Plexiglasadapter geben
   * [Handwerker Ratgeber](https://handwerkerratgeber.info/fensterabdichtung-bei-dachfenstern-fuer-abluft-von-klimaanlagen/)
   * [3d Druck Oberberg](https://www.3d-druck-service-oberberg.de/shop/abluft-adapter-fuer-velux-dachfenster-klimageraet-trockner/)
+    * sieht brauchbar aus für 35 Euro
   * [Climia](https://www.climia.de/Climia-Fensteradapter-fuer-mobile-Klimageraete-ohne-Zubehoer/9190200.1)
+    * aha 200 Euro ... witzig
   * [Wiltec](https://www.amazon.de/dp/B004UOWEUQ?tag=ihre-waermepumpe-21&linkCode=ogi&th=1&psc=1&language=de_DE)
+    * sieht brauchbar aus
   * [plexihof](https://www.plexihof.ch/wir-bringen-k%C3%BChle-in-ihre-r%C3%A4ume/einsatzscheiben-f%C3%BCr-klimaanlagen/)
   * [Klarstein](https://www.klarstein.de/Klimageraete/Ersatzteile/Window-Kit-3-Fensterabdichtung-mobile-Klimageraete-Schiebefenster-PVC.html)
+
+Es gibt [passende Reduzierstücke für unter 10 Euro](https://www.amazon.de/dp/B09BJT1CGL/ref=sspa_dk_detail_4?psc=1&pd_rd_i=B09BJT1CGL&pd_rd_w=F7Irg&content-id=amzn1.sym.6cf54639-a6a7-4e9c-83cd-9d370a7d6ef0&pf_rd_p=6cf54639-a6a7-4e9c-83cd-9d370a7d6ef0&pf_rd_r=MFG853NQTQMB69A69DH6&pd_rd_wg=9sG9R&pd_rd_r=0600f45b-7fbd-44e8-a95e-3b6a847cd164&s=diy&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyTTdSWFNJMFRDMlBGJmVuY3J5cHRlZElkPUEwNjI3NDQ3MTRJR1o3ME9BUEY3MCZlbmNyeXB0ZWRBZElkPUEwODQ3MzY2MzZCQVgzV1FYNUg0VSZ3aWRnZXROYW1lPXNwX2RldGFpbF90aGVtYXRpYyZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=).
 
 ### Klarstein Kraftwerk
 

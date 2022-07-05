@@ -171,7 +171,7 @@ in `~/.docker/config.json` oder `/etc/docker/daemon.json` (je nach Linux-Distrib
 
 Ich empfehle `build` als Default-Docker-Build-Variante per [`docker buildx install`](https://docs.docker.com/engine/reference/commandline/buildx_install/) zu setzen. Dadurch wird `docker build` ein Alias für `docker buildx build`.
 
-Unter Ubuntu werden die folgenden Packages benötigt:
+Unter Ubuntu 18.04 werden die folgenden Packages benötigt (in Ubuntu 20.04 allerdings nicht mehr - zumindest nicht, wenn man `tonistiigi/binfmt` verwendet):
 
 ```bash
 # QEMU ist die Emulationssoftware (statisch gelinkt, um Dependency Probleme zu vermeiden)
@@ -181,7 +181,11 @@ qemu-user-static
 binfmt-support
 ```
 
-Auf dem Host-System (auch wenn man den Multiarch-Build später in einem Docker-Images macht) werden Handler für die verschiedenen Executable-Files der verschiedenen Architekturen benötigt. Am einfachsten installiert man die per `docker run --privileged --rm tonistiigi/binfmt --install all` (ist man nur an bestimmten Architekturen interessiert verwendet man beispielsweise `docker run --privileged --rm tonistiigi/binfmt --install arm64,riscv64,arm`). Danach sollten sich Handler in `/proc/sys/fs/binfmt_misc` befinden und die nachfolgenden Kommandos sollten (je nach ausgewählten Architekturen) funktionieren:
+Auf dem Host-System (auch wenn man den Multiarch-Build später in einem Docker-Images macht) werden Handler für die verschiedenen Executable-Files der verschiedenen Architekturen benötigt. Am einfachsten installiert man die per `docker run --privileged --rm tonistiigi/binfmt --install all` (ist man nur an bestimmten Architekturen interessiert verwendet man beispielsweise `docker run --privileged --rm tonistiigi/binfmt --install arm64,riscv64,arm`).
+
+> Auf einem CentOS 7 image hat das nicht funktioniert ... hier musste ich [qemu-user-static](https://github.com/multiarch/qemu-user-static) über `docker run --rm --privileged multiarch/qemu-user-static:register --reset` bzw. (mit `--userns host`) `docker run --rm --userns host --privileged multiarch/qemu-user-static:register --reset` verwenden.
+
+Danach sollten sich Handler in `/proc/sys/fs/binfmt_misc` befinden und die nachfolgenden Kommandos **MÜSSEN** (je nach ausgewählten Architekturen) funktionieren:
 
 ```bash
 docker run --rm arm64v8/alpine uname -a
@@ -190,9 +194,7 @@ docker run --rm ppc64le/alpine uname -a
 docker run --rm s390x/alpine uname -a
 ```
 
-Best-Practice ist die Erzeugung einer neuen Builder Instanz per `docker buildx create --use --name my-docker-builder` - dadurch verkonfiguriert man schon nicht den Default Builder ( `docker buildx ls`).
-
-> Durch `--use` wird diese Instanz direkt als Builder-Default konfiguriert. Ansonsten kann man das per `docker buildx use my-docker-builder` auch nachholen.
+Best-Practice ist die Erzeugung einer neuen Builder Instanz per `docker buildx create --use --name my-docker-builder` - dadurch verkonfiguriert man schon nicht den Default Builder. Mit `docker buildx ls` sollte man anschließend überprüfen, ob der erzeugte Builder tatsächlich als Default gekennzeichnet ist und tatsächlich alle Formate aus `/proc/sys/fs/binfmt_misc` als Platforms unterstützt.
 
 Anschließend kann man per
 

@@ -29,11 +29,28 @@ Ein Workflow kann selbst wieder Workflows aufrufen, die im gleichen aber auch in
 
 ### Permissions
 
-* [GitHub Doku](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions)
+* [GitHub - Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
+* [GitHub - workflow-syntax-for-github-actions - Permissions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions)
+* [GitHub - Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions)
+
+Eine Action bekommt vom GitHub-Framework zu Beginn immer einen `${{ scerets.GITHUB_TOKEN }}` beigesteuert und steht implizit zur Verfügung. Damit lassen sich dann Aktionen auf dem Repo oder API-calls oder ...  ausführen.
+
+> Im Hintergrund wird eine GitHub App auf dem Repository installiert, das dann die Tokens erzeugt. Man kann die Permissions im Workflow steuern (über den `permissions:` Abschnitt)
+
+Mit diesem Token hat man Zugriff auf das eigene Repository.
+
+> gibt man Secrets über Log-Output (innerhalb eines Workflows) aus, dann wird der Inhalt durch `****` ersetzt. Das funktioniert i. d. R. sehr gut - es ist aber nicht komplett unmöglich, daß Secrets im Log erscheinen. Man sollte hier den best-Practices folgen.
+
+Für den Zugriff auf andere Repositories können [folgende Ansätze](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#considering-cross-repository-access) verwendet werden:
+
+* Repository Deploy Keys
+* GitHub App tokens - RECOMMENDED
+* Personal Access Tokens
+  * NICHT recommended, da dir Granularität nicht gut ist und der Token an einem echten Benutzer hängt (für Automatisierung geschäftkritischer Workflows SEHR unpraktisch ... plötzlich hat der Mitarbeiter gekündigt und seine gesamten Token sind sofort ungültig)
+* SSH-keys an einem Personal Account
+  * noch schlimmer als Personal Access Tokens: "Workflows should never use the SSH keys on a personal account."
 
 By Default hat ein Workflow nur Permissions, um auf das eigene Repository (inkl. Secrets) zuzugreifen. Wird der Zugriff auf ein anderes Repository benötigt, so bieten sich GitHub Apps an, die dann im Auftrag handeln.
-
-> Bei der Ausführung des Workflows sorgt GitHub dafür, daß die Ausführungsengine einen `GITHUB_TOKEN` erhält. Mit der `permissions:` Direktive lassen sich die Permissions steuern.
 
 ---
 
