@@ -64,7 +64,7 @@ Bei der Erzeugung eines GPG-Keys
 gpg --full-generate-key
 ```
 
-wird eine GPG-ID erzeugt ... die sieht ungefähr so aus: `0D2740AEE2781B3`. Hat man seine GPG-ID nicht aufgesschrieben, so kann man die Info aus dem GPG-Store per
+wird eine GPG-ID erzeugt ... die sieht ungefähr so aus (ein Beispiel): `0D2740AEE2781B3`. Hat man seine GPG-ID nicht aufgesschrieben, so kann man die Info aus dem GPG-Store per
 
 ```bash
 gpg --list-secret-keys --keyid-format LONG
