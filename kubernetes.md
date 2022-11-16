@@ -88,7 +88,9 @@ Grundsätzlich basiert Kubernetes auf der Idee, das Deployment über mehrere Mas
 
 Die manuelle Installation eines Kubernetes-Clusters ist nicht trivial (insbes. hinsichtlich der Netzwerkkonfiguration). Insofern ist Minikube ein guter Startpunkt. Auf vielen IaaS-Plattformen (z. B. AWS) existieren fertige Templates, die die Installation und Konfiguration zu einem Kinderspiel machen. Auch das ist ein guter Startpunkt.
 
-## Lokale Installation per Minikube/Virtualbox
+---
+
+## Lokale Installation per Minikube
 
 * [Homepage Minikube](https://github.com/kubernetes/minikube)
 
@@ -142,22 +144,30 @@ Entweder macht man ein `minikube ssh`, um auf die Konsole des Minikube-Images zu
 
 * https://github.com/kubernetes/minikube/blob/master/docs/reusing_the_docker_daemon.md
 
+---
+
 ## Lokale Installation per Shipyard
 
 ... pending
+
+---
 
 ## Lokale Installation per LinuxKit
 
 * [YouTuber Video - DockerCon 2017](https://youtu.be/FEtVxwsCUBY?t=1246)
 * [GitHub](https://github.com/linuxkit/linuxkit/tree/master/projects/kubernetes)
 
-## Docker Desktop
+---
+
+## Lokale Installation per Docker Desktop
 
 ... enthält bereits ein Kubernetes
 
 ---
 
-## Google Cloud Engine
+## CI/CD
+
+* [Argu CD](https://argo-cd.readthedocs.io)
 
 ---
 

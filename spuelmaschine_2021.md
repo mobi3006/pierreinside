@@ -8,7 +8,7 @@ ACHTUNG: die UVPs der Hersteller sind Mondpreise ... die Straßenpreise liegen b
 
 ## Anforderungen
 
-* Unterbau oder teilintegriert (statt Einbau, freistehend, vollintegriert)
+* teilintegriert, da ein Geschirrspüler 15 Jahre genutzt wird und wir in dieser Zeit evtl. auch mal die Küche erneuern (statt Unterbau (feste Front), Einbau (Korpus notwendig), freistehend, vollintegriert (Knöpfe innen))
   * ich habe noch eine Frontblende passend zu unserer Küche in der Größe 59,5 x 70,5 cm
 * leise (40-50 db)
   * wir haben eine zum Wohnzimmer offene Küche und einen 5-Personen-Haushalt (läuft also täglich)
