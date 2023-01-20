@@ -318,6 +318,14 @@ Die `./main.tf` agiert als Controller, um die Daten aus `./middleware/output.tf`
 
 Terraform bietet kleine Helferfunktionen, denn auch eine deklarative Sprache kommt nicht ohne aus.
 
+### Data Sources
+
+Data Sources stellen Terraform aktuelle Informationen aus der Umgebung bereit. Diese Bereitstellung erfolgt über Queries, die die Data Source zur Ausführungszeit gegen die APIs der Laufzeitumgebung macht. Dies ist **KOMPLETT** entkoppelt vom Terraform State.
+
+Data Sources haben das Ziel nicht terraform managed Ressources in Terraform zu integrieren.
+
+Eine Alternative zu Data Sources ist die Abfrage eines Remote-Terraform-States ... aber dazu muss die andere Ressource natürlich mit Terraform gemanged sein ... sonst hätte sie ja keinen Terraform-State.
+
 ### Refactorings
 
 Nach einem refactoring sollte man immer ein `terraform get` machen, da beispielsweise ein Umbenennen eines lokalen Moduls im `.terraform/modules/modules.json` repräsentiert werden muss. Ansonsten scheitern `terraform plan` und/oder `terraform apply`.
@@ -479,6 +487,8 @@ kann man den State verschlüsselt in S3 ablegen ... für die Arbeit im Team ist 
 Hatte man vorher den State lokal, dann "migriert" man ihn nach obiger Konfiguration per `terraform init -migrate-state` in den Bucket übertragen.
 
 > letztlich ist das nur ein Copy-Kommando wie `aws s3 cp terraform.tfstate s3://my-bucket/terraform.tfstate`
+
+Entkoppelte Terraform-Bundles (mit eigenem State) können den State eines anderen Bundles (remote) abfragen und sich so notwendige Informationen beschaffen. Auf diese Weise entsteht eine lose Kopplung ... mit allen Vor- und Nachteilen.
 
 ### Import
 
