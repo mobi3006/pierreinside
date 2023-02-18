@@ -141,6 +141,7 @@
       * [Docker Getting Started](docker_gettingStarted.md)
       * [Debugging Docker](docker_debug.md)
       * [Docker Build](docker_build.md)
+      * [Docker Registry](docker_registry.md)
       * Docker run
         * [docker run](docker_run.md)
         * [docker network](docker_network.md)
@@ -189,7 +190,8 @@
   * [Git](git.md)
   * [GitHub](github.md)
     * [GitHub Organizations](github-organizations.md)
-  * [GitHub Pages](githubPages.md)
+  * [GitHub Actions](github-actions.md)
+  * [GitHub Pages](github-pages.md)
   * [GitBook](gitbook.md)
   * [GitLab](gitlab.md)
   * [Bitbucket/Stash](bitbucket.md)
@@ -252,6 +254,8 @@
     * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
     * [Dockingstation](dockingstation.md)
     * [Gaming PC 2021](gaming-pc.md)
+    * [Mobiles Internet](mobiles-internet.md)
+    * [Mobiler Router](mobiler-router.md)
   * [Beamer Benq W1000+](beamer_benq_w1000plus.md)
   * Spielekonsole
     * [2017](spielekonsole_2017.md)

@@ -22,6 +22,36 @@ Leider sind die WLAN Hotspots in Hotels und Campingplätzen nicht zu gebrauchen.
 
 Fazit: WLAN-Hotspots sind die kostengünstigste Variante (aus Sicherheitsgründen oder wegen IP-Whitelisting mit VPN Verbindung). Leider sind sie nicht immer zuverlässig, so dass man eine Alternative parat haben sollte.
 
+### Sicherheit
+
+Ein öffentliches WLAN ist natürlich immer als Angriffsvektor zu sehen. Öffne ich ich eine Seite im Browser über "https" (z. B. https://heise.de), so ist die standardmässig verschlüsselt. Allerdings hängt es auch hier vom Endgerät ab wie gut die Verschlüsselung ist. Gute Server verhindern eine Verbindung, wenn der Client keine ausreichende Verschlüsselung unterstützt. Insofern ist das schon sicher und der Betreiber des öffentlichen Hotspots sollte keine Chance haben, die transferierten Daten (auch Passwörter) auszulesen.
+
+Gute Seiten (z. B. http://heise.de) leiten auch IMMER auf die sichere Seite (https://heise.de) um. Teilweise tut das der Browser sogar schon automatisch, so dass es nicht mehr der Server tun muss.
+
+Aus dem Browser heraus ist das also alles schon mal ganz sicher, so dass normales Surfen kein Problem sein sollte.
+
+Allerdings laufen auf einem Laptop oder Handy, das sich mit dem öffentlichen WLAN verbunden hat, noch andere Anwendungen. Professionelle Anwendungen werden die sichere Verschlüsselung wie im Browser genauso verwenden. 
+
+Hat man allerdings unsichere Apps installiert, denen man sogar Passwörter anvertraut hat, dann sieht das schon ganz anders aus.
+
+Ganz dramatisch wird es wenn man auf dem Endgerät keine Sicherheitsupdates gemacht oder noch schlimmer gar keine mehr bereitgestellt werden bzw. wurden.
+
+> Das ist übrigens der Grund warum ich von Android auf iPhone gewechselt habe. Die Update-Frequenz bei meinen Android Geräten war so gering, dass ich einfach kein Vertrauen mehr hatte. Das ist bei der Flagschiffen der großen Anbieter sicher in den Anfangsjahren sicher wie bei Apple auf hohem Niveau. Später lässt das aber auch nach und bei den Billig-Handys bekommt man schon gar keine zeitnahen Updates. Verwendet man dann noch immer die gleichen Passwörter und keinen Second-Factor ... gute Nacht.
+
+Aus diesem Grund vermeide ich WLANs, wenn es geht - lieber verwende ich meine mobilen Daten.
+
+Ein VPN verschlüsselt jeglichen Datenverkehr zuverlässig auf den unteren Netzwerklayern und ist deshalb zu empfehlen. Wenn ich im Browser dann eine Seite per "http" (statt https) aufrufe, dann wir der Datenverkehr zwar nicht auf diesem Applikationslayer verschlüsselt, wohl aber auf einem der unteren Layern. Insofern können auch unsichere Apps/Anwendungen genutzt werden, ohne Gefahr zu laufen, dass sensitive Daten in falsche Hände gelangen.
+
+Mit einem zwischen iPhone und WLAN-Hotspot zwischengeschalteten [Slate](slate.md) lassen sich sichere VPN Verbindungen mit den typischen VPN-Anbietern aufbauen. Die Nutzung von WLAN-Hotspots ist dann sicher.
+
+---
+
+## Data-Pass
+
+Manche Mobilfunkanbieter bieten sog. Data-Pass an, um bei einem tempopären Mehrbedarf nochmal einen Block (5, 10, 20 GB) hinzuzubuchen. Dies Option ist vermutlich am einfachsten ... wenn auch vielleicht nicht am günstigsten, da die Data-Passes zumiest nicht super-billig sind.
+
+> Man sollte die Option "Daten-Automatik" i. a. deaktivieren, da man hier dann für minimale Datenmengen einen sehr hohen Preis zahlen muss.
+
 ---
 
 ## Temporäre SIM-Karte oder eSIM
@@ -59,3 +89,18 @@ ALLERDINGS: ein Anbieter für alle Länder ... das kann dazu führen, dass man n
 ## Cloud SIM
 
 Dieser Ansatz wird im Abschnitt ["Mobiler Router"](mobiler-router.md) behandelt.
+
+---
+
+## Film-Streaming
+
+Beim Streaming fallen erhebliche Datenmengen an
+
+* SD-Auflösung: 0,5 GB pro Stunde
+* HD-Auflösung: 1 GB pro Stunde
+
+Mal ein paar Filme zu schauen ist vielleicht noch im eigenen Vertrag möglich, doch i. a. hat man einen Vertrag, der für die normale Nutzung zugeschnitten ist ... sonst würde man das Geld ja zum Fenster rauswerfen und die Mobilfunkunternehmen reiben sich die Hände.
+
+Es kann passieren, dass der Streaming-Anbieter nicht exakt so funktioniert wie zuhause, weil er an der IP-Adresse erkennt, dass man nun z. B. aus Frankreich kommt (sog. Geo-Blocking). Dann könnten die manche Filme nicht oder in anderen Sprachen verfügbar sein. Stolpert man über dieses Problem, kann eine VPN-Verbindung helfen. Hier lässt sich dann ein deutsche IP-Adresse auswählen und Netflix denkt man sein in Deutschland.
+
+> VPN-Anbieter kosten nochmal zusätzlich Geld ... häufig bieten sie ihre Abos am Black-Friday mit einem Nachlass von 90% an, so dass man dann auf einen Monatspreis von 2-4 Euro kommt.

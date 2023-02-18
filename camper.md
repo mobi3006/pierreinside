@@ -274,6 +274,8 @@ Daneben gibt es noch Pumpen mit Akku, der zudem per USB geladen wird. Davon halt
 
 ### Internet
 
+* im Detail im Abschnitt ["Mobiles Internet"](mobiles-internet.md) betrachtet
+
 Die meisten Campingplätze bieten WLAN an ... Glücksache, ob das gut funktioniert - zudem sollte man über VPN nachdenken.
 
 Vielleicht braucht es auch eine mobile Lösung ... [lokale Prepaid-Karten](), Roaming, ...

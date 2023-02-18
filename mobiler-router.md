@@ -6,7 +6,9 @@ Derzeit benutze ich mein iPhone als mobilen Router über WLAN-Tethering. Das fun
 
 Allerdings ist der Stromverbrauch an meinem iPhone dann relativ hoch (gelegentlich wird es auch warm). Störender ist allerdings, dass ich es immer wieder mal aus- und dann wieder einschalten muss, um es zu finden.
 
-Ein mobiler Router wäre ein wenig komfortabler (ausserdem müsste mein Handy dann nicht immer für aller erreichbar sein - ich bin ja vielleicht auch mal nicht da)... ist aber natürlich mit Kosten für die Anschaffung und eine weitere SIM-Karte verbunden (vielleicht bietet der eigene Anbieter auch schon Multi-SIMs für wenig Geld an).
+Ein mobiler Router wäre ein wenig komfortabler (ausserdem müsste mein Handy dann nicht immer für aller erreichbar sein - ich bin ja vielleicht auch mal nicht da) ... ist aber natürlich mit Kosten für die Anschaffung und eine weitere SIM-Karte verbunden (vielleicht bietet der eigene Anbieter auch schon Multi-SIMs für wenig Geld an).
+
+> *ACHTUNG:* Wenn man Tethering verwendet, dann wird ein WLAN bereitgestellt, mit dem sich die anderen Endgeräte verbinden. Auf den Endgeräten sollte man die Update-Automatik von Apps und Betriebssystem ausschalten. Ansonsten werden zuviele Daten gezogen und das Datenkontingent ist schnell aufgebraucht.
 
 ---
 
@@ -54,6 +56,13 @@ Bekannte Anbieter
 Mobile Ro
 
 ### Channel 
-   
+
 ### WLAN Frequenzbank
 
+### VPN
+
+Es wäre schon sehr praktisch, wenn der mobile Router direkt ein VPN über einen Standard-Anbieter wie NordVPN, Surfshark, ...
+
+Bisher habe ich das so noch nicht integriert gesehen.
+
+Allerdings lassen sich Geräte wie der [Slate](slate.md) vorschalten, die diese Funktion übernehmen.
