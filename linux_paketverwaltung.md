@@ -77,6 +77,10 @@ Die Mächtigkeit und Eleganz von *apt* haben auch andere Distributionen erkannt 
 * ``apt-get upgrade``
   * Aktualisiert alle Pakete auf den neuesten Stand (gemäss ``/etc/apt/sources.list``). Vorher muss ein ``apt-get update`` erfolgen. **ABER:** benötigt ein upzugradendes Paket ein Upgrade eines anderen Pakets, dann sorgt der upgrade-Befehl nicht für dessen automatische Installation, sondern das Upgrade wird nicht durchgeführt. Insofern ist upgrade nur für kleinere Upgrades (z. B. Security-Patches) nützlich. Für größere Anpassungen muss man ``dist-upgrade`` nehmen.
 
+`upgrade` vs `dist-upgrade`:
+
+* [siehe hier](https://askubuntu.com/questions/81585/what-is-dist-upgrade-and-why-does-it-upgrade-more-than-upgrade) 
+
 ### apt-key
 
 Softwareinstallationen sollten generell nur von vertrauenswürdigen Quellen erfolgen, sonst kann Schadsoftware das System komprimittieren (z. B. Trojaner). Werden neue Quellen hinzugefügt, muß noch explizit angegeben werden, daß dieser Quelle und somit der davon bereitgestellten Software vertraut wird.

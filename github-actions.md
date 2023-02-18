@@ -45,12 +45,38 @@ Für den Zugriff auf andere Repositories können [folgende Ansätze](https://doc
 
 * Repository Deploy Keys
 * GitHub App tokens - RECOMMENDED
-* Personal Access Tokens
+* Personal Access Tokens ... Details im nächsten Kapitel
   * NICHT recommended, da dir Granularität nicht gut ist und der Token an einem echten Benutzer hängt (für Automatisierung geschäftkritischer Workflows SEHR unpraktisch ... plötzlich hat der Mitarbeiter gekündigt und seine gesamten Token sind sofort ungültig)
+    * das stimmm im Januar 2023 so nicht mehr ... auch bei PATs lassen sich feingranulare Permissions vergeben
 * SSH-keys an einem Personal Account
   * noch schlimmer als Personal Access Tokens: "Workflows should never use the SSH keys on a personal account."
 
 By Default hat ein Workflow nur Permissions, um auf das eigene Repository (inkl. Secrets) zuzugreifen. Wird der Zugriff auf ein anderes Repository benötigt, so bieten sich GitHub Apps an, die dann im Auftrag handeln.
+
+### GitHub App Tokens
+
+* [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
+
+Jeder Workflow erhält einen `GITHUB_TOKEN`, mit dem der Workflow automatisch Zugriff auf das aktuelle Repository hat. Dieser Token wird von einer GitHub App erzeugt, die automatisch (weitestgehend unsichtbar) installiert wird sobald man GitHub Actions auf dem Repository enabled. Der Token steht dem Workflow dann auch explizit als Secret zur Verfügung
+
+> ${{ secrets.GITHUB_TOKEN }}
+
+Für den REST-Zugriff per `curl` könnte man dieses Token dann folgendermassen verwenden (um einen GitHub Issue anzulegen):
+
+```
+curl \
+   --request POST \
+   --url https://api.github.com/repos/${{ github.repository }}/issues \
+   --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
+```
+
+Ein solcher Token hat zunächst mal die [Standard-Permissions](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token) (wie sie GitHub definiert hat). Über die [`permissions` Direktive](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions) im GitHub Workflow Script lassen sich die Permissions erweitern und reduzieren.
+
+Benötigt nun ein Workflow erweiterten Zugriff (z. B. auf ein anderes Repository), dann muss man eine [GitHub App](https://docs.github.com/en/developers/apps/building-github-apps/authenticating-with-github-apps#authenticating-as-an-installation) mit den entsprechenden Permissions of die benötigten Repositories installieren, die dann Zugriff auf das Repository erhält. Diese App ist dann in jedem Repository zu sehen auf das es Zugriff bekommen hat.
+
+Für die Nutzung der GitHub App ist natürlich eine Authentifizierung erforderlich. Mögliche Varianten:
+
+* Client-Zertifikat
 
 ---
 
@@ -308,7 +334,45 @@ verwenden.
 
 ## GitHub Secrets
 
-Für eine Integration mit anderen Systemen benötigt man entsprechende Credentials. Hierfür bietet GitHub einen Secret Store auf verschiedenen Ebenen (Repo, Organisation)
+Für eine Integration mit anderen Systemen benötigt man entsprechende Credentials. Hierfür bietet GitHub einen Secret Store auf verschiedenen Ebenen (Organisation, Repo, Environment).
+
+Secrets können an einen Reusable Workflow per `secrets: inherit` komplett weitergegeben werden
+
+```
+jobs:
+  call-workflow-passing-data:
+    uses: octo-org/example-repo/.github/workflows/reusable-workflow.yml@main
+    with:
+      config-path: .github/labeler.yml
+    secrets: inherit
+```
+
+oder aber per `secrets: MYSECRET` einzeln
+
+```
+jobs:
+  call-workflow-passing-data:
+    uses: octo-org/example-repo/.github/workflows/reusable-workflow.yml@main
+    with:
+      config-path: .github/labeler.yml
+    secrets:
+      envPAT: ${{ secrets.envPAT }}
+```
+
+Im Reusable Workflow muss man die zu verwendenden Secrets dann allerdings explizit in der `on` Section definieren:
+
+```
+name: My Reusable Workflow
+on:
+  workflow_call:
+    inputs:
+      ...
+    secrets:
+      envPAT:
+        required: true
+```
+
+
 
 ---
 
