@@ -53,16 +53,51 @@ Bekannte Anbieter
 
 ### Akku
 
-Mobile Ro
 
-### Channel 
+### Channel Aggregation (CA)
+
+das sollte die Geschwondigkeit erhöhen
 
 ### WLAN Frequenzbank
 
+### Mobilfunkt-Standard
+
+... 3G, 4G, LTE, 5G
+
+Anfang 2023 sind die 5G Modelle noch sehr teuer
+
 ### VPN
 
-Es wäre schon sehr praktisch, wenn der mobile Router direkt ein VPN über einen Standard-Anbieter wie NordVPN, Surfshark, ...
+Es wäre schon sehr praktisch, wenn der mobile Router direkt ein VPN über einen Standard-Anbieter wie NordVPN, Surfshark, ... anbinden könnte und zudem ein WLAN-Access-Point wie der [Slate](slate.md) bereitstellen könnte, so dass WLAN-Hotspots VPN-verschlüsselt genutzt werden können.
 
 Bisher habe ich das so noch nicht integriert gesehen.
 
 Allerdings lassen sich Geräte wie der [Slate](slate.md) vorschalten, die diese Funktion übernehmen.
+
+---
+
+## Netgear Nightwawk M1
+
+Der M1 ist das günstigste Gerät (Februar 2023: 300 Euro), seine Geschwister kosten das 2-3 fache. Dafür bekommt man ein chices und performantes Gerät.
+
+---
+
+## GL-iNet Mudi
+
+* [YouTube Video](https://www.youtube.com/watch?v=LfAGOf0TCXc)
+
+Der Mudi ist nahezu die eierlegende Wollmilchsau, da er
+
+* von einer nachhaltigen professionellen Firma produziert wird, deren Produkte über Jahre gepflegt werden
+* mobil einsetzbar ist (gtoßer Akku vorhanden)
+  * im Gegensatz zu [GL-iNet Slate](slate.md), den ich schon habe ... und von dem ich begeistert bin
+* viele Modi unterstützt
+  * mobiles internet via SIM-Karte
+  * Wifi-Repeater ... damit kann das unsichere Hotel-WLAN über VPN und TOR sicher gemacht werden
+* Sicherheitsfeatures wie VPN und TOR bietet
+  * alle Endgeräte surfen damit sicher
+* 2,4 und 5 GHz WLAN bereitstellt
+* einen grossen Akku hat
+* einigermassen bezahlbar ist (240 Euro)
+
+Somit kann er mit WLAN-Hotspots und SIM genutzt werden. Das einzige Manko ist die fehlende Unterstützung von eSIMs ... sonst wäre das Gerät perfekt.
