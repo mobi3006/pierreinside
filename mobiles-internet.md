@@ -22,7 +22,19 @@ Leider sind die WLAN Hotspots in Hotels und Campingplätzen nicht zu gebrauchen.
 
 Fazit: WLAN-Hotspots sind die kostengünstigste Variante (aus Sicherheitsgründen oder wegen IP-Whitelisting mit VPN Verbindung). Leider sind sie nicht immer zuverlässig, so dass man eine Alternative parat haben sollte.
 
+### Hotspot Flatrate
+
+Einige Anbieter (Freenet, Telekom, Vodafone, ...) bieten sog. Hotspot Flatrates, die man auch ohne einen teuren und langfristigen Vertrag hinzubuchen kann (auch für externe Kunden - man muss also seinen Mobilfunkvertrag nicht dort haben). Sehr günstig (unter 5 Euro - in vielen Tarifen dieser Anbieter auch schon enthalten) kann man sich dann in viele Partner-Hotspots einwählen, mit denen der Provider zusammenarbeitet. Häufig sind das kleine Geschäfte, Hotels, Campingplätze, Tankstellen.
+
+Freenet bietet angeblich auch den Zugang zu allen Telekom-Hotspots ...
+
+Ich würde hier nicht allzuviel erwarten - Geschwindigkeit und Zuverlässigkeit sind wahrscheinlich mäßig.
+
 ### Sicherheit
+
+* [so geht's richtig mit dem Slate](https://www.youtube.com/watch?v=AH9smQhUdPc)
+  * [Slate](slate.md)
+* [VPN Einrichtung](https://www.youtube.com/watch?v=RmOkknhkWuI)
 
 Ein öffentliches WLAN ist natürlich immer als Angriffsvektor zu sehen. Öffne ich ich eine Seite im Browser über "https" (z. B. https://heise.de), so ist die standardmässig verschlüsselt. Allerdings hängt es auch hier vom Endgerät ab wie gut die Verschlüsselung ist. Gute Server verhindern eine Verbindung, wenn der Client keine ausreichende Verschlüsselung unterstützt. Insofern ist das schon sicher und der Betreiber des öffentlichen Hotspots sollte keine Chance haben, die transferierten Daten (auch Passwörter) auszulesen.
 
@@ -38,7 +50,7 @@ Ganz dramatisch wird es wenn man auf dem Endgerät keine Sicherheitsupdates gema
 
 > Das ist übrigens der Grund warum ich von Android auf iPhone gewechselt habe. Die Update-Frequenz bei meinen Android Geräten war so gering, dass ich einfach kein Vertrauen mehr hatte. Das ist bei der Flagschiffen der großen Anbieter sicher in den Anfangsjahren sicher wie bei Apple auf hohem Niveau. Später lässt das aber auch nach und bei den Billig-Handys bekommt man schon gar keine zeitnahen Updates. Verwendet man dann noch immer die gleichen Passwörter und keinen Second-Factor ... gute Nacht.
 
-Aus diesem Grund vermeide ich WLANs, wenn es geht - lieber verwende ich meine mobilen Daten.
+Aus diesem Grund vermeide ich WLANs, wenn es geht und ich meine Verbindung nicht über VPN abgesichert habe - lieber verwende ich meine mobilen Daten.
 
 Ein VPN verschlüsselt jeglichen Datenverkehr zuverlässig auf den unteren Netzwerklayern und ist deshalb zu empfehlen. Wenn ich im Browser dann eine Seite per "http" (statt https) aufrufe, dann wir der Datenverkehr zwar nicht auf diesem Applikationslayer verschlüsselt, wohl aber auf einem der unteren Layern. Insofern können auch unsichere Apps/Anwendungen genutzt werden, ohne Gefahr zu laufen, dass sensitive Daten in falsche Hände gelangen.
 
@@ -64,7 +76,7 @@ Diese SIM-Karte steckt man dann in sein Dual-SIM-Handy, ein Zweithandy oder eine
 
 Physische SIM-Karten müssen natürlich in einem Laden gekauft werden (oder werden vorab verschickt), eSIMS hingegen sind in sekundenschnelle online gekauft und einsatzbereit. Hier muss man nichts plane, sondern kann kruzfristig auf Engpässe (wenn man merkt dass das WLAN auf dem Campingplatz doch nichts taugt) reagieren.
 
-Einige Anbieter:
+Einige Anbieter ([gute Übersicht](https://prepaid-data-sim-card.fandom.com/wiki/Prepaid_SIM_with_data)):
 
 * [airalo](https://www.airalo.com/de)
 * [FlexiRoam](https://travel.flexiroam.com)
@@ -76,7 +88,17 @@ Wichtig ist natürlich, dass man dann auch ein Netz bekommt, das auch tatsächli
 
 Reist man ins nicht-europäische Ausland, so fallen i. a. Roaminggebühren an, die sehr hoch sind und die Datennutzung zum Luxus werden lassen.
 
-In solchen Fällen ist es sinnvoller eine lokale Prepaid-SIM-Karte zu verwenden.
+In solchen Fällen ist es sinnvoller eine lokale Prepaid-SIM-Karte zu verwenden. Allerdings braucht man hier in vielen Ländern eine Identifikationsprüfung.
+
+Europa:
+
+* O2 - Internet-to-Go
+   * [O2 - 999 GB - 4 Wochen](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/)
+   * [O2 - 30 GB - 365 Tage](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/)
+
+Frankreich:
+
+* [Anbieter free - 100GB für 20 Euro](https://comewithus2.com/free-die-prepaid-sim-karte-in-frankreich/)
 
 ### Globale SIM-Karten
 

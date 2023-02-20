@@ -24,12 +24,21 @@ Zudem hat er einen Micro-SD-Slot als Datenspeicher.
 
 > nach einem Reset auf Werkseinstellungen muss dieser Vorgang wiederholt werden
 
-Der Slate arbeitet per Default im Router-Modus, d. h. er baut nach dem Start zwei eigene WLANs (2,4 GHz und 5 GHz) auf. Mit einem der WLANs muß man sich verbinden und die Erst-Konfiguration über die Adminitrations-Web-Oberfläche vornehmen - die Zugangsdaten befinden sich auf der Unterseite des Slate. Nachdem die WLAN-Verbindung steht, gehts per Internet-Browser zur Erst-Konfiguration per Web-UI. Die IP-Adressen sind im Werkszustand
+Die schnelle Erstinbetriebnahme dauert nur 2 Minuten.
 
-* normales WLAN: `192.168.8.1` - nur hierüber ist die Admin-Web-UI erreichbar
-* Gäste-WLAN: `192.168.9.1`
+Bei der Erst-Inbetriebnahme oder nach einem Reset auf Werkseinstellungen arbeitet der Slate im Netzwerkmodus "Router". Er bietet zwei eigene WLANs (2,4 GHz und 5,0 GHz) an, an die man sich mit dem Standardpasswort `goodlife` (steht auch auf dem Gerät). Über die URL [http://192.168.8.1](http://192.168.8.1) kann man sich mit der Administrationsoberfläche des Slate verbinden. Bei der Erstinbetriebnahme muss man hier ein Passwort für den User `root` eingeben.
 
-und das WLAN Password ist `goodlife`. Bei der Erstanmeldung über das Web-UI http://192.168.8.1 (leider kein SSL Support) muß man ein Passwort für den Adminitrator-User `root` vergeben.
+Der Slate hat zunächst mal keine Internetverbindung. Man kann folgende Varianten konfigurieren:
+
+* Repeater
+  * der Slate wird mit einem vorhandenen WLAN verbunden
+* Kabel
+  * der Slate wird mit einem Internet-Router über die WAN-Buchse verbunden
+* Tethering
+  * der Slate wird über USB mit dem Handy verbunden und nutzt die dort über Tethering freigegebene Internetverbindung. Hat bei meinem iPhone 13 auf Anhieb problemlos funktioniert
+* 3G/4G
+  * der Slate verwendet einen USB-Stick mit SIM-Karte, um eine Internetverbindung aufzubauen
+  * [kompatible USB-Sticks](https://docs.gl-inet.com/en/4/tutorials/internet_cellular/#compatible-modems)
 
 Die wichtigste Entscheidung ist die der Netzwerk-Architektur (siehe unten). Per Default ist der Slate im Router-Modus.
 
@@ -54,8 +63,6 @@ Durch drücken des Reset-Buttons (neben dem Mode-Button) für 10 Sekunden wird d
 ## Network-Mode
 
 * [Dokumentation](https://docs.gl-inet.com/en/3/setup/slate/more_settings/#network-mode)
-
-Bei der Erst-Inbetriebnahme oder nach einem Reset auf Werkseinstellungen arbeitet der Slate im Router-Modus. Er bietet zwei eigene WLANs an, hat aber noch keine Internetverbindung. Nachdem man sich mit dem WLAN verbunden hat (die Default Zugangsdaten befinden sich an der Unterseite des Geräts) kann man die Administrations-Web-Oberfläche erreichen und die Internet-Verbindung konfigurieren, die in diesem Modus noch nicht existiert.
 
 In der [Web-Oberfläche - Netzwerk-Architektur](http://192.168.8.1/#/bridge) kann man den Netzwerk-Modus bestimmen.
 
@@ -82,6 +89,10 @@ Ich hänge meinen Slate am liebsten in das Gäste-WLAN meines Routers. Damit erh
 ### WDS
 
 ... wie im Extender-Mode ... allerdings muß man die Zugangsdaten nicht manuell eigeben
+
+### VPN
+
+* [VPN Einrichtung](https://www.youtube.com/watch?v=RmOkknhkWuI)
 
 ---
 

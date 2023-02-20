@@ -8,8 +8,6 @@ Allerdings ist der Stromverbrauch an meinem iPhone dann relativ hoch (gelegentli
 
 Ein mobiler Router wäre ein wenig komfortabler (ausserdem müsste mein Handy dann nicht immer für aller erreichbar sein - ich bin ja vielleicht auch mal nicht da) ... ist aber natürlich mit Kosten für die Anschaffung und eine weitere SIM-Karte verbunden (vielleicht bietet der eigene Anbieter auch schon Multi-SIMs für wenig Geld an).
 
-> *ACHTUNG:* Wenn man Tethering verwendet, dann wird ein WLAN bereitgestellt, mit dem sich die anderen Endgeräte verbinden. Auf den Endgeräten sollte man die Update-Automatik von Apps und Betriebssystem ausschalten. Ansonsten werden zuviele Daten gezogen und das Datenkontingent ist schnell aufgebraucht.
-
 ---
 
 ## TLDR
@@ -21,6 +19,14 @@ Für mich ist die Flexibilität von eSIMs das entscheidende Kriterium, weshalb m
 ---
 
 ## Konzepte
+
+### Tethering am Handy
+
+* [Video - Tethering einrichten](https://www.youtube.com/watch?v=bHx96k-sRnU)
+
+Es ist sehr einfach, die Mobilfunkverbindung des Handy's für andere freizugeben.
+
+> *ACHTUNG:* Wenn man Tethering verwendet, dann wird ein WLAN bereitgestellt, mit dem sich die anderen Endgeräte verbinden. Auf den Endgeräten sollte man die Update-Automatik von Apps und Betriebssystem ausschalten. Ansonsten werden zuviele Daten gezogen und das Datenkontingent ist schnell aufgebraucht.
 
 ### Normal physische SIM Karte
 
@@ -45,7 +51,6 @@ Hierbei steckt im Gerät schon eine eSIM-Karte, die alle weltweit (> 140 Länder
 Bekannte Anbieter
 
 * [Glocalme](https://eu.glocalme.com)
-* 
 
 ---
 
@@ -82,8 +87,9 @@ Der M1 ist das günstigste Gerät (Februar 2023: 300 Euro), seine Geschwister ko
 
 ---
 
-## GL-iNet Mudi
+## GL-iNet Mudi (GL-E750)
 
+* [GL-E750](https://www.gl-inet.com/products/gl-e750/)
 * [YouTube Video](https://www.youtube.com/watch?v=LfAGOf0TCXc)
 
 Der Mudi ist nahezu die eierlegende Wollmilchsau, da er
@@ -99,5 +105,11 @@ Der Mudi ist nahezu die eierlegende Wollmilchsau, da er
 * 2,4 und 5 GHz WLAN bereitstellt
 * einen grossen Akku hat
 * einigermassen bezahlbar ist (240 Euro)
+* bietet auch Nischeneinsatzbereiche
+  * Gerät per Netzwerkkabel an einen Router koppeln, um eine Internetverbindung zu bekommen (dann nutzt man VPN und TOR des Mudi)
+  * Tethering-Gerät über USB anschließen
+* Funktionsumfang lässt sich mit Plugins erweitern
 
 Somit kann er mit WLAN-Hotspots und SIM genutzt werden. Das einzige Manko ist die fehlende Unterstützung von eSIMs ... sonst wäre das Gerät perfekt.
+
+> Man kann allerdings ein Handy per USB für Tethering anschließen. Auf diese Weise könnte man eSIMs über ein eSIM-fähiges Handy nutzen. Ein wenig umständlich, aber es geht.«
