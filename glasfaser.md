@@ -6,7 +6,7 @@ Endlich ist es auch für uns soweit ... der Glasfaserausbau soll im April 2023 s
 
 Derzeit (Stand Februar 2023) startet Glasfaser bei den üblichen Anbietern mit 50 MBit/s und geht bis 1000 MBit/s ... ist aber noch lange nicht am Ende der möglichen Bandbreite
 
-## Warum denn überhaupt Glasfaser
+## Warum denn überhaupt Glasfaser?
 
 DSL (über Kupferleitungen) und Kabelanschluss (über Koax-Kabel) liefern doch schon tolle Bandbreiten. Warum denn noch einen weiteren Anschluss?
 
@@ -15,6 +15,14 @@ Die Bandbreite ist schon fast ausgereitzt. Insbes. beim Upload können die beide
 Mit grossen Upload-Bandbreiten steht auch einem Backup von Daten in die Cloud nichts mehr im Wege.
 
 Mit Glasfaser investiert man in die Zukunft.
+
+## Lohnt sich eine Hausanschluss wenn man ihn gar nicht benötigt
+
+... weil man gar kein Internet nutzt (sowas gibts) oder eben mit dem günstigeren DSL klar kommt.
+
+Das ist eine sehr gute Frage. Der Hausanschluss kostet Geld, keine Ahnung ob die von den Internet-Providern angegeben 800 Euro tatsächlich realistisch sind (ein Loch in die Hauswand und ein bisschen verkabeln sollte ja deutlich günstiger sein). Letztlich bekommt man den vielleicht auch schon für 400 Euro.
+
+Wenn man gar kein Internet braucht ... wenn meine Recherchen stimmen, sollte sich der Hausanschluss ohne deutlichen Mehraufwand auch nachträglich machen lassen. Dann macht es wahrscheinlich keinen Sinn, jetzt einen Glasfaseranschluss zu beauftragen, wenn man ihn dann gar nicht nutzt ... nur im den Hausanschluss subventioniert zu bekommen. Allerdings kann es später mal schwierig sein, einen Elektriker dazu zu bewegen, solch einen kleinen Auftrag zu übernehmen ... wird ja immer schwieriger einen Handwerker zu kommen. Wegen eines 300 Euro Auftrags kommen viele schon nicht mehr oder man muss Wochen/Monate warten.
 
 ---
 
@@ -55,4 +63,4 @@ Hier wird es sehr interessant und ein wenig unklar.
 
 Der Ausbau erfolgt bei uns durch die Telekom (in anderen Gebieten sind das Vodafone, Deutsche Glasfaser, O2, ...). Die Telekom hat mit 1und1 eine [gemeinsame Vermarktung vereinbart](https://www.telekom.com/de/medien/medieninformationen/detail/glasfaser-1und1-nutzt-netz-der-telekom-648622). Mit [Vodafone und Telefonica ist Open-Access](https://www.telekom.com/de/medien/medieninformationen/detail/telekom-und-vodafone-einigen-sich-auf-details-zur-glasfasernutzung-1009512) vereinbart, d. h. auch Kunden dieser Telekomunternehmen können die von der Telekom bereitgestellten Glasfaserleitungen nutzen.
 
-Ich habe keine 
+Ich habe keine Ahnung wie teuer der Hausanschluss und wen man - neben einem Internet-Provider - beauftragen kann. Letztlich braucht man aber immer einen Internet-Provider, der Glasfaser Signale liefert, und solange der den Hausanschluss subventioniert, kann einem das auch egal sein.
