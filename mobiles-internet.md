@@ -12,6 +12,12 @@ Welche Möglichkeiten bieten sich hier?
 
 Ich verwende für meinen 24 Monatsvertrag eine pyhische SIM-Karte und habe dadurch zwei eSIMs meines iPhone 13 zur freien Verfügung, um kurzfristig eine eSIM eines guten lokalen Anbieters zu buchen. Ich kann dann die Datennutzung so konfigurieren, dass Daten über die günstige eSIM transferiert werden und ich aber dennoch telefonisch (+ SMS + Whatsapp) über mein iPhone mit der üblichen Nummer erreichbar bin.
 
+Für WLAN-Hotspots verwende ich eine VPN Verschlüsselung - entweder auf meinem Handy oder in meinem [Slate](slate.md). WLAN-Hostpots sind leider nicht nur sicherheitstechnisch kritisch sondern auch wenig zuverlässig, was die Leistung und Verfügbarkeit betrifft.
+
+Aus diesem Grund verlasse ich mich nicht auf WLANs, sondern sorge IMMER für eine SIM-basierte Hauptlösung (WLAN nur on-top ... für den Fall, dass es wirklich gut funktioniert).
+
+Als Globetrotter würde ich zum Glocalme greifen, weil es einfach viel weniger administrativen Aufwand bedeutet. Wenn ich aber nur 2 Wochen nach Spanien fahre, dann kaufe ich mir lokal eine einzige SIM oder verwende zuhause gebuchte Datenkontingente, die ich im Ausland nutzen kann (Achtung Fair-Use-Policy!!!).
+
 ---
 
 ## WLAN Hotspot
@@ -73,6 +79,8 @@ Manche Mobilfunkanbieter bieten sog. Data-Pass an, um bei einem tempopären Mehr
 Die unbürokratischste Variante sind Prepaid-Karten, bei denen man keine Registrierung benötigt und keine längere Laufzeit hat. Häufig kauft man hier nur ein Datenvolumen, das man in einem bestimmten Zeitraum verbrauchen muss.
 
 Diese SIM-Karte steckt man dann in sein Dual-SIM-Handy, ein Zweithandy oder einen [mobilen Router](mobiler-router.md). Hat man ein eSIM-fähiges Handy, dann braucht man kein Dual-SIM-Handy und ist deutlich flexibler, da man in keinen Laden gehen muss, um an die Karte zu kommen.
+
+> Fair-Use-Policy (FUP): scheinbar kann man sein deutsches Datenvolumen (z. B. 20 GB) im Ausland nicht vollständig im Ausland bei höchster Geschwindigkeit nutzen. Die FUP schiebt dem bei 50% (oder mehr) einen Riegel vor und man surft auf niedriger Geschwindigkeit. Angeblich besteht das Problem bei dem [O2 - 999 GB - 4 Wochen](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/) nicht ... ob das bei lokalen SIM-Karten auch so ist, weiss ich nicht.
 
 Physische SIM-Karten müssen natürlich in einem Laden gekauft werden (oder werden vorab verschickt), eSIMS hingegen sind in sekundenschnelle online gekauft und einsatzbereit. Hier muss man nichts plane, sondern kann kruzfristig auf Engpässe (wenn man merkt dass das WLAN auf dem Campingplatz doch nichts taugt) reagieren.
 

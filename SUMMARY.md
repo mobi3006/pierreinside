@@ -288,6 +288,7 @@
     * [Hebe-Schiebetür](hebeSchiebetuer.md)
     * [Gasgrill](gasgrill.md)
     * [Minibar / Mini-Kühlschrank](mini-kuehlschrank.md)
+    * [Glasfaseranschluss (Fiber-to-the-Home)](glasfaser.md)
     * [Smart-Home](smartHome.md)
       * [Raspberry Pi](raspberrypi.md)
       * [Heimnetzwerk](heimnetzwerk.md)
