@@ -146,6 +146,8 @@ Nach dem 10. Anruf bei der 1und1 Hotline ohne irgendwelche Verbesserungen habe i
 
 ## Umstellung auf Glasfaser - Fritzbox 7590 AX
 
+* [Wifi 6 - AX](https://www.youtube.com/watch?v=p7N56YfjlO0)
+
 Prinzipiell könnte ich meine 7590 auch mit einem Glasfaseranschluss betreiben, da jedes VDSL Modem auch an einem Glasfaseranschluss betrieben werden kann. Hierzu stellen die Glasfaserbetreiber i. a. ein Glasfasermodem bereit, in das man den Nicht-Glasfaser-WLAN-Router per LAN einstöpseln kann.
 
 >  AON und GPON: Unterschiede von Glasfaseranschlüssen
