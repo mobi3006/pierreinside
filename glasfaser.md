@@ -37,7 +37,34 @@ Wenn man den Glasfaseranschluss nutzen will (die Kupferkabel bleiben natürlcih 
 * einen [Hausanschluss](https://www.youtube.com/watch?v=RydpctjoNDo)
 * einen Glasfasernutzungsvertrag einen Internet-Providers
 
-Der Hausanschluss (physisch und elektrisch) kostet wohl ca. 800 Euro (vielleicht ein wenig übertrieben, aber weniger als 500 Euro) und wird derzeit von den Internet-Providern bezahlt, wenn man sich für einen 24 Monatsvertrag entscheidet. Hierfür kann man sich scheinbar auch noch nach der physischen Verlegung bis ans Haus entscheiden.
+Der Hausanschluss beinhaltet
+
+* Glasfaser in der Strasse
+* unterirdisch wird mit einer "Rakete" Zugang bis zur Aussenwand gebohrt und ein Loch zum Keller gebohrt (keine größeren Baumassnahmen auf dem Grundstück erforderlich)
+* Loch in die Kellerwand
+* Leerrohr plus Glasfaserbestückung bis ins Hausinnere
+* verplombte Montagedose im Inneren des Kellers
+
+Man kann nun 2 Varianten buchen
+
+* Glasfaser OHNE Tarif (ausschließlich der Hausanschluss)
+* Glasfaser mit Nutzungstarif (Hausanschluss + Glasfasernutzungsvertrag für 24 Monate)
+
+Je nach Erschließungsgebiet ist "Glasfaser OHNE Tarif"
+
+* kostenlos ... so ist das in Eppelheim (Telekom Hotline) - das ist aber NICHT bundesweit so
+* kostet ca. 800 Euro
+
+Bei einem SOFORTIGEN Glasfasernutzungsvertrag (zumindest bei Telekom oder 1und1) ist der Hausanschluss IMMER (bundesweit) kostenlos.
+
+Angenommen man ist mit DSL (über Kupferkabel) zufrieden oder man braucht gar kein Internet, dann macht es dennoch Sinn
+
+* kostenloses "Glasfaser OHNE Tarif" (wenn angeboten) zu beauftragen
+* einen kleinen Glasfasernutzungsvertrag beim Internet-Provider seiner Wahl für 24 Monate abzuschließen
+
+um einen Glasfaser-Hausanschluss zu erhalten.
+
+> **ACHTUNG:** für Hauseigentümer ist das **EXTREM** wichtig, denn ein nachträglicher Hausanschluss ist mit immensen Kosten verbunden. Die Immobilie verliert dadurch an Wert
 
 Die Verlegung im Haus macht bis zu 3m von der Hauswand entfernt die Telekom. Wenn der Internet-Router weiter entfernt aufgebaut werden soll, so muss der Eigentümer hier schon entsprechende Leerrohre vorbereiten.
 
@@ -45,7 +72,6 @@ Es gibt zwei verschiedene Anschlussvarianten
 
 * GPON - passiv
 * AON - aktiv
-
 
 ---
 
