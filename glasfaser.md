@@ -6,6 +6,18 @@ Endlich ist es auch für uns soweit ... der Glasfaserausbau soll im April 2023 s
 
 Derzeit (Stand Februar 2023) startet Glasfaser bei den üblichen Anbietern mit 50 MBit/s und geht bis 1000 MBit/s ... ist aber noch lange nicht am Ende der möglichen Bandbreite
 
+---
+
+## TLDR - Lohnt sich eine Hausanschluss wenn man ihn gar nicht benötigt?
+
+Angenommen man ist mit DSL (über Kupferkabel) oder KabelBW/Vodefone zufrieden oder man braucht gar kein Internet, dann **SOLLTE** man dennoch dafür sorgen, dass man einen Glasfaser-Hausanschluss bekommt. Das bekommt man durch
+
+* eine Beauftragung "Glasfaser OHNE Tarif" bei der Telekom (nicht bundesweit kostenlos angeboten)
+* Abschluss eines Glasfasernutzungsvertrag beim Internet-Provider seiner Wahl für 24 Monate
+  * notfalls sollte man hier den kleinsten Tarif nehmen
+
+---
+
 ## Warum denn überhaupt Glasfaser?
 
 DSL (über Kupferleitungen) und Kabelanschluss (über Koax-Kabel) liefern doch schon tolle Bandbreiten. Warum denn noch einen weiteren Anschluss?
@@ -22,12 +34,23 @@ Mit Glasfaser investiert man in die Zukunft.
 
 > Es war echt schwierig mal verlässliche Informationen zu bekommen ... letztlich will jeder was verkaufen und dich binden. Ich bin mir immer noch nicht ganz sicher, ob ich es komplett verstanden habe.
 
-Die Strasse wird aufgerissen und die Telekom verlegt die Kabel. Sinnvollerweise wird JEDES Haus bis zur Aussenwand mit Glasfaser versorgt (um später nicht nochmal die Strasse aufreissen zu müssen). Von der Strass bis zur Hauswand kommt eine [Rakete](https://www.youtube.com/watch?v=2VyOgErAKj8) zum Einsatz (keine Angst die wird langsam durchs Erdreich getrieben ... der Vorgarten/Terrasse bleibt nahezu unberührt. Das ist kostenlos für mich als Hauseigentümer.
+Glasfaser besteht aus:
 
-Wenn man den Glasfaseranschluss nutzen will (die Kupferkabel bleiben natürlcih vor Ort so dass DSL weiterhin nutzbar ist), dann benötigt man noch
+* Glasfaser in der Strasse (bis zum nächsten Verteilerkasten)
+  * die Verteilerkästen sind in den Gebieten, die einen Glasfaserausbau bekommen, schon mit Glasfaser angebunden
+* einem [Hausanschluss](https://www.youtube.com/watch?v=RydpctjoNDo)
+* Verlegung im Haus bis zum Internet-Router
+* einem Glasfasernutzungsvertrag einen Internet-Providers
 
-* einen [Hausanschluss](https://www.youtube.com/watch?v=RydpctjoNDo)
-* einen Glasfasernutzungsvertrag einen Internet-Providers
+Die Strasse wird aufgerissen und die Telekom verlegt die Kabel. Von der Strasse bis zur Hauswand kommt eine [Rakete](https://www.youtube.com/watch?v=2VyOgErAKj8) zum Einsatz (keine Angst die wird langsam durchs Erdreich getrieben ... der Vorgarten/Terrasse bleibt nahezu unberührt.
+
+> **ACHTUNG:** es bekommen nur die Glasfaser ins Hausinnere (also die Strecke von Strasse ins Haus), die zumindest "Glasfaser OHNE Tarif" bei der Telekom beauftragt haben (oder sogar einen Nutzungsvertrag bei der Telekom oder 1und1).
+
+### Glasfaser in der Strasse
+
+Das bekommt jeder im Ausbaugebiet ohne dass er einen Finger krumm machen muss.
+
+### Glasfaser Hausanschluss
 
 Der Hausanschluss beinhaltet
 
@@ -40,7 +63,7 @@ Der Hausanschluss beinhaltet
 Man kann nun 2 Varianten buchen
 
 * Glasfaser OHNE Tarif (ausschließlich der Hausanschluss)
-* Glasfaser mit Nutzungstarif (Hausanschluss + Glasfasernutzungsvertrag für 24 Monate)
+* Glasfaser mit Nutzungsvertrag (Hausanschluss + Glasfasernutzungsvertrag für 24 Monate)
 
 Je nach Erschließungsgebiet ist "Glasfaser OHNE Tarif"
 
@@ -51,21 +74,26 @@ Bei einem SOFORTIGEN Glasfasernutzungsvertrag (zumindest bei Telekom oder 1und1)
 
 > **ACHTUNG:** für Hauseigentümer ist das **EXTREM** wichtig, denn ein nachträglicher Hausanschluss ist mit immensen Kosten verbunden. Die Immobilie verliert dadurch an Wert
 
-Die Verlegung im Haus macht bis zu 3m von der Hauswand entfernt die Telekom. Wenn der Internet-Router weiter entfernt aufgebaut werden soll, so muss der Eigentümer hier schon entsprechende Leerrohre vorbereiten.
+### Glasfaser Nutzungsvertrag
+
+Wenn man den Glasfaseranschluss nutzen will (die Kupferkabel bleiben natürlcih vor Ort so dass DSL weiterhin nutzbar ist), dann benötigt man noch einen Glasfasernutzungsvertrag (i. a. 24 Monatsverträge).
+
+### Verlegung im Haus
+
+Die Verlegung im Haus macht bis zu 3m von der Hauswand entfernt die Telekom. Wenn der Internet-Router weiter entfernt aufgebaut werden soll, so muss der Eigentümer hier schon entsprechende Leerrohre vorbereiten. Hier gibt es zwei Varianten
+
+* Internet-Router mit Glasfaseranschluss (Fiber-Router)
+* Internet-Router ohne Glasfaseranschluss (VDSL-Router) - Glasfaser geht nur bis zum Glasfasermodem und das wird mit einem Netzwerkkabel an den Router angeschlossen
+  * aus meiner Sicht ist das die beste Variante, da
+    * der alte VDSL Router (Kupferkabel) kann weiter genutzt werden
+    * selbst wenn man einen Glasfaseranschluss hat, ist man mit dem VDSL eigentlich viel flexibler (und kann den auch viel besser später nochmal verkaufen)
+
+### Weitere Details
 
 Es gibt zwei verschiedene Anschlussvarianten
 
 * GPON - passiv
 * AON - aktiv
-
-## Lohnt sich eine Hausanschluss wenn man ihn gar nicht benötigt
-
-Angenommen man ist mit DSL (über Kupferkabel) oder KabelBW/Vodefone zufrieden oder man braucht gar kein Internet, dann macht es dennoch Sinn
-
-* kostenloses "Glasfaser OHNE Tarif" (wenn angeboten) zu beauftragen
-* den kleinsten Glasfasernutzungsvertrag beim Internet-Provider seiner Wahl für 24 Monate abzuschließen
-
-um einen Glasfaser-Hausanschluss zu erhalten.
 
 ---
 
