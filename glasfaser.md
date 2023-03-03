@@ -38,6 +38,7 @@ Mit Glasfaser investiert man in die Zukunft.
 
 Glasfaser besteht aus:
 
+* Glasfaseranbindung des Verteilerkastens
 * Glasfaser in der Strasse (bis zum nächsten Verteilerkasten)
   * die Verteilerkästen sind in den Gebieten, die einen Glasfaserausbau bekommen, schon mit Glasfaser angebunden
 * einem [Hausanschluss](https://www.youtube.com/watch?v=RydpctjoNDo)
