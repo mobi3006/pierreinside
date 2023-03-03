@@ -16,14 +16,6 @@ Mit grossen Upload-Bandbreiten steht auch einem Backup von Daten in die Cloud ni
 
 Mit Glasfaser investiert man in die Zukunft.
 
-## Lohnt sich eine Hausanschluss wenn man ihn gar nicht benötigt
-
-... weil man gar kein Internet nutzt (sowas gibts) oder eben mit dem günstigeren DSL klar kommt.
-
-Das ist eine sehr gute Frage. Der Hausanschluss kostet Geld, keine Ahnung ob die von den Internet-Providern angegeben 800 Euro tatsächlich realistisch sind (ein Loch in die Hauswand und ein bisschen verkabeln sollte ja deutlich günstiger sein). Letztlich bekommt man den vielleicht auch schon für 400 Euro.
-
-Wenn man gar kein Internet braucht ... wenn meine Recherchen stimmen, sollte sich der Hausanschluss ohne deutlichen Mehraufwand auch nachträglich machen lassen. Dann macht es wahrscheinlich keinen Sinn, jetzt einen Glasfaseranschluss zu beauftragen, wenn man ihn dann gar nicht nutzt ... nur im den Hausanschluss subventioniert zu bekommen. Allerdings kann es später mal schwierig sein, einen Elektriker dazu zu bewegen, solch einen kleinen Auftrag zu übernehmen ... wird ja immer schwieriger einen Handwerker zu kommen. Wegen eines 300 Euro Auftrags kommen viele schon nicht mehr oder man muss Wochen/Monate warten.
-
 ---
 
 ## Ausbau
@@ -57,13 +49,6 @@ Je nach Erschließungsgebiet ist "Glasfaser OHNE Tarif"
 
 Bei einem SOFORTIGEN Glasfasernutzungsvertrag (zumindest bei Telekom oder 1und1) ist der Hausanschluss IMMER (bundesweit) kostenlos.
 
-Angenommen man ist mit DSL (über Kupferkabel) zufrieden oder man braucht gar kein Internet, dann macht es dennoch Sinn
-
-* kostenloses "Glasfaser OHNE Tarif" (wenn angeboten) zu beauftragen
-* einen kleinen Glasfasernutzungsvertrag beim Internet-Provider seiner Wahl für 24 Monate abzuschließen
-
-um einen Glasfaser-Hausanschluss zu erhalten.
-
 > **ACHTUNG:** für Hauseigentümer ist das **EXTREM** wichtig, denn ein nachträglicher Hausanschluss ist mit immensen Kosten verbunden. Die Immobilie verliert dadurch an Wert
 
 Die Verlegung im Haus macht bis zu 3m von der Hauswand entfernt die Telekom. Wenn der Internet-Router weiter entfernt aufgebaut werden soll, so muss der Eigentümer hier schon entsprechende Leerrohre vorbereiten.
@@ -72,6 +57,15 @@ Es gibt zwei verschiedene Anschlussvarianten
 
 * GPON - passiv
 * AON - aktiv
+
+## Lohnt sich eine Hausanschluss wenn man ihn gar nicht benötigt
+
+Angenommen man ist mit DSL (über Kupferkabel) oder KabelBW/Vodefone zufrieden oder man braucht gar kein Internet, dann macht es dennoch Sinn
+
+* kostenloses "Glasfaser OHNE Tarif" (wenn angeboten) zu beauftragen
+* den kleinsten Glasfasernutzungsvertrag beim Internet-Provider seiner Wahl für 24 Monate abzuschließen
+
+um einen Glasfaser-Hausanschluss zu erhalten.
 
 ---
 
