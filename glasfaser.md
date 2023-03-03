@@ -16,6 +16,8 @@ Angenommen man ist mit DSL (über Kupferkabel) oder KabelBW/Vodefone zufrieden o
 * Abschluss eines Glasfasernutzungsvertrag beim Internet-Provider seiner Wahl für 24 Monate
   * notfalls sollte man hier den kleinsten Tarif nehmen
 
+Tut man das nicht ist die Nachrüstung **SEHR TEUER**.
+
 ---
 
 ## Warum denn überhaupt Glasfaser?
