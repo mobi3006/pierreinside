@@ -217,6 +217,32 @@ Für Newbies, die noch keinen Sack voller eigener Workflows haben, oder die Work
 * [GitHub Docu - Creating starter workflows for your organization](https://docs.github.com/en/actions/using-workflows/creating-starter-workflows-for-your-organization)
 * [GitHub Docu - Using starter workflows](https://docs.github.com/en/actions/using-workflows/using-starter-workflows)
 
+### Wiederverwendung via Composite Actions vs. Workflows
+
+* [YouTube Video - CoderDave](https://www.youtube.com/watch?v=xa9gYSCf8q0)
+* [GitHub Blog](https://github.blog/2022-02-10-using-reusable-workflows-github-actions/)
+
+* GitHub Composite Actions - generische Use-Cases
+  * nesting bis zu 10 Levels möglich
+  * keine Runner-Selection via `uses:` möglich ... der Execution Kontext wird in einem Workflow definiert
+  * können keine Secrets aktiv lesen - müssen als Parameter contributed werden
+  * kein Support von Conditionals (`if:`) ... das muss im caller geschehen
+  * ALLE Steps sorgen nur für eine einzige Zeile Output
+* GitHub Workflows - sehr spezifische Use-Cases
+  * nesting weiterer Workflows nicht möglich
+  * Parallelisierung über Jobs
+  * Execution Context Definition über `uses:`
+  * JEDER Step erzeugt eine eigene Zeile Output
+
+Der aus meiner Sicht wichtigste Aspekt ist die des Execution Context. Eine Action läuft im Execution Context eines Workflows und hinterlässt dort seinen State, d. h. ein `git config --global user.name "Mona Lisa"` aus einer GitHub Action bleibt im Runner des Jobs nach Ausführung der Action bestehen. Will man also State-Veränderungen in eine wiederverwendbare Komponente packen, dann sind GitHub Actions das Mittel der Wahl.
+
+Aus meiner Sicht bilden Actions generische Wiederverwendung an und Reusable Workflows bieten eine anwendungsspezifische Wiederverwendung. Best-Practices für einen Build/Release-Job würde ich deshalb als Reusable Workflow abbilden, der seinerseits aus Reusable Actions implementiert ist.
+
+Technisch gesehen gibt es auch einige Einschränkungen
+
+* Reusable Workflows können keine anderen Workflows aufrufen
+* Composite Actions können weitere Composite Actions aufrufen ... aber nur bis zum Level 10
+
 ---
 
 ## Workflow Syntax
