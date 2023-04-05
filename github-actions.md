@@ -100,7 +100,15 @@ steps:
 
 Neben den von GitHub gehosteten Runners kann man auch eigene Runner (auf der eigenen Infrastruktur) bereitstellen. Ich würde das vermeiden wollen, weil man dann natürlich für das skalierbare Hosting und die Maintenance verantwortlich ist und der Weiterentwicklung des GitHub Ecosystems hinterher rennt.
 
-GitHub supported diesen Ansatz mit einem Agent, den man mit einem einzigen Kommando installieren kann. Auf diese Weise kann man sogar den eigenen Laptop zum GitHub Runner machen. Zum rumspielen ganz praktisch.
+> Wenn GitHub natürlich keinen entsprechenden Support für eine bestimmte Hardware bietet, so hat man keine andere Chance. Andere Dinge wie IP-Whitelisting oder Compliance Anforderungen können auch gegen die Verwendung von GitHub-Hosted-Runners sprechen.
+
+GitHub supported diesen Ansatz mit einem nativen Agent, den man mit einem einzigen Kommando installieren kann. Auf diese Weise kann man sogar den [eigenen Laptop](https://youtu.be/TLB5MY9BBa4?t=4060) zum GitHub Runner machen. Zum Rumspielen sehr praktisch. Wenn man docker-basierte GitHub Actions ausführen will, dann muss natürlich auch Docker auf dem Laptop installiert sein.
+
+> Es ist zu empfehlen auf dem Runner-System einen eigenen User anzulegen (und `sudo` zu limitieren ... manche Actions werden das benötigen), unter dem der Self-Hosted-Runner Prozess läuft - damit kann man den Zugriff schon mal gut einschränken und verhindert, dass unbeabsichtigte Dinge geschehen. Ich würde in einem Laptop-Szenario empfehlen, eine eigene VM (Virtualbox, Parallels) zu starten, um den Agent-Prozess in einer Sandbox einzusperren. Nichtsdestotz ist die VM dann dennoch im Netzwerk des Laptops ... hier sollte man sich überlegen, ob man das weiter absichern will.
+
+Der Laptop ist natürlich nur für den Anfang geeignet. Später sollte man eine [Self-Hosted-GitHub-Runners Infrastruktur](https://youtu.be/TLB5MY9BBa4?t=4352) auto-skalierbar in die Cloud bringen.
+
+GitHub rät davon ab Public Repositories auf Self-Hosted Runners auszuführen, da der Code Malware enthalten kann, die dann schon mal innerhalb der eigenen Infrastruktur ist und somit mehr Schaden anrichten kann. GitHub bietet [Self-Hosted-Runners-Hardening-Empfehlungen](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#hardening-for-self-hosted-runners).
 
 ---
 
@@ -122,7 +130,7 @@ Verwendet man also die Action
 - uses: actions/checkout@v3
 ```
 
-dann ist die Implementierung der Action auf GitHub zu finden. In diesem Fall im GitHub Repository [`checkout`](https://github.com/actions/checkout) der GitHub Organisation [`actions`](https://github.com/actions). Von diesem Repo wurde ein Release gebaut und als Tag [`v3`](https://github.com/actions/checkout/tree/v3) bereitgestellt.
+dann ist die Implementierung der Action auf GitHub zu finden. In diesem Fall im GitHub Repository [`checkout`](https://github.com/actions/checkout) der GitHub Organisation oder des Users [`actions`](https://github.com/actions). Von diesem Repo wurde ein Release gebaut und als Tag [`v3`](https://github.com/actions/checkout/releases/tag/v3) bereitgestellt.
 
 Man kann hier aber auch einen Branch wie `main` referenzieren
 
@@ -148,7 +156,9 @@ jobs:
 
 Bei der Ausführung eines solchen Workflows durch eine `ubuntu-latest` Runner Instanz werden zu Beginn die notwendigen Repositories der Actions runtergeladen und der Ausführungsumgebung (= GitHub Runner) zur Verfügung. 
 
-Von außen kann man einer Action nicht ansehen wie sie implementiert ist. Aufgrund des OpenSource-Ansatzes kann man sich die Implementierung aber in GutHub ansehen. Das ist auch eine gute Quelle zum Lernen.
+Von außen kann man einer Action nicht ansehen wie sie implementiert ist. Aufgrund des OpenSource-Ansatzes kann man sich die Implementierung aber in GitHub ansehen. Das ist auch eine gute Quelle zum Lernen.
+
+Anstatt ein Action im eigenen Repo bereitzustellen kann man auch ein anderes Repo referenzieren. Auf diese Weise lässt sich beispielsweise ein Action-Library-Repo anlegen.
 
 ### Implementierung eigener Actions
 
@@ -161,6 +171,8 @@ Actions lassen sich in einem Repository bereitstellen. Sie werden über
 * als Docker Container
   * [YouTube](https://www.youtube.com/watch?v=OHdyjuORZxU)
 * als Composite Action
+  * mit Shell-Scripting
+  * durch Aufruf weiterer Actions
 
 implementiert.
 
@@ -225,6 +237,8 @@ Für Newbies, die noch keinen Sack voller eigener Workflows haben, oder die Work
 * GitHub Composite Actions - generische Use-Cases
   * nesting bis zu 10 Levels möglich
   * keine Runner-Selection via `uses:` möglich ... der Execution Kontext wird in einem Workflow definiert
+    * Actions sind halt rein auf Wiederverwendung in einem bereitgestellten Execution-Context ausgelegt - sie definieren selbst keinen solchen
+  * keine Jobs - somit auch keine Parallelisierung ... Actions sind atomar
   * können keine Secrets aktiv lesen - müssen als Parameter contributed werden
   * kein Support von Conditionals (`if:`) ... das muss im caller geschehen
   * ALLE Steps sorgen nur für eine einzige Zeile Output
@@ -349,7 +363,7 @@ jobs:
 
 Alle Artfakte innerhalb eines Jobs stehen jederzeit zur Verfügung, da die Ausführungumgebung die gleiche ist.
 
-Jobs sind - aufgrund Ausführung auf unterschiedlichen Runners - voneinander getrennt. Ergebnisse in Form von einfachen Werten ist über die Workflow-Sprachmittel möglich (siehe oben). Zum Teilen Artefakten muss man
+Unterschiedliche Jobs sind - aufgrund Ausführung auf unterschiedlichen Runners - voneinander getrennt. Ergebnisse in Form von einfachen Werten ist über die Workflow-Sprachmittel möglich (siehe oben). Zum Teilen Artefakten muss man
 
 * [upload artifact im bereitstellenden Job](https://github.com/actions/upload-artifact)
 * [download artifact im konsumierenden Job](https://github.com/actions/download-artifact)
@@ -398,7 +412,33 @@ on:
         required: true
 ```
 
+---
 
+## Best-Practices
+
+### Online-IDE
+
+GitHub stellt einen komfortablen Editor im Browser zur Verfügung, der den Marketplace ganz schön integriert und auch Fehler gut sichtbar macht.
+
+Hierzu navigiert man einfach zum Workflow und drückt den Stift zum Editieren.
+
+### VSCode Extension
+
+### Fehlersuche per Logging
+
+Das Debug-Level wird durch Setzen folgender Secrets angepaßt:
+
+* `ACTIONS_STEP_DEBUG=true`
+* `ACTIONS_RUNNER_DEBUG=true`
+
+> Es handelt sich bei der Verwendung von Secrets vermutlich eher im eine Krücke ... weil das die derzeit einzige Möglichkeit ist, ohne Codeänderung Konfiguration zu contributen. LEIDER ist die Granularität dadurch nicht besonders gut (alle Workflows sind plötzlich im Debugmode). Ausserdem benötigt man Mainterer-Role, um überhaupt über "Settings - Secrets" darauf zugreifen zu können.
+
+### Nektos Act Development environment
+
+* [Nektos-Act@GitHub](https://github.com/nektos/act)
+* [YouTube - Intro](https://www.youtube.com/watch?v=5hHYUNbdP6M)
+
+... to run your workflows locally
 
 ---
 
