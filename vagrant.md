@@ -317,13 +317,33 @@ Man kann eigene Base Images veröffentlichen (public oder private) ... siehe unt
 
 ## Netzwerk
 
-* https://docs.vagrantup.com/v2/networking/
+* [Vagrant Dokumentation - Netzwerk](https://docs.vagrantup.com/v2/networking/)
+* [Parallels Dokumentation - Netzwerk](https://kb.parallels.com/4948#section3)
+* [Thomas Krenn - Virtualbox](https://www.thomas-krenn.com/de/wiki/Netzwerkkonfiguration_in_VirtualBox)
 
-In Vagrant kann man im Vagrantfile ein oder mehrere Netzwerkinterfaces definieren.
+In Vagrant kann man im Vagrantfile ein oder mehrere Netzwerke definieren.
+
+[Minimalanforderung für Vagrant](https://developer.hashicorp.com/vagrant/docs/networking) ist ein Shared-Network (= NAT-Network):
+
+```
+Vagrant assumes there is an available NAT device on eth0. This ensures that Vagrant always has a way of communicating with the guest machine. It is possible to change this manually (outside of Vagrant), however, this may lead to inconsistent behavior. Providers might have additional assumptions. For example, in VirtualBox, this assumption means that network adapter 1 is a NAT device.
+```
+
+Die Box bekommt dann entsprechend viele virtuelle Netzwerkkarten, die jeweils an ein Netzwerk gebunden sind. Vagrant kümmert i. a. sich um die korrekte Einbindung der Interfaces ins Gastbetriebssystem - es sein denn man schaltet das explizit per `auto_config: false` aus.
+
+### Netzwerktypen
+
+* NAT Network
+  * hier wird ein virtuelles Netzwerk vom Hypervisior bereitgestellt, das dann aber über das Host-System routet
+* Bridged Network
+  * hier wird kein virtuelles Netzwerk (bereitgestellt durch den Hypervisior) verwendet
+  * die VM hängt direkt im gleichen Netzwerk wie das Host-System (bei DHCP bekommt es die IP-Adresse genauso wie das Hostsystem vom Router zugewiesen)
+  * hier definiert man auch welchen physikalischen Netzwerkadapter man verwendet (Netzwerkkabel oder Wifi)
+* Host-Only Network
 
 ### Private Netzwerke
 
-Solche Netzwerke sind von ausserhalb des Gastbetriebssysstem nicht oder zumindest nicht direkt (sondern nur per Port-Forwarding erreichbar über das Hostbetriebssystem). Die VirtualBox fungiert als Router zwischen dem privaten Netzwerk und dem Netzwerk des Host-Betriebssystems. auf diese Weise erhält das Gastbetriebssystem Zugriff aufs Internet (über NAT). Die VirtualBox fungiert als Switch zu anderen virtuallen Images des gleichen privaten Netzwerks.
+Solche Netzwerke sind von ausserhalb des Gastbetriebssysstem nicht oder zumindest nicht direkt (sondern nur per Port-Forwarding erreichbar über das Hostbetriebssystem), weil sie IP-Adressen verwenden, die nicht im Internet geroutet werden (weil sie privat sind). Der Hypervisor stellt ein virtuelles Subnetz für die VMs zur verfügung und fungiert als Router zwischen diesem Subnetz und dem Netzwerk des Host-Betriebssystems. Auf diese Weise erhält das Gastbetriebssystem Zugriff aufs Internet (über NAT). Der Hypervisor fungiert als Switch zu anderen virtuellen Images des gleichen privaten Netzwerks.
 
 Hier ein paar Beispiele:
 
@@ -335,7 +355,7 @@ Hier ein paar Beispiele:
       config.vm.network "private_network", ip: "192.168.50.4"
     end
 
-Konfiguriert man nur ein einziges private_network (``config.vm.network "private_network", ip: "192.168.50.4"``), so wird scheinbar zusätzlich ein Host-Only-Interface angelegt, das dann aber ein anderes Subnetz verwendet ... oder ist das nur in meinem Base-Image so (kann das sein, daß es vom Base-Image kommt?):
+Konfiguriert man nur ein einziges private_network (``config.vm.network "private_network", ip: "192.168.50.4"``), so wird scheinbar zusätzlich zum Shared-NAT-Network ein Host-Only-Interface angelegt, das dann aber ein anderes Subnetz verwendet ... oder ist das nur in meinem Base-Image so (kann das sein, daß es vom Base-Image kommt?):
 
     [root@pep vagrant]# ifconfig
       enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -375,9 +395,9 @@ Konfiguriert man nur ein einziges private_network (``config.vm.network "private_
 
 ### Public Netzwerke
 
-Solche Netzwerke erhalten eine statische oder dynamische IP-Adresse und verstecken sich nicht hinter dem VirtualBox-Software-Router, sondern sind direkt - ohne Portforwarding - erreichbar. Da Vagrant unsichere SSH-Keys verwendet kann man sich relativ leicht Zugriff auf eine Vagrant-Box mit Public-Network verschaffen ... aus diesem Grund sollte man sich das gut überlegen.
+Solche Netzwerke erhalten eine statische oder dynamische IP-Adresse und verstecken sich nicht hinter dem Software-Router (bereitgestellt durch den Hypervisor als virtualles Subnet), sondern sind direkt - ohne Portforwarding - erreichbar. Da Vagrant unsichere SSH-Keys verwendet kann man sich relativ leicht Zugriff auf eine Vagrant-Box mit Public-Network verschaffen ... aus diesem Grund sollte man sich das gut überlegen.
 
-Unter VirtualBox als Provider entsprechen PublicNetworks dem Bridged-Mode.
+Unter VirtualBox und Parallels als Provider entsprechen PublicNetworks dem Bridged-Mode.
 
 Hier ein paar Beispiele:
 

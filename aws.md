@@ -53,6 +53,15 @@ apt-get install maven
 
 Die von meinen Docker Services bereitgestellten Ports mußten dann noch über die AWS-Management-UI als Inbound Rules der Security Group eingetragen werden.
 
+## Templates
+
+Manuelles Zusammenclicken einer ganzen Landschaft ist aufwendig und fehleranfällig ... insbesondere für Newbies. Entweder macht man das
+
+* automatisiert per 
+  * [terraform](terraform.md)
+  * oder Cloudformation 
+* interaktiv über die AWS-WebUI, indem man ein Template auswählt
+
 ---
 
 ## Kosten

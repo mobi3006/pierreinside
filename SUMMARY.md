@@ -117,6 +117,7 @@
   * [Zertifikate](certificates.md)
   * [Kali Linux](kaliLinux.md)
   * [VPN](vpn.md)
+  * [Zero-Trust-Networks](zero-trust-network.md)
 * Build und Deployment
   * [Maven](maven.md)
   * [Bamboo](bamboo.md)
@@ -161,6 +162,7 @@
         * [RDS](aws_rds.md)
         * [Static Website Hosting](aws_staticWebsiteHosting.md)
         * [Serverless](aws_serverless.md)
+        * [EKS - Elastic Kubernetes Service](aws-eks.md)
       * [Google Cloud Platform](gcp.md)
     * [Docker Orchestrierung](docker_orchestration.md)
       * [CoreOS](coreos.md)

@@ -1,4 +1,4 @@
-# GitHub Actions
+# GitHub Actions und Workflows
 
 Hierbei handelt es sich um die Automatisierungstechnologie von GitHub.
 
@@ -273,6 +273,47 @@ Können in
 
 ausgeführt werden. Das wird über die `runs-on` oder `container` Definition festgelegt. Ein Workflow kann mehrere Jobs enthalten, die per Default parallel ausgeführt werden. Über `needs: id` lassen sich Abhängigkeiten und über `needs.JOB.outputs.variable` Parameter übergeben.
 
+Matrix ist ein schönes Konzept, um Jobs in verschiedenen Kombinationen laufen zu lassen:
+
+```
+jobs:
+  backend:
+    strategy:
+      matrix:
+        browser: [ "firefox", "chrome", "opera"]
+```
+
+Sehr hilfreich ist an dieser Stelle, dass diese Matrix nicht statisch sein muss. Sie kann auch während der Durchführung eines Workflows ermittelt werden:
+
+* [Dynamic build matrix in GitHub Actions](https://www.cynkra.com/blog/2020-12-23-dynamic-gha/)
+* [Dynamic number of jobs in a GitHub Action workflow](https://www.geekytidbits.com/dynamic-number-of-jobs-in-github-action-workflow/)
+
+```
+jobs:
+  calculate-scope:
+    runs-on: ubuntu
+    outputs:
+      service_list: ${{ steps.calculation.outputs.service_list }}
+    steps:
+      - name: which services to patch
+        id: calculation
+        run: |
+          service_list="[ "
+          delimiter=
+          for service_version in ${supported[@]}; do
+            service_list="${service_list}${delimiter}\"${service_version}\""
+            delimiter=","
+          done
+          echo "service_list=${service_list}" >> $GITHUB_OUTPUT
+
+  patch:
+    needs: calculate-scope
+    strategy:
+      matrix:
+        service: ${{ fromJson(needs.calculate-scope.outputs.service_list) }}
+      max-parallel: 2
+```
+
 ### Triggers
 
 * [Workflow Trigger](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on)
@@ -411,6 +452,8 @@ on:
       envPAT:
         required: true
 ```
+
+> Seltsamerweise funktioniert die Nutzung von Secrets nur in Reusable Workflows (`workflow_call`). Wenn man beispielsweise einen `workflow_dispatch` verwendet, dann kann man ausschliesslich auf `secrets.GITHUB_TOKEN` zugreifen aber nicht auf andere secrets. Wenn man sich aber einen `workflow_dispatch` workflow baut und die Secrets per `secrets: inherit` alle contributed, dann kann der aufgerufene `workflow_call` auf ALLE Secrets zugreifen. Ich bin also gezwungen aus rein technischen Gründen innerhalb eines Repsoitories einen Reusable Workflow zu implementieren. Was ist das denn für ein Quatsch?
 
 ---
 

@@ -6,6 +6,9 @@ Im Zuge der Ausbildung meines Fachinformatiker-Anwendungsentwicklung-Azubis habe
 * Algorithmen und Datenstrukturen
 * JPA und MySQL
 * Webentwicklung
+* Cloud
+* DevOps
+* Developer Platform
 
 Ich selbst war von einem Udemy-Kurs sehr begeistert, den ich für 10 Euro im Sale erworben hatte. Das war systematisch und professionell aufbereitet ... es muß also gar nicht teuer sein.
 
@@ -22,7 +25,7 @@ Ich selbst war von einem Udemy-Kurs sehr begeistert, den ich für 10 Euro im Sal
 ### An die Inhalte
 
 * bezahlbar
-* Übungen
+* Übungen ... am besten in einer bereitgestellten Umgebung die ersten Schritte machen
 * Tests - fast Feedback
 * Chats
   * ... mit dem Lehrer
@@ -117,3 +120,16 @@ Was man verbessern könnte:
   * man kann nicht SEINER IDE arbeiten
     * Beispielcode basiert auf Libraries - keine Ahnung, ob die frei verfügbar sind
       * man ist "gezwungen" BlueJ zu verwenden - hat für Coursera aber viele Vorteile
+
+### Cloudguru (Linux Academy)
+
+* 
+
+### AWS Ressourcen
+
+* [AWS Skillbuilder](https://explore.skillbuilder.aws)
+  * teilweise kostenlos
+* [AWS Workshops](https://workshops.aws/)
+  * [AWS EKS]()
+* [AWS Ramp-up guides](https://aws.amazon.com/training/ramp-up-guides/)
+  * gute Links zu weiteren Ressourcen (Whitepapers, Blogs, PDF, ...)
