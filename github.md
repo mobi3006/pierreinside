@@ -107,6 +107,13 @@ Seit [Ende 2020](https://docs.github.com/en/rest/overview/other-authentication-m
 
 ### Authentifizierung per Personal-Access-Token (PAT)
 
+Der Personal-Access-Token ist ein Secret, das mit den Permissions des erzeugenden Users (zur Laufzeit ... nicht zum Erstellungszeitpunkt) genutzt wird. Der Gültigkeitsscope eines solchen Tokens kann allerdings eingeschränkt werden auf z. B.
+
+* bestimmte Repositories
+* bestimmte Bereiche (Content, Issues, Pull-Requests)
+
+Es gibt "Classic Tokens" und mittlerweile auch "Fine-Grained" Tokens.
+
 Über
 
 > curl --location -u mobi3006 --request GET 'https://api.github.com/repos/mobi3006/trash-private/contents/README.md'
@@ -119,6 +126,19 @@ Alternativ kann man auch
 --header 'Authorization: Basic thiscouldbeyourbase64encodedsecret
 
 verwenden.
+
+**ACHTUNG: PATs sind einfach in der Erstellung und kurzfristigen Nutzung ... ABER:**
+
+* sie werden ungültig, wenn der User nicht mehr existiert
+  * insofern sind PATs nicht die erste Wahl, wenn es um nachhaltige Automatisierung in Enterprise Umgebungen geht
+* es ist schwierig mit zeitlich begrenzten Tokens bei unternehmenskritischen Workflows zu arbeiten ... man stelle sich vor ein Hotfix kann nicht deplyoed werden, weil der Token abgelaufen ist und sich niemand mehr so richtig erinnert wo der zu konfigurieren ist
+* wir ein PAT an verschiedenen Stellen benutzt, müssen auch alle Stellen geändert werden
+* eine Änderung an den Berechtigungen des dahinterstehenden Users führt auch zu einer Berechtigungsänderung für den PAT (weil der ja direkt mit den Berechtigungen des Users gekoppelt ist). Somit kann das unerwünschte Seiteneffekte haben
+* sie sind schwieriger zu verwalten und im Auge zu behalten
+* automatisierte Prozesse will häufig nicht unter des Flagge des eigenen Users laufen lassen ... letztlich hat es die Maschine gemacht - evtl. getriggert von einem ganz anderen Benutzer
+  * häufig werden hierfür technische User verwendet ... GitHub Apps sind die GitHub-Lösung, die ohne technischen User auskommt (und zudem noch Vorteile gegenüber diesem Ansatz hat ... Stichwort Quota)
+
+**DESHALB** empfehle ich die Verwendung von GitHub Apps - sie sind  zu verwenden, die benutzerunabhängig sind.
 
 ### Authentifizierung per GitHub App
 

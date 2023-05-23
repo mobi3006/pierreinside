@@ -144,6 +144,31 @@ Einige mögliche Probleme:
 
 Nach dem 10. Anruf bei der 1und1 Hotline ohne irgendwelche Verbesserungen habe ich auf eine neue Fritzbox gedrängt. Mit der 7590 waren die Probleme dann ganz schnell weg ... immerhin habe ich die Box von 1und1 für 160 Euro (als Ersatz für meine 7390) statt 230 Euro (im Handel) bekommen. Auf die Idee hätte der SUpport aber auch mal von selbst kommen können.
 
+## Umstellung auf Glasfaser - Fritzbox 7590 AX
+
+* [YouTube Vide - Wifi 6 aka AX](https://www.youtube.com/watch?v=p7N56YfjlO0)
+
+Prinzipiell könnte ich meine 7590 auch mit einem Glasfaseranschluss betreiben, da jedes VDSL Modem auch an einem Glasfaseranschluss betrieben werden kann. Hierzu stellen die Glasfaserbetreiber i. a. ein Glasfasermodem bereit, in das man den Nicht-Glasfaser-WLAN-Router per LAN einstöpseln kann.
+
+>  AON und GPON: Unterschiede von Glasfaseranschlüssen
+> Nicht jeder Glasfaser Anschluss ist gleich. Für maximale Power wird ein sogenannter FTTH-Anschluss (Fiber-to-the-Home) benötigt. Hierbei wird Glasfaser bis ins Einfamilienhaus oder bei mehreren Parteien bis in die einzelnen Wohnungen verlegt. Glasfaseranschlüsse können dabei aktiv oder passiv sein. ([Quelle](https://www.dslweb.de/glasfaser-router.php))
+
+Aktive Glasfaseranschlüsse (AON) sind einzeln mit dem Glasfasernetz verbunden. Bei passiven Glasfaseranschlüssen (GPON) hingegen teilen sich mehrere eine Anbindung an das Glasfasernetz. In Deutschland ist GPON die gängige Technologie. Da auch der Glasfaser Router auf AON oder GPON ausgerichtet sein muss, sollte mit dem Anbieter geklärt werden, welche Art von Glasfaseranschluss vorliegt.
+
+Allerdings möchte ich mein WLAN verbessern und da bieten die neuen Modelle (AX) durch Wifi 6 nochmal ein deutliches plus. Die alte Box kann in der Familie weitergeben.
+
+Die Fritzbox kostet 200-250 Euro. Bei 1und1 kann man Boxen mieten:
+
+* 1&1 Homeserver (baugleich mit Fritzbox 7520): 5 Euro/Monat
+* 1&1 Homeserver+ (baugleich mit Fritzbox 7530 AX): 7 Euro/Monat
+* 1&1 Homeserver Speed+ (baugleich mit Fritzbox 7590 AX): 10 Euro/Monat
+* 1&1 Homeserver Glasfaser (baugleich mit Fritzbox 5530): 7 Euro/Monat
+* 1&1 Homeserver+ Glasfaser (baugleich mit Fritzbox 5590): 10 Euro/Monat
+  * "Dank eines SFP-Steckmoduls ist die AVM Fritz!Box 5590 Fiber mit allen gängigen Glasfaseranschlüssen in Europa kompatibel. Der WLAN Router ist dabei bereits für Übertragungsgeschwindigkeiten von bis zu 10 Gbit/s gerüstet. Für schnelles WLAN sorgen schließlich der Wi-Fi 6 Standard sowie moderne Antennentechnik. Funktionen für Telefonie stecken zudem im Gerät." ([Quelle](https://www.dslweb.de/avm-fritzbox-5590-fiber.php))
+
+Nach 2 Jahren ist man mit einer gekauften Box also günstiger ... aus der Erfahrung kann ich sagen, dass ich meine Boxen 4-6 Jahre genutzt habe. Ich werde mir also eine Box kaufen. Ich werde allerdings warten bis der Glasfaseranschluss tatsächlich liegt ... das kann nämlich noch 18 Monate dauern.
+
+
 ## Powerline
 
 * [Produkte von Fritz](https://avm.de/produkte/fritzpowerline/)

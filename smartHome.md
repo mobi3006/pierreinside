@@ -86,6 +86,8 @@ Hackerangriffe (z. B. Tür kann von Unberechtigten geöffnet werden) sind immer 
 * spielt in diesem Bereich keine große Rolle ... dennoch schwenken immer mehr Hersteller darauf um, um den Einstieg in Smart Home zu erleichtern (jeder hat zuhause WLAN)
   * dennoch ... im Bereich Homeautomatisierung braucht niemand die Datenmengen, auf die WLAN ausgelegt ist
 
+  In diesem Bereich ist [Shelly](https://www.shelly.cloud/de) ein sehr interessanter Anbieter. Die Produkte sind vergleichsweise preisgünstig - es sind halt keine Lifestyle-Produkte, sondern Industrieprodukte ... vielleicht kann man dann auch entsprechende Nachhaltigkeit erwarten.
+
 ### Bluetooth
 
 * [Einführung](https://www.homeandsmart.de/bluetooth-low-energy-smart-home)

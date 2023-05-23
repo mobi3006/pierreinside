@@ -88,9 +88,17 @@ MANIFEST.in         # Build-File (welche Dateien sollen ins Package?)
 
 Zum lokalen Testen (im Development Mode) kann man dann ein `pip install --editable .` verwenden ... `pip` wertet dann das `setup.py`-Datei aus und installiert das Paket in die aktuelle Python-Distribution (z. B. Virtuelles Environment). Die Option `--editable` kann weggelassen werden, sie ermöglicht Änderungen ohne erneutes `pip install .` sichtbar zu machen (zumindest viele Änderungen ... natürlich keine Änderungen an `setup.py`), da direkt auf dem Source-Code gearbeitet wird anstatt auf `site-packages` der Python-Distribution => Realtime-Updates (SEHR zu EMPFEHLEN).
 
-#### Binary Distributions - Wheel Format
+#### Binary Distributions bauen - Wheel Format
 
-Per `python setup.py bdist_wheel` ("B Dist" = "Binary Distribution") wird eine Binary Distribution im Wheel-Format gebaut. Anschließend die Ordner `build` (plattformabhängig) und `dist` (enthält die Wheel-Datei). Hängt man hintendran noch ein `upload` (z. B. `python setup.py bdist_wheel upload -r "my-pypi"`), dann wird das Wheel-Paket in das Python-Repository `my-pypi` hochgeladen (das in `~/.pypirc` mit Credential konfiguriert werden muß).
+* [realpython](https://realpython.com/python-wheels/)
+
+Ein Package im Wheel-Format ist eine Binärdistribution, die bereist für die Zielplatform compiliert wurde  (im Gegensatz zur Source-Code-Distribution) ... eine lokale Compilierung (erfordert häufig irgendwelche Header-Datei, die man als Endanwender nicht unbedingt installiert hat) ist nicht mehr erforderlich.
+
+Installiert man ein Package per `pip`, so werden Wheel-Distributionen gegenüber Source-Distributionen präferiert. 
+
+#### Binary Distributions bauen - Wheel Format
+
+Per `python setup.py bdist_wheel` ("B Dist" = "Binary Distribution") wird eine Binary Distribution im Wheel-Format (`*.whl`) gebaut. Anschließend die Ordner `build` (plattformabhängig) und `dist` (enthält die Wheel-Datei). Hängt man hintendran noch ein `upload` (z. B. `python setup.py bdist_wheel upload -r "my-pypi"`), dann wird das Wheel-Paket in das Python-Repository `my-pypi` hochgeladen (das in `~/.pypirc` mit Credential konfiguriert werden muß).
 
 Eine Wheel-Datei kann auch beispielsweise per `twine` auf ein Artifact-Repository (PyPI, Nexus) hochgeladen werden.
 
@@ -124,7 +132,7 @@ Per `python setup.py bdist_egg` ("B Dist" = "Binary Distribution") wird eine Bin
 
 #### Source Distributions
 
-Per `python setup.py sdist` ("S Dist") wird eine Source-Distribution als `tar.gz` gebaut.
+Per `python setup.py sdist` ("S Dist") wird eine Source-Distribution (in Form eines `tar.gz`) runtergeladen und lokal gebaut (beispielsweise als Wheel).
 
 Der Vorteil einer Source-Distribution besteht darin, daß man den Code lokal hat und und prüfen kann.
 

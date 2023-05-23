@@ -18,3 +18,9 @@ Klar ist allerdings auch, daß ich mit meinem mobilen Datenansatz über den Mobi
 * kostenlos bis 500 MB/Monat
   * da es mir nicht ums Streamen von Multimediadaten geht, sondern nur fürs sichere Surfen, ist das ein sehr interessantes Angebot
 * Standort in 25 Ländern wählbar
+
+### Eigenes VPN
+
+Macht man den eigenen Internet-Anschluss zuhause öffentlich (DynDNS), so kann man auch seinen eigenen VPN-Server betreiben.
+
+Die Fritzbox unterstützt VPN aber kein schnelles Wireguard. Das kann man mit dem [Brume](https://www.gl-inet.com/products/gl-mt2500/) nachrüsten. Den stöpselt man einfach an seine Fritzbox und kann nach einer schnellen Konfiguration über den iPhone - Slate - Hotel-WLAN - Fritzbox - Brume eine eigene VPN Verbindung aufbauen.

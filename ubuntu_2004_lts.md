@@ -2,6 +2,24 @@
 
 Insgesamt bin ich mit der Stabilität sehr zufrieden und das LTS ist - solange ich noch keine Automatisierung meines Setups habe - die bessere Entscheidung für meine Workbench, die ich für die Arbeit verwende. Ich habe dann keinen Nerv alle 6 Monate eine neue Version aufzusetzen ...
 
+Der Vorteil ist, dass Security Updates automatisch kommen, wenn man regelmäßig ein `sudo apt update && sudo apt upgrade` macht. Damit erhält man die letzten Security Patches der jeweiligen Pakete. Beispiel auf einem 20.04 LTS System:
+
+* die offiziellen Ubuntu Images stellen `git` in der Version `2.25.1` bereit
+* das neueste `git` ist `2.39.2`, das wird nicht in Focal Fossa verwendet
+* ein `apt upgrade` sorgt dafür, dass von `git:2.15.1` beispielsweise der Build `2.25.1-1ubuntu3.10` statt `2.25.1-1ubuntu3.8` installiert wird. Das enthält dann einen neuen Security Patch (z. B. [CVE-2023-22490](https://ubuntu.com/security/CVE-2023-22490))
+
+Möchte man eine neuere Version von `git` verwenden (z. B. `git:2.39.2`), dann muss man ein PPA-Repository hinzufügen:
+
+```
+sudo add-apt-repository ppa:git-core/ppa -y
+sudo apt update
+sudo apt install git -y
+```
+
+Auf einem 100% sicheren LTS System würde ich keine PPA Repositories verwenden, da die PPA-repos nicht von Ubuntu angeboten werden, sondern von der Community bereitgestellt werden. [Hier die Empfehlung von Ubuntu](https://help.ubuntu.com/community/Repositories/Ubuntu):
+
+> "PPAs are a low-security alternative to the main repositories, so the user will be installing software at their own risk."
+
 ---
 
 ## Was mich an 18.04 LTS genervt hat

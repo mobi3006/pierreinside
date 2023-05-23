@@ -139,6 +139,9 @@ Service Mesh Implementierungen sind häufig in folgenden Programmiersprachen ges
 
   > "Das Service Discovery wird durch den Pilot übernommen, indem dieser die Envoy Proxys mit den notwendigen Informationen versorgt. Diese Informationen ermöglichen dem Envoy unter anderem die Resilienz-Patterns (etwa Timeout, Retry und Circuit Breaker) umzusetzen. Auch die Themen A/B-Deployment und Canary Releasing wird durch dieses Zusammenspiel ermöglicht. Jeder Envoy verwaltet Load-Balancer-Informationen, die er vom Pilot erhält, wodurch der Envoy die Last optimal im Service Mesh verteilt." (([jaxenter - Teil 1](https://jaxenter.de/istio-einfuehrung-microservices-cloud-teil-1-71261)))
 
+* Linkerd
+  * [Why Linkerd doesn't use Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/)
+
 ### Consul Connect und Envoy
 
 * [Homepage Consul Connect](https://www.hashicorp.com/products/consul/service-mesh)

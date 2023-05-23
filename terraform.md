@@ -123,6 +123,8 @@ terraform plan -var instance_type=t2.micro  # hier sieht man was geschehen wird
 terraform apply                             # erzeugt den Execution Plan
 ```
 
+> mit `terraform plan -target module.eks` kann man den Scope des Plans bzw. des Apply einschränken (auf bestimmte Ressourcen), so dass die Ausführung deutlich schneller geht. Auf diese Weise kann man auch eine Layer-Struktur bilden, um den Scope eines Apply einzuschränken. Allerdings muss man dann die Abhängigkeiten zwischen den Layern berücksichtigen. 
+
 ausgeführt. Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration).
 
 > Ich halte diese Freiräume in der Benennung der Datei für einen guten Schachzug. Es ermöglicht eine freie semantische Benennung, ohne den Nutzer zu gängeln und dadurch dann wiederum Verstöße überprüfen zu müssen. Dennoch gibt es Best-Practices (`main.tf`, `output.tf`, `variables.tf`, ...), an die man sich halten sollte. Es verbleiben dennoch viele Freiheiten.
@@ -318,6 +320,14 @@ Die `./main.tf` agiert als Controller, um die Daten aus `./middleware/output.tf`
 
 Terraform bietet kleine Helferfunktionen, denn auch eine deklarative Sprache kommt nicht ohne aus.
 
+### Data Sources
+
+Data Sources stellen Terraform aktuelle Informationen aus der Umgebung bereit. Diese Bereitstellung erfolgt über Queries, die die Data Source zur Ausführungszeit gegen die APIs der Laufzeitumgebung macht. Dies ist **KOMPLETT** entkoppelt vom Terraform State.
+
+Data Sources haben das Ziel nicht terraform managed Ressources in Terraform zu integrieren.
+
+Eine Alternative zu Data Sources ist die Abfrage eines Remote-Terraform-States ... aber dazu muss die andere Ressource natürlich mit Terraform gemanged sein ... sonst hätte sie ja keinen Terraform-State.
+
 ### Refactorings
 
 Nach einem refactoring sollte man immer ein `terraform get` machen, da beispielsweise ein Umbenennen eines lokalen Moduls im `.terraform/modules/modules.json` repräsentiert werden muss. Ansonsten scheitern `terraform plan` und/oder `terraform apply`.
@@ -479,6 +489,8 @@ kann man den State verschlüsselt in S3 ablegen ... für die Arbeit im Team ist 
 Hatte man vorher den State lokal, dann "migriert" man ihn nach obiger Konfiguration per `terraform init -migrate-state` in den Bucket übertragen.
 
 > letztlich ist das nur ein Copy-Kommando wie `aws s3 cp terraform.tfstate s3://my-bucket/terraform.tfstate`
+
+Entkoppelte Terraform-Bundles (mit eigenem State) können den State eines anderen Bundles (remote) abfragen und sich so notwendige Informationen beschaffen. Auf diese Weise entsteht eine lose Kopplung ... mit allen Vor- und Nachteilen.
 
 ### Import
 

@@ -116,11 +116,13 @@ Hierzu muss man sich vorher in der Docker-Registry registrieren, um Credentials 
 docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
 ```
 
-ein. **BE AWARE:** Das `docker login` speichert das Password in `~/.docker/config.json`
+ein. 
 
 Nach dem Build (z. B. `docker build -t docker_hub_user/test:latest .`) wird das image per `docker push docker_hub_user/test:latest` auf die Registry gepusht. Anschließend steht das Image per `docker pull docker_hub_user/test:latest` zur Nutzung zur Verfügung.
 
-> Will man eine andere Registry als docker.io verwenden, dann muss man das im Imagenamen konfigurieren. In diesem Fall verwendet packt man den Registrynamen zum Imagenamen dazu: `docker push docker.io/docker_hub_user/test:latest`
+Will man eine andere Registry als docker.io verwenden, dann muss man das im Imagenamen konfigurieren. In diesem Fall verwendet packt man den Registrynamen zum Imagenamen dazu: `docker push docker.io/docker_hub_user/test:latest`
+
+> **BE AWARE:** obige Befehle führen dazu, dass das Passwort in der Shell-History landet und im Klartext in `~/.docker/config.json` abgelegt wird. Beides sollte man vermeiden ... bessere Möglichkeiten [findet man hier](docker_registry.md)
 
 ### Use multi-stage builds
 
