@@ -38,9 +38,9 @@ Die Cloud hat ihre ursprüngliche Motivation in der Skalierbarkeit. Hierin liegt
 
 ## Konzept Pod
 
-* ist atomare Deployment-Einheit ... Dinge, die IMMER gemeinsam auf einer Maschine (= Minion) deployed werden.
-* besteht aus einem Konglomerats von Docker-Containern, Data-Volumes, Networks, ...
-  * kann aber natürlich auch nur ein einziger Docker-Container sein
+* ist atomare Deployment-Einheit ... Dinge, die IMMER gemeinsam auf einem Node (= Minion) deployed werden.
+* besteht aus einem oder mehreren Docker-Containern, Data-Volumes, Networks, ...
+  * Komponenten EINES Pods sind eng verknüpft
 * ein Pod kann mehrere Labels haben, die dann verwendet werden, um Pods auszuwählen
 * Pods teilen sich Volumes
 * alle Container eines Pods können über ``localhost`` miteinander kommunizieren (vereinfacht die Konfiguration)
@@ -68,6 +68,22 @@ Die Cloud hat ihre ursprüngliche Motivation in der Skalierbarkeit. Hierin liegt
 * auf der Control-Plane läuft auch etcd ... eine verteilte (ausfallsichere) Key-Value-Datenbank (basierend auf Dqlite) zur Speicherung von Metadaten - dem State des K8s-Clusters.
   * nur der API-Server (Kube-API) spricht mit etcd
   * verwendet das Raft-Protocol
+
+---
+
+## Konzept Kube-API
+
+Das ist eine REST-API (bereitgestellt auf der Control Plane) zur Steuerung des K8s-Clusters. `kubectl` verwendet diese API ... wir können das aber natürlich auch tun. Statt eines `kubectl get pods --namespace my-namespace`
+
+```
+curl https://192.168.100.39:16443/api/v1/namespaces/my-namespace/pods \
+    --header `Authorization: Bearer <TOKEN>' \
+    --insecure
+```
+
+Als Antwort bekommt man dann ein JSON.
+
+... man erkennt daran, dass das `kubectl` eine durchaus sinnvolle Abstraktionsschicht ist.
 
 ---
 
@@ -223,8 +239,51 @@ und ermöglicht die gleichzeitige Nutzung von `kubectl` in verschiedenen Context
 
 ---
 
+## Konzept Manifest Files
+
+`yaml` Dateien, die einen Zielzustand (= Deployment) beschreiben:
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources: {}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          timeoutSeconds: 3
+          failureThreshold: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 25%
+    type: RollingUpdate
+```
+
+---
+
 ## etcd
 
+* nur die Control Plane verwendet etcd
 * key/value Store
 * enthält die Konfiguration des Clusters
 * jeder Knoten hat Zugriff
@@ -242,7 +301,7 @@ und ermöglicht die gleichzeitige Nutzung von `kubectl` in verschiedenen Context
 
 `kubectl`-CLI ist ein Client, mit dem ein Administrator mit einem Kubernetes-Cluster spricht. Die Kommunikation erfolgt mit der Kubernetes-Control-Plane - genauer gesagt mit dem API-Server (REST-API). Man installiert i. a. `kubectl` auf dem eigenen Laptop (oder auch einem Bastion Host) und konfiguriert ihn entsprechend auf einen Ziel-Cluster.
 
-`kubectl` benötigt eine enstrechende Konfiguration des Ziel-Clusters in `~/.kube/config`.
+`kubectl` benötigt eine enstrechende Konfiguration des Ziel-Clusters in `~/.kube/config`. Intern verwendet `kubectl` die KUBE-API ... eine REST-API der Kubernetes Control Plane. Es ist somit nur eine Abstraktionsschicht, die sehr stabil bleibt ... selbst wenn sich die REST-API mal (auch backward-inkompatibel) ändern sollte.
 
 > In einem elastischen Umfeld ist es wichtig, eine solche Abstraktion zu haben, denn die physische Location des API-Servers kann sich in einem elastischen Umfeld jederzeit ändern.
 
@@ -269,6 +328,17 @@ und ermöglicht die gleichzeitige Nutzung von `kubectl` in verschiedenen Context
 * `kubectl apply -k /workspace/modules/affinity/checkout`
   * Änderungen innerhalb des Clusters per [Kustomize](https://kustomize.io/) anwenden
 * `kubectl exec pod -n catalog -- cat /var/log/syslog`
+
+### Imperative vs Declarative
+
+`kubectl` bietet beide Formen an:
+
+* imperativ: `kubectl run nginx-pod --image=nginx --port 80`
+* deklarativ: `kubectl apply -f nginx-deployment.yaml`
+
+Beim deklarativen Beispiel handelt es sich um ein Manifest-Datei, die angewendet wird ... sozusagen eine Definition des Zielzustandes. Darin sind evtl. eine Anzahl von Replicas der NGinx Pods definiert, so dass die Control-Plane selbständig dafür sorgt, dass entsprechend viele Pods laufen. Das gilt aber nicht nur zum Zeitpunkt des `apply`-Statements, sondern auch für später. Der Zielzustand wird in etcd gespeichert und wenn Kubernetes-Control-Plane feststellt, dass nur noch 2 Replicas laufen, dann wird ein dritter Pods gestartet ... self-healing. Wir definieren also nur den Zielzustand und übergeben die Kontrolle an Kubernetes.
+
+Neben diesem konzeptuellen Vorteil, lassen sich solche Manifest-Dateien auch einfach mit anderen teilen (z. B. unter Versionskontrolle stellen) und wiederholt ausführen. Der erste wichtige Schritt zu richtiger Automatisierung - die viel weniger Fehler produziert als eine Step-by-Step-Anleitung von Kommandos (die veraltet). Nicht zu vergessen, dass auf diese Weise auch Wissen geteilt werden kann und Kollaboration (über Pull-Requests) ermöglicht werden kann.
 
 ---
 
