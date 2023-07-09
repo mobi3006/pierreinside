@@ -22,7 +22,7 @@ Ihr braucht dazu kein Microsoft-Konto und auch keine Microsoft Apps. MIT einem M
 
 ---
 
-## Öfnnen MIT Microsoft-Konto am Handy
+## Öfnen MIT Microsoft-Konto am Handy
 
 > wenn die Onedrive Apps bzw. Microsoft 365 Apps regelmäßig genutzt wird, dann wird der Inhalt direkt in der App angezeigt sobald man auf den Link drückt
 
