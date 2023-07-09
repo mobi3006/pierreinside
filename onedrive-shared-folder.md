@@ -5,9 +5,9 @@ Mit einem Shared-Link (sieht so aus: https://1drv.ms/f/s!562gv1v4k1h414kh41) kan
 * entweder im Web-Browser
 * oder in der Microsoft Onedrive App
 
-am Computer oder im Handy öffnen.
+am Computer oder am Handy öffnen.
 
-Ihr braucht dazu KEIN Microsoft-Konto und auch keine Microsoft Apps. MIT einem Microsoft-Konto ist das allerdings deutlich komfortabler (z. B. Integration in euer Microsoft-Konto) und bietet auf dem Handy auch ein paar nette Features (z. B. Download um die Bilder auch ohne mobile Internetverbindung ansehen zu können).
+Ihr braucht dazu kein Microsoft-Konto und auch keine Microsoft Apps. MIT einem Microsoft-Konto ist das allerdings deutlich komfortabler (z. B. Integration in euer Microsoft-Konto) und bietet auf dem Handy auch ein paar nette Features (z. B. Download um die Bilder auch ohne mobile Internetverbindung ansehen zu können).
 
 > **HINWEISE:** der Ordner kann Videos enthalten, die sehr groß sein können ... und evtl. eure mobilen Daten am Handy belastet!!!
 
@@ -30,10 +30,12 @@ Ihr braucht dazu KEIN Microsoft-Konto und auch keine Microsoft Apps. MIT einem M
 * der Link wird dann über die Onedrive App automatisch geöffnet
   * falls du die Onedrive App nicht installiert hast, wirst du zur Installation in den Appstore weitergeleitet
   * falls du die Onedrive App nicht mit den Zugangsdaten bestückt hast, wirst du dazu aufgefordert
- 
+
 ---
 
 ## Vorteile eines Microsoft Kontos und der Microsoft App
+
+> ein Microsoft-Konto ist kostenlos
 
 * Benachrichtigungen, wenn neue Inhalte verfügbar sind
 * Offline-Speicherung
