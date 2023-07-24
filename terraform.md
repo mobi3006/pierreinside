@@ -123,9 +123,9 @@ terraform plan -var instance_type=t2.micro  # hier sieht man was geschehen wird
 terraform apply                             # erzeugt den Execution Plan
 ```
 
-> mit `terraform plan -target module.eks` kann man den Scope des Plans bzw. des Apply einschränken (auf bestimmte Ressourcen), so dass die Ausführung deutlich schneller geht. Auf diese Weise kann man auch eine Layer-Struktur bilden, um den Scope eines Apply einzuschränken. Allerdings muss man dann die Abhängigkeiten zwischen den Layern berücksichtigen. 
+> mit `terraform plan -target module.eks` kann man den Scope des Plans bzw. des Apply einschränken (auf bestimmte Ressourcen), so dass die Ausführung deutlich schneller geht. Auf diese Weise kann man auch eine Layer-Struktur bilden, um den Scope eines Apply einzuschränken. Allerdings muss man dann die Abhängigkeiten zwischen den Layern berücksichtigen.
 
-ausgeführt. Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration).
+Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration).
 
 > Ich halte diese Freiräume in der Benennung der Datei für einen guten Schachzug. Es ermöglicht eine freie semantische Benennung, ohne den Nutzer zu gängeln und dadurch dann wiederum Verstöße überprüfen zu müssen. Dennoch gibt es Best-Practices (`main.tf`, `output.tf`, `variables.tf`, ...), an die man sich halten sollte. Es verbleiben dennoch viele Freiheiten.
 
@@ -527,12 +527,17 @@ Verwendet man AWS, dann kann man für ein Terraform-Lock auch eine DynamoDB verw
 
 ### Isolation Best Practices
 
-Packt man die Beschreibung der gesamten Infrastruktur (für alle Stages) in ein einziges Deployment-Modul, so ist das Risiko etwas kaputtzumachen (es wird dann auch nur ein einziges State-File verwendet) vergleichsweise hoch. Wenn man nur eine kleine Änderung an den Edge-Proxies vornehmen will, dann ist es vielleicht besser nur das oberste Layer der Infrastruktur auszurollen und nicht die tieferen Schichten. Das hat auch etwas mit der Änderungshäufigkeit der verschiedenen Layer zu tun ... je tiefer desto seltener.
+Packt man die Beschreibung der gesamten Infrastruktur (für alle Stages) in ein einziges Deployment-Modul, so ist das Risiko etwas kaputtzumachen (es wird dann auch nur ein einziges State-File verwendet) vergleichsweise hoch und der Plan dauert auch länger. Wenn man nur eine kleine Änderung an den Edge-Proxies vornehmen will, dann ist es vielleicht besser nur das oberste Layer der Infrastruktur auszurollen und nicht die tieferen Schichten. Das hat auch etwas mit der Änderungshäufigkeit der verschiedenen Layer zu tun ... je tiefer desto seltener.
 
 Welches Level der Isolation verwendet wird, liegt in der Entscheidung des Nutzers - Terraform kann hier keine Vorgaben machen ... dennoch gibt es Best-Practices:
 
 * Separierung von Stages (DEV, TEST, LIVE)
 * Layering ... alles was man typischerweise gemeinsam deployed (weil es konsistent zueinander sein muß)
+
+Diskussion über Monoilith vs. Layers:
+
+* [www.padok.fr](https://www.padok.fr/en/blog/terraform-iac-multi-layering)
+* [Happy Terraforming! Real-world experience and proven best practices](https://www.hashicorp.com/resources/terraforming-real-world-experience-best-practices)
 
 ### Isolation über Workspaces
 

@@ -10,6 +10,7 @@
     * [Ubuntu 16.04 LTS](ubuntu_1604_lts.md)
     * [Ubuntu 18.04 LTS](ubuntu_1804_lts.md)
     * [Ubuntu 20.04 LTS](ubuntu_2004_lts.md)
+    * [Ubuntu - Netzwerk](ubuntu-netzwerk.md)
   * Konsole
     * [ssh](ssh.md)
     * [zsh](zsh.md)
@@ -159,6 +160,7 @@
         * [IAM](aws-iam.md)
         * [Netzwerke](aws-network.md)
         * [AWS CLI](aws-cli.md)
+          * [aws-vault](aws-vault.md)
         * [RDS](aws_rds.md)
         * [Static Website Hosting](aws_staticWebsiteHosting.md)
         * [Serverless](aws_serverless.md)
@@ -167,6 +169,9 @@
     * [Docker Orchestrierung](docker_orchestration.md)
       * [CoreOS](coreos.md)
       * [Kubernetes](kubernetes.md)
+        * [microK8s](kubernetes-microK8s.md)
+        * [minikube](kubernetes-minikube.md)
+        * [autoscaler](kubernetes-autoscaler.md)
       * [Nomad](nomad.md)
   * [PHP](php.md)
 * Operations
@@ -269,6 +274,7 @@
     * [Macbook Pro](macbook.md)
     * [Smartwatch](smartwatch.md)
     * [Slate](slate.md)
+    * [Mudi](mudi.md)
   * Fahrrad
     * [Jonas 2018](mountainbike_2018.md)
     * [SQLab](sqlab.md)

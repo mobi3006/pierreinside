@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# how to use?
+# 	cd pierreinside/scripts
+# 	./missing-in-summary.sh
+
 # when I create a new markdown file it is not automatically added to SUMMARY.md which is
 # relevant for the table of contents (TOC)
 for f in `find .. -mindepth 1 -maxdepth 1 -name "*.md"`; do
