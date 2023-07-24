@@ -169,7 +169,7 @@ Interessante Cloud Storage Anbieter (Preis für 1 TB/Monat):
 
 Leider habe ich das gelesen:
 
-"it simply has NOT the ability to make filebased, smartrecyled backup) ... i will NEVER backup me files in a propritary database" ([Synology Forum](https://forum.synology.com/enu/viewtopic.php?t=119519))
+> "it simply has NOT the ability to make filebased, smartrecyled backup) ... i will NEVER backup me files in a propritary database" ([Synology Forum](https://forum.synology.com/enu/viewtopic.php?t=119519))
 
 ... und das war genau mein Problem mit Bacula - ich möchte sichergehen können, daß ich meine Daten auch restoren kann, wenn die Restore-Software nicht funktioniert oder evtl. nicht mehr gewartet wird. Ich möchte die Platte anstöpseln und direkt meine Daten per Windows Explorer copy/paste restaurieren können.
 
@@ -386,3 +386,96 @@ Auf dem Client wird das Repository lokal geclont (Achtung: es handelt sich hier 
 **ACHTUNG:** Für den Support von https-Urls muß noch WebDAV auf der Synology-Diskstation installiert und konfiguriert werden - aber ssh-Verbindungen sind viel besser, da eine passwortfreie Authentifizierung möglich ist.
 
 ### Passwortfreie ssh-Verbindung konfigurieren
+
+---
+
+## Festplattentausch
+
+Nach nun 9 Jahren sind bei der WD Red Festplatte 2 Sektoren fehlerhaft ... die Festplatte gilt aber dennoch als "healthy". Dennoch möchte ich die Platte und auch die Backup-Platte (gleich alt) nun mal ersetzen. Ausserdem ist die 3 TB zu 94% belegt ... Zeit für ein Upgrade.
+
+> Seit ein paar Tagen schlägt das "daily" Hyper-Backup auf die externe Platte fehl (das weekly Backup klappt problemlos) ... also ein weiterer Grund sich mit der Thematik zu beschäftigen.
+
+Ich habe geschaut, ob ich die alte Synology auch ersetze, doch die neueste interessante ist von 2020 (DS220+) und da warte ich lieber ab. Ich bin mir nicht sicher, ob ich tatsächlich ein 2-Bay NAS brauche. Ich mache dann doch lieber ein Backup auf eine externe Festplatte oder vielleicht doch bal mal in die Cloud. Ein RAID brauche ich nicht. Dennoch hat die 2-Bay Variante einen entscheidenden Vorteil:
+
+* der Austausch der Festplatten ist wirklich super einfach, weil es im laufenden Betrieb vollkommen ohne manuelles zutun (wie Hyper-Backup) vollautomatisiert geschehen kann
+
+Allerdings habe ich das in den letzten 9 Jahren nicht gebraucht ... und nach so einer Zeit wechselt man dann vielleicht auch mal die Hardware. Vielleicht ein nice-to-have Feature ohne praktische Relevanz aber it hohem Kostenfaktor. Ich bin mir noch nicht sicher ... aber es muss auch erstmal eine 1-Bay Alternative geben ... eine DS118+ ist mir definitiv zu alt (im Herbst 2022).
+
+### Analyse fehlschlagendes Backup
+
+Leider zeigt die Admin-Oberfläche keine detaillierten Informationen an, warum das Backup fehlgeschlagen ist. Ich exportiere das Log im HTML-Format und bekomme mehr Informationen:
+
+> Exception occurred while backing up data. (Source file could not be read. Reason:[Input/output error]) [Path: /volume1/xyz]]
+
+Viola, warum nicht gleich so? Gut, dass es scheinbar kein Problem wegen fehlerhafter Sektoren ist.
+
+Die Datei gibt es aber noch auf dem Source System ... ich lösche sie (wird nicht benötigt) und starte das Backup erneut.
+
+### Vorbereitung
+
+Ich habe zwei identische WD Red Plus 6TB (for NAS) gekauft (165 Euro pro Stück). Eine für den Einbau in die DS112+ und eine als Einbau in das externe USB-3 Gehäuse.
+
+### Ziel
+
+Ich möchte meine alte System-Festplatte (im Synology verbaut) nicht behalten und möchte auch nicht zu einem anderen NAS wechseln. Zudem möchte ich die Festplatte austauschen, die das Hyper-Backup via USB anbietet ... dabei will ich die Historie nicht verlieren.
+
+Die System-Festplatte enthält neben meinen Daten natürlich auch das DSM-Betriebssystem (Linux-based). Die Backup-Festplatte enthät nur Daten (vermutlich im Hyper-Backup Binärformat).
+
+### Vorgehen
+
+In
+
+* [Synology Migration? Die 3 besten Wege der Datenübertragung](https://www.youtube.com/watch?v=_d1mTo6MB-Y)
+
+versuche ich zunächst die Migrationsoptionen zu ergründen:
+
+* Option 1: Festplattenmigration
+  * ist in meinem Fall also aus konzeptionelllen (alte Platten in neuer Synology wiederverwenden) UND technischen (nicht unterstützt bei DS112+) Gründen keine Option. Hierbei würde das DSM auf den Festplatten nach Einbau in das neue Synology upgraded.
+* Option 2: Migrationsassistent
+  * ist in meinem Fall keine Option, da ich meine existierend Synology weiterverwenden möchte ... Quell- und Zielsystem sind identisch ... der Migrationsassistent funktioniert nur, wenn zwei Geräte (alt + neu) genutzt werden
+* Option 3: Hyper-Backup
+
+Das o. a. Video adressierte nicht direkt meinen Use-Case ... doch erschien mir das Hyper-Backup die grundsätzlich sinnvollste Variante (in meinem Fall). In diesem Video wird auf meinen Use-Case eingegangen:
+
+* [Increase storage space on 1-bay NAS (HDD upgrade)](https://www.youtube.com/watch?v=wy90iOvu99E)
+
+Wir haben bei dieser Aktion vier Festplatten am Start
+
+* alte Festplatte "System" (bisher im Synology verbaut)
+* alte Festplatte "Backup" (bisher im USB-Gehäuse verbaut)
+* neue Festplatte "System" (zukünftig im Synology verbaut)
+* neue Festplatte "Backup" (zukünftig im USB-Gehäuse verbaut)
+
+High-Level:
+
+* Update der DSM Version auf der alten Festplatte "System"
+* Backup des alten Systems und seiner Daten
+  * Systemkonfiguration als `backup.dss` Datei auf einen Laptop exportieren - enthält Users/Berechtigungen, Shared Folders, Dienste und deren Konfiguration, ...
+  * Hyper-Backup der Daten auf die alte Festplatte "Backup" via USB-3
+  * Hyper-Backup der Daten auf die neue Platte "Backup" via USB-3 ... das wird zukünftig die Backup-Festplatte, die ausschliesslich Daten enthält
+    * hier vielleicht besser die Daten über einen "Festplatten Dockingstation mit zwei Einschüben" Low-Level kopieren, so dass die GESAMTE Historie vorhanden ist.
+      * https://www.synology-forum.de/threads/backup-festplatte-klonen.107037/
+* Ausbau der alten Platte aus der Synology
+* Einbau der neuen Platte "System" in das Synology + Starten.
+  * beim Start wird der Prozess zur DSM-Installation gestartet
+    * im besten Fall haben alte Festplatte (am besten vorher ein DSM Update machen) und neue Festplatte die gleiche DSM Version ... das reduziert die Problem-Wahrscheinlichkeit
+  * beim ersten DSM-Zugriff auf der neuen Festplatte muss man eine Minimalkonfiguration durchführen (NAS-Name, Admin-User und Passwort). Hier sollte man die gleichen Daten verwenden wie bei der alten Festplatte
+* Import der Systemkonfiguration (`backup.dss`)
+* Restore der Daten von Festplatte "Backup" via USB nach Festplatte "System"
+  * hierbei wird natürlich nur der letzte Stand der Daten wiederhergestellt - die Versionen der Dateien befinden sich ausschliesslich auf der Festplatte "Backup"
+
+Im Detail:
+
+* Schritt 1:
+  * Backup auf die externe USB-Festplatte (tägliche und wöchentliche Sicherung)
+  * Backup auf die externe USB-Festplatte (Quartal-Sicherung)
+  * somit stehen 2 Backups + die alte Festplatte aus dem NAS für einen möglichen Restore zur Verfügung ... da sollte nichts schiefgehen
+* Schritt 1: 
+* Schritt 1: letztes DSM installieren
+* über Systemsteuerung eine Sicherung der DSM Konfiguration durchführen ... erzeugt eine verhältnismässig kleine `.dss` Datei (sie enthält nicht die Konfiguration)
+
+### Ergebnis
+
+Die alte Platte aus dem Synology werde ich als Backup-System behalten (und in den Schrank legen). Ich denke ich kann sie einfach wieder einbauen und auf dem Stand dann weitermachen - zumindest in DIESER DS112+.
+
+Die alte Platte aus dem USB-Gehäuse brauche ich nun eigentlich nicht mehr als Backup ... die kann ich nun für andere Zwecke nutzen.
