@@ -223,3 +223,11 @@ Ich könnte mir vorstellen, dass man den Mudi für offline Backups beispielsweis
 ## SIM-Daten-Karten
 
 [siehe "Mobiles Internet"](mobiles-internet.md)
+
+---
+
+## Fazit August 2023
+
+Nach 3 Wochen intensiver Nutzung bin ich sehr begeistert von diesem Gerät. Nur die WLAN-Stärke könnte besser sein (Wifi 6 wäre super). Mit eSIM-Support würde noch ein weiterer Anwendungsfall hinzukommen und das Gerät perfektionieren.
+
+Mit 200 Euro (im Sale 170 Euro) ist das Gerät kein Schnäppchen, aber man erhält ein professionelles Gerät, das den Komfort im mobilen Einsatz deutlich erhöht. Kein MUSS aber ein Super-AddOn.
