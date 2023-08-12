@@ -16,6 +16,8 @@ Für mich bietet ein mobiler Router keinen grossen Zusatzkomfort ... nur noch ei
 
 Für mich ist die Flexibilität von eSIMs das entscheidende Kriterium, weshalb mein iPhone besser ist als jeder aktuelle (bezahlbare) mobile Router, die keine eSIMs unterstützen. Eine passende eSIM für meine aktuelle Region habe ich komfortabel und in sekundenschnelle übers Internet registriert.
 
+> Nachtrag: der [mudi](mudi.md) ist ein toller mobiler Router, der sich wirklich lohnt ... ich habe meine Meinung "keinen großen Zusatzkomfort" geändert
+
 ---
 
 ## Konzepte
@@ -89,27 +91,4 @@ Der M1 ist das günstigste Gerät (Februar 2023: 300 Euro), seine Geschwister ko
 
 ## GL-iNet Mudi (GL-E750)
 
-* [GL-E750](https://www.gl-inet.com/products/gl-e750/)
-* [YouTube Video](https://www.youtube.com/watch?v=LfAGOf0TCXc)
-
-Der Mudi ist nahezu die eierlegende Wollmilchsau, da er
-
-* von einer nachhaltigen professionellen Firma produziert wird, deren Produkte über Jahre gepflegt werden
-* mobil einsetzbar ist (gtoßer Akku vorhanden)
-  * im Gegensatz zu [GL-iNet Slate](slate.md), den ich schon habe ... und von dem ich begeistert bin
-* viele Modi unterstützt
-  * mobiles internet via SIM-Karte
-  * Wifi-Repeater ... damit kann das unsichere Hotel-WLAN über VPN und TOR sicher gemacht werden
-* Sicherheitsfeatures wie VPN und TOR bietet
-  * alle Endgeräte surfen damit sicher
-* 2,4 und 5 GHz WLAN bereitstellt
-* einen grossen Akku hat
-* einigermassen bezahlbar ist (240 Euro)
-* bietet auch Nischeneinsatzbereiche
-  * Gerät per Netzwerkkabel an einen Router koppeln, um eine Internetverbindung zu bekommen (dann nutzt man VPN und TOR des Mudi)
-  * Tethering-Gerät über USB anschließen
-* Funktionsumfang lässt sich mit Plugins erweitern
-
-Somit kann er mit WLAN-Hotspots und SIM genutzt werden. Das einzige Manko ist die fehlende Unterstützung von eSIMs ... sonst wäre das Gerät perfekt.
-
-> Man kann allerdings ein Handy per USB für Tethering anschließen. Auf diese Weise könnte man eSIMs über ein eSIM-fähiges Handy nutzen. Ein wenig umständlich, aber es geht.«
+[siehe hier](mudi.md)

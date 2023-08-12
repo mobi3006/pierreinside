@@ -141,7 +141,7 @@ Diese App rundet den sehr guten Eindruck ab. Sie ist sehr praktisch, um schnell 
 
 ## Anwendungsfälle
 
-![mudi-ueberblick.png](mudi-ueberblick.png)
+![mudi-ueberblick.png](images/mudi-ueberblick.png)
 
 Der Mudi bietet Internetzugang über folgende Modi
 
