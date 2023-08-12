@@ -4,27 +4,11 @@
 * [Handbuch](https://docs.gl-inet.com/router/en/3/setup/gl-e750/first_time_setup/)
 * [ausführliches Review - YouTube](https://youtu.be/BhKC7rMrj8E)
 
-Ich habe bereits den [GL-AR750S-Ext aka Slate](slate.md) seit 4 Jahren und war von der Professionalität der Software und der Updates sehr begeistert. Nun läuft der Support für dieses Gerät aus und ich liebäugel mit dem Mudi, der mobil einsetzbar ist (mit integriertem Akku).
+Ich habe bereits den [GL-AR750S-Ext aka Slate](slate.md) seit 4 Jahren und war von der Professionalität der Software und der Updates sehr begeistert. Nun läuft der Support für dieses Gerät aus und ich liebäugel mit dem Mudi, der aufgrund des integrierten Akkus mobil einsetzbar ist.
 
-> mittlerweile gibt es auch schon V2 dieses Geräts (GL-E750V2), das größere SD-Karten unterstützt und schneller lädt (4 statt 6 Stunden)
+> mittlerweile gibt es auch schon V2 dieses Geräts (GL-E750V2), das größere SD-Karten unterstützt (1 GB statt 512 MB - kein wesentlicher Aspekt für mich) und schneller lädt (4 statt 6 Stunden - das ist ein ganz nettes Feature, da der Mudi nach 8-10 Stunden aufgeladen werden will)
 
-Der Mudi ist ein Router, der ein eigenes WLAN zur Verfügung stellt, mit dem sich die Endgeräte verbinden. Der Standard-Anwendungsfall ist, dass der Mudi über ein anderes WLAN, die SIM-Karte, das Handy (Tethering) oder ein Netzwerkkabel eine Verbindung in ein anderes Netzwerk aufbaut und die Kommunikation dorthin routet. Zusätzlich kann sich der Mudi um eine Verschlüsselung kümmern und die SD-Karte als Netzwerklaufwerk zur Verfügung stellen.
-
----
-
-## Anwendungsfall
-
-Ich möchte mobil arbeiten, also tatsächlich Videokonferenzen von unterwegs und Java/Docker-Builds machen ... nahezu so wie von zuhause. Ausserdem möchte ich meiner Familie (m)eine grosse Datenkarte zur Nutzung zur Verfügung stellen, ohne dass JEDER einen großen Vertrag haben muss.
-
-O2 bietet sehr günstige Datentarife zur Verfügung (allerdings habe ich noch nicht verstanden wie die [Fair-Use-Policy](https://www.o2online.de/service/auslandsoptionen/eu-verordnung/?partnerId=O2_DTI_NEW_TEF_11003&medium=sms&campaignName=eu-roaming_BK_201705) funktioniert):
-
-* https://www.o2online.de/tarife/
-
-Der "Unlimited Smart" kostet gerade mal 43 Euro (allerdings auf 15 Mbit gedrosselt) - - für den gleichen Preis bekommt man 70 GB mit voller Geschwindigkeit (500 MBit).
-
-### VPN
-
-Im Ausland möchte ich eine Deutsche IP-Adresse verwenden, um alle meine Angebote (Netflix, Amazon Prime, Sky, ...) ohne regionale Einschränkungen nutzen kann. [OVPN](https://www.ovpn.com/en/pricing) bietet Open VPN UND Wireguard Server an. Wireguard ist deutlich schneller und benötigt weniger Ressourcen - auf dem Mudi wird dieses Protokoll unterstützt und die Performance soll deutlich besser sein als mit OpenVPN (50 MBit/s vs. 10 MBit/s). 
+Der Mudi ist ein Router, der ein eigenes WLAN zur Verfügung stellt, mit dem sich die Endgeräte verbinden.
 
 ---
 
@@ -88,16 +72,11 @@ Ausschalten durch 5 Sekunden drücken ... statt 3 Sekunden.
 
 ---
 
-## Modi
-
-* sind SIM-Karte und Repeater aktiviert, dann wird der Repeater verwenden
-  * macht ja Sinn ... kann man das ändern?
-
----
-
 ## Booting
 
 * der Bootvorgang dauert ca. 2 Minuten
+* konfiguriert man ein **neues** Repeater-WLAN, so erfolgt eine kurze Unterbrechung der WLAN-Verbindung
+  * schaltet man den Repeater-Modus auf ein bereits bekanntes WLAN um, so ist die Unterbrechung nicht oder kaum wahrnehmbar
 
 ---
 
@@ -116,7 +95,7 @@ Ausschalten durch 5 Sekunden drücken ... statt 3 Sekunden.
      * ping 40 ms
      * normales Surfen in Ordnung ... YouTube bis 720p gut - bei 1080p Aussetzer
 
-Ich schätze O2 hat hier einfach nicht das beste Netz.
+Ich schätze O2 hat **hier** einfach nicht das beste Netz.
 
 ### Repeater Modus
 
@@ -149,3 +128,98 @@ Ich schätze O2 hat hier einfach nicht das beste Netz.
 * USB-Ladegerät: kein Unterschied zur Powerbank
 * mitgelieferten Ladegerät: ???
 * es spielt keine Rolle, ob Mudi im Standby-Mode oder im Running-Mode ist
+
+---
+
+## GL-iNet App iOS
+
+* [iOS App glinet](https://apps.apple.com/de/app/glinet/id1523245996)
+
+Diese App rundet den sehr guten Eindruck ab. Sie ist sehr praktisch, um schnell mal ein neues WLAN zu konfigurieren oder auch einen QR-Code für das Gäste-WLAN bereitzustellen.
+
+---
+
+## Anwendungsfälle
+
+![mudi-ueberblick.png](mudi-ueberblick.png)
+
+Der Mudi bietet Internetzugang über folgende Modi
+
+* WLAN-Repeater (aka WLAN-Access-Point)
+  * Internet über das WLAN eines Hotels oder anderes öffentliches WLAN
+  * Tethering über ein Handy funktioniert in diesem Modus **NICHT**
+* SIM-Karte
+  * hierzu bedarf es einer SIM-Karte, die im Gerät steckt
+* USB-Tethering
+  * die Internetverbindung eines Telefons wird per Tethering zur Verfügung gestellt ... das Handy muss per USB an den Mudi angesteckt werden und am Handy muss das Tethering konfiguriert werden
+* Netwerkkabel
+  * der Mudi liefert einen USB-Adapter mit, der einen RJ45-Anschluss (normales Netzweerkkabel) bereitstellt. Der Adapter hat einen eigenen USB-Anschluss, so daß man keinen USB-Anschluss (Laden des Geräts, USB-Tethering) verliert
+
+Ich möchte mobil arbeiten (vielleicht sogar mal mit dem Wohnmobil oder im Ferienhaus von unterwegs arbeiten), also tatsächlich Videokonferenzen von unterwegs und Java/Docker-Builds machen (Download großer Datenmengen ... Netzwerk- und Internetbandbreite ist hier entscheidend) ... nahezu so wie von zuhause. Ausserdem möchte ich meiner Familie (m)eine grosse Datenkarte zur Nutzung zur Verfügung stellen, ohne dass JEDER einen großen Vertrag haben muss.
+
+### Anwendungsfall WLAN-Access-Point
+
+In diese Modus verwendet man ein externes WLAN (vom Hotel, Campingplatz, Cafe, ...) für den Zugang ins Internet.
+
+Natürlich kann man das WLAN auch in jedem Endgerät einstellen, doch wenn man viele Endgeräte hat (Laptops, mehrere Handys und Tablets, FireTV-Stick, eBook-Reader, Navigationssystem), dann ist es einfach eine einzige Konfiguration im Mudi zu ändern und die anderen Endgeräte bleiben einfach im Mudi-WLAN. Das ist sehr komfortabel.
+
+Ein besonderes Goody ist die VPN-Verschlüsselung im Mudi. Auf diese Weise kann man über ein unsicheres (= offenes oder unbekanntes) WLAN ins Internet gehen, aber dennoch vollkommen sicher, da die Verbindung im Mudi über ein VPN abgesichert wird. Man kann natürlich auch VPN in den Endgeräten (Handy, Tablet, Laptop, ...) konfigurieren. Das ist dann allerdings mehrfacher Aufwand und natürlich braucht man dann auch mehr VPN-Lizenzen (=> Kosten).
+
+> **ACHTUNG:** hierzu braucht man einen VPN-Anbieter, der das OpenVPN- oder Wireguard-Prookoll unterstützt. Siehe Details im Abschnitt VPN-Tunnel.
+
+### Anwendungsfall SIM-Daten-Karte
+
+Wir haben eine O2-Karte verwendet ... sobald wir wieder in der Reichweite eines konfigurierten Repeater-WLANs waren hat der Mudi automatisch umgeschaltet. Das war sehr komfortabel. 
+
+### Anwendungsfall VPN Tunnel
+
+Der VPN Tunnel kann in allen Internet-Access-Modi Sinn machen, da man hierüber neben der Verschlüsselung auch die Möglichkeit hat eine IP-Adresse eines bestimmten Landes zu nutzen und so vorzugaukeln man sein in Deutschland oder den USA.
+
+In Europa braucht man das für die großen Streaming-Dienste wie Netflix, Prima, Sky, DAZN, ... nicht, da die Inhalte i. a. nicht dem Geoblocking unterworfen sind. Für die Mediatheken und YouTube o. ä. braucht man es gelegentlich, da die Inhalte aus rechtlichen Gründen nur in Deutschland zur Verfügung stehen dürfen.
+
+> Ein Beispiel: während die ZDF Mediathek ohne VPN problemlos in Frankreich funktioniert hat, wurde das Frauen-WM-Spiel Deutschland vs Südkorea (WM 2023) geblockt. Nach der Erstellung eines VPN-Tunnels über einen deutschen VPN-Server konnten wir das Spiel schauen.
+
+Dieser Aspekt ist nicht nur für Urlauber interessant. Manche Inhalte (z. B. American Football) kann man nur in den USA empfangen. Mit einem VPN-Server in den USA ist das kein Problem mehr.
+
+Der Mudi hat eine Extra-Schieberegler, den man mit einer Aktion belegen kann. Ich habe hier die VPN "on vs off" Belegung konfiguriert, so dass ich entscheiden konnte, ob mit VPN oder ohne gearbeitet wird.
+
+**OpenVPN-Protokoll:**
+
+Dieses Standard-Protokoll benötigt mehr Ressourcen als das neue Wireguard-Protokoll. Insbesondere in Endgeräten mit wenig Rechenpower (wie dem Mudi) ist das ein klarer Nachteil.
+
+> Performance-Vergleich laut Mudi-Produktseite: OpenVPN erreicht maximal 10 MBit/s - Wireguard erreicht 50 MBit/s. 10 MBit/s reichen natürlich vollkommen aus für 2-3 Streams. Dann ist das Gerät aber am Anschlag während es mit Wireguard 10 Streams liefern könnte. Vielleicht nicht für jeden ein Problem - ABER: der Mudi bietet noch weitere Funktionen (z. B. normales Internet-Surfen, Fileserver), die dann natürlich auch beeinträchtigt werden, wenn ein OpenVPN-Stream läuft. Zudem verbraucht das Gerät dann mehr Strom und der Akku ist schneller leer.
+
+Die Unterstützung von OpenVPN ist dennoch die beste ... es ist DAS Standard-Protokoll der VPN Anbieter. Die Einrichtung ist denkbar einfach:
+
+* beim VPN-Anbieter anmelden
+* VPN-Server auswählen und Konfigurationsdatei runterladen
+* Konfigurationsdatei in den Mudi im Abschnitt OpenVPN hochladen
+
+**Wireguard-Protokoll:**
+
+Wireguard ist mittlerweile etabliert und Anbieter wie [ovpn.com](https://ovpn.com) unterstützen es genauso komfortabel wie OpenVPN.
+
+Bei NordVPN ist das leider nicht der Fall, da sie ein proprietäres Wireguard-Protokoll verwenden (das Produkt dazu heisst NordLynx). Hierzu müsste man auf dem Mudi eine Linux-Package installieren - das ist mir zu umständlich ... deshabl scheidet NordVPN derzeit aus.
+
+### Anwendungsfall USB-Tethering
+
+Vielleicht kann das Sinn machen, wenn man keine SIM-Datenkarte im Mudi hat oder das Datenvolumen bereits verbraucht ist. Dann kann man vielleicht das Datenvolumen eines Handys verwenden. Im Notfall ist das vielleicht eine Option ... besonders komfortabel (und mobil) ist das dann aber nicht.
+
+### Anwendungsfall File-Server
+
+Die im Mudi befindliche SD-Karte kann man als Netzwerkspeicher über smb://192.168.8.1 freigeben und in den Endgeräten verwenden.
+
+Ich habe länger überlegt welche Anwendungsfälle mir da einfallen, da ich
+
+* auch genügend Online Speicher habe
+* ein altes Synology-NAS verwenden könnte
+
+Ich könnte mir vorstellen, dass man den Mudi für offline Backups beispielsweise von Fotos (Handy, Kamera) verwendet (hier möchte man das kostbare Mudi-SIM-Datenvolumen vielleicht nicht opfern).
+
+Über die [iOS PhotoSync](https://apps.apple.com/de/app/photosync-fotos-%C3%BCbertragen/id415850124) App könnte man das in der Pro-Version (30 Euro einmalig) umsetzen. Auf diese Weise könnte ich vielleicht sogar Bilder automatisch von der Kamera auf den Mudi syncen und von dort automatisch in die Cloud hochladen.
+
+---
+
+## SIM-Daten-Karten
+
+[siehe "Mobiles Internet"](mobiles-internet.md)

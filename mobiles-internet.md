@@ -10,13 +10,17 @@ Welche Möglichkeiten bieten sich hier?
 
 ## TLDR
 
+Ich habe den [GL-iNet Mudi](mudi.md) für 3 Wochen getestet und bin sehr begeistert.
+
 Ich verwende für meinen 24 Monatsvertrag eine pyhische SIM-Karte und habe dadurch zwei eSIMs meines iPhone 13 zur freien Verfügung, um kurzfristig eine eSIM eines guten lokalen Anbieters zu buchen. Ich kann dann die Datennutzung so konfigurieren, dass Daten über die günstige eSIM transferiert werden und ich aber dennoch telefonisch (+ SMS + Whatsapp) über mein iPhone mit der üblichen Nummer erreichbar bin.
 
 Für WLAN-Hotspots verwende ich eine VPN Verschlüsselung - entweder auf meinem Handy oder in meinem [Slate](slate.md). WLAN-Hostpots sind leider nicht nur sicherheitstechnisch kritisch sondern auch wenig zuverlässig, was die Leistung und Verfügbarkeit betrifft.
 
 Aus diesem Grund verlasse ich mich nicht auf WLANs, sondern sorge IMMER für eine SIM-basierte Hauptlösung (WLAN nur on-top ... für den Fall, dass es wirklich gut funktioniert).
 
-Als Globetrotter würde ich zum Glocalme greifen, weil es einfach viel weniger administrativen Aufwand bedeutet. Wenn ich aber nur 2 Wochen nach Spanien fahre, dann kaufe ich mir lokal eine einzige SIM oder verwende zuhause gebuchte Datenkontingente, die ich im Ausland nutzen kann (Achtung Fair-Use-Policy!!!).
+Als weltweiter Globetrotter würde ich zum Glocalme greifen, weil es einfach viel weniger administrativen Aufwand bedeutet.
+
+Als europaweit Reisender würde ich zum [GL-iNet Mudi](mudi.md) greifen. Entweder mit nicht-heimischen SIM-Karten oder unter Verwendung zuhause gebuchter Datenkontingente, die ich im Ausland nutzen kann (Achtung Fair-Use-Policy!!!).
 
 ---
 
@@ -82,7 +86,7 @@ Diese SIM-Karte steckt man dann in sein Dual-SIM-Handy, ein Zweithandy oder eine
 
 > Fair-Use-Policy (FUP): scheinbar kann man sein deutsches Datenvolumen (z. B. 20 GB) im Ausland nicht vollständig im Ausland bei höchster Geschwindigkeit nutzen. Die FUP schiebt dem bei 50% (oder mehr) einen Riegel vor und man surft auf niedriger Geschwindigkeit. Angeblich besteht das Problem bei dem [O2 - 999 GB - 4 Wochen](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/) nicht ... ob das bei lokalen SIM-Karten auch so ist, weiss ich nicht.
 
-Physische SIM-Karten müssen natürlich in einem Laden gekauft werden (oder werden vorab verschickt), eSIMS hingegen sind in sekundenschnelle online gekauft und einsatzbereit. Hier muss man nichts plane, sondern kann kruzfristig auf Engpässe (wenn man merkt dass das WLAN auf dem Campingplatz doch nichts taugt) reagieren.
+Physische SIM-Karten müssen natürlich in einem Laden gekauft werden (oder werden vorab verschickt), eSIMS hingegen sind in sekundenschnelle online gekauft und einsatzbereit. Hier muss man nichts plane, sondern kann kurzfristig auf Engpässe (wenn man merkt dass das WLAN auf dem Campingplatz doch nichts taugt) reagieren.
 
 Einige Anbieter ([gute Übersicht](https://prepaid-data-sim-card.fandom.com/wiki/Prepaid_SIM_with_data)):
 
@@ -92,17 +96,20 @@ Einige Anbieter ([gute Übersicht](https://prepaid-data-sim-card.fandom.com/wiki
 
 Wichtig ist natürlich, dass man dann auch ein Netz bekommt, das auch tatsächlich eine gute Abdeckung und Bandbreite verfügt. Und das kann durchaus kompliziert werden, denn in Deutschland ist die Telekom beispielsweise in ländlicher Gebieten mit Abstand die beste Wahl, in Grossstädten bieten dann allerdings Anbieter wie O2 vielleicht bessere Dienste. Diese Seite hilft bei der Auswahl des richtigen Anb
 
-### Lokale SIM-Karten
+### O2
+
+O2 bietet sehr günstige Datentarife zur Verfügung. In unserem Frankreich-Urlaub hat das gut geklappt ... sogar während der Autofahrt haben wir Fussball-Streams geschaut. 
+
+* [O2 - 999 GB - 4 Wochen](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/)
+* [O2 - 30 GB - 365 Tage](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/)
+
+O2 bietet auch einen günstigen Unlimited-Tarif mit 10 MBit/s an ... vielleicht eine gute Option.
+
+### Nicht-heimische SIM-Karten
 
 Reist man ins nicht-europäische Ausland, so fallen i. a. Roaminggebühren an, die sehr hoch sind und die Datennutzung zum Luxus werden lassen.
 
 In solchen Fällen ist es sinnvoller eine lokale Prepaid-SIM-Karte zu verwenden. Allerdings braucht man hier in vielen Ländern eine Identifikationsprüfung.
-
-Europa:
-
-* O2 - Internet-to-Go
-   * [O2 - 999 GB - 4 Wochen](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/)
-   * [O2 - 30 GB - 365 Tage](https://www.o2-freikarte.de/prepaid-tarife/flextarife/myprepaid-max/)
 
 Frankreich:
 
@@ -134,3 +141,22 @@ Mal ein paar Filme zu schauen ist vielleicht noch im eigenen Vertrag möglich, d
 Es kann passieren, dass der Streaming-Anbieter nicht exakt so funktioniert wie zuhause, weil er an der IP-Adresse erkennt, dass man nun z. B. aus Frankreich kommt (sog. Geo-Blocking). Dann könnten die manche Filme nicht oder in anderen Sprachen verfügbar sein. Stolpert man über dieses Problem, kann eine VPN-Verbindung helfen. Hier lässt sich dann ein deutsche IP-Adresse auswählen und Netflix denkt man sein in Deutschland.
 
 > VPN-Anbieter kosten nochmal zusätzlich Geld ... häufig bieten sie ihre Abos am Black-Friday mit einem Nachlass von 90% an, so dass man dann auf einen Monatspreis von 2-4 Euro kommt.
+
+SIM-Datenkarten sind i. a. günstiger als die üblichen SIM-Karten in Modiltelefonen, weil sie keine GSM-Telefonie ermöglichen.
+
+> Letztlich kann man dennoch über diese Karten telefonieren, wenn man ein Produkt wie Whatsapp zum telefonieren verwendet ... hier gehen die Daten nämlich ausschließlich über Datenpakete des Internets.
+
+
+### Lokale SIM-Karten
+
+Statt einen 24-Monatstarif beim heimischen Mobilfunkanbieter abzuschließen (mit einem riesigen Datenvolumen, das man aber nur im 2-3 wöchigen Urlaub benötigt) oder eine heimische kurzfristige Prepaid-Karte zu verwenden, kann man auch eine lokale Prepaid-Karte kaufen.
+
+
+
+### Fair-Use-Policy
+
+[Fair-Use-Policy](https://www.o2online.de/service/auslandsoptionen/eu-verordnung/?partnerId=O2_DTI_NEW_TEF_11003&medium=sms&campaignName=eu-roaming_BK_201705) funktioniert):
+
+* https://www.o2online.de/tarife/
+
+Der "Unlimited Smart" kostet gerade mal 43 Euro (allerdings auf 15 Mbit gedrosselt) - - für den gleichen Preis bekommt man 70 GB mit voller Geschwindigkeit (500 MBit).
