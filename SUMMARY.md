@@ -227,9 +227,10 @@
   * [Mathematik](mathematik.md)
 * Misc
   * Foto/Video
-    * [Foto/Video Sammlung](fotoVideoSammlung.md)
+    * [Foto/Video Sammlung bis 2023](fotoVideoSammlung-bis-2023.md)
       * [Handbrake](handbrake.md)
       * [Onedrive](onedrive-shared-folder.md)
+    * [Foto/Video Sammlung ab 2024](fotoVideoSammlung-ab-2024.md)
     * [Gopro](gopro.md)
     * [Panasonic FZ1000 ii](panasonic-fz1000ii.md)
       * [als Webcam](panasonic-fz1000ii-webcam.md)

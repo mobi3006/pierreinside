@@ -1,4 +1,4 @@
-# Meine Foto- und Video-Sammlung
+# Meine Foto- und Video-Sammlung bis 2023
 
 Ich verwende im wesentlichen meine [Synology](synology.md) als Fileserver und die DS Photo App, um die Erinnerungen komfortabel über Tablets, Smartphones und Fire TV anzuschauen.
 
