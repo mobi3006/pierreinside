@@ -3,18 +3,31 @@
 * [Kubernetes@pierreinside](kubernetes.md)
 * [EKS Terraform Blueprint](https://aws-ia.github.io/terraform-aws-eks-blueprints/latest/)
 
-Das ist eine managed EKS Control Plane (abgebildet im sog. Master-Node - im Gegensatz zu den Worker-Nodes = Data-Plane), das den härtesten Teil eines [Kubernetes Clusters](kubernetes.md) abbildet. Kubernetes selbst ist Technologie-agnostic, d. h. das unterliegende Backend spielt keine Rolle für die Orchestrierung von Workload. Allerdings wird ein Backend benötigt und hier kommen natürlich alle Cloud-Anbieter (AWS; Azure, Google) in Frage ... man kann prinzipiell aber natürlich auch seine eigene Hardware bereitstellen.
+Das ist eine managed EKS Control Plane (abgebildet im sog. Master-Node - im Gegensatz zu den Worker-Nodes = Data-Plane), das den härtesten Teil eines [Kubernetes Clusters](kubernetes.md) abbildet. Kubernetes selbst ist Technologie-agnostic, d. h. das unterliegende Backend (Cloud, OnPrem) spielt keine Rolle für die Orchestrierung von Workload. Allerdings wird ein Backend benötigt und hier kommen natürlich alle Cloud-Anbieter (AWS; Azure, Google) in Frage ... man kann prinzipiell aber natürlich auch seine eigene Hardware bereitstellen.
 
-Die Cloudanbieter offerieren Lösungen (wie AWS beispielsweise mit AWS-EKS), die für ihre Cloud zugeschnitten sind und damit maximal integriert. Im Hintergrund wird die Infrastruktur des Cloud-Anbieters genutzt ... in diesem Fall AWS => EC2 Instanzen, NLBs (Network-Load-Balancers), EBS-Volumes oder auch Fargate. Das ist so gut integriert, dass man es häufig gar nicht mitbekommt, was da im Hintergrund auf seinem AWS-Account alles geschieht (und natürlich Kosten verursacht). Insofern bietet AWS-EKS ein Abstraktionslayer und eine funktionierende (häufig getestete) Integration.
+Die Cloudanbieter offerieren Lösungen (wie AWS beispielsweise mit AWS-EKS), die für ihre Cloud zugeschnitten sind und damit maximal integriert. Im Hintergrund wird die Infrastruktur des Cloud-Anbieters genutzt ... im Fall von AWS EC2 Instanzen oder Fargate, NLBs (Network-Load-Balancers), EBS-Volumes, ...  Insofern bietet AWS-EKS ein Abstraktionslayer und eine funktionierende (häufig getestete) Integration.
 
-Man könnte aber auch AWS verwenden und sein Kubernetes selbst darauf managen ... muss sich dann aber um viele Dinge selbst kümmern. Die Control-Plane ist der komplexe Part eines Kubernetes-Clusters ... es macht also Sinn, dies den Experten von AWS anzuvertrauen ... wenn man es nicht leisten kann, dieses KnowHow selbst aufzubauen.
+> Das ist so gut integriert, dass man es häufig gar nicht mitbekommt, was da im Hintergrund auf seinem AWS-Account alles geschieht (und natürlich Kosten verursacht).
 
-Um die Data-Plane muss sich der Nutzer selbst kümmern. EKS kann mit zwei unterschiedlichen "Data Plane" (= Workers ... hierauf laufen die Pods) genutzt werden - die Control Plane kommt mit beiden zurecht:
+Man könnte aber auch AWS verwenden und die Control-Plane des Kubernetes selbst darauf managen ... muss sich dann aber um viele Dinge selbst kümmern. Die Control-Plane ist der komplexe Part eines Kubernetes-Clusters, vor dem sich dementsprechend viele Nutzer scheuen und deshalb lieber eine managed Control-Plane wie AWS EKS verwenden.
+
+Die Data-Plane ist der einfache Teil, weil man hier nur eine Integration in den Cluster braucht um Compute-Ressourcen zur Verfügung zu stellen. EKS kann mit zwei unterschiedlichen "Data Plane" (= Workers ... hierauf laufen die Pods) genutzt werden - die Control Plane kommt mit beiden zurecht:
 
 * Traditional Server (EC2) Container Data Plane
 * Serverless Container (Fargate) Data Plane
 
 Das ist keine ENTWEDER/ODER Entscheidung ... stattdessen können beide Ansätze koexistieren.
+
+AWS EKS bietet auch für die Data-Plane ein Management an:
+
+* bei Fargate gibt es ja keine self-managed unterliegende Infrastruktur => auto-management out-of-the-box
+* bei EC2 bietet AWS-EKS managed Node-Groups an ... Auto-Scaling ist hier allerdings ein Problem, das gelöst werden muss
+
+---
+
+## AWS-EKS vs AWS-ECS
+
+Der Elastic-Container-Service (ECS) stellt eine AWS-spezifische Alternative zu Kubernetes dar. Genau wie AWS-EKS kann es mit EC2 oder Fargate Ressourcen als Compute-Ndes arbeiten.
 
 ---
 

@@ -5,7 +5,7 @@
 
 Wenn man eine neue EC2 Instanz startet, so kann man das **OHNE** all die Sachen zu wissen, da die Default-Konfiguration (angelegt bei der Account Erstellung) schon so ausgelegt ist, daß das alles reibungslos funktioniert. Will man allerdings eine halbwegs professionelle (= sicher, performant) anbieten, dann **MUSS** man sich damit beschäftigen.
 
-![Sketch]()
+![AWS-Core-Components](images/aws-core-components.png)
 
 Hier sieht man auch sehr schön, warum man beim Starten einer EC2 Instanz die Security-Group, das Subnet, das VPC, ... angeben muß.
 
@@ -15,6 +15,21 @@ Hier sieht man auch sehr schön, warum man beim Starten einer EC2 Instanz die Se
 
 * [Stephane Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528538#overview)
 
+Die Virtual Privat Cloud ist das Ziel einer jeden Anwendung ... hier wird sie gehostet. Mit dem VPC wird das Internet (= Public Cloud ... Ingress - einkommender Traffic, Egress - ausgehender Traffic) verbunden. Als Anwendungshoster kann ich mich für ein oder mehrere VPC entscheiden. Meistens hat man aber auch verschiedene Hosting-Umgebungen (Development, Test, Staging, Production), die man voneinander durch Nutzung verschiedener VPCs voneinander trennen möchte.
+
+* ein VPC liegt in einer Region, deckt aber alle Availability Zones (AZ) dieser Region ab
+  * die Subnets liegen dann in unterschiedlichen AZs
+* jeder AWS Account kommt schon vorkonfiguriert mit (um den Einstieg zu erleichtern) ... im Produktionsumfeld sollte alle Komponenten selbst konfigurieren
+  * Default-VPC ... ohne VPC geht nix
+    * Internet-Zugang vorhanden (Inbound + Outbound)
+    * alle EC2 erhalten public IP-addresses ... ready-to-go
+    * Route Table vorkonfiguriert
+    * DHCP vorkonfiguriert
+    * Network ACL vorkonfiguriert
+  * Default-Subnets in allen Availability Zones
+  * Security Groups
+  * Internet Gateway
+  * Route Table
 * besitzt einen oder mehrere CIDR-Ranges und vergibt **PRIVATE** IP-Adressen aus dem 172.xxx.xxx.xxx Netz für die darin befindlichen Netzwerkkomponenten (z. B. EC2-Instanzen)
 * IP-Ranges von VPC sollten sich nach Möglichkeit nicht überlagern, damit man später noch ALLE VPCs miteinander verbinden kann (Eindeutigkeit)
 * definiert DNS Einstellungen
@@ -23,6 +38,15 @@ Hier sieht man auch sehr schön, warum man beim Starten einer EC2 Instanz die Se
 ### CIDR
 
 * [CIDR Calculator](https://www.ipaddressguide.com/cidr)
+
+CIDR-Notation Bedeutung
+
+* `192.168.0.0/32`
+  * alle 32 Bits sind fest => nur eine einzige IP-Adresse ist in der Range: `192.168.0.0`
+* `192.168.0.0/16`
+  * die ersten 16 Bits sind fest (`192.168`) und die anderen Variable - Range: `192.168.0.0` - `192.168.255.255`
+* `192.168.0.0/30`
+  * 30 Stellen sind fest, 2 sind frei => 2^2 = 4 IP-Adressen - Range `192.168.0.0` - `192.168.0.3`
 
 ### VPC Peering
 
@@ -56,10 +80,14 @@ Die Lösung sind VPC-Endpoints:
 * gebunden an ein VPC
 * gebunden an eine Availability Zone (z. B. eu-central-1a)
 * hat einen CIDR-Block ... der muß eine Teilmenge des VPC sein
+* typischerweises verwendet man public (wenige IP-Adressen) und private (viele IP-Adressen) Subnetze
+* typischerweises hat man pro Availability Zone, die man abdecken möchte, ein private und ein public Subnetz
 * Subnetze müssen entsprechend konfiguriert werden, um aus dem Internet erreichbar zu sein
   * für public Ressourcen: Internet Gateway
   * für private Ressourcen (in private Networks): Bastion Host
     * zumindest ssh Zugriff ist hier für Admins erforderlich
+* später werden wir weitere Komponenten (z. B. EC2 Instanz) über das zugewiesene Subnet positionieren und so über verschiedene Availability Zones verteilen und Zugriffe managen
+* public Subnets sollten auch public IP-Adressen erhalten (sonst werden sie ja von einem User nicht in mein VPC geroutet) ... das muss man aber explizit konfigurieren
 
 ---
 
@@ -68,8 +96,16 @@ Die Lösung sind VPC-Endpoints:
 * [Stephan Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528544#overview)
 
 * IGW stellt - in Verbindung mit einer Route Table und einem Router - den Zugang zum Internet dar ... also die Grenze zwischen Virtual-PRIVATE-Cloud (VPC) und World-Wide-Web
-* hochverfügbar (skaliert horizontal, Redundanz)
-* ein VPC kann nur einem IGW zugeordnet sein
+* von AWS wird sichergestellt, dass es hochverfügbar (skaliert horizontal, Redundanz) ist
+* VPC und IGW haben eine 1:1 Beziehung
+* ein IGW ohne Route Table hat keinen Wert
+
+---
+
+## Route Table
+
+* regelt das Routing in einem VPC und/oder einem Subnet
+* da man private und public Subnets hat, sollte man auch private Route Table (für die privaten Subnetze) und eine Public Route Table (für die public Subnetze) haben
 
 ---
 
@@ -92,14 +128,17 @@ Die Lösung sind VPC-Endpoints:
 
 * [Stephan Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528550#overview)
 
+* wird verwendet, um einer privaten Komponente (z. B. EC2 Instanz) Zugriff auf das Internet zu ermöglichen
+  * die Route Table muss dazu entsprechend konfiguriert werden
 * muss in einem separaten Subnet betrieben werden als eine EC2 Instanz, die es verwenden will
 * High-Availability in EINER Availibility Zone
-  * ABER: ist gebunden an EINE Availibility Zone => mehrere NAT-Gateways erforderlich
+  * ABER: ist gebunden an EINE Availibility Zone => pro AZ ein NAT-Gateway erforderlich
 * verwendet eine Elastic IP (feste IP-Adresse)
-* braucht auch eine Internet Gateway (genauso wie eine *NAT Instance*)
+* braucht ein Internet Gateway (genauso wie eine *NAT Instance*)
 * managed by AWS (im Gegensatz zu NAT Instance)
   * man muss keine Security-Groups managen
   * keine OS Patches, Software Installationen
+* es wird keine Security-Group gebraucht
 
 > Bastion Hosts sind mit einem NAT Gateway nicht möglich, da man keinen ssh-Zugriff auf das NATGW hat
 

@@ -1,8 +1,9 @@
 
 # Terraform
 
-* [eine tolle Einführung](https://www.mineiros.io/blog/how-to-manage-your-github-organization-with-terraform)
+* [eine tolle Einführung](https://www.youtube.com/watch?v=SLB_c_ayRMo)
 * [Homepage by HashiCorp](https://www.terraform.io/)
+* [Dokumentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
 
 Tool um auf [verschiedenen Infrastructure-as-a-Service Platformen](https://www.terraform.io/docs/providers/index.html) (AWS, Google Cloud Platform, Microsoft Azure, VSphere, ...) in der Cloud und On-Premise komplexe Infrastruktur- und Applikations-Landschaften aufzubauen. Wer schon mal versucht hat in AWS eine Infrastruktur aus EC2, Security-Groups, Route Tables, Router, Internet Gateway, ... zusammenzuklicken und dann auch zu warten (Komponenten hinzufügen/wegnehmen/umkonfigurieren ... ohne DOWNTIME und im 4-Augen-Prinzip), der wird schnell zu Tools wie terraform greifen, um das zu maintainen. Die Gefahr stundenlang die Fehler in einem Setup zu suchen ist recht hoch ... Fehler passieren schnell.
 
@@ -123,7 +124,7 @@ terraform plan -var instance_type=t2.micro  # hier sieht man was geschehen wird
 terraform apply                             # erzeugt den Execution Plan
 ```
 
-> mit `terraform plan -target module.eks` kann man den Scope des Plans bzw. des Apply einschränken (auf bestimmte Ressourcen), so dass die Ausführung deutlich schneller geht. Auf diese Weise kann man auch eine Layer-Struktur bilden, um den Scope eines Apply einzuschränken. Allerdings muss man dann die Abhängigkeiten zwischen den Layern berücksichtigen.
+> mit `terraform plan -target module.eks` kann man den Scope des Plans bzw. des Apply einschränken (auf bestimmte Ressourcen), so dass die Ausführung deutlich schneller geht. Auf diese Weise kann man auch eine Layer-Struktur bilden, um den Scope eines Apply einzuschränken. Allerdings muss man dann die Abhängigkeiten zwischen den Layern selbst berücksichtigen und dabei können Fehler entstehen. Deshalb versuche ich das zu vermeiden.
 
 Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration).
 
@@ -332,7 +333,7 @@ Eine Alternative zu Data Sources ist die Abfrage eines Remote-Terraform-States .
 
 Nach einem refactoring sollte man immer ein `terraform get` machen, da beispielsweise ein Umbenennen eines lokalen Moduls im `.terraform/modules/modules.json` repräsentiert werden muss. Ansonsten scheitern `terraform plan` und/oder `terraform apply`.
 
-Man sollte sich angewöhnen, vor dem `terraform apply` ein Backup vom State zu machen. Legt man den State auf S3, dann hat man automatisch eine Versionierung.
+Man sollte sich angewöhnen, vor dem `terraform apply` ein Backup vom State zu machen. Legt man den State auf S3, dann sollte man die Versionierung einschalten (ich glaube das ist nicht die Standard-Einstellung!!!).
 
 ### Monolithen-Module refactorn
 
@@ -523,7 +524,21 @@ Alle Aktionen, die innerhalb eines `terraform apply` vollzogen werden, führen z
 * Terraform Enterprise
 * [Terragrunt](https://github.com/gruntwork-io/terragrunt)
 
-Verwendet man AWS, dann kann man für ein Terraform-Lock auch eine DynamoDB verwenden.
+Verwendet man AWS, dann kann pessimistisches Locking über DynamoDB implementieren:
+
+```
+terraform {
+  backend "s3" {
+    bucket         = "foobar.tfstate"
+    key            = "terraform.tfstate"
+    region         = "eu-central-1"
+    encrypt        = true
+    dynamodb_table = "foobar_terraform.state-lock"
+  }
+}
+```
+
+So stellt man sicher, dass keine zwei Updates auf dem State parallel laufen.
 
 ### Isolation Best Practices
 
@@ -547,7 +562,17 @@ Diskussion über Monoilith vs. Layers:
 
 Man muß in jedem Fall sicherstellen, immer die zum State passende Terraform-Version zu verwenden ... man kann nicht einfach Version 0.13.1 verwenden, um beim nächsten mal 0.12.7 zu verwenden - das führt unweigerlich zu Problemen.
 
+> Mit der Version 1.x ist es nicht mehr unbedingt erforderlich genau die gleiche Version zu verwenden ... ich empfehle dennoch die Verwendung von `.terraform-version` im Repository, um die Nutzung zu vereinfachen und Fehlern vorzubeugen.
+
 Das hört sich einfacher an als es in Wirklichkeit ist - keine Rocket-Science, aber es erfordert Disziplin, wenn man beispielsweise verschiedene Deploy-Stages hat, die absichtlich mit unterschiedichen Terraform-Versionen betrieben werden. Terraform wird nämich das State-File auf die höchste Version migrieren und damit ist der State für ältere Versionen evtl. nicht mehr zu gebrauchen. Am besten führt man die Terraform-Kommandos nicht von einem frei-konfigurierbaren Rechner aus, sondern von einem CI/CD-Server wie beispielsweise einem [Jenkins-Server](jenkins.md). Der stellt sicher, daß alle Schritte in Code gegossen sind und somit in der richtigen reihenfolge und mit dem richtigen `terraform`-Binary ausgeführt werden!!!
+
+### tfenv
+
+Mit [tfenv](https://github.com/tfutils/tfenv) hat man ein Tool, das die `.terraform-version` ausliest und bei Bedarf die Terraform Version switched oder sogar die passende Terraform Version installiert.
+
+Das vereinfacht die Nutzung ungemein.
+
+> Grundsätzlich bin ich aber ein Freund der Automatisierung und würde am liebsten vollständig auf die lokale Ausführung verzichten.
 
 ---
 
