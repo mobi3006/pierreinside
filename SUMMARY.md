@@ -188,6 +188,7 @@
     * [Grafana](grafana.md)
   * Infrastructure-as-Code
     * [Terraform](terraform.md)
+      * [AWS](terraform-aws.md)
     * [Packer](packer.md)
   * Deployment
     * [Vault](vault.md)
@@ -268,6 +269,7 @@
     * [Dell CNF 2665 Farbdrucker](dellFarbdrucker_2665.md)
     * [Dockingstation](dockingstation.md)
     * [Gaming PC 2021](gaming-pc.md)
+    * [Mobiles Büro](mobiles-buero.md)
     * [Mobiles Internet](mobiles-internet.md)
     * [Mobiler Router](mobiler-router.md)
   * [Beamer Benq W1000+](beamer_benq_w1000plus.md)
@@ -277,7 +279,6 @@
     * [Pico Spielekonsole](pico.md)
   * Gadgets
     * [iPad Pro](ipadPro.md)
-      * [iPad als mobiles Büro](mobiles–buero-ipad.md)
     * [Macbook Pro](macbook.md)
     * [Smartwatch](smartwatch.md)
     * [Slate](slate.md)
@@ -308,7 +309,6 @@
       * [Raspberry Pi](raspberrypi.md)
       * [Heimnetzwerk](heimnetzwerk.md)
     * [Homeoffice](homeoffice.md)
-      * [Mobiles Büro mit dem iPad](mobiles-buero-ipad.md)
     * Energie
       * [Solar](solar.md)
       * [Wärmepumpe](waermepumpe.md)

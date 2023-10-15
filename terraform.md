@@ -315,6 +315,8 @@ Auf diese Weise lassen sich auch Layer (z. B. Backend, Middleware, Frontend) imp
 
 Die `./main.tf` agiert als Controller, um die Daten aus `./middleware/output.tf` and `./frontend/main.tf` zu übergeben - ein direkter Zugriff von `./frontend/main.tf` auf `./middleware/output.tf` ist nicht möglich. Außerdem ist es nicht erwünscht, da `frontend` und `middleware` nichts voneinander wissen sollten (Dependency Injection).
 
+Die in `output.tf` definierten Ausgaben stehen anderen Modulen und - natürlich dem menschlichen Benutzer - als Input Werte zur Verfügung. Am Ende werden sie auch auf der Konsole ausgegeben, so dass ich als User z. B. die public IP Adresse einer EC2 Instanz ausgegeben bekommt, um dann ein ssh connect darauf machen zu können. 
+
 ### Functions
 
 * [Dokumentation](https://www.terraform.io/language/functions)

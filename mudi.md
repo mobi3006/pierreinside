@@ -30,10 +30,14 @@ Der Mudi ist ein Router, der ein eigenes WLAN zur Verfügung stellt, mit dem sic
   * Plastik ist in Ordnung ... schliesslich soll das WLAN top sein - rutschig sollte es aber nicht sein
 * beim Laden über USB-C wird das Gerät relativ warm ... 63° sagt die Admin-UI
   * die normale Betriebstemperatur liegt bei 40-50°
+* Batterie könnte länger halten ... Gewicht wäre mir hier egal (auf 100g kommt es nicht an)
+  * mittlerweile schalte ich den Mudi ab und habe ihn an der Ladestation, wenn ich ihn nicht brauche - ist aber wahrscheinlich eh die beste Lösung (ganz unabhängig von der Batteriekapazität)
 
 ---
 
-## Erst-Inbetriebnahme
+## Inbetriebnahme
+
+### Erst-Inbetriebnahme
 
 > **ACHTUNG:** Die Admin-WebUI http://192.168.8.1 zum Mudi funktioniert nur, wenn man das WLAN des Mudi verwendet. Wenn man also im Heimnetzwerk mit dem Haim-WLAN ist, muss man das WLAN wechseln. Der Mudi verwendet den WLAN-Namen GL-E750-xxx
 
@@ -58,6 +62,21 @@ Der Mudi ist ein Router, der ein eigenes WLAN zur Verfügung stellt, mit dem sic
 * SIM-Karte einsetzen ... [nicht ganz einfach siehe YouTube-Video](https://www.youtube.com/watch?v=l9dxJUL7lhA)
 * Reboot
 * SIM-PIN eingeben über die Web-Admin-UI
+
+### Zweit-Inbetriebnahme
+
+Nach einigen Wochen habe ich das 5 GHz WLAN nicht mehr finden können, obwohl es weiterhin eingeschaltet und als "sichtbar" gekennzeichnet war. Das 2,4 GHz WLAN war auch nicht mehr sichtbar, doch das konnte ich dann manuell am iPhone mit der SSID konfigurieren.
+
+Deshalb habe ich mich entschlossen, den Mudi auf Werkseinstellungen zurückzusetzen und neu - diesmal - mit der Gli-Net App vom iPhone zu konfigurieren.
+
+Diesmal hat die automatische Erkennung des Mobilfunkproviders (O2) nicht funktioniert. Ich habe denn googeln müssen, welche Werte ich konfigurieren muss (und auch das hat nicht auf Anhieb funktioniert):
+
+    * 3G
+    * PIN
+    * PAP ohne username Passwort
+    * TTL ... durfte nicht leer sein, sonst konnten man nicht speichern
+
+Ich bin mir nicht sicher, ob die Problem nur mit der GLI-NET App bestehen oder grundsätzlicher Art sind. Sollte letzteres der Fall sein, wäre das natürlich immer dann ein Problem, wenn man häufig die SIM-Karte wechseln müßte (um beispielsweise einen lokalen Provider im Ausland zu nutzen).
 
 ### Stand-By
 

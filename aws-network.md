@@ -27,6 +27,7 @@ Die Virtual Privat Cloud ist das Ziel einer jeden Anwendung ... hier wird sie ge
     * DHCP vorkonfiguriert
     * Network ACL vorkonfiguriert
   * Default-Subnets in allen Availability Zones
+  * Subnet NACLs
   * Security Groups
   * Internet Gateway
   * Route Table
