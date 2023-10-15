@@ -110,3 +110,15 @@ Im Camper ist ein 2-flammiger Gasherd. Der ist gut genug, um mal Nudeln zu koche
 Da wir für die romatischen Sommerabende eh unsere Feuerschale mitnehmen möchten haben wir uns eine Feuerplatte gekauft. Die paßt perfekt auf die Feuerschale und dient als Grillersatz. Im Gegensatz zu einem kleinen Kugelgrill hat man hier verschiedene Värmezonen und kann ganz enstpannt sein Essen (Fleisch, Gemüse, Zwiebeln, Burger, Feta, Eier, ... sogar Crepes oder überbackene Banane) zubereiten. Klar, bis das Feuer brennt und die Platte heiß ist dauert es 30 Minuten ... die Abendessenvorbereitung beginnt also mit Feuermachen. Die ersten Versuche mit Holz haben sehr gut geklappt - obwohl die Feuerschale natürlich keinen Kaminzug hat. Mit Holzkohle war es dann schon schwieriger ... das Sonnenblumenöl, das ich für das Einbrennen und säubern der Platte vor dem Grillen benutze, ist aber ein hervorragender Grillanzünder.
 
 > Ich hoffe, daß die Waldbrandstufe offenes Feuer nicht verhindert. Notfalls müssen wir häufiger die Restaurants besuchen.
+
+### Übernachtungen - Wie finden
+
+* [Park4night](https://park4night.com/de)
+
+### Maut
+
+* [Asfinag - Maut Österreich](https://www.asfinag.at/asfinag-app/)
+
+### Vor Ort Mobil
+
+Hat man das Wohnmobil mal eingerichtet ist es nicht ganz einfach mal eben loszufahren, um Brötchen oder kleiner Einkäufe vorzunehmen. Hat man kein Platz für Fahrräder, dann könnte ein eScooter gute Dienste leisten. Der ist klein und einigermassen schnell, so daß man damit auch mal Städttouren machen kann. Vielleicht reicht hier auch schon ein einziger, einen zweiten kann man vielleicht vor Ort buchen.

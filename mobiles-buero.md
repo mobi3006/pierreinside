@@ -33,6 +33,12 @@ Für diesen Use-Case müssen die Kinder aber noch ein bisschen älter werden. Gr
 
 Mein Freund Martin hat ein Wohnmobil, das ich mir spontan mal ausleihen könnte, um das auf einem verlängerten Wochenende mal auszutesten. Und wer weiß vielleicht entwickelt sich daraus eine Vision.
 
+### Business-Trips
+
+Ich bin geschäftlich nicht besonders viel unterwegs. In manche Gegenden (z. B. Sofia) würde ich auch nie mit dem Auto fahren, weil es viel zu weit ist. Reisen nach Berlin oder Antwerpen wären aber dennoch möglich ... wobei ich derzeit eher die Bahn bevorzuge. Wenn man den Trip aber mit einem verlängerten Wochenende mit der Frau oder dem Besuch eines Freundes oder von Verwandten verbinden könnte, dann sieht es natürlich gleich ganz anders aus.
+
+Diese Fahrten lassen sich als Reisekosten abrechnen und sind für den Arbeitgeber und für den Arbeitnehmer i. a. ein Gewinn.
+
 ---
 
 ## Infrastruktur
@@ -57,9 +63,9 @@ Der iPad-Akku (obwohl bereits 3 Jahre alt) hält mal richtig lang und auch mein 
 
 Mein Macbook Pro (M1) hält locker einen ganzen langen Arbeitstag durch (und nervt nebenbei auch nicht mit Lüftergeräuschen).
 
-Im Wohnmobil hätte man auf einem Campingplatz i. a. 220V Strom wie zuhause oder man könnte die 12V nutzen (oder wieder auf 220V transformieren). In entlegenen Regionen könnte man über Solarpanels nachdenken.
+Im Wohnmobil hätte man auf einem Campingplatz i. a. 220V Strom wie zuhause oder man könnte die 12V nutzen, die man mit einem Wechselrichter auch wieder auf 220 V transformieren kann. In entlegenen Regionen könnte man über Solarpanels nachdenken.
 
-> Eine externer Monitor ist fürs professionelle Arbeiten auf jeden Fall hilfreich ... 1-2 Tage gehts auch auch mal ohne. Evtl sind [Notebookwings](https://www.notebookwings.com/produkte) eine interessante Alternative zum externen Monitor.
+> Eine externer Monitor ist fürs professionelle Arbeiten auf jeden Fall hilfreich ... 1-2 Tage gehts auch auch mal ohne. Evtl sind [Notebookwings](https://www.notebookwings.com/produkte) eine interessante Alternative zum externen Monitor ... ich denke aber, dass die eher minderwertige Qualität haben.
 
 ### Festplatten-Speicher
 
