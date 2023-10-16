@@ -9,8 +9,6 @@ Da ich mittlerweile vollständig im Home-Office arbeite, ist der Schritt zum mob
 
 bereits alles, um tatsächlich jederzeit damit zu beginnen.
 
-> Ich trenne am Laptop grundsätzlich Arbeit und Beruf weitestgehend. Ich installiere NIEMALS nicht-Beruf-Software auf meinem Arbeitsrechner (das wäre auch gar nicht erlaubt und auch nicht möglich). Alles was im Browser läuft und keiner zusätzlichen Installation bedarf (eMail, YouTube, ...) ist natürlich immer möglich.
-
 Ich achte bei meinem Equipment - auch schon im Alltag - auf seine mobile Tauglichkeit. Im besten Fall unterscheidet sich das Home-Office Equipment nur wenig vom Mobilen Equipment, denn dann ist nahtloses wechseln leichter möglich.
 
 ---
