@@ -1,4 +1,8 @@
-# VW Bus
+# Camper
+
+> mittlerweile möchte ich weder VW Bus noch Mercedes V-Klasse zum Campen verwenden. Mit denen kann man vielleicht mal einen Tag irgendwo übernachten, wenn man nicht zuviel Gepäck hat (das ja dann weggeräumt werden müsste). Mich würde die fehlende Stehhöhe am meisten stören ... und extra dafür für ein Hochstelldach zu zahlen wäre reine Verschwendung, denn ich möchte dort oben nicht schlafen. 
+
+---
 
 ## VW California Beach - Bulli T5
 
@@ -190,32 +194,6 @@ Den T7 wird es nicht als reinen E-Bus geben - das kommt erst mit dem ID Buzz, de
 
 ---
 
-## Pössl Campster
-
-### Infos
-
-* seit 2017
-* auf Citroen Basis
-* fährt sich wie ein PKW
-* sehr flexibel
-  * bis zu 7 Sitzer
-  * rausnehmbarer Küchenblock
-* zwei Schiebetüren
-* gefällt mir gut
-* mit 1,99 Höhe kommt man in jedes Parkhaus und sogar auf die Parkplätze am Strand (meist auf 2m beschränkt)
-* mit 1,92m sehr schmal (VW, Mercedes: 2,25m)
-  * müßte man mal schauen, ob man da Platzangst bekommt
-  * unser Galaxy ist auch nur 1,88 breit und 3 Personen nebeneinander passen gut
-* Berichte:
-  * [Autozeitung](https://www.autozeitung.de/neuer-poessl-campster-blue-hdi-193748.html)
-  * "Tiefgaragentauglich, schnell und sparsam: Beim Fahren verhält sich der Campster fast wie ein Pkw. VW T6 und Mercedes V-Klasse fahren feiner, kosten aber auch mehr. Beim Campen verlangen der günstige Preis und das stadttaugliche Format Kompromisse bei Platz und Komfort. Mit Verdunkelungen und einem komfortableren Bett würde der Campster zu einem guten Camper für mehr als ein bis zwei Nächte." ([auto-motor-und-sport](https://www.auto-motor-und-sport.de/fahrbericht/poesl-campster-2018-fahrbericht-camping-bus-wohnmobil-1/))
-
-### Berichte
-
-* [Begeisterung](https://www.youtube.com/watch?v=kbEUxSYWceo)
-
----
-
 ## Pössl Vanster
 
 * basiert auf Citroen Jumpy
@@ -257,45 +235,3 @@ Den T7 wird es nicht als reinen E-Bus geben - das kommt erst mit dem ID Buzz, de
 * sehr ähnlich zum Campster/Crosscamp
 * ab 2020
 
----
-
-## Hymer Car Sidney - Ducato
-
-* Länge: 4,96
-* Höhe: 2,35
-* Breite: 2,05
-* 4-5 Personen
-
-* [Video](https://wwww.youtube.com/watch?v=OVQrRGj44gA)
-
----
-
-## Eigenumbau vom Profi
-
-* Spacecamper
-
----
-
-## Zubehör
-
-* Einbauküchen
-  * z. B. im Schienensystem montiert
-  * von Vanessa
-* Liegeauflage
-  * von Vanessa
-* Kühlschrank
-  * von Engel
-
----
-
-## Testen
-
-Für 40.000 Euro will ja keiner die Katze im Sack kaufen ...
-
-* [Multicamper](https://multicamper.com/)
-* https://www.mieten-testen-kaufen.de
-* [Paul Camper](https://paulcamper.de/)
-* [Roadsurfer](https://roadsurfer.com/de/)
-  * nicht in unserer Gegend
-
----

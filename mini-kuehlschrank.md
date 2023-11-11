@@ -51,14 +51,18 @@ Ein normaler Kühlschrank schafft bis zu 2° - im Gemüsefach ist die empfohlene
 * kein Fenster
 * 5-15°
 
-### Klarstein Beersafe
+### Klarstein Beersafe M
 
-* https://www.klarstein.de/Haushaltsgeraete/Kuehlschraenke-Gefrierschraenke/Minikuehlschraenke-Minibars/Beersafe-M-Kuehlschrank-33-Liter-2-Boeden-Panoramaglastuer-Edelstahl-Silber.html
 * Energieeffizientklasse C
 * 35 Liter
 * bis 42 db
   * wenn Kompressor anspringt ... klacken ...
 * 0-10°
+
+### Klarstein Beersafe L
+
+* Fächer haben Übertiefe, so dass auch hohe Weissweinflaschen reinpassen
+* [YouTube Video](https://www.youtube.com/watch?v=zNmOg2R6uKM)
 
 ### Klarstein Beersafe Onyx
 

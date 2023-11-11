@@ -2,6 +2,12 @@
 
 Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar sind und wir das Campen langsam alle mögen (nicht alle im Zelt), suchen wir nach einer bezahlbaren Urlaubsalternative, die es uns ermöglicht, die Welt zu entdecken. Eine Pauschalreise im Hotel ist hier nicht wirklich geeignet. Meistens liegt man nur am Strand oder Hotelpool und läßt sich im Hotel bekochen und bedienen ... von den Einheimischen erfährt man auf diese Weise nichts, da sie als Angestellte ihre Rolle spielen müssen. Als Kind bin ich auch mit meinen Eltern durch Europa getourt und war begeistert - schöne Geschichten, an die ich mich noch 30 Jahre später gerne erinnere.
 
+Ich kann mir gut vorstellen, dass eine Mischung aus Ferienhaus und Camper die perfekte Lösung für uns ist. Auf dem Weg zum Ferienhaus kann man den Camper für 1-2 Zwischenübernachtungen nutzen. Am Ferienhaus angekommen nutzt man ihn dann für längere 1-3 Tage Touren, um die weitere Umgebung zu erkunden. Dann kann man auch an einem Ort mal eine Nacht bleiben oder noch weiter fahren.
+
+Ich kann mir derzeit nicht vorstellen IMMER nur auf Campingplätze zu gehen, nur weil ich ja einen Camper habe und der genutzt werden muss. Deshalb würde ich mir derzeit lieber einen Camper zulegen, der auch als KFZ-Ersatz taugt. Etwas in der Sprinter, Pössl-Klasse, die releativ kurz und schmal sind. Mit diesem Fahrzeug kann man auch noch in die Stadt fahren und es könnte das Fahrzeug für die längeren Strecken sein. Für die Stadt würde sich ein e-Auto als Zweitwagen anbieten.
+
+Aus diesem Grund muss der Camper keinen grossen Luxus bieten (z. B. Dusche) und für viele Übernachtungen am Stück ausgelegt sein. Wenn man es dann doch mal braucht, wäre ein Dachzelt oder ein normales Zelt vielleicht die bessere Alternative - vor Ort braucht man ja dann doch meistens ein Auto und will nicht immer alles wieder zurückbauen müssen.
+
 ---
 
 ## Varianten
@@ -35,7 +41,7 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
 
 ### Nutzung
 
-* wenn wir einen Kaufen würden, dann müsste er alltagstauglich sein - eine Auto für 50 TEUR (oder mehr) ausschließlich für 2-3 Wochen Urlaub zu nutzen würde keinen Sinn machen
+* wenn wir einen Kaufen würden, dann müsste er alltagstauglich sein (bis max. 6m) - eine Auto für 50 TEUR (oder mehr) ausschließlich für 2-3 Wochen Urlaub zu nutzen würde keinen Sinn machen
 * 3-4 mal im Jahr Nutzung für den Urlaub (auch schlafen)
 * 3-4 mal im Jahr ein verlängertes Wochenende
 * Eltern schlafen im Auto - Kinder im Zelt - wir haben ein kleines 3-Kinder Wurfzelt, das in 60 Sekunden auf- und in 180 Sekunden abgebaut ist
@@ -46,8 +52,6 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
 
 ### MUST-HAVE
 
-* 5 Sitzplätze für Erwachsene ... lieber 6-7 (zumindest im Alltag)
-* Aufstelldach
 * gut motorisiert (ca. 150 PS Diesel)
   * vielleicht hängt man irgendwann mal was dran (Anhängerkupplung) - derzeit aber nicht (höchstens nachrüsten)
   * auch für die Wiederverkauf wichtig
@@ -60,54 +64,52 @@ Jetzt da unsere Kinder immer älter werden, die Flugreisen nicht mehr bezahlbar 
 * Bluetooth
   * Freisprecheinrichtung
   * Audio-Senke (auch für Navigationssystem am Handy)
+    * am besten [Apple Carplay](https://www.youtube.com/watch?v=8Bf1sg_tSfM)
 * Privacy-Paket (getönte Scheiben hinten)
   * alternativ: Rollos
-* im oberen Schlafbereich rechts/links Fliegengitter zur Durchlüftung
 * Armlehnen Fahrer/Beifahrer
+* Toilette
+* Automatik
+* tauglich für ein [mobiles Büro](mobiles-buero.md)
 
 ### NICE-TO-HAVE
 
-* Doppelklimaanlage (damit es hinten auch kühl wird)
+* Klimaanlage
 * austellbares Heckfenster
-* im Aufstelldach nach vorne ein Fenster
 * integrierte Schubladen unter der Rücksitzbank
+* Markise
+  * bei Kurzaufenthalten (1-2 Tage ... insbesondere bei Dauerregen - quasi als Vordach, um die Schuhe zumindest mal abstellen zu können) könnte ich mir sie recht nützlich vorstellen
+  * bei längeren Aufenthalten wird man ein Zelt aufbauen und dann braucht man die Markise maximal für eine Überdachung zum Zelt
 * aufstellbarer Tisch
 
 ![Schubladen](images/sitzbank-schubladen.png)
 
 ### DONT-HAVE
 
+* Aufstelldach
 * festes Hochdach
 * Küche/Spüle
-  * niemand kocht in diesem Auto
-* Toilette
+  * niemand kocht in diesem Auto - wenn das Wetter zum DRaussen-Kochen nicht passt, dann gehts ins Restaurant
 * Dusche
+  * zuviel Schimmelgefahr - meisten gehen wir auf einen Campingplatz ... wenn das mal nicht geht wird entweder draussen geduscht oder das Duschen fällt mal einen Tag aus. Notfalls gehen wir ins Schwimmbad.
 * Navigationssystem oder großer Radio-Schnick-Schnack
 * Multimedia-Support
   * fraglich wie lange das wirklich unterstützt wird ... bei einem Apple-Dienst vielleicht länger als bei einem Android-Dienst - dafür ist Apple sicherlich weniger offen (welche Apps werden unterstützt)
     * ich glaube, daß mein Handy/Tablet immer die aktuellere Software haben wird und auch leicht ausgetauscht werden kann - wichtig ist nur, daß der Ton auf die Auto-Lautsprecher ausgegeben werden kann (Bluetooth)
-  * [Apple Carplay](https://www.youtube.com/watch?v=8Bf1sg_tSfM)
     * derzeit muß man noch eine USB-Verbindung herstellen
-  * Android Auto
   * [MirrorLink](https://de.wikipedia.org/wiki/MirrorLink)
 * Allrad-Antrieb
   * für den Wintereinsatz wäre das ganz nett, aber eigentlich haben wir im Flachland kaum Schnee und für eine Woche Skifahren pro Jahr lohnen sich die 3000 Euro Aufpreis nicht
   * Straßenlage soll allerdings grundsätzlich besser sein
     * Wiederverkauf könnte ein Argument sein - ich glaube aber kein wesentliches
-* Automatik
-  * im Stau ganz nett
-  * ich bin mir nicht sicher, ob die dann auch noch bei höheren Laufleistungen nicht zickt
 
 ### DONT-KNOW
 
 * LED-Scheinwerfer - sollen heller sein
-* Markise
-  * bei Kurzaufenthalten (1-2 Tage ... insbesondere bei Dauerregen - quasi als Vordach, um die Schuhe zumindest mal abstellen zu können) könnte ich mir sie recht nützlich vorstellen
-  * bei längeren Aufenthalten wird man ein Zelt aufbauen und dann braucht man die Markise maximal für eine Überdachung zum Zelt
 
 ### Fazit
 
-Die typischen vollausgestatteter Camper ist für uns nicht interessant, da er mit Ausbau nicht den notwendigen Platz für 5-6 Erwachsenen bietet ... eher einen spartanischer Bus mit Hochstelldach.
+Die typischen vollausgestatteter Camper ist für uns nicht interessant, da er kein Alltagsauto ist.
 
 ---
 

@@ -25,13 +25,13 @@ Der Mudi ist ein Router, der ein eigenes WLAN zur Verfügung stellt, mit dem sic
 
 ### Was verbessert werden könnte?
 
-* Displayschrift extrem klein
+* Display kaum zu gebrauchen (Helligkeit, Schriftgröße)
 * rutschiges Plastikgehäuse
   * Plastik ist in Ordnung ... schliesslich soll das WLAN top sein - rutschig sollte es aber nicht sein
 * beim Laden über USB-C wird das Gerät relativ warm ... 63° sagt die Admin-UI
   * die normale Betriebstemperatur liegt bei 40-50°
 * Batterie könnte länger halten ... Gewicht wäre mir hier egal (auf 100g kommt es nicht an)
-  * mittlerweile schalte ich den Mudi ab und habe ihn an der Ladestation, wenn ich ihn nicht brauche - ist aber wahrscheinlich eh die beste Lösung (ganz unabhängig von der Batteriekapazität)
+  * mittlerweile lade ich ihn nach intensiver Benutzung einfach einmal auf 100% und fahre ihn denn runter - somit ist er dann beim nächsten Mal auf jeden Fall einsatzbereit
 
 ---
 
@@ -176,6 +176,12 @@ Der Mudi bietet Internetzugang über folgende Modi
 
 Ich möchte mobil arbeiten (vielleicht sogar mal mit dem Wohnmobil oder im Ferienhaus von unterwegs arbeiten), also tatsächlich Videokonferenzen von unterwegs und Java/Docker-Builds machen (Download großer Datenmengen ... Netzwerk- und Internetbandbreite ist hier entscheidend) ... nahezu so wie von zuhause. Ausserdem möchte ich meiner Familie (m)eine grosse Datenkarte zur Nutzung zur Verfügung stellen, ohne dass JEDER einen großen Vertrag haben muss.
 
+### Anwendungsfall Internet-Fail-Over
+
+Gelegentlich kommt es vor, dass das Internet langsam ist oder nur unzuverlässig funktioniert. In dem Fall nutze ich den Mudi gerne als Ersatz (mit einer günstigen Daten-SIM-Karte) - das kann mir auch dabei helfen, das Problem einzugrenzen (liegt es an meinem Endgerät oder dem Router/Provider).
+
+Auf diese Weise könnte ich auch leichter mal einen Provider-Wechsel überstehen oder den Wechsel von DSL auf Glasfaser nahtloser gestalten.
+
 ### Anwendungsfall WLAN-Access-Point
 
 In diese Modus verwendet man ein externes WLAN (vom Hotel, Campingplatz, Cafe, ...) für den Zugang ins Internet.
@@ -218,7 +224,9 @@ Die Unterstützung von OpenVPN ist dennoch die beste ... es ist DAS Standard-Pro
 
 Wireguard ist mittlerweile etabliert und Anbieter wie [ovpn.com](https://ovpn.com) unterstützen es genauso komfortabel wie OpenVPN.
 
-Bei NordVPN ist das leider nicht der Fall, da sie ein proprietäres Wireguard-Protokoll verwenden (das Produkt dazu heisst NordLynx). Hierzu müsste man auf dem Mudi eine Linux-Package installieren - das ist mir zu umständlich ... deshabl scheidet NordVPN derzeit aus.
+Bei NordVPN ist das leider nicht der Fall, da sie ein proprietäres Wireguard-Protokoll verwenden (das Produkt dazu heisst NordLynx). Hierzu müsste man auf dem Mudi eine Linux-Package installieren - das ist mir zu umständlich ... deshalb scheidet NordVPN derzeit aus.
+
+Die FritzBox unterstützt neuerdings auch Wireguard ... eine gute kostenlose Alternative, wenn der Upload über ausreichend Bandbreite verfügt.
 
 ### Anwendungsfall USB-Tethering
 

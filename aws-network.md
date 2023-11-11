@@ -53,7 +53,7 @@ CIDR-Notation Bedeutung
 
 * [Stephane Maarek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528554#overview)
 
-* Verbindung zweier VPCs, um den Zusammenschluss zu simulieren (funktioniert natürlich nur, wenn die privaten IP-Adressen nicht überlappen)
+* Verbindung zweier VPCs (z. B. in verschiedenen Accounts), um den Zusammenschluss zu simulieren (funktioniert natürlich nur, wenn die privaten IP-Adressen nicht überlappen)
   * **Einsatzbereich:** VPCs unterschiedlicher Regionen oder gar Accounts verbinden
 * die Route Tables müssen nachgepflegt werden, um den Traffic in das andere VPC über die VPC-Peering-Connection zu routen
 

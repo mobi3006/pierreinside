@@ -6,6 +6,39 @@ GitHub ist auch Bestandteil der [GitBook-Toolchain](gitbook.md).
 
 ---
 
+## Accounts
+
+Man unterscheidet
+
+* Personal Accounts
+* Organization Accounts
+  * man legt eine Organisation an indem man einen [Personal Account in eine Organisation umwandelt](github-organizations.md)
+* Enterprise Accounts
+  * hiermit kann man mehrere Organisationen managen
+
+Zu jedem Account gehört ein GitHub Plan, der bestimmt
+
+* wieviel es kostet
+* welche Features man nutzen kann
+
+Grunsätzlich möchte GitHub die Community fördern und somit bekommt man für Public Repositories viele Features kostenlos, für die man bei Nutzung Privater Repositories zahlen muss.
+
+### Pricing Plans
+
+Es ist nicht ganz einfach, die Pricing Plan zu durchschauen. Ein Beispiel:
+
+> Codespaces sind kostenlos für "GitHub Free for Personal Accounts", sind aber nicht in "GitHub Free for Organization" enthalten. Für Organisationen muss man einen Team-Plan kaufen, um Codespaces nutzen zu können.
+
+* Personal Account
+  * Free
+  * Pro
+* Organisationen
+  * Free
+  * Team
+* Enterprise
+
+---
+
 ## Features
 
 * Git-Repository (public und private)
