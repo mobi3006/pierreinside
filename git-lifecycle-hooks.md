@@ -21,6 +21,8 @@ A hook implementation has to have a specific name (e. g. `pre-commit`) and needs
 * create a `~/.git-templates/hooks` folder containing all hooks that should be copied during `git init`
   * `git init` is not only used for the initial git-repo setup but you can use it anytime when you want to have the `~/.git-templates` applied
 
+For the pre-commit hook there was a framework (Plugin-based) implemented that gets contributions for a wide range of technologies and use-cases (see below).
+
 ---
 
 ## Pre-Commit Hook Project
