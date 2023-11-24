@@ -21,6 +21,8 @@ Ich wollte nie so ein Ding haben ... jetzt haben wir einen im mittleren Preisseg
 * schnell (22 km/h)
 * mega Beschleunigung
 * kann die 22 km/h dauerhaft halten (top)
+  * hier ist ein Controller von Hobbywing (kommt aus dem RC-Bereich ... ferngesteuerte Autos) verbaut - da merkt man kein nachjustieren der Geschwindigkeit. Ein Feund hat ein eBike und das beschleunigt hoch auf 24 km/h und fällt dann wieder auf 20 km/h, um dann wieder auf 24 km/h zu beschleunigen ... ihn nervt das ein wenig
+    * hieran merkt man einfach, dass der Hersteller wirklich in Qualität investiert hat und sein Produkt liebt ... es sind die Kleinigkeiten, die aus einem guten Produkt ein exzellentes macht
 * der Hinterrad-Antrieb ist eine gute Entscheidung
 * Blinker
 * brauchbare Handy App
@@ -38,9 +40,10 @@ Ich wollte nie so ein Ding haben ... jetzt haben wir einen im mittleren Preisseg
 
 * abschließen ist mit einem normalen Schloss schwierig
   * durch die Felgen geht nichts durch (höchstens Handschellen)
-  * es gibt keine Öse durch die man ein Fahrradschloss durchziehen könnte
-* Luftreifen ... nach 200 km hatte ich schon den ersten Platten - leider hinten, d. h. der Motor muss abgeklemmt werden
-  * ich hätte mir lieber Vollgummireifen und stattgessen eine Federgabel gewünscht
+  * es gibt keine Öse durch die man ein Fahrradschloss durchziehen könnte ... das hätte man noch verbessern können
+* Luftreifen ... nach 200 km hatte ich schon den ersten Platten - leider hinten, d. h. der Motor muss abgeklemmt werden - der Tausch hat mich 2 Stunden gekostet. Durch die gute YouTube-Anleitung kein Problem, aber dennoch aufwendig
+  * ich hätte mir lieber Vollgummireifen (wahrscheinlich zu schwer) und stattgessen eine Federgabel gewünscht
+  * vielleicht wechsel ich beim nächsten Platten auf die schlauchlosen Reifen
 
 ### Bewertung anderer
 
@@ -61,8 +64,8 @@ Ich wollte nie so ein Ding haben ... jetzt haben wir einen im mittleren Preisseg
 
 Da der Roller - im Vergleich zu einem Fahrrad (wenn man nicht gerade ein Klappfahrrad hat) - sehr wenig Platz verbraucht, ist er ideal für
 
-* für eine Stadterkundung ist der eScooter ideal
-* Park-and-Ride ausserdhalb der Stadt
+* für eine Stadterkundung
+* Park-and-Ride
 * im Urlaub mal schnell zum Bäcker
 
 Mit einem Rucksack kann man dann sogar kleinere Einkäufe transportieren.
@@ -71,7 +74,7 @@ Mit einem Rucksack kann man dann sogar kleinere Einkäufe transportieren.
 
 ## Reparaturen
 
-ePowerFun bietet zwar auch Reparaturen ein, aber dazu muss man den Roller einschicken ... was ein Aufwand. Teilweise kann man auch Teil-Demontagen selbst machen und dann nur ein Teil einschicken. Dann kann ichs aber auch gleich selbst machen.
+Der Hersteller bietet auch Reparaturen, aber dazu muss man den Roller einschicken ... was ein Aufwand. Teilweise kann man auch Teil-Demontagen selbst machen und dann nur ein Teil einschicken. Dann kann ichs aber auch gleich selbst machen, die vom Hersteller vorbereiteten Videos sind klasse und der Roller ist kein Hexenwerk (Akku, Controller, ein paar Kabel und reine Mechanik).
 
 Ein bisschen Spezialwerkzeug braucht man allerdings:
 
@@ -90,6 +93,10 @@ Ein bisschen Spezialwerkzeug braucht man allerdings:
 ### Hinterreifen platt - nach 200km
 
 * mit Seifenwasser konnte ich sehen, dass die Luft seitlich am Ventil rauskommt
+  * das muss nicht unbedingt bedeuten, dass dort auch das Loch ist (so wars bei mir auch)
 * mit Slime habe ich einen ersten Flickversuch unternommen - negativ
+  * den Slime fand ich sehr enttäuschend - Tage nach Einbringen des Slimes kam er mir beim Ausbau des Hinterrads komplett flüssig entgegen. Das kann doch gar nicht funktionieren ... vielleicht habe ich den falschen Slime verwendet oder hätte noch was beachten müssen?
 * Ausbau des Hinterrades gemäß [dieser Anleitung](https://www.youtube.com/watch?v=bq0yiRKZa9Q)
 * ich habe mich entschieden - aufgrund des hohen Aufwands - gleich einen neuen Schlauch zu kaufen (7-10 Euro)
+  * vielleicht hätte ich mir lieber gleich einen schlauchlos Reifen kaufen sollen
+* die Felge hat beim Ausbau ein wenig gelitten ... beim nächsten mal geht es sicher auch schneller
