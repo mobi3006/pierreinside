@@ -107,6 +107,10 @@ Manche Code-Stellen verstehe ich nicht und ich möchte gerne mal die Parameter v
   * man kann neue erstellen
     * hochladen
     * aufnehmen
+* Plugins wie z. B. den Malstift, Lego-Mindstorms-Integration oder die Verwendung der Videokamera zur Programmsteuerung
+* Open-Source
+  * man kann Projekte öffentlich machen und so anderen einen Einblick gewähren oder über Remixe Forks erzeugen, um so ein Projekt weiterzuentwickeln
+* projektübergreifende Library in Form eines Lagers ... so lassen sich mehrere Blöcke zwischen Figuren und/oder Projekten wiederverwenden 
 
 ### Skripte
 
@@ -126,3 +130,14 @@ Manche Code-Stellen verstehe ich nicht und ich möchte gerne mal die Parameter v
   * leider kann man Blöcke nicht projektübergreifend nutzen
 * im Code können Variablen verwendet werden, um Zustände zu speichern und im Code zu verwenden (z. B. ein Punktestand)
 * Konfiguration kann über Variablen erfolgen
+
+---
+
+## Bewertung
+
+Sehr gut gemacht und ein toller Einstieg in die Softwareentwicklung ab 8-10 Jahren. Die wesentlichen Programmierkonzepte sind alle abbildbar und sogar Open-Source-Ansätze sind umgesetzt.
+
+### Was ich mir wünschen würde ...
+
+* Undo-Funktion
+* Historie bei der Speicherung
