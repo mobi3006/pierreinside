@@ -12,7 +12,7 @@ Da es auch Scratch-Projekt mit Mindcraft oder anderen für Jugendliche interessa
 
 Während es zu meiner Jugendzeit (80er Jahre des 20. Jahrhunderts) kaum Computer gab (kaum verbreitet, sehr teuer), hat heutztage jeder 10-jährige einen Power-Computer in der Tasche ... das Handy.
 
-Alle sind gewohnt Computer in irgendeiner Form wie Handy, Tablet, Alexa, FireTV-Stick, Netflix, Smart-Watch, Playstation ... zu benutzen. Wissen über Programmierung kann heutzutage niemandem schaden und so beginnen dei Schulen schon systematisch mit der IT-Ausbildung in der weiterführenden Schule.
+Alle sind gewohnt Computer in irgendeiner Form wie Handy, Tablet, Alexa, FireTV-Stick, Netflix, Smart-Watch, Playstation ... zu benutzen. Wissen über Programmierung kann heutzutage niemandem schaden und so beginnen die Schulen schon systematisch mit der IT-Ausbildung in der weiterführenden Schule.
 
 Ich bin selbst Softwareentwickler und kann mir keinen schöneren Job vorstellen. Wir sind kreativ, arbeiten im Team, verdienen sehr gut, können unsere eigenen Hobby-Projekte durchführen und teilweise entwickelt sich daraus auch ein Geschäftsmodell. Kurz: wir können die Zukunft mitgestalten.
 
@@ -94,9 +94,11 @@ Manche Code-Stellen verstehe ich nicht und ich möchte gerne mal die Parameter v
   * lassen sich editieren (= Kostüm)
   * man kann neue erstellen
     * hochladen
+      * als einfach jpg, png Dateien (im besten Fall mit transparentem Hintergrund)
+      * als Sprite ... so kann man beispielsweise aus einem Handy-Foto per App Clip2Comic einen Comic-Filter anwenden und das Ergebnis per [Online-Sprite-Sheet-Generator](https://codeshack.io/images-sprite-sheet-generator/) einen Sprite erzeugen
     * malen
 * Skripte (= Programmcode)
-  * ist immer an eine Figur (= Objekt: Katze, Ball, ...) gebunden
+  * ist **IMMER** an eine Figur (= Objekt: Katze, Ball, ...) gebunden
     * verwendet man mehrere Figuren, dann kann jede ihre eigenen Aktionen ausführen
 * Klänge
   * können im Code abgespielt werden
@@ -107,6 +109,8 @@ Manche Code-Stellen verstehe ich nicht und ich möchte gerne mal die Parameter v
     * aufnehmen
 
 ### Skripte
+
+> Skripte sind **IMMER** an eine Figur (= Objekt: Katze, Ball, ...) gebunden
 
 * Programmierelemente aus (man kann auch Kommentare hinzufügen)
   * Bewegung
