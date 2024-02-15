@@ -1,4 +1,3 @@
-
 # Terraform
 
 * [YouTube - eine tolle Einführung](https://www.youtube.com/watch?v=SLB_c_ayRMo)
@@ -21,14 +20,18 @@ Terraform ist Cloud-Provider unabhängig ... damit verhindert es im Gegensatz zu
 
 ## Konzept
 
-Man beschreibt einen Zielzustand (deklarativer Ansatz) und Terraform berechnet aus dem aktuellen Zustand (abgebildet in einer `terraform.tfstate` Datei) einen Execution Plan (die tatsächlichen Aktionen) für verschiedene Deploy-Platformen. Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans. Hierzu ist entsprechendes Wissen im Terraform Code notwendig. Ein Beispiel:
+Man beschreibt einen Zielzustand (deklarativer Ansatz) und Terraform berechnet aus dem aktuellen Zustand (abgebildet in einer `terraform.tfstate` JSON Datei) einen Execution Plan (die tatsächlichen Aktionen) für verschiedene Deploy-Platformen. 
+
+> Man nennt den Terraform Code auch eher Terraform Configuration, da es sich um eine deklarative Beschriebung des Zielzustands handelt. Die Implementierung liegt in den Terraform Provider und bereitgestellten Modulen.
+
+Die Planung optimiert die Rollout-Zeit durch Parallelisierung unabhängiger Abschnitte des Execution Plans. Hierzu ist entsprechendes Wissen im Terraform Code notwendig. Ein Beispiel:
 
 * eine Änderung eines EC2 Tags ist ohne Downtime möglich
 * eine Änderung des EC2-AMI ist nur durch Terminierung und Neuanlage einer EC2-Instanz möglich
 
 Terraform weiß was es in der jeweiligen Situation am besten tut.
 
-> ACHTUNG: Terraform berücksichtigt bei der Planung nur den State (gespeichert in einer Datei - abgelegt auf der lokalen Platte oder auf einem shared Bereich). Der tatsächliche Zustand der Runtime-Umgebung wird nicht berücksichtigt (wäre auch sehr schwierig). Das bedeutet im Umkehrschluß, daß manuelle Änderungen an der Runtime-Umgebung verloren gehen oder vielleicht sogar zu später fehlschlagenden `terraform apply` Kommandos führen können. Infrastructure-as-Code bedeutet auch,, daß man es konsequent anwendet!!!
+> ACHTUNG: Terraform berücksichtigt bei der Planung nur den State (gespeichert in einer Datei - abgelegt auf der lokalen Platte oder auf einem shared Bereich). Der tatsächliche Zustand der Runtime-Umgebung wird nicht berücksichtigt (wäre auch sehr schwierig). Das bedeutet im Umkehrschluß, daß manuelle Änderungen an der Runtime-Umgebung verloren gehen oder vielleicht sogar zu später fehlschlagenden `terraform apply` Kommandos führen können. Die überschriebenen Infrastructure-as-Code bedeutet auch, daß man es konsequent anwendet!!!
 >> "Once you start using Terraform, you should only use Terraform" (Buch: *Terraform - Up and Running: Writing Infrastructure as Code*)
 
 Im Gegensatz dazu werden in Ansible imperativ die durchzuführenden Schritte angegeben ... der DevOps muß also immer genau wissen welchen Zustand die Umgebung hat und welche Schritte auszuführen sind. Das ist natürlich deutlich fehleranfälliger (und benötigt viel Detailwissen - das zwischen allen DevOps-Mitarbeitern geteilt werden muß) als wenn dies - wie bei Terraform - aus der Beschreibung des Zielzustands und dem aktuellen Zustand berechnet wird. Zudem zeigt Terrform die durchführenden Aktionen nach einem `terraform plan` halbwegs übersichtlich an (kann man sogar als Input für einen Approval im Vier-Augen-Prinzip verwenden). Im Gegensatz zu Bash-Skripting hat Ansible aber zumindest auf ganz niederiger Ebene etwas wie die Beschreibung des Zielzustands:
@@ -50,6 +53,21 @@ In diesem Beispiel muß man sich als Ansible-Entwickler nicht mehr prüfen, ob d
 Idempotenz ist bei Ansible aber deutlich besser umgesetzt als bei Bash-Scripting.
 
 Besonders praktisch ist `terraform destroy`, bei dem Terraform ALLE gemanagten Ressourcen löscht ... das verhindert auch unnötige Kosten.
+
+Ein Terraform Projekt sollte vollständig self-containing sein, d. h. man checkt es von seinem VCS aus und kann es ohne zusätzliche manuelle Installation von Komponenten starten. Die einzige Voraussetzung ist ein `terraform`-Binary. Zu diesem Zweck unterstützt Terraform
+
+* Anforderungen an die Version des `terraform`-Binary (`terraform.required_version`)
+* Dependency-Spezifikation (`terraform.required_providers`)
+* Schnittstellen Spezifikation
+  * Input Values über `var`
+  * Output Values über `output`
+* Kollaboration
+  * remote State Spezifikation (`terraform.backend`)
+  * State-Locking
+
+Zum Zwecke der Wiederverwendung größerer Blöcke werden `module` unterstützt. Module werden dabei entweder lokal, auf der HashiCorp-Cloud oder in eine VCS gehostet. Letztlich wird der Code dieser Remote-Module runtergeladen und dann wie lokale Module genutzt. Das ist sehr stringent.
+
+Terraform stellt KEINE Anforderungen was wo definiert wird ... im Extremfall hat man alles in einer einzigen Datei beliebigen Namens definiert. Best-Practice ist das natürlich nicht. Diese Freiheit macht es manchmal ein bisschen schwierig, sich im Code zurechtzufinden. 
 
 ---
 
@@ -79,6 +97,7 @@ chmod 755 terraform
 
 * [Terraform Doku](https://www.terraform.io/intro/getting-started/build.html)
 * [mein eigenes Terraform Projekt](https://github.com/mobi3006/terraform-fls15)
+* [MUSTHAVE: HashiCorp Certified: Terraform Associate - Hands-on Labs](https://www.udemy.com/course/terraform-hands-on-labs/learn/lecture/30158642)
 
 Diese Konfiguration (z. B. `main.tf`)
 
@@ -119,14 +138,14 @@ wird mit
 ```bash
 terraform verify                            # Syntaxprüfung
 terraform init                              # hierdurch wird ein Verzeichnis .terraform im aktuellen Verzeichnis angelegt
-                                            # providerspezifische Informationen werden nachgeladen
+                                            # providerspezifische Informationen/Module werden nachgeladen
 terraform plan -var instance_type=t2.micro  # hier sieht man was geschehen wird
                                             # ... aws_access_id, aws_secret_key und instance_type werden interaktiv abgefragt
                                             # ... oder können per -var-file foo.tfvar contributed werden
 terraform apply                             # erzeugt den Execution Plan
 ```
 
-> mit `terraform plan -target module.eks` kann man den Scope des Plans bzw. des Apply einschränken (auf bestimmte Ressourcen), so dass die Ausführung deutlich schneller geht. Auf diese Weise kann man auch eine Layer-Struktur bilden, um den Scope eines Apply einzuschränken. Allerdings muss man dann die Abhängigkeiten zwischen den Layern selbst berücksichtigen und dabei können Fehler entstehen. Deshalb versuche ich das zu vermeiden.
+> mit `terraform plan -target module.eks` kann man den Scope des Plans bzw. des Apply einschränken (auf bestimmte Ressourcen), so dass die Ausführung deutlich schneller geht. Auf diese Weise kann man auch eine Layer-Struktur bilden, um den Scope eines Apply einzuschränken. Allerdings muss man dann die Abhängigkeiten zwischen den Layern selbst berücksichtigen und dabei können leicht Fehler entstehen. Aus meiner Sicht führt das am Konzept (definieren ein Ziel und lass Terraform einen Plan finden wie es zu implementieren ist) von Terraform vorbei und deshalb versuche ich das zu vermeiden. Manchmal (z. B. in Fehlersituationen) lässt sich das aber nicht vermeiden.
 
 Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Dateien berücksichtigt, die sich im aktuellen Verzeichnis befinden (Convention-over-Configuration).
 
@@ -221,7 +240,7 @@ variable "instance_type" {
 
 ### Dependencies
 
-Durch die Referenzierung von Ressourcen ergibt sich eine implizite Abhängigkeit, die Terraform erkennt und entsprechend auflöst, so daß - unabhängig von der Definition in der `.tf`-Datei - eine valide Reihenfolge bei der Anlage/Löschung von Ressourcen abgeleitet wird. Alles, was voneinander unabhängig ist, kann parallel ausgeführt werden, um die Zeit bis zur Bereitstellung der Ziel-Umgebung zu verringern.
+Durch die Referenzierung von Provider-Komponenten (Ressourcen, Data-Sources, ...) ergibt sich eine implizite Abhängigkeit, die Terraform erkennt und entsprechend auflöst, so daß - unabhängig von der Definition in der `.tf`-Datei - eine valide Reihenfolge bei der Anlage/Löschung von Ressourcen abgeleitet wird. Alles, was voneinander unabhängig ist, kann parallel ausgeführt werden, um die Zeit bis zur Bereitstellung der Ziel-Umgebung zu verringern.
 
 Manchmal muß man allerdings Abhängigkeiten explzit über `depends_on` definieren, wenn Terraform keine Chance zur Ableitung hat. Beispielsweise kann eine Applikation, die in einer anzulegenden EC2-Instanz läuft, einen S3-Bucket voraussetzen. Eine solche Abhängigkeit könnte eine explizite Abhängigkeitsdefinition erfordern. Die AWS-Aktionen werden i. a. auch asnychron ausgeführt ... es kann also sein, dass eine Aktion noch nicht fertig ist bevor eine darauf aufbauende Aktion startet. Das führt dann manchmal zu merkwürdigen Fehlermeldungen.
 
@@ -229,11 +248,12 @@ Manchmal muß man allerdings Abhängigkeiten explzit über `depends_on` definier
 
 ### Locals
 
-Bei Locals handelt es sich um Konstanten, die per
+Bei Locals handelt es sich um Konstanten oder wiederverwendbare Werte (z. B. Transformationen von Datentypen oder Datenmengen), die per
 
 ```
 locals {
-  my_const = "pierre"
+  my_const  = "pierre"
+  full_name = "${var.surname} ${var.lastname}"
 }
 ```
 
@@ -247,7 +267,7 @@ genutzt werden.
 
 ### Data Sources - für komplexe Datenstrukturen 
 
-Über `data` lassen sich komplexe Datenstrukturen bereitstellen.
+Über `data` lassen sich komplexe Datenstrukturen oder generierte Dateien bereitstellen.
 
 Hier ein Beispiel wie man ein aus einem Template **gerendertes** File referenziert (beachte im folgenden `...nomad-job-template.rendered`):
 
@@ -268,16 +288,89 @@ Hier sieht man auch sehr schön die übergreifende Adressierung (von `nomad_job.
 
 > zu beachten ist, dass man dem Namen ein `data.` voranstellen muss - das ist bei `resource` nicht der Fall (weil das der Standard-Fall ist ... da wollte man sich die Redundanz sparen)
 
+### Data Sources - für Infrastruktur-Informationen
+
+Data Sources stellen Terraform aktuelle statische und dynamische Informationen aus der Umgebung bereit. Diese Bereitstellung erfolgt über read-only Queries, die die Data Source zur Ausführungszeit gegen die APIs der Laufzeitumgebung macht. Dies ist **KOMPLETT** entkoppelt vom Terraform State.
+
+Data Sources haben folgende Ziele
+
+* Integration von nicht terraform-managed Ressources
+* Informationen über Ressourcen, die in anderen Infrastruktur-Layern deployed wurden
+  * ist eine Ressource terraform-managed und man hat Zugriff auf den State, dann sollte kann man natürlich auch eine Abfrage des Remote-Terraform-States in Betracht ziehen
+
+Hiermit bekommt man Informationen darüber welche Ubuntu-AMI's zur Verfügung stehen (statische Informationen also) ... die Werte im Block beschreiben die Query (schon ein bissl strange)
+
+```
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+```
+
+Man kann natürlich auch dynamische Informationen auslesen, z. B. welche Region im aktuellen Executions Context verwendet wird:
+
+```
+data "aws_region" "current" {}
+```
+
+Man könnte mit
+
+```
+variable "private_subnets" {
+  default = {
+    "subnet_1" = 1
+    "subnet_2" = 2
+    "subnet_3" = 3
+  }
+}
+```
+
+und
+
+```
+data "aws_availability_zones" "available" {}
+
+resource "aws_subnet" "public_subnets" {
+  for_each                = var.public_subnets
+  availability_zone       = tolist(data.aws_availability_zones.available.names)[each.value]
+}
+```
+
+sogar Code schreiben, der in **JEDER** beliebigen Region mit unterschiedlichen Availability Zones läuft. Das erspart letztlich Konfigurationsarbeit und verhindert Copy/Paste-Ansätze.
+
+### Data-Sources für externe Programmaufrufe
+
+* [external Provider](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external)
+
+Manchmal benötigt man eben doch Logik, die sich schlecht in einer deklarative Sprache wie HCL abbilden lässt. Für diesen Zweck bietet sich der `external`-Provider an, der eine Data-Source bereitstellt. Auf diese Weise kann man Bash/Python-Code ausführen lassen ... Input und Output Parameter werden dabei unterstützt.
+
+Alternativ kann man hier `provisioners` verwenden.
+
 ### Variablen
+
+* [Udemy-Kurs - terraform-hands-on-labs](https://www.udemy.com/course/terraform-hands-on-labs/learn/lecture/30158642#overview)
 
 Variablen können folgende Datentypen haben
 
 * Primitive Typen
   * String
+    * `name = "Pierre"`
   * Number
+    * `age = 25`
   * Boolean
+    * `is_male = true`
 * Komplexe Typen
   * List
+    * `cars = `
   * Set
   * Map
   * Object
@@ -292,45 +385,85 @@ Die Belegung der Variablen erfolgt
 * `foobar.tfvars`-Datei ... diese Datei muss EXPLIZIT per `terraform plan -var-file foobar.tfvars` angegeben werden
 * Umgebungsvariable `TF_VAR_variable1=foobar`
 
-### Data Sources - für Infrastruktur-Informationen
+```
+[for car in var.cars_short_list: upper(car)]
+```
 
-Data Sources stellen Terraform aktuelle statische und dynamische Informationen aus der Umgebung bereit. Diese Bereitstellung erfolgt über read-only Queries, die die Data Source zur Ausführungszeit gegen die APIs der Laufzeitumgebung macht. Dies ist **KOMPLETT** entkoppelt vom Terraform State.
+Es kommt immer wieder vor, dass man Datentypen transformieren muss, um
 
-Data Sources haben das Ziel, nicht terraform-managed Ressources in Terraform zu integrieren.
+* output Werte eines Moduls (das man evtl. nicht mal unter Kontrolle hat) in eine andere Darstellung zu transformieren
+* redundante variablen Definitionen zu vermeiden
+  * Beispiel: man könnte aus einer
+  
+      ```
+      variable "cars_detailed_list" {
+        type = list(object({
+          brand = string
+          type  = string
+          color = string
+          age   = number
+        }))
+      ```
 
-Ist eine Ressource terraform-managed und man hat Zugriff auf den State, dann sollte kann man natürlich auch eine Abfrage des Remote-Terraform-States in Betracht ziehen
+    ein Set der genutzten Farben extrahieren:
+
+      ```
+      toset([for car in var.cars_detailed_list : car.color])
+      ```
+
+In diesem Zusammenhang sind auch die [Terraform-Functions](https://developer.hashicorp.com/terraform/language/functions) interessant:
+
+* `toset`
+* `merge`
+*  ...
 
 ### Module
 
 * [terraform docu](https://learn.hashicorp.com/tutorials/terraform/module?in=terraform/modules)
 * [terraform docu - lokale Module](https://learn.hashicorp.com/tutorials/terraform/module-create?in=terraform/modules)
+* [Udemy-Kurs](https://www.udemy.com/course/terraform-hands-on-labs/learn/lecture/29599500)
 
-Über Module wird ein Template-Mechnismus bereitgestellt, über den sich wiederverwendbare Komponenten abbilden lassen. Aus atomaren `resourcen` entstehen komplexe Komponenten, die über Parameter an den jeweiligen Use-Case angepasst werden. 
+Über Module wird ein Template-Mechnismus bereitgestellt, über den sich wiederverwendbare Komponenten abbilden lassen. Aus atomaren Sprachelementen (`resource`, `data`, `var`, `output`, ...), die eine Lösung formen, entstehen komplexe wiederverwendbare Komponenten, die über Parameter an den jeweiligen Use-Case angepasst werden.
 
 > Letztlich ist ein Modul nicht mehr als eine impliziete Kopieranleitung, die man explizit auch mit Codegenerierung erreichen könnte
 
 Die Endstufe eines Moduls sieht man bei [mineiros-io](https://github.com/mineiros-io/terraform-github-repository/blob/main/examples/public-repository/main.tf), die eine DSL in Terraform-Code um ein Modul bereitstellen. So kann Terraform-Code aussehen.
 Diese Art von Wrapper-Modul ist ganz typische, um komplexere Strukturen wiederzuverwenden ... so ist es [auch bei AWS (beispielsweise beim Modul "terraform-aws-modules/security-group/aws")](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/main.tf).
 
- Jede Sammlung von `*.tf` Dateien in einem Verzeichnis ist ein Modul ... man verwendet Module dementsprechend IMMER automatisch. Deshalb referenziert man in `source = "/home/pfh/my-terraform-module"` auch ein Verzeichnis und nicht eine einzelne Datei.
-
-So sieht die Wiederverwendung eines Moduls aus:
-
+Jede Sammlung von `*.tf` Dateien in einem Verzeichnis ist ein Modul ... man verwendet Module dementsprechend IMMER automatisch. Man kann JEDE Ansammlung von Terraform Code in einem Verzeichnis per
+ 
 ```json
-module "use-my-terraform-module" {
-  source = "./my-terraform-module"
-  // verschiedene Quellen sind möglich
-  //    source = "/home/pfh/my-terraform-module"
-  //    source = "https://mvnrepository.com/artifact/.../config-2.3.5.zip"
-  //    source = "git://"
-  
+module "my_use_case" {
+  source = "./my-reusable-code"
+
   variable1 = "value1"
 }
 ```
 
-In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `./my-terraform-module` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert.
+als Modul einbinden. Danach muss man ein `terraform init` durchführen, um das Modul in die Laufzeitumgebung eines `terraform plan/apply` einzubinden. Erfolgt das nicht so stellt terraform selbst eine Diskrepanz fest und fordert zu einem `terraform init --upgrade` auf, das den Source-Code der Module ins Verzeichnis `./.terraform/modules` abgelegt wird, d. h. man hat einen Trennung zwischen den Sourcen im GitHub Repo und den zur Laufzeit verwendeten. 
 
-Die Verwendung eines (lokalen) relativen Moduls (`./my-terraform-module`) ermöglicht die Modularisierung in einem einzelnen Git-Repository (fungiert dann als sog. Root-Module), ohne daß der Code verstreut ist. Auf diese Weise lassen sich komplette Systeme kompakt beschreiben, ohne dabei Redundanzen einbauen zu müssen.
+`source` kann viele Quellen repäsentieren:
+
+```json
+module "my_use_case" {
+  // verschiedene Quellen sind möglich
+  //    lokales modul
+  //      source = "/home/pfh/my-terraform-module"
+  //    zip-package irgendwo
+  //      source = "https://mvnrepository.com/artifact/.../config-2.3.5.zip"
+  //    github commit/tag/release
+  //      source = "git::https://github.com/github-organization/git-repo.git//modules/my-module?ref=abcdddb3847ac4d6507f10012345862f5ade524e"
+  //    public module registry
+  //      source = "terraform-aws-modules/lambda/aws"
+```
+
+Ein Blick in die [Terraform Registry](https://registry.terraform.io/) ist zu empfehlen, wenn man Module nicht selbst schreiben, sondern wiederverwenden will.
+
+> Aber natürlich muss ein Modul auch für die Wiederverwendung vorbereitet sein, aber das sind eher Design-Anforderungen als technische Requirements.
+
+In diesem Fall werden alle Platzhalter `variable1` im Terraform Ordner `./my-reusable-code` mit `value1` ersetzt. Bei `source` handelt es sich um ein Meta-Argument, das das zu verwendende Modul referenziert. Der Output des Modules wird dann per `module.my_use_case.aws_ec2.web-server` verwendet.
+
+Die Verwendung eines (lokalen) relativen Moduls (`./my-reusable-code`) ermöglicht die Modularisierung in einem einzelnen Git-Repository (fungiert dann als sog. Root-Module), ohne daß der Code verstreut ist. Auf diese Weise lassen sich komplette Systeme kompakt beschreiben, ohne dabei Redundanzen einbauen zu müssen.
 
 ```
 .
@@ -351,9 +484,13 @@ Praktisch ist, daß man bei `source` auch eine Sammlung von Terraform Scripten i
 
 Module können selbst wieder Variablen (`variables.tf`) und Output (`output.tf`) definieren. Dieser Mechanismus definiert den Contract eines Callers zum Module und enthält gleichzeitig die Dokumentation dieser Schnittstelle durch `description`. Auch alle anderen typischen Konzepte (`main.tf`, ...) stehen einem Module zur Verfügung ... genauso wie dem Root-Module (das ohne weitere Module verwendet wird). So einfach und doch so mächtig.
 
-Und natürlich können Modules wieder weitere Module verwenden.
+Und natürlich können Modules wieder weitere Module verwenden. Dadurch entstehen lange Ketten von Ressourcen-Bezeichnern wie diese (beachte: 3 mal `module`):
 
-> **ALLERDINGS:** einen `provider` Block sollte ein - zur Wiederverwendung entworfenes Modul - nicht haben - es erbt diesen vom Caller, denn hier erfolgt häufig die Konfiguration des Nutzungskontextes und den kennt ein wiederverwendbares Modul natürlicherweise nicht. Allerdings muß das Modul einen `required_providers` Block enthalten, um die Version des Providers zu spezifizieren. Es macht durchaus Sinn, daß jedes Modul die Version eines Providers eigenständig definiert, denn es enthält "Code", der sich von der Version des Providers abhängig ist (Contract).
+```
+module.eks.module.eks.module.eks_node_group["for"].data.aws_iam_policy_document.assume_role_policy[0]
+```
+
+> **ALLERDINGS:** einen `provider` Block sollte ein - zur Wiederverwendung entworfenes Modul - nicht haben - es erbt diesen normalerweise vom Caller, denn hier erfolgt häufig die Konfiguration des Nutzungskontextes und den kennt ein wiederverwendbares Modul natürlicherweise nicht. Allerdings muß das Modul einen `required_providers` Block enthalten, um den Contract mit dem Caller zu definieren und um Einschränkungen der Version des Providers zu spezifizieren. Es macht durchaus Sinn, daß jedes Modul die Version eines Providers eigenständig definiert, denn es enthält "Code", der sich von der Version des Providers abhängig ist (Contract). Das wird häufig per `version = "~> 5.0"` ... das bedeutet alle 5er Versionen des Providers werden akzeptiert und sind kompatibel.
 
 Verwendet man externe Module (von der Hashicorp-Cloud, git-repository oder aus einem zip-Artefakt), dann müssen die durch ein `terraform init` (oder `terraform get`) zunächst runtergeladen und lokal (in `.terraform`) abgespeichert werden.
 
@@ -374,6 +511,27 @@ Auf diese Weise lassen sich auch Layer (z. B. Backend, Middleware, Frontend) imp
 Die `./main.tf` agiert als Controller, um die Daten aus `./middleware/output.tf` and `./frontend/main.tf` zu übergeben - ein direkter Zugriff von `./frontend/main.tf` auf `./middleware/output.tf` ist nicht möglich. Außerdem ist es nicht erwünscht, da `frontend` und `middleware` nichts voneinander wissen sollten (Dependency Injection).
 
 Die in `output.tf` definierten Ausgaben stehen anderen Modulen und - natürlich dem menschlichen Benutzer - als Input Werte zur Verfügung. Am Ende werden sie auch auf der Konsole ausgegeben, so dass ich als User z. B. die public IP Adresse einer EC2 Instanz ausgegeben bekommt, um dann ein ssh connect darauf machen zu können. 
+
+### Provider in Modulen
+
+* [Providers Within Modules](https://developer.hashicorp.com/terraform/language/modules/develop/providers)
+
+Eine besondere Challenge weitergabe eines Providers zum Modul darstellen. Macht man hier einen Fehler (z. B. Verwendung eines unterschiedlichen Providers `hashicorp/github` vs `intgerations/github`), dann kann man schon mal ein paar Stunden in die Fehlersuche investieren.
+
+Ein Modul sollte als Contract die `required_providers` definieren ... schließlich ist der Code für eine bestimmte Version geschrieben/getestet worden. Wenn der Nutzer des Moduls sich dann auch ganau daran hält, dann sind keine Probleme zu erwarten, da der im Root-Modul definierte Provider dann einfach weiterverwendet wird.
+
+Provider unterstützen auch `provider.alias` und diese unterschiedlichen Alias-Provider können dann explizit bei einem [Modul-Aufruf übergeben werden](https://developer.hashicorp.com/terraform/language/modules/develop/providers#passing-providers-explicitly):
+
+```json
+module "project" {
+  source    = "git::https://github.com/foobar.git?ref=12345"
+  providers = {
+    github  = github.alias1
+  }
+}
+```
+
+... besser man kann darauf verzichten.
 
 ### Functions
 
@@ -400,6 +558,28 @@ Man sollte sich angewöhnen, vor dem `terraform apply` ein Backup vom State zu m
 
 * [howto](https://learn.hashicorp.com/tutorials/terraform/organize-configuration?in=terraform/modules)
 
+### Debugging
+
+Per `export TF_LOG=TRACE` lässt sich der `terraform`-Kommando Aufruf maximal gesprächig machen. Darin sieht man dann sogar die Requests/Reponses, die die Provider an die Remote-API versenden.
+
+Alle Log-Levels (nach Gesprächigkeit abfallend):
+
+* TRACE
+* DEBUG
+* INFO
+* WARN
+* ERROR <=== Default
+
+Durch Setzen von `export TF_LOG_PATH=/tmp/terraform.log` lässt sich der verbose Logtext in eine Datei umleiten und an der Console sieht man nur noch das Nötigste (was man bei `ERROR` sieht).
+
+> Die Debugging-Möglichkeiten erinnern eher an die 1980er Jahre ... da ist man in 2020 eigentlich anderes gewohnt.
+
+### Terraform Console
+
+Bei `terraform console` handelt es sich um eine CLI-Tool (im weitesten Sinne eine "Entwicklungsumgebung"), mit dem man leicht Terraform Expressions testen kann. Auf diese Weise kann man den aktuellen State sehr schön analysieren (anstatt per `terraform show` ALLE Ressourcen auf einmal angezeigt zu bekommen), indem man sich eine Ressource ausgeben lässt.
+
+Ausserdem lassen sich auf diese Weise Expressions (z. B. Inline `for` zur Transformation von Datenstrukturen) schön testen.
+
 ---
 
 ## HCL - HashiCorp Control Language
@@ -407,6 +587,8 @@ Man sollte sich angewöhnen, vor dem `terraform apply` ein Backup vom State zu m
 Es lonht sich, hier mal einen Blick reinzuwerfen nachdem man die ersten Schritte gegangen ist - dann versteht man den Code tatsächlich besser:
 
 * [HCL language/syntax](https://developer.hashicorp.com/terraform/language/syntax/configuration)
+
+### Statischer Block
 
 Das wichtigste Konstrukt ist der BLOCK:
 
@@ -422,14 +604,34 @@ resource "aws_instance" "webserver" {
 
 In diesem Beispiel ist
 
-* `resource` ein Block mit 2 Labels:
+* `resource` ein Block-Typ mit 2 Labels:
   * `aws_instance`: definiert die Ressource des Providers (Provider `aws` + Komponente `instance`)
   * `example`: ein frei definierbarer Name
 * `network_interface` ein Block mit 0 Labels
 
+
+### Schleifen per for_each
+
+* [`for_each`](https://youtu.be/7xngnjfIlK4?t=4556)
+
+Auf diese Weise ist es möglich variablen-gesteuert VIELE Ressourcen mit einem einzigen `resource`-Statement anzulegen:
+
+```
+resource "aws_instance" "server" {
+  for_each = local.subnet_ids
+
+  ami           = "ami-0ab1a82de7ca5889c"
+  instance_type = "t2.micro"
+  subnet_id     = each.key
+```
+
+### Schleifen per Dynamic Blocks
+
 Neben den statischen Blocks gibt es auch [dynamische Blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks), um dynamisch - einer for-Schleife ähnlich - Blocks zu erzeugen.
 
 > imperative Konstrukte wie Schleifen wirken in deklarative "Sprachen" wie HCL immer ein bisschen seltsam - wie ein Bruch im Konzept. 
+
+### Meta-Argumente
 
 Es gibt auch Meta-Argumente wie
 
@@ -447,16 +649,7 @@ Es gibt auch Meta-Argumente wie
       }
     ```
 
-* [`for_each`](https://youtu.be/7xngnjfIlK4?t=4556)
-
-    ```
-    resource "aws_instance" "server" {
-      for_each = local.subnet_ids
-
-      ami           = "ami-0ab1a82de7ca5889c"
-      instance_type = "t2.micro"
-      subnet_id     = each.key
-    ```
+### Lifecycle Direktiven
 
 * [`lifecycle`](https://youtu.be/7xngnjfIlK4?t=4602)
 
@@ -466,12 +659,14 @@ Es gibt auch Meta-Argumente wie
       instance_type = "t2.micro"
 
       lifecycle {
-        create_before_destroy = true
+        create_before_destroy = true                       # <====== wichtige Konfiguration
         ignore_changes = [
           tags
         ]
       }
     ```
+
+### JSON statt HCL
 
 Anstatt HCL kann man auch JSON verwenden (dann müssen die Dateien allerdings mit `.tf.json` anstatt `.tf` enden):
 
@@ -533,6 +728,12 @@ terraform {
 }
 ```
 
+In diesem Beispiel ist die Version nicht eindeutig definiert - es wird nur gefordert, dass die Version 4.0 oder höher ist. Bei einem `terraform init -upgrade` würde dann die Version evtl. hochgezogen
+
+Gibt man keine explizite Version des Providers an, dann sollten man gelegentlich per `terraform init -upgrade` die Provider Versionen hochziehen. Dadurch wird dann auch eine `.terraform.lock.hcl` Datei upgedated, die die Dependencies beschreibt. Diese Datei sollte man unter Versionskontrolle stellen, damit man zumindest mitbekommt (im PR beispielsweise), dass sich die Version geändert hat. Das könnte beispielsweise einen expliziten Test triggern.
+
+> Wenn ein expliziter `required_providers` Block fehlt oder auch einzelne im Code genutzte Provider fehlen, dann macht das nichts. Terraform scannt alle notwendigen Provider aus dem Code und installiert diese automatisch beim `terraform init`. Allerdings kann man mit dem `required_providers` die Versionen beeinflussen - tut man das nicht, dann wir immer die `latest` Version verwendet, die aber evtl. nicht mit dem Terraform Code kompatibel ist.
+
 Anschließend müssen die meisten Provider noch konfiguriert werden:
 
 ```tf
@@ -591,21 +792,55 @@ Man kann auch seinen eigenen Provider `terraform-provider-<NAME>_vX.Y.Z` contrib
 
 * [Supported Provisioning-Ansätze](https://www.terraform.io/docs/provisioners/index.html)
 
-Terraform ist geeignet, um die Infrastruktur bereitzustellen und verschiedene Infrastrukturkomponenten ineinander zu stöpseln. Software-Installationen und -Konfigurationen werden i. a. nicht mit Terraform abgebildet, sondern per
+Terraform ist geeignet, um die Infrastruktur bereitzustellen und verschiedene Infrastrukturkomponenten ineinander zu stöpseln.
+
+Software-Installationen und -Konfigurationen werden i. a. nicht mit Terraform abgebildet, sondern per
 
 * [Packer](packer.md) (vorkonfigurierte Images)
 * Konfiguration-Management-Tools wie Ansible, Puppet, Chef, ...
 * Cloud-Init-, User-data-Skripte
 
+Terraform ist für Software-Deployments nicht unbedingt der geeignete Ansatz ... auch wenn es geht (z. B. mit den `provisioners` Direktive). Allerdings 
+
+* liegen Software-Komponenten auf einem höheren Layer ... sie basieren auf der Infrastruktur, die Terraform bereitstellt
+* diese Software-Komponenten haben i. a. einen anderen Release-Lifecycle, einen anderen Owner und andere Trigger-Events
+
+Man kann vieles auch in Terraform machen ... aber man sollte nicht alles machen, was geht. Das sieht man sehr schön, wenn man eine Python-AWS-Lambda deployen will. Das erste Deployment funktioniert problemlos:
+
+```
+resource "aws_lambda_function" "hello_world" {
+  runtime       = "python3.8"
+  function_name = "hello-world-python"
+  handler       = "hello-world.lambda_handler"
+  filename      = "${path.module}/../hello-world-python/hello-python.zip"
+}
+```
+ Wenn man dann aber Änderungen am Code vornimmt, dann werden die aber nicht deployed, weil Terraform keine Änderung erkennt. Der Zustand des `hello-world.py` ist einfach nicht im Terraform State. Mit folgendem Trick kann man das ändern. Nach `filename` fügt man noch folgende Zeile ein:
+
+ ```
+  source_code_hash = filebase64sha256("${path.module}/../hello-world-python/hello-python.zip")
+``` 
+
+Nun ist der `source_code_hash` (ein Fingerprint des `hello-python.zip`) Teil des Terraform State und wenn sich daran was ändern, dann bekommt Terraform das auch mit und deployed den geänderten Source Code.
+
+### provisioners
+
+> Dieser Ansatz sollte die letzte Option sein ([Provisioners are a Last Resort](https://developer.hashicorp.com/terraform/language/resources/provisioners/syntax#provisioners-are-a-last-resort)), da Terraform für Konfiguration-Management und Deployment von Software Komponenten nicht die erste Wahl ist.
+
+
 ---
 
 ## State
+
+* [Udemy Kurs](https://www.udemy.com/course/terraform-hands-on-labs/learn/lecture/29554226)
 
 Terraform verwaltet einen State (z. B. `terraform.tfstate`), der als `json`-Datei abgespeichert wird. Per Default liegt er lokal auf dem Filesystem - besser ist es aber, ihn Remote (z. B. S3, Terraform Cloud) abzulegen.
 
 > **ACHTUNG:** der State enthält Secrets in Plaintext - sollte also am besten verschlüsselt werden. Hier eignet sich S3 besonders gut, denn hier kann man am Bucket die Verschlüsselung aktiviert und kann das so schon mal nicht vergessen.
 
 Dieser State beschreibt den aktuellen Zustand der unter Terraform stehenden Umgebung und ist die Basis, um aus der Ziel-Definition (Terraform-Dateien) die zu triggernden Aktionen bei einem `terraform apply` abzuleiten - es wird ein Diff zwischen dem neuen Ziel-Status und dem aktuellen Status gemacht. Hinzu kommt - wenn das möglich ist - noch der tatsächliche Zustand auf dem Zielsystem ... das ist aber nur bei relativ einfachen Abweichungen möglich ... hilft aber sehr, wenn das Zielsystem doch mal manuell verändert hat (zum Testen manchmal ganz praktisch). Die manuellen Änderungen werden dann beim nächsten `terraform apply` verworfen, sofern sie von terraform gemanaged werden.
+
+> Terraform erkennt das in der Regel und zeigt die Änderungen mit einem `Note: Objects have changed outside of Terraform. Terraform detected the following changes made outside of Terraform since the last "terraform apply"` an.
 
 Per Default wird der State lokal abgelegt (= Local Backend) - arbeitet das Team verteilt oder will man Datenverlusten vorbeugen, sollte man den State zentral (z. B. Consul, S3, Terraform Cloud) speichern (= Remote Backend). Dann muß man sich allerdings auch mit dem Thema [State Locking](https://www.terraform.io/docs/state/locking.html) beschäftigen.
 
@@ -661,8 +896,11 @@ Entkoppelte Terraform-Bundles (mit eigenem State) können den State eines andere
 ### Import
 
 * [import Kommando](https://www.terraform.io/cli/import)
+* [Importing Existing Infrastructure Into Terraform – Step by Step](https://spacelift.io/blog/importing-exisiting-infrastructure-into-terraform)
 
 In Migrationsprojekten (hin zu Terraform) oder wenn der Terraform-Provider nun eine weitere Ressource unterstützt kann es erforderlich sein, eine bisher nicht über Terraform gemanagte Ressource per `terraform import` in den State zu übernehmen, um sie nicht löschen und neu anlegen zu müssen.
+
+Das `terraform import` Statement bringt die Ressource allerdings nur in den Terraform-State. Ein `terraform state show` zeigt sie aber schon mal an und ein `terraform destroy` könnte sie damit also auch löschen. ABER: eine Änderung der Konfigurationsparameter bedarf Terraform Source Code, der NOCH nicht automatisch erzeugt wird.
 
 ### Import am Beispiel GitHub
 
@@ -769,6 +1007,9 @@ Das vereinfacht die Nutzung ungemein.
   * detailierte Anzeige des States, der im File `tfstate.backup` abgebildet ist
 * `terraform state list`
   * welche Resourcen sind unter Terraform-Control
+* `terraform taint aws_instance.web_server` - **DEPRECATED** ... ersetzt durch `terraform apply -replace="MY_RESOURCE"`
+  * hiermit markiert man eine Ressource als nicht fully functional, so dass sie beim nächsten `terraform apply` gelöscht und neu erzeugt wird
+  * das passiert terraform-intern, wenn eine Komponente erzeugt aber nicht vollständig konfiguriert werden konnte ... dann markiert Terraform die Komponente als tainted. Das kann man dann über den State sehen `terraform state show MY_RESOURCE`
 * `terraform import`
   * Importieren eines Resource in den State ... hiermit bringt man eine vorher manuell gemanagte Resource unter Terraform-Control
 * `terraform validate`

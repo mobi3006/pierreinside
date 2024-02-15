@@ -2,6 +2,7 @@
 
 ## Buch OAuth 2 in Action
 
+* [OAuth 2 Explained In Simple Terms](https://www.youtube.com/watch?v=ZV5yTm4pT8g)
 * [Buch bei Manning](https://www.manning.com/books/oauth-2-in-action)
 * [Live Book](https://livebook.manning.com/#!/book/oauth-2-in-action)
 * [Beispielcode in JavaScript (Node.js basiert)](https://github.com/oauthinaction)
@@ -125,7 +126,7 @@ OAuth 2 versucht die Komplexität aus den Clients rauszuhalten und in die Server
   * oder über ein Refresh-Token (das ihn für die Erneuerung des Access Tokens berechtigt) an den Authorization Server
 * Client kann mit dem Access Token i. a. nichts anfangen (kann es häufig nicht mal interpretieren) ... er leitet es nur an die Protected Resource weiter (treduziert die Client-Komplexität) - nur Authorization Server und Protected Resource haben mit dem Inhalt was zu tun
 * Typ des Access Tokens ist nicht Teil der OAuth Spezifikation - folgende Token Typen kommen zum Einsatz
-  * [Bearer Token](https://tools.ietf.org/html/rfc6750) ... er enthält interpretierbare Informationen über die Authorisierung des Requests
+  * [Bearer Token](https://www.predic8.de/bearer-token-autorisierung-api-security.htm) ... er enthält interpretierbare Informationen über die Authorisierung des Requests
     * will man der Protected Resource die Interpretation des AccessTokens ersparen (vielleicht auch weil es sicherer ist), dann kann man sich überlegen, dem Authorisierungsserver einen Introspection Endpoint zu spendieren
   * ID ... in diesem Fall muß die Protected Resource die ID über den [Introspection Endpoint des Authorization Servers](https://www.oauth.com/oauth2-servers/token-introspection-endpoint/) in eine Information umwandeln, um die Zugriffskontrolle prüfen zu können. Im Gegensatz zum Bearer Token muß hier also noch eine Kommunikation mit dem Authorisierungsserver stattfinden ... dafür lassen sich aber auch Revocations leicht implementieren
 * der Scope ist Teil des Access Tokens

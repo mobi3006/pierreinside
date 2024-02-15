@@ -39,7 +39,7 @@ Der Mudi ist ein Router, der ein eigenes WLAN zur Verfügung stellt, mit dem sic
 
 ### Erst-Inbetriebnahme
 
-> **ACHTUNG:** Die Admin-WebUI http://192.168.8.1 zum Mudi funktioniert nur, wenn man das WLAN des Mudi verwendet. Wenn man also im Heimnetzwerk mit dem Haim-WLAN ist, muss man das WLAN wechseln. Der Mudi verwendet den WLAN-Namen GL-E750-xxx
+> **ACHTUNG:** Die Admin-WebUI http://192.168.8.1 zum Mudi funktioniert nur, wenn man das WLAN des Mudi verwendet. Wenn man also im Heimnetzwerk mit dem Haim-WLAN ist, muss man das WLAN wechseln. Der Mudi verwendet den WLAN-Namen `GL-E750-xxx`.
 
 * aufladen
 * 3-5 Sekunden zum Booten auf den Push-Button drücken
@@ -78,11 +78,30 @@ Diesmal hat die automatische Erkennung des Mobilfunkproviders (O2) nicht funktio
 
 Ich bin mir nicht sicher, ob die Problem nur mit der GLI-NET App bestehen oder grundsätzlicher Art sind. Sollte letzteres der Fall sein, wäre das natürlich immer dann ein Problem, wenn man häufig die SIM-Karte wechseln müßte (um beispielsweise einen lokalen Provider im Ausland zu nutzen).
 
+### Dritt-Inbetriebnahme
+
+Wieder ein paar Wochen später habe ich - mal wieder das 5 GHz WLAN nicht gesehen - aber viel schlimmer manchmal auch nicht das 2,4 GHz nicht und wenn, dann hat die SIM-Karte nicht funktioniert. Das nervt mich jetzt doch ein bisschen. Die Konfiguration könnte ich über die iPhone App auch gar nicht sehen ... war nur ein grauer Kasten. Also wieder Reset auf Werkseinstellungen (Reset-Button hinter der Abdeckung 10 Sekunden drücken - dann erfolgt der Reboot).
+
+> Die Firmware war aktuell - die WLANs eigentlich als "sichtbar" konfiguriert.
+
+Diesmal hat die automatische Erkennung des Mobilfunkproviders (O2) wieder funktioniert.
+
+Der Mudi ist in 10 Minuten (ich nutze nur wenige Features) wieder eingerichtet ... ärgerlich ists trotzdem und wer mehr Zeit in seine Konfiguration investiert hat wird sich noch mehr ärgern.
+
 ### Stand-By
 
 Durch Drücken der Taste für 3 Sekunden kommt der Mudi in einen Standby-Mode (zeigt er auch auf dem Display an). In diesem Modus ist er via WLAN nicht erreichbar - er muss erst wieder aufgeweckt werden (3 Sekunden drücken).
 
 Ausschalten durch 5 Sekunden drücken ... statt 3 Sekunden.
+
+### Werkseinstellungen Reset
+
+Entfernt man die Klappe an der Rückseite des Geräts (dort wo die SIM-Karte sitzt), dann hat man Zugriff auf die "Reset"-Taste, die man für 10 Sekunden mit einem spitzen Gegenstand drücken muss. Danach sollte der Mudi mit Werkseinstellungen neu starten, d. h.
+
+* das WLAN heisst auch wieder `GL-E750-xxx` und das Passwort ist `goodlife`
+* der Admin User hat das Passwort `goodlife`
+
+> Die zuletzt installierte Firmware bleibt natürlich erhalten - Updates seit der Geräteauslieferung müssen also nicht nochmals installiert werden.
 
 ### Probleme
 
@@ -253,8 +272,14 @@ Ich könnte mir vorstellen, dass man den Mudi für offline Backups beispielsweis
 
 ---
 
-## Fazit August 2023
+## Fazit
+
+### August 2023
 
 Nach 3 Wochen intensiver Nutzung mit 36 GB Datentransfer (SIM-Karte, Repeater, VPN, SD-Karte, viele Endgeräte, Streaming - ) bin ich sehr begeistert von diesem Gerät. Nur die WLAN-Stärke könnte besser sein (Wifi 6 wäre super). Mit eSIM-Support würde noch ein weiterer Anwendungsfall hinzukommen und das Gerät perfektionieren.
 
 Mit 200 Euro (im Sale 170 Euro) ist das Gerät kein Schnäppchen, aber man erhält ein professionelles Gerät, das den Komfort im mobilen Einsatz deutlich erhöht. Kein MUSS aber ein Super-AddOn.
+
+### Dezember 2023
+
+Zuletzt habe ich den Mudi seltener genutzt und er war meistens aus. Wenn ich ihn dann brauchte, hat er zu häufig wegen oben beschriebener WLAN-Nicht-Auffindbar-Probleme nicht funktioniert. Das hat mich schon genervt. In den nächsten Wochen werde ich dem Problem mal auf den Grund gehen.

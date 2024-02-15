@@ -114,3 +114,13 @@ Auf diese Weise kann man den Zugriff auf den Passwort-Store auch aus einer grafi
 ### Migration
 
 `pass` bietet komfortable Migrationsmöglichkeiten, um Passwörter aus anderen Passwortmanagern (z. B. 1Password, Keypass) zu exportieren.
+
+---
+
+## KeypassXC
+
+### Plaform-Support
+
+* Windows
+* Mac
+* Linux

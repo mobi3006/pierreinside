@@ -15,7 +15,7 @@ Hier sieht man auch sehr schön, warum man beim Starten einer EC2 Instanz die Se
 
 * [Stephane Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528538#overview)
 
-Die Virtual Privat Cloud ist das Ziel einer jeden Anwendung ... hier wird sie gehostet. Mit dem VPC wird das Internet (= Public Cloud ... Ingress - einkommender Traffic, Egress - ausgehender Traffic) verbunden. Als Anwendungshoster kann ich mich für ein oder mehrere VPC entscheiden. Meistens hat man aber auch verschiedene Hosting-Umgebungen (Development, Test, Staging, Production), die man voneinander durch Nutzung verschiedener VPCs voneinander trennen möchte.
+Die Virtual Privat Cloud ist das Ziel einer jeden Server-based Anwendung ... hier wird sie gehostet. Mit dem VPC wird das Internet (= Public Cloud ... Ingress - einkommender Traffic, Egress - ausgehender Traffic) verbunden. Als Anwendungshoster kann ich mich für ein oder mehrere VPC entscheiden (bis zu 5 VPCs sind in EINER Region innerhalb eines AWS Accounts möglich) - VPCs sind logisch voneinander isoliert ... Verbindungen kann man konfigurieren. Meistens hat man aber auch verschiedene Hosting-Umgebungen (Development, Test, Staging, Production), die man voneinander durch Nutzung verschiedener VPCs voneinander trennen möchte (hier kann man aber auch verschiedene AAWS Accounts verwenden ... eine noch stärkere Trennung als die über VPCs).
 
 * ein VPC liegt in einer Region, deckt aber alle Availability Zones (AZ) dieser Region ab
   * die Subnets liegen dann in unterschiedlichen AZs

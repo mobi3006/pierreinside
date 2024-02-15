@@ -8,7 +8,7 @@ Sicherheit ist das höchste Gut in unternehmenskritischen Anwendungen.
 
 ## AWS Account
 
-Ein AWS Account beherbegt die AWS Ressourcen und hat ein Usermanagement (= Identity and Access Management - IAM). In großen Lösungen verwendet man häufig sehr viele Accounts, um eine separation-of-concerns zu erreichen ... manchmal sogar so viele, daß man eine "AWS Organization" drüberlegt und den Control-Tower-Service zum Management verwendet.
+Ein AWS Account beherbegt die AWS Ressourcen und hat ein Usermanagement (= Identity and Access Management - IAM). Die meisten Ressourcen sind in einer speziellen Region beherbergt ... andere hingegen (z. B. IAM) sind global. In großen Lösungen verwendet man häufig sehr viele Accounts, um eine separation-of-concerns zu erreichen ... manchmal sogar so viele, daß man eine "AWS Organization" drüberlegt und den Control-Tower-Service zum Management verwendet.
 
 > Dennoch benötigt man manchmal Zugriff aus einem Account auf die Ressourcen in einem anderen Account. Diese Cross-Account Zugriffe sind möglich.
 
@@ -24,9 +24,25 @@ Grundsätzlich spielen IDs (z. B. ARNs) im Umfeld von AWS eine wichtige Rolle, d
 ## AWS Organization
 
 * [YouTube - Digital Cloud Training - Create AWS Organization and Add Account](https://www.youtube.com/watch?v=T4U2YC4PJkY)
+
 Es ist üblich, dass man im Business-Umfeld nicht nur einen AWS Account verwendet, sondern viele. Natürlich packt man seine ganzen Environments (z. B. DEV, TEST, LIVE) in separate Accounts. Aber vielleicht hat man noch andere Aspekte, die man voneinander trennen möchte.
 
 Mit "AWS Organization" lassen sich alle AWS Accounts eines Unternehmens managen und policy-based controls (z. B. Tag-Policy, Service-Control-Policies) umsetzen.
+
+## AWS Control Tower
+
+* [YouTube - Digital Cloud Training - AWS Control Tower Overview and Landing Zone Hands-On](https://www.youtube.com/watch?v=3-aaw-B1j8Y)
+
+Control-Tower managed eine AWS Organisation. Hierzu wird die Organisation in Organization-Units aufgeteilt, denen dann Accounts zugeordnet werden.
+
+Es werden
+
+* preventive Guardrails
+  * Zugriffsrechte über Service-Control-Policies (SCP) einzuschränken
+* detective Guardrails
+  * um Compliance-Anforderungen zu prüfen
+
+eingesetzt.
 
 ---
 
@@ -51,9 +67,13 @@ Eine Gruppe kann mehrere User beeinhalten - ein User kann in mehreren Gruppen se
 
 ### Konzept Role
 
+* [YouTube - Digital Cloud Training - Assume AWS IAM Role Using the AWS Management Console](https://www.youtube.com/watch?v=tg7Ahng08h8)
+
 Benutzer, AWS Services und Anwendungen können eine Role (= IAM Identity) assumen (`sts:assumeRole`). An der Rolle hängen wiederum Berechtigungen (über Policies). Über die Rolle abstrahiert man von einem speziellen Benutzer ... stattdessen erhalten Benutzergruppen eine Rolle und darüber Berchtigungen. Man kann eine Rolle einnehmen (und auch wechseln), indem man die Role assumed. Dadurch wechselt man seinen Arbeitskontext und damit seine Berechtigungen.
 
 > eine Role ist eine Art technischer Benutzer
+
+Neben den Berechtigungen einer Role ist die Trust-Policy entscheidend. Sie beschreibt, wer die Rolle assumen darf.
 
 Man kann sogar einem User aus einem anderen Account erlauben, eine Rolle zu assumen. Damit lassen sich Cross-Account-Zugriffe umsetzen (siehe unten).
 
@@ -61,9 +81,11 @@ Man kann sogar einem User aus einem anderen Account erlauben, eine Rolle zu assu
 
 Eine Policy beschreibt Zugriffsrechte. Wer hat auf welche Ressource für welche Aktionen welche Berechtigung (oder eben explizit nicht)?
 
-In AWS besteht eine Policy aus einem json Dokument. Man kann sich in der AWS Console interaktiv Policy Dokumente erstellen lassen ... das vereinfacht die Erstellung erheblich.
+In AWS besteht eine Policy aus einem json Dokument. Man kann sich in der AWS Console mit dem [AWS Policy Generator](https://awspolicygen.s3.amazonaws.com) interaktiv eine Policy zusammenstellen und als JSON exportieren ... das vereinfacht die Erstellung erheblich.
 
-Ein Policy kann hängen für ... an ...
+> In json kann man keine Kommentare verwenden ... sehr schaden, denn manchmal würde man gerne etwas erklräen wollen. Allerdings gibt es bei den Statements eine `Sid`, in der man etwas Doku einbauen kann (z. B. `sid = "This is the web-server"`).
+
+Ein Policy kann hängen für ... an ... ([gute Erklärung](https://cloudcasanova.com/s3-bucket-access-from-the-same-and-another-aws-account/))
 
 * für Identity-Based-Policies an
   * einem User
@@ -74,7 +96,30 @@ Ein Policy kann hängen für ... an ...
   * einer Ressource (z. B. S3 Bucket)
     * auf diese Weise kann man auch Cross-Account Zugriffe erlauben
 
+> **ACHTUNG:** nicht alle Ressourcen unterstützen Resource-based-Policies (z. B. SSM Parameter Store)
+
 Wenn Identity-Based-Policies verwendet werden, dann sollte man sie an eine Rolle (statt an User/Gruppe) hängen, denn dies ermöglicht die größte Wiederverwendung (von Usern, AWS Services und Anwendungen) und den wenigsten administrativen Aufwand (User kommen und gehen).
+
+### Konzept Policy - Cross Account
+
+Bei Cross-Account Zugriffen braucht man i. a. ZWEI Policies, jeweils eine pro beteiligtem Account.
+
+Beispiel: ich möchte aus einem Account A auf den S3 Bucket in Account B zugreifen, dann benötigt man
+
+* IAM-Cross-Account Policy in Account A für den Zugriff auf den Bucket in Account B
+  * hierbei handelt es sich i. a. um eine Identity-Based-Policy, d. h. einem User/Gruppe/**Rolle** wird die Berechtigung erteilt
+* Destination Access Policy in Account B für den Zugriff von Account A auf den Bucket
+  * hierbei handelt es sich i. a. um eine Resource-Based-Policy, d. h. der Zugriff auf die Ressource wird erlaubt
+
+**Warum macht man sowas?**
+
+Accounts könnten grundsätzlich in der Verantwortung unterschiedlicher Gruppen/Unternehmen liegen, so dass BEIDE Seiten diesem Zugriff stattgeben müssen. Wenn man sich das als Brücke über einen Fluss vorstellt, so wird die Brücke von beiden Seiten gebaut ... nur DANN wird sie vollständig. Wird nur eine Seite der Brücke gebaut, dann gibt es keinen Weg über den Fluss.
+
+### Konzept Permission-Bondary
+
+* [YouTube - Digital Cloud Training - AWS IAM Permissions Boundary](https://www.youtube.com/watch?v=t8P8ffqWrsY)
+
+Diese Konzept verhindert Permission-Escalation.
 
 ### Konzept ABAC (Attribute-Based-Access-Control)
 
@@ -88,7 +133,12 @@ Mit diesem Service lassen sich kurzlebige Tokens mit feingranularen Permissions 
 
 ## Assume Role
 
-Das einnehmen einer bestimmten Rolle ist der typische Weg, um als User in verschiedenen Kontexten zu arbeiten. Das zeigt sich auch schon im WebUI der AWS-Console wo man ein "Switch Role" ausführen kann. Es ist aber auch der typische Weg, wenn Services Berechtigungen benötigen.
+Das Einnehmen einer bestimmten Rolle ist der typische Weg, um
+
+* als User in verschiedenen Kontexten zu arbeiten
+* als Service Berechtigungen zu erhalten
+
+Das zeigt sich auch schon im WebUI der AWS-Console wo man ein "Switch Role" ausführen kann. Es ist aber auch der typische Weg, wenn Services Berechtigungen benötigen.
 
 Über die AWS-CLI kann man eine Rolle über `aws sts assume-role` einnehmen:
 
@@ -119,5 +169,6 @@ In diesem Beispiel wird einem User aus Account B der Zugriff auf einen S3 Bucket
 
 * [YouTube - Digital Cloud Training - Cross-Account Access to Amazon S3](https://www.youtube.com/watch?v=HP8XSRWrFQc)
 * [YouTube - Digital Cloud Training - Use Cases for AWS Identity and Access Management (IAM) Roles](https://www.youtube.com/watch?v=PPkPcU1iX1g)
+* [S3 bucket permissions for access cross-account](https://cloudcasanova.com/s3-bucket-access-from-the-same-and-another-aws-account/#s3-bucket-permissions-for-access-cross-account)
 
 Würde man das mit einer Rolle machen, so könnte man sich den Policy-Part in Account B sparen.

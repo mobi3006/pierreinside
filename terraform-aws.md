@@ -9,3 +9,32 @@ So kann man kein System zuverlässig betreiben. Deshalb muss etwas wie Terraform
 > AWS ist ohne Code und Automatisierung kaum zu betreiben - Himmelfahrtskommando
 
 Allerdings darf man sich auch nicht auf Default-Ressourcen verlassen (z. B. Default-VPV, Default Route-Table, Default-Security-Groups), sondern muss diese im Terraform Code erstellen.
+
+---
+
+# Tags
+
+Tags sind besonders wichtig in AWS. Mit Ihnen kann
+
+* Kosten kategorisieren
+* Zugriffskontrolle erfolgen
+
+## Default Tags
+
+Default Tags kann man an der `aws` Provider Konfiguration definieren:
+
+```
+provider "aws" {
+  default_tags {
+    tags = local.default_tags
+  }
+}
+```
+
+Sie vererben sich dann auf alle `aws_`-Ressourcen, verhindern aber nicht, dass die `aws_` Ressourcen noch weitere Tags definieren.
+
+## AWS Ressourcen
+
+Beinahe alls `aws_`-Ressourcen unterstützen Tags. Es gibt auch einige besondere Tags:
+
+* `Name`: diese Tag erscheint nicht nur in der Tags-Sektion im AWS-UI, sondern auch im Namen der Komponente

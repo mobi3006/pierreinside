@@ -6,7 +6,7 @@ GitHub ist auch Bestandteil der [GitBook-Toolchain](gitbook.md).
 
 ---
 
-## Accounts
+# Accounts
 
 Man unterscheidet
 
@@ -23,7 +23,7 @@ Zu jedem Account gehört ein GitHub Plan, der bestimmt
 
 Grunsätzlich möchte GitHub die Community fördern und somit bekommt man für Public Repositories viele Features kostenlos, für die man bei Nutzung Privater Repositories zahlen muss.
 
-### Pricing Plans
+## Pricing Plans
 
 Es ist nicht ganz einfach, die Pricing Plan zu durchschauen. Ein Beispiel:
 
@@ -39,7 +39,7 @@ Es ist nicht ganz einfach, die Pricing Plan zu durchschauen. Ein Beispiel:
 
 ---
 
-## Features
+# Features
 
 * Git-Repository (public und private)
 * Remote-Editierung (direkt auf dem Remot-Repository) über eine Weboberfläche
@@ -53,7 +53,7 @@ Es ist nicht ganz einfach, die Pricing Plan zu durchschauen. Ein Beispiel:
 
 ---
 
-## Verbindungsaufbau
+# Verbindungsaufbau
 
 Die Authentifizierung kann über (ODER)
 
@@ -62,11 +62,11 @@ Die Authentifizierung kann über (ODER)
 
 erfolgen.
 
-### Erstellung ssh-key
+## Erstellung ssh-key
 
 [siehe ssh](ssh.md)
 
-#### Connection prüfen
+### Connection prüfen
 
 Bei GitHub darf man sich NICHT mit dem Usernamen (= Email-Adresse) anmelden, sondern IMMER über den User ``git``:
 
@@ -76,11 +76,11 @@ ssh -T git@github.com
 
 ---
 
-## Fork Repositories
+# Fork Repositories
 
 * https://help.github.com/articles/fork-a-repo/
 
-### Fork vs. Branch vs. Clone
+## Fork vs. Branch vs. Clone
 
 Alle 3 Artefakte sind Kopien eines Origin-Repositories, allerdings unterscheiden sich die Konzepte darin wie nah das Artefakt am Origin-Repository ist:
 
@@ -100,13 +100,13 @@ Das wesentliche Entscheidungskriterium ist hier, ob man in dem Projekt das Recht
 
 Aus diesem Grund habe ich mich für einen Fork der [Spring Petclinic](https://github.com/spring-projects/spring-petclinic) als Grundlage meines [Sandbox-Projekts](sandbox.md) entschlossen.
 
-### Syncing a Fork
+## Syncing a Fork
 
 * https://help.github.com/articles/syncing-a-fork/
 
 ---
 
-## REST API
+# REST API
 
 Für die Automatisierung von Prozessen bietet sich die [REST-API](https://docs.github.com/en/rest) an. Sie liegt als [Open-API](https://github.com/github/rest-api-description) Beschreibung vor und kann somit leicht in [Postman](postman.md) importiert werden.
 
@@ -118,27 +118,11 @@ Folder stellen Parameter zur Verfügung (hier `owner`, `repo`, `path`), die dann
 
 Bei der Nutzung eines anderen Repos muss man dann allerdings die oberen Folder kopieren ... das erfordert eine gewisse Disziplin.
 
-### Authentifizierung
+## Authentifizierung und Authorisierung
 
-* [Vergleich verschiedener Methoden](https://dev.to/dtinth/authenticating-as-a-github-app-in-a-github-actions-workflow-27co)
-  * mit dem Ergebnis ... **verwende GitHub-Apps**
+[siehe hier](github-auth.md)
 
-Prinzipiell stehen folgende Varianten zur Verfügung:
-
-* Personal-Access-Token
-* Deploy-Keys
-* OAuth-Token ... um beispielsweise anderen Diensten Zugriff zu gewähren
-* GitHub-App-Access-Token
-
-Seit [Ende 2020](https://docs.github.com/en/rest/overview/other-authentication-methods#basic-authentication) kann man sich nicht mehr per Username-Passwort authentifizieren.
-
-> Ich denke das hängt auch damit zusammen, daß Two-Factor-Authentication der neue Standard ist, der bei Username-Passwort noch einen weiteren Faktor in Form des Tokens bräuchte.
-
-**ACHTUNG:**
-
-> bei einer fehlschlagenden Authentifizierung liefert die GitHub REST API kein HTTP 401 oder 403, sondern ein 404 ([siehe hier](https://docs.github.com/en/rest/overview/other-authentication-methods)). Das macht aus Sicherheitsgründen Sinn, denn mit einer 404 weiß man nicht mal ob es eine nicht-existierende Ressource ist oder ein Authentifizierungsproblem.
-
-### Authentifizierung per Personal-Access-Token (PAT)
+## Authentifizierung/Authorisierung per Personal-Access-Token (PAT)
 
 Der Personal-Access-Token ist ein Secret, das mit den Permissions des erzeugenden Users (zur Laufzeit ... nicht zum Erstellungszeitpunkt) genutzt wird. Der Gültigkeitsscope eines solchen Tokens kann allerdings eingeschränkt werden auf z. B.
 
@@ -173,7 +157,7 @@ verwenden.
 
 **DESHALB** empfehle ich die Verwendung von GitHub Apps - sie sind  zu verwenden, die benutzerunabhängig sind.
 
-### Authentifizierung per GitHub App
+## Authentifizierung/Authorisierung per GitHub App
 
 GitHub Apps werden im Account oder der Organisation konfiguriert (hauptsächlich Permissions) und installiert. Sie stehen öffentlich zur Verfügung und werden genutzt, um `GITHUB_TOKEN` für die Nutzung der REST-API auszustellen. Die Zugriff ist abgesichert über einen Private-Key, so daß nur der Inhaber diese Keys einen Token erhalten kann.
 

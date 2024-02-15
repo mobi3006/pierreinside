@@ -79,19 +79,55 @@ siehe eigenes Kapitel
 
 Lesen, Musik, Videos, ... alles grandios auf dem iPad. Aber schnelles komfortables Schreiben ist mit der virtuellen Tastatur nicht möglich. Für ein paar Zeilen ist es ok, aber nicht für mehr.
 
-Ich habe eine kleine Bluetooth Tastatur, die ich mit dem iPad koppeln kann. Allerdings verwende ich die eigentlich nicht, denn mfür richtiges (= längeres) Arbeiten verwende ich lieber doch lieber mein Macbook.
+Ich habe eine kleine Bluetooth Tastatur, die ich mit dem iPad koppeln kann. Allerdings verwende ich die eigentlich nicht, denn für richtiges (= längeres) Arbeiten verwende ich lieber doch lieber mein Macbook.
 
 Im Home-Office habe ich mein Setup so umgestellt, dass ich nur die Tastatur/Touchpad meines Macbooks verwende. In der Vergangenheit hatte ich immer wieder schlechte Erfahrungen mit wechselnden Tastaturen, da die vom Layout häufig immer leicht unterschiedlich aufegbaut sind (Sondertasten). Da ich ein Power-User bin, der viele Shortcuts verwendet, hat das meine Performance signifikant beeinträchtigt.
 
 > Diese Entscheidung macht mein Mobiles Büro natürlich sehr schlank ... ich packe einfach nur mein Macbook ein und los gehts.
 
-Durch das Touch-Displays am iPad hat man aber keine Notwendigkeit für eine Maus. Außerdem würde die auch zuviel Platz wegnehmen und einen Tisch erfordern ... und genau darauf möchte ich verzichten.
+Durch das Touch-Display am iPad gibt es keinen Grund für eine Maus. Außerdem würde die auch zuviel Platz wegnehmen und einen Tisch erfordern ... und genau darauf möchte ich verzichten.
 
 Eine tolle Alternative scheint das neue Float Magic Keyboard ... hat sogar ein Touchpad, das die Bedienung ein wenig komfrotabler gesatltet. ABER: die Tastatur verdoppelt das Gewicht ... beim Lesen könnte mich das (in Abhängigkeit der Leseposition) stören.
 
+Ich komme also ganz ohne zusätzliche externe Tastatur aus und kann so leicht alles was ich zum arbeiten brauche in meinen Macbook Sleeve packen.
+
 ### Bildschirm
 
-Ich komme mit meinem Macbook Pro 15 (M1) schon ganz gut klar ohne weiteren Platz. Dennoch ist ein 32 Zoll 4k Monitor in meinem Home-Offive natürlich das non-plus-Ultra. Für einen Long-Trip ist das aus meiner Sicht ein MUST-HAVE ... und kann dann natürlcih auch zum Fernsehen genutzt werden (gute Synergie-Effekte).
+Ich komme mit meinem Macbook Pro 15 (M1) schon ganz gut klar ohne weiteren Platz. Dennoch ist ein 32 Zoll 4k Monitor in meinem Home-Offive natürlich das non-plus-Ultra. Für einen Long-Trip ist das aus meiner Sicht ein MUST-HAVE ... und kann dann natürlich auch zum Fernsehen genutzt werden (gute Synergie-Effekte).
+
+Für Short-Trips kann man das iPad (gleiches WLAN, gleiche Apple-ID wie das Macbook) auf zweierlei Weisen genutzt werden:
+
+* AirPlay/AirDrop
+  * bei diesem Ansatz gibt man Teile (z. B. einen Tab des Browsers) auf dem iPad aus ... man triggert also nur die Ausgabe - man muss auf dem iPad dann aber weiterhin den Login einrichten, denn das iPad ist der Client
+  * das iPad bleibt im üblichen Nutzungsmodus, d. h.
+    * es wird weiterhin über den Touchscreen bedient
+    * ich kann beliebige Apps starten
+* [Mirroring auf das iPad als extended Display - der Ansatz nennt sich Sidecar](https://www.youtube.com/watch?v=YwjLppENI_A)
+  * bei diesem Ansatz wird das iPad als vollwertiger Bildschirm angesehen
+    * Clipboard funktioniert
+  * das iPad wird dann **AUSSCHLIESSLICH** vom Macbook gesteuert, d. h.
+    * es ist nicht mehr möglich, das iPad mit dem Finger zu bedienen oder andere Apps zu nutzen
+  * **ACHTUNG**: mit machen Inhalten funktioniert das nicht (z. B. Udemy-Videos) wohingegen es mit anderen Videos (z. B. YouTube) funktioniert (ich nehme an das sind lizenzrechtliche Gründe) ... das muss man dann mit Airplay machen
+
+Beide Ansätze haben ihre Vor- und Nachteile ... wäre schön, wenn Apple eine Lösung finden könnte, die die Vorteile kombiniert und die Nachteile minimiert.
+
+### HDMI am iPad
+
+Sollte ich unterwegs doch mal den kleinen Bildschirm auf einem Großen wiedergeben wollen, dann hilft mir der Lightning-auf-HDMI-Adapter. Im Urlaub ist das sehr angenehm, wenn man die bezahlten Filme (offline) dabei hat und nicht auf dem kleinen iPad-Bildschirm schauen muß.
+
+> Allerdings: mit machen Inhalten funktioniert das nicht (z. B. WOW-Streaming von Fussball)
+
+### Handy-Halterung
+
+Zum Arbeiten benötige ich auch mein Handy für 2FA (Two-Factor-Authentication). Aus diesem Grund muss das Handy immer griffbereit sein. Im Office ist das kein Problem, denn da liegt das Handy einfach auf dem Tisch. Wenn ich allerdings mal im Auto oder im Cafe arbeite, dann muss ich es immer wieder umständlich aus der Hosentasche kramen.
+
+Deshalb habe ich 30 Euro (viel Geld für sowenig Ware) einen *Rolling Square Edge Pro* gekauft, mit dem ich mein Handy an das Macbook hängen kann.
+
+> selbst mit der Single-Halterung kann ich mein iPad 10,5 an das Macbook hängen (eigentlich werden hier zwei empfohlen) und habe dadurch einen zweiten kleinen Screen. Sollte das ein richtiger Use-Case werden, dann würde ich mir noch einen zweiten Rolling Square Edge Pro kaufen, um die Stabilität zu verbessern. Auf diese Weise könnte man sogar rechts und links ein iPad (sogar mit 12,9 Zoll hängen), um unterwegs die Arbeitsfläche zu vergrößern.
+
+Ausserdem kann ich es auch zur Video-Telefonie oder auch einfach zur Platzierung meines Handys auf dem Tisch oder an magnetischen Flächen benutzen.
+
+Ist jetzt kein Game-Changer, aber trotzdem klasse. So ist das Handy nun auch immer zuhause schön aufgeräumt und wenn ich dort mal die Location wechsel, dann ist es auch gleich mit dabei.
 
 ### Kopfhörer
 
@@ -106,12 +142,6 @@ Ich bin Anhänger des papierlosen Büros ... im Home-Office brauche ich den Druc
 ### Kabel
 
 Kabel benötige ich eigentlich nur für die Stromversorgung der Geräteakkus - im normalen Gebrauch ist mein Büro auf ein einziges kabellos :-)
-
-### HDMI am iPad
-
-Sollte ich unterwegs doch mal den kleinen Bildschirm auf einem großen wiedergeben wollen, dann hilft mir der Lightning-auf-HDMI-Adapter. Im Urlaub ist das sehr angenehm, wenn man die bezahlten Filme (offline) dabei hat und nicht auf dem kleinen iPad-Bildschirm schauen muß.
-
-> Allerdings: mit machen Inhalten funktioniert das nicht (z. B. WOW-Streaming von Fussball)
 
 ### Stuhl
 

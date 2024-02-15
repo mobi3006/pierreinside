@@ -1,12 +1,14 @@
 # GitHub Actions und Workflows
 
+* [CoderDave - GitHub Actions Tutorial | From Zero to Hero in 90 minutes](https://www.youtube.com/watch?v=TLB5MY9BBa4)
+
 Hierbei handelt es sich um die Automatisierungstechnologie von GitHub.
 
 > Eigentlich würde der Name "GitHub Workflows" viel besser passen, weil auf höchstem Abstraktionsgrad der Workflow steht. Technisch gesehen ist eine Action in diesem Kontext nur eine vordefinierte Folge von Operationen, die in einer Library zur Verfügung gestellt wird. Ich denke "Action" klingt einfach eher nach "mach was" und lässt sich so besser verkaufen.
 
 ---
 
-## Konzept
+# Konzept
 
 Das zentrale Konzept sind Workflows, die als yaml-Datei im Repository abgelegt werden (im Verzeichnis `.github/workflows` und dann automatisch zur Ausführung zur Verfügung stehen bzw. automatisch getriggert werden. Das ist wirklich seamless :-)
 
@@ -27,7 +29,9 @@ Ein Workflow definiert:
 
 Ein Workflow kann selbst wieder Workflows aufrufen, die im gleichen aber auch in einem anderen Repository liegen können. Auf diese Weise läßt sich eine Library-basierte Wiederverwendung abbilden.
 
-### Permissions
+Mit GitHub Workflows lassen sich beliebige Automatisierungen umsetzen. Natürlich sind sie in GitHub für CI (Build/Test von Artefakten) prädestiniert. Deployments werden spätestens seit Einführung von Environments auch sehr gut unterstützt.
+
+## Permissions
 
 * [GitHub - Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
 * [GitHub - workflow-syntax-for-github-actions - Permissions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#permissions)
@@ -37,23 +41,21 @@ Eine Action bekommt vom GitHub-Framework zu Beginn immer einen `${{ scerets.GITH
 
 > Im Hintergrund wird eine GitHub App auf dem Repository installiert, das dann die Tokens erzeugt. Man kann die Permissions im Workflow steuern (über den `permissions:` Abschnitt)
 
-Mit diesem Token hat man Zugriff auf das eigene Repository.
+Mit diesem Token hat man Zugriff **AUSSCHLIESSLICH** auf das eigene Repository.
 
 > gibt man Secrets über Log-Output (innerhalb eines Workflows) aus, dann wird der Inhalt durch `****` ersetzt. Das funktioniert i. d. R. sehr gut - es ist aber nicht komplett unmöglich, daß Secrets im Log erscheinen. Man sollte hier den best-Practices folgen.
 
 Für den Zugriff auf andere Repositories können [folgende Ansätze](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#considering-cross-repository-access) verwendet werden:
 
-* Repository Deploy Keys
 * GitHub App tokens - RECOMMENDED
 * Personal Access Tokens ... Details im nächsten Kapitel
   * NICHT recommended, da dir Granularität nicht gut ist und der Token an einem echten Benutzer hängt (für Automatisierung geschäftkritischer Workflows SEHR unpraktisch ... plötzlich hat der Mitarbeiter gekündigt und seine gesamten Token sind sofort ungültig)
     * das stimmm im Januar 2023 so nicht mehr ... auch bei PATs lassen sich feingranulare Permissions vergeben
 * SSH-keys an einem Personal Account
   * noch schlimmer als Personal Access Tokens: "Workflows should never use the SSH keys on a personal account."
+* Repository Deploy Keys
 
-By Default hat ein Workflow nur Permissions, um auf das eigene Repository (inkl. Secrets) zuzugreifen. Wird der Zugriff auf ein anderes Repository benötigt, so bieten sich GitHub Apps an, die dann im Auftrag handeln.
-
-### GitHub App Tokens
+## GitHub App Tokens
 
 * [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
 
@@ -80,7 +82,7 @@ Für die Nutzung der GitHub App ist natürlich eine Authentifizierung erforderli
 
 ---
 
-## Runners
+# GitHub Runners
 
 * [GitHub-hosted Runners](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners)
 
@@ -96,7 +98,9 @@ steps:
     architecture: 'x64'
 ```
 
-### Self-Hosted Runners
+In einigen GitHub Plans sind bereits CPU-Minuten für GitHub-Hosted Runners enthalten. Diese "kostenlosen" Maschinen sind i. a. etwas schwachbrüstig und ihnen fehlen einige Features (z. B. static IPs, die man evtl. für IP-Whitelisting benötigt). Will man dann die teuren/starken GitHub-Hosted-Runners verwenden, dann ist der Preis relativ hoch. Es macht dann auf jeden Fall Sinn, mal zu untersuchen, ob man mit Self-hosted Runners oder Hosted-Runners ausserhalb von GitHub (gibt es wohl auch schon) besser bedient ist.
+ 
+## Self-Hosted Runners
 
 Neben den von GitHub gehosteten Runners kann man auch eigene Runner (auf der eigenen Infrastruktur) bereitstellen. Ich würde das vermeiden wollen, weil man dann natürlich für das skalierbare Hosting und die Maintenance verantwortlich ist und der Weiterentwicklung des GitHub Ecosystems hinterher rennt.
 
@@ -110,17 +114,27 @@ Der Laptop ist natürlich nur für den Anfang geeignet. Später sollte man eine 
 
 GitHub rät davon ab Public Repositories auf Self-Hosted Runners auszuführen, da der Code Malware enthalten kann, die dann schon mal innerhalb der eigenen Infrastruktur ist und somit mehr Schaden anrichten kann. GitHub bietet [Self-Hosted-Runners-Hardening-Empfehlungen](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#hardening-for-self-hosted-runners).
 
+## Self-Hosted Runners - EKS-Cluster
+
+...
+
+## Self-Hosted Runners - AWS-Technologies - Philips
+
+* [GitHub Projekt](https://github.com/philips-labs/terraform-aws-github-runner)
+
+Der Philips Konzern bietet eine AWS-basierte Lösung für automatisch skalierbare Self-Hosted GitHub-Runners als Open-Source Projekt an.
+
 ---
 
-## Workflows in depth
+# Workflows in depth
 
-### Templates
+## Templates
 
 Wenn man einen neuen Workflow über die GitHub-UI anlegt, dann bekommt man passende Template vorgeschlagen. Diese Templates bieten erleichern die Entwicklung eines eigenen Workflows.
 
 Über [eigene Starter Workflows](https://docs.github.com/en/actions/using-workflows/creating-starter-workflows-for-your-organization) in einem `.github` Repository lassen sich die von GitHub bereitgestellten Workflow-Templates erweitern.
 
-### Wiederverwendung über Actions
+## Wiederverwendung über Actions
 
 In einem Workflow verwendet man die sog. Actions, die beispielsweise über den [GitHub Marketplace](https://github.com/marketplace?type=actions) gesucht werden können. Letztlich sind die Actions wiederum in einem Repository bereitgestellt.
 
@@ -160,7 +174,7 @@ Von außen kann man einer Action nicht ansehen wie sie implementiert ist. Aufgru
 
 Anstatt ein Action im eigenen Repo bereitzustellen kann man auch ein anderes Repo referenzieren. Auf diese Weise lässt sich beispielsweise ein Action-Library-Repo anlegen.
 
-### Implementierung eigener Actions
+## Implementierung eigener Actions
 
 * [Creating Actions](https://docs.github.com/en/actions/creating-actions)
 * [Beispiele von GitHub](https://github.com/actions)
@@ -206,7 +220,7 @@ In dem Fall wird das Image in DockerHub bereitgestellt ... das muss man dort abe
 
 > Es gibt schon einige GitHub Actions, die intern über Docker Container implementiert sind ... das ist auch der Grund warum das Dockerhub Ratelimit (Beschränkung deer Downloads von Docker Images auf 100 pro 6 Stunden) in solchen Fällen problematisch werden kann.
 
-### Wiederverwendung von Workflows
+## Wiederverwendung von Workflows
 
 * [GitHub Docu - Reusing workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
 
@@ -222,14 +236,14 @@ aufrufen und so wiederverwenden. Das Repository `octo-org/example-repo` agiert s
 
 > **ACHTUNG:** Sollte es sich um ein **INTERNAL** Repository (Enterprise Account) handeln (statt **PUBLIC**), dann muss der [Nutzung explizit im bereitstellenden Repo zugestimmt werden](https://docs.github.com/en/enterprise-cloud@latest/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#allowing-access-to-components-in-an-internal-repository)
 
-### Starter Workflows
+## Starter Workflows
 
 Für Newbies, die noch keinen Sack voller eigener Workflows haben, oder die Workflows in einem neuen Bereich (z. B. AWS) implementieren wollen, stellt GitHub Templates zur Verfügung:
 
 * [GitHub Docu - Creating starter workflows for your organization](https://docs.github.com/en/actions/using-workflows/creating-starter-workflows-for-your-organization)
 * [GitHub Docu - Using starter workflows](https://docs.github.com/en/actions/using-workflows/using-starter-workflows)
 
-### Wiederverwendung via Composite Actions vs. Workflows
+## Wiederverwendung via Composite Actions vs. Workflows
 
 * [YouTube Video - CoderDave](https://www.youtube.com/watch?v=xa9gYSCf8q0)
 * [GitHub Blog](https://github.blog/2022-02-10-using-reusable-workflows-github-actions/)
@@ -259,11 +273,41 @@ Technisch gesehen gibt es auch einige Einschränkungen
 
 ---
 
-## Workflow Syntax
+# Deployments via GitHub Workflows
+
+Für die Umsetzung von Deployments steht immer wieder ein besonderer Schutz des Deployment Targets und Berechtigungen (wer darf es ausführen? wie kommt der Workflow an die Berechtigungen?) im Vordergrund. Hierzu benötigt man dann ein Approval durch eine Gruppe von Personen.
+
+Das kann man über
+
+* aktives Warten
+* inaktives Warten implementieren
+
+Beim aktiven Warten bleibt der GitHub Runner einfach aktiv und wartet - im schlimmsten Fall bis zum Timeout - bis der Benutzer den Workflow approved. In dieser Wartezeit verursacht der Workflow allerdings weiterhin Kosten.
+
+Inaktives Warten bedeutet, dass der Runner erst dann gestartet wird, wenn der Reviewer sein Approval gegeben hat. 
+
+## Active Waiting for Approval
+
+z. B. über [`trstringer/manual-approval`](https://github.com/trstringer/manual-approval)
+
+## Inactive Waiting via GitHub Environments
+
+Inaktives Warten läßt sich über GitHub Environments abbilden, die ein Review einfordern. Beim Environment definiert man einen Review Request, wenn der Workflow nicht durch den Owner gestartet wurde. Im Workflow sieht man von dieser Logik nichts:
+
+```
+terraform_apply:
+  needs: terraform_plan
+  runs-on: ubuntu
+  environment: live
+```
+
+---
+
+# Workflow Syntax
 
 * [GitHub Docu](https://docs.github.com/en/actions/using-workflows/about-workflows)
 
-### Jobs
+## Jobs
 
 Können in
 
@@ -314,13 +358,13 @@ jobs:
       max-parallel: 2
 ```
 
-### Triggers
+## Triggers
 
 * [Workflow Trigger](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on)
 
 Über `workflow_call` lassen sich auch manuell getriggerte Workflows abbilden, die dann auch Parameter erhalten können.
 
-### Workflow-Steps
+## Workflow-Steps
 
 Hier verwendet man Actions aus dem GitHub Ecosystem (`uses`) oder Shell-Kommandos (`run`). Per Default verwendet `run` eine bash ... man kann hier aber auch [andere `shell`s definieren](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell), um beispielsweise Python Code zu verwenden (insbesondere die Verarbeitung komplexer Datenstrukturen gelingt damit einfach leichter):
 
@@ -336,11 +380,13 @@ shell: python
 
 GitHub bietet [Funktionen und Datenstrukturen](https://docs.github.com/en/actions/learn-github-actions/expressions).
 
-### Bedingte Ausführung
+## Bedingte Ausführung
 
 Per `if:` lassen sich Steps überspringen oder auch ausführen, wenn ein vorheriger Step fehlgeschlagen ist (Exception Handling).
 
-### Parameterübergabe
+> **ACHTUNG:** in `if`-clauses darf nicht auf den `secrets`-Kontext zugegriffen werden
+
+## Parameterübergabe
 
 Zwischen Steps und Jobs müssen manchmal Parameter transportiert werden. Am einfachsten ist das zwischen Steps, die alle in einem gemeinsamen Job laufen und damit im gleichen Runner (-Kontext). Hier kann man einfach
 
@@ -400,7 +446,7 @@ jobs:
     runs-on: ${{ fromJson(needs.runner-selection.outputs.runners) }}
 ```
 
-### Artefaktübergabe
+## Artefaktübergabe
 
 Alle Artfakte innerhalb eines Jobs stehen jederzeit zur Verfügung, da die Ausführungumgebung die gleiche ist.
 
@@ -413,7 +459,7 @@ verwenden.
 
 ---
 
-## GitHub Secrets
+# GitHub Secrets
 
 Für eine Integration mit anderen Systemen benötigt man entsprechende Credentials. Hierfür bietet GitHub einen Secret Store auf verschiedenen Ebenen (Organisation, Repo, Environment).
 
@@ -457,7 +503,7 @@ on:
 
 ---
 
-## Best-Practices
+# Best-Practices
 
 ### Online-IDE
 
@@ -465,9 +511,9 @@ GitHub stellt einen komfortablen Editor im Browser zur Verfügung, der den Marke
 
 Hierzu navigiert man einfach zum Workflow und drückt den Stift zum Editieren.
 
-### VSCode Extension
+## VSCode Extension
 
-### Fehlersuche per Logging
+## Fehlersuche per Logging
 
 Das Debug-Level wird durch Setzen folgender Secrets angepaßt:
 
@@ -476,7 +522,7 @@ Das Debug-Level wird durch Setzen folgender Secrets angepaßt:
 
 > Es handelt sich bei der Verwendung von Secrets vermutlich eher im eine Krücke ... weil das die derzeit einzige Möglichkeit ist, ohne Codeänderung Konfiguration zu contributen. LEIDER ist die Granularität dadurch nicht besonders gut (alle Workflows sind plötzlich im Debugmode). Ausserdem benötigt man Mainterer-Role, um überhaupt über "Settings - Secrets" darauf zugreifen zu können.
 
-### Nektos Act Development environment
+## Nektos Act Development environment
 
 * [Nektos-Act@GitHub](https://github.com/nektos/act)
 * [YouTube - Intro](https://www.youtube.com/watch?v=5hHYUNbdP6M)
@@ -485,21 +531,21 @@ Das Debug-Level wird durch Setzen folgender Secrets angepaßt:
 
 ---
 
-## Vergleich zu Jenkins
+# Vergleich zu Jenkins
 
-Ich bin sehr begeistert von GitHub Workflows.
+Ich bin sehr begeistert von GitHub Workflows. Natürlich stößt man auch hier gelegentlich mal an Grenzen oder Inkonsistenzen, die man sich gerne anders wünscht. Es tut sich allerdings eine Menge im GitHub Ecosystem und so entstehen immer wieder sehr nützliche Verbesserungen. Der GitHub Support bemüht sich hier auch im Lösungen oder stellt sogar Feature-Requests ein ... aber natürlich dauert es dannn doch manchmal eine Ewigkeit bis nützliche Features umgesetzt sind. Es ist halt immer wieder eine Abwägung, ob das Feature in das Konzept von GitHub passt oder wie sehr es auch für andere Nutzer passt.
 
-### Pipeline bereitstellung
+## Pipeline-Bereitstellung
 
 Die automatische Integration aller `.github/worflows/*.yml` Dateien inklusive automatischer Ausführung macht den GitHub Ansatz besonders smooth.
 
 Bei Jenkins konnte man den Pipeline-Code auch in ein `Jenkinsfile` packen, das unter Version-Control stand. Allerdings musste man manuell noch einen entsprechenden Jenkins-Job anlegen, um die Pipeline auch zur Ausführung zu bringen. Das hat mir gar nicht gefallen.
 
-### Pipeline Syntax
+## Pipeline Syntax
 
 Ich bin mit der Pipeline-Syntax von Jenkins nie so richtig warm geworden. Die GitHub-Workflows find ich viel klarer und einfacher zu programmieren.
 
-### Wiederverwendung
+## Wiederverwendung
 
 In den Workflows kann man Shell-Scripting oder Python direkt verwenden. Über Docker lassen sich beliebige Sprachen problemlos integrieren.
 
@@ -509,11 +555,11 @@ Die Fehleranalyse empfand ich bei Jenkins immer recht schwierig. Der Glue-Code i
 
 Notfalls kann man sogar Self-Hosted Runners mit Software bestücken und so einbinden, ohne explizite Referenzierung im Workflow File. Ich würde allerdings versuchen, darauf zu verzichten, da das unnötige Magic reinbringt. Bei Komponenten deren Installation/Konfiguration allerdings sehr lange dauert, kann das allerdings die Ausführungszeit der Workflows deutlich reduzieren.
 
-### Dokumentation
+## Dokumentation
 
 ... fand ich bei Jenkins sehr schwach - GitHub ist nicht perfekt, aber schon sehr gut
 
-### Ecosystem
+## Ecosystem
 
 Das Ecosystem ist bei Jenkins und GitHub riesig. Ich schätze bei GitHub ist es sehr stark wachsend. Die Kopplung von Source Code Repository und SaaS-Ausführungsumgebung hat einen großen Charme. Die Open Source Community, die ja eh GitHub nutzt, wird darauf abfahren.
 

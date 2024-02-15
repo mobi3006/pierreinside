@@ -20,18 +20,21 @@ Dieser Ansatz hat sehr viele Vorteile:
 Man darf dabei aber nicht vergessen, daß ein einziges Credential auch den Nachteile hat:
 
 * ist dieses Credential geknackt, dann stehen die Türen zu vielen Services (Daten) offen - widerspricht das nicht eigentlich dem Sicherheitsansatz, viele Hürden aufzubauen
+  * aus diesem Grund sollte man 2FA verwenden, um den Identity-Provider-Account besonders zu schützen
 * die Nachverfolgbarkeit wird erhöht - werden unterschiedliche Credentials von einem Benutzer verwendet, dann ist es schwieriger festzustellen, daß es sich dabei um den gleichen Nutzer handelt
   * durch die erhöhte Integration der Dienste kann es für den Benutzer unüberschaubar werden, welche Spuren er hinterläßt (plötzlich wird auf Facebook meine tägliche Fahrradstrecke gepostet, die ich über Komoot geplant habe)
 
-## OAuth 2 vs. OpenID Connect
+---
 
-OpenID Connect = OAuth2 + OpenID Provider
+# OAuth 2 vs. OpenID Connect
 
-OpenID Connect ist ein vollständiges OAuth2-basiertes Authentifizierungsprotokoll, das für Authentification-as-a-Service Implementierungen verwendet werden kann:
+OpenID Connect = OpenID Provider + OAuth2 = Authentifizierung + Authorisierung
+
+OpenID Connect ist ein vollständiges OAuth2-basiertes **Authentifizierungs**protokoll, das für Authentification-as-a-Service Implementierungen verwendet werden kann:
 
 > "[...] allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner. OpenID Connect allows clients of all types, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end-users. The specification suite is extensible, allowing participants to use optional features such as encryption of identity data, discovery of OpenID Providers, and session management, when it makes sense for them." ([Website OpenID Connect](http://openid.net/connect/))
 
-In OAuth2 dreht sich alles im Authorisierung - der Aspekt einer Identifizierung des Nutzers via Authentifizierung ist nicht Teil der OAuth2 Spezifikation. OpenID Connect basiert auf dem OAuth2-Framework, um ein Authentifizierungsprotokoll zu implementieren. Letztlich wird OAuth2 verwendet, um den Zugriff der Applikation (= Client) auf die Protected Resource "Identity Provider" zu authorisieren.
+In OAuth2 dreht sich alles im **Authorisierung** - der Aspekt einer Identifizierung des Nutzers via **Authentifizierung** ist nicht Teil der OAuth2 Spezifikation. OpenID Connect basiert auf dem OAuth2-Framework, um ein Authentifizierungsprotokoll zu implementieren. Letztlich wird OAuth2 verwendet, um den Zugriff der Applikation (= Client) auf die Protected Resource "Identity Provider" zu authorisieren.
 
 Im [Buch Auth2 in Action](https://livebook.manning.com/#!/book/oauth-2-in-action/chapter-13/28) wird gibt der Authorization Server beide Tokens (Accedd Token und ID Token) im gleichen Request an den Client. Das hat mich lange Zeit verwirrt, denn eigentlich hätte ich erwartet, daß erst mit dem Access Token ein Zugriff auf den Identity Provider möglich ist, der Informationen über den authentifizierten User in Form eines ID Tokens bzw. über die Identity Profile API bereitstellt.
 
@@ -45,23 +48,27 @@ Die Zusammenhänge zwischen Authentifizierung und Authorisierung wirken ein weni
 
 Die Stakeholder des OAuth2 Protokolls haben im OpenID Connect Kontext andere Bezeichnungen, weil es sich um einer Spezialisierung handelt. Dennoch ist es wichtig, die Abbildung der Stakeholder auf das OAuth2 Protokoll immer im Bliock zu haben, um die gegenseitigen Trustbeziehungen zu erkennen und das Überschreiten der Security Domain Boundary zu erkennen - was den Mehrwert des OpenID Connect Ansatzes ausmacht. Verliert man dieses Wissen aus dem Blick, so können sich - sofern man einen Authorization Server bzw. OpenID Provider implementiert - fatale Fehler einschleichen, die das System als Ganzes kompromittieren!!!
 
-### OpenID vs. OpenID Connect
+## OpenID vs. OpenID Connect
 
 Es gibt auch nicht OpenID, doch OpenID Connect ist angeblich mehr API-friendly.
 
-## Alternativen
+---
+
+# Alternativen
 
 * CAS
 * Keycloak
 
-## Konzepte
+---
 
-### Identity Provider = OpenID Provider
+# Konzepte
+
+## Identity Provider = OpenID Provider
 
 * ein Identity Provider verwendet Authentifizierung zur Identifikation eines Clients
 * der Identity Provider kann innerhalb einer Anwendung implementiert sein (z. B. in einem Monolithen) oder aber auch als externer Service (Authentication as a Service - z. B. in einer Microservice Architektur) eingebunden werden
 
-### OpenID Provider (OP)
+## OpenID Provider (OP)
 
 * ist der Identity Provider im OpenID Connect Umfeld
 * verschmilzt mit dem OAuth2-Authorization-Server
@@ -69,11 +76,11 @@ Es gibt auch nicht OpenID, doch OpenID Connect ist angeblich mehr API-friendly.
   * authenticate
   * userInfo
 
-### Authentication as a Service
+## Authentication as a Service
 
 Provider eines Service möchten evtl. kein eigenes User-Management betreiben, um den Nutzern das Management ihrer Credentials zu vereinfachen, z. B. sie können die Facebook Credentials verwenden.
 
-### ID Token
+## ID Token
 
 * Identity Token
 * ID Token wird nach der Identifizierung per Authentifizierung (des menschlichen Benutzers) durch den OpenID Provider (= Identity Provider) in Form eines JSON Web Tokens (JWT) an die Relying Party (die den OpenID Provider im Sinne eines Authentication-as-a-Service genutzt hat) übergeben. Die Relying Party nutzt den ID Token evtl. um eine Session für den authentifizierten User zu erzeugen, aber danach nicht mehr (ist eher ein Wegwerfprodukt mit kurzer Laufzeit - wird auch )
@@ -117,19 +124,19 @@ Provider eines Service möchten evtl. kein eigenes User-Management betreiben, um
 * verläßt aus Sicherheitsgründen niemals die Relying Party (abgesehen vom OpenID Provider kennt den ID Token niemand)
 * normalerweise kürzere Laufzeit als ein Access Token
 
-### ID Token vs. Access Token
+## ID Token vs. Access Token
 
 Braucht es denn wirklich zwei Tokens (ID Token aus OpenID Connect, Access Token aus OAuth2), die letztlich häufig zum gleichen Zeitpunkt und von der gleichen Komponente (die sowohl IdentityProvider als auch Authorization Server repräsentiert) erstellt wird? Genügt hier nicht der AccessToken, der ja auch Informationen über den User enthält?
 
 * auch wenn der AccessToken User Informationen trägt, so sagt er nichts darüber aus, ob tatsächlich in der laufenden Transaktion eine Identifikation des Users stattgefunden hat. Der Token kann sehr alt oder gar gestohlen (ausgestellt für einen anderen Client), so daß einen Identifizierung zusätzlichen Schutz bietet.
 * da OAuth2 nichts über das Format des Access Tokens aussagt, könnte man alles in den Access Token packen, doch dadurch würde man der Protected Resource Informationen (Nutzer des Access Tokens) über die Identity offenbaren, was in manchen Szenarien vielleicht nicht gewünscht ist. Durch die Trennung kann die Identity-Information komplett beim Client verbleiben ... für die Protected Resource sollte das keine Rolle spielen - Hauptsache der User ist authorisiert
 
-### UserInfo Endpunkt
+## UserInfo Endpunkt
 
 * der OpenID Provider stellt diesen Endpunkt zur Verfügung, um Claims abzufragen
 * der Endpunkt ist eine Protected Resource im Sinne von OAuth2, d. h. beim Zugriff ist ein Access Token erforderlich
 
-### Scope
+## Scope
 
 * [Scope vs. Claim](https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/)
 
@@ -139,7 +146,7 @@ ABER auch:
 
 > "OpenID Connect Clients use scope values, as defined in Section 3.3 of OAuth 2.0 [RFC6749], to specify what access privileges are being requested for Access Tokens. The scopes associated with Access Tokens determine what resources will be available when they are used to access OAuth 2.0 protected endpoints. Protected Resource endpoints MAY perform different actions and return different information based on the scope values and other parameters used when requesting the presented Access Token." ([OpenID Connect Spezifikation - Scopes and Claims](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims))
 
-### Claim
+## Claim
 
 * [OpenID Connect Spezifikation - Scopes and Claims](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
 * [OpenID Connect Spezifikation - Claims](http://openid.net/specs/openid-connect-core-1_0.html#Claims)
@@ -171,11 +178,11 @@ Ein User kann evtl. mitbestimmen welche Informationen an eine Relying Party weit
 
 > "In some cases, the End-User will be given the option to have the OpenID Provider decline to provide some or all information requested by RPs. To minimize the amount of information that the End-User is being asked to disclose, an RP can elect to only request a subset of the information available from the UserInfo Endpoint." ([OpenID Connect Spezifikation - Scopes and Claims](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims))
 
-### Relying Party (RP)
+## Relying Party (RP)
 
 Client, der dem ID Token vertraut
 
-### State Token
+## State Token
 
 * https://developers.google.com/identity/protocols/OpenIDConnect#server-flow
 * [Cross-Site-Request-Forgery](https://de.wikipedia.org/wiki/Cross-Site-Request-Forgery)
@@ -187,7 +194,7 @@ Nach erfolgreicher Anmeldung an einem Server (z. B. OpenID Connect Provider oder
 
 Der State Token dient der Verhinderung eines solchen Angriffs ... der Angreifer kann nicht so einfach an den State Token kommen (der Token darf nicht im Cookie stecken, sondern muß als URL-Parameter transportiert werden). Ganz unmöglich ist das nicht, denn er wurde ja zumindest mal in den Browser des Users transportiert, aber es erhöht zumindest mal die Schwierigkeit. Somit weist der State nach, daß der Session-Cookie nicht mißbraucht wird, sondern tatsächlich von dem genutzt wird, der die Authentifizierung initiiert hat.
 
-### Nonce
+## Nonce
 
 * [State vs. Nonce](https://stackoverflow.com/questions/46844285/difference-between-oauth-2-0-state-and-openid-nonce-parameter-why-state-cou)
 
@@ -198,7 +205,9 @@ Nonce ist ähnlich zu einem State Token, doch ist es eine Absicherung zwischen a
 * das State-Token baut Vertrauen zwischen Relying Party und User auf. Es erschwert, daß der Aufrufer der Relying Party (der potentielle User ... der aber gar nicht der echte User ist), das Authentifizierungsvertrauen in Form des Session Cookies mißbraucht.
 * die Nonce baut Vertrauen zwischen Relying Party und OpenID Connect Provider auf. Hiermit wird sichergestellt, daß die ursprüngliche Authentiizierungsanfrage (der Relying Party über den User-Browser zum OpenID Connect Provider) und die zeitlich nachfolgende (in einem neuen Request) Tokenanfrage auch tatsächlich vom gleichen OpenID Connect Provider bearbeitet werden. Damit wird 
 
-## Ablauf einer Authentifizierung/Authorisierung
+---
+
+# Ablauf einer Authentifizierung/Authorisierung
 
 * http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowSteps
 
@@ -232,7 +241,9 @@ Authentifizierung kann über folgende OAuth2-Grant-Types erfolgen:
 * [Hybrid Flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth)
   * basierend auf [OAuth 2.0 Multiple Response Type Encoding Practices](http://openid.net/specs/oauth-v2-multiple-response-types-1_0.html)
 
-## Getting Started
+---
+
+# Getting Started
 
 * [sehr pragmatische Einführung von Google](https://developers.google.com/identity/protocols/OpenIDConnect)
 
@@ -240,14 +251,14 @@ Da OpenID Connect sehr beliebt ist, findet man bei vielen Cloud-Unternehmen (u. 
 
 Web-Applikationen machen von diesen OpenID Connect Providern regen Gebrauch. Das inhärente Single-Sign-On ist neben der Eigenschaft Reuse-Existing-Credentials ein extrem komfortables Feature (einmal bei GitHub angemeldet und mit diesem Login 20 Web-Applikationen ohne erneute Anmeldung nutzen).
 
-### Google als OpenID Connect Provider
+## Google als OpenID Connect Provider
 
 * [Google OpenID Provider in Action ... sehr schön mit Beispiel-Requests](https://developers.google.com/identity/protocols/OpenIDConnect)
 * [Google OAuth Playground - sehr gut](https://developers.google.com/oauthplayground)
 
 [Google ist OpenID Connect certified](http://openid.net/certification/) und somit bietet sich der Dienst besonders an, um OpenID Connect in Action zu sehen.
 
-#### Nutzung als Software-Anbieter
+### Nutzung als Software-Anbieter
 
 Jede Anwendung (= Client = Relying Party), die ein Login mit den Google-Credentials erlauben will, muß bei Google eine Client Konfiguration anlegen, in der
 
@@ -258,7 +269,7 @@ Jede Anwendung (= Client = Relying Party), die ein Login mit den Google-Credenti
 
 abgelegt sind.
 
-#### Nutzung als User
+### Nutzung als User
 
 * [Verwaltung der zugelassenen Anwendungen](https://security.google.com/settings/security/permissions)
 
@@ -272,7 +283,7 @@ wird ein entsprechendes Authorisierungs-Profil für diese Anwendung im OpenID Co
 
 Der [Google-Playground](https://developers.google.com/oauthplayground) bietet ein nettes Tool, um der Playground-Webapplikation "Google OAuth 2.0 Playground" Zugriff auf die Google APIs (Calendar, eMail, ...) auszuprobieren.
 
-#### Protected Resource - Todoist
+### Protected Resource - Todoist
 
 [todoist](https://todoist.com/) ist eine beliebtes Getting Things Done (GTD) Tool, das unter Android, iOS und als Webapplikation läuft. Beim Login kann man wählen zwischen verschiedenen User-Managements:
 
@@ -280,13 +291,13 @@ Der [Google-Playground](https://developers.google.com/oauthplayground) bietet ei
 * Google via Google's OpenID Provider
 * Facebook via Facebook Connect (Facebook nutzt nicht OpenID Connect, sondern [Facebook Connect](https://developers.facebook.com/docs/facebook-login))
 
-### Microsoft 365
+## Microsoft 365
 
 * http://www.office.com
 
 > ACHTUNG: Microsoft 365 basiert auf [OneDrive for Business](https://onedrive.live.com/about/de-DE/business/) ... ist nicht zu verwechseln mit [OneDrive](https://onedrive.live.com/about/de-de/), das für Privatanwender konzipiert ist.
 
-#### Microsoft OpenID Connect Provider
+### Microsoft OpenID Connect Provider
 
 * [Microsoft-Dokumentation](https://docs.microsoft.com/de-de/azure/active-directory/develop/active-directory-protocols-openid-connect-code)
 * Entwicklerinfos zur Nutzung des Micosoft OpenID Connect Providers: https://developer.microsoft.com/de-de/graph
@@ -299,15 +310,15 @@ Die Login Page des Microsoft OpenID Connect Providers befindet sich unter https:
 
 Nach erfolgreicher Authentifizierung mit dem gewählten Account wird mir angezeigt für welches Unternehmen ich mich eingeloggt habe und werde dann auf Grundlage der `redirect_uri` zu der ursprünglichen Seite gemäß OpenID Connect redirected.
 
-#### Landing Page
+### Landing Page
 
 Die Landing Page (von dort aus kann man in alle Microsoft Anwendungen springen) befindet sich auf https://www.office.com. Der Zugriff ist geschützt, d. h. man sieht die Applicationen erst nach erfolgreicher Anmeldung ... der Anmeldelink (https://www.office.com/login) redirected auf den Microsoft OpenID Connect Provider (https://login.microsoftonline.com) mit den entsprechenden OpenID Connect URL Parametern (u. a. `response_type=code+id_token`). Nach erfolgreicher Anmeldung gelangt man auf die Landing Page.
 
-#### Deep Links zum Einstieg
+### Deep Links zum Einstieg
 
 Verwendet man spezielle Links der Anwendungen (Outlook: https://outlook.office365.com, Office: https://office.live.com, Teams: https://teams.microsoft.com, Sharepoint: https://trinso-my.sharepoint.com) für den ersten Einstieg, so verhält sich die Anwendung wie beim Zugriff auf die Landing Page ... Redirect zum Microsoft OpenID Connect Provider.
 
-#### Wechsel zwischen Apps
+### Wechsel zwischen Apps
 
 Beim Wechsel zwischen Apps gibt es Unterschiede im Verhalten:
 
@@ -315,7 +326,7 @@ Beim Wechsel zwischen Apps gibt es Unterschiede im Verhalten:
 * wechselt man die Security-Domain hingegen zum ersten Mal (!!!), z. B. beim Wechsel von Word (https://office.live.com/start/Word.aspx?auth=2) nach OneDrive  (https://trinso-my.sharepoint.com/), dann erfolgt hingegeben ein Redirect über den Microsoft OpenID Connect Provider aus (der allerdings aufgrunds des impliziten Single-Sign-On Konzepts geleich wieder zu einem Redirect führt ... die Seite flackert und es dauert recht lang)
   * wenn man sich in einer Security-Domain bereits authentifiziert hat (über den Microsoft OpenID Connect Provider Redirect-Mechanismus), dann existiert im Backend eine Session und über den Cookie-Mechanismus kann die auch immer wieder identifiziert werden, so daß die Redirects stetig abnehmen - Microsoft 365 lässt sich dann flüssiger bedienen.
 
-#### Change Password
+### Change Password
 
 Der Account wird in der Webapplikation https://portal.office.com/account/ verwaltet. Hier wird u. a.
 
@@ -324,7 +335,7 @@ Der Account wird in der Webapplikation https://portal.office.com/account/ verwal
   * das Passwort wird allerdings wiederum in einer anderen Webapplikation (https://account.activedirectory.windowsazure.com) gepflegt ... die Einbindung erfolgt OpenID Connect typisch über den OpenID Connect Provider (https://login.microsoftonline.com/common/oauth2/authorize?client_id=...).
 * die Berechtigungen (auf andere Clients = Webanwendungen) gepflegt
 
-#### Logout
+### Logout
 
 Beim Logout wird die API https://www.office.com/logout aufgerufen, die aber wie alle APIs über OpenID Connect geschützt ist:
 
@@ -332,22 +343,26 @@ Beim Logout wird die API https://www.office.com/logout aufgerufen, die aber wie 
 
 Letztlich werden hiermit vermutlich ALLE laufenden Sessions der einzelnen beteiligten Clients (Office, OneDrive) und im IAM gelöscht.
 
-#### Fazit
+### Fazit
 
 Das Office 365 Paket von Microsoft besteht aus einer Vielzahl an Webapplikationen und APIs, die miteinander über den OpenID Connect Mechanismus Single-Sign-On verbunden sind, so daß es dem Benutzer kaum auffällt, daß die Web-Anwendungen ständig gewechselt werden.
 
-### GitHub
+## GitHub
 
 * https://github.com/login/oauth/authorize
 
 GitHub bietet KEIN OpenID Connect an, aber ein ähnliches Protokoll auf OAuth2-Basis.
 
-## Implementierung mit Spring Security
+---
+
+# Implementierung mit Spring Security
 
 Spring (-Boot) ist im Java-Ökosystem DIE Platform/Framework zur Entwicklung von Microservices und hat auch ensprechende Konzepte für OpenID Connect bzw. OAuth2.
 
 [siehe eigener Abschnitt](springSecurity.md)
 
-## OpenID Certification
+---
+
+# OpenID Certification
 
 * [... to be certified OpenID Provider or certified Relying Party](http://openid.net/certification/)

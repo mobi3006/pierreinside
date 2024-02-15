@@ -4,7 +4,7 @@ Ich bin kein Windows Liebhaber ... aber nutze dieses Betriebssystem aber seit Ja
 
 ---
 
-## Erste Erfahrungen
+# Erste Erfahrungen
 
 Der Login nach dem Reboot dauert echt lang (über eine Minute) ... vielleicht liegts nur an der Firmen-Konfiguration, aber das enttäuscht mich schon ein wenig. Naja, das ständige Booten (a la Windows) sollte ja nun der Vergangenheit angehören.
 
@@ -30,10 +30,38 @@ Für mich gibt es vermutlich keinen Grund weiterhin Windows Laptops zu nutzen ..
 
 ---
 
-## Virtualisierung
+# Virtualisierung
+
+## Virtualbox
 
 Mein geliebtes Virtualbox funktioniert prima auf den Intel Macbooks aber leider nicht mehr (nicht mal mit Rosetta) auf den neuen M1 Macbooks. Ich schätze daran wird sich auch so bald nichts ändern.
 
-Als Alternativen standen schon kurz nach Einführung von M1 Parallels und VMWare Fusion zur Verfügung, die allerdings nicht kostenlos sind ... aber mit 100 Euro auch nicht besonders viel kosten.
+## Parallels
 
-Da Apple M1 im September 2021 noch recht jung ist, wird es in naher Zukunft sicherlich wieder einige Verbesserungen/Alternativen geben.
+Mit der Version 16.5 hat Parallels den Support von ARM64 eingeführt ... mit dem Umstieg auf einen Mac M1 vor 2 Jahren habe ich auch Parallels eingesetzt. Funktioniert SUPER.
+
+Mit der Version 19.x wird sogar innerhalb einer Linux VM x86 Binaries via Rosetta unterstützt - KLASSE.
+
+Seit 2 Jahren hat mich Parallels nicht ein einziges mal im Stich gelassen. 100% Empfehlung.
+
+---
+
+# Finder
+
+... mit diesem Tool stehe ich auf Kriegsfuss - das ist so unintuitiv. Nicht mal Copy/Paste einer Datei wird unterstützt ...
+
+Da gehe ich lieber in ein Terminal und mache die Arbeiten dort via CLI.
+
+---
+
+# FAQ
+
+**Frage 1:** Meine iPhone Shared Internet (hatte ich gleichzeitig am mobilen Router ... nicht aber mit anderen WLANs, in denen ich schon mal war) Verbindung funktioniert plötzlich nicht mehr - ich habe aber eigentlich nichts geändert.
+
+**Antwort 1:** hier findet man [gute Tips](https://nordvpn.com/blog/how-to-fix-self-assigned-ip-address-error-on-mac/)
+
+**Antwort 1a:** iPhone/Macbook Restart
+
+**Antwort 1b:** Forget Network und neu einrichten
+
+**Antwort 1c:** bei mir lag es daran, dass mein Macbook keine IP-Adresse bekommen hat und stattdessen "self-assigned IP address" hatte. Die obigen Tricks haben nicht geholfen ... auch das "Renew DHCP Lease" nicht. Bei mir war IPv6 unter "WLAN - Details - TCP/IP" auf "Link-Local Only" eingestellt. Das habe ich auf "Automatic" gestellt und dann hat es wieder funktioniert. Eine Zurückstellen auf "Link-Local Only" und es hat wieder nicht funktioniert. Zurück auf "Automatic" und alles war wieder gut (der erste HTTP-Request hat aber besonders lang gedauert). 

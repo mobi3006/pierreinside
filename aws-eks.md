@@ -3,55 +3,56 @@
 * [Kubernetes@pierreinside](kubernetes.md)
 * [EKS Terraform Blueprint](https://aws-ia.github.io/terraform-aws-eks-blueprints/latest/)
 
-Das ist eine managed EKS Control Plane (abgebildet im sog. Master-Node - im Gegensatz zu den Worker-Nodes = Data-Plane), das den härtesten Teil eines [Kubernetes Clusters](kubernetes.md) abbildet. Kubernetes selbst ist Technologie-agnostic, d. h. das unterliegende Backend (Cloud, OnPrem) spielt keine Rolle für die Orchestrierung von Workload. Allerdings wird ein Backend benötigt und hier kommen natürlich alle Cloud-Anbieter (AWS; Azure, Google) in Frage ... man kann prinzipiell aber natürlich auch seine eigene Hardware bereitstellen.
+AWS EKS ist eine managed Kubernetes Control Plane (abgebildet im sog. Master-Node - im Gegensatz zu den Worker-Nodes = Data-Plane), die den härtesten Teil eines [Kubernetes Clusters](kubernetes.md) abbildet.
 
-Die Cloudanbieter offerieren Lösungen (wie AWS beispielsweise mit AWS-EKS), die für ihre Cloud zugeschnitten sind und damit maximal integriert. Im Hintergrund wird die Infrastruktur des Cloud-Anbieters genutzt ... im Fall von AWS EC2 Instanzen oder Fargate, NLBs (Network-Load-Balancers), EBS-Volumes, ...  Insofern bietet AWS-EKS ein Abstraktionslayer und eine funktionierende (häufig getestete) Integration.
+> man muss natürlich nicht AWS EKS verwenden, um Kubernetes auf EC2 zu nutzen. Man kann auch die Control-Plane vollkommen selbst bauen. Die Control-Plane ist allerdings der komplexe Part eines Kubernetes-Clusters. Man benötigt hier entsprechend Erfahrung und Zeit, um einen HA-Cluster zuverlässig (etcd Backup) bereitzustellen und alle 6 Monate eine Migration der Kubernetes Version vorzunehmen. Aus diesem Grund hat sich AWS entschieden EKS anzubieten.
+Kubernetes selbst ist Technologie-agnostic, d. h. das unterliegende Backend (Cloud, OnPrem) spielt keine Rolle für die Orchestrierung von Workload. Allerdings wird ein Backend benötigt und hier kommen natürlich alle Cloud-Anbieter (AWS; Azure, Google) in Frage ... man kann prinzipiell aber natürlich auch seine eigene Hardware bereitstellen.
 
-> Das ist so gut integriert, dass man es häufig gar nicht mitbekommt, was da im Hintergrund auf seinem AWS-Account alles geschieht (und natürlich Kosten verursacht).
+Für die Data-Plane bietet AWS
 
-Man könnte aber auch AWS verwenden und die Control-Plane des Kubernetes selbst darauf managen ... muss sich dann aber um viele Dinge selbst kümmern. Die Control-Plane ist der komplexe Part eines Kubernetes-Clusters, vor dem sich dementsprechend viele Nutzer scheuen und deshalb lieber eine managed Control-Plane wie AWS EKS verwenden.
+* EC2 Instanzen, NLBs (Network-Load-Balancers), EBS-Volumes,
+* oder AWS Fargate
+* oder beides
 
-Die Data-Plane ist der einfache Teil, weil man hier nur eine Integration in den Cluster braucht um Compute-Ressourcen zur Verfügung zu stellen. EKS kann mit zwei unterschiedlichen "Data Plane" (= Workers ... hierauf laufen die Pods) genutzt werden - die Control Plane kommt mit beiden zurecht:
-
-* Traditional Server (EC2) Container Data Plane
-* Serverless Container (Fargate) Data Plane
-
-Das ist keine ENTWEDER/ODER Entscheidung ... stattdessen können beide Ansätze koexistieren.
-
-AWS EKS bietet auch für die Data-Plane ein Management an:
-
-* bei Fargate gibt es ja keine self-managed unterliegende Infrastruktur => auto-management out-of-the-box
-* bei EC2 bietet AWS-EKS managed Node-Groups an ... Auto-Scaling ist hier allerdings ein Problem, das gelöst werden muss
+Die Data-Plane ist der einfache Teil, weil man hier nur eine Integration in den Cluster braucht um Compute-Ressourcen zur Verfügung zu stellen.
 
 ---
 
-## AWS-EKS vs AWS-ECS
+# AWS-EKS vs AWS-ECS
 
-Der Elastic-Container-Service (ECS) stellt eine AWS-spezifische Alternative zu Kubernetes dar. Genau wie AWS-EKS kann es mit EC2 oder Fargate Ressourcen als Compute-Ndes arbeiten.
-
----
-
-## EC2 vs Fargate Data Plane
-
-Der Fargate Ansatz reduziert den Maintenance Aufwand deutlich, da Auto-Scaling und VMs automatisch managed sind von AWS selbst. Dafür ist er in der Vielfalt limitiert.
-
-Fargate verwendet letztlich auch EC2 Instanzen ... man muss sie aber nicht managen.
+Der Elastic-Container-Service (ECS) stellt eine AWS-spezifische Alternative zu Kubernetes dar. Genau wie AWS-EKS kann es mit EC2 oder Fargate Ressourcen als Compute-Nodes arbeiten.
 
 ---
 
-## AWS EKS Workshop
+# EC2 vs Fargate Data Plane
 
-> **ACHTUNG:** bei der Ausführung des Terraform Codes werden AWS Ressourcen erstellt, die **signifikante Kosten** erzeugen!!!
+Der Fargate Ansatz reduziert den Maintenance Aufwand deutlich, da Auto-Scaling und VMs automatisch managed sind von AWS selbst. Dafür ist er in der Vielfalt limitiert (z. B. kein Support von DaemonSets).
+
+> Fargate verwendet letztlich auch EC2 Instanzen ... man muss sie aber nicht managen.
+
+---
+
+# AWS EKS Workshop
+
+Der offizielle *Amazon EKS Workshop* ist eine tolle Einführung und ein MUST-HAVE für den Einstieg.
 
 * [Amazon EKS explained](https://www.eksworkshop.com/docs/introduction)
 * Amazon EKS Workshop
   * [Dokumentation](https://www.eksworkshop.com/docs/introduction)
-  * [Video - Demo](https://www.youtube.com/watch?v=_TFk5jQr2lk)
+  * [code eks-workshop-v2 auf GitHub](https://github.com/aws-samples/eks-workshop-v2)
+  * Videos
+    * [Part 1](https://www.youtube.com/watch?v=_TFk5jQr2lk)
+    * [Part 2](https://www.youtube.com/live/EAZnXII9NTY)
+    * [Part 3](https://youtu.be/ajPe7HVypxg)
+    * [Part 4](https://youtu.be/dONzzCc0oHo)
+    * [Part 5](https://youtu.be/l-FKi7eCb7k)
     * [Managed Nodes](https://youtu.be/_TFk5jQr2lk?t=1171)
     * [Fargate](https://youtu.be/_TFk5jQr2lk?t=2993)
       * [Dokumentation](https://www.eksworkshop.com/docs/fundamentals/fargate/)
 
-Step-by-Step Workshop wie man ein AWS EKS Cluster auf Basis des [aws-samples/eks-workshop-v2 GitHub repos](https://github.com/aws-samples/eks-workshop-v2) aufsetzt. Diese Projekt bietet schon eine Vielzahl von [Addons](https://github.com/aws-samples/eks-workshop-v2/blob/main/terraform/modules/cluster/addons.tf#L25).
+Der [Terraform-Code](https://github.com/aws-samples/eks-workshop-v2) erzeugt ein Cluster (**ACHTUNG: signifikante KOSTEN**) und auch eine Cloud9 Entwicklungsumgebung, so dass man die Beispiele leicht nachvollziehen kann, ohne die ganzen Tools lokal selbst installieren zu müssen. Über [Addons](https://github.com/aws-samples/eks-workshop-v2/blob/main/terraform/modules/cluster/addons.tf#L25) lässt sich der Umfang leicht konfigurieren. Ein Reset ist leicht über ein einziges Kommando zu bewerkstelligen (``).
+
+Step-by-Step Workshop wie man ein AWS EKS Cluster auf Basis des [aws-samples/eks-workshop-v2 GitHub repos](https://github.com/aws-samples/eks-workshop-v2) aufsetzt. Diese Projekt bietet schon eine Vielzahl von .
 
 Nach einem initialen
 
@@ -63,13 +64,13 @@ steht das EKS-Cluster bereits zur Verfügung.
 
 ---
 
-## kubectl CLI
+# kubectl CLI
 
 [siehe hier @pierreinside](kubernetes.md)
 
 ---
 
-## eksctl CLIs
+# eksctl CLIs
 
 * [Homepage](https://eksctl.io/)
 
@@ -91,7 +92,7 @@ kann man besipielsweise ein AWS-EKS-Cluster erzeugen. Bei diesem einzelnen Befeh
 
 ---
 
-## aws CLI
+# aws CLI
 
 * AWS bildet das Backend von AWS-EKS ... somit ist natürlich auch `aws`-CLI ein nützliches Tool
   * [siehe hier @pierreinside](aws.md)

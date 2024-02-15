@@ -114,3 +114,9 @@ Die 2 GB Festplatte ist noch von 2013 ... da brauche ich unbedingt neue. 4 GB so
 ### Backups
 
 ... ich werde meine alte DS112 behalten und auch noch eine 1-2 Jahre nicht verändern => Backups müssen nicht unbedingt migriert werden.
+
+---
+
+## Entscheidung
+
+... vertagt ... ich konnte mich nicht entscheiden

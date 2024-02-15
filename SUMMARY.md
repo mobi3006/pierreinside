@@ -207,7 +207,7 @@
   * [GitHub Pages](github-pages.md)
   * [GitHub CLI](github-cli.md)
   * [GitHub Copilot](github-copilot.md)
-  * [GitHub OIDC](github-oidc.md)
+  * [GitHub-AWS OIDC](github-aws-oidc.md)
   * [GitBook](gitbook.md)
   * [GitLab](gitlab.md)
   * [Bitbucket/Stash](bitbucket.md)

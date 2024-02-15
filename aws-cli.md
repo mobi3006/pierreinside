@@ -13,9 +13,9 @@ Mit der AWS CLI kann man all die Dinge machen, die man auch über die AWS Consol
 
 Nach der Installation des Binary (übrigens ist die CLI in [Python](python.md) programmiert und hat deshalb auch perfekte Python Libraries via [Boto3](https://aws.amazon.com/de/sdk-for-python/)) muss die Shell noch mit Credentials bestückt werden.
 
-Für den Zugriff benötigt man Security-Credentials (Access Keys = Tokens), die man beispielsweise manuell per AWS Console (Web-UI) manuell erzeugen kann. Ein `aws configure` führt interaktiv durch die Konfiguration - hier werden die Credentials abgefragt und am Ende eine Datei `~/.aws/config` geschrieben => damit ist die Konfiguration persistent.
+Für den Zugriff benötigt man Security-Credentials (Access Keys = Tokens), die man beispielsweise manuell per AWS Console (Web-UI) manuell erzeugen kann. Ein `aws configure` führt interaktiv durch die Konfiguration - hier werden die Credentials abgefragt und am Ende eine Datei `~/.aws/config` geschrieben => damit ist die Konfiguration persistent. Darin lassen sich verschiedene Profile einrichten (siehe unten), um in verschiedenen Kontexten (mit verschiedenen Rollen oder als unterschiedliche User) zu arbeiten.
 
-> **ABER ACHTUNG:** Die Credentials sind in Plaintext abgespeichert ... große Gefahr, daß sie gestohlen oder sogar von Dir selbst versehentlich veröffentlicht werden (z. B. bei einem `git push`). Aus diesem Grund empfiehlt sich die Verwendung von `aws-vault`.
+> **ABER ACHTUNG:** Die Credentials sind in Plaintext abgespeichert ... große Gefahr, daß sie gestohlen oder sogar von Dir selbst versehentlich veröffentlicht werden (z. B. bei einem `git push`). Aus diesem Grund empfiehlt sich die Verwendung von `aws-vault`, das man auf encrypted Credentials in einem Password-Store (z. B. `pass` oder den MacOS-Keystore umbiegen kann - siehe unten).
 
 ### Installation per Python Paket Manager
 
@@ -44,9 +44,17 @@ sudo apt-get install awscli
 
 habe ich nur eine awscli-1.14.xxx bekommen.
 
+### Ohne Installation via CloudShell
+
+Die AWS Console (WebUI) bietet in manchen Regionen die CloudShell an, so daß man gar kein lokales Terminal braucht, um die AWS zu nutzen. Man hat dann auch gleicht die entsprechende Rolle und Region, die man beim interaktiven Login ausgewählt hat und kann damit direkt Kommandos ausführen, ohne sich um eine Konfiguration via `aws configure` kümmern zu müssen.
+
+Man hat damit auch gleich auto-Completion für `aws`-CLI zur Verfügung. Auf andere Tools wie Command-History und Tools, die man normalerweise in der eigenen Shell installiert hat, muss man natürlich verzichten (aber die CloudShell bringt schon viele GNU-Tools mit ... `awk`, `jq`). 
+
 ### Konfiguration
 
 Anschließend muß man die Credentials `~/.aws/credentials` noch einbinden.
+
+> **ACHTUNG:** diese Credentials liegen im Plaintext vor!!!
 
 Die Kommandos hängen davon ab, ob man die Python Installation verwendet hat oder die Package-Installation - [siehe Dokumentation](https://linuxhint.com/install_aws_cli_ubuntu/)):
 
@@ -111,7 +119,9 @@ Hierzu legt man eine Rolle an, die einem User (dessen Token man später verwende
 
 Per
 
-> aws sts assume-role --role-arn arn:aws:iam:xxxxxxxxxx:role/ROLENAME
+```
+aws sts assume-role --role-arn arn:aws:iam:xxxxxxxxxx:role/ROLENAME
+```
 
 kann man sich einen Token erzeugen (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`), der die entsprechenden AWS-Kommandos (gemäß Berechtigung) ausführen kann.
 
