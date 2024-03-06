@@ -175,6 +175,8 @@
         * [microK8s](kubernetes-microK8s.md)
         * [minikube](kubernetes-minikube.md)
         * [autoscaler](kubernetes-autoscaler.md)
+        * [Docker](kubernetes-docker.md)
+        * [k9s](kubernetes-k9s.md)
       * [Nomad](nomad.md)
   * [PHP](php.md)
 * Operations

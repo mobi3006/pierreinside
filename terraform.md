@@ -153,7 +153,7 @@ Dabei werden alle `*.tf`-Dateien, `terraform.tfvars` und `foo.auto.tfvars` Datei
 
 Anschließend ist die Maschine auf AWS nutzbar.
 
-> Ich verwende statt `terraform plan && terraform apply` lieber `terraform plan -out=tfplan && terraform apply tfplan` (`tfplan` ist eine Binärdatei), da hier in diesem Fall sicher sein kann, daß tatsächlich auch der von mir erstellte Plan umgesetzt wird und nichts anderes. Insbesondere wenn ich noch interaktiv Variablenwerte bereitstellen muss ist das die bessere Variante.
+> Ich verwende statt `terraform plan && terraform apply` lieber `terraform plan -out=tfplan && terraform apply tfplan` (`tfplan` ist eine Binärdatei), da hier in diesem Fall sicher sein kann, daß tatsächlich auch der von mir erstellte Plan umgesetzt wird und nichts anderes. Insbesondere wenn ich noch interaktiv Variablenwerte bereitstellen muss ist das die bessere Variante. Den erstellten binären `tfplan` kann man leicht per `terraform show -json tfplan | jq` sichtbar machen.
 
 Eine Best-Practice ist die Aufteilung des Codes auf mehrere Dateien mit diesem Namensschema:
 

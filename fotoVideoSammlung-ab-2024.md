@@ -219,7 +219,8 @@ Ich habe PhotoSync folgendermaßen eingestellt:
   * das hat den Zeitstempel der Datei verändert
 * überschreiben erlauben: NEIN
   * bei mir ist der Sync mehrfach abgebrochen und als Neu gekennzeichnete Dateien war aber schon übertragen. Mit dieser Einstellung konnte ich die nächsten Sync deutlich beschleunigen
-  * angeblich sorgen OS Upgrades manchmal dafür, dass die "Neu" Kennzeichnung falsch ist - in dem Fall überträgt man am besten alle Dateien neu. Auch hier werden dann schon übertragene Dateien übersprungen.
+  * angeblich sorgen OS Upgrades manchmal dafür, dass die "Neu" Kennzeichnung falsch ist - in dem Fall überträgt man am besten alle Dateien neu (zumindest wenn der Workflow idempotent ist ... und das sollte immer das Ziel sein). Mit der Einstellung werden dann alle schon übertragenen Dateien übersprungen.
+  * zudem kann ich dann auch irgendwann das Rating auf meinem iPhone ändern, ohne Änderungen in meinen bereits auf dem Server befindlichen Dateien
 
 PhotoSync existiert seit 2011 ... wer sich 13 Jahre auf dem Markt hält, hat entsprechende Qualität und langfristiges Interesse hinreichend nachgewiesen. Ich habe keine Lust, mir in 2 Jahren wieder eine neue Software suchen zu müssen.
 

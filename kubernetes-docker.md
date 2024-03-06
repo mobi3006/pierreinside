@@ -1,0 +1,7 @@
+# Kubernetes und Docker
+
+Kubernetes wird häufig als untrennbar mit Docker verbandelt wahrgenommen ... das ist aber gar nicht der Fall, da Kubernetes auf höherem Level sitzt. Die Kubernetes-Control-Plane kennt seine Worker Nodes aus der Data-Plane und weist diese an, Workloads auszuführen. Docker ist nur eine Möglichkeit zur Ausführung von Arbeit in einem Kubernetes-Cluster ist. Kubernetes kann genauso gut einfach Prozesse starten und somit komplett ohne Docker auskommen.
+
+> Aus diesem Grund wird K8s auch häufig das Operating-System der Cloud genannt. Es spielt keine Rolle, wo die Compute-Resourcen sind (Cloud, OnPrem, RaspberryPI) und welche Artefakte dort deployed werden (Docker Container, Prozesse, ...). K8s orchestriert die Arbeit, überwacht und heilt. 
+
+Wenn die Workload in Form von Docker-Containern abgearbeitet werden soll, dann braucht Kubernetes eine Docker Container Runtime. Kubernetes hat diese Container Runtime pluggable gemacht, so dass man aus der Vielzahl von Angeboten auswählen kann. Aktuell (2023) wird [containerd](https://containerd.io/) als schlanke Container Runtime per Default eingesetzt - sie ist für Kubernetes optimiert. Man kann aber unterschiedliche Container-Runtimes parallel in einem Kubernetes-Cluster verwenden.
