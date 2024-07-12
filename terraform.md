@@ -568,8 +568,6 @@ module.eks.module.eks.module.eks_node_group["for"].data.aws_iam_policy_document.
 
 Input-Variablen (z. B. in `variables.tf`) und Output-Values (z. B. in `output.tf`) definieren den Contract eines Callers zum Module und enthält gleichzeitig die Dokumentation dieser Schnittstelle durch `description`. Auch alle anderen typischen Konzepte (`main.tf`, ...) stehen einem Module zur Verfügung ... genauso wie dem Root-Module (das ohne weitere Module verwendet wird). So einfach und doch so mächtig.
 
-> **ACHTUNG:** einen `provider` Block sollte ein - zur Wiederverwendung entworfenes Modul - nicht haben - es erbt diesen normalerweise vom Caller - ansonsten wäre das Modul kaum wiederverwendbar. Das Modul sollte aber Anforderungen definieren (`required_providers`) und kann auch die Version einschränken (`version = "~> 5.0"` - alle 5er Versionen des Providers werden akzeptiert und sind kompatibel). Die Version sollte nicht zu restriktiv gesetzt werden - das würde die Nutzbarkeit deutlich reduzieren. 
-
 Auf diese Weise lassen sich auch Layer (z. B. Backend, Middleware, Frontend) implementieren. Benötigt man Daten aus einem Modul (= Layer) in einem anderen, dann muß man in Daten explizit übergeben:
 
 ```
@@ -588,15 +586,17 @@ Die `./main.tf` agiert als Controller, um die Daten aus `./middleware/output.tf`
 
 Die in `output.tf` definierten Ausgaben stehen anderen Modulen und - natürlich dem menschlichen Benutzer - als Input Werte zur Verfügung. Am Ende werden sie auch auf der Konsole ausgegeben, so dass ich als User z. B. die public IP Adresse einer EC2 Instanz ausgegeben bekommt, um dann ein ssh connect darauf machen zu können. 
 
-## Provider in Modulen
+### Provider in Modulen
 
 * [Providers Within Modules](https://developer.hashicorp.com/terraform/language/modules/develop/providers)
 
-Eine besondere Challenge weitergabe eines Providers zum Modul darstellen. Macht man hier einen Fehler (z. B. Verwendung eines unterschiedlichen Providers `hashicorp/github` vs `intgerations/github`), dann kann man schon mal ein paar Stunden in die Fehlersuche investieren.
+Einen `provider` Block sollte ein - zur Wiederverwendung entworfenes Modul - nicht haben. Die Definition und damit die Instantieerung sollte im Caller erfolgen ... dort werden die Version und die Konfiguration festgelegt - ansonsten wäre das Modul kaum wiederverwendbar. Das Modul selbst verwendet den Provider aber intern und hat somit auch eigene Erwartungen, die es definieren sollte
 
-Ein Modul sollte als Contract die `required_providers` definieren ... schließlich ist der Code für eine bestimmte Version geschrieben/getestet worden. Wenn der Nutzer des Moduls sich dann auch ganau daran hält, dann sind keine Probleme zu erwarten, da der im Root-Modul definierte Provider dann einfach weiterverwendet wird.
+* `required_providers`
+* Version einschränken (`version = "~> 5.0"` - alle 5er Versionen des Providers werden akzeptiert und sind kompatibel)
+  * die Version sollte nicht zu restriktiv gesetzt werden - das würde die Nutzbarkeit deutlich reduzieren
 
-Provider unterstützen auch `provider.alias` und diese unterschiedlichen Alias-Provider können dann explizit bei einem [Modul-Aufruf übergeben werden](https://developer.hashicorp.com/terraform/language/modules/develop/providers#passing-providers-explicitly):
+Man kann sogar unterschiedliche Provider Instanzen erzeugen und unterschiedlich benennen. Die unterschiedlichen Alias-Provider werden dann explizit bei einem [Modul-Aufruf übergeben](https://developer.hashicorp.com/terraform/language/modules/develop/providers#passing-providers-explicitly):
 
 ```json
 module "project" {
@@ -607,7 +607,7 @@ module "project" {
 }
 ```
 
-... besser man kann darauf verzichten.
+Allerdings macht das den Code nicht unbedingt besser verständlich ... besser man kann darauf verzichten.
 
 ## Functions
 
