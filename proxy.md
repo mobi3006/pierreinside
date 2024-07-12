@@ -8,11 +8,11 @@ Ein Proxy wird in Form eines Decorators (= transparent für den Nutzer) vor den 
 
 handeln.
 
-## Loadbalancer
+# Loadbalancer
 
 Ein Loadbalancer ist eine spezielle Art von Proxy, der für die Lastverteilung und Ausfallsicherheit eingesetzt wird.
 
-### Typen
+## Typen
 
 * Application Load Balancer
   * arbeitet auf HTTP/HTTPS-Ebene (Layer 7)
@@ -26,9 +26,9 @@ Ein Loadbalancer ist eine spezielle Art von Proxy, der für die Lastverteilung u
 * Network Load Balancer
   * arbeitet auf
 
-### Konzepte
+# Konzepte
 
-### AWS - Elastic Load Balancer (ELB)
+## AWS - Elastic Load Balancer (ELB)
 
 * [AWS - ELB](https://aws.amazon.com/de/elasticloadbalancing/)
 

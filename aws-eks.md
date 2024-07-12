@@ -108,13 +108,6 @@ Allerdings sollte man jegliche Infrastruktur-Komponenten mit Infrastructure-as-C
 
 ---
 
-# aws CLI
-
-* AWS bildet das Backend von AWS-EKS ... somit ist natürlich auch `aws`-CLI ein nützliches Tool
-  * [siehe hier @pierreinside](aws.md)
-
----
-
 # AWS Node-Group
 
 > nur wenn self-managed EC2 Instanzen als Worker-Nodes verwendet
@@ -129,3 +122,16 @@ Der [AWS Cluster-Autoscaler](https://github.com/kubernetes/autoscaler/blob/maste
 
 > neben diesem Node-Scaling gibt es auch ein Auto-Scaling auf Pod-Ebene ([siehe Horizontal-Pod-Autoscaler](kubernetes-autoscaler.md))
 
+---
+
+# Ingress
+
+---
+
+# Service-Account
+
+* [kubernetes.io - Managing Service Accounts](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)
+
+Der EKS-Service-Account ist die AWS-Identität, mit der die Kubernetes Ressourcen (z. B. Pods) arbeiten ... der Pod wird mit dem Service-Account assoziiert. Insofern hängen hier u. a. Berechtigungen dran.
+
+> Der Service-Account ist vergleichbar mit einem technischen User-Account

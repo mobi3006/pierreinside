@@ -122,7 +122,7 @@ Bei der Nutzung eines anderen Repos muss man dann allerdings die oberen Folder k
 
 [siehe hier](github-auth.md)
 
-## Authentifizierung/Authorisierung per Personal-Access-Token (PAT)
+## Authentifizierung/Authorisierung per Classic Personal-Access-Token (PAT)
 
 Der Personal-Access-Token ist ein Secret, das mit den Permissions des erzeugenden Users (zur Laufzeit ... nicht zum Erstellungszeitpunkt) genutzt wird. Der Gültigkeitsscope eines solchen Tokens kann allerdings eingeschränkt werden auf z. B.
 
@@ -156,6 +156,12 @@ verwenden.
   * häufig werden hierfür technische User verwendet ... GitHub Apps sind die GitHub-Lösung, die ohne technischen User auskommt (und zudem noch Vorteile gegenüber diesem Ansatz hat ... Stichwort Quota)
 
 **DESHALB** empfehle ich die Verwendung von GitHub Apps - sie sind  zu verwenden, die benutzerunabhängig sind.
+
+## Authentifizierung/Authorisierung per fine-grained Personal-Access-Token (PAT)
+
+Classic PATs können die Berechtigungen des Users (der den PAT erstellt hat) nur geringfügig im Scope einschränken (z. B. auf den Bereich "Repo", dann hat man keinen Zugriff auf die Ressourcen im Bereich "Workflow"). Wenn sich die Berechtigungen des Users ändern, dann ändern sich auch gleichzeitig die Berechtigungen des Tokens.
+
+Fein-granulare PATs beheben dieses Problem indem die Berechtigungen des Users viel feingranularer reduziert werden können ... bis runter auf read-only access auf Repo Content. Zudem hat man die Chance die Nutzung über einen Approval-Prozess abzusichern (z. B. der Organisations-Owner muss dem zustimmen). Die maximale Gültigkeit ist derzeit auf 1 Jahr beschränkt ... man muss also daran denken, den Token rechtzeitig zu erneuern, sonst brechen die Workflows/Integrationen.
 
 ## Authentifizierung/Authorisierung per GitHub App
 

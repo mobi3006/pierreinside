@@ -307,14 +307,33 @@ Ich habe einen alten (hässlichen) Powermanager, der derzeit noch auf meinem Sch
 
 Ich habe noch ein paar 15 Jahre alte Funksteckdosen, die mit einem propritären Handsender bedient werden. Leider funktioniert der Funksender nicht so zuverlässig ... manchmal reagiert es gar nicht, manchmal nur nach nur nachdem ich meine Position verändere und manchmal klappt es auch mehrfach hintereinander. Kurz: ich bin genervt.
 
-### Ledvance Smart+Plug
+### Ledvance Smart+Plug - Steckdose
 
-Ledvance bietet Produkte basierend aif Wifi, Bluetooth und Zigbee. Nachdem ich nun Hue Bluetooth erfolgreich an meinen Echo Plus koppeln konnte und das einwandfrei und zuverlässig funktioniert, habe ich mich nun für eine Zigbee-Steckdose entschieden.
+> Meine Erfahrungenn sind durchwachsen. Wenn sie mal laufen, funktionieren sie i. d. R. zuverlässig (ich habe 3 Steckdosen - eine hat noch nie rumgezickt, eine selten und eine häufiger). Manchmal sind sie allerdings nicht mehr erreichbar - kurzzeitig vom Strom trennen hilft dann schon, um sie wieder in der Hue-App erreichbar zu haben und darüber steuern zu können. Wenn man aber mal ein Gerät in der Hue-App hatte und es dann löschen mussten, weil es einfach nicht mehr steuerbar war, dann kann es nervig werden. In diesem Fall muss man vermutlich einen Reset des Geräts durchführen (10 Sekunden die Power-Taste drücken), um danach eine Kopplung (5 Sekunden die Power-Taste drücken) durchzuführen. Das klappt aber leider nicht zuverlässig.
+
+Ledvance bietet Produkte basierend auf Wifi, Bluetooth und Zigbee. Nachdem ich nun Hue Bluetooth erfolgreich an meinen Echo Plus koppeln konnte und das einwandfrei und zuverlässig funktioniert, habe ich mich nun für eine Zigbee-Steckdose entschieden.
 
 Die Erstinbetriebnahme gestaltete sich seltsam, aber nicht problematisch - evtl. weil es das erste mal war. Nach dem Einstecken forderte ich "Alexa, suche Geräte", aber es wurde kein neues Gerät gefunden. Ich fand auch keinen Pairing-Schalter an der Steckdose ... also versuchte ich es mit dem Power-Schalter, den ich länger drückte und dann erneut "Alexa, suche Geräte". Kein Erfolg. Nach Abstöpseln und erneutem Anstöpseln, drückte ich den Power-Button nur 5 Sekunden und erneut "Alexa, suche Geräte" ... diesmal mit Erfolg. Alexa meldete, "Steckdose 1 gefunden".
 
-> Beim nächsten mal werde ich erst die Suche starten und dann die Steckdose einstecken. Übrigens: 10 Sekunden auf den Power-Button drücken führt zu einem Reset.
+**Tips:**
+
+* der Hue-Hub sollte bei der Erstinbetriebnahme nicht weiter als 30cm entfernt sein
+  * tatsächlich habe ich mal ein paar Stunden vergeudet, weil ich diesen Tip nicht beherzigt habe
+    * meine Alexa mit Zigbee im Abstand von 30cm, aber 2 Stockwerke vom Hue-Hub entfernt, hat nicht ausgereicht ... die Suche in der Hue-App ist immer fehlgeschlagen
+* 10 Sekunden drücken der Power-Taste führt zu einem Reset und direkt in den Kopplungsmodus, so dass man die Suche in der Hue-App starten kann
 
 In der Alexa-App am iPhone konnte ich die Steckdose nun auch sehen und ihr einen anderen Namen "Arbeitsplatz" geben. Sogleich wollte ich die Steckdose mit einer Routine verknüpfen, doch die Steckdose war innerhalb der Routinen als Gerät nicht aufzufinden. Also versuchte ich einfach mal "Alexa, Arbeitsplatz an" - ERFOLG.
 
 Noch habe ich nicht herausgefunden, warum ich die Smart+Plug nicht in Routinen verwenden kann. Vielleicht brauche ich noch einen Alexa-Skill?
+
+**Probleme:**
+
+* wenn die Steckdose in der Hue-App als "Nicht erreichbar" gekennzeichnet ist, dann hilft es mal kurzzeitig die Stromzufuhr zu unterbrechen und wieder einzuschalten.
+* wenn das Gerät eingeschaltet ist, es NICHT als "Nicht erreichbar" in der Hue-App gekennzeichnet ist, aber in der Hue-App als "AUS" dargestellt wird:
+  * in der Hue-App einschalten (so dass es zum aktuellen Zustand passt) - anschließend über die Hue-App aus und wieder einschalten. Somit ist der Status wieder synchronisiert
+
+**Fazit:**
+
+* ich verwende 1-2 Steckdosen, die zuverlässig und gut funktionieren
+* bei einer Steckdose habe ich es nicht mehr hinbekommen, es über die Hue-App zu steuern. Ich konnte es zwar immer wieder pairen, doch dann war es wieder nicht verfügbar. Plötzlich spinnte dann auch die andere Ledvance-Steckdose, die ich gar nicht angefasst hatte ...
+  * letztlich bin ich doch wieder bei meinen Funksteckdosen gelandet, die einfach einwandfrei funktionieren und deutlich einfacher zu installieren waren

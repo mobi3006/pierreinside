@@ -81,13 +81,98 @@ Da Btrfs leistungshungriger (empfohlen werden 2 GB RAM - meine DS124 hat nur 1 G
 
 Die Features von Btrfs brauche i
 
+## Benutzer vs. Shared Folder
+
+**ACHTUNG:** man muss zwischen User-Accounts und Shared-Folders unterschieden. User Accounts erhalten - sofern die Anlage eines Home-Verzeichnisses erwünscht ist - einen eigenen Speicherbereich unter `/volume1/homes/USERNAME`. Mit diesem User können sie ihr Home-Verzeichnis per `\\IP_ADRESSE_SYNOLOGY\homes\USERNAME` mounten. 
+
+
+> ACHTUNG: ich lege die Daten **NICHT unter meinem Homeverzeichnis ab**, sondern in einem Shared Folder und gebe meinem Benutzer darauf Berechtigungen. **DENN:** Unter Windows kann man aber zu EINER IP-Adresse nur mit EINEM User eine Verbindung aufbauen, d. h. man kann nicht zwei User-Homeverzeichnisse einbinden. Das limitiert die Verwendung von Home-Verzeichnissen.
+
+Aus diesem Grund habe ich mich entschieden alle Daten nicht in Home-Verzeichnisse abzulegen, sondern in Shared-Foldern, auf die dann bestimmte User Berechtigung erhalten. Auf Filesystem-Ebene sind die Berechtungen `rwxrwxrwx+` vergeben, d. h. grundsätzlich hat JEDER User Zugriff. ABER: beim Zugriff über SMB (Netzwerk-Share) schaltet sich die Synology dazwischen und wertet die Share-Berechtigungen aus, um den Zugriff zu gewähren oder zu verweigern. Der Owner der Datei ist tatsächlich der User, der sie angelegt hat - es wird IMMER die Gruppe `users` gesetzt, in der standardmäßig alle User enthalten sind (sofern nicht explizit geändert).
+
+Bei der Anlage eines Shared-Folder sollte man den Recycle-Support einschalten
+
+> Das hat zudem den Vorteil, dass ich mir beispielsweise die Berechtigung erteilen kann die Dateien meinen Kinder zu bearbeiten ... das kommt immer mal wieder vor, wenn ich ihnen helfe. Würden die Dateien in deren Home-Verzeichnis liegen, dann wäre das recht umständlich.
+
+Will man Daten zwischen Usern teilen, dann verwendet man Shared-Folder. Die liegen unter `/volume1/SHARED_FOLDER`. Zusätzlich muss man jedem Benutzer, der Zugriff haben soll, eine Berechtigung auf den Shared-Folder. Jeder Nutzer kann dann mit "seinen" Credntials den Shared-Folder per `\\IP_ADRESSE_SYNOLOGY\SHARED_FOLDER` mounten. Das ist natürlich viel flexibler, weil ein Benutzer n Shared-Folders einbinden kann (aber nur ein Home-Folder).
+
+Damit es nicht zu Verwirrung kommt, erhält der Username ein Kürzel (z. B. `/volume1/homes/pfh`) aber der dazugehörige Shared-Folder einen Langnamen (z. B. `/volume1/pierre`).
+
+Beim mounten muss man dann natürlich die 
+
+> so war das bei meiner alten DS112 auch
+
+### Drucker-Scans
+
+Ich verwende einen Shared-Folder `public`, auf den JEDER Nutzer meiner Famile Schreibzugriff hat. Wir tauschen hier Dateien aus.
+
+Ich habe einen Netzwerkdrucker, der Scans auf die Synology ablegt. Hierzu habe ich einen User `dnf2665` für den Drucker angelegt (der nicht einmal ein Home-Verzeichnis braucht). 
+
+Dieser User erhält auch Schreibberechtigung auf den `public`-Shared-Folder.
+
+### PhotoSync
+
+Auch hier wird ein Nutzer angelegt, mit dem die PhotoSync-App sich authentifiziert, um Zugriff auf den Shared-Folder `/volume1/photoysync` zu bekommen. Hier werden alle Photos hochgeladen, um sie dann nachzubearbeiten, zu kategorisieren und nach `/volume1/photos` von einem automatisierten Job zu verschieben.
+
 ## Benutzer
+
+Wann lege ich einen Benutzer an:
+
+* für jeden menschlichen Nutzer
+  * diese Nutzer bekommen ein Home-Verzeichnis
+* für jedes Gerät, das irgendwie Zugriff auf Dateien auf dem Synology braucht
+  * diese Nutzer bekommen i. a. **KEIN** Home-Verzeichnis ... denn ich lege sie nur an, um die Berechtigung auf Shared-Folders einzurichten
+  * tatsächlich bekommt JEDES Gerät einen eigenen User, denn damit kann ich die Berechtigungen gerätespezifisch steuern
 
 In der Einstellung "Benutzer und Gruppe - Erweitert" muss man explizit die automatische Anlage eines Home-Verzeichnisses für neue Benutzer anschalten. Standardmäßig ist das ausgeschaltet.
 
-Im Windows-Explorer muss die Verbindung zu `\\IP_ADRESSE\homes\USERNAME` aufgebaut werden (ACHTUNG: aufpassen bei `homes` - in DSM 6 war das nicht so).
+Im Windows-Explorer kann das Home-Verzeichnis des Nutzers per `\\IP_ADRESSE\homes\USERNAME` eingebunden werden (ACHTUNG: aufpassen bei `homes` - in DSM 6 war das nicht so).
+
+## Shared Folder
+
+Shared-Folders liegen unter `/volume1/SHARED_FOLDER` (im Gegensatz zu Home-Verzeichnissen von Benutzern, die unter `/volume1/homes/USERNAME` liegen).
+
+Einen Shared-Folder kann man mit n Benutzern teilen - jedem Benutzer kann man andere Berechtigungen geben.
+
+Typische Shared-Folders:
+
+* `public`
+* `photos`
+* `music`
+* `videos`
+* `backup`
 
 ## Backups
 
-Backups müssen nicht migriert werden - im Notfall habe ich noch die alte Synology.
+Backup-Daten (liegen auf einer externen USB-Festplatte) müssen nicht migriert werden - im Notfall habe ich noch die alte Synology.
 
+Allerdings müssen die Backup-Jobs für die neue Synology eingerichtet werden.
+
+## Drucker
+
+Ein Dell DNF2665 wird verwendet, um eingescannte Dokumente auf dem Synology für alle Nutzer bereitzustellen. Meine neue Synology hat eine neue IP-Adresse bekommen und während der Migration habe ich einen Hybrid-Betrieb, d. h. einige Dateien liegen noch auf der alten Syology (eingebunden in ein paar Rechner) und migrierte liegen auf der Neuen. Ich kann also nicht einfach die alte IP-Adrese verwenden, um auf die neue Synology zuzugreifen.
+
+Leider ist der Touch-Screen meines Druckers nicht mehr voll funktionsfähig und deshalb konnte ich darüber nicht die neue Synology als Ziel konfigurieren. Letztlich habe ich es einfach über das Web-Interface des Druckers gemacht.
+
+## ssh-Server
+
+Ich habe den ssh-Server aktiviert ... allerdings können nur User der Gruppe `administrators` sich mit ihrem Account peer ssh anmelden. Das macht ja irgendwo auch Sinn.
+
+## Git-Server
+
+Hierzu muss man das Package Git-Server installieren. DEr Zugriff erfolgt über ssh, d. h. jeder Git-Nutzer muss somit in die `administrators` Gruppe aufgenommen werden. Anschliessend kann man per
+
+```
+git clone ssh://mygituser@192.168.1.2:/volume1/mysharefolder/myrepo1
+```
+
+ein Repository clonen.
+
+Hat man noch kein Repository auf der Synology, so
+
+* legt man am besten ein Shared-Folder an
+* gibt jedem berechtigten User auf diesen Shared Folder Write-Access
+* per ssh mit dem Admin-User anmelden und dann:
+  * `mkdir -p /volume1/my-shared-git-folder/my-repo`
+  * `cd /volume1/my-shared-git-folder/my-repo`
+  * `git init --bare`

@@ -501,6 +501,10 @@ on:
 
 > Seltsamerweise funktioniert die Nutzung von Secrets nur in Reusable Workflows (`workflow_call`). Wenn man beispielsweise einen `workflow_dispatch` verwendet, dann kann man ausschliesslich auf `secrets.GITHUB_TOKEN` zugreifen aber nicht auf andere secrets. Wenn man sich aber einen `workflow_dispatch` workflow baut und die Secrets per `secrets: inherit` alle contributed, dann kann der aufgerufene `workflow_call` auf ALLE Secrets zugreifen. Ich bin also gezwungen aus rein technischen Gründen innerhalb eines Repsoitories einen Reusable Workflow zu implementieren. Was ist das denn für ein Quatsch?
 
+Der Secret Store auf dem Level Organisation und Repository hat ist allerdings nicht besonders sicher, da jeder Workflow diese Secrets benutzen kann. In jedem Feature-Branch (den niemand zuvor reviewed hat) kann das "Secret" genutzt werden und somit kann eine Privilege Escalation durchgeführt werden, d. h. ein Workflow "erschleicht" sich das Secret und nutzt es schamlos aus. Das verhindert man am besten mit Environment-Secrets und limitiert den Zugriff auf das Environment auf bestimmte Nutzer oder bestimmte Branches (i. a. Protected-Branches, die von `CODEOWNERS` geschützt werden).
+
+Alternativ kann man Ansätze wie [SOPS](https://github.com/getsops/sops) verwenden, um eine verschlüsselte Datei im Git-Repository abzulegen. SOPS unterstützt hierbei die Verwendung von AWS-KMS-Keys, die z. B. nur für eine bestimmte IAM-Role zugreifbar ist (in diesem Zusammenhang ist [OIDC](github-aws-oidc.md) ein guter Ansatz, um passwordless Zugriff zu erhalten).
+
 ---
 
 # Best-Practices

@@ -8,15 +8,15 @@ Unsere Gasheizung ist nun 20 Jahre alt und wir werden sicher bald vor der Entsch
 
 ---
 
-## Strom
+# Strom
 
 Mittlerweile wird die Anschaffung von Solarpanels (auf schlau Photovoltaik-Anlage) nicht mehr staatlich gefördert ... stattdessen ist es für Neubauten sogar vorgeschrieben.
 
-### Photovoltaik im Winter
+## Photovoltaik im Winter
 
 * [Photovoltaik im Winter](https://www.energieversum.de/photovoltaik-im-winter/)
 
-### Eigenbedarf
+## Eigenbedarf
 
 Wir verbrauchen derzeit ca. 4500 kwh/Jahr und liegen damit noch vergleichsweise niedrig. Durch Home-Office, möglicherweise Klimaanlagen und Elektroauto könnte der Bedarf weiter steigen. Eine [Heizung auf Wärmepumpenbasis und die Warmwasserbereitung](https://www.solarwatt.de/loesungen/unser-systemansatz/alles-aus-einer-hand/saubere-waerme) könnte von selbstproduziertem Strom stark profitieren und eine Lösung für die beliebig steigenden Energiekosten darstellen.
 
@@ -24,11 +24,11 @@ Schwierig ist bei einer Heizung über Wärmepumpe allerdings, daß man in den So
 
 > Löst das ein Stromspeicher? Wird der Strom wirklich solange gespeichert? ... bei einem eigenen Speicher sicherlich nicht ... vielleicht aber mit einem Cloud-Speicher
 
-### Solarmodule
+## Solarmodule
 
 Es gibt verschiedene Größen der (maximal darf die Fläche 2qm sein). Die Leistung variiert zwischen 10qm/kW und 4qm/kw ... hier geht es um die Effizienz.
 
-### Speicher
+## Speicher
 
 Sonnenenergie wird am Tage gewonnen, doch wir benötigen vergleichsweise viel Strom in den Abend/Nachtstunden. Die Einspeisung von Strom (z. B. 10 ct/kwh) bringt weniger Einnahmen als der Kosten für den Bezug (z. B. 30 ct/kwh) . Es macht also Sinn, den produzierten Strom auch selbst zu verbrauchen ... wenn man ihn gebrauchen kann. Ausserdem gibt es eine 70% Regelung - ein Stromspeicher hilft dabei dabei kein Strom zu vergeuden ... bei entsprechender Eigennutzung ist das aber nur ein theoretisches Problem.
 
@@ -48,7 +48,11 @@ Da der Stromspeicher Kosten verursacht, muß man die Frage der Rentabilität ber
 
 > "Eine Stromcloud ohne Speicher im eigenen Haushalt ist demnach wirtschaftlich nicht sehr empfehlenswert. Optimal ist die Nutzung der Solarcloud als Ergänzung zum eigenen Energiespeicher. Kurzum: Der lokale Speicher für die kurzfristige Stromsicherung, die Strom-Cloud für langfristig abrufbare Solarstrom-Reserven." [Stromcloud](https://www.energieversum.de/stromcloud/)
 
-### Cloud-Speicher aka Solarcloud
+## Balkonkraftwerke
+
+In 2023 sind Balkonkraftwerke in Mode gekommen ... sie sind kostengünstig (weil man ja i. a. nur 1-3 Module kauft) und amortisieren sich nach 2-3 Jahre.
+
+## Cloud-Speicher aka Solarcloud
 
 * [Mit der Stromcloud im siebten Himmel](https://www.energieversum.de/stromcloud/)
 * [Senec-Cloud](https://senec.com/de)
@@ -57,7 +61,7 @@ Beim Cloud-Speicher verkauft man seinen Strom nicht an einen Stromanbieter und b
 
 > Hört sich phantastisch an ... ABER: jeder braucht in den Wintermonaten Energie und produziert im Sommer Überschuss. Irgendwoher muss also die Energie im Winter kommen. Das kann doch nur klappen, wenn 100 Einheiten Lieferung im Sommer nur zu z. B. 70 Einheiten Lieferung im Winter führt. Oder man dann deutlich teureren (und weniger nachhaltigen AKW/Kohle-Strom) vom Anbieter erhält.
 
-### Stromverkauf
+## Stromverkauf
 
 Neben des materiellen Energie-gegen-Energie-Tauschs gibt es auch die Möglichkeit, überschüssigen Strom zu verkaufen. Hier stehen verschiedene Varianten zur Verfügung:
 
@@ -72,7 +76,7 @@ Neben des materiellen Energie-gegen-Energie-Tauschs gibt es auch die Möglichkei
   * der Kunde schließt einen direkten Vertrag mit dem Mittelsmann (z. B. Voltego) ... der Stromproduzent (z. B. ich) legt fest zu welchem Preis der Kunde den Strom bekommt
   * wenn der überschüssige Strom des Produzenten nicht ausreicht, dann liefert der Mittelsmann zum festgelegten Preis Strom (wo auch immer der herkommt). Hat als Produzent den Preis zu niedrig angesetzt (15 ct, die der Stromabnehmer zahlt), dann springt vermutlich der Produzent (= ICH) ein. Das ist ein großes Risiko. Wenn der Vertrag des Kunden also 1 Jahr läuft und meine Anlage produziert zu wenig Strom (Wetter, Reparatur mit langen Lieferzeiten) und die Preise am Markt deutlich steigen, dann habe ich das Risiko.
 
-### 70% Regel
+## 70% Regel
 
 * [energieversum](https://www.energieversum.de/70-prozent-regelung-pv/)
 
@@ -80,15 +84,15 @@ Maximal 70% der erzeugten Energie dürfen eingespeist werden, um eine Überlastu
 
 Bei einer variablen Drosselung hilft ein Stromspeicher, um den produzierten Strom nicht zu verlieren. Oder man erhöht den Eigenverbrauch in dieser Zeit durch Wäsche-Waschen, ...
 
-### SmartMeter
+## SmartMeter
 
 Ein smarter Stromzähler ist bei Anlagen ab 7 kWp Pflicht und hilft Statistiken zu erfassen und intelligente Steuerungen/Optimierungen durchzuführen.
 
-### Energietransformation
+## Energietransformation
 
 Strom einspeisen ... Gas bekommen - das verspricht die [BSH-Cloud](https://www.bsh-energie.de/leistungen/bsh-cloud).
 
-### Staatliche Förderung
+## Staatliche Förderung
 
 Obwohl PV-Anlagen für Neubauten vorgeschrieben sind, gibt es dennoch 2022 einige Fördermöglichkeiten. Von Einspeisevergütung (bringt immer weniger - aber für 20 Jahre festgelegt) über zinsgünstige Kredite bis zu Zuschüssen.
 
@@ -96,7 +100,7 @@ Obwohl PV-Anlagen für Neubauten vorgeschrieben sind, gibt es dennoch 2022 einig
 * [Baden-Württemberg](https://um.baden-wuerttemberg.de/de/energie/informieren-beraten-foerdern/foerderprogramme/regionale-pv-netzwerke/)
 * [KfW - Erneuerbare Energien](https://www.kfw.de/inlandsfoerderung/Unternehmen/Energie-Umwelt/F%C3%B6rderprodukte/Erneuerbare-Energien-Standard-(270)/)
 
-### Rentabilität
+## Rentabilität
 
 * [solarwatt.de](https://www.solarwatt.de/ratgeber/photovoltaik-kosten)
 
@@ -104,19 +108,21 @@ PV-Anlagen haben eine hohe Lebensdauer (ca. 20 Jahre) und erhöhen somit auch de
 
 Es gibt Berechnungen wie hoch die Rendite bei Investition in eine PV-Anlage ist.
 
-### Risiko Feuer
+## Risiko Feuer
 
 Durch die Umwandlung von Strahlungsenergie in Strom ist beim Brand einer Photovoltaik-Anlage erhöhte Vorsicht geboten. Die Feuerwehr ist mittlerweile darin geschult und somit stellt das i. a. kein Problem dar.
 
-### Versicherung
+## Versicherung
 
 * https://www.bsh-energie.de/ratgeber/photovoltaikversicherung-diese-schaeden-sind-abgedeckt
 
-### Dimensionierung
+## Dimensionierung
 
 Die Frage ist hier wieviel Autarkie will ich erreichen. Im äußersten dimensioniert man die Anlage so, daß sie auch im dunkelsten Winter noch genug Strom abwirft, um KEINEN Strom einkaufen zu müssen. Dann muss man allerdings mehr investieren ... produziert dann aber auch mehr Überschuss, der sich verkaufen läßt (komplexe Kosten/Nutzen-Rechnung).
 
-### Angebot - Jes AG
+## Angebot - Jes AG
 
 * Solarmodul *LONGI * Longi 405Wp LR5-54HIH BlackFrame*
   * [Test von gruenes.haus](https://gruenes.haus/longi-solar-solarmodule-test-erfahrungen/)
+
+---

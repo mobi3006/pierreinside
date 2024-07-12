@@ -881,6 +881,13 @@ Man kann sich leicht aus den laufenden Ressourcen die Manifest-Files exportieren
 
 Ein Manifest-File kann mehrere Kubernetes Ressourcen spezifizieren ... die sind dannn durch `---` voneinander getrennt (das sollte man aber besser nicht tun).
 
+## Abgrenzung zu anderen Ansätzen
+
+Neben solchen Manifest-Dateien (Teil des K8s Core), die per `kubectl apply` ausgerollt werden gibt es noch weitere Ansätze
+
+* [Helm-Package-Manager](kubernetes-helm.md)
+* [Kustomize]()
+
 ---
 
 # ConfigMap
@@ -974,7 +981,7 @@ Allerdings behandelt Kubernetes Secrets in bestimmten Use-Cases ein wenig sensit
 * sie werden Base64-encoded in etcd gespeichert (was natürlich nicht sicher ist)
 * keine Ausgabe in Logfiles
 
-> In etcd werden Secrets und in den Containers werden sie aber dennoch im Plaintext genutzt.
+> In etcd und in den Containers werden Secrets aber dennoch im Plaintext genutzt.
 
 ## Type generic
 
@@ -1100,7 +1107,7 @@ Die manuelle Installation eines Kubernetes-Clusters ist nicht trivial (insbes. h
 
 # CI/CD
 
-* [Argo CD](https://argo-cd.readthedocs.io)
+[see here](argocd.md)
 
 ---
 

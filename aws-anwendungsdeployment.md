@@ -1,5 +1,7 @@
 # AWS Anwendungsdeployment
 
+* [10 Things Serverless Architects Should Know](https://aws.amazon.com/blogs/architecture/ten-things-serverless-architects-should-know/)
+
 In diesem Abschnitt beleuchte ich die verschiedenen Ansätze jegliche Arten von Anwendungen (sehr einfach aber auch sehr komplexe) auf AWS zu betreiben.
 
 Allen gemeinsam ist, dass die Basic-Tools von AWS (EC2, VPC, ALB, Auto-Scaling-Groups, Security-Groups, ...) mehr oder weniger offensichtlich genutzt werden, um so ein komplexes Szenario abzubilden. Je nach Lösung hat man entweder weniger oder mehr Einfluß.

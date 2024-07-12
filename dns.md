@@ -7,17 +7,17 @@ Gute Dokumentationen:
 
 ---
 
-## Motivation
+# Motivation
 
-Rechner werden im Internet über IP-Adressen adressiert. Leider kann sich die niemand merken und ausserdem könnten die sich durch Veränderungen an der Netzstrultur (z. B. man wechselt den Provider) - deshalb hat man mit den FullQualifiedDomainNames (FQDN) eine Abstraktionsschicht eingezogen, die diese Probleme lösen soll. Ein DNS mappt FQDN auf IP-Adressen über sog. A-Records.
+Rechner werden im Internet über IP-Adressen adressiert. Leider kann sich die niemand merken und ausserdem könnten die sich durch Veränderungen an der Netzstrultur (z. B. man wechselt den Provider) - deshalb hat man mit den FullQualifiedDomainNames (FQDN) eine Abstraktionsschicht eingezogen, die diese Probleme löst. Kurzum: ein DNS-Server mappt FQDN auf IP-Adressen über sog. A-Records.
 
-Aber ein DNS kennt noch viele weitere Recordtypen.
+Aber ein DNS kennt noch viele weitere Einsatzbereiche, dür die es entsprechende Recordtypen gibt.
 
 Ein guter Vergleich ist die Verwendung von Telefonnummern. Wir können uns die ganz gut merken, damit es es aber funktioniert müssen die "Kabel" in den Telefonzentralen richtig geschaltet sein, sonst kommt unser Anruf dennoch woanders an. Der DNS ist für das Routing in der unterliegenden Technik verantwortlich. Dementsprechend kritisch ist er ... denn damit könnte man Nutzer auf andere Seiten umlenken (Stichwort Phishing - DNSSec). 
 
 ---
 
-## Komponenten
+# Komponenten
 
 * Client = Resolver
 * Server = Domain Name Server
@@ -25,8 +25,19 @@ Ein guter Vergleich ist die Verwendung von Telefonnummern. Wir können uns die g
     * ein autoritativer Nameserver ist das Original der DNS-Informationen. Ein autoritativer Nameserver ist für eine Zone/Domain zuständig (z. B. cachaca.de) - er kann die Verwaltung von Subdomains an weitere Nameserver delegieren
   * non-autoritative Nameserver
     * sie sammeln und cachen die Informationen aus vielen autoritativen Nameservern
-
 ---
+
+# Verwaltung und Nutzung
+
+## DNS-Zone
+
+Eine DNS-Zone wird über ein Zone-File administriert, das verschiedene Record-Typen enthält. Wird eine Sub-Zone hier eingebunden, dann erfolgt das über einen `NS`-Entry, der die Auflösung an einen anderen Nameserver zur Auflösung der DNS-Entries dieser Zone weiterleitet.
+
+### Zone `local.`
+
+TopLevelDomains wie `de`, `com`, `org`, ... haben eine gleichnamige Zone `de.`, `com.`, `org.`, ... (der Punkt dahinter ist tatsächlich relevant). Die Zone `local.` ist keine TopLevel-Zone, doch wird diese Pseudo-Zone gerne für DNS-Einträge in einem LAN, um beispielsweise zwei Mailserver im LAN aufzusetzen, die sich gegenseitig Mails schicken können, ohne die Mailserver ans Internet anbinden zu müssen.
+
+Hier ist beschrieben wie man bind nutzen kann, um eine local Zone zu konfigurieren: http://wiki.linuxmce.org/index.php/How_to_setup_Local_Authoritative_DNS
 
 ## Record-Typen
 
@@ -35,19 +46,32 @@ Ein Nameserver verwaltet Informationen in Form von sog. Resource Records - es gi
 * SOA: Start of Authority
   * gibt an welche Zone von diesem Nameserver verwaltet wird - nur, wenn es sich um einen autoritativen Nameserver (= Primary Nameserver) handelt
 * NS
+  * entweder: referenziert die DNS-Servers, die für die Namensauflösung dieser Zone zuständig sind
+  * oder: bei Subzonen werden die DNS-Server dieser Subzone referenziert, über die eine Delegation erfolgt
 * A
+  * es kann mehrere A-Records zu einem einzigen FQDN geben, so dass **MEHRERE** IP-Adressen auf die Query nach dem A-Record zurückgeliefert werden. Der Client kann dann einen beliebigen auswählen
 * AAAA
+* CNAME
+  * macht FQDN => FQDN Auflösung - CNAME fungiert als Alias-Definition
+  * auf diese Weise könnte ich `google.cachaca.de` auf `google.de` umleiten
 * MX
 * CERT
 * SRV
 * TXT
 
-FQDN-Namesauflösung iterativ vs. rekursiv über Root-Server und autoritative Server
+Diese Entries werden in jeweils unterschiedlichen Kontexten (= Use-Cases) verwendet, d. h. ein `A` Record löst einen FQDN zu einer IP-Adresse auf und ein `NS`-Entry enthält die Nameserver, die die Sub-Zone verwaltet.
+
+> **ACHTUNG:** die Records haben ALLE eine sog. Time-to-Live (TTL), die fürs Caching relevant ist. Setzt man die zu hoch an, dann dauert es entsprechend lange bis man Einträge nach Änderungen in allen Caches aktualisiert hat - im worst-case führt eine Änderung dann zu einer temporären Nicht-Erreichbarkeit. Setzt man den Wert zu niedrig an, dann dauert die hierarchische Namensauflösung entsprechend lange. Die TTL sollte man also mit Bedacht wählen.
+
+---
+
+# FQDN-Namesauflösung iterativ vs. rekursiv
+
 DNS ist dezentral organisiert, d. h. ein DomainNameServer ist für eine sog. Zone/Domäne (eine Subdomäne ist auch eine Domäne) zuständig (z. B. für die Domäne cachace.de). Eine Domäne ist in eine oder mehrere Zonen (= Subdomains) aufgeteilt (z. B. einkauf.cachaca.de und produktion.cachaca.de) - das kann der Domänen-Administrator frei entscheiden. Ein Client bekommt einen Resolver (= Nameserver) konfiguriert (z . B. in /etc/resolv.conf) oder aber auch bei der Initialisierung des Netzwerks zugewiesen (z. B. wenn man die DSL-Verbindung aufbaut). Der einkonfigurierte Resolver dient als zentrale Anlaufstelle für DNS-Requests. Kann der Resolver den Request selbst nicht auflösen (weil es sich nicht um einen Record aus seiner verwalteten Zone handelt oder die Caches dafür abgelaufen ist), dann delegiert er den Request weiter. Im worst-case landet der Request beim DNS, der für die Zone der Root-Domain zuständig ist.
 
 Braucht ein Client eine IP-Adresse, so wendet er sich an den Resolver mit dem gewünschten FQDN (z. B. www.cachaca.de). Dann ...
 
-### Iterative Auflösung
+## Iterative Auflösung
 
 findet der Resolver (er übernimmt den aktiven Part - im rekursiven Szenario übernimmt der an den Resolver angebunde DNS den aktiven Part) raus, welcher Root-Server für die Top-Level-Domain de zuständig ist (dig -t ns de):
 
@@ -80,7 +104,7 @@ Nun kann der Resolver einen der definierten (autoritativen) Nameserver für cach
 www.cachaca.de.         7008    IN      A       80.246.53.11
 ```
 
-### Rekursive Auflösung
+## Rekursive Auflösung
 
 Hier ist das auch sehr schön grafisch aufbereitet (SUPER!!!): http://de.wikipedia.org/w/index.php?title=Datei:DNS-query-to-wikipedia.svg&filetimestamp=20110823143358
 
@@ -105,15 +129,7 @@ Zur Auflösung der RecordResource-Requests (also wie oben z. B. die Abfrage eine
 
 ---
 
-## Zone local
-
-Es gibt die TopLevelDomains de, com, org, ... - alle bilden auch eine gleichnamige Zone. local ist keine TopLevelDomain, doch wird diese Pseudo-Zone gerne für DNS-Einträge in einem LAN, um beispielsweise zwei Mailserver im LANaufzusetzen, die sich gegenseitig Mails schicken können, ohne die Mailserver ans Internet anbinden zu müssen.
-
-Hier ist beschrieben wie man bind nutzen kann, um eine local Zone zu konfigurieren: http://wiki.linuxmce.org/index.php/How_to_setup_Local_Authoritative_DNS
-
----
-
-## DNS-Caching
+# DNS-Caching
 
 Die Auflösung über die Root-Server bis hin zu den autoritativen Servern ist natürlich relativ ineffizient, wenn man berücksichtigt, daß es sich um Informationen handelt, die sich nur ganz selten ändern.
 
@@ -123,15 +139,23 @@ Die DNS-Einträge können (beispielsweise durch andere DNS, Browser, ...) Ergebn
 
 ---
 
-## Wer betreibt einen Nameserver
+# DNS vs Elstic-Servers
 
-### Szenario - lesender Zugriff
+Im Cloud-Umfeld arbeitet man i. a. mit elastischen Servern. Je nach Last werden weitere Server gestartet oder nicht genutzte wieder runtergefahren. Man könnte nun auf die Idee kommen, die einzelnen Server als DNS-Entries bereitzustellen. Für diese schnelle Änderungsrate sind die Enträge aber nicht gemacht. In diesem Fall würde man einen Loadbalancer vor die Server setzen und diesen Loadbalancer mit einer Public-Address versehen, die über DNS geroutet wird.
+
+Ein Application-Load-Balancer könnte dann Requests für eine Domain `cachaca.de` zuständig sein und dann aufgrund einer Subdomain (z. B. `api.cachaca.de`) oder eines URL-Path (z. B. `cachaca.de/api`) eine Delegation in dahinterliegende (private) Servers durchführen.
+
+---
+
+# Wer betreibt einen Nameserver
+
+## Szenario - lesender Zugriff
 
 In größeren LANs wird i. d. R. ein (oder mehrere - wegen Ausfallsicherheit) eigener Nameserver betrieben, der neben den Internet-FQDNs auch die internen FQDNs des LAN verwaltet. Dieser DNS cached die Informationen der autoritativen DNS-Server bis das Ende die TTL abgelaufen ist. Dann wird der autoritative Server erneut kontaktiert und das Spiel beginnt von vorn.
 
 Als Privatanwender (ohne größeres LAN) wird man den DNS seines Internet-Providers nutzen (wird automatisch beim Erhalt der Public Internet-Address mitgeliefert). Dennoch trägt man den DNS seines Providers nicht direkt in die /etc/resolv.conf, da sie sich ändern kann und man dann mit veralteten DNS-Server-Adressen arbeitet (die im besten Fall gar nicht mehr funktionieren ... dann würde man das Problem zumindest noch mitbekommen). Stattdessen übermittelt der DSL-Provider beim DSL-Verbindungsaufbau zwei DNS-Server (es sind wohl zwei vorgeschrieben). Diese kann der Router verwenden (man kann aber auch einen anderen DNS-Server im router konfigurieren). In den Clientrechnern im LAN verwendet man dann die IP-Adresse des Routers, der die DNS-Requests an den eingetragenen DNS-Server weiterleitet (evtl. erfolgt hier auch ein Caching). Der DHCP-Server übernimmt auch das DNS-Handling ... zumindest kann die dem Host (-namen) zugeordnete IP-Adresse an dem DNS-Server übermittelt werden, so daß die Rechner im internen LAN auch mit sprechenden Hostnamen adressiert werden können. Am einfachsten ist das alles - zumindest für kleinere Netze (z. B. für Privatanwender) - wenn der DSL-Router gleichzeitig DHCP-Server und DNS-Server (zumindest für das lokale Netz) ist. Wenn der Router nicht autoritativer Server für die angefragte Zone/Domain ist, wird er vermutlich im Cache nachsehen und dann evtl. an den DNS des DSL-Providers weiterreichen (sog. Forwarding). Kommt die Antwort vom externen DNS, so wird der Router diese Information cachen (bis die TTL erreicht ist)
 
-### Szenario - schreibender Zugriff
+## Szenario - schreibender Zugriff
 
 Gute Quellen:
 
@@ -183,7 +207,7 @@ In diesem Fall kann man DNSMASQ lokal laufen lassen. In diesem kann man komforta
 
 ---
 
-## CDN - Content Delivery Network
+# CDN - Content Delivery Network
 
 * [Wikipedia](https://en.wikipedia.org/wiki/Content_delivery_network)
 
@@ -193,11 +217,11 @@ Für CDNs hat sich ein eigener Markt entwickelt, d. h. die Contentersteller host
 
 ---
 
-## Tools
+# Tools
 
 * [Online dig](https://toolbox.googleapps.com/apps/dig/)
 
-### dig (Linux) und ipconfig (Windows)
+## dig (Linux) und ipconfig (Windows)
 
 Will man die Konfiguration einer Zone/Domain rausfinden, so kann man das Tool dig verwenden (besser als nslookup).
 

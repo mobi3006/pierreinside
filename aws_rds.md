@@ -1,5 +1,7 @@
 # AWS - RDS
 
+Kommt man aus einer OnPrem-Umgebung, dann ist es verm
+
 ---
 
 ## Unterstützte Datenbanken

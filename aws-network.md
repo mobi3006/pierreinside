@@ -14,13 +14,17 @@ Hier sieht man auch sehr schön, warum man beim Starten einer EC2 Instanz die Se
 ## VPC - Virtual Private Cloud
 
 * [Stephane Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528538#overview)
+* [How Amazon VPC works](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html)
 
-Die Virtual Privat Cloud ist das Ziel einer jeden Server-based Anwendung ... hier wird sie gehostet. Mit dem VPC wird das Internet (= Public Cloud ... Ingress - einkommender Traffic, Egress - ausgehender Traffic) verbunden. Als Anwendungshoster kann ich mich für ein oder mehrere VPC entscheiden (bis zu 5 VPCs sind in EINER Region innerhalb eines AWS Accounts möglich) - VPCs sind logisch voneinander isoliert ... Verbindungen kann man konfigurieren. Meistens hat man aber auch verschiedene Hosting-Umgebungen (Development, Test, Staging, Production), die man voneinander durch Nutzung verschiedener VPCs voneinander trennen möchte (hier kann man aber auch verschiedene AAWS Accounts verwenden ... eine noch stärkere Trennung als die über VPCs).
+Die Virtual Privat Cloud ist das Ziel einer jeden Server-based Anwendung ... hier wird sie gehostet. Das VPC riegelt zumeist den Zugriff auf die Anwendungslösung ab und lässt nur noch dedizierte Zugriffe zu. Zwischen VPC und Internet kann eine Verbindung hergestellt werden ... und zumeist macht das auch Sinn, denn die User sind meistens außerhalb des VPC. Das VPC wie ein Subnetz zu verstehen, das über einen Router/InternetGateway mit der Aussenwelt verbunden wird (in beide Richtungen).
+
+Als Anwendungshoster kann ich mich für ein oder mehrere VPC entscheiden (bis zu 5 VPCs sind in EINER Region innerhalb eines AWS Accounts möglich). Die VPCs sind logisch voneinander isoliert ... Verbindungen kann man konfigurieren. Meistens hat man aber auch verschiedene Hosting-Umgebungen (Development, Test, Staging, Production), die man voneinander durch Nutzung verschiedener VPCs voneinander trennen möchte (hier kann man aber auch verschiedene AAWS Accounts verwenden ... eine noch stärkere Trennung als die über VPCs).
 
 * ein VPC liegt in einer Region, deckt aber alle Availability Zones (AZ) dieser Region ab
   * die Subnets liegen dann in unterschiedlichen AZs
+* ein VPC hat eine Main Route Table, die Kommunikation innerhalb des VPC zwischen allen Subnets erlaubt
 * jeder AWS Account kommt schon vorkonfiguriert mit (um den Einstieg zu erleichtern) ... im Produktionsumfeld sollte alle Komponenten selbst konfigurieren
-  * Default-VPC ... ohne VPC geht nix
+  * Default-VPC **MIT** (ACHTUNG) Public-Internet-Access ... ohne VPC geht nix
     * Internet-Zugang vorhanden (Inbound + Outbound)
     * alle EC2 erhalten public IP-addresses ... ready-to-go
     * Route Table vorkonfiguriert
@@ -35,6 +39,9 @@ Die Virtual Privat Cloud ist das Ziel einer jeden Server-based Anwendung ... hie
 * IP-Ranges von VPC sollten sich nach Möglichkeit nicht überlagern, damit man später noch ALLE VPCs miteinander verbinden kann (Eindeutigkeit)
 * definiert DNS Einstellungen
 * konfiguriert einen Flow Log (zur Problemanalyse)
+* zumeist definiert man verschiedene Subnets ... jedes Subnetz muss eine CIDR-Range aus dem VPC-CIDR-Range haben
+  * pro Availability Zone ein Subnetz
+  * unterschiedliche Subnets für public (z. B. Webserver) und private (z. B. Datenbank) Resources
 
 ### CIDR
 
@@ -92,32 +99,30 @@ Die Lösung sind VPC-Endpoints:
 
 ---
 
-## Internet Gateway (IGW)
+## Internet Gateway (IGW) und Route Table
 
 * [Stephan Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528544#overview)
+* [Configure route tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
 
-* IGW stellt - in Verbindung mit einer Route Table und einem Router - den Zugang zum Internet dar ... also die Grenze zwischen Virtual-PRIVATE-Cloud (VPC) und World-Wide-Web
+* IGW stellt - in Verbindung mit einer Route Table und einem Router - den Zugang zwischen dem VPC und dem Internet dar
+  * ein IGW ohne Route Table hat keinen Wert, denn nur darüber wird das Internet-Gateway für die Ressourcen der jeweiligen Subnets nutzbar
+  * die Main-Route-Table hängt am VPC ... sie enthält per Default nur Einträge, die das Routing zwischen allen Subnetzen des VPC ermöglicht (`target = local`) - ein Routing von innen-nach-außen und von außen-nach-innen ist hier aus Sicherheitsgründen nicht konfiguriert
+  * jedes Subnetz hat eine Custom Route Table
+  * die Route-Table stellt sicher, dass einkommende Requests auch im ans richtige Subnetz weitergeleitet werden (i. a. ist das dann ein Public-Subnetz)
+    * ob ein Subnet private oder public ist hängt einzig und allein daran, ob die Route Table ein Routing ins Subnetz definiert
 * von AWS wird sichergestellt, dass es hochverfügbar (skaliert horizontal, Redundanz) ist
 * VPC und IGW haben eine 1:1 Beziehung
-* ein IGW ohne Route Table hat keinen Wert
 
 ---
 
-## Route Table
+## NAT Instance - DEPRECATED
 
-* regelt das Routing in einem VPC und/oder einem Subnet
-* da man private und public Subnets hat, sollte man auch private Route Table (für die privaten Subnetze) und eine Public Route Table (für die public Subnetze) haben
-
----
-
-## NAT Instance
-
-> **deprecated by NAT Gateway (seit Ende 2020), die AWS-managed sind, höhere Bandbreite und Verfügbarkeit haben**
+> **DEPRECATED** by NAT Gateway (seit Ende 2020), die AWS-managed sind, höhere Bandbreite und Verfügbarkeit haben
 
 * erlaubt EC2 Instanzen aus privaten Subnetzen auf das Internet zuzugreifen ... braucht man schon allein, um die Packages des Betriebssystems/Toolings up-to-date zu halten ... also **IMMER**
   * letztlich auch über Router, Route Table und Internet Gateway
   * es wird ein spezielles Amazon Linux AMI bereitgestellt, das als EC2 Instanz im Public-Subnetz deployed wird
-* NAT Instance muss im Public Subnetz laufen
+* NAT Instance muss im Public Subnetz laufen, denn nur das hat i. a. das Routing über das Internet-Gateway definiert. Ein Zugriff aus dem privaten Subnetz erfolgt also über das NAT
   * es agiert als Vermittlungsstelle zwischen WWW und Private Network
     * da die NAT Instance die Sender-IP-Adresse verändert muss die Einstellung "Source-and-Destination-Check" auf der EC2 Instanz des private Networks disabled werden muss
 * braucht eine Elastic IP Adresse (= feste IP-Adresse) ... damit die Responses auf Requests auch wieder ankommen
@@ -129,12 +134,12 @@ Die Lösung sind VPC-Endpoints:
 
 * [Stephan Marek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528550#overview)
 
-* wird verwendet, um einer privaten Komponente (z. B. EC2 Instanz) Zugriff auf das Internet zu ermöglichen
+* wird verwendet, um einer privaten Komponente (z. B. EC2 Instanz) Zugriff auf das Internet zu ermöglichen ... braucht man schon allein, um die Packages des Betriebssystems/Toolings up-to-date zu halten ... also **IMMER**
   * die Route Table muss dazu entsprechend konfiguriert werden
 * muss in einem separaten Subnet betrieben werden als eine EC2 Instanz, die es verwenden will
 * High-Availability in EINER Availibility Zone
   * ABER: ist gebunden an EINE Availibility Zone => pro AZ ein NAT-Gateway erforderlich
-* verwendet eine Elastic IP (feste IP-Adresse)
+* verwendet eine public Elastic IP (feste IP-Adresse)
 * braucht ein Internet Gateway (genauso wie eine *NAT Instance*)
 * managed by AWS (im Gegensatz zu NAT Instance)
   * man muss keine Security-Groups managen
@@ -186,7 +191,9 @@ Für diesen Einsatzbereich muss der Bastion Host natürlich vollkommen sicher se
 
 ## DNS
 
-* [Stephane Maarek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13531254#overview)
+* [DNS@pierreinside](dns.md)
+* [Stephane Maarek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/learn/lecture/28384280#overview)
+* [AWS Skillbuilder](https://explore.skillbuilder.aws/learn/course/17896/play/93873/amazon-route-53-basics)
 
 * DNS-Resolving wird auf VPC-Ebene eingestellt
 * AWS stellt einen Route53-DNS-Server unter 169.254.169.253 (public IP!!!) zur Verfügung. Auf diese Weise werden
@@ -199,7 +206,57 @@ Für diesen Einsatzbereich muss der Bastion Host natürlich vollkommen sicher se
 
 > Der Name leitet sich aus dem Standard-Port für DNS-Server (53) ab.
 
-Hier lassen sich Private Hosted Zones einrichten, mit dem sich DNS-Namen im eigenen VPC vergeben und auflösen lassen.
+Route53 ist ein AWS Managed Service, d. h. man sorgt sich nur um die Spezifikation (= Konfiguration) und AWS managed die dahinterliegende Infrastruktur und sorgt für High-Availability (z. B. mehrere DNS Server verteilt über die Welt). Die Route53-Konfiguration ist global, d. h. man macht sie nicht in einer bestimmten AWS Region, sondern Global innerhalb eines AWS Accounts.
+
+Hier lassen sich
+
+* Private Hosted Zones
+  * mit dem sich DNS-Namen im eigenen VPC vergeben und auflösen lassen (Routing innerhalb eines VPCs)
+* Public Hosted Zones
+  * hier agiert AWS als Domain-Registrar (wie jeder andere Domain-Hoster)
+* man kann die "Registered Domains" [hier verwalten](https://us-east-1.console.aws.amazon.com/route53/domains)
+
+einrichten.
+
+Bei der Einrichtung einer Zone (z. B. `cachaca.de.`) sorgt AWS dafür, dass ein paar DNS-Servers für die Auflösung von Domains aus dieser Zone (z. B. `www.cachaca.de`) zuständig sind. Diese DNS Server werden als `NS` Records in der Zone `cachaca.de.` hinterlegt.
+
+Route 53 unterstützt auch Routing-Policies (ist das eigentlich eine Route 53 Besonderheit oder kann das jeder DNS Server?):
+
+* Simple
+* Failover (z. B. in ein Desaster-Recovery)
+  * dann braucht man auch entsprechende Health-Checks
+* Geolocation
+* Weighted
+  * hier vergibt man dann den gleichen A-Record Namen (z. B. `www.cachaca.de`) an verschiedene IP-Adressen und gewichtet deren Nutzung
+  * auf diese Weise kann man die Processing Last verteilen oder auch Canary-Releases abbilden
+* Multi-Value
+  * hiermit lassen sich Client-Side Loadbalancer abbilden
+  * dabei liefert Route53 bis zu 8 A-Records für einen FQDN und der Client kann sich einen aussuchen  
+
+Mit den unterschielichen Routing-Typen lassen sich Canary-Releases abbilden, Multi-Region-Failovers, ...
+
+> Routing Policies sind keine richtigen Umleitungen eines Requests an einen anderen Empfänger, d. h. die Nachrichten gehen nicht durch den DNS an einen Zielserver. Es werden nur die FQDN unterschiedlich durch den Nameserver aufgelöst (bei einem sehr niedrigen TTL) und der Client spricht dann halt einen andere IP-Adresse (= Server) an. Insofern ist das ein relativ rudimentäres (nicht-transparentes) Routing. Aus diesem Grund sind diese Routin-Policies auch nur sinnvoll zu verwenden, wenn man einen sehr kleinen TTL verwendet ... ansonsten cached der Client dies sehr lange und der Route53-DNS-Server ist gar nicht mehr in die Entscheidung eingebunden.
+
+Bei der Verwendung von Routing-Policies definiert man für eine FQDN (z. B. www.cachaca.de) unterschiedliche IP-Adressen. Je nach Routing-Strategie (z. B. Latency) erhält der Anfrager eine andere IP-Adresse (z. B. die IP-Adresse eine Elastic Loadbalancers - ALB). Blöd wäre nun aber dieser Load-Balancer derzeit nicht verfügbar ist, aber die DNS-Auflösung zu ihm führt. Um das zu vermeiden, können Health-Checks für bestimmte DNS-Records (abhängig von der Routing-Policy) konfiguriert werden. Diese haben dann Einfluss auf die Routing-Strategy. AWS unterhält hierzu Health-Checker Dienste (außerhalb des Kunden-VPC - managed by AWS), die aus aller Welt die Health-Check-URL des Ziels aufrufen. Antwortet der Health-Check des ALB mit einer 2xx/3xx (der Health-Check kann aber auf den Text der Antwort parsen, um eine bessere Interpretation durchzuführen) so wird das als "healthy" interpretiert. Erst wenn mind. 18% der Health-Checkers den Service als "healthy" bewerten, wird er tatsächlich als "healthy" angesehen und Traffic wird dorthin geroutet.
+
+> Viele Anwendungen (z. B. Spring-Boot Anwendungen) haben eine dedizierte Health-Check url (z. B. http://www.cachaca.de/health). Haben sie das nicht, dann steht unter dem FQDN vermutlich nur ein allgemeiner Request zur Verfügung und man kann nur den HTTP-Status Code 2xx/4xx/... für eine Interpretation des Health-Status verwenden-
+
+Neben einfachen Health-Checks, die nur eine einzige IP-Adresse prüfen können, kann man _Calculated Health-Checks_ verwenden, die die Ergebnisse mehrerer einfacher Health-Checks zu einem gemeinsamenen Health-Check kombinieren.
+
+Dadurch, dass die Health-Checkers außerhalb des VPC liegen, können sie grundsätzlich nur Public-Endpoints prüfen - die Security-Groups/Firewalls müssen den Zugriff erlauben. Die Health-Checkers liegen in einer dedicated IP-Range, so dass man leicht Ausnahmen zuverlässig deklarieren kann. Für private Endpoints kann man sich eines Tricks bedienen ... CloudWatch-Metric mit einem CloudWatch-Alarm - der Healthcheck monitored dann den CloudWatch-Alarm.
+
+**Verwendet man das tatsächlich in der Praxis ... gibt es nicht viel bessere Lösungen?**
+
+* ja man verwendet es tatsächlich noch für
+  * Geolocation
+  * Weighted Routing
+  * ...
+* ABER: das ersetzt natürlich nicht Server-Side-Loadbalancer
+  * man kann mit Multi-Value Strategie einen Client-Side-Loadbalancer abbilden
+
+### External DNS-Registrar aber Route53 Hosted Zone
+
+Wenn man eine Domain (cachaca.de) bei einem beliebigen DNS-Registrar (z. B. webspace-verkauf.de) kauft, dann stellt dieser i. a. auch den DNS-Server bereit. Diese DNS-Server sind als NS-Entries in seiner hosted Zone eingetragen und steuern das Management der DNS-Zone. Nun kann man aber die NS-Entries beim External Registrar editieren und hier zum Beispiel die DNS-Servers eintragen, die man beim Einrichten einer AWS-Hosted-Zone erstellt bekommt.
 
 ---
 
@@ -215,11 +272,14 @@ Das besondere daran ist, daß man sie zur Laufzeit einfach einer anderen EC2 Ins
 
 ## Transit Gateway
 
+Ein Transit-Gateway regelt den Zugriff auf andere VPCs (und auch OnPrem-Netzwerke).
+
 ---
 
 ## Direct Connect (DX)
 
 * [Stephane Maarek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13531250#overview)
+* [What is AWS Direct Connect?](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html)
 
 * private Connection vom Corporate Datacenter ins AWS VPC
   * Zugriff auf Public UND Private AWS Ressourcen
@@ -232,7 +292,7 @@ Das besondere daran ist, daß man sie zur Laufzeit einfach einer anderen EC2 Ins
 
 * [Stephane Maarek](https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c02/learn/lecture/13528560#overview)
 
-Wird verwendet, um Corporate Networks per VPN mit einem AWS VPC zu verbinden.
+Wird verwendet, um Corporate Networks per VPN mit einem AWS VPC zu verbinden. Hiermit lassen sich dann auch Hybrid-Cloud-Solutions realisieren.
 
 ### AWS VPN CloudHub
 

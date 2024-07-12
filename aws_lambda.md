@@ -1,6 +1,6 @@
 # AWS Lambda
 
-Einer der wohl beliebtesten (neben AWS S3) serverless Ansätze. Hiermit lassen sich Event-Driven Architectures sehr effizient umsetzen (hierbei wird asynchrones Processing verwendet, das sehr effizient mit Ressourcen umgehen kann und für den Nutzer minimale Wartezeit erzeugen). Der Entwickler kann sich hier voll und ganz auf seinen Applikationscode fokussieren und muss sich nicht um Server kümmern. Man zahlt pro Request und Compute-Zeit ... ein faires Modell (insbes. für Startups).
+Einer der wohl beliebtesten (neben AWS S3) serverless Ansätze. Hiermit lassen sich Event-Driven Architectures sehr effizient umsetzen (hierbei wird asynchrones Processing verwendet, das sehr effizient mit Ressourcen umgehen kann und für den Nutzer minimale Wartezeit erzeugen). Der Entwickler kann sich hier voll und ganz auf seinen Applikationscode fokussieren und muss sich nicht um Server kümmern. Man zahlt pro Request und Compute-Zeit ... ein faires Modell (insbes. für Startups) - im Extremfall zahlt man gar nichts.
 
 > Natürlich führen im Hintergrund dennoch EC2 Instanzen und damit auch echte Hardware den Code aus. Aber diese Infrastruktur wird von AWS gemanaged und ist somit sogar nahezu vollkommen unsichtbar. Es ist eine Abstraktionsschicht, die die unterliegende Implementierung verbirgt. Auch S3, AWS RDS, DynamoDB, ... sind Serverless-Services.
 
@@ -21,6 +21,7 @@ Deshalb ist AWS Lambda für mich ein Sinnbild wie die Cloud Innovation vorantrei
 * Auto-Scaling
 * 15 Minuten Compute-Time Maximum ... danach timeout
   * das sollte bei einer event-driven Architektur aber für die meisten Use-Cases ausreichen
+* stateless
 * synchron (BE AWARE: das könnte bis zu 15 Minuten dauern) und asynchron
   * User-triggered Lambda-Calls (z. B. im WebUI-Development Environment siehe unten) sind immer synchron
   * manche Services können nur asnchron als Trigger (S3, SNS, SQS, CloudWatch Events, EventBridge, AWS CodeCommit, AWS CodePipeline, ...) verwendet werden
@@ -32,6 +33,12 @@ Deshalb ist AWS Lambda für mich ein Sinnbild wie die Cloud Innovation vorantrei
 ---
 
 ## Konzepte
+
+### 15 Minuten
+
+Lambda-Functions müssen nach 15 Minuten beendet sein ... danach werden sie hart abgebrochen. Das zwingt den Designer eines komplexen Workflows den Workflow in kleinere Teile zu stückeln, die alle innerhalb dieses Zeitfensters beendet werden können. Dies wiederum führt evtl. zu sehr kleinen Einheiten, die allesamt innerhalb weniger Sekunden beendet werden können. Dieses Design kann positive Auswirkungen auf die Skalierbarkeit der Anwendung und die Resilienz haben.
+
+Man könnte sagen, dass die Limitierung auf 15 Minuten - gepaart mit der stateless Anforderung, den Designer der Anwedung zu einem besseren Design zwingt. Einzelne Steps eines komplexen Workflows können über Event-Queues aneinander gereiht werden.
 
 ### Permissions
 
@@ -175,7 +182,7 @@ Lambdas skalieren automatisch, d. h. die Lambda-Functions werden dann parallel a
 
 ### Docker Container
 
-Die Lambda Function kann in verschiedenen Sprachen zur Verfügung gestellt werden oder aber auch in einem Docker Image, von dem Lambda dann einen Docker Container startet. Das macht Sinn, wenn die Function noch weitere Laufzeitkomponenten oder Konfigurationen benötigt.
+Die Lambda Function kann in verschiedenen Sprachen zur Verfügung gestellt werden oder aber auch in einem Docker Image, von dem Lambda dann einen Docker Container startet. Das macht Sinn, wenn die Function noch weitere Laufzeitkomponenten oder Konfigurationen benötigt. Auf diese Weise könnte man den Code beispielweise auch lokal sehr schön testen - allerdings kostet der Download des Image auch ein bisschen Geschwindigkeit.
 
 ### Deployment Package
 
