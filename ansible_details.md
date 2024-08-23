@@ -28,4 +28,5 @@ Ansible bringt eine Default Konfiguration unter `/etc/ansible/ansible.cfg` mit. 
 ---
 
 # Inventory
+
 Ansible bringt bei der Installation das Inventory-File `/etc/ansible/hosts`. Über die Variable `ANSIBLE_INVENTORY=myInventory` oder den Parameter `ansible-playbook -i myInventory` kann das übersteuert werden.
