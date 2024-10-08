@@ -76,6 +76,8 @@ aws eks --region <aws_region> update-kubeconfig --name <cluster-name>
 
 die Konfiguration in eine Datei erzeugen lassen. Per Default ist es `~/.kube.config`. Hat man allerings eine `KUBECONFIG` Umgebungsvariable gesetzt, dann wird diese Datei verwendet.
 
+> Ich bevorzuge für jedes Cluster eine eigene Datei in `~/.kube.config` (z. B. `~/.kube/config-microk8s`, `~/.kube/config-aws-eks`). Deshalb mache ich **VOR** der Cluster ein `export KUBECONFIG=~/.kube/config-aws-eks` und anschließend das `aws eks update-kubeconfig`. Später kann ich dann zwischen den verschiedenen Clustern mit einem einfach `export KUBECONFIG=...` wechseln.
+
 Eine Liste der im Account verfügbaren Cluster bekommt man per `aws eks list-clusters` (die korrekte Konfiguration der AWS Credentials natürlich vorausgesetzt).
 
 ---

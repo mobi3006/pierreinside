@@ -20,17 +20,19 @@ K8s abstrahiert die unterliegende Infrastruktur. Es spielt keine Rolle, ob darun
 
 Die Cloud hat ihre ursprüngliche Motivation in der Skalierbarkeit. Hierin liegt der grosse Vorteil gegenüber einer limitierten eigenen OnPrem-Umgebung. Grundsätzlich könnte man seine eigene OnPrem-Umgebung so groß gestalten, dass man nie in Ressourcenengpässe läuft und somit keinen Cloud-Anbieter bräuchte. Das wäre allerdings nicht besonders wirtschaftlich, weil man immer auf den worst-case vorbereitet sein müsste und den natürlich auch bezahlen müsste.
 
-> Hieraus ergibt sich eine riesige Chance für Startups, die ohne großes Invest in Hardware ihre Idee auf den Markt bringen können. Ein Booster für Innovation.
+> Hieraus ergibt sich eine riesige Chance für Startups, die ohne großes Invest in Hardware ihre Idee auf den Markt bringen können. Ein Booster für Innovation. Aber nicht nur Startups profitieren von diesem Ansatz. Durch die schier unendliche Menge an Ressources können sich auch Großunternehmen eine (sehr schwierige) a-priori Kapazitätsplanung sparen (die zumeist auf Peak-Zeiten ausgelegt sind und damit meistens nicht besonders wirtschaftlich) ... wenn man weitere Kapazitäten braucht, dann kann man sie sich nehmen - braucht man sie nicht mehr dann werden sie freigegeben und kosten auch kein Geld mehr. 
 
 AWS, Google, Azure halten diese oversized Umgebung bereit, weil es Kunden gibt, die dafür bezahlen und die wahrscheinlich NIE immer Gleichzeitig unter Vollast laufen, so dass sich er Bedarf mittelt und es sich für den Cloud-Provider und den Kunden rechnet. Im besten Fall ist das eine Win-Win-Situation. Für kleine Unternehmen, die mit einer tollen Idee an den Start gehen wollen, ist das ideal. Sie brauchen nicht in Vorleistung zu gehen, um ein grosses Data-Center aufzubauen, das sie vielleicht nie benötigen. Sobald der Service erfolgreich ist, skaliert die Umgebung automatisch, um die Kunden zu befriedigen - Kosten entstehen erst, wenn sie tatsächloch benötigt werden (und dann im besten Fall auch mit Einnahmen verrechnet werden können).
 
-Kubernetes und alles was darauf läuft ist darauf ausgelegt, IMMER zu laufen. Es sollte keine Downtime geben. Deshalb ist es nicht verwunderlich, wenn Deployments und der Server jahrelang ohne Downtime auskommen. Selbst die Kubernetes-Upgrade laufen ohne Downtime ab.
+Kubernetes und alles was darauf läuft ist darauf ausgelegt, IMMER zu laufen. Kubernetes überwacht die Spezifikation im etcd-Datenbank und vergleicht diese mit dem aktuellen Deployment. Gibt es Abweichungen, dann löst Kubernetes das Problem von selbst ... indem eine neue Instanz eines Service gestartet und die unhealthy Instanz gestoppt wird. Auf diese Weise sollte es keine oder nur sehr selten eine Downtime einer wichtigen Ressource geben. Deshalb ist es nicht verwunderlich, wenn Deployments und der Server jahrelang ohne Downtime auskommen. Selbst die Kubernetes-Upgrade laufen ohne Downtime ab.
 
 ---
 
 # Konzept Cluster
 
-Sowohl auf der Data-Plane als auch auf der Control-Plane wird i. a. mit einem High-Availability Cluster bestehend aus mind. 3 Nodes gearbeitet. Verwendet man eine Cloud-Lösung, dann wird man versuchen die Nodes in unterschiedliche Availability Zones zu verteilen, so dass auch bei Wartungsarbeiten an der Infrastruktur des Cloud-Providers kein für den Endkunden sichtbarer Ausfall entsteht
+Sowohl auf der Data-Plane als auch auf der Control-Plane wird i. a. mit einem High-Availability Cluster bestehend aus mind. 3 Nodes gearbeitet. Verwendet man eine Cloud-Lösung, dann wird man versuchen die Nodes in unterschiedliche Availability Zones zu verteilen, so dass auch bei Wartungsarbeiten an der Infrastruktur des Cloud-Providers kein für den Endkunden sichtbarer Ausfall entsteht.
+
+Fällt mal ein Knoten weg, dann wird sofort ein neuer Knoten gestartet. Das System wendet somit die gleichen Prinzipien für seine eigene Control-Plane-Infrastruktur wie für die Workernodes und Services, die die Kunde der Anbieter bedienen.
 
 ---
 
@@ -38,7 +40,7 @@ Sowohl auf der Data-Plane als auch auf der Control-Plane wird i. a. mit einem Hi
 
 Das ist eine REST-API (bereitgestellt auf der Control Plane) zur Steuerung des K8s-Clusters.
 
-`kubectl` ist eine CLI, die die REST-API verwendet. Statt eines `kubectl get pods --namespace my-namespace`
+`kubectl` ist eine CLI, die die REST-API verwendet. Statt eines `kubectl get pods --namespace my-namespace` Kommandos kann man auch die API verwenden:
 
 ```
 curl https://192.168.100.39:16443/api/v1/namespaces/my-namespace/pods \
@@ -49,7 +51,7 @@ curl https://192.168.100.39:16443/api/v1/namespaces/my-namespace/pods \
 Das curl Kommando wird ein längliches JSON Dokument liefern. `kubectl` reduziert den Output auf ein Minimum. Dennoch kann man mit dem Parameter `-o json` oder `-o yaml` auch ein anderes Format bekommen:
 
 ```
-kubectl get pods --json
+kubectl get pods --output json
 ```
 
 ---
@@ -60,11 +62,13 @@ kubectl get pods --json
 
 Normalerweise verwendet man nicht für jede Separierung einen eigenen Cluster, weil das Maintence und Koste erhöht. Das gleichzeitige Betreiben isolierter Anwendungsfälle ist also inherent in das Kubernetes Konzept integriert.
 
+> Letztlich läuft der Cluster aber auch in einer Cloud-Umgebung, z. B. in einem AWS-Account. Das Design der AWS-Accounts hat dann natürlich eintscheidenden Einfluss auf die Grob-Separierung, denn Cluster in unterschiedlichen Accounts sind natürlich per se schon mal stark separiert, denn sie laufen ja weit voneinander entfernt und teilen sich nicht mal im geringsten gemeinsame Ressourcen.
+
 Auf Namespace-Ebene lassen sich Berechtigungen, Quota und andere Limitierungen definieren, um so die Nutzung des Clusters zu beschränken, zu optimieren oder was auch immer.
 
 Letztlich bestimmt der Anwendungsfall (was will ich separieren?) welchen Aspekt man zur Definition eines Namespaces verwendet.
 
-## Default Namespaces
+## Kubernetes-eigene Namespaces
 
 * `default`
 * `kube-system`
@@ -77,21 +81,19 @@ Letztlich bestimmt der Anwendungsfall (was will ich separieren?) welchen Aspekt 
 * ist kleinste Deployment-Einheit bestehend aus 1-n Docker-Containern, Data-Volumes, Networks, ...
 * ein Pod bekommt eine IP-Adresse
 * alle Container innerhalb eines Pods können über `localhost` miteinander kommunizieren (vereinfacht die Konfiguration)
-* ein Pod kommt vollständig auf einen Worknode
-  * alles darin befindliche wird auf dem gleichen Knote ... Dinge, die IMMER gemeinsam auf einem Node (= Minion) deployed werden.
+* ein Pod kommt vollständig auf einen Worknode, d. h. alle im Pod gekapselten Docker Container landen auf dem gleichen Worker Node
 * Komponenten EINES Pods sind eng verknüpft und teilen den gleichen Lifecycle
 * so startet man einen Pod mit einem einzigen Container: `kubectl run nginx-pod --image=nginx --port 80`
   * der Pod exposed den Port 80 (des NGINX Docker Containers) nach außen für andere Pods innerhalb des gleichen Namespaces 
-* um einen Port nach aussen (außerhalb des Namespaces) freizugeben kann man explizit ein Port-Forwarding `kubectl port-forward nginx-pod 8080:80` definieren und anschließend man kann per http://localhost:8080 auf den NGINX Server zugreifen
-  * auf diese Weise kann ich auf den Pod in AWS über ein `localhost:8080` zugreifen, um darin Fehler analysieren zu können
+* um einen Port nach aussen (außerhalb des Namespaces) freizugeben, kann man explizites Port-Forwarding `kubectl port-forward nginx-pod 8080:80` verwenden, so daß man anschließend von der Maschine, die das Port-Forwarding definiert hat, den expose dPort nutzen, um mit dem Pod zu kommunizieren (z. B. per http://localhost:8080 auf den vom Pod bereitgestellten NGINX Server zuzugreifen)
   * ACHTUNG: so macht man das i. a. nicht im normalen Betrieb ... sondern eher zum Debugging
-* ein Pod kann mehrere Labels haben, die dann verwendet werden, um Pods auszuwählen
+* ein Pod kann mehrere Labels haben, die dann verwendet werden, um Pods auszuwählen (z. B. in einem Filter im `kubectl`-Kommando)
 * Pods teilen sich Volumes
 * sind volatil (ephemeral) ... können wegfallen oder sich vermehren (getriggert durch den Auto-Scaler)
 
-Beim Start eines Pods geschieht folgendes:
+Beim Kommando `kubectl run nginx-pod` wird ein Pod gestartet ... im Detail passiert folgendes:
 
-* `kubectl` weist den API-Server an einen Pod mit NGINX zu starten
+* `kubectl` weist den API-Server (das K8s-Cluster also) an einen Pod mit NGINX zu starten
 * die Control-Plane (auf dem auch der API-Server läuft) schreibt den DESIRED State (1 NGINX Pod) nach etcd
 * der Kube-Controller stellt fest, dass der DESIRED State nicht erfüllt ist (denn es gibt einen solchen Pod noch nicht)
 * der Kube-Controller weist den Scheduler an einen Pod zu starten
@@ -105,7 +107,7 @@ Warum mehrere Container in einem Pod
   * Verschlüsselung, Zertifikathandling
   * Logging
 
-Pods werden i. a. selten einzeln deployed, sondern immer über ein ReplicaSet oder gar Deployment. Wenn man nun einen Pod sieht und möchte den irgendwie verändern, dann muss man natürlich herausfinden welches die zuständig Deployment-Einheit ist. Hierzu schaut man sich das Manifest-File des Pods an per
+Pods werden i. a. selten einzeln deployed, sondern immer über ein ReplicaSet oder gar Deployment (hat das ReplicaSet abgelöst). Wenn man nun einen Pod sieht und möchte den irgendwie verändern, dann muss man natürlich herausfinden welches die zuständig Deployment-Einheit ist. Hierzu schaut man sich das Manifest-File des Pods an per
 
 ```
 kubectl get pod my-pod -o yaml
@@ -114,6 +116,42 @@ kubectl get pod my-pod -o yaml
 Darin befindet sich die Information `ownerReferences`. Diese Info befindet sich an vielen Kubernetes-Ressourcen, so dass man backward-traversing machen kann.
 
 > **ACHTUNG:** in einem professionellen Umfeld startet niemand pods imperativ mit `kubectl run ...`. Das kann man mal zum Rumspielen tun oder zum Debugging. Normalerweise verwendet man ein Deploment, da hier Replicas, Health-Checks, ... spezifiziert werden können.
+
+## Imperativ vs deklaraive Spezifikation eines Zielzustands
+
+Im vorigen Abschnitte habe ich mit `kubectl run nginx-pod` einen Pod imperativ - also mit einem Kommando - gestartet. Von diesem laufenden Pod kann man sich per
+
+```
+kubectl get pod nginx-pod -o yaml
+```
+
+das Manifest-File der Pod-Spezifikation ansehen. Mit ein paar Löschungen der Laufzeitinformationen strippt man das auf diesen Inhalt zurecht (z. B. in eine Datei `my-pod.yaml`)
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+   name: nginx-pod-via-manifest
+   namespace: pierre
+ spec:
+   containers:
+   - image: nginx
+     imagePullPolicy: Always
+     name: nginx-pod
+     ports:
+     - containerPort: 80
+       protocol: TCP
+```
+
+dann kann man die neue Instanz des Pods mit dem Namen `nginx-pod-via-manifest` deklarativ mit
+
+```
+kubectl apply -f my-pod.yaml
+```
+
+starten.
+
+Im Real-Life arbeitet man natürlich deklarativ, da man hier die Spezifikation in yaml-Files angibt, die man schön in Pull-Requests im Team reviewen kann.
 
 ## Stateful vs Stateless Pods
 
@@ -139,12 +177,6 @@ Um einen Pod mit all seinen Containern auf einem passenden Node zu platzieren, m
     ```
 
 > Es ist zu empfehlen im Kubernetes-Cluster default-Werte hierfür zu definieren. Das verhindert böse Überraschungen, wenn der Entwickler das vergisst.
-
----
-
-# Konzept Minion
-
-* Minion ist die softwareseitige Komponente eines Nodes - der Node besteht aus der Hardware und der Software (= dem Minion)
 
 ---
 
@@ -194,7 +226,7 @@ kubectl scale replicaset ningx-pierre --replica 2
 
 # Konzept Deployment
 
-Ich kann einzelne Pods über ein Manifest-File deployen lassen, ich kann viele gleiche Pods über ReplicaSets deployen lassen. Wozu dann noch Deployments als eigenes Konzept ... ich habe doch schon alles?
+Ich kann einzelne Pods über ein Manifest-File deployen lassen (hierzu werden die ), ich kann viele gleiche Pods über ReplicaSets deployen lassen. Wozu dann noch Deployments als eigenes Konzept ... ich habe doch schon alles?
 
 Was ist gleich?
 
@@ -262,7 +294,7 @@ triggern (oder zu einer anderen Version `kubectl rollout undo deployment my-webs
 
 ## Wie startet man ein Deployment?
 
-... wie bei allen anderen Changes bereitet man ein Manifest-File (z. B. `my-webserver-deployment.yml`) vor und applied es per
+Im deklaraiven Fall bereitet man wie üblich ein Manifest-File (z. B. `my-webserver-deployment.yml`) vor und applied es per
 
 ```
 kubectl apply -f my-webserver-deployment.yml
@@ -270,7 +302,7 @@ kubectl apply -f my-webserver-deployment.yml
 
 Man kann das Manifest-File auch interaktiv per `kubectl edit deployment my-webserver` bearbeiten. Dieses Kommando sorgt für den Download der aktuellen Manifest-Datei via API-Server aus etcd. Danach kann man es editieren und applyen.
 
-Mit einem `kubectl scale deployment my-webserver --replicas 10` kann man auch on-the-fly die Anwendungs skalieren (besser man verwendet hier Auto-Scaling, das Last-Spitzen selbständig erkennt und ausbalanciert ).
+Mit einem `kubectl scale deployment my-webserver --replicas 10` kann man imperativ on-the-fly die Anwendung skalieren (besser man verwendet hier Auto-Scaling, das Last-Spitzen selbständig erkennt und ausbalanciert ).
 
 > Ich empfehle das aber maximal in Spielumgebungen zu tun. In professionell genutzten Umgebungen, sollte man das Manifest-File editieren, ins VCS committen, reviewen und dann automatisiert deployen (oder dann das Manifest-File per `kubectl apply -f my-webserver-deployment.yml` anwenden).
 
@@ -288,7 +320,9 @@ Wie können wir (hoch/runter) skalieren
   * auf Node-Ebene => Anzahl der Nodes
   * auf Pod-Ebene => mehr/weniger Pods auf vorhandenen Nodes
 
-Auf diese Weise kann man flexibal auf die Last durch Nutzer reagieren (upscaling), ohne unnötige Kosten zur erzeugen (downscaling).
+Auf diese Weise kann Kubernetes flexibel auf die Last durch Nutzer reagieren (upscaling), ohne unnötige Kosten zur erzeugen (downscaling).
+
+> ACHTUNG: vielleicht ist es nicht aufgefallen, aber wir skalieren auf zwei Abstraktionsebenen ... auf Node-Ebene und auf Pod-Ebene
 
 ### Horizontal Pod-Autoscaler (HPA)
 
@@ -334,6 +368,8 @@ Autoscaling-Policies können auf verschiedenen Metriken basieren
 ## Vertical Pod-Autoscaler
 
 * [Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler)
+
+Bei einem 
 
 ---
 
@@ -447,7 +483,7 @@ Kann ein Restart auf einem anderen Knoten erfolgen?
 
 # Konzept Scheduler
 
-Der Scheduler ist dafür zuständig - getriggert vom Controller - Worker-Nodes zu finden, auf denen die angeforderte Arbeitslast aussgeführt werden kann.
+Der Scheduler ist dafür zuständig - getriggert vom Controller, der eine Diskrepanz zwischen Desired State und Current State feststellt - Worker-Nodes zu finden, auf denen die angeforderte Arbeitslast aussgeführt werden kann.
 
 > Was der Kube-Proxy für Pods ist der Kube-Scheduler für Nodes.
 
@@ -465,36 +501,99 @@ Der Scheduler ist dafür zuständig - getriggert vom Controller - Worker-Nodes z
     * De-/Registrierung eines neuen Worker-Nodes
     * stellt Health-Check-Informationen des Nodes bereit
 
+Hat sich der Scheduler mal für einen Worker-Node entschieden, dann führt der Worker-Node (gesteuert vom Kubelet) diese Load aus ... dafür hat er ja seine Auslastung die ganzeZeit an den API-Server gemeldet.
+
 ---
 
 # Konzept Service
 
 ## Motivation
 
-In einer elastischen Umgebung mit Auto-Scaling und Self-Healing Mechanismus sind die Pods ephemeral, d. h. sie kommen und gehen relativ häufig. Wenn nun aber meine Anwendung aber mit einer anderen (internen) Anwendung kommunizieren will, dann erfolgt diese Kommunikation über IP-Adressen. Doch leider ändern die sich ständig (neuer Pod wird gestartet, Pods verschwinden weil die Last weniger wird).
+In einer elastischen Umgebung mit Auto-Scaling und Self-Healing Mechanismus sind die Pods ephemeral, d. h. sie kommen und gehen relativ häufig, werden mehr oder weniger, wandern auf andere Nodes, werden neu gestartet weils sie unhealthy sind oder neue Versionen deployed werden.
 
-Aus diesem Grund wurden Services eingeführt, die eine halbwegs statische IP-Adresse haben und zudem noch im Kubernetes DNS einen semantischen Namen erhalten. Dadurch können auch die IP-Adressenn eines Service verändert werden, ohne Auswirkungen auf die Kommunikation (entsprechend kurze TTLs vorausgesetzt).
+**PROBLEM:** Wenn nun aber meine Anwendung mit einer anderen (internen) Anwendung kommunizieren will, dann erfolgt diese Kommunikation über IP-Adressen. Die ändern sich in diesem dynamischen Umfeld aber ständig.
 
-Der Service ist somit ein Proxy vor den Pods und managed die Last (die Entscheidung wohin ein Request geroutet wird trifft allerdings der Kube-Proxy).
+Aus diesem Grund wurden Services eingeführt, die eine statische IP-Adresse haben und über einen FQDN (`my-service.kubernetes.svc`) adressiert werden. Der FQDN wird über innerhalb des Clusters zu erreichen sind. Der Service kümmert sich dann um die Delegation des Requests an die dahinterliegenden Pods. Werden Pods neu gestartet oder fallen weg, dann wird die Routing-Table des Service gepflegt, so dass Requests niemals ins Nirvana gehen.
+
+Der Service ist ein Proxy vor den Pods und managed die Last (die Entscheidung wohin ein Request geroutet wird trifft allerdings der Kube-Proxy). Der Service kennt somit die dahinterliegenden Pods und ist somit der zentrale Punkt für Service-Discovery.
 
 ![kubernetes-service-overview.png](images/kubernetes-service-overview.png)
 
 > "The front-end of a Service provides an IP, DNS name and port that is guaranteed not to change for the entire life of the Service. The back-end of a Service uses labels and selectors to load-balance traffic across a potentially dynamic set of application pods." (The Kubernetes Book: 2023 Edition)
 
+## Service-Spezifikation
+
+In einer `service`-Spezifikation werden die Pods, die zu diesem Service gehören, über einen `selector` ausgewählt ... es gibt keine statische Zuordnung. Auf diese Weise kann Kubernetes Pods, die im neu gestartet werden (mit ihren eigenen Labels), dynamisch zuordnen, weil es die ZuordnungsREGEL kennt.
+
+> Hierbei handelt es sich um ein wiederkehrendes Muster, denn auch eine `deployment`-Spezifikation verwendet einen `selector`, um die Pods flexibel dem Deployment zuzuordnen.
+
+Eine der wichtigsten Eigenschaften eines Service ist der `type`:
+
+> "type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ExternalName" maps to the specified externalName. "ClusterIP" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object. If clusterIP is "None", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a stable IP. "NodePort" builds on ClusterIP and allocates a port on every node which routes to the clusterIP. "LoadBalancer" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the clusterIP. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types"
+
+Mit `type: NodePort` wird ein NodePort-Service erzeugt, der von außerhalb des K8s-Clusters erreichbar ist.
+
+Folgene Spezifikation
+
+```
+apiVersion: v1
+kind: Service
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 9000
+    targetPort: 8000
+    nodePort: 30001
+  type: NodePort
+```
+
+erzeugt einen Service auf dem Port 9000, der an dahinterliegende `nginx` Pods an Port 8000 delegiert. Zudem wird ein Nodeport Service auf JEDEM Node des Clusters an Port 30001 erstellt.
+
+Zu dieser Konfiguration liefert `kubectl get all -o wide` evtl. dies:
+
+```
+NAME                                    READY   STATUS    RESTARTS   AGE   IP            NODE      NOMINATED NODE   READINESS GATES
+pod/nginx-deployment-7b8955bd9d-cc59m   1/1     Running   0          47m   10.1.52.158   vagrant   <none>           <none>
+pod/nginx-deployment-7b8955bd9d-mlp2v   1/1     Running   0          47m   10.1.52.167   vagrant   <none>           <none>
+pod/nginx-deployment-7b8955bd9d-q25h7   1/1     Running   0          47m   10.1.52.182   vagrant   <none>           <none>
+
+NAME                    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE   SELECTOR
+service/nginx-service   NodePort   10.152.183.25   <none>        9000:30001/TCP   47m   app=nginx```
+```
+
+> man sieht hier sehr schön, dass jeder Pod eine eigene IP-Addresse hat (hätte man das nicht, dann wäre die Anzahl der Container auf einem Cluster-Node stark eingeschränkt, denn dann stünden nur 64000 Ports zur Verfügung - mit den IP-Adressen-Ansatz ist es sehr einfach innerhalb eines Pods nicht mit den Ports zu überlappen)... Pods können darüber clusterweit kommunizieren. Container innerhalb eines Pods kommunizieren über `localhost:<PORT_NUMBER>` ... wobei hier die PORT_NUMBER diejenige ist mit der der interne Port der Anwendung an den Container gemappt wurde.
+
+und das `kubctl describe service nginx-service` liefert z. B.
+
+```
+IP:                       10.152.183.25
+IPs:                      10.152.183.25
+Port:                     <unset>  9000/TCP
+TargetPort:               8000/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.1.52.158:8000,10.1.52.167:8000,10.1.52.182:8000
+```
+
+Ein Request an den Nodeport Service ist via `10.152.183.25:30001` würde dann den Request an einen der dahinterliegenden Pods weiterleiten ... genauer gesagt an den Container dieser Pods, der an Port 8000 lauscht.
+
 ## Öffentlich erreichbare Services
 
-Innerhalb eines K8s-Clusters müssen die internen Backend services miteinander kommunizieren können. Hierzu genügt ein sog. ClusterIP-Service (`kind: service; type: ClusterIP`). Diese Cluster-IP Adresse wird im Kube-DNS mit der Service-IP-Adresse kombiniert, der Service hat einen statischen Port, d. h. über `my-webserver:8080` kann jede Komponente innerhalb des Clusters einen Pod/Container erreichen, der den Request ausführt (der Kube-Proxy steuert welche Instanz das sein wird). Diese IP-Adresse des Service ist aber eine Cluster-interne IP-Adresse (private IP-Range), die man übers Internet nicht routen kann.
+Innerhalb eines K8s-Clusters müssen die internen Backend Komponenten miteinander kommunizieren können. Hierzu genügt eine sog. ClusterIP-Service (`kind: service; type: ClusterIP`). Diese Cluster-IP Adresse wird im Kube-DNS mit der Service-IP-Adresse kombiniert, der Service hat einen statischen Port, z. B. über `my-webserver:8080` kann jede Komponente innerhalb des Clusters einen Pod erreichen, der den Request ausführt (der Kube-Proxy steuert welche Instanz das sein wird). Diese IP-Adresse des Service ist aber eine Cluster-interne IP-Adresse (private IP-Range), die man übers Internet nicht routen kann.
 
 Wenn man nun einen Service (z. B. `my-webserver`) übers Internet erreichbar machen will, dann benötigt man eine Public-IP-Adresse (mit einem Public-Domain-Name wie z. B. `www.cachaca.de`). Zudem muss man ein Routing definieren, um von außen zum Pod zu gelangen ... das erfolgt über
 
 * NodePort 
 * LoadBalancer
 
-## NodePort
+## NodePort Service
 
-Jeder Cluster-Node bekommt für den Service einen NodePort, d. h. bei n Knoten haben wir n NodePorts. Über jede (öffentliche) IP-Adresse eines beliebigen K8s-Worker-Nodes bekommt man dann Zugriff via ClusterIP auf die Pods/Container.
+Jeder Cluster-Node bekommt für jeden Service einen NodePort, d. h. bei n Knoten haben wir n NodePorts für diesen Service. Über jede (öffentliche) IP-Adresse eines beliebigen K8s-Worker-Nodes bekommt man dann Zugriff via ClusterIP auf die Pods/Container.
 
 Die Port-Range bei Node-Ports liegt zwischen 30000 und 32767.
+
+> "Ein NodePort ist ein Typ von Kubernetes Service, der es ermöglicht, Anwendungen außerhalb des Kubernetes-Clusters zugänglich zu machen, indem er einen bestimmten Port auf allen Knoten des Clusters öffnet. Dadurch kann der Datenverkehr von außen direkt auf die Pods im Cluster weitergeleitet werden. [...] Der Datenverkehr, der an diesen Port auf einem beliebigen Knoten des Clusters gesendet wird, wird an den entsprechenden Service weitergeleitet und von dort zu den dahinter liegenden Pods."
 
 ### Implementierung deklarativ
 
@@ -521,29 +620,7 @@ status:
 
 Der Service wird durch einen `selector` lose über Labels mit den Pods gekoppelt.
 
-Per Default wird hier ein Service vom `type: ClusterIP` erstellt. Der Service ist somit nicht von außerhalb des Clusters erreichbar, aber natürlich von innerhalb, z. b. via
-
-```
-# starten eines Analyse Pods
-kubectl run busybox --image busybox --command -- sleep "infinity"
-
-# Zugriff von busybox auf nginx - innerhalb des Clusters via ClusterIP
-kubectl exec -ti busybox -- wget nginx:8080
-```
-
-### Implementierung imperativ
-
-Bei einem
-
-```
-kubectl expose pod nginx --port 8080 --target-port 80
-```
-
-erfolgt automatisch die Erstellung eines Service (`kubectl get service nginx`) mit ClusterIP. Für die Erstellung des "public" Service braucht man 
-
-```
-kubectl expose pod nginx --target-port 80 --type NodePort
-```
+Per Default wird hier ein Service vom `type: ClusterIP` erstellt. Der Service ist somit nicht von außerhalb des Clusters erreichbar, aber natürlich von innerhalb.
 
 ## Load-Balancer
 
@@ -594,6 +671,42 @@ spec:
   selector:
     run: nginx
   type: LoadBalancer
+```
+
+### Implementierung imperativ
+
+Bei einem
+
+```
+kubectl expose pod nginx --port 8080 --target-port 80
+```
+
+erfolgt automatisch die Erstellung eines Service (`kubectl get service nginx`) mit ClusterIP. Für die Erstellung des "public" Service braucht man 
+
+```
+kubectl expose pod nginx --target-port 80 --type NodePort
+```
+
+---
+
+# Analyse innerhalb eines Clusters mit Busybox
+
+Zur Analyse eines Clusters und der Kommunikationsmöglichkeiten eignet sich ein Pod, der entsprechende Tools mitbringt ... Busybox:
+
+```
+kubectl run busybox --image busybox --command -- sleep "infinity"
+```
+
+Mit einem
+
+```
+kubectl exec -ti busybox /bin/sh
+```
+
+öffnet man eine Shell auf dem Busybox Pod und kann dann z. B. einen Request an den nginx-service absetzen:
+
+```
+wget nginx.kubernets.svc:8080
 ```
 
 ---
@@ -895,10 +1008,21 @@ Neben solchen Manifest-Dateien (Teil des K8s Core), die per `kubectl apply` ausg
 Eine ConfigMap besteht aus Key-Value-Paaren:
 
 * enthält statische und/oder dynamische Konfiguration der Applikation ... Pod-übergreifend und persistent
-* persistiert in etcd => überlebt also Pod und Nodes
-* ist für Pods eine read-only Ressource
+* persistiert in etcd => überlebt also Pod, Nodes, Deployments
+  * hochverfügbar über die Cluster-Control-Plane
+  * ist für Pods eine read-only Ressource
+    * man sollte nicht in Versuchung geraten, eine ConfigMap zum Speichern von Arbeitsdaten zu missbrauchen
 
-Die werden zur Konfiguration der Pods bzw. seiner Container eingesetzt und über File-Mounts der ConfigMap können sogar dynamische Änderungen in die laufenden Container injected werden.
+ConfigMaps sind zunächt mal nicht an eine Komponente (z. B. Pod) gebunden, sondern haben einen eigenen Lifecycle. Die Verbindung erfolgt in einer Manifest-Konfiguration. Dabei wird die ConfigMap einem Pod zugeordnet ... man spricht auch von "Mounting". Beliebig viele Komponenten können die gleiche ConfigMap mounten. 
+
+> **BEACHTE:** die ConfigMaps sind mal auf der gleichen Ebene wie Pods, Deployments, Services definiert und zunächst mal lose. Sie werden später dann in die Konfiguration der Container eingehangen. Sie sind in etcd definiert und somit PERSISTENT vorhanden ... überleben jeglichen Crash. Auf diese Weise lässt dich die Konfiguration auch flexibel von mehreren Pods teilen, ohne Redundanzen.
+
+Man unterscheidet zwei Formen der Bereitstellung
+
+* Environment Variablen
+  * hierbei handelt es sich um eine **statische Bereitstellung**, d. h. ändert sich der Wert in der ConfigMap, dann ändert sich nicht der Wert der Environment Variable im Container
+* als File-Mounts (RECOMMENDED)
+  * hierbei handelt es sich um eine **dynamische Bereitstellung**, d. h. ändert sich der Wert in der ConfigMap, dann ändert sich automatisch der Wert der Variable im Container
 
 ## Erzeugung
 
@@ -909,7 +1033,7 @@ ConfigMaps sind Kubernetes Ressourcen und werden wie üblich ... angelegt
   * `kubectl create configmap my-configmap --from-file my-config-file.txt`
 * deklarativ:
 
-  ```
+  ```yaml
   apiVersion: v1
   kind: ConfigMap
   data:
@@ -923,7 +1047,7 @@ ConfigMaps sind Kubernetes Ressourcen und werden wie üblich ... angelegt
 
 ConfigMaps werden Containers eines Pods gemounted und stehen dann als Umgebungsvariablen oder Volume-Files (in diesem Kontext readonly) zur Verfügung
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -964,24 +1088,38 @@ spec:
 
 Nach einem Update der ConfigMap sind die Werte in einem File-Mounted Szenario SOFORT für den Containes sichtbar - das ist bei der Bereitstellung als Umgebungsvariable nicht der Fall.
 
+Die Volume-Variante wirkt ein bisschen sperrig, weil man erst ein Volume mit der ConfigMap definiert und dann noch ein VolumeMount mit dem referenzierten Volume.
+
 ---
 
 # Secrets
 
-Technisch gesehen unterscheiden sich Secrets nicht von ConfigMaps. Die Erzeugung erfolgt per
+Technisch gesehen unterscheiden sich Secrets nicht von ConfigMaps. Die Erzeugung erfolgt per (ACHTUNG: `my-password` im Plaintext ... nicht Base64-Encoded)
 
 ```
-`kubectl create secret generic my-secret --from-literal password=bXktcGFzc3dvcmQK`
+kubectl create secret generic my-secret --from-literal password=my-password
 ```
 
-> der `password`-Value muss Base64 encoded sein!!!
+Der einzige Unterschied zwischen ConfigMaps und Secrets ist, dass Kubernetes Secrets in bestimmten Use-Cases ein wenig sensitiver:
 
-Allerdings behandelt Kubernetes Secrets in bestimmten Use-Cases ein wenig sensitiver:
-
-* sie werden Base64-encoded in etcd gespeichert (was natürlich nicht sicher ist)
+* sie werden Base64-encoded in etcd (dort wo die Manifest-Dateien der Spezifikation gespeichert werden) gespeichert (was natürlich nicht sicher ist)
+  * mounted man es in einen Pod, dann steht es im Docker-Container im Plaintext zur Verfügung
+  * **ACHTUNG:** Base64 ist keine Encryption, sondern nur ein Encoding ... denn man kann es ganz einfach decoden: `echo my-password | base64 | base64 -d` ergibt wieder `my-password`
 * keine Ausgabe in Logfiles
 
-> In etcd und in den Containers werden Secrets aber dennoch im Plaintext genutzt.
+Verwendet man hingegen ein Manifest-File zur deklarativen Spezifikation eines Secrets
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+data:
+  password: bXktcGFzc3dvcmQK
+type: Opaque
+```
+
+dann muss statt des Plaintextes `my-password` der Base64-encoded Wert (`echo my-password | base64` = `bXktcGFzc3dvcmQK`) verwendet werden.
 
 ## Type generic
 

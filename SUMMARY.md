@@ -283,7 +283,8 @@
       * [Playstation 4](playstation.md)
     * [Pico Spielekonsole](pico.md)
   * Gadgets
-    * [iPad Pro](ipadPro.md)
+    * [iPad Pro 2015 und 2016](ipadPro-2015.md)
+    * [iPad Air 2024](ipadAir-2024.md)
     * [Macbook Pro](macbook.md)
     * [Smartwatch](smartwatch.md)
     * [Slate](slate.md)

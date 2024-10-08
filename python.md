@@ -192,8 +192,9 @@ Deshalb öffne ich mein Python Projekt in einer separaten VSCode-Instanz, das nu
 
 * [Getting Started](https://docs.python-guide.org/dev/virtualenvs/)
 * [Tutorial](https://docs.python.org/3/tutorial/venv.html)
+* [Install packages in a virtual environment using pip and venv](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
 
-> ACHTUNG: virtuelle Environments erfordern die Bereitstellung von Python-Versionen auf dem System ... das virtuelle Environment bringt diese nicht mit.
+> ACHTUNG: virtuelle Environments erfordern die Bereitstellung von Python-Versionen auf dem System ... das virtuelle Environment bringt diese nicht mit. In dem virtuellen Environment wird dann eine der auf dem System installierten Python Versionen verwendet.
 
 Bei diesem Ansatz werden Bibliotheken und Interpreter in einem applikationsspezifischen Verzeichnis installiert, so daß verschiedene Ausführungsumgebungen voneinander getrennt werden können. Auf diese Weise werden Konflikte vermieden und man kann sich nicht auf Bibliotheken stützen, die im Zusammenhang mit einem anderen Projekt installiert wurden ... das verbessert die Qualität in den projektspezifischen Dependencies (`requirements.txt` Datei).
 
@@ -201,6 +202,7 @@ Bei diesem Ansatz werden Bibliotheken und Interpreter in einem applikationsspezi
 
 * [Ubuntu-Installation](https://wiki.ubuntuusers.de/virtualenv/)
 
+> Das ist die präferierte Variante, da `python -m venv` [nicht alle Features mitbringt](https://virtualenv.pypa.io/en/latest/).
 Das Paket zum Management dieser virtuellen Umgebungen wird per `sudo apt install virtualenv` installiert.
 
 Per (z. B.) `virtualenv my-venv` wird ein virtuelles Environment im Ordner `./my-venv` angelegt.

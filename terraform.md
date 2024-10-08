@@ -590,13 +590,21 @@ Die in `output.tf` definierten Ausgaben stehen anderen Modulen und - natürlich 
 
 * [Providers Within Modules](https://developer.hashicorp.com/terraform/language/modules/develop/providers)
 
-Einen `provider` Block sollte ein - zur Wiederverwendung entworfenes Modul - nicht haben. Die Definition und damit die Instantieerung sollte im Caller erfolgen ... dort werden die Version und die Konfiguration festgelegt - ansonsten wäre das Modul kaum wiederverwendbar. Das Modul selbst verwendet den Provider aber intern und hat somit auch eigene Erwartungen, die es definieren sollte
+Einen `provider` Block sollte ein - zur Wiederverwendung entworfenes Modul - nicht haben. Die Definition und damit die Instantierung sollte im Caller erfolgen ... dort werden die Version und die Konfiguration festgelegt - ansonsten wäre das Modul kaum wiederverwendbar (Dependency-Injection!!!). Das Modul "erbt" dann die konfigurierte Provider-Instanz und verwendet sie weiter.
+
+Allerdings hat das Terraform, das den Provider verwendet, eigene Erwartungen ... der Code ist evtl. für eine bestimmte Version geschrieben und getestet worden. Diese Erwartungen sollte das Modul **EXPLIZIT** definieren:
 
 * `required_providers`
 * Version einschränken (`version = "~> 5.0"` - alle 5er Versionen des Providers werden akzeptiert und sind kompatibel)
   * die Version sollte nicht zu restriktiv gesetzt werden - das würde die Nutzbarkeit deutlich reduzieren
 
-Man kann sogar unterschiedliche Provider Instanzen erzeugen und unterschiedlich benennen. Die unterschiedlichen Alias-Provider werden dann explizit bei einem [Modul-Aufruf übergeben](https://developer.hashicorp.com/terraform/language/modules/develop/providers#passing-providers-explicitly):
+Diese Erwartungen werden zur Ausführungszeit überprüft ... somit wird ein `terraform plan/apply` im Konfliktfall verhindert.
+
+> Man erkennt hier, dass wiederverwendbare Module auf backward-kompatibles Verhalten der Provider angewiesen sind.
+
+Man kann sogar unterschiedliche Provider Instanzen erzeugen und unterschiedlich benennen. Das kann Sinn machen, wenn man Ressourcen in unterschiedlichen Regionen anlegen muss.
+
+Die unterschiedlichen Alias-Provider werden dann explizit bei einem [Aufruf übergeben](https://developer.hashicorp.com/terraform/language/modules/develop/providers#passing-providers-explicitly):
 
 ```json
 module "project" {
@@ -607,7 +615,36 @@ module "project" {
 }
 ```
 
+oder aber auch bei einer Ressource
+
+```json
+resource "aws_s3_bucket" "example" {
+  provider = aws.us-east-1
+  bucket   = "XXXXXXXXXXXXXXXXXXX"
+}
+```
+
+Das Modul signalisiert per
+
+```
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      configuration_aliases = [
+        aws,
+        aws.us-east-1,
+      ]
+    }
+  }
+}
+```
+
+daß es mit mehreren AWS-Instanzen umgehen kann bzw. diese auch erwartet.
+
 Allerdings macht das den Code nicht unbedingt besser verständlich ... besser man kann darauf verzichten.
+
+Allerdings lassen sich damit Anforderungen hinsichtlich Multi-Region oder sogar Multi-Cloud Support umsetzen (z. B. Desaster-Recovery).
 
 ## Functions
 
@@ -695,7 +732,87 @@ resource "aws_instance" "server" {
 
 ## Schleifen per Dynamic Blocks
 
-Neben den statischen Blocks gibt es auch [dynamische Blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks), um dynamisch - einer for-Schleife ähnlich - Blocks zu erzeugen.
+Neben den statischen Blocks gibt es auch [dynamische Blocks](https://developer.hashicorp.com/terraform/language/expressions/dynamic-blocks), um dynamisch - einer for-Schleife ähnlich - Blöcke zu erzeugen.
+
+Diesen redundanten Code
+
+resource "aws_security_group" "main" {
+    arn                    = "arn:aws:ec2:us-east-1:4711:security-group/sg-0815"
+    description            = "Managed by Terraform"
+    egress                 = []
+    id                     = "sg-0815"
+    ingress                = [
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = "Port 443"
+            from_port        = 443
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 443
+        },
+        {
+            cidr_blocks      = [
+                "0.0.0.0/0",
+            ]
+            description      = "Port 80"
+            from_port        = 80
+            ipv6_cidr_blocks = []
+            prefix_list_ids  = []
+            protocol         = "tcp"
+            security_groups  = []
+            self             = false
+            to_port          = 80
+        },
+    ]
+    name                   = "core-sg"
+    owner_id               = "1234567"
+    revoke_rules_on_delete = false
+    tags_all               = {}
+    vpc_id                 = "vpc-8263821392"
+}
+```
+
+schreibt man eleganter als
+
+```hcl
+locals {
+  ingress_rules = [{
+      port        = 443
+      description = "Port 443"
+    },
+    {
+      port        = 80
+      description = "Port 80"
+    }
+  ]
+}
+
+resource "aws_security_group" "main" {
+  name   = "core-sg"
+  vpc_id = aws_vpc.vpc.id
+
+  dynamic "ingress" {
+    for_each = local.ingress_rules
+
+    content {
+      description = ingress.value.description
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+}
+```
+
+> **ACHTUNG:** statte `each.value` muss man den dynamic Identifikator `ingress` verwenden, um die Werte zu referenzieren, z. B. `ingress.value` ... `each.value` funktioniert by `dynamic`-Blocks nicht. Das hat allerdings auch den Vorteil, dass man innerhalb eine `for_each`-Ressource (in der man `each.value` verwendet) noch beliebig viele `dynamic` Blocks verwenden kann.
+
+Man verwendet Danymic Blocks immer dann, wennn innerhalb einer Ressource Schleifen auf der Konfiguration gebraucht werden.
 
 > imperative Konstrukte wie Schleifen wirken in deklarativen "Sprachen" wie HCL immer ein bisschen seltsam - wie ein Bruch im Konzept
 
@@ -797,7 +914,7 @@ terraform {
 
 In diesem Beispiel ist die Version nicht eindeutig definiert - es wird nur gefordert, dass die Version 4.0 oder höher ist. Bei einem `terraform init -upgrade` würde dann die Version evtl. hochgezogen
 
-Gibt man keine explizite Version des Providers an, dann sollten man gelegentlich per `terraform init -upgrade` die Provider Versionen hochziehen. Dadurch wird dann auch eine `.terraform.lock.hcl` Datei upgedated, die die Dependencies beschreibt. Diese Datei sollte man unter Versionskontrolle stellen, damit man zumindest mitbekommt (im PR beispielsweise), dass sich die Version geändert hat. Das könnte beispielsweise einen expliziten Test triggern.
+Gibt man keine explizite Version des Providers an, dann sollten man gelegentlich per `terraform init -upgrade` die Provider Versionen hochziehen. Dadurch wird dann auch eine `.terraform.lock.hcl` Datei upgedated, die die Dependencies beschreibt. Diese Datei sollte man unter Versionskontrolle stellen, damit man zumindest mitbekommt (im PR beispielsweise), dass sich die Version ändern würde und man eine explizite Entscheidung treffen kann. Das könnte beispielsweise einen expliziten Test triggern oder zumindest sollte man dann mal die Release Notes lesen.
 
 > Wenn ein expliziter `required_providers` Block fehlt oder auch einzelne im Code genutzte Provider fehlen, dann macht das nichts. Terraform scannt alle notwendigen Provider aus dem Code und installiert diese automatisch beim `terraform init`. Allerdings kann man mit dem `required_providers` die Versionen beeinflussen - tut man das nicht, dann wir immer die `latest` Version verwendet, die aber evtl. nicht mit dem Terraform Code kompatibel ist.
 

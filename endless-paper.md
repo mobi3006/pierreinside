@@ -100,3 +100,11 @@ Ich habe mich spontan in Miro verliebt ...
 * extrem viele Integrationen
   * ich mag draw.io aber als Integration in Miro ist es einfach ideal
 * seit Jahren am Markt und immer weiterentwickelt (ein Freund hat es seit 5 Jahren im täglichen Einsatz)
+
+---
+
+# Mural
+
+An der Arbeit nutze ich Mural (die Firma hat sich dafür entschieden). Es ist vergleichbar ... aber dennoch **DEUTLICH** schlechter.
+
+Der Stift funktioniert dort nicht so akkurat, die Bedienung ist weniger intuitiv - insgesamt sind es nur Kleinigkeiten (an die man sich wahrscheinlich mit der Zeit gewöhnt), aber in Miro habe ich mich spontan verliebt.

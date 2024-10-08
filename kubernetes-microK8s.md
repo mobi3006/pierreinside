@@ -48,7 +48,7 @@ microk8s enable rbac dns storage ingress
 
 Microk8s kommt zwar schon gebundelt mit einem eigenen `kubectl` (`microk8s.kubectl`), will neben dem Microk8s auch einen "normalen" Kubernetes Cluster managen, dann wird man das offizielle `kubectl` verwenden wollen.
 
-> Ich empfehle, das `microk8s.kubectl` nicht zu verwenden. Stattdessen das normale `kubectl` per `microk8s config > ~/.kube/config` umkonfigurieren. Dann funktioniert auch die Auto-Completion von `kubectl` einfach out-if-the-box auch für Microk8s.
+> Ich empfehle, das `microk8s.kubectl` nicht zu verwenden. Stattdessen das normale `kubectl` per `microk8s config > ~/.kube/config` umkonfigurieren. Dann funktioniert auch die Auto-Completion von `kubectl` einfach out-of-the-box auch für Microk8s.
 
 ## Konfiguration kubectl
 
@@ -97,7 +97,6 @@ Ich habe mich für microK8s entschieden, weil
 * mich [dieser Vergleich](https://microk8s.io/compare) überzeugt hat
   * Vanilla Kubernetes
   * Multi-Node Support
-
 
 ## Minikube
 

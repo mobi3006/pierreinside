@@ -158,9 +158,9 @@ Hierzu bedient man sich des Ansatze *Früher-an-später-denken* ... es werden im
 
 ### CDN - Content Delivery Network
 
-Hierdurch soll die Signallaufzeit durch Erhöhung der  Geografische Nähe reduziert werden.
+Hierdurch soll die Signallaufzeit durch Erhöhung der geografischen Nähe reduziert werden.
 
-> "Die Auslieferung von statischen Assets via CDN ist der klassische Anwendnungsfall. Der initiale Request wird vom Origin beantwortet, die restlichen Requests für JavaScript, Bilder und CSS kommen vom CDN." ([javamagazin 5/2016](https://jaxenter.de/ausgaben/java-magazin-5-16), "Teil 10: Latenz - Loading ...")
+> "Die Auslieferung von statischen Assets via CDN ist der klassische Anwendungsfall. Der initiale Request wird vom Origin beantwortet, die restlichen Requests für JavaScript, Bilder und CSS kommen vom CDN." ([javamagazin 5/2016](https://jaxenter.de/ausgaben/java-magazin-5-16), "Teil 10: Latenz - Loading ...")
 
 #### Option 1: URL-Rewriting
 
