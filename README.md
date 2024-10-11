@@ -1,6 +1,6 @@
-# Introduction
+# Introduction TEST-gitbook.com
 
-Diese Seite habe ich für mich selbst erstellt ... aber ich teile sie gerne mit Euch.
+Diese Seite habe ich für mich selbst erstellt ... aber ich teile sie gerne mit Euch. 
 
 Ich habe viele Interessen, aber leider zu wenig Zeit. Manchmal habe ich ein paar Tage und kann mich in ein neues Thema einarbeiten, aber dann mache ich wieder wochenlang nichts. Um zu verhindern, daß ich dann immer wieder von vorne anfangen muß habe ich verschiedene Strategien entwickelt:
 
