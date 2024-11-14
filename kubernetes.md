@@ -1005,6 +1005,8 @@ Neben solchen Manifest-Dateien (Teil des K8s Core), die per `kubectl apply` ausg
 
 # ConfigMap
 
+> Secrets sind im wesentlichen ConfigMaps ... nur der Inhalb eines Secrets wird sensibler gehandhabt (z. B. keine Ausgabe in den Logs)
+
 Eine ConfigMap besteht aus Key-Value-Paaren:
 
 * enthält statische und/oder dynamische Konfiguration der Applikation ... Pod-übergreifend und persistent
@@ -1013,9 +1015,9 @@ Eine ConfigMap besteht aus Key-Value-Paaren:
   * ist für Pods eine read-only Ressource
     * man sollte nicht in Versuchung geraten, eine ConfigMap zum Speichern von Arbeitsdaten zu missbrauchen
 
-ConfigMaps sind zunächt mal nicht an eine Komponente (z. B. Pod) gebunden, sondern haben einen eigenen Lifecycle. Die Verbindung erfolgt in einer Manifest-Konfiguration. Dabei wird die ConfigMap einem Pod zugeordnet ... man spricht auch von "Mounting". Beliebig viele Komponenten können die gleiche ConfigMap mounten. 
+ConfigMaps sind zunächt mal nicht an eine Komponente (z. B. Pod) gebunden, sondern haben einen eigenen Lifecycle. Die Verbindung erfolgt in einer Manifest-Konfiguration. Dabei wird die ConfigMap einem Pod zugeordnet ... man spricht auch von "Mounting Volumes". Beliebig viele Komponenten können die gleiche ConfigMap mounten. 
 
-> **BEACHTE:** die ConfigMaps sind mal auf der gleichen Ebene wie Pods, Deployments, Services definiert und zunächst mal lose. Sie werden später dann in die Konfiguration der Container eingehangen. Sie sind in etcd definiert und somit PERSISTENT vorhanden ... überleben jeglichen Crash. Auf diese Weise lässt dich die Konfiguration auch flexibel von mehreren Pods teilen, ohne Redundanzen.
+> **BEACHTE:** ConfigMaps sind in etcd definiert (in der Control-Plane) und somit persistent und ausfallsicher vorhanden ... überleben jeglichen Crash.
 
 Man unterscheidet zwei Formen der Bereitstellung
 
@@ -1088,7 +1090,7 @@ spec:
 
 Nach einem Update der ConfigMap sind die Werte in einem File-Mounted Szenario SOFORT für den Containes sichtbar - das ist bei der Bereitstellung als Umgebungsvariable nicht der Fall.
 
-Die Volume-Variante wirkt ein bisschen sperrig, weil man erst ein Volume mit der ConfigMap definiert und dann noch ein VolumeMount mit dem referenzierten Volume.
+> **ACHTUNG:** in der Anwendung muß ein Update der Konfiguration/Secret vorgesehen sein - sonst hat das natürlich keine Auswirkungen 
 
 ---
 

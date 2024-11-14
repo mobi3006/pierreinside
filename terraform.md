@@ -117,6 +117,8 @@ variable "instance_type" {
 }
 ```
 
+> Keep in mind: You can add default tags to the provider block to apply them to all resources created by the provider. ([Dokumentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs))
+
 Nach diesen Kommandos der `terraform`-CLI ...
 
 ```bash
@@ -1411,7 +1413,7 @@ ABER: ganz grundsätzlich falsch ist es nicht, daß die beiden Tools ähnlich si
 
 "We started nesting modules inside other smaller modules. Updating code or resolving conflicts in the matryoshka doll structure became a nightmare." [Regis Wilson](https://medium.com/driven-by-code/the-terrors-and-joys-of-terraform-88bbd1aa4359)
 
-## terraform state mv
+## Terraform Refactorings - State Manipulation
 
 * [Dokumentation](https://www.terraform.io/cli/commands/state/mv)
 
@@ -1429,13 +1431,13 @@ Bewertung des `terraform state mv` Ansatzes:
 * Nachteile:
   * jedes Kommando wird atomar abgebildet und schreibt somit eine eigene neue Version des Statefiles. Hat man den State in S3, dann bedeutet das einen Network-Full-Roundtrip (langsam) und **VOR ALLEM** noch zig neue Versionen des Statefiles ... das will man eigentlich nicht.
 
-> Man kann den State auch durch Download und Upload des terraform Statefiles (JSON Format) erreichen ... dann kann man diese beiden angesprochenen Problem lösen. Allerdings rät HashiCorp davon explizit ab "While the format of the state files are just JSON, direct file editing of the state is discouraged." ([Hashicorp Doku](https://developer.hashicorp.com/terraform/language/state))
+Man kann den State auch durch Download und Upload des terraform Statefiles (JSON Format) erreichen ... dann kann man diese beiden angesprochenen Problem lösen. Allerdings rät HashiCorp davon explizit ab "While the format of the state files are just JSON, direct file editing of the state is discouraged." ([Hashicorp Doku](https://developer.hashicorp.com/terraform/language/state))
 
 Alternativ ([hier beschrieben](https://support.hashicorp.com/hc/en-us/articles/4418624552339-How-to-Merge-State-Files)) kann man das Statefile mit einem `terraform state pull > /tmp/source.tfstate` runterladen und dann via `terraform state mv --state=/tmp/source.tfstate -state-out=/tmp/destination.tfstate module.bar prefixed.foo.me.module.bar` verschieben und dabei umbenennen ... so kann man natürlich auch Statefiles mergen. Das muss man dann für jede Top-Level Resource machen ... am besten Scripten. BEACHTE: hier arbeitest Du lokal auf den Files ... du hast also alles unter Kontrolle.
 
 > **ACHTUNG:** beim Mergen muss man aufpassen, dass jeder Resourcenname unique sein muss und zudem dann natürlich zum Code passen muss, der dann später auf diesem State einen Terraform-Plan erstellt.
 
-Alternativ kann man `moved` Direktiven verwenden. Diese Refactoring-Hints kann man auch [in Code packen](https://learn.hashicorp.com/tutorials/terraform/move-config?in=terraform/modules#move-your-resources-with-the-moved-configuration-block) - [YouTube - Using Moved Blocks in Terraform](https://www.youtube.com/watch?v=fDPB7xbckVM):
+**Recommended:** Alternativ kann man `moved` Direktiven verwenden. Diese Refactorings packt man [in Code](https://learn.hashicorp.com/tutorials/terraform/move-config?in=terraform/modules#move-your-resources-with-the-moved-configuration-block) - [YouTube - Using Moved Blocks in Terraform](https://www.youtube.com/watch?v=fDPB7xbckVM) - [How to rename terraform resources using the worst and the best options](https://www.youtube.com/watch?v=mxDqfkfjZmw):
 
 ```hcl
 moved {
@@ -1444,7 +1446,11 @@ moved {
 }
 ```
 
-Insgesamt gestaltet sich dieses Vorgehen mühselig und fehleranfällig. Hier sollte Hashicorp dringend nachbessern. Ich erwarte hier eigentlich Refactoring-Tools, die sich ähnlich leicht bedienen lassen wie in einer IDE beim Refactoring von Code beliebiger Hochsprachen. Zumal man auf dieser Ebene keine a-priori-Tests hat und jede einzelne Änderungen kritisch beäugen muss ... im worst-case zerstört man sich so die LIVE-Umgebung und es kommt zur Downtime. 
+Beim `terraform apply` wird Terraform die alten Ressourcen `aws_instance.example` unter dem neuen Namen `module.ec2_instance.aws_instance.example`im Terraform State verwalten und der `moved`-Block sollte entfernt werden.
+
+> **IMPORTANT:** Diese Variante ist inbesondere bei der Verwendung automatisierter Workflows zum Rollout des Terraform-Codes (z. B. GitHub) sehr wichtig, da hier die `terraform state mv` Variante nicht funktioniert. Außerdem erspart einem das i. a. zittrige destroy/create Terraform Plans.
+
+Insgesamt ist das Thema Refactoring von Terraform-Code noch nicht so elegant gelöst wie in der Softwareentwicklung. Es wird allerdings immer besser. Aktuell unterstützt VSCode nicht mal minimale Refactorings (z. B. Umbenennen einer Ressource) mit den Standard-Extensions. Auch GitHub-Copilot ist hier im Jahr 2024 keine große Hilfe. Zumal man auf dieser Ebene keine a-priori-Tests hat und jede einzelne Änderung evtl. eine lange Feedback Loop hat. 
 
 ## Loops
 

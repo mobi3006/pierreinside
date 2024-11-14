@@ -120,6 +120,7 @@ Hier kann man den aktuellen Verbrauch, den historischen und einen Forecast sehen
     ** ...
     ** us-east-1f
   * in jeder Availability Zone gibt es zumeist mehrere Data-Center
+  * nicht alle AWS Services sind in allen Regionen vorhanden
 * Edge Locations: AWS unterstützt sog. Edge-Locations, die zum Cachen von Ressourcen nah (Reduktion der Latency) beim Enduser genutzt werden (z. B. von CloudFront). AWS kümmert sich hier um die Replikation über sein schnelles Backbone-Netz
 
 ## ELB - Elastic LoadBalancer
@@ -131,7 +132,7 @@ In AWS ist die Elastizität der große Vorteil. Man kann nach Bedarf weitere Ins
 
 Auf diese Weise werden Ausfälle von Services (z. B. EC2) in Availability-Zones-under-Maintenance oder auch die Elastizität verborgen. Der ELB ist highly-scalable und hochverfügbar - managed von AWS selbst ... hier kann nichts schiefgehen, wenn man die Ressourcen im Hintergrund sinnvoll auf Availability-Zones verteilt hat. Health-Checks sind hier ganz enstcheident, denn der ELB entscheidet mit diesen Informationen welche Komponenten im Backend für die Requestverarbeitung genutzt werden. Eine neue EC2 Instanz ist vielleicht schon hochgefahren, aber die Applikation steht evtl. noch nicht zur Verfügung (weil die Initialisierung länger dauert). Dem Nutzer soll ein zuverlässiger Dienst angeboten werden ... deshalb muss hier alles sauber funktionieren.
 
-Man kann private und public Loadbalancer haben. Ein public Loadbalancer bekommt eine Public-IP-Adresse, einen DNS-Eintrag und wird mit dem Internet-Gateway verbunden, so dass der Traffic aus dem Internet auch in die Subnetze geroutet werden kann.
+Man kann private und public Loadbalancer haben. Ein public Loadbalancer bekommt eine Public-IP-Adresse, einen DNS-Eintrag und wird mit dem Internet-Gateway verbunden, so dass der Traffic aus dem Internet auch in die Subnetze geroutet werden kann. Ein private Loadbalancer steht nur intern im VPC zur Verfügung ... erfüllt dort aber den gleichen Zweck wie ein Public-Loadbalancer ... nämlich die Dynamik/Elastizität in der Cloud durch einen zuverlässigen Loadbalancer auszugleichen.
 
 Ein ELB hat folgende Komponenten:
 
@@ -144,7 +145,7 @@ Ein ELB hat folgende Komponenten:
 
 Amazon bietet folgende Arten von Loadbalancers:
 
-* Application Load Balancer
+* Application Load Balancer (ALB)
   * arbeitet auf HTTP/HTTPS-Ebene (Layer 7)
   * unterstützt die Terminierung der SSL-Verbindung
   * unterstützt Sticky-Sessions über Cookies, die vom Load-Balancer generiert werden
@@ -153,7 +154,7 @@ Amazon bietet folgende Arten von Loadbalancers:
     * host-basiert
       * es könnte sein, daß mehrere Domains auf einen Loadbalancer geroutet werden (über DNS), dann kann der ELB über den Hostnamen ein entsprechendes Routing anbieten
     * pfad-basiert
-* Network Load Balancer
+* Network Load Balancer (NLB)
 
 ## Availability Zones
 
