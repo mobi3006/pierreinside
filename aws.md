@@ -1,4 +1,4 @@
-# Amazon Web Services
+# Amazon Web Services - Pierre
 
 Amazon war der Vorreiter des heutigen _Cloud Computings_ (ca. im Jahre 2005). Heutzutage führt fast kein Weg daran vorbei (es gibt viele Cloud-Anbieter). Der Vorteil ist besteht in
 
